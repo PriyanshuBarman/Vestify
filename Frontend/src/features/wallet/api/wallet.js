@@ -12,7 +12,7 @@ export const searchProfile = async (query) => {
 
 export const fetchAllTnx = async (query) => {
   const { data } = await axios.get(
-    `${VITE_BACKEND_BASE_URL}/upi/transactions`,
+    `${VITE_BACKEND_BASE_URL}/wallet/transactions`,
     {
       withCredentials: true,
     },
@@ -25,7 +25,7 @@ export const fetchAllTnx = async (query) => {
 
 export const sendMoney = async ({ amount, note, receiverId, pin }) => {
   const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/upi/send`,
+    `${VITE_BACKEND_BASE_URL}/wallet/send`,
     {
       amount,
       note,

@@ -20,7 +20,7 @@ import {
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Loader2Icon } from "lucide-react";
 
-export default function ReusableDialog({
+function ReusableDialog({
   title = "Dialog Title",
   description = "This is a reusable dialog.",
   children,
@@ -40,11 +40,11 @@ export default function ReusableDialog({
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
-          <DrawerHeader className="items-center">
+          <DrawerHeader className="items-center gap-2 tabular-nums">
             <div className="mx-auto">{icon}</div>
             <DrawerTitle className="text-center text-lg">{title}</DrawerTitle>
 
-            <DrawerDescription className="text-center text-sm">
+            <DrawerDescription className="text-center text-sm whitespace-pre-line">
               {description}
             </DrawerDescription>
           </DrawerHeader>
@@ -86,11 +86,11 @@ export default function ReusableDialog({
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="gap-8">
-          <DialogHeader className="items-center">
+          <DialogHeader className="items-center gap-4 tabular-nums">
             <div className="mx-auto">{icon}</div>
             <DialogTitle className="text-center text-lg">{title}</DialogTitle>
 
-            <DialogDescription className="text-center text-sm">
+            <DialogDescription className="text-center text-sm whitespace-pre-line">
               {description}
             </DialogDescription>
           </DialogHeader>
@@ -128,3 +128,5 @@ export default function ReusableDialog({
     );
   }
 }
+
+export default ReusableDialog;

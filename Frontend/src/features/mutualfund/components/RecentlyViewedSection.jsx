@@ -19,6 +19,7 @@ function RecentlyViewedSection() {
       <div className="flex flex-wrap justify-between gap-x-2 gap-y-4 px-4 sm:px-0">
         {recentlyViewedFunds?.map((fund) => (
           <Link
+            key={fund.scheme_code}
             to={`/mutual-funds/${fund.scheme_code}`}
             className="flex w-[48%] cursor-pointer items-center gap-2 rounded-2xl border px-3 py-3 duration-200 hover:scale-101 sm:m-0.5"
           >

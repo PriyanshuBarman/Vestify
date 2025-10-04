@@ -2,6 +2,7 @@ import { TZDate } from "@date-fns/tz";
 import { parse } from "date-fns";
 import { db } from "../../../config/db.config.js";
 import { MF_API_BASE_URL } from "../../../config/env.config.js";
+import { sendUserEvent } from "../../shared/events/eventManager.js";
 import { calcPortfolioAfterRedemption } from "../utils/calculateUpdatedPortfolio.utils.js";
 import { fifoRedemption } from "./fifo.service.js";
 
@@ -14,7 +15,7 @@ export const instantRedemption = async (fund, amount) => {
   const units = amount / latestNav; // Redemption units
 
   // prisma $transaction
-  await db.$transaction(async (tx) => {
+  const user = await db.$transaction(async (tx) => {
     const costBasis = await fifoRedemption(userId, schemeCode, units, tx);
 
     const updatedValues = calcPortfolioAfterRedemption(
@@ -44,7 +45,7 @@ export const instantRedemption = async (fund, amount) => {
       },
     });
 
-    const user  = await tx.user.update({
+    const user = await tx.user.update({
       where: { id: userId },
       data: {
         balance: { increment: amount },
@@ -61,7 +62,11 @@ export const instantRedemption = async (fund, amount) => {
         updatedBalance: user.balance,
       },
     });
+
+    return user;
   });
+
+  sendUserEvent(userId, { balance: user.balance });
 };
 
 export const fetchLatestNAVData = async (schemeCode) => {

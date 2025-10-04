@@ -12,7 +12,6 @@ export function useCreateInvestOrder() {
     mutationFn: createInvestOrder,
     onSuccess: (orderDetail, variables) => {
       const { amount, fund } = variables;
-      queryClient.invalidateQueries({ queryKey: ["balance"] });
       queryClient.invalidateQueries({ queryKey: ["orders"] });
       navigate("/payment-success", {
         state: {

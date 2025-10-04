@@ -1,5 +1,6 @@
 import GoBackBar from "@/components/GoBackBar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { setIsSearchOpen } from "@/store/slices/searchSlice";
 import { Bookmark, LockKeyholeIcon, Search } from "lucide-react";
@@ -12,12 +13,11 @@ import FundLogo from "../components/FundLogo";
 import FundPageAccordions from "../components/FundPageAccordions.jsx";
 import FundPortfolioPreview from "../components/fundPortfolioPreview";
 import RecentlyViewedFunds from "../components/RecentlyViewedFunds";
-import { useGetFundData } from "../hooks/useGetFundData";
-import { formatFundCategory } from "../utils/formaters";
 import { useAddToWatchlist } from "../hooks/useAddToWatchlist";
+import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetIsInWatchlist } from "../hooks/useGetIsInWatchlist";
 import { useRemoveFromWatchlist } from "../hooks/useRemoveFromWatchlist";
-import { Button } from "@/components/ui/button";
+import { formatFundCategory } from "../utils/formaters";
 
 const PurchaseBtns = lazy(() => import("../components/PurchaseBtns"));
 const DesktopPaymentCard = lazy(
@@ -56,6 +56,7 @@ function FundPage() {
   return (
     <div className="mt-4 sm:flex sm:gap-6">
       <GoBackBar />
+
       <div className="h-full w-full space-y-4 text-inherit sm:space-y-6 lg:w-[67%]">
         <div className="px-4 max-sm:pr-6">
           <div className="flex items-center justify-between">

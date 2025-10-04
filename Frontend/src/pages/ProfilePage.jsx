@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
+import NumberFlow from "@number-flow/react";
 
 const themeMapping = [
   { name: "system", icon: SlidersHorizontal },
@@ -59,7 +60,9 @@ function ProfilePage() {
           <div className="flex">
             <div className="flex">
               <WalletIcon className="text-muted-foreground" />
-              <span className="ml-4">Balance : {formatToINR(balance)}</span>
+              <span className="ml-4">
+                Balance : <NumberFlow value={balance} prefix="₹" />{" "}
+              </span>
             </div>
           </div>
 

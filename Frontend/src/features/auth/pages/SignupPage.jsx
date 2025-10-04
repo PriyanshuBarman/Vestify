@@ -7,7 +7,7 @@ function SignupPage() {
       <div className="relative hidden content-center space-y-15 font-medium lg:block">
         <h1 className="flex flex-col text-center text-2xl">
           Invest In Mutual Funds{" "}
-          <span className="text-primary">With Virtual Money</span>
+          <span className="text-primary">Using Virtual Money</span>
         </h1>
         <img src="/Stocks.png" alt="Image" className="mx-auto" />
       </div>

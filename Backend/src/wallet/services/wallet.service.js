@@ -1,9 +1,10 @@
 import { formatDate } from "date-fns";
 import { db } from "../../../config/db.config.js";
+import { sendUserEvent } from "../../shared/events/eventManager.js";
 import { ApiError } from "../../shared/utils/apiError.utils.js";
 
 export const sendMoney = async (userId, amount, note, receiverId) => {
-  return await db.$transaction(async (tx) => {
+  const { sender, receiver } = await db.$transaction(async (tx) => {
     // 1. Debit sender balance
     const sender = await tx.user.update({
       where: { id: userId },
@@ -46,8 +47,11 @@ export const sendMoney = async (userId, amount, note, receiverId) => {
       ],
     });
 
-    return sender.balance;
+    return { sender, receiver };
   });
+
+  sendUserEvent(userId, { balance: sender.balance });
+  sendUserEvent(receiverId, { balance: receiver.balance });
 };
 
 export const fetchAllTnx = async (userId) => {

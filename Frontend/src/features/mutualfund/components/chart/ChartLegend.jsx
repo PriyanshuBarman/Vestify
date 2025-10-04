@@ -5,11 +5,17 @@ function ChartLegend({ selectedRange, fund, returnPercent }) {
   return (
     <CardHeader className="gap-0 pl-4">
       <div className="flex items-center gap-2">
-        <NumberFlow
-          value={returnPercent}
-          suffix="%"
-          className={`text-2xl font-semibold sm:text-[1.65rem] ${!returnPercent || returnPercent >= 0 ? "text-positive" : "text-negative"}`}
-        />
+        {returnPercent ? (
+          <NumberFlow
+            value={returnPercent || 0}
+            suffix="%"
+            className={`text-2xl font-semibold sm:text-[1.65rem] ${!returnPercent || returnPercent >= 0 ? "text-positive" : "text-negative"}`}
+          />
+        ) : (
+          <span className="text-muted-foreground text-2xl font-semibold sm:text-[1.65rem]">
+            0%
+          </span>
+        )}
         <span className="text-muted-foreground/90 text-xs font-medium sm:text-sm sm:font-semibold">
           {selectedRange}
           {selectedRange.includes("Y") && selectedRange !== "1Y"

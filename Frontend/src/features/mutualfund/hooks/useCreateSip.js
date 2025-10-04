@@ -13,7 +13,6 @@ export function useCreateSip() {
     onSuccess: (data, variables) => {
       const { amount, fund } = variables;
       queryClient.invalidateQueries({ queryKey: ["sips"] });
-      queryClient.invalidateQueries({ queryKey: ["balance"] });
       queryClient.invalidateQueries({ queryKey: ["orders"] });
       toast.success(data.message);
       navigate("/payment-success", {

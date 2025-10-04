@@ -35,7 +35,7 @@ export const placeRedemptionOrder = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { amount, fundId, isInstant = false } = req.body;
 
-  await orderService.placeRedemptionOrder(userId, fundId, isInstant);
+  await orderService.placeRedemptionOrder(userId, amount, fundId, isInstant);
 
   return res.status(201).json({
     success: true,

@@ -3,7 +3,7 @@ import { Navigate } from "react-router";
 
 function AuthGuard({ children, mode = "protected" }) {
   const { data: user } = useGetUser();
-
+return children;
   // ----- Protected Mode -----
   if (mode === "protected") {
     if (!user) return <Navigate to="/auth/signup" replace />;

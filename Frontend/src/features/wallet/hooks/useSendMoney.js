@@ -1,18 +1,16 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { sendMoney } from "../api/wallet";
+import { formatToINR } from "@/utils/formatters";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { formatToINR } from "@/utils/formatters";
+import { sendMoney } from "../api/wallet";
 
 export const useSendMoney = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: sendMoney,
     onSuccess: (balance, variables) => {
       const { amount, name } = variables;
-      queryClient.setQueryData(["balance"], balance);
       navigate("/payment-success", {
         state: {
           amount,

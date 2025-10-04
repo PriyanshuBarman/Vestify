@@ -1,4 +1,5 @@
 import { db } from "../../../config/db.config.js";
+import { sendUserEvent } from "../../shared/events/eventManager.js";
 import { ApiError } from "../../shared/utils/apiError.utils.js";
 import { getMainDomain } from "../utils/getMainDomain.utils.js";
 import {
@@ -21,7 +22,7 @@ export const placeInvestmentOrder = async ({
   const { processDate, navDate } =
     getNavAndProcessDateForInvestment(fundCategory);
 
-  return await db.$transaction(async (tx) => {
+  const { order, user } = await db.$transaction(async (tx) => {
     // 1. Deduct amount from user's wallet
     const user = await tx.user.update({
       where: { id: userId },
@@ -65,8 +66,12 @@ export const placeInvestmentOrder = async ({
       },
     });
 
-    return order; // Return Order Details
+    return { order, user };
   });
+
+  sendUserEvent(userId, { balance: user.balance });
+
+  return order; // Return Order Details
 };
 
 export const placeRedemptionOrder = async (

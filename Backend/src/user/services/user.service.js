@@ -2,6 +2,7 @@ import { tz, TZDate } from "@date-fns/tz";
 import { endOfToday, isToday, startOfToday } from "date-fns";
 import { db } from "../../../config/db.config.js";
 import { ApiError } from "../../shared/utils/apiError.utils.js";
+import { sendUserEvent } from "../../shared/events/eventManager.js";
 
 export const getMe = async (userId) => {
   const user = await db.user.findUnique({
@@ -25,7 +26,7 @@ export const getMe = async (userId) => {
 export const claimDailyReward = async (userId) => {
   const rewardAmount = 1000;
 
-  return await db.$transaction(async (tx) => {
+  const updatedBalance = await db.$transaction(async (tx) => {
     const user = await tx.user.findUnique({
       where: { id: userId },
     });
@@ -58,4 +59,8 @@ export const claimDailyReward = async (userId) => {
 
     return updatedBalance;
   });
+
+  sendUserEvent(userId, { balance: updatedBalance });
+
+  return updatedBalance;
 };

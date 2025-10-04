@@ -3,14 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetBalance } from "@/hooks/useGetBalance";
+import { sanitizeAmount } from "@/utils/formatters";
+import NumberFlow from "@number-flow/react";
 import { IndianRupeeIcon, Loader2Icon } from "lucide-react";
 import { useState } from "react";
-import { sanitizeAmount } from "@/utils/formatters";
 import { useCreateInvestOrder } from "../hooks/useCreateInvestOrder";
 import { useCreateSip } from "../hooks/useCreateSip";
-import { formatToINR } from "@/utils/formatters";
 import DatePicker from "./DatePicker";
-import { toast } from "sonner";
 
 function DesktopPaymentCard({ fund }) {
   const [isPinDialogOpen, setIsPinDialogOpen] = useState(false);
@@ -78,7 +77,7 @@ function DesktopPaymentCard({ fund }) {
           </div>
 
           <p className="mb-4 text-sm font-medium tabular-nums">
-            Available Balance: {formatToINR(balance)}
+            Available Balance: <NumberFlow value={balance} prefix="₹" />
           </p>
 
           <Button
@@ -131,7 +130,8 @@ function DesktopPaymentCard({ fund }) {
           </div>
 
           <p className="mb-4 space-y-2 text-sm font-medium tabular-nums">
-            Available Balance: {formatToINR(balance)}
+            Available Balance:
+            <NumberFlow value={balance} prefix="₹" />
           </p>
 
           <Button
