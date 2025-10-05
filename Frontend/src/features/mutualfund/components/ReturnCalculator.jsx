@@ -52,13 +52,13 @@ function ReturnCalculator({ fund }) {
   }, [type, chartData, debouncedValue, selectedYear, fund]);
 
   return (
-    <Card className="text-muted-foreground bg-background border-0 py-0 pb-6 sm:gap-8 sm:rounded-xl sm:border sm:py-10">
+    <Card className="text-muted-foreground bg-background border-0 pt-0 pb-4 sm:gap-8 sm:rounded-xl sm:border sm:py-10">
       <CardHeader className="px-0 sm:px-8">
         <CardTitle>
           <Button
             variant="ghost"
             onClick={() => switchCalculationType("sip")}
-            className={`sm:text-md h-7 rounded-full px-3 text-xs font-normal hover:bg-transparent sm:px-4 sm:py-2 sm:font-medium ${
+            className={`h-7 rounded-full px-3 text-xs font-normal hover:bg-transparent sm:px-4 sm:py-2 sm:text-sm sm:font-medium ${
               type === "sip"
                 ? "text-primary border-primary bg-primary/10 hover:bg-primary/10 hover:text-primary sm:border"
                 : ""
@@ -69,7 +69,7 @@ function ReturnCalculator({ fund }) {
           <Button
             variant="ghost"
             onClick={() => switchCalculationType("one-time")}
-            className={`sm:text-md h-7 rounded-full px-3 text-xs font-normal hover:bg-transparent sm:px-4 sm:py-2 sm:font-medium ${
+            className={`h-7 rounded-full px-3 text-xs font-normal hover:bg-transparent sm:px-4 sm:py-2 sm:text-sm sm:font-medium ${
               type === "one-time"
                 ? "text-primary border-primary bg-primary/10 hover:bg-primary/10 hover:text-primary sm:border"
                 : ""
@@ -100,7 +100,7 @@ function ReturnCalculator({ fund }) {
           step={500}
         />
 
-        <div className="mt-10 flex items-center justify-between sm:mt-14 sm:justify-start">
+        <div className="mt-8 flex items-center justify-between sm:mt-14 sm:justify-start">
           <span className="sm:text-base">Over the past</span>
           <div className="flex sm:ml-6 sm:gap-2">
             {TIME_OPTIONS.map((item) => (
@@ -108,7 +108,7 @@ function ReturnCalculator({ fund }) {
                 key={item.year}
                 variant="outline"
                 onClick={() => setSelectedYear(item.year)}
-                className={`sm:!border-border h-7 rounded-full !border-transparent !bg-transparent px-3 font-normal shadow-none sm:h-9 sm:w-22 sm:font-medium ${selectedYear === item.year && "sm:!bg-accent !bg-primary/10 text-primary sm:!border-foreground sm:text-foreground"}`}
+                className={`sm:!border-border h-7 rounded-full !border-transparent !bg-transparent px-3 font-normal shadow-none sm:h-8 sm:w-20 sm:font-medium ${selectedYear === item.year && "sm:!bg-accent !bg-primary/10 text-primary sm:!border-foreground sm:text-foreground"}`}
               >
                 {item.label}
               </Button>
@@ -117,7 +117,7 @@ function ReturnCalculator({ fund }) {
         </div>
       </CardContent>
 
-      <CardFooter className="flex flex-col items-start gap-2 border-t px-0 sm:px-10">
+      <CardFooter className="border-border/50 flex flex-col items-start gap-2 border-t px-0 sm:px-10">
         <p className="text-sm sm:text-base">
           Total investment of {formatToINR(result.totalInvestment)}
         </p>

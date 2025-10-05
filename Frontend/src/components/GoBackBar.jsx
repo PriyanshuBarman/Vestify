@@ -1,7 +1,8 @@
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, SearchIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 function GoBackBar({ title, className }) {
   const navigate = useNavigate();
@@ -22,6 +23,15 @@ function GoBackBar({ title, className }) {
         </button>
         {title && <h1 className="font-medium">{title}</h1>}
       </div>
+      <Button
+        aria-label="search"
+        variant="ghost"
+        onClick={() => navigate("/search")}
+        size="icon"
+        className="min-[1100px]:hidden"
+      >
+        <SearchIcon className="size-5.5" />
+      </Button>
     </div>
   );
 }

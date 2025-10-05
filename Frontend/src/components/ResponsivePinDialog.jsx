@@ -5,17 +5,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import { formatToINR } from "@/utils/formatters";
+import { useBackClose } from "@/hooks/useBackClose";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
-import { Loader2Icon, SendIcon } from "lucide-react";
+import { formatToINR } from "@/utils/formatters";
+import { Loader2Icon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import PinKeypad from "./PinKeypad";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useBackClose } from "@/hooks/useBackClose";
 
 const LENGTH = 4;
 
@@ -26,12 +25,16 @@ function ResponsivePinDialog({
   sendingTo,
   onSubmit,
   isError,
+  error,
   isPending,
 }) {
   const isMobile = useIsMobile();
   const [pin, setPin] = useState(new Array(LENGTH).fill(""));
   const inputRefs = useRef([]);
   const [currentIndex, setCurrentIndex] = useState(0); // for mobile
+
+  const isInvalidPin =
+    error?.response?.data?.message?.toLowerCase() === "invalid pin";
 
   useBackClose(isOpen, () => setIsOpen(false));
 
@@ -40,8 +43,12 @@ function ResponsivePinDialog({
       setPin(new Array(LENGTH).fill(""));
       setCurrentIndex(0);
       inputRefs?.current[0]?.focus();
+
+      if (isInvalidPin) {
+        navigator.vibrate([100, 50, 100]);
+      }
     }
-  }, [isError]);
+  }, [isError, isInvalidPin]);
 
   // For Mobile
   const handleVirtualInput = (value) => {
@@ -98,7 +105,7 @@ function ResponsivePinDialog({
     setPin(newArr);
 
     if (value.trim()) {
-      inputRefs.current[index + 1].focus();
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
@@ -140,7 +147,12 @@ function ResponsivePinDialog({
             Enter PIN
           </p>
 
-          <div className="flex items-center justify-center gap-2">
+          <div
+            className={cn(
+              "flex items-center justify-center gap-2",
+              isInvalidPin && "shake-animation",
+            )}
+          >
             {pin.map((digit, index) => (
               <div key={index} className="Box relative">
                 <Input
@@ -197,7 +209,7 @@ function ResponsivePinDialog({
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />

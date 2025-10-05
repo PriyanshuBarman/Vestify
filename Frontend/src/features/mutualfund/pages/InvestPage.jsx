@@ -29,7 +29,7 @@ function InvestPage() {
 
   const activeMutation = sipDate ? sipMutation : lumpsumMutation;
 
-  const { mutate: makePayment, isPending, isError } = activeMutation;
+  const { mutate: makePayment, isPending, isError, error } = activeMutation;
 
   const handleInvest = (pin) => {
     makePayment({ amount, sipDate, fund, pin });
@@ -131,6 +131,7 @@ function InvestPage() {
         onSubmit={handleInvest}
         isPending={isPending}
         isError={isError}
+        error={error}
       />
     </div>
   );

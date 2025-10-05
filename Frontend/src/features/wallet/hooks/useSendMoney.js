@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { sendMoney } from "../api/wallet";
+import { playPaymentSuccessSound } from "@/utils/sound";
 
 export const useSendMoney = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export const useSendMoney = () => {
     mutationFn: sendMoney,
     onSuccess: (balance, variables) => {
       const { amount, name } = variables;
+      playPaymentSuccessSound();
       navigate("/payment-success", {
         state: {
           amount,

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { createInvestOrder } from "../api/order";
 import { formatToINR } from "@/utils/formatters";
+import { playPaymentSuccessSound } from "@/utils/sound";
 
 export function useCreateInvestOrder() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export function useCreateInvestOrder() {
     mutationFn: createInvestOrder,
     onSuccess: (orderDetail, variables) => {
       const { amount, fund } = variables;
+      playPaymentSuccessSound();
       queryClient.invalidateQueries({ queryKey: ["orders"] });
       navigate("/payment-success", {
         state: {

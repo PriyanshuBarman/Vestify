@@ -27,7 +27,7 @@ function EnterAmountPage() {
     location.state?.receiverUsername || profile?.username;
   const receiverAvatar = location.state?.receiverAvatar || profile?.avatar;
 
-  const { mutate: makePayment, isPending, isError } = useSendMoney();
+  const { mutate: makePayment, isPending, isError, error } = useSendMoney();
 
   const handleSubmit = (pin) => {
     makePayment({
@@ -92,6 +92,7 @@ function EnterAmountPage() {
         onSubmit={handleSubmit}
         isPending={isPending}
         isError={isError}
+        error={error}
       />
     </div>
   );

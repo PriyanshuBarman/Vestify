@@ -6,7 +6,7 @@ function FundDescription({ fund }) {
   let date = d.toLocaleDateString("en-GB", { dateStyle: "medium" });
 
   return (
-    <div className="relative mt-8  ml-4 flex sm:mt-14 sm:ml-0 sm:justify-between sm:gap-20">
+    <div className="relative mt-8 ml-4 flex sm:mt-14 sm:ml-0 sm:justify-between sm:gap-20">
       <section className="Left flex w-1/2 flex-col gap-6 text-xs sm:text-base">
         <div className="row-1 flex flex-col gap-2 sm:flex-row sm:justify-between">
           <p className="text-muted-foreground">NAV: {date}</p>

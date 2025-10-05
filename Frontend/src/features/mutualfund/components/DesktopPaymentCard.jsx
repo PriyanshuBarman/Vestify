@@ -23,7 +23,7 @@ function DesktopPaymentCard({ fund }) {
 
   const activeMutation = activeTab === "sip" ? sipMutation : lumpsumMutation;
 
-  const { mutate: makePayment, isPending, isError } = activeMutation;
+  const { mutate: makePayment, isPending, isError, error } = activeMutation;
 
   const handleInvest = (pin) => {
     makePayment({ amount, sipDate, fund, pin });
@@ -97,6 +97,7 @@ function DesktopPaymentCard({ fund }) {
             onSubmit={handleInvest}
             isPending={isPending}
             isError={isError}
+            error={error}
           />
         </TabsContent>
 
