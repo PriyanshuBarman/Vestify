@@ -1,19 +1,12 @@
 import LoadingState from "@/components/LoadingState";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import FundRating from "@/features/mutualfund/components/FundRating";
-import { ChevronsLeftRight, Loader2 } from "lucide-react";
+import { Loader2, StarIcon } from "lucide-react";
 import { Link } from "react-router";
 import { formatFundCategory, formatToINR } from "../../utils/formaters";
 import FundLogo from "../FundLogo";
-import SortByButton from "../filters/SortByButton";
+import { cn } from "@/lib/utils";
 
 /**
  *  Reusable Small screen table with pagination support
@@ -22,16 +15,9 @@ import SortByButton from "../filters/SortByButton";
 function TableSM({
   funds,
   isPending, // Becomes true only when the first request is loading
-  totalCount,
   activeColumn,
-  activeSortBy,
-  order,
   onColumnClick,
-  onSortChange,
-  onOrderChange,
-  sortOptions,
   columnsConfig,
-  show,
   // Pagination props
   enablePagination = false,
   hasNextPage = false,
@@ -45,7 +31,7 @@ function TableSM({
     }
     if (activeColumn === "aum") {
       return fund[activeColumn]
-        ? `${formatToINR(fund[activeColumn] / 10)}Cr`
+        ? `${formatToINR(fund[activeColumn] / 10, 0)} Cr`
         : "NA";
     }
     return fund[activeColumn]
@@ -56,65 +42,29 @@ function TableSM({
   return (
     <ScrollArea className="overflow-x-auto">
       <Table className="table-fixed">
-        <TableHeader className="bg-background sticky top-0 z-10 text-xs">
-          <TableRow>
-            <TableHead className="w-[75%] pl-4 font-semibold">
-              {show === "fundCount" ? (
-                <span className="tabular-nums">
-                  {totalCount?.toLocaleString()} funds
-                </span>
-              ) : show === "sortByBtn" ? (
-                <SortByButton
-                  order={order}
-                  sortOptions={sortOptions}
-                  activeSortBy={activeSortBy}
-                  onSortChange={onSortChange}
-                  onOrderChange={onOrderChange}
-                  columnsConfig={columnsConfig}
-                />
-              ) : null}
-            </TableHead>
-
-            <TableHead
-              onClick={onColumnClick}
-              className="border-muted-foreground flex items-center justify-end gap-1 rounded-xl pr-3 text-right font-medium"
-            >
-              <ChevronsLeftRight className="size-4 shrink-0" />
-              <span className="border-muted-foreground border-b border-dashed">
-                {
-                  columnsConfig[
-                    activeColumn === "popularity" ? "return_3y" : activeColumn
-                  ].name
-                }
-              </span>
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-
         <TableBody>
           {funds?.map((fund) => (
             <TableRow key={fund.scheme_code}>
               <TableCell className="flex items-center gap-4 py-4 pl-4">
                 <FundLogo fundHouseDomain={fund.detail_info} />
                 <div>
-                  <Link to={`/mutual-funds/${fund.scheme_code}`}>
-                    <h4 className="Fund-Name text-foreground text-wrap">
+                  <h4 className="Fund-Name text-foreground text-wrap">
+                    <Link to={`/mutual-funds/${fund.scheme_code}`}>
                       {fund.short_name}
-                    </h4>
-                  </Link>
-                  <div className="text-muted-foreground mt-1 flex flex-wrap gap-1 text-xs">
+                    </Link>
+                  </h4>
+
+                  <p className="text-muted-foreground mt-1 space-x-1 text-xs text-wrap">
                     <span>{fund.fund_type}</span>
                     <span>{formatFundCategory(fund.fund_category)}</span>
-                    <span>
-                      <FundRating rating={fund.fund_rating} />
-                    </span>
-                  </div>
+                    {fund.fund_rating ? <span>{fund.fund_rating} ★</span> : ""}
+                  </p>
                 </div>
               </TableCell>
 
               <TableCell
                 onClick={onColumnClick}
-                className="pr-4 text-right font-[450] break-words whitespace-normal"
+                className="w-[25%] pr-4 text-right font-[450] break-words whitespace-normal"
               >
                 {getValue(fund)}
               </TableCell>

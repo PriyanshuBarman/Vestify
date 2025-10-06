@@ -18,8 +18,8 @@ export const columnsConfig = {
     suffix: "%",
   },
   return_since_inception: {
-    name: "All",
-    shortName: "All",
+    name: "All Returns",
+    shortName: "All Returns",
     prefix: "",
     suffix: "%",
   },
@@ -41,15 +41,15 @@ export const columnsConfig = {
     prefix: "",
     suffix: " ★",
   },
-  lump_min: {
-    name: "Min Lump.",
-    shortName: "Min Lump.",
-    prefix: "₹",
-    suffix: "",
-  },
   sip_min: {
     name: "Min SIP",
     shortName: "Min SIP",
+    prefix: "₹",
+    suffix: "",
+  },
+  lump_min: {
+    name: "Min Lump.",
+    shortName: "Min Lump.",
     prefix: "₹",
     suffix: "",
   },

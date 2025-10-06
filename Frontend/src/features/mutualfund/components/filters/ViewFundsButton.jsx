@@ -4,8 +4,8 @@ import { Loader2Icon } from "lucide-react";
 function ViewFundsButton({ totalCount, isFetching, onClick }) {
   return (
     <Button
-      disabled={!totalCount && !isFetching}
-      className={`h-12 w-full font-semibold ${!totalCount && !isFetching ? "bg-muted" : ""}`}
+      disabled={!totalCount && isFetching}
+      className={`h-12 w-full font-semibold`}
       onClick={onClick}
     >
       {isFetching ? (

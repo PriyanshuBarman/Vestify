@@ -67,5 +67,5 @@ export const sortOptions = {
   expense_ratio: "Expense Ratio",
   lump_min: "Min Lumpsum",
   sip_min: "Min SIP",
-  return_since_inception: "All Return",
+  return_since_inception: "All Returns",
 };

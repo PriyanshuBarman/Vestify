@@ -33,7 +33,7 @@ function PortfolioTableLG({ portfolio }) {
               key={fund.schemeCode}
             >
               <TableCell className="flex items-center gap-8 py-4 pl-8">
-                <FundLogo fundHouseDomain={fund.fundHouseDomain} />
+                <FundLogo noFormat fundHouseDomain={fund.fundHouseDomain} />
                 <div>
                   <h4 className="text-wrap">{fund.shortName}</h4>
                   <p className="text-muted-foreground mt-1 flex items-center text-xs font-medium">

@@ -14,8 +14,8 @@ function FundHouses() {
         navigateTo="/mutual-funds/fund-houses"
       />
 
-      <div className="flex flex-wrap justify-between gap-4 px-4 sm:m-0.5 sm:gap-3 sm:px-0">
-        {amcs?.slice(0, 4).map((amc) => (
+      <div className="scrollbar-none grid auto-cols-[49%] grid-flow-col grid-rows-2 gap-3 px-4 max-sm:overflow-auto sm:m-0.5 sm:auto-cols-fr sm:gap-x-4 sm:px-0">
+        {amcs?.slice(0, 6).map((amc) => (
           <Link
             key={amc.amc_code}
             to={`/mutual-funds/amc-funds`}
@@ -27,7 +27,7 @@ function FundHouses() {
               rank:
                 amcs.findIndex((item) => item.amc_code === amc.amc_code) + 1,
             }}
-            className="w-[47%] cursor-pointer space-y-2 rounded-2xl border p-3 duration-200 hover:scale-101 sm:m-0.5 sm:space-y-4 sm:p-4"
+            className="bg-card cursor-pointer space-y-2 rounded-2xl border p-3 duration-200 hover:scale-101 sm:m-0.5 sm:space-y-4 sm:p-4"
           >
             <div className="flex items-end gap-2 sm:gap-4">
               <FundLogo fundHouseDomain={amc.detail_info} />

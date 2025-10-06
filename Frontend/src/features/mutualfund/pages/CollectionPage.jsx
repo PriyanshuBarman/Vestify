@@ -1,8 +1,11 @@
 import GoBackBar from "@/components/GoBackBar";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { ChevronsLeftRightIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import SortByButton from "../components/filters/SortByButton";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import { DEFAULT_COLUMNS, sortOptions } from "../constants/collectionConstants";
@@ -61,9 +64,9 @@ function CollectionPage() {
 
   return (
     <div className="relative">
-      <GoBackBar />
-      <section className="top-0 z-10">
-        <div className="bg-background mb-4 flex items-center gap-8 px-4 sm:mb-10">
+      <section className="bg-background sticky top-0 z-10 pb-1">
+        <GoBackBar />
+        <div className="mb-4 flex items-center gap-8 px-4 sm:mb-10">
           <div className="space-y-2 sm:space-y-4">
             <h2 className="text-lg font-semibold sm:text-2xl">{label} </h2>
             <p className="text-muted-foreground text-sm">{description || ""}</p>
@@ -74,6 +77,32 @@ function CollectionPage() {
             </Avatar>
           )}
         </div>
+
+        {/* Buttons */}
+        <div className="flex items-center justify-between px-4 text-xs font-semibold sm:hidden">
+          <SortByButton
+            order={orderBy}
+            sortOptions={sortOptions}
+            activeSortBy={activeSortBy}
+            onSortChange={handleSortChange}
+            onOrderChange={handleOrderChange}
+            columnsConfig={columnsConfig}
+          />
+          <Button
+            variant="ghost"
+            onClick={handleColumnClick}
+            className="border-muted-foreground flex h-auto items-center justify-end gap-1 rounded-xl !px-0 text-right text-xs font-semibold"
+          >
+            <ChevronsLeftRightIcon className="size-4 shrink-0" />
+            <span className="border-muted-foreground border-b border-dashed">
+              {
+                columnsConfig[
+                  activeColumn === "popularity" ? "return_3y" : activeColumn
+                ].name
+              }
+            </span>
+          </Button>
+        </div>
       </section>
 
       {isMobile ? (
@@ -82,14 +111,8 @@ function CollectionPage() {
           funds={peers}
           isPending={isPending}
           activeColumn={activeColumn}
-          activeSortBy={activeSortBy}
-          order={orderBy}
           onColumnClick={handleColumnClick}
-          onSortChange={handleSortChange}
-          onOrderChange={handleOrderChange}
-          sortOptions={sortOptions}
           columnsConfig={columnsConfig}
-          show="sortByBtn"
         />
       ) : (
         // ----------- LARGE SCREEN TABLE -----------

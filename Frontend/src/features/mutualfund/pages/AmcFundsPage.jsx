@@ -16,13 +16,15 @@ import {
 import FilterCategoryButton from "../components/filters/FilterCategoryButton";
 import FundLogo from "../components/FundLogo";
 import { formatToINR } from "../utils/formaters";
+import { Button } from "@/components/ui/button";
+import { ChevronsLeftRightIcon } from "lucide-react";
 
 function AmcFundsPage() {
   const isMobile = useIsMobile();
   const { amcName, amcCode, description, fundHouseDomain, aum, rank } =
     useLocation().state ?? {};
   const { data, isPending } = useGetAmcFunds(amcCode);
-  const [peers, setPeers] = useState();
+  const [funds, setFunds] = useState();
   const [activeColumn, setActiveColumn] = useState("popularity"); // default active column (popularity)
   const [activeSortBy, setActiveSortBy] = useState("popularity");
   const [orderBy, setOrderBy] = useState("desc");
@@ -30,13 +32,13 @@ function AmcFundsPage() {
   const [activeCategory, setActiveCategory] = useState("Equity");
 
   useEffect(() => {
-    if (data) setPeers(data[activeCategory]);
+    if (data) setFunds(data[activeCategory]);
   }, [data, activeCategory]);
 
   // Desktop table callback
   const handleDesktopClick = (clicked) => {
     const newOrder = getNewOrder(clicked, activeColumn, orderBy);
-    setPeers((prevPeers) => sortPeersBy(prevPeers, clicked, newOrder));
+    setFunds((prevPeers) => sortPeersBy(prevPeers, clicked, newOrder));
     setActiveColumn(clicked);
     setOrderBy(newOrder);
   };
@@ -49,27 +51,27 @@ function AmcFundsPage() {
   const handleSortChange = (columnKey) => {
     if (columnKey === "popularity") {
       setActiveSortBy("popularity");
-      setPeers(data);
+      setFunds(data);
       return;
     }
     setActiveSortBy(columnKey);
     setActiveColumn(columnKey);
-    setPeers((prevPeers) => sortPeersBy(prevPeers, columnKey, orderBy));
+    setFunds((prevPeers) => sortPeersBy(prevPeers, columnKey, orderBy));
   };
 
   const handleOrderChange = () => {
     const newOrder = orderBy === "asc" ? "desc" : "asc";
     setOrderBy(newOrder);
-    setPeers((prevPeers) => sortPeersBy(prevPeers, activeColumn, newOrder));
+    setFunds((prevPeers) => sortPeersBy(prevPeers, activeColumn, newOrder));
   };
 
   const categories = data ? Object.keys(data) : [];
 
   return (
     <div className="relative">
-      <GoBackBar />
-      <section className="top-0 z-10 mb-4">
-        <div className="bg-background flex items-center justify-between gap-8 px-4 sm:mb-10 sm:justify-start sm:gap-12">
+      <section className="bg-background sticky top-0 z-10 sm:relative">
+        <GoBackBar />
+        <div className="flex items-center justify-between gap-8 px-4 sm:mb-10 sm:justify-start sm:gap-12">
           <div>
             <h2 className="text-lg font-semibold sm:text-2xl">{amcName} </h2>
             <p className="text-muted-foreground font mt-2 space-x-2 text-xs sm:mt-4 sm:text-sm">
@@ -88,18 +90,37 @@ function AmcFundsPage() {
             className="size-18 border sm:size-24"
           />
         </div>
-      </section>
+        <FilterCategoryButton
+          categories={categories}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
 
-      <FilterCategoryButton
-        categories={categories}
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-      />
+        <div className="flex w-full items-center justify-between px-4 py-2 sm:hidden">
+          <span className="text-xs font-semibold tabular-nums">
+            {funds?.length?.toLocaleString()} funds
+          </span>
+          <Button
+            variant="ghost"
+            onClick={handleColumnClick}
+            className="border-muted-foreground flex h-auto items-center justify-end gap-1 rounded-xl !px-0 text-right text-xs font-semibold"
+          >
+            <ChevronsLeftRightIcon className="size-4 shrink-0" />
+            <span className="border-muted-foreground border-b border-dashed">
+              {
+                columnsConfig[
+                  activeColumn === "popularity" ? "return_3y" : activeColumn
+                ].name
+              }
+            </span>
+          </Button>
+        </div>
+      </section>
 
       {isMobile ? (
         // ----------- MOBILE TABLE -----------
         <TableSM
-          funds={peers}
+          funds={funds}
           isPending={isPending}
           activeColumn={activeColumn}
           activeSortBy={activeSortBy}
@@ -114,7 +135,7 @@ function AmcFundsPage() {
       ) : (
         // ----------- LARGE SCREEN TABLE -----------
         <TableLG
-          funds={peers}
+          funds={funds}
           isPending={isPending}
           visibleColumns={visibleColumns}
           setVisibleColumns={setVisibleColumns}

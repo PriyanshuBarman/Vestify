@@ -81,7 +81,7 @@ function PortfolioTableSM({ portfolio }) {
         {portfolio?.map((fund) => (
           <TableRow key={fund.schemeCode}>
             <TableCell className="flex items-center gap-4 py-4 pl-4">
-              <FundLogo fundHouseDomain={fund.fundHouseDomain} />
+              <FundLogo noFormat fundHouseDomain={fund.fundHouseDomain} />
 
               <div>
                 <h4 className="font-medium text-wrap">{fund.shortName} Fund</h4>

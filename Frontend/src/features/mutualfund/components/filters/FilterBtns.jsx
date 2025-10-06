@@ -72,6 +72,7 @@ function FilterBtns() {
         className="mx-1 data-[orientation=vertical]:h-8"
       />
       <SortByBtn
+        variant="outline"
         order={orderBy}
         onSortChange={handleSortChange}
         onOrderChange={handleOrderChange}

@@ -2,7 +2,11 @@ export const columnsConfig = {
   return_1y: { name: "1Y Returns", shortName: "1Y", suffix: "%" },
   return_3y: { name: "3Y Returns", shortName: "3Y", suffix: "%" },
   return_5y: { name: "5Y Returns", shortName: "5Y", suffix: "%" },
-  return_since_inception: { name: "All", shortName: "All", suffix: "%" },
+  return_since_inception: {
+    name: "All Returns",
+    shortName: "All Returns",
+    suffix: "%",
+  },
   fund_rating: { name: "Rating", shortName: "Rating", suffix: " ★" },
   expense_ratio: { name: "Expense Ratio", shortName: "TER", suffix: "%" },
   aum: {
@@ -11,8 +15,8 @@ export const columnsConfig = {
     prefix: "₹",
     suffix: "Cr",
   },
-  lump_min: { name: "Min Lumpsum", shortName: "Min Lump.", prefix: "₹" },
   sip_min: { name: "Min SIP", shortName: "Min SIP", prefix: "₹" },
+  lump_min: { name: "Min Lumpsum", shortName: "Min Lump.", prefix: "₹" },
 };
 
 export const columnKeys = Object.keys(columnsConfig);

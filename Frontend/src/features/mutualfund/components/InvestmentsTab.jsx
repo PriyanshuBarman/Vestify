@@ -56,7 +56,7 @@ function InvestmentsTab() {
       <PendingOrders />
 
       {!portfolio.length ? (
-        <div className="flex mt-20 sm:mt-0 flex-col items-center justify-center px-8">
+        <div className="mt-20 flex flex-col items-center justify-center px-8 sm:mt-0">
           <img
             src="/StartInvesting.svg"
             alt="sip"

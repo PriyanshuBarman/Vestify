@@ -3,16 +3,19 @@ import { DialogTitle } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
 import {
   ArrowDownAZIcon,
   ArrowUpZAIcon,
   ChartNoAxesColumnDecreasingIcon,
   ChartNoAxesColumnIncreasing,
   ChevronDownIcon,
+  ChevronUpIcon,
 } from "lucide-react";
 import { useState } from "react";
 
 function SortByButton({
+  variant = "ghost",
   order,
   onSortChange,
   sortOptions,
@@ -33,27 +36,38 @@ function SortByButton({
     <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
       <DrawerTrigger asChild>
         <Button
-          variant="outline"
-          className={`h-7.5 rounded-full text-[0.65rem] sm:h-10 sm:text-xs ${
-            !isDefaultSort && "!border-foreground bg-accent"
-          }`}
+          variant={variant}
+          className={cn(
+            "h-7.5 rounded-full sm:h-10",
+            variant === "outline" ? "border text-[0.65rem]" : "px-0 text-xs",
+            !isDefaultSort && "bg-accent border-foreground border font-[550]",
+          )}
         >
-          {order === "desc" ? (
-            <ChartNoAxesColumnDecreasingIcon className="size-3.5 rotate-90" />
-          ) : (
-            <ChartNoAxesColumnIncreasing size={18} className="rotate-90" />
-          )}
+          <div
+            className={cn(
+              "flex gap-1",
+              isDefaultSort &&
+                variant !== "outline" &&
+                "border-muted-foreground border-b border-dashed",
+            )}
+          >
+            {order === "desc" ? (
+              <ChartNoAxesColumnDecreasingIcon className="rotate-90" />
+            ) : (
+              <ChartNoAxesColumnIncreasing className="rotate-90" />
+            )}
 
-          {!isDefaultSort ? (
-            <span>Sort: {sortOptions[activeSortBy]}</span>
-          ) : (
-            <span>Sort by</span>
-          )}
-          <ChevronDownIcon className="size-3.5" />
+            <span>
+              {!isDefaultSort
+                ? `Sort: ${sortOptions[activeSortBy]}`
+                : "Sort by"}
+            </span>
+          </div>
+          {(!isDefaultSort || variant === "outline") && <ChevronDownIcon />}
         </Button>
       </DrawerTrigger>
 
-      <DrawerContent className="px-4 pb-2 sm:px-20">
+      <DrawerContent className="data-[vaul-drawer-direction=bottom]:max-h-auto px-4 pb-2 sm:px-20">
         <div className="my-2 flex items-center justify-between sm:px-4">
           <DialogTitle className="text-base sm:text-xl">Sort by</DialogTitle>
           {onOrderChange && (
@@ -97,9 +111,17 @@ function SortByButton({
               variant="ghost"
               size="icon"
               onClick={() => setShowMore(!showMore)}
-              className="mt-2 w-full"
+              className="mt-2 w-full text-xs"
             >
-              {showMore ? "Show less" : "More options"}
+              {showMore ? (
+                <span className="flex items-center gap-2">
+                  Show Less <ChevronUpIcon />
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  More options <ChevronDownIcon />
+                </span>
+              )}
             </Button>
           )}
         </RadioGroup>
