@@ -108,8 +108,24 @@ export const fetchCategories = async () => {
   return data.result;
 };
 
+export const fetchFundCategoryRanking = async (schemeCode) => {
+  const { data } = await axios.get(
+    `${VITE_MF_API_BASE_URL}/categories/${schemeCode}`,
+  );
+
+  return data;
+};
+
 export const fetchAmcFunds = async (amcCode) => {
   const { data } = await axios.get(`${VITE_MF_API_BASE_URL}/amcs/${amcCode}`);
 
   return data.categories;
+};
+
+export const fetchMangerFunds = async (managerFunds) => {
+  const { data } = await axios.get(
+    `${VITE_MF_API_BASE_URL}/fund-managers/${managerFunds}`,
+  );
+
+  return data.funds;
 };

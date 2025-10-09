@@ -6,9 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatToINR } from "@/utils/formatters";
 import { useNavigate } from "react-router";
 import FundLogo from "../FundLogo";
-import { formatToINR } from "@/utils/formatters";
 
 function PortfolioTableLG({ portfolio }) {
   const navigate = useNavigate();

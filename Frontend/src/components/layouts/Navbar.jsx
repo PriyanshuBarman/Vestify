@@ -91,14 +91,14 @@ export default Navbar;
 function NavLinks() {
   return (
     <div className="flex sm:text-lg">
-      {/* <NavLink
-        to="/coming-soon"
+      <NavLink
+        to="/stocks"
         className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2 font-semibold`
+          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden"} shrink-0 rounded-md p-2 font-semibold`
         }
       >
         Stocks
-      </NavLink> */}
+      </NavLink>
 
       <NavLink
         to="/mutual-funds#explore"

@@ -61,7 +61,7 @@ function ProfilePage() {
             <div className="flex">
               <WalletIcon className="text-muted-foreground" />
               <span className="ml-4">
-                Balance : <NumberFlow value={balance} prefix="₹" />{" "}
+                Balance : <NumberFlow value={balance || 0} prefix="₹" />{" "}
               </span>
             </div>
           </div>

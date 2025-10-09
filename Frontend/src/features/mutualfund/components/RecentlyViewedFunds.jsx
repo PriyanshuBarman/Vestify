@@ -17,8 +17,9 @@ const labelArr = [
 ];
 
 function RecentlyViewedFunds() {
+  const isMobile = useIsMobile();
   const [activeLabelIdx, setActiveLabelIdx] = useState(0);
-  const recentlyViewedFunds = useRecentlyViewedFunds();
+  const recentlyViewedFunds = useRecentlyViewedFunds(isMobile ? 5 : 4);
 
   // Loop ♾️
   const handleClick = () => {
@@ -26,22 +27,20 @@ function RecentlyViewedFunds() {
     setActiveLabelIdx(nextIndex);
   };
 
-  const isMobile = useIsMobile();
-
   return (
     <section>
       <h2 className="pl-4 font-medium sm:pl-0 sm:text-xl sm:font-semibold">
         Recently Viewed
       </h2>
 
-      <div className="mt-6 flex items-center justify-between pl-4 sm:px-0">
+      <div className="mt-6 flex items-center justify-between pl-4 sm:hidden sm:px-0">
         <h4 className="text-muted-foreground text-[0.8rem] font-medium sm:text-base">
           Fund Name
         </h4>
         <Button
           onClick={handleClick}
           variant="ghost"
-          className="flex gap-1 text-[0.8rem] sm:hidden"
+          className="flex gap-1 text-[0.8rem]"
         >
           <ChevronsUpDown strokeWidth={2.5} />
           {labelArr[activeLabelIdx].label}
@@ -49,7 +48,7 @@ function RecentlyViewedFunds() {
       </div>
 
       <ScrollArea>
-        <div className="mt-4 w-full gap-4 space-y-5 px-4 sm:my-4 sm:flex sm:space-y-0 sm:px-0">
+        <div className="mt-4 w-full gap-4 space-y-5 px-4 sm:my-8 sm:flex sm:space-y-0 sm:px-0">
           {recentlyViewedFunds?.map((fund) =>
             isMobile ? (
               <Row key={fund.id} fund={fund} activeLabelIdx={activeLabelIdx} />

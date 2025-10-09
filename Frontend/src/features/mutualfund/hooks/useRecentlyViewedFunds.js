@@ -6,7 +6,9 @@ export const useRecentlyViewedFunds = (limit = 4) => {
   const funds = queryClient
     .getQueryCache()
     .getAll()
-    .filter((item) => item.queryKey && item.queryKey[0] === "fund" && item.state.data)
+    .filter(
+      (item) => item.queryKey && item.queryKey[0] === "fund" && item.state.data,
+    )
     .sort((a, b) => b.state.dataUpdatedAt - a.state.dataUpdatedAt)
     .slice(0, limit)
     .map((q) => q.state.data);

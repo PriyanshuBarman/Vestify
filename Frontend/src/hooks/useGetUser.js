@@ -30,7 +30,7 @@ export const useGetUser = () => {
     } else {
       localStorage.setItem("USER_DATA", JSON.stringify(query.data));
     }
-  }, [query.data, query.isError]);
+  }, [query.data, query.isError, query.error]);
 
   return query;
 };

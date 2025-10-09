@@ -23,7 +23,6 @@ function FilterBtns() {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
   const activeFilterCount = getActiveFilterCount(filters);
-  const orderBy = filters.order_by;
   let activeSortBy = filters.sort_by;
 
   // callbacks for SortByButton
@@ -33,12 +32,6 @@ function FilterBtns() {
     if (columnKey !== "popularity") dispatch(setActiveColumn(columnKey));
     activeSortBy = columnKey;
   };
-
-  const handleOrderChange = () => {
-    const newOrder = orderBy === "asc" ? "desc" : "asc";
-    dispatch(setFilters({ ...filters, order_by: newOrder }));
-  };
-  // ------------------------------------------------------------
 
   // Toggle FundCategory selection
   const isSelected = (value) => filters.fund_category.includes(value);
@@ -72,10 +65,9 @@ function FilterBtns() {
         className="mx-1 data-[orientation=vertical]:h-8"
       />
       <SortByBtn
+        defaultSortBy="popularity"
         variant="outline"
-        order={orderBy}
         onSortChange={handleSortChange}
-        onOrderChange={handleOrderChange}
         sortOptions={sortOptions}
         columnsConfig={columnsConfig}
         activeSortBy={activeSortBy}

@@ -15,8 +15,8 @@ export const columnsConfig = {
     prefix: "₹",
     suffix: "Cr",
   },
-  sip_min: { name: "Min SIP", shortName: "Min SIP", prefix: "₹" },
-  lump_min: { name: "Min Lumpsum", shortName: "Min Lump.", prefix: "₹" },
+  // sip_min: { name: "Min SIP", shortName: "Min SIP", prefix: "₹" },
+  // lump_min: { name: "Min Lumpsum", shortName: "Min Lump.", prefix: "₹" },
 };
 
 export const columnKeys = Object.keys(columnsConfig);

@@ -63,9 +63,9 @@ export const sortOptions = {
   return_3y: "3Y Returns",
   return_5y: "5Y Returns",
   fund_rating: "Rating",
-  aum: "Fund Size",
   expense_ratio: "Expense Ratio",
-  lump_min: "Min Lumpsum",
-  sip_min: "Min SIP",
+  aum: "Fund Size",
   return_since_inception: "All Returns",
+  // lump_min: "Min Lumpsum",
+  // sip_min: "Min SIP",
 };

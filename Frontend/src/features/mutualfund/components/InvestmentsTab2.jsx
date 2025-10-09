@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useGetAllOrders } from "../hooks/useGetAllOrders";
 import { useGetPortfolio } from "../hooks/useGetPortfolio";
-import { getNewOrder, sortPortfolio } from "../utils/investmentTabHelper";
+import { sortPortfolio } from "../utils/investmentTabHelper";
 import SortByButton from "./filters/SortByButton";
 import PendingOrders from "./PendingOrders";
-import PortfolioSummary from "./PortfolioSummary";
+import SectionCards from "./PortfolioSummary";
 import PortfolioTableLG from "./tables/PortfolioTableLG";
 import PortfolioTableSM from "./tables/PortfolioTableSM";
 
@@ -51,11 +51,11 @@ function InvestmentsTab() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <ScrollToTop />
       <PendingOrders />
 
-      {!portfolio.length ? (
+      {portfolio.length ? (
         <div className="mt-20 flex flex-col items-center justify-center px-8 sm:mt-0">
           <img
             src="/StartInvesting.svg"
@@ -75,27 +75,17 @@ function InvestmentsTab() {
         </div>
       ) : (
         <>
-          <PortfolioSummary count={portfolio.length} />
-
+          <SectionCards />
           <SortByButton
-            defaultSortBy="current"
-            portfolio={portfolio}
             sortOptions={sortOptions}
             activeSortBy={sortBy}
             onSortChange={handleSortChange}
             onOrderChange={handleOrderChange}
             order={orderBy}
-            className="text-sm max-sm:hidden"
           />
+
           {isMobile ? (
-            <PortfolioTableSM
-              portfolio={portfolio}
-              sortOptions={sortOptions}
-              activeSortBy={sortBy}
-              onSortChange={handleSortChange}
-              onOrderChange={handleOrderChange}
-              order={orderBy}
-            />
+            <PortfolioTableSM portfolio={portfolio} />
           ) : (
             <PortfolioTableLG portfolio={portfolio} />
           )}

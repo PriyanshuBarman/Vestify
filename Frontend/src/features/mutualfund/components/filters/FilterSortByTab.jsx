@@ -11,6 +11,7 @@ const SORT_OPTIONS = [
   { label: "5Y Returns", value: "return_5y" },
   { label: "Rating", value: "fund_rating" },
   { label: "Fund Size", value: "aum" },
+  { label: "Expense Ratio", value: "expense_ratio" },
 ];
 
 function FilterSortByTab() {
@@ -18,8 +19,14 @@ function FilterSortByTab() {
   const dispatch = useDispatch();
 
   const handleSortChange = (value) => {
-    dispatch(setFilters({ ...filters, sort_by: value }));
-    if (columnKey !== "popularity") dispatch(setActiveColumn(columnKey));
+    dispatch(
+      setFilters({
+        ...filters,
+        sort_by: value,
+        order_by: value === "expense_ratio" ? "asc" : "desc",
+      }),
+    );
+    if (value !== "popularity") dispatch(setActiveColumn(value));
   };
 
   return (

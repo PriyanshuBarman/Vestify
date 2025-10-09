@@ -7,6 +7,7 @@ import { mutualFundRoutes } from "./features/mutualfund/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import Layout from "./components/layouts/Layout";
 import ProfilePage from "./pages/ProfilePage";
+import { stocksRoutes } from "./features/stocks/routes";
 
 const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
 const MobileSearchPage = lazy(
@@ -27,6 +28,7 @@ export const routes = createBrowserRouter([
     ),
     children: [
       walletRoutes,
+      stocksRoutes,
       mutualFundRoutes,
       {
         index: true,

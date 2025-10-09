@@ -49,6 +49,7 @@ function WatchlistTab() {
 
       {watchlist?.map((fund, index) => (
         <Link
+          key={fund.schemeCode}
           to={`/mutual-funds/${fund.schemeCode}`}
           className="hover:bg-accent flex min-w-full items-center border-b py-4 sm:rounded-2xl sm:border sm:px-4"
         >

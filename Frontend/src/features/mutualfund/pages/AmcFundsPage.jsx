@@ -1,30 +1,32 @@
 import GoBackBar from "@/components/GoBackBar";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { ChevronsLeftRightIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useParams } from "react-router";
+import FilterCategoryButton from "../components/filters/FilterCategoryButton";
+import FundLogo from "../components/FundLogo";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import { DEFAULT_COLUMNS, sortOptions } from "../constants/collectionConstants";
 import { useGetAmcFunds } from "../hooks/useGetAmcFunds";
+import { useGetAMCs } from "../hooks/useGetAMCs";
 import {
   columnsConfig,
   getNewOrder,
   getNextColumn,
   sortPeersBy,
 } from "../utils/collectionsHelper";
-import FilterCategoryButton from "../components/filters/FilterCategoryButton";
-import FundLogo from "../components/FundLogo";
-import { formatToINR } from "../utils/formaters";
-import { Button } from "@/components/ui/button";
-import { ChevronsLeftRightIcon } from "lucide-react";
+import { formatToINR } from "@/utils/formatters";
 
 function AmcFundsPage() {
   const isMobile = useIsMobile();
-  const { amcName, amcCode, description, fundHouseDomain, aum, rank } =
-    useLocation().state ?? {};
+  const { amcCode } = useParams();
+  const { data: amcs } = useGetAMCs();
+  const amc = amcs?.find((amc) => amc.amc_code === amcCode);
+
   const { data, isPending } = useGetAmcFunds(amcCode);
-  const [funds, setFunds] = useState();
+  const [funds, setFunds] = useState([]);
   const [activeColumn, setActiveColumn] = useState("popularity"); // default active column (popularity)
   const [activeSortBy, setActiveSortBy] = useState("popularity");
   const [orderBy, setOrderBy] = useState("desc");
@@ -73,20 +75,22 @@ function AmcFundsPage() {
         <GoBackBar />
         <div className="flex items-center justify-between gap-8 px-4 sm:mb-10 sm:justify-start sm:gap-12">
           <div>
-            <h2 className="text-lg font-semibold sm:text-2xl">{amcName} </h2>
+            <h2 className="text-lg font-semibold sm:text-2xl">
+              {amc.amc_name}{" "}
+            </h2>
             <p className="text-muted-foreground font mt-2 space-x-2 text-xs sm:mt-4 sm:text-sm">
               <span>Rank(total asset):</span>
-              <span className="text-sm font-medium">#{rank} in India</span>
+              <span className="text-sm font-medium">#{amc.rank} in India</span>
             </p>
             <p className="text-muted-foreground font space-x-2 sm:text-sm">
               <span className="text-xs">Total AUM </span>
               <span className="text-sm font-medium">
-                {formatToINR(aum / 10)}Cr
+                {formatToINR(amc.totalAum / 10)}Cr
               </span>
             </p>
           </div>
           <FundLogo
-            fundHouseDomain={fundHouseDomain}
+            fundHouseDomain={amc.detail_info}
             className="size-18 border sm:size-24"
           />
         </div>
@@ -98,7 +102,7 @@ function AmcFundsPage() {
 
         <div className="flex w-full items-center justify-between px-4 py-2 sm:hidden">
           <span className="text-xs font-semibold tabular-nums">
-            {funds?.length?.toLocaleString()} funds
+            {funds.length.toLocaleString()} funds
           </span>
           <Button
             variant="ghost"
@@ -118,7 +122,6 @@ function AmcFundsPage() {
       </section>
 
       {isMobile ? (
-        // ----------- MOBILE TABLE -----------
         <TableSM
           funds={funds}
           isPending={isPending}
@@ -133,7 +136,6 @@ function AmcFundsPage() {
           show="sortByBtn"
         />
       ) : (
-        // ----------- LARGE SCREEN TABLE -----------
         <TableLG
           funds={funds}
           isPending={isPending}

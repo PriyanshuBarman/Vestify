@@ -1,5 +1,6 @@
 import LoadingState from "@/components/LoadingState";
 import { lazy, Suspense } from "react";
+import ManagerFundsPage from "./pages/ManagerFundsPage";
 const FundHousesPage = lazy(() => import("./pages/FundHousesPage"));
 const AmcFundsPage = lazy(() => import("./pages/AmcFundsPage"));
 const MutualFundLayout = lazy(() => import("./components/MutualFundLayout"));
@@ -109,10 +110,18 @@ export const mutualFundRoutes = {
       ),
     },
     {
-      path: "amc-funds",
+      path: "amc-funds/:amcCode",
       element: (
         <Suspense fallback={<LoadingState fullPage />}>
           <AmcFundsPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "fund-manager/:managerName",
+      element: (
+        <Suspense fallback={<LoadingState fullPage />}>
+          <ManagerFundsPage />
         </Suspense>
       ),
     },

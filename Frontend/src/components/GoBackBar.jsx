@@ -4,7 +4,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 
-function GoBackBar({ title, className }) {
+function GoBackBar({ title, showSearchIcon = true, className }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
@@ -23,15 +23,18 @@ function GoBackBar({ title, className }) {
         </button>
         {title && <h1 className="font-medium">{title}</h1>}
       </div>
-      <Button
-        aria-label="search"
-        variant="ghost"
-        onClick={() => navigate("/search")}
-        size="icon"
-        className="min-[1100px]:hidden"
-      >
-        <SearchIcon className="size-5.5" />
-      </Button>
+
+      {showSearchIcon && (
+        <Button
+          aria-label="search"
+          variant="ghost"
+          onClick={() => navigate("/search")}
+          size="icon"
+          className="min-[1100px]:hidden"
+        >
+          <SearchIcon className="size-5.5" />
+        </Button>
+      )}
     </div>
   );
 }

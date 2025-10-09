@@ -55,7 +55,7 @@ function FundPage() {
 
   return (
     <div className="mt-4 sm:flex sm:gap-6">
-      <GoBackBar />
+      <GoBackBar showSearchIcon={false} />
 
       <div className="h-full w-full space-y-4 text-inherit sm:space-y-6 lg:w-[67%]">
         <div className="px-4 max-sm:pr-6">
@@ -89,7 +89,7 @@ function FundPage() {
             </div>
           </div>
 
-          <h2 className="Fund-name mt-4 min-h-[1.5rem] text-lg font-medium sm:text-2xl sm:font-semibold">
+          <h2 className="Fund-name mt-4 min-h-[1.5rem] text-lg font-medium tracking-tight sm:text-2xl sm:font-semibold">
             {fund.name}
           </h2>
 

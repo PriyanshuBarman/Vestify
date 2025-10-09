@@ -53,7 +53,7 @@ function BottomNavbar() {
     <nav className="bg-background fixed inset-x-0 bottom-0 z-10 flex w-full justify-around border-t py-2">
       {tabsMapping.map((tab) => (
         <NavLink
-          to={`${["/mutual-funds#explore", "/wallet"].includes(tab.link) ? tab.link : "/coming-soon"}`}
+          to={tab.link}
           key={tab.id}
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[0.65rem] font-medium transition-all duration-200 hover:scale-105 sm:text-xs ${isActive ? "text-primary font-semibold dark:text-white" : "text-zinc-500 dark:text-zinc-400"}`
@@ -62,7 +62,6 @@ function BottomNavbar() {
           <tab.icon
             className={`size-5 ${tab.link.includes(currentPath) && "stroke-[2.5]"}`}
           />
-
           {tab.name}
         </NavLink>
       ))}

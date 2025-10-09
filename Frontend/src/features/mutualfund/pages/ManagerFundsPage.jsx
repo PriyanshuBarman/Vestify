@@ -1,15 +1,14 @@
 import GoBackBar from "@/components/GoBackBar";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { ChevronsLeftRightIcon } from "lucide-react";
+import { ChevronsLeftRightIcon, UserIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import SortByButton from "../components/filters/SortByButton";
+import { useParams } from "react-router";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import { DEFAULT_COLUMNS, sortOptions } from "../constants/collectionConstants";
-import { useGetFundsByFilter } from "../hooks/useGetFundsByFilter";
+import { useGetManagerFunds } from "../hooks/useGetManagerFunds";
 import {
   columnsConfig,
   getNewOrder,
@@ -17,27 +16,27 @@ import {
   sortPeersBy,
 } from "../utils/collectionsHelper";
 
-function CollectionPage() {
+function ManagerFundsPage() {
   const isMobile = useIsMobile();
-  const [peers, setPeers] = useState();
+  const { managerName } = useParams();
+  const { data, isPending } = useGetManagerFunds(managerName);
+
+  const [managedFunds, setManagedFunds] = useState([]);
   const [activeColumn, setActiveColumn] = useState("popularity"); // default active column (popularity)
   const [activeSortBy, setActiveSortBy] = useState("popularity");
   const [orderBy, setOrderBy] = useState("desc");
   const [visibleColumns, setVisibleColumns] = useState(DEFAULT_COLUMNS);
 
-  const { label, filters, description, img } = useLocation().state ?? {};
-  const { data, isPending } = useGetFundsByFilter(filters);
-
   useEffect(() => {
-    if (data) setPeers(data);
+    if (data) setManagedFunds(data);
   }, [data]);
 
   // Desktop table callback
   const handleDesktopClick = (clicked) => {
     const newOrder = getNewOrder(clicked, activeColumn, orderBy);
-    setOrderBy(newOrder);
-    setPeers((prevPeers) => sortPeersBy(prevPeers, clicked, newOrder));
+    setManagedFunds((prevPeers) => sortPeersBy(prevPeers, clicked, newOrder));
     setActiveColumn(clicked);
+    setOrderBy(newOrder);
   };
 
   // Mobile table callbacks
@@ -48,52 +47,45 @@ function CollectionPage() {
   const handleSortChange = (columnKey) => {
     if (columnKey === "popularity") {
       setActiveSortBy("popularity");
-      setPeers(data);
+      setManagedFunds(data);
       return;
     }
-
-    setPeers((prevPeers) =>
-      sortPeersBy(
-        prevPeers,
-        columnKey,
-        columnKey === "expense_ratio" ? "asc" : orderBy,
-      ),
-    );
     setActiveSortBy(columnKey);
     setActiveColumn(columnKey);
+    setManagedFunds((prevPeers) => sortPeersBy(prevPeers, columnKey, orderBy));
   };
 
   const handleOrderChange = () => {
     const newOrder = orderBy === "asc" ? "desc" : "asc";
     setOrderBy(newOrder);
-    setPeers((prevPeers) => sortPeersBy(prevPeers, activeColumn, newOrder));
+    setManagedFunds((prevPeers) =>
+      sortPeersBy(prevPeers, activeColumn, newOrder),
+    );
   };
 
   return (
     <div className="relative">
-      <section className="bg-background sticky top-0 z-10 pb-1">
+      <section className="bg-background sticky top-0 z-10 sm:relative">
         <GoBackBar />
-        <div className="mb-4 flex items-center gap-8 px-4 sm:mb-10">
-          <div className="space-y-2 sm:space-y-4">
-            <h2 className="text-lg font-semibold sm:text-2xl">{label} </h2>
-            <p className="text-muted-foreground text-sm">{description || ""}</p>
-          </div>
-          {img && (
-            <Avatar className="size-18 rounded-lg border p-2 sm:h-24 sm:w-34 dark:mix-blend-hard-light">
-              <AvatarImage src={img} />
+        <div className="space-y-4 px-4 sm:mb-10">
+          <div className="flex items-center gap-4">
+            <Avatar className="border-muted-foreground size-10 border sm:size-14">
+              <UserIcon className="text-muted-foreground m-auto size-full stroke-1 p-1.5 sm:p-2" />
             </Avatar>
-          )}
+            <h2 className="text-lg font-medium sm:text-2xl sm:font-semibold">
+              {managerName}{" "}
+            </h2>
+          </div>
+          <p className="text-sm sm:text-base">
+            Funds Managed By{" "}
+            <span className="font-semibold">{managerName}</span>
+          </p>
         </div>
 
-        {/* Buttons */}
-        <div className="flex items-center justify-between px-4 text-xs font-semibold sm:hidden">
-          <SortByButton
-            defaultSortBy="popularity"
-            sortOptions={sortOptions}
-            activeSortBy={activeSortBy}
-            onSortChange={handleSortChange}
-            columnsConfig={columnsConfig}
-          />
+        <div className="flex w-full items-center justify-between px-4 py-2 sm:hidden">
+          <span className="text-xs font-semibold tabular-nums">
+            {managedFunds.length.toLocaleString()} funds
+          </span>
           <Button
             variant="ghost"
             onClick={handleColumnClick}
@@ -112,16 +104,24 @@ function CollectionPage() {
       </section>
 
       {isMobile ? (
+        // ----------- MOBILE TABLE -----------
         <TableSM
-          funds={peers}
+          funds={managedFunds}
           isPending={isPending}
           activeColumn={activeColumn}
+          activeSortBy={activeSortBy}
+          order={orderBy}
           onColumnClick={handleColumnClick}
+          onSortChange={handleSortChange}
+          onOrderChange={handleOrderChange}
+          sortOptions={sortOptions}
           columnsConfig={columnsConfig}
+          show="sortByBtn"
         />
       ) : (
+        // ----------- LARGE SCREEN TABLE -----------
         <TableLG
-          funds={peers}
+          funds={managedFunds}
           isPending={isPending}
           visibleColumns={visibleColumns}
           setVisibleColumns={setVisibleColumns}
@@ -135,4 +135,4 @@ function CollectionPage() {
   );
 }
 
-export default CollectionPage;
+export default ManagerFundsPage;

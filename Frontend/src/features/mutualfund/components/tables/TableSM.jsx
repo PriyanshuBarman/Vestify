@@ -1,12 +1,11 @@
 import LoadingState from "@/components/LoadingState";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import FundRating from "@/features/mutualfund/components/FundRating";
-import { Loader2, StarIcon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Link } from "react-router";
-import { formatFundCategory, formatToINR } from "../../utils/formaters";
+import { formatFundCategory } from "../../utils/formaters";
 import FundLogo from "../FundLogo";
-import { cn } from "@/lib/utils";
+import { formatToINR } from "@/utils/formatters";
 
 /**
  *  Reusable Small screen table with pagination support

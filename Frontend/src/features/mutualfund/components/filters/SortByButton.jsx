@@ -3,6 +3,7 @@ import { DialogTitle } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import {
   ArrowDownAZIcon,
@@ -15,12 +16,12 @@ import {
 import { useState } from "react";
 
 function SortByButton({
+  defaultSortBy,
   variant = "ghost",
-  order,
   onSortChange,
   sortOptions,
   activeSortBy,
-  onOrderChange,
+  className,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -30,7 +31,7 @@ function SortByButton({
     setIsDrawerOpen(false);
   };
 
-  const isDefaultSort = activeSortBy === "popularity";
+  const isDefaultSort = activeSortBy === defaultSortBy;
 
   return (
     <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
@@ -41,6 +42,7 @@ function SortByButton({
             "h-7.5 rounded-full sm:h-10",
             variant === "outline" ? "border text-[0.65rem]" : "px-0 text-xs",
             !isDefaultSort && "bg-accent border-foreground border font-[550]",
+            className,
           )}
         >
           <div
@@ -51,12 +53,11 @@ function SortByButton({
                 "border-muted-foreground border-b border-dashed",
             )}
           >
-            {order === "desc" ? (
-              <ChartNoAxesColumnDecreasingIcon className="rotate-90" />
-            ) : (
+            {activeSortBy === "expense_ratio" ? (
               <ChartNoAxesColumnIncreasing className="rotate-90" />
+            ) : (
+              <ChartNoAxesColumnDecreasingIcon className="rotate-90" />
             )}
-
             <span>
               {!isDefaultSort
                 ? `Sort: ${sortOptions[activeSortBy]}`
@@ -70,20 +71,18 @@ function SortByButton({
       <DrawerContent className="data-[vaul-drawer-direction=bottom]:max-h-auto px-4 pb-2 sm:px-20">
         <div className="my-2 flex items-center justify-between sm:px-4">
           <DialogTitle className="text-base sm:text-xl">Sort by</DialogTitle>
-          {onOrderChange && (
+          <div className="flex items-center">
             <Button
+              Clear
               variant="ghost"
               size="icon"
-              className="ml-2"
-              onClick={onOrderChange}
+              disabled={isDefaultSort}
+              className="text-primary ml-2 disabled:hidden"
+              onClick={() => handleSortChange(defaultSortBy)}
             >
-              {order === "desc" ? (
-                <ArrowUpZAIcon className="size-4" />
-              ) : (
-                <ArrowDownAZIcon className="size-4" />
-              )}
+              Clear
             </Button>
-          )}
+          </div>
         </div>
 
         <RadioGroup
