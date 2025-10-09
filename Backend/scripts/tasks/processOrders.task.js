@@ -15,7 +15,7 @@ async function processOrders() {
   const orders = await db.mfOrder.findMany({
     where: {
       status: "PENDING",
-      processDate: today,
+      processDate: { lte: today },
     },
     orderBy: {
       createdAt: "desc",

@@ -2,8 +2,8 @@ name: Order Processor Cron
 
 on:
   schedule:
+    - cron: "0 0 * * *" # 5:30 AM IST
     - cron: "30 0 * * *" # 6:00 AM IST
-    - cron: "0 1 * * *" # 6:30 AM IST
   workflow_dispatch: # Allow manual trigger
 
 defaults:
