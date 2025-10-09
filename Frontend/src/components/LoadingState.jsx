@@ -14,12 +14,10 @@ function LoadingState({ isLoading = true, fullPage, className = "" }) {
       )}
     >
       {fullPage ? (
-        // <Loader2Icon className="text-primary size-10 animate-spin" />
-        <Spinner />
+        <Spinner className="text-primary size-10" />
       ) : (
         <div className="bg-accent flex h-fit items-center gap-2 rounded-full px-4 py-1 text-xs font-[450] italic shadow sm:px-6 sm:py-2 sm:font-medium">
-          <Loader2Icon className="size-4 animate-spin" />
-          <span>Loading...</span>
+          <Spinner /> Loading...
         </div>
       )}
     </div>

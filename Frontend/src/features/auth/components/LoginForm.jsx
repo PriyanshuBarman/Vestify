@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Link } from "react-router";
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
-import { Loader2Icon } from "lucide-react";
 import { useLogin } from "../hooks/useLogin";
 
 export function LoginForm({ className, ...props }) {
@@ -82,11 +82,7 @@ export function LoginForm({ className, ...props }) {
           type="submit"
           className="w-full"
         >
-          {isPending || isLoading ? (
-            <Loader2Icon className="animate-spin" />
-          ) : (
-            "Login"
-          )}
+          {isPending || isLoading ? <Spinner /> : "Login"}
         </Button>
 
         {/* Divider */}

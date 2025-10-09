@@ -19,10 +19,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Spinner } from "@/components/ui/spinner";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { tz } from "@date-fns/tz";
 import { addMonths, differenceInDays, format } from "date-fns";
-import { Loader2Icon, SkipForwardIcon } from "lucide-react";
+import { SkipForwardIcon } from "lucide-react";
 import { useState } from "react";
 import { useSkipSip } from "../hooks/useSkipSip";
 
@@ -92,11 +93,7 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
             disabled={isPending}
             className="flex-1"
           >
-            {isPending ? (
-              <Loader2Icon className="animate-spin" />
-            ) : (
-              "Skip anyway"
-            )}
+            {isPending ? <Spinner /> : "Skip anyway"}
           </Button>
         </DrawerFooter>
       </DrawerContent>
@@ -141,11 +138,7 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
             disabled={isPending}
             className="flex-1"
           >
-            {isPending ? (
-              <Loader2Icon className="animate-spin" />
-            ) : (
-              "Skip anyway"
-            )}
+            {isPending ? <Spinner /> : "Skip anyway"}
           </Button>
         </DialogFooter>
       </DialogContent>

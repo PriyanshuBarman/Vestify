@@ -1,7 +1,8 @@
-import { SearchIcon, Loader2Icon, XIcon } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
+import { setIsSearchOpen } from "@/store/slices/searchSlice";
+import { SearchIcon, XIcon } from "lucide-react";
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSearchOpen } from "@/store/slices/searchSlice";
 
 // Only used in DesktopSearch
 
@@ -37,11 +38,7 @@ function SearchBar({
           searchBarRef.current.focus();
         }}
       >
-        {isLoading ? (
-          <Loader2Icon className="text-primary animate-spin" />
-        ) : (
-          <XIcon size={18} />
-        )}
+        {isLoading ? <Spinner className="text-primary" /> : <XIcon size={18} />}
       </button>
 
       <p

@@ -1,8 +1,9 @@
 import GoBackBar from "@/components/GoBackBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { useDebounce } from "@/hooks/useDebounce";
-import { Loader2Icon, SearchIcon, XIcon } from "lucide-react";
+import { SearchIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSearchProfile } from "../hooks/useSearchProfile";
@@ -41,7 +42,7 @@ function SendMoneyPage() {
             }}
           >
             {isLoading ? (
-              <Loader2Icon className="text-primary animate-spin" />
+              <Spinner className="text-primary" />
             ) : (
               <XIcon size={20} />
             )}

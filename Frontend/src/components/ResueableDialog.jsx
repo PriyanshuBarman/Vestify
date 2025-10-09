@@ -18,7 +18,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { Loader2Icon } from "lucide-react";
+import { Spinner } from "./ui/spinner";
 
 function ReusableDialog({
   title = "Dialog Title",
@@ -69,11 +69,7 @@ function ReusableDialog({
                 disabled={isPending}
                 className="flex-1"
               >
-                {isPending ? (
-                  <Loader2Icon className="size-4 animate-spin" />
-                ) : (
-                  confirmButtonText
-                )}
+                {isPending ? <Spinner /> : confirmButtonText}
               </Button>
             )}
           </DrawerFooter>
@@ -115,11 +111,7 @@ function ReusableDialog({
                 disabled={isPending}
                 className="flex-1"
               >
-                {isPending ? (
-                  <Loader2Icon className="animate-spin" />
-                ) : (
-                  confirmButtonText
-                )}
+                {isPending ? <Spinner /> : confirmButtonText}
               </Button>
             )}
           </DialogFooter>

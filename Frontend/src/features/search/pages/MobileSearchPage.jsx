@@ -1,9 +1,10 @@
 import GoBackBtn from "@/components/GoBackBtn";
-import { useDebounce } from "@/hooks/useDebounce";
-import { useKeyboardDismiss } from "@/features/search/hooks/useKeyboardDismis";
+import { Spinner } from "@/components/ui/spinner";
 import { useGetSearchResults } from "@/features/search/hooks/useGetSearchResults";
+import { useKeyboardDismiss } from "@/features/search/hooks/useKeyboardDismis";
+import { useDebounce } from "@/hooks/useDebounce";
 import { addToSearchHistory } from "@/store/slices/searchSlice";
-import { Loader2Icon, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -60,11 +61,7 @@ function MobileSearchPage() {
             setQuery("");
           }}
         >
-          {isLoading ? (
-            <Loader2Icon className="text-primary animate-spin" />
-          ) : (
-            <X size={20} />
-          )}
+          {isLoading ? <Spinner className="text-primary" /> : <X size={20} />}
         </button>
       </div>
       {/* ============================// SearchBar ============================ */}

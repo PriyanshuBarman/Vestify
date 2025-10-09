@@ -1,11 +1,12 @@
 import ResponsivePinDialog from "@/components/ResponsivePinDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetBalance } from "@/hooks/useGetBalance";
 import { sanitizeAmount } from "@/utils/formatters";
 import NumberFlow from "@number-flow/react";
-import { IndianRupeeIcon, Loader2Icon } from "lucide-react";
+import { IndianRupeeIcon } from "lucide-react";
 import { useState } from "react";
 import { useCreateInvestOrder } from "../hooks/useCreateInvestOrder";
 import { useCreateSip } from "../hooks/useCreateSip";
@@ -86,7 +87,7 @@ function DesktopPaymentCard({ fund }) {
             disabled={isPending || amount < fund.lump_min}
             className="w-full"
           >
-            {isPending ? <Loader2Icon className="animate-spin" /> : "Invest"}
+            {isPending ? <Spinner /> : "Invest"}
           </Button>
 
           <ResponsivePinDialog
@@ -141,7 +142,7 @@ function DesktopPaymentCard({ fund }) {
             disabled={isPending || amount < fund.sip_min || !sipDate}
             className="w-full"
           >
-            {isPending ? <Loader2Icon className="animate-spin" /> : "Start Sip"}
+            {isPending ? <Spinner /> : "Start Sip"}
           </Button>
 
           <ResponsivePinDialog

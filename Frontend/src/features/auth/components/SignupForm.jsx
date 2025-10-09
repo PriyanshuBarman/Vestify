@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
-import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
@@ -79,11 +79,7 @@ export function SignupForm({ className, ...props }) {
           type="submit"
           className="w-full"
         >
-          {isPending || isLoading ? (
-            <Loader2Icon className="animate-spin" />
-          ) : (
-            "Signup"
-          )}
+          {isPending || isLoading ? <Spinner /> : "Signup"}
         </Button>
         <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
           <span className="bg-background text-muted-foreground relative z-10 px-2">

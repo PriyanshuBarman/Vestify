@@ -10,11 +10,11 @@ import { useBackClose } from "@/hooks/useBackClose";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
 import { formatToINR } from "@/utils/formatters";
-import { Loader2Icon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import PinKeypad from "./PinKeypad";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Spinner } from "./ui/spinner";
 
 const LENGTH = 4;
 
@@ -123,7 +123,7 @@ function ResponsivePinDialog({
       <DialogContent className="flex h-full w-full max-w-full flex-col overflow-hidden rounded-none p-0 sm:h-fit sm:gap-8 sm:rounded-2xl sm:p-6">
         {isPending && (
           <div className="absolute inset-0 z-50 grid place-items-center">
-            <Loader2Icon className="text-primary size-12 animate-spin sm:hidden" />
+            <Spinner className="text-primary size-12 sm:hidden" />
           </div>
         )}
 
@@ -195,7 +195,7 @@ function ResponsivePinDialog({
             className="my-4 w-[88%] rounded-xl sm:mt-12 sm:mb-0"
           >
             {isPending ? (
-              <Loader2Icon className="animate-spin" />
+              <Spinner />
             ) : (
               <>
                 Pay{" "}

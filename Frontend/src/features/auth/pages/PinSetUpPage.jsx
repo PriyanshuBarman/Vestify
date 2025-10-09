@@ -4,9 +4,9 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { Spinner } from "@/components/ui/spinner";
 import { useGetUser } from "@/hooks/useGetUser";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { Navigate } from "react-router";
 import { useSetPin } from "../hooks/useSetPin";
@@ -76,7 +76,7 @@ function PinSetupPage() {
         className="mx-auto my-4 w-[90%] font-medium sm:w-sm"
         onClick={() => mutate(pin)}
       >
-        {isPending ? <Loader2Icon className="animate-spin" /> : "Confirm"}
+        {isPending ? <Spinner /> : "Confirm"}
       </Button>
     </div>
   );

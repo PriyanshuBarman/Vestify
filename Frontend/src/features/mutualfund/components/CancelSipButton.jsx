@@ -19,8 +19,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Spinner } from "@/components/ui/spinner";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { Loader2Icon, MessageCircleXIcon } from "lucide-react";
+import { MessageCircleXIcon } from "lucide-react";
 import { useDeleteSip } from "../hooks/useDeleteSip";
 
 function CancelSipButton({ sipId }) {
@@ -73,11 +74,7 @@ function CancelSipButton({ sipId }) {
               disabled={isPending}
               className="w-1/2"
             >
-              {isPending ? (
-                <Loader2Icon className="size-4 animate-spin" />
-              ) : (
-                "Cancel SIP"
-              )}
+              {isPending ? <Spinner /> : "Cancel SIP"}
             </Button>
           </DrawerFooter>
         </DrawerContent>
@@ -126,11 +123,7 @@ function CancelSipButton({ sipId }) {
             disabled={isPending}
             className="w-1/2"
           >
-            {isPending ? (
-              <Loader2Icon className="animate-spin" />
-            ) : (
-              "Cancel SIP"
-            )}
+            {isPending ? <Spinner /> : "Cancel SIP"}
           </Button>
         </DialogFooter>
       </DialogContent>

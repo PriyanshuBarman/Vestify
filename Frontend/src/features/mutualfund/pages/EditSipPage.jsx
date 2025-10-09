@@ -1,15 +1,15 @@
 import GoBackBtn from "@/components/GoBackBtn";
 import Keypad from "@/components/Keypad";
 import { Button } from "@/components/ui/button";
-import { Loader2Icon } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
+import { formatToINR } from "@/utils/formatters";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "sonner";
 import EditSipDatePicker from "../components/EditSipDatePicker";
+import { useEditSip } from "../hooks/useEditSip";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetSipDetail } from "../hooks/useGetSipDetail";
-import { useEditSip } from "../hooks/useEditSip";
-import { formatToINR } from "@/utils/formatters";
 
 function EditSipPage() {
   const { sipId } = useParams();
@@ -108,11 +108,7 @@ function EditSipPage() {
             onClick={handleUpdateSip}
             className="w-full"
           >
-            {isPending ? (
-              <Loader2Icon className="animate-spin" />
-            ) : (
-              "Save Changes"
-            )}
+            {isPending ? <Spinner /> : "Save Changes"}
           </Button>
         </div>
       </div>

@@ -1,15 +1,18 @@
-import { useLocation } from "react-router";
-import { useCreateInvestOrder, useCreateSip } from "../hooks/useCreateInvestOrder";
-import { useGetFundData } from "../hooks/useGetFundData";
+import { Button } from "@/components/ui/button";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { Button } from "@/components/ui/button";
-import { Loader2Icon } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useState } from "react";
+import { useLocation } from "react-router";
+import {
+  useCreateInvestOrder,
+  useCreateSip,
+} from "../hooks/useCreateInvestOrder";
+import { useGetFundData } from "../hooks/useGetFundData";
 
 function PinPage() {
   const [pin, setPin] = useState("");
@@ -93,7 +96,7 @@ function PinPage() {
         className="mx-auto my-6 w-[90%] font-medium sm:w-sm"
         onClick={() => mutate(pin)}
       >
-        {isPending ? <Loader2Icon className="animate-spin" /> : "Confirm"}
+        {isPending ? <Spinner /> : "Confirm"}
       </Button>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Loader2Icon } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 function ViewFundsButton({ totalCount, isFetching, onClick }) {
   return (
@@ -9,7 +9,7 @@ function ViewFundsButton({ totalCount, isFetching, onClick }) {
       onClick={onClick}
     >
       {isFetching ? (
-        <Loader2Icon className="size-5 animate-spin" />
+         <Spinner />
       ) : (
         `View ${totalCount} funds`
       )}

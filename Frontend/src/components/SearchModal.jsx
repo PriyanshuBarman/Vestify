@@ -2,8 +2,9 @@ import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useGetSearchResults } from "@/features/search/hooks/useGetSearchResults";
 import { useDebounce } from "@/hooks/useDebounce";
-import { Loader2Icon, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { useState } from "react";
+import { Spinner } from "./ui/spinner";
 
 export function SearchModal({ isOpen, onClose, onSelectFund }) {
   const [query, setQuery] = useState("");
@@ -31,7 +32,7 @@ export function SearchModal({ isOpen, onClose, onSelectFund }) {
         </DialogHeader>
         <div className="flex-1 overflow-y-auto py-2">
           {isLoading ? (
-            <Loader2Icon className="text-primary mx-auto animate-spin" />
+            <Spinner className="text-primary mx-auto" />
           ) : searchResult?.length > 0 ? (
             <ul className="space-y-2">
               {searchResult.map((fund) => (
