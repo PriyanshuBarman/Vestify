@@ -45,6 +45,7 @@ function SipsTab() {
         <Link key={sip.id} to={`/mutual-funds/sip/${sip.id}`}>
           <div className="flex items-center justify-between border-b py-4">
             <FundLogo
+              noFormat
               fundHouseDomain={sip.fundHouseDomain}
               className="size-10"
             />
