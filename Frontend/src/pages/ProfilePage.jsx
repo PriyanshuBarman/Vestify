@@ -1,9 +1,9 @@
 import ProfileAvatar from "@/components/ProfileAvatar";
 import { Button } from "@/components/ui/button";
-import { formatToINR } from "@/utils/formatters";
 import { useGetBalance } from "@/hooks/useGetBalance";
 import { useGetUser } from "@/hooks/useGetUser";
 import { selectTheme, setTheme } from "@/store/slices/themeSlice";
+import NumberFlow from "@number-flow/react";
 import {
   ArrowLeftIcon,
   ArrowLeftRightIcon,
@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
-import NumberFlow from "@number-flow/react";
 
 const themeMapping = [
   { name: "system", icon: SlidersHorizontal },
@@ -46,13 +45,15 @@ function ProfilePage() {
 
       <div className="flex flex-col px-4">
         {/*================== Profile Info ================== */}
-        <div className="z-10 flex flex-col items-center gap-6">
-          <ProfileAvatar />
-          <div>
-            <h3 className="text-center text-lg font-semibold capitalize">
-              {user.profile.name}
-            </h3>
-          </div>
+        <div>
+          <ProfileAvatar className="mx-auto" />
+
+          <h3 className="mt-2 text-center text-lg font-semibold capitalize">
+            {user.profile.name}
+          </h3>
+          <p className="text-muted-foreground text-center text-sm">
+            @{user.profile.username}
+          </p>
         </div>
 
         {/* =============== Menu Items =============== */}
@@ -68,13 +69,13 @@ function ProfilePage() {
 
           <Link to="/orders" className="flex">
             <LogsIcon className="text-muted-foreground" />
-            <span className="ml-4">All Orders</span>
+            <span className="ml-4">Orders</span>
           </Link>
 
-          <div className="flex">
+          <Link to="/account-details" className="flex">
             <UserIcon className="text-muted-foreground" />
             <span className="ml-4">Account Details</span>
-          </div>
+          </Link>
 
           <Link to="/wallet/transactions" className="flex">
             <ArrowLeftRightIcon className="text-muted-foreground" />

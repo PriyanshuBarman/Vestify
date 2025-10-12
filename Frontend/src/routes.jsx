@@ -9,6 +9,8 @@ import Layout from "./components/layouts/Layout";
 import ProfilePage from "./pages/ProfilePage";
 import { stocksRoutes } from "./features/stocks/routes";
 
+const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
+const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
 const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
 const MobileSearchPage = lazy(
   () => import("./features/search/pages/MobileSearchPage"),
@@ -61,6 +63,22 @@ export const routes = createBrowserRouter([
       {
         path: "/profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "/account-details",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <AccountDetailsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/edit-field/:field",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <EditFieldPage />
+          </Suspense>
+        ),
       },
       {
         path: "/coming-soon",

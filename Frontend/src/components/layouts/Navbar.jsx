@@ -8,6 +8,7 @@ import { BellIcon, SearchIcon } from "lucide-react";
 import { lazy } from "react";
 import MediaQuery from "react-responsive";
 import { NavLink, useLocation, useNavigate } from "react-router";
+import ProfileAvatar from "../ProfileAvatar";
 const ProfileSheet = lazy(() => import("@/components/ProfileSheet"));
 const DesktopSearch = lazy(
   () => import("../../features/search/components/DesktopSearch"),
@@ -58,27 +59,13 @@ function Navbar() {
         {!isMobile && <ModeToggle />}
 
         {isMobile ? (
-          <Avatar onClick={() => navigate("/profile")} className="size-8.5">
-            <AvatarImage
-              src={user?.profile?.avatar}
-              alt="User Profile Picture"
-            />
-            <AvatarFallback>
-              {user?.profile?.name?.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+          <ProfileAvatar
+            onClick={() => navigate("/profile")}
+            className="size-8.5"
+          />
         ) : (
           <ProfileSheet>
-            <Avatar className="size-8.5">
-              <AvatarImage
-                referrerPolicy="no-referrer"
-                src={user?.profile?.avatar}
-                alt="User Profile Picture"
-              />
-              <AvatarFallback>
-                {user?.profile?.name?.charAt(0).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
+            <ProfileAvatar className="size-8.5" />
           </ProfileSheet>
         )}
       </div>

@@ -4,7 +4,7 @@ import { Navigate } from "react-router";
 function AuthGuard({ children, mode = "protected" }) {
   const { data: user } = useGetUser();
 
-  // return children;
+  return children;
 
   // ----- Protected Mode -----
   if (mode === "protected") {
