@@ -30,6 +30,8 @@ model User {
   pendingMfSipChanges PendingMfSipChange[]
   transactions        Transaction[]        @relation("UserTransactions")
   peerTransactions    Transaction[]        @relation("PeerTransactions")
+  ResetPasswordToken  ResetPasswordToken?
+  EmailChangeRequest  EmailChangeRequest?
 
   @@map("users")
 }
@@ -52,6 +54,33 @@ model Profile {
   userId String @unique
 
   @@map("profiles")
+}
+
+model ResetPasswordToken {
+  id        String   @id @default(uuid())
+  token     String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  @@index([token])
+  @@map("reset_password_tokens")
+}
+
+model EmailChangeRequest {
+  id        String   @id @default(uuid())
+  newEmail  String
+  otpHash   String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  @@index([userId])
+  @@map("email_change_requests")
 }
 
 // ======== Transaction =======

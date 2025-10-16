@@ -37,20 +37,29 @@ export const logout = (req, res) => {
     .json({ success: true, message: "User Logged Out Successfully" });
 };
 
-export const setPin = asyncHandler(async (req, res) => {
-  const { userId } = req.user;
-  const { pin } = req.body;
-
-  if (!pin) {
-    throw new ApiError(400, "pin is required");
-  }
-  if (pin.toString().length !== 4) {
-    throw new ApiError(400, "pin must be 4 digits");
+export const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    throw new ApiError(400, "email is required");
   }
 
-  await authService.setPin(userId, pin);
+  const link = await authService.forgotPassword(email);
 
   return res
     .status(200)
-    .json({ success: true, message: "Pin Setup Successful" });
+    .json({ success: true, message: "Reset link sent successfully", link });
+});
+
+export const resetPassword = asyncHandler(async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+
+  if (!token) throw new ApiError(400, "token is required");
+  if (!newPassword) throw new ApiError(400, "newPassword is required");
+
+  await authService.verifyTokenAndResetPassword(token, newPassword);
+
+  return res
+    .status(200)
+    .json({ success: true, message: "Password reset successfully" });
 });

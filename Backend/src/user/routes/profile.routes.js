@@ -9,8 +9,8 @@ profileRoutes.get("/:userId", authenticate, profileController.getProfile);
 profileRoutes.get("/", authenticate, profileController.searchProfile);
 
 profileRoutes.patch("/", authenticate, profileController.updateProfile);
-profileRoutes.post(
-  "/upload/avatar",
+profileRoutes.patch(
+  "/avatar",
   authenticate,
   upload.single("avatar"),
   profileController.uploadProfilePhoto

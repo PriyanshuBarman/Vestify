@@ -10,3 +10,18 @@ userRoutes.patch(
   authenticate,
   userController.claimDailyReward
 );
+
+userRoutes.post("/pin", authenticate, userController.setPin); // set-pin
+userRoutes.put("/pin", authenticate, userController.changePin); // update/change/reset-pin
+
+userRoutes.put("/change-password", authenticate, userController.changePassword);
+userRoutes.post(
+  "/change-email",
+  authenticate,
+  userController.requestEmailChange
+);
+userRoutes.put(
+  "/change-email/:otp",
+  authenticate,
+  userController.verifyEmailChange
+);
