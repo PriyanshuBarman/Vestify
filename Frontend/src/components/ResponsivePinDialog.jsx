@@ -160,7 +160,6 @@ function ResponsivePinDialog({
                   autoComplete="off"
                   inputMode="none"
                   readOnly={isMobile}
-                  // type="text"
                   onFocus={() => setCurrentIndex(index)}
                   value={digit}
                   onKeyDown={(e) => handleKeyDown(e, index)}

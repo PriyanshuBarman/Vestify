@@ -16,10 +16,10 @@ function Collections() {
                   src={cl.img}
                   alt={`${cl.label} logo`}
                   loading="lazy"
-                  className="size-[70%] dark:mix-blend-hard-light"
+                  className="size-[75%] dark:mix-blend-hard-light"
                 />
               </div>
-              <p className="text-foreground-secondary mt-1 text-xs sm:mt-3 sm:text-sm sm:font-medium">
+              <p className="text-foreground-secondary mt-1 text-xs sm:mt-3 sm:text-sm">
                 {cl.label}
               </p>
             </div>

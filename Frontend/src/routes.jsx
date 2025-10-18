@@ -1,14 +1,21 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router";
 import AuthGuard from "./components/AuthGuard";
+import Layout from "./components/layouts/Layout";
 import LoadingState from "./components/LoadingState";
 import { authRoutes } from "./features/auth/routes";
 import { mutualFundRoutes } from "./features/mutualfund/routes";
-import { walletRoutes } from "./features/wallet/routes";
-import Layout from "./components/layouts/Layout";
-import ProfilePage from "./pages/ProfilePage";
 import { stocksRoutes } from "./features/stocks/routes";
+import { walletRoutes } from "./features/wallet/routes";
+import ProfilePage from "./pages/ProfilePage";
 
+const ChangePasswordPage = lazy(() => import("./pages/ChangePasswordPage"));
+const ChangePinPage = lazy(() => import("./pages/ChangePinPage"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage"));
+const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
+const VerifyEmailChangeOTPPage = lazy(
+  () => import("./pages/VerifyEmailChangeOTPPage"),
+);
 const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
 const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
 const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
@@ -77,6 +84,46 @@ export const routes = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingState fullPage />}>
             <EditFieldPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/settings/change-pin",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <ChangePinPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/settings/change-password",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <ChangePasswordPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/change-email",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <ChangeEmailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/verify-email-change-otp",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <VerifyEmailChangeOTPPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/settings",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <SettingsPage />
           </Suspense>
         ),
       },

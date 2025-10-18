@@ -1,7 +1,7 @@
 import GoBackBar from "@/components/GoBackBar";
 import { Button } from "@/components/ui/button";
+import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useUpdateProfile } from "@/hooks/useUpdateProfile";
 import { useState } from "react";
@@ -26,13 +26,13 @@ function EditFieldPage() {
   };
 
   return (
-    <div className="sm:mx-auto sm:mt-30 sm:flex sm:max-w-lg sm:flex-col sm:items-center sm:justify-center">
-      <GoBackBar showSearchIcon={false} />
+    <div className="flex h-dvh flex-col px-4 pb-4 sm:mx-auto sm:h-fit sm:max-w-lg">
+      <GoBackBar showSearchIcon={false} className="px-0" />
 
-      <div className="mt-4 w-full space-y-2 px-4 sm:space-y-4">
-        <Label htmlFor="field-input" className="text-base font-medium">
+      <Field className="mt-4 sm:mt-28">
+        <FieldLabel className="text-base font-medium">
           Enter your new {field}
-        </Label>
+        </FieldLabel>
         <Input
           placeholder={user.profile[field]}
           value={value}
@@ -41,16 +41,14 @@ function EditFieldPage() {
           autoFocus
         />
         {isSameValueEntered && (
-          <p className="text-destructive text-sm">
-            This is your current {field}
-          </p>
+          <FieldError>This is your current {field}</FieldError>
         )}
-      </div>
+      </Field>
 
       <Button
         disabled={!value || isSameValueEntered}
         size="lg"
-        className="fixed inset-x-0 bottom-4 mx-auto w-[90%] sm:static sm:mt-8 sm:w-fit"
+        className="mx-auto mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleSave}
       >
         Save Changes

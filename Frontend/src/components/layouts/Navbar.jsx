@@ -52,9 +52,9 @@ function Navbar() {
         >
           <SearchIcon className="size-5.5" />
         </Button>
-        <Button aria-label="cart" variant="ghost" size="icon">
+        {/* <Button aria-label="cart" variant="ghost" size="icon">
           <BellIcon className="size-5.5" />
-        </Button>
+        </Button> */}
 
         {!isMobile && <ModeToggle />}
 
@@ -62,10 +62,11 @@ function Navbar() {
           <ProfileAvatar
             onClick={() => navigate("/profile")}
             className="size-8.5"
+            fallbackClassName="text-sm"
           />
         ) : (
           <ProfileSheet>
-            <ProfileAvatar className="size-8.5" />
+            <ProfileAvatar className="size-8.5" fallbackClassName="text-sm" />
           </ProfileSheet>
         )}
       </div>

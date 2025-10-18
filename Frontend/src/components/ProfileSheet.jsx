@@ -19,7 +19,7 @@ function ProfileSheet({ children }) {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="h-svh min-w-md py-18 sm:rounded-l-2xl"
+        className="h-svh min-w-md pt-18 sm:rounded-l-2xl"
       >
         <ProfilePage />
       </SheetContent>

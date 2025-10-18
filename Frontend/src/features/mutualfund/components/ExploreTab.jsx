@@ -16,7 +16,7 @@ function ExploreTab() {
         <PopularFunds />
         <Collections />
         <FundHouses/>
-        <IndexFunds />
+        {/* <IndexFunds /> */}
         <RecentlyViewedSection />
         <QuickAccess />
         <AllFunds />
