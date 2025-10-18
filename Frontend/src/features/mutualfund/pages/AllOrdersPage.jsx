@@ -23,8 +23,8 @@ function AllOrdersPage() {
   if (!orders) return <NoOrders />;
 
   return (
-    <div>
-      <GoBackBar title="All Orders" />
+    <div className="sm:mx-auto sm:max-w-xl">
+      <GoBackBar title="All Orders" showSearchIcon={false} />
       <div className="px-4">
         {orders?.map((order) => (
           <div

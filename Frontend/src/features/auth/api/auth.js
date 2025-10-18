@@ -25,11 +25,3 @@ export const logoutUser = async () => {
     withCredentials: true,
   });
 };
-
-export const createPin = async (pin) => {
-  const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/auth/pin`,
-    { pin },
-    { withCredentials: true },
-  );
-};

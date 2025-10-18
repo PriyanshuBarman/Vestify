@@ -73,13 +73,13 @@ function AccountDetailsPage() {
             <p className="text-muted-foreground">Email</p>
             <p className="text-base font-medium">{user?.email}</p>
           </div>
-          {/* <Button
+          <Button
             size="icon"
             variant="ghost"
-            onClick={() => navigate("/edit-field/email")}
+            onClick={() => navigate("/change-email")}
           >
             <Edit2Icon />
-          </Button> */}
+          </Button>
         </div>
       </div>
     </div>

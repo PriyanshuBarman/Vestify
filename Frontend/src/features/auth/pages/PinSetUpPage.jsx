@@ -6,10 +6,10 @@ import {
 } from "@/components/ui/input-otp";
 import { Spinner } from "@/components/ui/spinner";
 import { useGetUser } from "@/hooks/useGetUser";
+import { useSetPin } from "@/hooks/useSetPin";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useState } from "react";
 import { Navigate } from "react-router";
-import { useSetPin } from "../hooks/useSetPin";
 
 function PinSetupPage() {
   const [pin, setPin] = useState("");
@@ -74,7 +74,7 @@ function PinSetupPage() {
         disabled={pin.length < 4 || isPending}
         size="lg"
         className="mx-auto my-4 w-[90%] font-medium sm:w-sm"
-        onClick={() => mutate(pin)}
+        onClick={() => mutate({ pin })}
       >
         {isPending ? <Spinner /> : "Confirm"}
       </Button>

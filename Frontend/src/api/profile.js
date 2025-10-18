@@ -3,22 +3,20 @@ import axios from "axios";
 
 export const updateProfile = async ({ name, username }) => {
   const { data } = await axios.patch(
-    `${VITE_BACKEND_BASE_URL}/user/profiles`,
+    `${VITE_BACKEND_BASE_URL}/users/profiles`,
     {
       name,
       username,
     },
-    {
-      withCredentials: true,
-    },
+    { withCredentials: true },
   );
 
   return data.profile;
 };
 
 export const updateAvatar = async (formData) => {
-  const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/user/profiles/upload/avatar`,
+  const { data } = await axios.patch(
+    `${VITE_BACKEND_BASE_URL}/users/profiles/avatar`,
     formData,
     {
       withCredentials: true,
@@ -33,9 +31,18 @@ export const updateAvatar = async (formData) => {
 
 export const removeAvatar = async () => {
   const { data } = await axios.delete(
-    `${VITE_BACKEND_BASE_URL}/user/profiles/avatar`,
-    {
-      withCredentials: true,
-    },
+    `${VITE_BACKEND_BASE_URL}/users/profiles/avatar`,
+    { withCredentials: true },
   );
+
+  return data;
+};
+
+export const fetchProfileById = async (userId) => {
+  const { data } = await axios.get(
+    `${VITE_BACKEND_BASE_URL}/users/profiles/${userId}`,
+    { withCredentials: true },
+  );
+
+  return data.profile;
 };

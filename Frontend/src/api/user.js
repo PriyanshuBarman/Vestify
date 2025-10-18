@@ -2,7 +2,7 @@ import { VITE_BACKEND_BASE_URL } from "@/config/env";
 import axios from "axios";
 
 export const fetchUserData = async () => {
-  const { data } = await axios.get(`${VITE_BACKEND_BASE_URL}/user`, {
+  const { data } = await axios.get(`${VITE_BACKEND_BASE_URL}/users`, {
     withCredentials: true,
   });
 
@@ -11,23 +11,65 @@ export const fetchUserData = async () => {
 
 export const claimDailyReward = async () => {
   const { data } = await axios.patch(
-    `${VITE_BACKEND_BASE_URL}/user/claim-daily-reward`,
+    `${VITE_BACKEND_BASE_URL}/users/claim-daily-reward`,
     {},
-    {
-      withCredentials: true,
-    },
+    { withCredentials: true },
   );
 
   return data;
 };
 
-export const fetchProfileById = async (userId) => {
-  const { data } = await axios.get(
-    `${VITE_BACKEND_BASE_URL}/user/profiles/${userId}`,
+export const changePassword = async ({ currentPassword, newPassword }) => {
+  const { data } = await axios.patch(
+    `${VITE_BACKEND_BASE_URL}/users/change-password`,
     {
-      withCredentials: true,
+      currentPassword,
+      newPassword,
     },
+    { withCredentials: true },
   );
 
-  return data.profile;
+  return data;
+};
+
+export const requestEmailChange = async ({ password, newEmail }) => {
+  const { data } = await axios.post(
+    `${VITE_BACKEND_BASE_URL}/users/change-email`,
+    {
+      password,
+      newEmail,
+    },
+    { withCredentials: true },
+  );
+
+  return data;
+};
+
+export const verifyEmailChangeOTP = async ({ otp }) => {
+  const { data } = await axios.patch(
+    `${VITE_BACKEND_BASE_URL}/users/change-email/${otp}`,
+    { withCredentials: true },
+  );
+
+  return data.email;
+};
+
+export const setPin = async ({ pin }) => {
+  const { data } = await axios.patch(
+    `${VITE_BACKEND_BASE_URL}/users/set-pin`,
+    { pin },
+    { withCredentials: true },
+  );
+
+  return data;
+};
+
+export const changePin = async ({ currentPin, newPin }) => {
+  const { data } = await axios.patch(
+    `${VITE_BACKEND_BASE_URL}/users/change-pin`,
+    { currentPin, newPin },
+    { withCredentials: true },
+  );
+
+  return data;
 };
