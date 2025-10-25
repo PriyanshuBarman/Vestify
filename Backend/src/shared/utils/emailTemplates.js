@@ -294,3 +294,73 @@ export const changeEmailTemplate = (name, otp) => `<!DOCTYPE html>
   </body>
 </html>
 `;
+export const refreshTokenReuseTemplate = (
+  session,
+  decoded,
+  userAgent,
+  ip
+) => `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Action Required</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+    "
+  >
+  <h2>Refresh Token Reuse Detected</h2>
+  
+  <h3><strong>Suspicious activity detected for user:</strong></h3>
+  <table>
+    <tr>
+      <td><strong>User ID:</strong></td>
+      <td>${session.user.id}</td>
+    </tr>
+    <tr>
+      <td><strong>User Email:</strong></td>
+      <td>${session.user.email}</td>
+    </tr>
+  </table>
+ 
+
+  <h3>Current Session Details</h3>
+  <table>
+    <tr>
+      <td><strong>Session ID:</strong></td>
+      <td>${session.id}</td>
+    </tr>
+    <tr>
+      <td><strong>IP Address:</strong></td>
+      <td>${session.ip}</td>
+    </tr>
+    <tr>
+      <td><strong>User Agent:</strong></td>
+      <td>${session.userAgent}</td>
+    </tr>
+  </table>
+
+  <h3>New Login Attempt</h3>
+  <table>
+    <tr>
+      <td><strong>New Session ID:</strong></td>
+      <td>${decoded.sessionId}</td>
+    </tr>
+    <tr>
+      <td><strong>IP Address:</strong></td>
+      <td>${ip}</td>
+    </tr>
+    <tr>
+      <td><strong>User Agent:</strong></td>
+      <td>${userAgent}</td>
+    </tr>
+  </table>
+  </body>
+</html>
+`;

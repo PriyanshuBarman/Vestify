@@ -74,6 +74,7 @@ export const changePassword = asyncHandler(async (req, res) => {
     .status(200)
     .json({ success: true, message: "Password changed successfully" });
 });
+
 export const requestEmailChange = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { password, newEmail } = req.body;

@@ -1,21 +1,23 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { ApiError } from "../../shared/utils/apiError.utils.js";
-import crypto from "crypto";
+import { v4 as uuidv4 } from "uuid";
 import { db } from "../../../config/db.config.js";
-import { JWT_SECRET } from "../../../config/env.config.js";
-import { TOKEN_EXPIRY } from "../constants/auth.constants.js";
+import { JWT_SECRET, OWNER_EMAIL } from "../../../config/env.config.js";
 import { sendEmail } from "../../shared/services/email.service.js";
-import { passwordResetTemplate } from "../../shared/utils/emailTemplates.js";
+import { generateUniqueUsername } from "../../shared/services/usernameGenerator.service.js";
+import { ApiError } from "../../shared/utils/apiError.utils.js";
+import { refreshTokenReuseTemplate } from "../../shared/utils/emailTemplates.js";
+import {
+  generateTokenHash,
+  generateTokens,
+} from "../../shared/utils/token.utils.js";
 
-export const signupUser = async (name, email, password) => {
+export const signupUser = async ({ name, email, password, userAgent, ip }) => {
   const existingUser = await db.user.findUnique({ where: { email } });
-
   if (existingUser) throw new ApiError(400, "User Already Exists");
 
   const hashPassword = await bcrypt.hash(password, 10);
   const username = await generateUniqueUsername(name);
-
   const user = await db.user.create({
     data: {
       email,
@@ -29,120 +31,108 @@ export const signupUser = async (name, email, password) => {
     },
   });
 
-  const token = jwt.sign({ id: user.id }, JWT_SECRET, {
-    expiresIn: TOKEN_EXPIRY,
+  const sessionId = uuidv4();
+  const { refreshToken, accessToken } = generateTokens(user.id, sessionId);
+  const refreshTokenHash = generateTokenHash(refreshToken);
+  await db.session.create({
+    data: {
+      id: sessionId,
+      userId: user.id,
+      ip,
+      userAgent,
+      refreshTokenHash,
+    },
   });
 
-  return { token, user };
+  return { refreshToken, accessToken, user };
 };
 
-export const loginUser = async (email, password) => {
-  const existingUser = await db.user.findUnique({
+export const loginUser = async ({ email, password, userAgent, ip }) => {
+  const user = await db.user.findUnique({
     where: { email },
   });
 
-  if (!existingUser) throw new ApiError(400, "Email or password is invalid");
+  if (!user) throw new ApiError(400, "Email or password is invalid");
 
-  const match = await bcrypt.compare(password, existingUser.password);
+  const match = await bcrypt.compare(password, user.password);
 
   if (!match) throw new ApiError(400, "Email or password is invalid");
 
-  const token = jwt.sign({ id: existingUser.id }, JWT_SECRET, {
-    expiresIn: TOKEN_EXPIRY,
+  const sessionId = uuidv4();
+  const { refreshToken, accessToken } = generateTokens(user.id, sessionId);
+  const refreshTokenHash = generateTokenHash(refreshToken);
+
+  await db.session.create({
+    data: {
+      id: sessionId,
+      userId: user.id,
+      ip,
+      userAgent,
+      refreshTokenHash,
+    },
   });
 
-  return { token, user: existingUser };
+  return { refreshToken, accessToken, user };
 };
 
-export async function generateUniqueUsername(name) {
-  const base = name.toLowerCase().replace(/\s+/g, "");
-  let username = base;
-
-  // First check if base username is available
-  const exists = await db.profile.findUnique({
-    where: { username },
+export const logoutUser = async (refreshToken) => {
+  const refreshTokenHash = generateTokenHash(refreshToken);
+  await db.session.deleteMany({
+    where: {
+      refreshTokenHash: refreshTokenHash,
+    },
   });
+};
 
-  if (!exists) return username;
+export const refreshToken = async (token, userAgent, ip) => {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const session = await db.session.findUnique({
+      where: {
+        id: decoded.sessionId,
+      },
+      include: { user: true },
+    });
 
-  // Keep generating until we find a available username
-  while (true) {
-    // Generate 5 random candidates/usernames in a batch
-    const candidates = Array.from(
-      { length: 5 },
-      () => base + crypto.randomInt(1, 1000) // 4-digit random
-    );
+    if (!session) {
+      throw new ApiError(403, "Invalid refresh token");
+    }
 
-    // Fetch all usernames that already exist from this batch
-    const taken = await db.profile.findMany({
-      where: { username: { in: candidates } },
-      select: {
-        username: true,
+    const tokenHash = generateTokenHash(token);
+
+    // REUSE DETECTED
+    if (session.refreshTokenHash !== tokenHash) {
+      // Revoke the session
+      await db.session.deleteMany({
+        where: { id: decoded.sessionId },
+      });
+
+      // Notify owner
+      await sendEmail({
+        to: OWNER_EMAIL,
+        subject: "REUSE DETECTED",
+        html: refreshTokenReuseTemplate(session, decoded, userAgent, ip),
+      });
+
+      throw new ApiError(403, "Invalid refresh token");
+    }
+
+    // Generate new tokens
+    const newTokens = generateTokens(session.user.id, session.id);
+    const refreshTokenHash = generateTokenHash(newTokens.refreshToken);
+
+    // Update TokenHash in DB
+    await db.session.update({
+      where: {
+        id: session.id,
+      },
+      data: {
+        refreshTokenHash,
       },
     });
 
-    // Find the first candidate not taken
-    const available = candidates.find(
-      (u) => !taken.some((t) => t.username === u)
-    );
-
-    if (available) {
-      return available;
-    }
-
-    // If all taken, loop again and try another batch
+    return newTokens;
+  } catch (error) {
+    throw new ApiError(403, "Invalid refresh token");
   }
-}
-
-export const forgotPassword = async (email) => {
-  const user = await db.user.findUnique({
-    where: { email },
-    include: { profile: true },
-  });
-
-  if (!user) {
-    throw new ApiError(404, "No account found with this email");
-  }
-
-  const token = crypto.randomBytes(32).toString("hex");
-  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
-  const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
-
-  await db.resetPasswordToken.upsert({
-    where: { userId: user.id },
-    update: { token: hashedToken, expiresAt, createdAt: new Date() },
-    create: { token: hashedToken, expiresAt, userId: user.id },
-  });
-
-  await sendEmail({
-    to: user.email,
-    subject: "Password Reset Request",
-    html: passwordResetTemplate(user.profile.name, token),
-  });
-};
-
-export const verifyTokenAndResetPassword = async (token, newPassword) => {
-  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
-  const record = await db.resetPasswordToken.findFirst({
-    where: { token: hashedToken },
-    include: { user: true },
-  });
-
-  if (!record || record.expiresAt < new Date()) {
-    throw new ApiError(404, "Invalid or expired token");
-  }
-
-  await db.resetPasswordToken.delete({
-    where: { id: record.id },
-  });
-
-  const hashPassword = await bcrypt.hash(newPassword, 10);
-  await db.user.update({
-    where: {
-      id: record.userId,
-    },
-    data: {
-      password: hashPassword,
-    },
-  });
 };

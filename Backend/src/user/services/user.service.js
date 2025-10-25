@@ -114,7 +114,7 @@ export const changePassword = async (userId, currentPassword, newPassword) => {
   }
 
   const hashPassword = await bcrypt.hash(newPassword, 10);
-  await db.user.update({
+  const updatePassword = db.user.update({
     where: {
       id: userId,
     },
@@ -122,6 +122,11 @@ export const changePassword = async (userId, currentPassword, newPassword) => {
       password: hashPassword,
     },
   });
+  const clearAllSessions = db.session.deleteMany({
+    where: { userId },
+  });
+
+  await db.$transaction([updatePassword, clearAllSessions]);
 };
 
 export const requestEmailChange = async (userId, password, newEmail) => {

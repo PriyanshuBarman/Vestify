@@ -10,10 +10,12 @@ import { notFoundHandler } from "./src/shared/middlewares/notFound.middleware.js
 import userRoutes from "./src/user/routes/index.routes.js";
 import { walletRoutes } from "./src/wallet/routes/wallet.routes.js";
 import { authRoutes } from "./src/auth/routes/auth.routes.js";
+import requestIp from "request-ip";
 
 const app = express();
 
 app.use(cors({ origin: FRONTEND_URL, credentials: true }));
+app.use(requestIp.mw());
 
 app.use(cookieParser());
 app.use(express.json());
