@@ -1,61 +1,60 @@
-import axios from "axios";
-import { VITE_MF_API_BASE_URL, VITE_MF_CHART_API_BASE_URL } from "@/config/env";
+import { mfChartApi, mfHelperApi } from "@/lib/axios";
 
 export const fetchFund = async (schemeCode) => {
-  const { data } = await axios.get(
-    `${VITE_MF_API_BASE_URL}/scheme_code/${schemeCode}`,
-  );
+  const { data } = await mfHelperApi.get(`/scheme_code/${schemeCode}`);
   return data.fund;
 };
 
 export const fetchIndexFunds = async () => {
-  const { data } = await axios.get(
-    `${VITE_MF_API_BASE_URL}?plan=GROWTH&fund_category=index funds&limit=4`,
+  const { data } = await mfHelperApi.get(
+    `?plan=GROWTH&fund_category=index funds&limit=4`,
   );
   return data.funds;
 };
 
 export const fetchPopularFunds = async () => {
-  const { data } = await axios.get(
-    `${VITE_MF_API_BASE_URL}?plan=GROWTH&limit=4&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
+  const { data } = await mfHelperApi.get(
+    `?plan=GROWTH&limit=4&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
   );
   return data.funds;
 };
 
 export const fetchCategoryFundList = async (url) => {
-  const { data } = await axios.get(url);
+  const { data } = await mfHelperApi.get(url);
   return data.funds;
 };
 
-export const fetchChartData = async (scheme_code) => {
-  const { data } = await axios.get(
-    `${VITE_MF_CHART_API_BASE_URL}/${scheme_code}`,
-  );
-
-  const fullChartData = data.data?.map((entry) => {
-    const [day, month, year] = entry.date.split("-");
-    const d = new Date(`${year}-${month}-${day}`);
-    const dd = d.toLocaleDateString("en-GB", {
-      dateStyle: "medium",
-      timeZone: "UTC",
-    });
-
-    return { date: dd, nav: Number(entry.nav) };
-  });
-
-  return fullChartData.reverse();
-};
-
 export const fetchAllFunds = async () => {
-  const { data } = await axios.get(
-    `${VITE_MF_API_BASE_URL}?plan=GROWTH&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
+  const { data } = await mfHelperApi.get(
+    `?plan=GROWTH&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
   );
   return data.funds;
 };
 
 export const fetchAMCs = async () => {
-  const { data } = await axios.get(`${VITE_MF_API_BASE_URL}/amcs`);
+  const { data } = await mfHelperApi.get(`/amcs`);
   return data.amcs;
+};
+
+// Fetch categories and subcategories
+export const fetchCategories = async () => {
+  const { data } = await mfHelperApi.get(`/categories`);
+  return data.result;
+};
+
+export const fetchFundCategoryRanking = async (schemeCode) => {
+  const { data } = await mfHelperApi.get(`/categories/${schemeCode}`);
+  return data;
+};
+
+export const fetchAmcFunds = async (amcCode) => {
+  const { data } = await mfHelperApi.get(`/amcs/${amcCode}`);
+  return data.categories;
+};
+
+export const fetchMangerFunds = async (managerFunds) => {
+  const { data } = await mfHelperApi.get(`/fund-managers/${managerFunds}`);
+  return data.funds;
 };
 
 export const fetchFundsByFilter = async (filters) => {
@@ -71,10 +70,8 @@ export const fetchFundsByFilter = async (filters) => {
     }
   }
 
-  // params.push(`limit=${LIMIT}`);
-
   const queryString = `?${params.join("&")}`;
-  const { data } = await axios.get(`${VITE_MF_API_BASE_URL}${queryString}`);
+  const { data } = await mfHelperApi.get(`${queryString}`);
 
   return data.funds;
 };
@@ -96,36 +93,24 @@ export const fetchFilteredFunds = async ({ pageParam = 0, filters, LIMIT }) => {
   params.push(`offset=${pageParam}`);
 
   const queryString = `?${params.join("&")}`;
-  const { data } = await axios.get(`${VITE_MF_API_BASE_URL}${queryString}`);
+  const { data } = await mfHelperApi.get(`${queryString}`);
 
   return data;
 };
 
-// Fetch categories and subcategories
-export const fetchCategories = async () => {
-  const { data } = await axios.get(`${VITE_MF_API_BASE_URL}/categories`);
+export const fetchChartData = async (scheme_code) => {
+  const { data } = await mfChartApi.get(`/${scheme_code}`);
 
-  return data.result;
-};
+  const fullChartData = data.data?.map((entry) => {
+    const [day, month, year] = entry.date.split("-");
+    const d = new Date(`${year}-${month}-${day}`);
+    const dd = d.toLocaleDateString("en-GB", {
+      dateStyle: "medium",
+      timeZone: "UTC",
+    });
 
-export const fetchFundCategoryRanking = async (schemeCode) => {
-  const { data } = await axios.get(
-    `${VITE_MF_API_BASE_URL}/categories/${schemeCode}`,
-  );
+    return { date: dd, nav: Number(entry.nav) };
+  });
 
-  return data;
-};
-
-export const fetchAmcFunds = async (amcCode) => {
-  const { data } = await axios.get(`${VITE_MF_API_BASE_URL}/amcs/${amcCode}`);
-
-  return data.categories;
-};
-
-export const fetchMangerFunds = async (managerFunds) => {
-  const { data } = await axios.get(
-    `${VITE_MF_API_BASE_URL}/fund-managers/${managerFunds}`,
-  );
-
-  return data.funds;
+  return fullChartData.reverse();
 };

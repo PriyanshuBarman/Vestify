@@ -74,7 +74,7 @@ function CancelSipButton({ sipId }) {
               disabled={isPending}
               className="w-1/2"
             >
-              {isPending ? <Spinner /> : "Cancel SIP"}
+              {isPending && <Spinner />} Cancel SIP
             </Button>
           </DrawerFooter>
         </DrawerContent>
@@ -123,7 +123,7 @@ function CancelSipButton({ sipId }) {
             disabled={isPending}
             className="w-1/2"
           >
-            {isPending ? <Spinner /> : "Cancel SIP"}
+            {isPending && <Spinner />} Cancel SIP
           </Button>
         </DialogFooter>
       </DialogContent>

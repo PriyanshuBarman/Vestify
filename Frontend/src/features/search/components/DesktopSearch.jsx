@@ -108,10 +108,10 @@ function DesktopSearch() {
         />
 
         {isSearchOpen && (
-          <div className="Search-Popover bg-background absolute z-10 w-full space-y-4 rounded-b-lg border border-t-0 px-6 py-4">
+          <div className="Search-Popover bg-background absolute z-10 w-full space-y-4 rounded-b-2xl border border-t-0 px-6 py-4">
             <FilterTabs searchType={searchType} setSearchType={setSearchType} />
 
-            <ScrollArea className="h-[60vh]">
+            <ScrollArea className="max-h-[60vh] sm:pb-6">
               <LoadingSkeleton isLoading={isLoading} />
 
               <SearchResultList
@@ -129,14 +129,14 @@ function DesktopSearch() {
                 />
               )}
 
-              {!searchResult &&
+              {/* {!searchResult &&
                 !searchHistory[searchType]?.length &&
                 !isLoading && (
                   <TrendingSearchList
                     activeIdx={activeIdx}
                     handleClick={handleClick}
                   />
-                )}
+                )} */}
 
               <ScrollBar orientation="vertical" />
             </ScrollArea>
@@ -148,7 +148,7 @@ function DesktopSearch() {
       {isSearchOpen && (
         <div
           onClick={() => dispatch(setIsSearchOpen(false))}
-          className="Backdrop-Overlay fixed inset-0 z-20 bg-black/10 backdrop-blur-xs"
+          className="Backdrop-Overlay fixed inset-0 z-20 bg-black/20 backdrop-blur-xs"
         ></div>
       )}
     </>

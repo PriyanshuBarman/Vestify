@@ -108,7 +108,7 @@ function EditSipPage() {
             onClick={handleUpdateSip}
             className="w-full"
           >
-            {isPending ? <Spinner /> : "Save Changes"}
+            {isPending && <Spinner />} Save Changes
           </Button>
         </div>
       </div>

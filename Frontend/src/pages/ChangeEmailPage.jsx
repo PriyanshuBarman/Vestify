@@ -32,27 +32,6 @@ function ChangeEmailPage() {
       <GoBackBar showSearchIcon={false} className="px-0" />
 
       <FieldGroup className="mt-4 sm:mt-28">
-        <Field data-invalid={isInvalidPassword}>
-          <FieldLabel className="text-md font-medium">
-            Enter Vestify password{" "}
-            <FieldDescription className="text-xs">
-              (Not your new email password)
-            </FieldDescription>
-          </FieldLabel>
-
-          <Input
-            autoFocus
-            aria-invalid={isInvalidPassword}
-            value={password}
-            placeholder="••••••"
-            onChange={(e) => {
-              setPassword(e.target.value);
-              if (isError) reset();
-            }}
-            className="h-11 w-full"
-          />
-        </Field>
-
         <Field>
           <FieldLabel className="text-md font-medium">
             Enter your new email
@@ -66,6 +45,26 @@ function ChangeEmailPage() {
           {isSameValueEntered && (
             <FieldError>This is your current email</FieldError>
           )}
+        </Field>
+
+        <Field data-invalid={isInvalidPassword}>
+          <FieldLabel className="text-md flex-wrap gap-y-1 font-medium">
+            Enter Vestify password{" "}
+            <FieldDescription className="text-xs">
+              (Not your new email password)
+            </FieldDescription>
+          </FieldLabel>
+
+          <Input
+            autoFocus
+            aria-invalid={isInvalidPassword}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (isError) reset();
+            }}
+            className="h-11 w-full"
+          />
         </Field>
       </FieldGroup>
 
@@ -81,7 +80,7 @@ function ChangeEmailPage() {
         className="mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleSave}
       >
-        {isPending ? <Spinner /> : "Save Changes"}
+        {isPending && <Spinner />} Save Changes
       </Button>
     </div>
   );

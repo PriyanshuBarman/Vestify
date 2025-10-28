@@ -1,9 +1,9 @@
 import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import { useGetAllOrders } from "../hooks/useGetAllOrders";
 
-const OrderTypeConfig = {
+const orderTypeConfig = {
   ONE_TIME: "One-Time",
   SIP_INSTALLMENT: "SIP Installment",
   NEW_SIP: "New SIP",
@@ -18,7 +18,6 @@ const statusConfig = {
 
 function AllOrdersPage() {
   const { data: orders } = useGetAllOrders();
-  const navigate = useNavigate();
 
   if (!orders) return <NoOrders />;
 
@@ -27,22 +26,22 @@ function AllOrdersPage() {
       <GoBackBar title="All Orders" showSearchIcon={false} />
       <div className="px-4">
         {orders?.map((order) => (
-          <div
-            onClick={() => navigate(`/mutual-funds/order/${order.id}`)}
+          <Link
+            to={`/mutual-funds/order/${order.id}`}
             key={order.id}
             className="flex justify-between border-b py-4"
           >
             <div className="max-w-[60%]">
-              <h4 className="sm:text-md truncate sm:font-medium">
+              <h4 className="sm:text-md truncate text-sm sm:font-medium">
                 {order.fundName}
               </h4>
-              <p className="text-muted-foreground mt-2 text-sm">
-                {OrderTypeConfig[order.orderType]}
+              <p className="text-muted-foreground mt-2 text-xs">
+                {orderTypeConfig[order.orderType]}
               </p>
             </div>
 
             <div className="flex flex-col items-end">
-              <span className="text-[14px] font-medium tabular-nums sm:text-base">
+              <span className="text-sm font-medium tabular-nums sm:text-base">
                 {formatToINR(order.amount, 2)}
               </span>
               <div className="text-muted-foreground mt-2 flex items-center gap-2 text-xs">
@@ -50,7 +49,7 @@ function AllOrdersPage() {
                 <span>{statusConfig[order.status]}</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

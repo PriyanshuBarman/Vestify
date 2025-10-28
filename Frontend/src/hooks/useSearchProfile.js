@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { searchProfile } from "../api/wallet";
+import { searchProfile } from "../api/profile";
 
 export const useSearchProfile = (query) => {
   return useQuery({

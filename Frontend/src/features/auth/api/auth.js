@@ -1,27 +1,16 @@
-import { VITE_BACKEND_BASE_URL } from "@/config/env";
-import axios from "axios";
+import { api } from "@/lib/axios";
 
 export const signupUser = async ({ name, email, password }) => {
-  const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/auth/signup`,
-    { name, email, password },
-    { withCredentials: true },
-  );
-
+  const { data } = await api.post(`/auth/signup`, { name, email, password });
   return data?.user;
 };
 
 export const loginUser = async ({ email, password }) => {
-  const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/auth/login`,
-    { email, password },
-    { withCredentials: true },
-  );
+  const { data } = await api.post(`/auth/login`, { email, password });
   return data?.user;
 };
 
 export const logoutUser = async () => {
-  const { data } = await axios.get(`${VITE_BACKEND_BASE_URL}/auth/logout`, {
-    withCredentials: true,
-  });
+  const { data } = await api.get(`/auth/logout`);
+  return data;
 };

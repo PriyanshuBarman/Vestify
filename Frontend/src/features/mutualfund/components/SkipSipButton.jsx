@@ -93,7 +93,7 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
             disabled={isPending}
             className="flex-1"
           >
-            {isPending ? <Spinner /> : "Skip anyway"}
+            {!isPending && <Spinner />} Skip anyway
           </Button>
         </DrawerFooter>
       </DrawerContent>
@@ -138,7 +138,7 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
             disabled={isPending}
             className="flex-1"
           >
-            {isPending ? <Spinner /> : "Skip anyway"}
+            {isPending && <Spinner />} Skip anyway
           </Button>
         </DialogFooter>
       </DialogContent>

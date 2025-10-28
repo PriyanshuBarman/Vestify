@@ -27,7 +27,7 @@ function SearchBar({
         onChange={onChange}
         onFocus={() => dispatch(setIsSearchOpen(true))}
         placeholder="Search "
-        className={`!bg-background text-foreground min-w-full rounded-lg border px-12 py-2 outline-none ${isSearchOpen && "rounded-b-none border"}`}
+        className={`!bg-background text-foreground min-w-full rounded-xl border px-12 py-2 outline-none ${isSearchOpen && "rounded-b-none border"}`}
       />
       <button
         disabled={isLoading}
@@ -38,7 +38,7 @@ function SearchBar({
           searchBarRef.current.focus();
         }}
       >
-        {isLoading ? <Spinner className="text-primary" /> : <XIcon size={18} />}
+        {isLoading ? <Spinner /> : <XIcon size={18} />}
       </button>
 
       <p

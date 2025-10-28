@@ -1,14 +1,35 @@
+import CopyrightFooter from "@/components/CopyrightFooter";
 import GoBackBar from "@/components/GoBackBar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ProfileAvatar from "@/components/ProfileAvatar";
 import { Button } from "@/components/ui/button";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemSeparator,
+  ItemTitle,
+} from "@/components/ui/item";
+import {
+  ResponsiveModal,
+  ResponsiveModalContent,
+  ResponsiveModalHeader,
+  ResponsiveModalTitle,
+  ResponsiveModalTrigger,
+} from "@/components/ui/responsive-modal";
+import { Spinner } from "@/components/ui/spinner";
 import { useGetUser } from "@/hooks/useGetUser";
+import { useRemoveAvatar } from "@/hooks/useRemoveAvatar.js";
+import { useUploadAvatar } from "@/hooks/useUploadAvatar";
 import {
   CameraIcon,
   ChevronRightIcon,
   Edit2Icon,
   ImageUpIcon,
-  Trash2Icon,
+  Trash2Icon
 } from "lucide-react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 function AccountDetailsPage() {
@@ -17,11 +38,11 @@ function AccountDetailsPage() {
   const { mutate: uploadAvatar, isPending } = useUploadAvatar();
 
   return (
-    <div className="sm:mx-auto sm:max-w-lg">
+    <div className="h-full sm:mx-auto sm:max-w-lg">
       <GoBackBar title="Account details" showSearchIcon={false} />
       <div className="relative mx-auto mt-4 w-fit">
         <ProfileAvatar className="size-36" />
-        <Com uploadAvatar={uploadAvatar}>
+        <EditAvatarModal uploadAvatar={uploadAvatar}>
           <Button
             size="sm"
             variant="secondary"
@@ -35,74 +56,74 @@ function AccountDetailsPage() {
               </>
             )}
           </Button>
-        </Com>
+        </EditAvatarModal>
       </div>
 
-      <div className="mt-12">
-        <div className="flex justify-between border-b p-6">
-          <div>
-            <p className="text-muted-foreground">Name</p>
-            <p className="text-base font-medium capitalize">
-              {user?.profile?.name}
-            </p>
-          </div>
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={() => navigate("/edit-field/name")}
-          >
-            <Edit2Icon />
-          </Button>
-        </div>
+      <ItemGroup className="mt-12">
+        <Item size="sm">
+          <ItemContent>
+            <ItemDescription>Name</ItemDescription>
+            <ItemTitle className="text-base"> {user?.profile?.name}</ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => navigate("/edit-field/name")}
+            >
+              <Edit2Icon />
+            </Button>
+          </ItemActions>
+        </Item>
 
-        <div className="flex justify-between border-b p-6">
-          <div>
-            <p className="text-muted-foreground">Username</p>
-            <p className="text-base font-medium">@{user?.profile?.username}</p>
-          </div>
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={() => navigate("/edit-field/username")}
-          >
-            <Edit2Icon />
-          </Button>
-        </div>
-        <div className="flex justify-between border-b p-6">
-          <div>
-            <p className="text-muted-foreground">Email</p>
-            <p className="text-base font-medium">{user?.email}</p>
-          </div>
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={() => navigate("/change-email")}
-          >
-            <Edit2Icon />
-          </Button>
-        </div>
-      </div>
+        <ItemSeparator />
+
+        <Item size="sm">
+          <ItemContent>
+            <ItemDescription>Username</ItemDescription>
+            <ItemTitle className="text-base">
+              {" "}
+              @{user?.profile?.username}
+            </ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => navigate("/edit-field/username")}
+            >
+              <Edit2Icon />
+            </Button>
+          </ItemActions>
+        </Item>
+
+        <ItemSeparator />
+
+        <Item size="sm">
+          <ItemContent>
+            <ItemDescription>Email</ItemDescription>
+            <ItemTitle className="text-base"> {user?.email}</ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => navigate("/change-email")}
+            >
+              <Edit2Icon />
+            </Button>
+          </ItemActions>
+        </Item>
+      </ItemGroup>
+
+      <CopyrightFooter className="absolute inset-x-0 bottom-4" />
     </div>
   );
 }
 
 export default AccountDetailsPage;
 
-import {
-  ResponsiveModal,
-  ResponsiveModalContent,
-  ResponsiveModalHeader,
-  ResponsiveModalTitle,
-  ResponsiveModalTrigger,
-} from "@/components/ui/responsive-modal";
-import { Separator } from "@/components/ui/separator";
-import { useUploadAvatar } from "@/hooks/useUploadAvatar";
-import { useRef, useState } from "react";
-import { useRemoveAvatar } from "@/hooks/useRemoveAvatar.js";
-import { Spinner } from "@/components/ui/spinner";
-import ProfileAvatar from "@/components/ProfileAvatar";
-
-function Com({ children, uploadAvatar }) {
+function EditAvatarModal({ children, uploadAvatar }) {
   const [isOpen, setIsOpen] = useState(false);
   const { mutate: removeAvatar } = useRemoveAvatar();
   const fileInputRef = useRef();
@@ -127,7 +148,7 @@ function Com({ children, uploadAvatar }) {
     <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
       <ResponsiveModalTrigger asChild>{children}</ResponsiveModalTrigger>
 
-      <ResponsiveModalContent className="gap-2 pb-10">
+      <ResponsiveModalContent className="pb-8">
         <ResponsiveModalHeader>
           <ResponsiveModalTitle className="text-start">
             Change Profile Picture
@@ -145,21 +166,27 @@ function Com({ children, uploadAvatar }) {
           <Button
             onClick={() => fileInputRef.current?.click()}
             variant="ghost"
-            className="flex w-full justify-start"
+            className="grid w-full grid-cols-[auto_1fr] items-center"
           >
-            <ImageUpIcon /> Select from gallery (max 5MB)
-            <ChevronRightIcon className="ml-auto" />
+            <ImageUpIcon />
+            <div className="flex items-center justify-between border-b p-4 font-medium">
+              Select from gallery
+              <span className="text-2xs">(Max 5MB)</span>
+              <ChevronRightIcon className="ml-auto" />
+            </div>
           </Button>
         </>
 
-        <Separator />
         <Button
           onClick={handleRemoveAvatarClick}
           variant="ghost"
-          className="flex w-full justify-start"
+          className="mt-4 grid w-full grid-cols-[auto_1fr] items-center"
         >
-          <Trash2Icon /> Remove
-          <ChevronRightIcon className="ml-auto" />
+          <Trash2Icon />
+          <div className="flex items-center justify-between border-b p-4 font-medium">
+            Remove
+            <ChevronRightIcon className="ml-auto" />
+          </div>
         </Button>
       </ResponsiveModalContent>
     </ResponsiveModal>

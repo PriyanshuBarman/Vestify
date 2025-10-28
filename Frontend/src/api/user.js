@@ -1,75 +1,63 @@
-import { VITE_BACKEND_BASE_URL } from "@/config/env";
-import axios from "axios";
+import { api } from "@/lib/axios";
+
+// ================ QUERIES ================
 
 export const fetchUserData = async () => {
-  const { data } = await axios.get(`${VITE_BACKEND_BASE_URL}/users`, {
-    withCredentials: true,
-  });
-
+  const { data } = await api.get(`/users`);
   return data.user;
 };
 
-export const claimDailyReward = async () => {
-  const { data } = await axios.patch(
-    `${VITE_BACKEND_BASE_URL}/users/claim-daily-reward`,
-    {},
-    { withCredentials: true },
-  );
+export const fetchSessions = async () => {
+  const { data } = await api.get(`/users/sessions`);
+  return data.activeSessions;
+};
 
+// ================ MUTATIONS ================
+
+export const claimDailyReward = async () => {
+  const { data } = await api.patch(`/users/claim-daily-reward`);
   return data;
 };
 
 export const changePassword = async ({ currentPassword, newPassword }) => {
-  const { data } = await axios.patch(
-    `${VITE_BACKEND_BASE_URL}/users/change-password`,
-    {
-      currentPassword,
-      newPassword,
-    },
-    { withCredentials: true },
-  );
+  const { data } = await api.patch(`/users/change-password`, {
+    currentPassword,
+    newPassword,
+  });
 
   return data;
 };
 
 export const requestEmailChange = async ({ password, newEmail }) => {
-  const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/users/change-email`,
-    {
-      password,
-      newEmail,
-    },
-    { withCredentials: true },
-  );
+  const { data } = await api.post(`/users/change-email`, {
+    password,
+    newEmail,
+  });
 
   return data;
 };
 
 export const verifyEmailChangeOTP = async ({ otp }) => {
-  const { data } = await axios.patch(
-    `${VITE_BACKEND_BASE_URL}/users/change-email/${otp}`,
-    { withCredentials: true },
-  );
-
+  const { data } = await api.patch(`/users/change-email/${otp}`);
   return data.email;
 };
 
 export const setPin = async ({ pin }) => {
-  const { data } = await axios.patch(
-    `${VITE_BACKEND_BASE_URL}/users/set-pin`,
-    { pin },
-    { withCredentials: true },
-  );
-
+  const { data } = await api.patch(`/users/set-pin`, { pin });
   return data;
 };
 
 export const changePin = async ({ currentPin, newPin }) => {
-  const { data } = await axios.patch(
-    `${VITE_BACKEND_BASE_URL}/users/change-pin`,
-    { currentPin, newPin },
-    { withCredentials: true },
-  );
+  const { data } = await api.patch(`/users/change-pin`, { currentPin, newPin });
+  return data;
+};
 
+export const deleteSession = async ({ sessionId }) => {
+  const { data } = await api.delete(`/users/sessions/${sessionId}`);
+  return data;
+};
+
+export const deleteAllSessions = async () => {
+  const { data } = await api.delete(`/users/sessions`);
   return data;
 };

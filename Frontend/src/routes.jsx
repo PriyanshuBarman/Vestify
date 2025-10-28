@@ -5,26 +5,27 @@ import Layout from "./components/layouts/Layout";
 import LoadingState from "./components/LoadingState";
 import { authRoutes } from "./features/auth/routes";
 import { mutualFundRoutes } from "./features/mutualfund/routes";
-import { stocksRoutes } from "./features/stocks/routes";
+import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
 
-const ChangePasswordPage = lazy(() => import("./pages/ChangePasswordPage"));
-const ChangePinPage = lazy(() => import("./pages/ChangePinPage"));
-const SettingsPage = lazy(() => import("./pages/SettingsPage"));
-const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
-const VerifyEmailChangeOTPPage = lazy(
-  () => import("./pages/VerifyEmailChangeOTPPage"),
-);
-const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
-const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
-const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
+const ActiveDevicesPage = lazy(() => import("./pages/ActiveDevicesPage"));
 const MobileSearchPage = lazy(
   () => import("./features/search/pages/MobileSearchPage"),
 );
 const AllOrdersPage = lazy(
   () => import("./features/mutualfund/pages/AllOrdersPage"),
 );
+const VerifyEmailChangeOTPPage = lazy(
+  () => import("./pages/VerifyEmailChangeOTPPage"),
+);
+const ChangePasswordPage = lazy(() => import("./pages/ChangePasswordPage"));
+const ChangePinPage = lazy(() => import("./pages/ChangePinPage"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage"));
+const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
+const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
+const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
+const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
 const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
 
 export const routes = createBrowserRouter([
@@ -37,7 +38,7 @@ export const routes = createBrowserRouter([
     ),
     children: [
       walletRoutes,
-      stocksRoutes,
+      stockRoutes,
       mutualFundRoutes,
       {
         index: true,
@@ -88,22 +89,6 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/change-pin",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <ChangePinPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/settings/change-password",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <ChangePasswordPage />
-          </Suspense>
-        ),
-      },
-      {
         path: "/change-email",
         element: (
           <Suspense fallback={<LoadingState fullPage />}>
@@ -120,20 +105,49 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/settings",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <SettingsPage />
-          </Suspense>
-        ),
-      },
-      {
         path: "/coming-soon",
         element: (
           <Suspense fallback={<LoadingState fullPage />}>
             <ComingSoonPage />
           </Suspense>
         ),
+      },
+      {
+        path: "/settings",
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<LoadingState fullPage />}>
+                <SettingsPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "change-pin",
+            element: (
+              <Suspense fallback={<LoadingState fullPage />}>
+                <ChangePinPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "change-password",
+            element: (
+              <Suspense fallback={<LoadingState fullPage />}>
+                <ChangePasswordPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "active-devices",
+            element: (
+              <Suspense fallback={<LoadingState fullPage />}>
+                <ActiveDevicesPage />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },

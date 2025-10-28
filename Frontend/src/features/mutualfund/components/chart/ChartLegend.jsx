@@ -29,7 +29,7 @@ function ChartLegend({ selectedRange, fund, returnPercent }) {
           className={`${fund.day_change_percent >= 0 ? "text-positive" : "text-negative"}`}
         >
           {fund.day_change_percent > 0 ? "+" : ""}
-          {fund.day_change_percent}%
+          {fund.day_change_percent || 0}%
         </span>
         <span className="text-muted-foreground"> 1D</span>
       </div>

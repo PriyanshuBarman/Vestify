@@ -21,7 +21,7 @@ function PendingOrders() {
   const { data } = useGetAllOrders();
   const pendingOrders = data?.filter((order) => order.status === "PENDING");
 
-  if (!pendingOrders?.length) return;
+  if (!pendingOrders?.length) return null;
 
   return (
     <Accordion type="single" collapsible>

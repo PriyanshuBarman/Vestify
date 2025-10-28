@@ -7,6 +7,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { useChangePassword } from "@/hooks/useChangePassword";
 import { useState } from "react";
 
@@ -81,7 +82,7 @@ function ChangePasswordPage() {
         className="mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleSave}
       >
-        Save Changes
+        {isPending && <Spinner />}  Save Changes
       </Button>
     </div>
   );

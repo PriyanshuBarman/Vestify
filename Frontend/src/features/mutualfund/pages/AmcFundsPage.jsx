@@ -78,15 +78,12 @@ function AmcFundsPage() {
             <h2 className="text-lg font-semibold sm:text-2xl">
               {amc.amc_name}{" "}
             </h2>
-            <p className="text-muted-foreground font mt-2 space-x-2 text-xs sm:mt-4 sm:text-sm">
-              <span>Rank(total asset):</span>
-              <span className="text-sm font-medium">#{amc.rank} in India</span>
+            <p className="text-muted-foreground mt-2 space-x-2 text-xs whitespace-pre-line sm:mt-4 sm:text-sm">
+              Rank(total asset):
+              <b>#{amc.rank} in India</b>
             </p>
-            <p className="text-muted-foreground font space-x-2 sm:text-sm">
-              <span className="text-xs">Total AUM </span>
-              <span className="text-sm font-medium">
-                {formatToINR(amc.totalAum / 10)}Cr
-              </span>
+            <p className="text-muted-foreground mt-2 space-x-2 text-xs sm:text-sm">
+              Total AUM <b>{formatToINR(amc.totalAum / 10)}Cr</b>
             </p>
           </div>
           <FundLogo

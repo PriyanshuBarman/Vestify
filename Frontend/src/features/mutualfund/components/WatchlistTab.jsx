@@ -84,9 +84,7 @@ function NoWatchlist() {
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <img src="/NoData.svg" alt="sip" className="size-60 md:size-96" />
-      <h3 className="text-foreground-secondary font-medium sm:text-lg">
-        Not watching any funds
-      </h3>
+      <h3 className="font-medium sm:text-lg">Not watching any funds</h3>
       <p className="text-xs sm:text-sm">
         When you watch a fund, it will appear here
       </p>

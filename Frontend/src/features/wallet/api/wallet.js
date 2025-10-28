@@ -1,39 +1,21 @@
-import axios from "axios";
-import { VITE_BACKEND_BASE_URL } from "@/config/env";
+import { api } from "@/lib/axios";
 
-export const searchProfile = async (query) => {
-  const { data } = await axios.get(
-    `${VITE_BACKEND_BASE_URL}/user/profiles?query=${query}`,
-    { withCredentials: true },
-  );
+// ================ QUERIES ================
 
-  return data.profiles;
-};
-
-export const fetchAllTnx = async (query) => {
-  const { data } = await axios.get(
-    `${VITE_BACKEND_BASE_URL}/wallet/transactions`,
-    {
-      withCredentials: true,
-    },
-  );
-
+export const fetchAllTnx = async () => {
+  const { data } = await api.get(`/wallet/transactions`);
   return data.transactions;
 };
 
-// Mutations
+// ================ MUTATIONS ================
 
 export const sendMoney = async ({ amount, note, receiverId, pin }) => {
-  const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/wallet/send`,
-    {
-      amount,
-      note,
-      receiverId,
-      pin,
-    },
-    { withCredentials: true },
-  );
+  const { data } = await api.post(`/wallet/send`, {
+    amount,
+    note,
+    receiverId,
+    pin,
+  });
 
   return data.balance;
 };

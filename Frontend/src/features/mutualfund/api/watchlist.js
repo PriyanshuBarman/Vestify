@@ -1,5 +1,18 @@
-import { VITE_BACKEND_BASE_URL } from "@/config/env";
-import axios from "axios";
+import { api } from "@/lib/axios";
+
+// ================ QUERIES ================
+
+export const fetchWatchlist = async () => {
+  const { data } = await api.get(`/mutual-funds/watchlist`);
+  return data.watchlist;
+};
+
+export const isInWatchlist = async (schemeCode) => {
+  const { data } = await api.get(`/mutual-funds/watchlist/${schemeCode}`);
+  return data.isWatchlisted;
+};
+
+// ================ MUTATIONS ================
 
 export const addToWatchlist = async ({
   schemeCode,
@@ -7,43 +20,17 @@ export const addToWatchlist = async ({
   shortName,
   fundHouseDomain,
 }) => {
-  const { data } = await axios.post(
-    `${VITE_BACKEND_BASE_URL}/mutual-funds/watchlist`,
-    {
-      schemeCode,
-      fundName,
-      shortName,
-      fundHouseDomain,
-    },
-    { withCredentials: true },
-  );
+  const { data } = await api.post(`/mutual-funds/watchlist`, {
+    schemeCode,
+    fundName,
+    shortName,
+    fundHouseDomain,
+  });
 
   return data;
 };
 
 export const removeFromWatchlist = async ({ schemeCode }) => {
-  const { data } = await axios.delete(
-    `${VITE_BACKEND_BASE_URL}/mutual-funds/watchlist/${schemeCode}`,
-    { withCredentials: true },
-  );
-
+  const { data } = await api.delete(`/mutual-funds/watchlist/${schemeCode}`);
   return data;
-};
-
-export const fetchWatchlist = async () => {
-  const { data } = await axios.get(
-    `${VITE_BACKEND_BASE_URL}/mutual-funds/watchlist`,
-    { withCredentials: true },
-  );
-
-  return data.watchlist;
-};
-
-export const isInWatchlist = async (schemeCode) => {
-  const { data } = await axios.get(
-    `${VITE_BACKEND_BASE_URL}/mutual-funds/watchlist/${schemeCode}`,
-    { withCredentials: true },
-  );
-
-  return data.isWatchlisted;
 };

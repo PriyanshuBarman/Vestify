@@ -1,3 +1,4 @@
+import CopyrightFooter from "@/components/CopyrightFooter";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -36,11 +37,11 @@ const NAV_ITEMS = [
     icon: <SettingsIcon className="text-muted-foreground" />,
     text: "Settings",
   },
-  {
-    to: "#",
-    icon: <HeartIcon className="text-muted-foreground" />,
-    text: "Refer & earn",
-  },
+  // {
+  //   to: "#",
+  //   icon: <HeartIcon className="text-muted-foreground" />,
+  //   text: "Refer & earn",
+  // },
 ];
 
 function ProfilePage() {
@@ -110,19 +111,7 @@ function ProfilePage() {
 
         {/* Footer */}
         <div className="mt-auto flex w-full flex-col items-center justify-center gap-6 pb-4 sm:font-medium">
-          <div className="flex flex-col items-center gap-2">
-            <div className="flex items-center justify-center">
-              <img
-                src="/logo.png"
-                alt="Vestify logo"
-                className="size-5 rounded-full"
-              />
-              <span className="ml-2 text-xs">Vestify</span>
-            </div>
-            <p className="text-muted-foreground flex items-center text-center text-xs">
-              Copyright © 2025 Vestify
-            </p>
-          </div>
+          <CopyrightFooter />
         </div>
       </div>
     </div>

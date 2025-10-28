@@ -89,7 +89,7 @@ function FundPage() {
             </div>
           </div>
 
-          <h2 className="Fund-name mt-4 min-h-[1.5rem] text-lg font-medium tracking-tight sm:text-2xl sm:font-semibold">
+          <h2 className="Fund-name mt-4 min-h-[1.8rem] text-lg font-medium tracking-tight sm:min-h-[1.9rem] sm:text-2xl sm:font-semibold">
             {fund.name}
           </h2>
 

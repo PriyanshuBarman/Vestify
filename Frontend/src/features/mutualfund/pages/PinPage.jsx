@@ -96,7 +96,7 @@ function PinPage() {
         className="mx-auto my-6 w-[90%] font-medium sm:w-sm"
         onClick={() => mutate(pin)}
       >
-        {isPending ? <Spinner /> : "Confirm"}
+        {isPending && <Spinner />} Confirm
       </Button>
     </div>
   );

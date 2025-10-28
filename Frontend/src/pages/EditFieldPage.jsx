@@ -2,6 +2,7 @@ import GoBackBar from "@/components/GoBackBar";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useUpdateProfile } from "@/hooks/useUpdateProfile";
 import { useState } from "react";
@@ -12,7 +13,7 @@ function EditFieldPage() {
   const navigate = useNavigate();
   const { data: user } = useGetUser();
   const { field } = useParams();
-  const { mutate } = useUpdateProfile();
+  const { mutate, isPending } = useUpdateProfile();
 
   const isSameValueEntered = value === user?.profile?.[field];
 
@@ -51,7 +52,7 @@ function EditFieldPage() {
         className="mx-auto mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleSave}
       >
-        Save Changes
+        {isPending && <Spinner />} Save Changes
       </Button>
     </div>
   );

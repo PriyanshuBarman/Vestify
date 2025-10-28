@@ -1,19 +1,11 @@
-import axios from "axios";
-import {
-  VITE_STOCK_SEARCH_API_BASE_URL,
-  VITE_MF_API_BASE_URL,
-} from "@/config/env";
+import { mfHelperApi, stockSearchApi } from "@/lib/axios";
 
 export const fetchSearchResults = async (query, type) => {
   if (type === "mutualFunds") {
-    const { data } = await axios.get(
-      `${VITE_MF_API_BASE_URL}/search?query=${query}`,
-    );
+    const { data } = await mfHelperApi.get(`/search?query=${query}`);
     return data.funds;
   } else if (type === "indianStocks") {
-    const { data } = await axios.get(
-      `${VITE_STOCK_SEARCH_API_BASE_URL}query=${query}`,
-    );
+    const { data } = await stockSearchApi.get(`query=${query}`);
     return data.data.funds.indian_stocks;
   }
   return null;
@@ -25,8 +17,8 @@ export const fetchSearchResults = async (query, type) => {
  * TODO: Change the function to fetch the trending searches
  */
 export const fetchTrendingSearches = async () => {
-  const { data } = await axios.get(
-    `${VITE_MF_API_BASE_URL}?plan=GROWTH&limit=4&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
+  const { data } = await mfHelperApi.get(
+    `?plan=GROWTH&limit=4&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
   );
   return data.funds;
 };

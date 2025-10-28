@@ -4,14 +4,14 @@ import {
   Field,
   FieldError,
   FieldGroup,
-  FieldLabel,
-  FieldSet,
+  FieldLabel
 } from "@/components/ui/field";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { Spinner } from "@/components/ui/spinner";
 import { useChangePin } from "@/hooks/useChangePin";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useState } from "react";
@@ -133,7 +133,7 @@ function ChangePasswordPage() {
         className="mx-auto mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleSave}
       >
-        Save Changes
+        {isPending && <Spinner />} Save Changes
       </Button>
     </div>
   );

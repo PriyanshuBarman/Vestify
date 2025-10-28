@@ -90,7 +90,7 @@ function VerifyEmailChangeOTPPage() {
         className="mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleVerifyOTP}
       >
-        {isPending ? <Spinner /> : "Confirm"}
+        {isPending && <Spinner />} Confirm
       </Button>
     </div>
   );

@@ -87,7 +87,7 @@ function DesktopPaymentCard({ fund }) {
             disabled={isPending || amount < fund.lump_min}
             className="w-full"
           >
-            {isPending ? <Spinner /> : "Invest"}
+            {!isPending && <Spinner />} Invest
           </Button>
 
           <ResponsivePinDialog
@@ -142,7 +142,7 @@ function DesktopPaymentCard({ fund }) {
             disabled={isPending || amount < fund.sip_min || !sipDate}
             className="w-full"
           >
-            {isPending ? <Spinner /> : "Start Sip"}
+            {isPending && <Spinner />} Start Sip
           </Button>
 
           <ResponsivePinDialog

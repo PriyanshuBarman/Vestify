@@ -3,10 +3,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { useDebounce } from "@/hooks/useDebounce";
+import { useSearchProfile } from "@/hooks/useSearchProfile";
 import { SearchIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { useSearchProfile } from "../hooks/useSearchProfile";
+
 
 function SendMoneyPage() {
   const navigate = useNavigate();

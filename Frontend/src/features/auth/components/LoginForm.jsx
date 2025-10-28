@@ -82,7 +82,7 @@ export function LoginForm({ className, ...props }) {
           type="submit"
           className="w-full"
         >
-          {isPending || isLoading ? <Spinner /> : "Login"}
+          {(isPending || isLoading) && <Spinner />} Login
         </Button>
 
         {/* Divider */}
