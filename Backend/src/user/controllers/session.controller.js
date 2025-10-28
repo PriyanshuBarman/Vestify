@@ -26,8 +26,9 @@ export const revokeSession = asyncHandler(async (req, res) => {
 
 export const revokeAllSessions = asyncHandler(async (req, res) => {
   const { userId } = req.user;
+  const { refreshToken } = req.cookies;
 
-  await sessionService.revokeAllSessions(userId);
+  await sessionService.revokeAllSessions(userId, refreshToken);
 
   return res.status(200).json({
     success: true,

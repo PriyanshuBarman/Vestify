@@ -29,6 +29,14 @@ export const signupUser = async ({ name, email, password, userAgent, ip }) => {
         },
       },
     },
+    select: {
+      id: true,
+      email: true,
+      hasPin: true,
+      createdAt: true,
+      authProvider: true,
+      profile: true,
+    },
   });
 
   const sessionId = uuidv4();
@@ -50,6 +58,15 @@ export const signupUser = async ({ name, email, password, userAgent, ip }) => {
 export const loginUser = async ({ email, password, userAgent, ip }) => {
   const user = await db.user.findUnique({
     where: { email },
+    select: {
+      id: true,
+      email: true,
+      hasPin: true,
+      password: true,
+      createdAt: true,
+      authProvider: true,
+      profile: true,
+    },
   });
 
   if (!user) throw new ApiError(400, "Email or password is invalid");
@@ -72,14 +89,15 @@ export const loginUser = async ({ email, password, userAgent, ip }) => {
     },
   });
 
+  delete user.password;
   return { refreshToken, accessToken, user };
 };
 
 export const logoutUser = async (refreshToken) => {
-  const refreshTokenHash = generateTokenHash(refreshToken);
+  const decoded = jwt.verify(refreshToken, JWT_SECRET);
   await db.session.deleteMany({
     where: {
-      refreshTokenHash: refreshTokenHash,
+      id: decoded.sessionId,
     },
   });
 };
@@ -95,7 +113,7 @@ export const refreshToken = async (token, userAgent, ip) => {
     });
 
     if (!session) {
-      throw new ApiError(403, "Invalid refresh token");
+      throw new ApiError(401, "Invalid refresh token");
     }
 
     const tokenHash = generateTokenHash(token);
@@ -114,7 +132,7 @@ export const refreshToken = async (token, userAgent, ip) => {
         html: refreshTokenReuseTemplate(session, decoded, userAgent, ip),
       });
 
-      throw new ApiError(403, "Invalid refresh token");
+      throw new ApiError(401, "Invalid refresh token");
     }
 
     // Generate new tokens
@@ -133,6 +151,6 @@ export const refreshToken = async (token, userAgent, ip) => {
 
     return newTokens;
   } catch (error) {
-    throw new ApiError(403, "Invalid refresh token");
+    throw new ApiError(401, "Invalid refresh token");
   }
 };

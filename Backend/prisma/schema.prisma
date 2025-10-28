@@ -9,14 +9,15 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(uuid())
-  email          String    @unique
+  id             String            @id @default(uuid())
+  email          String            @unique
   password       String?
   pin            String?
-  hasPin         Boolean   @default(false)
-  role           Role      @default(USER)
-  balance        Decimal   @default(0) @db.Decimal(18, 2)
+  hasPin         Boolean           @default(false)
+  role           Role              @default(USER)
+  balance        Decimal           @default(0) @db.Decimal(18, 2)
   lastRewardedAt DateTime?
+  authProvider   AuthProviderType? // e.g. "google", "facebook", etc. Null if using email/password auth
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -35,6 +36,13 @@ model User {
   Sessions            Session[]
 
   @@map("users")
+}
+
+enum AuthProviderType {
+  GOOGLE
+  FACEBOOK
+  GITHUB
+  TWITTER
 }
 
 enum Role {

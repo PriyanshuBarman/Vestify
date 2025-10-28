@@ -7,13 +7,25 @@ import {
 } from "../../shared/utils/token.utils.js";
 
 export const googleAuth = async ({ email, name, picture, ip, userAgent }) => {
-  let user = await db.user.findUnique({ where: { email } });
+  let user = await db.user.findUnique({
+    where: { email },
+    select: {
+      id: true,
+      email: true,
+      hasPin: true,
+      createdAt: true,
+      authProvider: true,
+      profile: true,
+    },
+  });
+
   let isNewUser = false;
 
   if (!user) {
     const username = await generateUniqueUsername(name);
     user = await db.user.create({
       data: {
+        authProvider: "GOOGLE",
         email,
         profile: {
           create: {
@@ -22,6 +34,14 @@ export const googleAuth = async ({ email, name, picture, ip, userAgent }) => {
             avatar: picture,
           },
         },
+      },
+      select: {
+        id: true,
+        email: true,
+        hasPin: true,
+        createdAt: true,
+        authProvider: true,
+        profile: true,
       },
     });
 
