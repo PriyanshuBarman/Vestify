@@ -10,6 +10,7 @@ export const processInvestmentOrder = async (orderData) => {
   let {
     id: orderId,
     userId,
+    sipId,
     schemeCode,
     fundName,
     amount,
@@ -23,7 +24,6 @@ export const processInvestmentOrder = async (orderData) => {
   const nav = await fetchNavByDate(schemeCode, navDate);
   const units = amount / nav;
 
-  //  Prisma transaction
   await db.$transaction(async (tx) => {
     const prevInv = await tx.mfPortfolio.findUnique({
       where: {
@@ -84,11 +84,22 @@ export const processInvestmentOrder = async (orderData) => {
         units,
       },
     });
+
+    // 5. Link SIP to portfolio if not already linked
+    if (sipId) {
+      await tx.mfSip.update({
+        where: { id: sipId },
+        data: {
+          portfolioId,
+        },
+      });
+    }
   });
 };
 
-
-// Process Redemption Order
+// ----------------------------------------------------------------------
+//  Process Redemption Order
+// ----------------------------------------------------------------------
 
 export const processRedemptionOrder = async (orderData) => {
   let { id: orderId, userId, schemeCode, amount, units, navDate } = orderData;
