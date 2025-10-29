@@ -10,7 +10,7 @@ import * as gAuthService from "../services/googleAuth.service.js";
 const client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, "postmessage");
 
 export const googleAuth = asyncHandler(async (req, res) => {
-  const { code } = req.body;
+  const { code, referralCode } = req.body;
   const ip = req.clientIp;
   const userAgent = req.headers["user-agent"];
 
@@ -30,6 +30,7 @@ export const googleAuth = asyncHandler(async (req, res) => {
       picture,
       ip,
       userAgent,
+      referralCode
     });
 
   return res

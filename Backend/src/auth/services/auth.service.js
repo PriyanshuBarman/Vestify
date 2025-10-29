@@ -11,8 +11,16 @@ import {
   generateTokenHash,
   generateTokens,
 } from "../../shared/utils/token.utils.js";
+import * as referralService from "./referral.service.js";
 
-export const signupUser = async ({ name, email, password, userAgent, ip }) => {
+export const signupUser = async ({
+  name,
+  email,
+  password,
+  userAgent,
+  ip,
+  referralCode,
+}) => {
   const existingUser = await db.user.findUnique({ where: { email } });
   if (existingUser) throw new ApiError(400, "User Already Exists");
 
@@ -51,6 +59,10 @@ export const signupUser = async ({ name, email, password, userAgent, ip }) => {
       refreshTokenHash,
     },
   });
+
+  if (referralCode) {
+    await referralService.applyReferralBonus(user.id, referralCode);
+  }
 
   return { refreshToken, accessToken, user };
 };

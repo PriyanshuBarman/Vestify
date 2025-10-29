@@ -5,8 +5,16 @@ import {
   generateTokenHash,
   generateTokens,
 } from "../../shared/utils/token.utils.js";
+import * as referralService from "./referral.service.js";
 
-export const googleAuth = async ({ email, name, picture, ip, userAgent }) => {
+export const googleAuth = async ({
+  email,
+  name,
+  picture,
+  ip,
+  userAgent,
+  referralCode,
+}) => {
   let user = await db.user.findUnique({
     where: { email },
     select: {
@@ -44,6 +52,10 @@ export const googleAuth = async ({ email, name, picture, ip, userAgent }) => {
         profile: true,
       },
     });
+
+    if (referralCode) {
+      await referralService.applyReferralBonus(user.id, referralCode);
+    }
 
     isNewUser = true;
   }

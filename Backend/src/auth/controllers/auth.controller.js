@@ -8,7 +8,7 @@ import {
 } from "../constants/auth.constants.js";
 
 export const signup = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, referralCode } = req.body;
   const userAgent = req.headers["user-agent"];
   const ip = req.clientIp;
 
@@ -18,6 +18,7 @@ export const signup = asyncHandler(async (req, res) => {
     password,
     userAgent,
     ip,
+    referralCode,
   });
 
   return res
