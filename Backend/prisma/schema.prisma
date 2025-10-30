@@ -23,6 +23,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   profile             Profile?
+  sessions            Session[]
   mfPortfolio         MfPortfolio[]
   mfHolding           MfHolding[]
   mfWatchlist         MfWatchlist[]
@@ -31,9 +32,8 @@ model User {
   pendingMfSipChanges PendingMfSipChange[]
   transactions        Transaction[]        @relation("UserTransactions")
   peerTransactions    Transaction[]        @relation("PeerTransactions")
-  ResetPasswordToken  ResetPasswordToken?
-  EmailChangeRequest  EmailChangeRequest?
-  Sessions            Session[]
+  resetPasswordToken  ResetPasswordToken?
+  emailChangeRequest  EmailChangeRequest?
 
   @@map("users")
 }
@@ -107,7 +107,6 @@ model EmailChangeRequest {
   @@map("email_change_requests")
 }
 
-// ======== Transaction =======
 model Transaction {
   id             String          @id @default(uuid())
   amount         Decimal         @db.Decimal(18, 2)
@@ -128,7 +127,7 @@ model Transaction {
   assetCategory AssetCategory?
   // assetId       String? // e.g. fund code, stock symbol, etc.
   assetOrder    MfOrder?       @relation(fields: [assetOrderId], references: [id], onDelete: Restrict)
-  assetOrderId  String?
+  assetOrderId  String?        @unique
 
   @@map("transactions")
 }
@@ -144,7 +143,9 @@ enum AssetCategory {
   STOCK
 }
 
-// =============================================== MUTUAL FUND ==============================================
+// ----------------------------------------------
+// MUTUAL FUND 
+// ----------------------------------------------
 
 model MfOrder {
   id              String    @id @default(uuid())
@@ -169,7 +170,7 @@ model MfOrder {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  Transaction Transaction[]
+  transaction Transaction?
 
   @@map("mf_orders")
 }
@@ -211,10 +212,10 @@ model MfPortfolio {
   updatedAt        DateTime @updatedAt
 
   userId String
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  sips   MfSip[]
-  mfHoldings MfHolding[]
+  sips     MfSip[]
+  holdings MfHolding[]
 
   @@unique([userId, schemeCode])
   @@map("mf_portfolios")
@@ -239,7 +240,7 @@ model MfHolding {
 
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
-  mfPortfolio MfPortfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolio   MfPortfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String
 
   @@map("mf_holdings")
@@ -270,11 +271,6 @@ model MfSip {
   @@map("mf_sips")
 }
 
-enum SipStatus {
-  ACTIVE
-  PAUSED
-}
-
 model PendingMfSipChange {
   id                  String    @id @default(uuid())
   amount              Decimal?  @db.Decimal(18, 2) // future amount
@@ -284,7 +280,7 @@ model PendingMfSipChange {
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
-  mfSip  MfSip  @relation(fields: [sipId], references: [id], onDelete: Cascade)
+  sip    MfSip  @relation(fields: [sipId], references: [id], onDelete: Cascade)
   sipId  String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
