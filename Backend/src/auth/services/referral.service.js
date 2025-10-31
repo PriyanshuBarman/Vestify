@@ -1,16 +1,17 @@
 import { db } from "../../../config/db.config.js";
+import { sendUserEvent } from "../../shared/events/eventManager.js";
 import { ApiError } from "../../shared/utils/apiError.utils.js";
 
-export const applyReferralBonus = async (userId, referralCode) => {
+export const applyReferralBonus = async (referrerId, userId) => {
   const REFERRER_BONUS = 10000;
   const NEW_USER_BONUS = 5000;
 
-  await db.$transaction(async (tx) => {
+  const { referrer, user } = await db.$transaction(async (tx) => {
     // Credit referrer
     const referrer = await tx.user.update({
-      where: { profile: { username: referralCode } },
+      where: { id: referrerId },
       data: {
-        balance: { credit: REFERRER_BONUS },
+        balance: { increment: REFERRER_BONUS },
       },
     });
 
@@ -30,7 +31,7 @@ export const applyReferralBonus = async (userId, referralCode) => {
     await tx.transaction.createMany({
       data: [
         {
-          userId,
+          userId: referrerId,
           amount: REFERRER_BONUS,
           type: "CREDIT",
           updatedBalance: referrer.balance,
@@ -45,5 +46,9 @@ export const applyReferralBonus = async (userId, referralCode) => {
         },
       ],
     });
+    return { referrer, user };
   });
+
+  sendUserEvent(referrer.id, { balance: referrer.balance });
+  sendUserEvent(user.id, { balance: user.balance });
 };

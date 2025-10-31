@@ -6,6 +6,7 @@ import {
   generateTokens,
 } from "../../shared/utils/token.utils.js";
 import * as referralService from "./referral.service.js";
+import { ApiError } from "../../shared/utils/apiError.utils.js";
 
 export const googleAuth = async ({
   email,
@@ -30,6 +31,16 @@ export const googleAuth = async ({
   let isNewUser = false;
 
   if (!user) {
+    // Check if referralCode is valid or not
+    let referrer;
+    if (referralCode) {
+      referrer = await db.profile.findUnique({
+        where: { username: referralCode },
+      });
+
+      if (!referrer) throw new ApiError(400, "Invalid referral code");
+    }
+
     const username = await generateUniqueUsername(name);
     user = await db.user.create({
       data: {
@@ -53,8 +64,8 @@ export const googleAuth = async ({
       },
     });
 
-    if (referralCode) {
-      await referralService.applyReferralBonus(user.id, referralCode);
+    if (referrer) {
+      await referralService.applyReferralBonus(referrer.userId, user.id);
     }
 
     isNewUser = true;

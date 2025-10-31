@@ -30,7 +30,7 @@ export const googleAuth = asyncHandler(async (req, res) => {
       picture,
       ip,
       userAgent,
-      referralCode
+      referralCode,
     });
 
   return res

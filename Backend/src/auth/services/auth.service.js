@@ -24,6 +24,17 @@ export const signupUser = async ({
   const existingUser = await db.user.findUnique({ where: { email } });
   if (existingUser) throw new ApiError(400, "User Already Exists");
 
+  // Check if referralCode is valid or not
+  let referrer;
+  if (referralCode) {
+    referrer = await db.profile.findUnique({
+      where: { username: referralCode },
+    });
+
+    console.log(referrer);
+    if (!referrer) throw new ApiError(400, "Invalid referral code");
+  }
+
   const hashPassword = await bcrypt.hash(password, 10);
   const username = await generateUniqueUsername(name);
   const user = await db.user.create({
@@ -60,8 +71,8 @@ export const signupUser = async ({
     },
   });
 
-  if (referralCode) {
-    await referralService.applyReferralBonus(user.id, referralCode);
+  if (referrer) {
+    await referralService.applyReferralBonus(referrer.userId, user.id);
   }
 
   return { refreshToken, accessToken, user };

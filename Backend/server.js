@@ -2,15 +2,15 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import requestIp from "request-ip";
 import { FRONTEND_URL } from "./config/env.config.js";
+import { authRoutes } from "./src/auth/routes/auth.routes.js";
 import { mutualFundRoutes } from "./src/mutualfund/routes/index.routes.js";
 import eventRoutes from "./src/shared/events/events.route.js";
 import { errorHandler } from "./src/shared/middlewares/error.middleware.js";
 import { notFoundHandler } from "./src/shared/middlewares/notFound.middleware.js";
 import userRoutes from "./src/user/routes/index.routes.js";
 import { walletRoutes } from "./src/wallet/routes/wallet.routes.js";
-import { authRoutes } from "./src/auth/routes/auth.routes.js";
-import requestIp from "request-ip";
 
 const app = express();
 
