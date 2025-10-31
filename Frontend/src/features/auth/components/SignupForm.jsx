@@ -12,7 +12,6 @@ import { useSearchParams } from "react-router";
 export function SignupForm({ className, ...props }) {
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get("referralCode");
-  console.log(referralCode);
   const [formData, setFormData] = useState({
     name: "",
     email: "",

@@ -1,10 +1,9 @@
-import { useState } from "react";
-import axios from "axios";
+import { api } from "@/lib/axios";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
-import { VITE_BACKEND_BASE_URL } from "@/config/env";
-import { useQueryClient } from "@tanstack/react-query";
 
 export function useGoogleAuth() {
   const navigate = useNavigate();
@@ -17,16 +16,12 @@ export function useGoogleAuth() {
     onSuccess: async ({ code }) => {
       try {
         setIsLoading(true);
-        const { data } = await axios.post(
-          `${VITE_BACKEND_BASE_URL}/auth/google`,
-          { code, referralCode },
-        );
+        const { data } = await api.post("/auth/google", { code, referralCode });
         if (data.success) {
           queryClient.setQueryData(["user"], data.user);
           navigate("/", { replace: true });
         }
       } catch (err) {
-        console.error("Login error:", err);
         toast.error("Something went wrong.");
       } finally {
         setIsLoading(false);
