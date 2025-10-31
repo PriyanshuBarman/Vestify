@@ -37,11 +37,11 @@ const NAV_ITEMS = [
     icon: <SettingsIcon className="text-muted-foreground" />,
     text: "Settings",
   },
-  // {
-  //   to: "#",
-  //   icon: <HeartIcon className="text-muted-foreground" />,
-  //   text: "Refer & earn",
-  // },
+  {
+    to: "/refer-and-earn",
+    icon: <HeartIcon className="text-muted-foreground" />,
+    text: "Refer & earn",
+  },
 ];
 
 function ProfilePage() {

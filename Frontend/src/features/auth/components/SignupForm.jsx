@@ -7,8 +7,12 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
 import { useSignup } from "../hooks/useSignup";
+import { useSearchParams } from "react-router";
 
 export function SignupForm({ className, ...props }) {
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("referralCode");
+  console.log(referralCode);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,7 +24,7 @@ export function SignupForm({ className, ...props }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(formData);
+    signup({ ...formData, referralCode });
   };
 
   const handleChange = (e) => {

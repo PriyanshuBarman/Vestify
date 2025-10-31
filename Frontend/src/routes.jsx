@@ -9,6 +9,7 @@ import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
 
+const ReferAndEarnPage = lazy(() => import("./pages/ReferAndEarnPage"));
 const ActiveDevicesPage = lazy(() => import("./pages/ActiveDevicesPage"));
 const MobileSearchPage = lazy(
   () => import("./features/search/pages/MobileSearchPage"),
@@ -101,6 +102,14 @@ export const routes = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingState fullPage />}>
             <VerifyEmailChangeOTPPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/refer-and-earn",
+        element: (
+          <Suspense fallback={<LoadingState fullPage />}>
+            <ReferAndEarnPage />
           </Suspense>
         ),
       },
