@@ -1,5 +1,6 @@
 import GoBackBar from "@/components/GoBackBar";
 import ShareIcon from "@/components/icons/ShareIcon";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,9 +11,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemSeparator,
+  ItemTitle,
+} from "@/components/ui/item";
+import { useGetReferrals } from "@/hooks/useGetReferrals";
 import { useGetUser } from "@/hooks/useGetUser";
-import { GiftIcon, TrophyIcon, UsersIcon } from "lucide-react";
+import { formatToINR } from "@/utils/formatters";
+import {
+  CheckCircle2Icon,
+  GiftIcon,
+  TrophyIcon,
+  UsersIcon,
+} from "lucide-react";
 import { toast } from "sonner";
+
 const shareText = `Try *Vestify* — 
 a virtual investment platform with a *Groww-like UI*.
 
@@ -23,7 +41,8 @@ Invest in mutual funds using virtual money, _start virtual SIPs_, manage your vi
 `;
 
 function ReferAndEarnPage() {
-  const { data: user = {} } = useGetUser();
+  const { data: user } = useGetUser();
+  const { data: referrals } = useGetReferrals();
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -40,7 +59,7 @@ function ReferAndEarnPage() {
     <div className="container mx-auto max-w-4xl space-y-12 px-4 pb-12 sm:px-6 lg:px-8">
       <GoBackBar
         showSearchIcon={false}
-        className="bg-transparent px-0 backdrop-blur-[2px]"
+        className="bg-transparent px-0 backdrop-blur-[1px]"
       />
       <div className="text-center">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
@@ -96,12 +115,64 @@ function ReferAndEarnPage() {
               wallet.
             </p>
           </div>
-          <CardFooter className="bg-accent mt-8 rounded-md px-4 py-2">
+          <CardFooter className="mt-8 rounded-md px-4 py-2">
             <CardDescription className="text-xs">
               Note: It's virtual money and will be credited to your vestify
               wallet. <b>It's not real money.</b>
             </CardDescription>
           </CardFooter>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <CheckCircle2Icon className="h-6 w-6" />
+            Your Referrals
+          </CardTitle>
+          <CardDescription>
+            Successful referrals: <b>{referrals?.length || 0}</b>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {!referrals || referrals.length === 0 ? (
+            <div className="text-muted-foreground flex flex-col items-center justify-center py-12 text-center">
+              <UsersIcon className="mb-4 h-16 w-16 opacity-20" />
+              <p className="text-lg font-medium">No referrals yet</p>
+              <p className="mt-2 text-sm">
+                Share your referral link to start earning rewards!
+              </p>
+            </div>
+          ) : (
+            <ItemGroup className="gap-2">
+              {referrals?.map((item, index) => (
+                <>
+                  <Item size="sm" className="p-2">
+                    <ItemMedia>
+                      <Avatar className="size-10">
+                        <AvatarImage src={item.referredUser.profile.avatar} />
+                        <AvatarFallback>
+                          {item.referredUser.profile.name.charAt(0)}
+                        </AvatarFallback>
+                      </Avatar>
+                    </ItemMedia>
+                    <ItemContent>
+                      <ItemTitle>{item.referredUser.profile.name}</ItemTitle>
+                      <ItemDescription>
+                        @{item.referredUser.profile.username}
+                      </ItemDescription>
+                    </ItemContent>
+                    <div>
+                      <span className="text-primary font-medium">
+                        +{formatToINR(item.amount)}
+                      </span>
+                    </div>
+                  </Item>
+                  {index !== referrals.length - 1 && <ItemSeparator />}
+                </>
+              ))}
+            </ItemGroup>
+          )}
         </CardContent>
       </Card>
     </div>

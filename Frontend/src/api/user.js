@@ -12,6 +12,11 @@ export const fetchSessions = async () => {
   return data.activeSessions;
 };
 
+export const fetchReferrals = async () => {
+  const { data } = await api.get(`/users/referrals`);
+  return data.referrals;
+};
+
 // ================ MUTATIONS ================
 
 export const claimDailyReward = async () => {
