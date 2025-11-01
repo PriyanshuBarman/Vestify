@@ -5,6 +5,7 @@ import * as userController from "../controllers/user.controller.js";
 export const userRoutes = Router();
 
 userRoutes.get("/", authenticate, userController.getMe);
+userRoutes.get("/referrals", authenticate, userController.getReferrals);
 userRoutes.patch(
   "/claim-daily-reward",
   authenticate,

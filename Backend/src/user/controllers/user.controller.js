@@ -10,6 +10,14 @@ export const getMe = asyncHandler(async (req, res) => {
   return res.status(200).json({ success: true, user });
 });
 
+export const getReferrals = asyncHandler(async (req, res) => {
+  const { userId } = req.user;
+
+  const referrals = await userService.getReferrals(userId);
+
+  return res.status(200).json({ success: true, referrals });
+});
+
 export const claimDailyReward = asyncHandler(async (req, res) => {
   const { userId } = req.user;
 

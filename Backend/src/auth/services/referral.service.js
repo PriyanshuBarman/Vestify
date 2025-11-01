@@ -46,6 +46,16 @@ export const applyReferralBonus = async (referrerId, userId) => {
         },
       ],
     });
+
+    // Create referral record for referrer
+    await tx.referral.create({
+      data: {
+        userId: referrer.id,
+        amount: REFERRER_BONUS,
+        referredUserId: user.id,
+      },
+    });
+
     return { referrer, user };
   });
 

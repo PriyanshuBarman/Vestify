@@ -27,6 +27,28 @@ export const getMe = async (userId) => {
   return user;
 };
 
+export const getReferrals = async (userId) => {
+  const referrals = await db.referral.findMany({
+    where: { userId },
+    select: {
+      id: true,
+      amount: true,
+      createdAt: true,
+      referredUser: {
+        select: {
+          profile: true,
+        },
+      },
+    },
+  });
+
+  if (!referrals.length) {
+    throw new ApiError(404, "No referrals found");
+  }
+
+  return referrals;
+};
+
 export const claimDailyReward = async (userId) => {
   const rewardAmount = 1000;
 

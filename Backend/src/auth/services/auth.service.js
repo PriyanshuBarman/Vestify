@@ -31,7 +31,6 @@ export const signupUser = async ({
       where: { username: referralCode },
     });
 
-    console.log(referrer);
     if (!referrer) throw new ApiError(400, "Invalid referral code");
   }
 
