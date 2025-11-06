@@ -1,4 +1,4 @@
-import { UnderstandTermsInfo } from "../info/UnderstandTermsInfo";
+import { UnderstandTermsInfo } from "../overlays/info/UnderstandTermsInfo";
 
 function ExpenseRatioExitLoad({ fund }) {
   return (

@@ -32,7 +32,7 @@ export const placeSipInstallmentOrder = async (data) => {
     if (!user) throw new Error("User not found");
 
     // 2. Create FAILED order for insufficient balance
-    if (amount > user.balance) {
+    if (amount.toNumber() > user.balance.toNumber()) {
       await tx.mfOrder.create({
         data: {
           sipId,
@@ -50,6 +50,10 @@ export const placeSipInstallmentOrder = async (data) => {
           status: "FAILED",
           failureReason: "Insufficient balance",
         },
+      });
+      await tx.mfSip.update({
+        where: { id: sipId },
+        data: { nextInstallmentDate: addMonths(nextInstallmentDate, 1) },
       });
       // Early return to exit the transaction
       return;

@@ -29,6 +29,7 @@ import {
   TrophyIcon,
   UsersIcon,
 } from "lucide-react";
+import { Fragment } from "react";
 import { toast } from "sonner";
 
 const shareText = `Try *Vestify* — 
@@ -146,7 +147,7 @@ function ReferAndEarnPage() {
           ) : (
             <ItemGroup className="gap-2">
               {referrals?.map((item, index) => (
-                <>
+                <Fragment key={item.id}>
                   <Item size="sm" className="p-2">
                     <ItemMedia>
                       <Avatar className="size-10">
@@ -169,7 +170,7 @@ function ReferAndEarnPage() {
                     </div>
                   </Item>
                   {index !== referrals.length - 1 && <ItemSeparator />}
-                </>
+                </Fragment>
               ))}
             </ItemGroup>
           )}

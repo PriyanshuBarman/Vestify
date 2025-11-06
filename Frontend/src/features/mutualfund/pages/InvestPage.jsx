@@ -1,12 +1,12 @@
 import GoBackBtn from "@/components/GoBackBtn";
 import Keypad from "@/components/Keypad";
-import ResponsivePinDialog from "@/components/ResponsivePinDialog";
+import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
 import { Button } from "@/components/ui/button";
 import { TZDate } from "@date-fns/tz";
 import { getDate } from "date-fns";
 import { useState } from "react";
 import { useLocation } from "react-router";
-import DatePicker from "../components/DatePicker";
+import DatePicker from "../components/overlays/DatePicker";
 import { Label } from "@/components/ui/label";
 import { sanitizeAmount } from "@/utils/formatters";
 import { useCreateInvestOrder } from "../hooks/useCreateInvestOrder";
@@ -42,7 +42,7 @@ function InvestPage() {
   };
 
   return (
-    <div className="flex h-dvh flex-col">
+    <div className="flex h-dvh flex-col sm:mx-auto sm:max-w-lg">
       {/* ================= Title ================= */}
       <div className="Title mt-4 flex items-center gap-4 px-4">
         <GoBackBtn />
@@ -117,7 +117,7 @@ function InvestPage() {
           onClick={() => setIsPinDialogOpen(true)}
           size="lg"
           disabled={amount < (isSip ? fund.sip_min : fund.lump_min)}
-          className="my-4 w-[88%] rounded-xl"
+          className="my-4 w-[90%]"
         >
           {isSip ? "Start SIP" : "Invest"}
         </Button>

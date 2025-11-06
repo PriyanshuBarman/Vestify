@@ -24,7 +24,13 @@ function PendingOrders() {
   if (!pendingOrders?.length) return null;
 
   return (
-    <Accordion type="single" collapsible>
+    <Accordion
+      type="single"
+      collapsible
+      defaultValue={
+        pendingOrders.length > 0 && pendingOrders.length < 4 ? "item-1" : null
+      }
+    >
       <AccordionItem value="item-1" className="px-4">
         <AccordionTrigger className="pt-0 text-base sm:text-lg sm:font-semibold">
           Orders ({pendingOrders?.length})
@@ -33,7 +39,7 @@ function PendingOrders() {
         <AccordionContent>
           {pendingOrders?.map((order) => (
             <div
-              onClick={() => navigate(`/mutual-funds/order/${order.id}`)}
+              onClick={() => navigate(`/mutual-funds/orders/${order.id}`)}
               key={order.id}
               className="flex justify-between border-b py-4"
             >

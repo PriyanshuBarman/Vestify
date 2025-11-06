@@ -2,6 +2,8 @@ import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
 import { Link } from "react-router";
 import { useGetAllOrders } from "../hooks/useGetAllOrders";
+import { lazy } from "react";
+const NoOrders = lazy(() => import("../components/empty-states/NoOrders"));
 
 const orderTypeConfig = {
   ONE_TIME: "One-Time",
@@ -19,7 +21,7 @@ const statusConfig = {
 function AllOrdersPage() {
   const { data: orders } = useGetAllOrders();
 
-  if (!orders) return <NoOrders />;
+  if (!orders?.length) return <NoOrders />;
 
   return (
     <div className="sm:mx-auto sm:max-w-xl">
@@ -27,7 +29,7 @@ function AllOrdersPage() {
       <div className="px-4">
         {orders?.map((order) => (
           <Link
-            to={`/mutual-funds/order/${order.id}`}
+            to={`/mutual-funds/orders/${order.id}`}
             key={order.id}
             className="flex justify-between border-b py-4"
           >
@@ -56,24 +58,3 @@ function AllOrdersPage() {
   );
 }
 export default AllOrdersPage;
-
-function NoOrders() {
-  return (
-    <div className="mx-auto sm:w-xl">
-      <GoBackBar title="All Orders" className="fixed" />
-      <div className="flex h-dvh flex-col items-center justify-center gap-2">
-        <img
-          src="/No data-rafiki.svg"
-          alt="sip"
-          className="size-60 md:size-96"
-        />
-        <h3 className="text-foreground-secondary font-medium sm:text-lg">
-          No Orders Found
-        </h3>
-        <p className="text-xs sm:text-sm">
-          Start exploring funds to find the one that suits you best.
-        </p>
-      </div>
-    </div>
-  );
-}

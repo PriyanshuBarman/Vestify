@@ -8,7 +8,7 @@ import {
 import { formatToINR } from "@/utils/formatters";
 import { format } from "date-fns";
 import { CheckCircle, ChevronRightIcon, Clock, Clock4Icon } from "lucide-react";
-import { Link, useParams } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
 
 const helperConfig = {
@@ -25,11 +25,19 @@ const statusConfig = {
 
 function OrderDetailsPage() {
   const { orderId } = useParams();
+  const location = useLocation();
+  const orderFromState = location.state;
+  const queryClient = useQueryClient();
 
-  const { data: order = {} } = useGetOrderDetail(orderId);
+  // If navigated with state & there is no cache, set it in the query cache
+  if (orderFromState && !queryClient.getQueryData(["order", orderId])) {
+    queryClient.setQueryData(["order", orderId], orderFromState);
+  }
+
+  const { data: order } = useGetOrderDetail(orderId);
 
   return (
-    <div>
+    <div className="sm:mx-auto sm:max-w-xl">
       <GoBackBar title="Order Details" />
       <div className="px-4">
         <div className="space-y-4">
@@ -106,7 +114,15 @@ function OrderDetailsPage() {
 }
 export default OrderDetailsPage;
 
+import { CheckCircleIcon, ClockIcon, CircleXIcon } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 export function StatusTimeline({ order }) {
+  const iconConfig = {
+    COMPLETED: <CheckCircleIcon className="text-primary size-5" />,
+    PENDING: <ClockIcon className="text-primary size-5" />,
+    FAILED: <CircleXIcon className="text-destructive size-5" />,
+  };
+
   const steps = [
     {
       id: 1,
@@ -117,7 +133,11 @@ export function StatusTimeline({ order }) {
     {
       id: 2,
       label:
-        order.status === "PENDING" ? "Order to be process" : "Order processed",
+        order.status === "FAILED"
+          ? `Order Failed Reason: ${order.failureReason}`
+          : order.status === "PENDING"
+            ? "Order to be process"
+            : "Order processed",
       date: order.processDate && format(order.processDate, "dd MMM yy"),
       completed: order.status === "PENDING" ? false : true,
     },
@@ -136,11 +156,7 @@ export function StatusTimeline({ order }) {
 
             {/* Icon */}
             <div className="bg-background z-10 mt-0.5">
-              {step.completed ? (
-                <CheckCircle className="text-primary size-5" />
-              ) : (
-                <Clock className="text-primary size-5" />
-              )}
+              {iconConfig[order.status]}
             </div>
 
             {/* Text */}

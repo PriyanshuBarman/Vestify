@@ -1,23 +1,31 @@
 import LoadingState from "@/components/LoadingState";
 import { lazy, Suspense } from "react";
-import ManagerFundsPage from "./pages/ManagerFundsPage";
+
+const RedemptionRequestSuccessPage = lazy(
+  () => import("./pages/RedemptionRequestSuccessPage"),
+);
+const InvestmentDetailsPage = lazy(
+  () => import("./pages/InvestmentDetailsPage"),
+);
+const ManagerFundsPage = lazy(() => import("./pages/ManagerFundsPage"));
 const FundHousesPage = lazy(() => import("./pages/FundHousesPage"));
 const AmcFundsPage = lazy(() => import("./pages/AmcFundsPage"));
-const MutualFundLayout = lazy(() => import("./components/MutualFundLayout"));
 const SipDetailsPage = lazy(() => import("./pages/SipDetailsPage"));
 const EditSipPage = lazy(() => import("./pages/EditSipPage"));
 const InvestPage = lazy(() => import("./pages/InvestPage"));
+const RedeemPage = lazy(() => import("./pages/RedeemPage"));
 const CollectionPage = lazy(() => import("./pages/CollectionPage"));
 const FundPage = lazy(() => import("./pages/FundPage"));
-const HomePage = lazy(() => import("./pages/HomePage"));
 const AllFundsPage = lazy(() => import("./pages/AllFundsPage"));
 const OrderDetailsPage = lazy(() => import("./pages/OrderDetailsPage"));
 const CompareFundsPage = lazy(() => import("./pages/CompareFundsPage"));
 const SipCalculatorPage = lazy(() => import("./pages/SipCalculatorPage"));
+const Page = lazy(() => import("./pages/Page"));
+const Layout = lazy(() => import("./components/Layout"));
 
 export const mutualFundRoutes = {
   path: "/mutual-funds",
-  element: <MutualFundLayout />,
+  element: <Layout />,
   children: [
     {
       index: true,
@@ -25,7 +33,15 @@ export const mutualFundRoutes = {
         <Suspense
           fallback={<LoadingState fullPage className="h-[calc(100vh-250px)]" />}
         >
-          <HomePage />
+          <Page />
+        </Suspense>
+      ),
+    },
+    {
+      path: "investment-details",
+      element: (
+        <Suspense fallback={<LoadingState fullPage />}>
+          <InvestmentDetailsPage />
         </Suspense>
       ),
     },
@@ -34,6 +50,22 @@ export const mutualFundRoutes = {
       element: (
         <Suspense fallback={<LoadingState fullPage />}>
           <InvestPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "redeem",
+      element: (
+        <Suspense fallback={<LoadingState fullPage />}>
+          <RedeemPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "redeem-success",
+      element: (
+        <Suspense fallback={<LoadingState fullPage />}>
+          <RedemptionRequestSuccessPage />
         </Suspense>
       ),
     },
@@ -70,7 +102,7 @@ export const mutualFundRoutes = {
       ),
     },
     {
-      path: "order/:orderId",
+      path: "orders/:orderId",
       element: (
         <Suspense fallback={<LoadingState fullPage />}>
           <OrderDetailsPage />

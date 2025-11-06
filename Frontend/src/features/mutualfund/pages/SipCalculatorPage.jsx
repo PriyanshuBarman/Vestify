@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMemo, useState } from "react";
-import FutureValuePieChart from "../components/chart/FutureValuePieChart";
+import FutureValuePieChart from "../components/charts/FutureValuePieChart";
 import { formatToINR } from "@/utils/formatters";
 import { calcFutureValues } from "../utils/returnCalculatorHelper";
 

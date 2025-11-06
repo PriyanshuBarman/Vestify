@@ -15,7 +15,7 @@ export const createSip = asyncHandler(async (req, res) => {
     fundType,
   } = req.body;
 
-  await sipService.createSip({
+  const { order, sip } = await sipService.createSip({
     userId,
     amount,
     sipDate,
@@ -29,7 +29,7 @@ export const createSip = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json({ success: true, message: "SIP created successfully" });
+    .json({ success: true, message: "SIP created successfully", order, sip });
 });
 
 export const editSip = asyncHandler(async (req, res) => {

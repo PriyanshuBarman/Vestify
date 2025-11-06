@@ -69,7 +69,7 @@ function ManagerFundsPage() {
         <GoBackBar />
         <div className="space-y-4 px-4 sm:mb-10">
           <div className="flex items-center gap-4">
-            <Avatar className="border-muted-foreground size-10 border sm:size-14">
+            <Avatar className="size-10 border sm:size-14">
               <UserIcon className="text-muted-foreground m-auto size-full stroke-1 p-1.5 sm:p-2" />
             </Avatar>
             <h2 className="text-lg font-medium sm:text-2xl sm:font-semibold">

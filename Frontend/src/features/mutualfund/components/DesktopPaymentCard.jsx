@@ -1,4 +1,4 @@
-import ResponsivePinDialog from "@/components/ResponsivePinDialog";
+import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
@@ -7,10 +7,10 @@ import { useGetBalance } from "@/hooks/useGetBalance";
 import { sanitizeAmount } from "@/utils/formatters";
 import NumberFlow from "@number-flow/react";
 import { IndianRupeeIcon } from "lucide-react";
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { useCreateInvestOrder } from "../hooks/useCreateInvestOrder";
 import { useCreateSip } from "../hooks/useCreateSip";
-import DatePicker from "./DatePicker";
+const DatePicker = lazy(() => import("./overlays/DatePicker"));
 
 function DesktopPaymentCard({ fund }) {
   const [isPinDialogOpen, setIsPinDialogOpen] = useState(false);
@@ -78,7 +78,7 @@ function DesktopPaymentCard({ fund }) {
           </div>
 
           <p className="mb-4 text-sm font-medium tabular-nums">
-            Available Balance: <NumberFlow value={balance} prefix="₹" />
+            Available Balance: <NumberFlow value={balance || 0} prefix="₹" />
           </p>
 
           <Button
@@ -87,7 +87,7 @@ function DesktopPaymentCard({ fund }) {
             disabled={isPending || amount < fund.lump_min}
             className="w-full"
           >
-            {!isPending && <Spinner />} Invest
+            {isPending && <Spinner />} Invest
           </Button>
 
           <ResponsivePinDialog
@@ -133,7 +133,7 @@ function DesktopPaymentCard({ fund }) {
 
           <p className="mb-4 space-y-2 text-sm font-medium tabular-nums">
             Available Balance:
-            <NumberFlow value={balance} prefix="₹" />
+            <NumberFlow value={balance || 0} prefix="₹" />
           </p>
 
           <Button

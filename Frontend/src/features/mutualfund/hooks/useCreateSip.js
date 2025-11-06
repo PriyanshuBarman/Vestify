@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { createSip } from "../api/sip";
+import { createSip, fetchSips } from "../api/sip";
 import { formatToINR } from "@/utils/formatters";
 import { playPaymentSuccessSound } from "@/utils/sound";
 
@@ -11,17 +11,22 @@ export function useCreateSip() {
 
   return useMutation({
     mutationFn: createSip,
-    onSuccess: (data, variables) => {
-      const { amount, fund } = variables;
-      playPaymentSuccessSound();
+    onSuccess: (data) => {
+      const { order } = data;
+
       queryClient.invalidateQueries({ queryKey: ["sips"] });
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      queryClient.setQueryData(["order", order.id], order);
+      queryClient.setQueryData(["orders"], (old) =>
+        old ? [order, ...old] : [order],
+      );
+
+      playPaymentSuccessSound();
       navigate("/payment-success", {
         state: {
-          amount,
+          amount: order.amount,
           title: "SIP Order Placed",
-          description: `SIP of ${formatToINR(amount)} in ${fund.short_name}.`,
-          orderDetailsRoute: "/mutual-funds/#sips",
+          description: `SIP of ${formatToINR(order.amount)} in ${order.fundName}.`,
+          orderDetailsRoute: `/mutual-funds/orders/${order.id}`,
           doneRoute: "/mutual-funds#sips",
         },
         replace: true,

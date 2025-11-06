@@ -41,18 +41,18 @@ export const columnsConfig = {
     prefix: "",
     suffix: " ★",
   },
-  sip_min: {
-    name: "Min SIP",
-    shortName: "Min SIP",
-    prefix: "₹",
-    suffix: "",
-  },
-  lump_min: {
-    name: "Min Lump.",
-    shortName: "Min Lump.",
-    prefix: "₹",
-    suffix: "",
-  },
+  // sip_min: {
+  //   name: "Min SIP",
+  //   shortName: "Min SIP",
+  //   prefix: "₹",
+  //   suffix: "",
+  // },
+  // lump_min: {
+  //   name: "Min Lump.",
+  //   shortName: "Min Lump.",
+  //   prefix: "₹",
+  //   suffix: "",
+  // },
 };
 
 export const columnKeys = Object.keys(columnsConfig);

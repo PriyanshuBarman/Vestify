@@ -19,7 +19,7 @@ const labelArr = [
 function RecentlyViewedFunds() {
   const isMobile = useIsMobile();
   const [activeLabelIdx, setActiveLabelIdx] = useState(0);
-  const funds = useRecentlyViewedFunds(isMobile ? 5 : 4);
+  const funds = useRecentlyViewedFunds(isMobile ? 5 : 4, false);
 
   // Loop ♾️
   const handleClick = () => {
@@ -53,7 +53,12 @@ function RecentlyViewedFunds() {
         <div className="mt-4 w-full gap-4 space-y-5 px-4 sm:my-8 sm:flex sm:space-y-0 sm:px-0">
           {funds?.map((fund) =>
             isMobile ? (
-              <Row key={fund.id} fund={fund} activeLabelIdx={activeLabelIdx} />
+              <Row
+                key={fund.id}
+                fund={fund}
+                activeLabelIdx={activeLabelIdx}
+                handleChange={handleClick}
+              />
             ) : (
               <CardLG key={fund.id} fund={fund} />
             ),
@@ -68,11 +73,16 @@ function RecentlyViewedFunds() {
 
 export default RecentlyViewedFunds;
 
-function Row({ fund, activeLabelIdx }) {
+function Row({ fund, activeLabelIdx, handleChange }) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/mutual-funds/${fund?.scheme_code}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleChangeClick = (e) => {
+    e.stopPropagation();
+    handleChange();
   };
 
   const key = labelArr[activeLabelIdx].key;
@@ -92,7 +102,7 @@ function Row({ fund, activeLabelIdx }) {
           <FundRating rating={fund.fund_rating} />
         </div>
       </div>
-      <div className="ml-auto">
+      <div onClick={handleChangeClick} className="ml-auto">
         <span className="text-sm font-medium">{value}</span>
       </div>
     </div>

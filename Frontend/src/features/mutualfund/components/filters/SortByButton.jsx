@@ -4,6 +4,7 @@ import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
 import {
   ArrowDownAZIcon,
@@ -23,8 +24,9 @@ function SortByButton({
   activeSortBy,
   className,
 }) {
+  const isMobile = useIsMobile();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(!isMobile);
 
   const handleSortChange = (value) => {
     onSortChange(value);
@@ -34,7 +36,11 @@ function SortByButton({
   const isDefaultSort = activeSortBy === defaultSortBy;
 
   return (
-    <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+    <Drawer
+      direction={isMobile ? "bottom" : "left"}
+      open={isDrawerOpen}
+      onOpenChange={setIsDrawerOpen}
+    >
       <DrawerTrigger asChild>
         <Button
           variant={variant}
@@ -68,7 +74,7 @@ function SortByButton({
         </Button>
       </DrawerTrigger>
 
-      <DrawerContent className="data-[vaul-drawer-direction=bottom]:max-h-auto px-4 pb-2 sm:px-20">
+      <DrawerContent className="data-[vaul-drawer-direction=bottom]:max-h-auto px-4 pb-2 sm:pt-12">
         <div className="my-2 flex items-center justify-between sm:px-4">
           <DialogTitle className="text-base sm:text-xl">Sort by</DialogTitle>
           <div className="flex items-center">
@@ -95,7 +101,7 @@ function SortByButton({
             .map((option) => (
               <Label
                 key={option}
-                className="flex cursor-pointer items-center gap-4 border-b px-2 py-4 font-[450] transition-colors sm:ml-2 sm:gap-6 sm:py-6 sm:text-base sm:font-medium"
+                className="flex cursor-pointer items-center gap-4 border-b px-2 py-4 font-[450] transition-colors sm:ml-2 sm:gap-6 sm:text-base sm:font-medium"
               >
                 <RadioGroupItem
                   value={option}

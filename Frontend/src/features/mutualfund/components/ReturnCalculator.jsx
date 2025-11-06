@@ -17,7 +17,7 @@ import {
   calculateAbsoluteReturn,
   calculateSIPReturns,
 } from "../utils/returnCalculatorHelper";
-import SIPCalculationInfo from "./info/SIPCalculationInfo";
+import SIPCalculationInfo from "./overlays/info/SIPCalculationInfo";
 
 const TIME_OPTIONS = [
   { label: "1 year", year: 1 },
@@ -85,7 +85,7 @@ function ReturnCalculator({ fund }) {
           <span className="text-primary sm:text-foreground text-lg tracking-tighter tabular-nums">
             {formatToINR(amount)}
           </span>
-          <div className="sm:text-foreground flex items-center gap-2 font-normal sm:text-base">
+          <div className="sm:text-foreground flex items-center font-normal sm:text-base">
             <span>{type === "sip" ? "per month " : "one-time"}</span>
             {type === "sip" && <SIPCalculationInfo />}
           </div>

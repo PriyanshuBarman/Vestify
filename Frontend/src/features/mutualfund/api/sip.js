@@ -26,7 +26,8 @@ export const createSip = async ({ amount, sipDate, fund, pin }) => {
     fundType: fund.fund_type,
     fundHouseDomain: fund.detail_info,
   });
-  return data;
+
+  return { order: data.order, sip: data.sip };
 };
 
 export const editSip = async ({ sipId, amount, sipDate }) => {

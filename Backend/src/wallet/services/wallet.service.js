@@ -63,7 +63,6 @@ export const fetchAllTnx = async (userId) => {
           profile: true,
         },
       },
-      assetOrder: true,
     },
     orderBy: { createdAt: "desc" },
   });

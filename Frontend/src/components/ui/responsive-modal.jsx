@@ -28,6 +28,17 @@ import { useIsMobile } from "@/hooks/useIsMobile";
  *
  * You can use it exactly like shadcn's Dialog/Drawer:
  *
+ * import {
+  ResponsiveModal,
+  ResponsiveModalContent,
+  ResponsiveModalDescription,
+  ResponsiveModalFooter,
+  ResponsiveModalHeader,
+  ResponsiveModalTitle,
+  ResponsiveModalTrigger,
+  ResponsiveModalClose
+} from "@/components/ui/responsive-modal";
+ *
  * <ResponsiveModal>
  *   <ResponsiveModalTrigger>Open</ResponsiveModalTrigger>
  *   <ResponsiveModalContent>

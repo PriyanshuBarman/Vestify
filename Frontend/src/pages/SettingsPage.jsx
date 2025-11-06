@@ -57,7 +57,7 @@ function SettingsPage() {
         <h6 className="text-muted-foreground text-2xs mb-2 tracking-wider">
           PRIVACY & SECURITY
         </h6>
-        {user.authProvider === "MANUAL" && (
+        {user && !user.authProvider && (
           <Link
             to="/settings/change-password"
             className="grid grid-cols-[auto_1fr] items-center"

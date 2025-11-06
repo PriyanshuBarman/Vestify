@@ -18,7 +18,7 @@ export const createSip = async ({
   fundType, // required for order placement
 }) => {
   //1. create/subscribe to new SIP
-  const { id: sipId } = await db.mfSip.create({
+  const sip = await db.mfSip.create({
     data: {
       userId,
       amount,
@@ -34,8 +34,8 @@ export const createSip = async ({
   });
 
   //2. place initial investment order
-  await orderService.placeInvestmentOrder({
-    sipId,
+  const order = await orderService.placeInvestmentOrder({
+    sipId: sip.id,
     userId,
     amount,
     fundName,
@@ -45,6 +45,8 @@ export const createSip = async ({
     fundHouseDomain,
     fundType: fundType.toUpperCase(), //
   });
+
+  return { sip, order };
 };
 
 export const editSip = async ({ userId, sipId, amount, sipDate }) => {

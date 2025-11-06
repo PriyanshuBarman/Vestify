@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Loader2Icon } from "lucide-react";
 import { Spinner } from "./ui/spinner";
 
 function LoadingState({ isLoading = true, fullPage, className = "" }) {

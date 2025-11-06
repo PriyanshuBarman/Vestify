@@ -7,11 +7,11 @@ import { Bookmark, LockKeyholeIcon, Search } from "lucide-react";
 import { lazy } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import Chart from "../components/chart/Chart";
+import Chart from "../components/charts/Chart";
 import FundDescription from "../components/FundDescription";
 import FundLogo from "../components/FundLogo";
-import FundPageAccordions from "../components/FundPageAccordions.jsx";
-import FundPortfolioPreview from "../components/fundPortfolioPreview";
+import FundPageAccordions from "../components/accordions/FundPageAccordions.jsx";
+import FundPortfolioPreview from "../components/FundPortfolioPreview";
 import RecentlyViewedFunds from "../components/RecentlyViewedFunds";
 import { useAddToWatchlist } from "../hooks/useAddToWatchlist";
 import { useGetFundData } from "../hooks/useGetFundData";
@@ -25,13 +25,13 @@ const DesktopPaymentCard = lazy(
 );
 
 function FundPage() {
+  const isMobile = useIsMobile({ maxWidth: 1024 });
   const { scheme_code } = useParams();
   const { data: fund = {}, isPending } = useGetFundData(scheme_code);
   const { data: isInWatchlist } = useGetIsInWatchlist(scheme_code);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
 
   const { mutate: addToWatchlist } = useAddToWatchlist();
   const { mutate: removeFromWatchlist } = useRemoveFromWatchlist();
@@ -123,7 +123,21 @@ function FundPage() {
         <FundDescription fund={fund} />
         <FundPageAccordions fund={fund} />
         <RecentlyViewedFunds />
-        {isMobile && <PurchaseBtns fund={fund} isPending={isPending} />}
+        {isMobile && (
+          <div className="bg-background sticky bottom-0 z-10">
+            {(fund.lump_available === "N" || fund.sip_available === "N") && (
+              <div className="px-4 pt-4">
+                <p className="bg-accent rounded-md p-3 text-center text-xs">
+                  This fund has blocked{" "}
+                  {fund.lump_available === "N" ? "one-time" : "SIP"} investments
+                  in this fund. You can explore similar funds from the 'Peer
+                  Comparison' section.
+                </p>
+              </div>
+            )}
+            <PurchaseBtns schemeCode={scheme_code} isPending={isPending} />
+          </div>
+        )}
       </div>
 
       <DesktopPaymentCard fund={fund} />

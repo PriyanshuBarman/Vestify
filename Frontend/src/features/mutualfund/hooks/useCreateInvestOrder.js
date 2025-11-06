@@ -11,16 +11,21 @@ export function useCreateInvestOrder() {
 
   return useMutation({
     mutationFn: createInvestOrder,
-    onSuccess: (orderDetail, variables) => {
-      const { amount, fund } = variables;
+    onSuccess: (order) => {
+      queryClient.setQueryData(["order", order.id], order);
+      queryClient.setQueryData(["orders"], (old) =>
+        old ? [order, ...old] : [order],
+      );
+
       playPaymentSuccessSound();
+
       queryClient.invalidateQueries({ queryKey: ["orders"] });
       navigate("/payment-success", {
         state: {
-          amount,
+          amount: order.amount,
           title: "Order Placed",
-          description: `Investment of ${formatToINR(amount)} in ${fund.short_name}.`,
-          orderDetailsRoute: "/mutual-funds/order/" + orderDetail.id,
+          description: `Investment of ${formatToINR(order.amount)} in ${order.fundName}.`,
+          orderDetailsRoute: `/mutual-funds/orders/${order.id}`,
           doneRoute: "/mutual-funds#explore",
         },
         replace: true,

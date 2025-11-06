@@ -1,4 +1,5 @@
 import GoBackBar from "@/components/GoBackBar";
+import LoadingState from "@/components/LoadingState";
 import { Button } from "@/components/ui/button";
 import {
   Item,
@@ -40,7 +41,7 @@ const deviceIcons = {
 };
 
 export default function ActiveDevicesPage() {
-  const { data: sessions = [] } = useGetSessions();
+  const { data: sessions = [], isPending } = useGetSessions();
   const { mutate: revoke } = useDeleteSession();
   const { mutate: revokeAll } = useDeleteAllSessions();
   const [selected, setSelected] = useState(null); // { id?, isCurrentDevice: boolean }
@@ -94,7 +95,9 @@ export default function ActiveDevicesPage() {
           recognize a device, log out from it to secure your account.
         </p>
 
-        {sessions.length <= 1 ? (
+        {isPending ? (
+          <LoadingState className="mt-12" />
+        ) : sessions.length <= 1 ? (
           <img
             src="/Devices-bro.svg"
             alt="No other devices"

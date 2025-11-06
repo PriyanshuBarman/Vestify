@@ -37,7 +37,7 @@ export const validateInvestmentOrder = (req, res, next) => {
 export const validateRedemptionOrder = (req, res, next) => {
   const { amount, fundId } = req.body;
 
-  if (!fundId || fundId !== "") {
+  if (!fundId) {
     throw new ApiError(400, "fundId required");
   }
 

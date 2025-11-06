@@ -1,5 +1,5 @@
 import GoBackBar from "@/components/GoBackBar";
-import ResponsivePinDialog from "@/components/ResponsivePinDialog";
+import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";

@@ -1,12 +1,12 @@
 import { lazy } from "react";
-const HomePage = lazy(() => import("./pages/HomePage"));
+const Page = lazy(() => import("./pages/Page"));
 
 export const stockRoutes = {
   path: "stocks",
   children: [
     {
       index: true,
-      element: <HomePage />,
+      element: <Page />,
     },
   ],
 };

@@ -88,7 +88,7 @@ function AmcFundsPage() {
           </div>
           <FundLogo
             fundHouseDomain={amc.detail_info}
-            className="size-18 border sm:size-24"
+            className="size-16 border sm:size-24"
           />
         </div>
         <FilterCategoryButton

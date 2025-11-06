@@ -44,7 +44,7 @@ const OpenFilterSheetBtn = () => {
       </SheetTrigger>
       <SheetContent
         side={isMobile ? "bottom" : "left"}
-        className={`[&>button]:hidden ${isMobile ? "fixed inset-0 data-[state=open]:duration-300" : "min-w-lg overflow-hidden rounded-r-3xl"}`}
+        className={`[&>button]:hidden ${isMobile ? "fixed inset-0 data-[state=open]:duration-300" : "min-w-md overflow-hidden rounded-r-3xl data-[state=open]:duration-300"}`}
       >
         <SheetTitle className="sr-only">Filter Sheet</SheetTitle>
         <FilterSheet onClose={() => setIsOpen(false)} />

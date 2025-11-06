@@ -100,7 +100,7 @@ export const placeRedemptionOrder = async (
     return await instantRedemption(fund);
   }
 
-  await db.mfOrder.create({
+  const order = await db.mfOrder.create({
     data: {
       userId,
       schemeCode: fund.schemeCode,
@@ -117,6 +117,8 @@ export const placeRedemptionOrder = async (
       navDate,
     },
   });
+
+  return order;
 };
 
 export const getAllOrders = async (userId) => {
@@ -140,9 +142,9 @@ export const getOrderDetail = async (orderId) => {
   });
 };
 
-export const getFundOrders = async (userId, fundId) => {
+export const getFundOrders = async (userId, schemeCode) => {
   const orders = await db.mfOrder.findMany({
-    where: { userId, fundId },
+    where: { userId, schemeCode: parseInt(schemeCode) },
     orderBy: {
       createdAt: "desc",
     },

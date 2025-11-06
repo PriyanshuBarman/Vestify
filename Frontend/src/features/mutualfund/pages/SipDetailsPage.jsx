@@ -6,21 +6,23 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import LoadingSkeleton from "@/features/search/components/LoadingSkeleton";
-import { format, setDate } from "date-fns";
+import { formatToINR } from "@/utils/formatters";
+import { format, formatDate, setDate } from "date-fns";
 import {
   ArrowLeftIcon,
   CalendarRangeIcon,
-  CheckCircle,
+  CheckCircleIcon,
   ChevronRightIcon,
-  Clock,
+  CircleXIcon,
+  ClockIcon,
+  CopyIcon,
   PencilIcon,
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
-import CancelSipButton from "../components/CancelSipButton";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
-import SkipSipButton from "../components/SkipSipButton";
+import CancelSipButton from "../components/overlays/CancelSipButton";
+import SkipSipButton from "../components/overlays/SkipSipButton";
 import { useGetSipDetail } from "../hooks/useGetSipDetail";
-import { formatToINR } from "@/utils/formatters";
 
 function SipDetailsPage() {
   const { sipId } = useParams();
@@ -52,12 +54,12 @@ function SipDetailsPage() {
         {/* SIP Details/Summary */}
         <section className="space-y-4 py-6">
           <div>
-            <h2 className="text-2xl font-semibold">
+            <h2 className="text-3xl font-semibold">
               {formatToINR(sipDetail.amount, 2)}
             </h2>
             <span className="mt-2 space-x-6 text-xs">
-              {format(setDate(new Date(), sipDetail.sipDate), "do")} of every
-              month
+              {formatDate(setDate(new Date(), sipDetail.sipDate), "do")} of
+              every month
             </span>
           </div>
 
@@ -79,7 +81,7 @@ function SipDetailsPage() {
 
         {/* Upcoming SIP */}
         <section className="border-b py-6">
-          <h2 className="text-md mb-4 font-medium">Upcoming</h2>
+          <h2 className="text-md mb-4 font-semibold">Upcoming</h2>
 
           <div className="flex justify-between">
             <div className="flex items-center gap-4">
@@ -130,9 +132,16 @@ function SipDetailsPage() {
                   Vestify Wallet (Virtual Money)
                 </span>
               </div>
-              <div className="space-x-10">
-                <span>SIP Id:</span>
-                <span className="font-medium">{sipDetail.id}</span>
+              <div className="flex space-x-10">
+                <span className="shrink-0">SIP Id:</span>
+                <p className="font-medium">{sipDetail.id}</p>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  onClick={() => navigator.clipboard.writeText(sipDetail.id)}
+                >
+                  <CopyIcon />
+                </Button>
               </div>
             </AccordionContent>
           </AccordionItem>
@@ -143,9 +152,15 @@ function SipDetailsPage() {
 }
 
 function StatusTimeline({ data }) {
+  const iconConfig = {
+    COMPLETED: <CheckCircleIcon className="text-primary size-5" />,
+    PENDING: <ClockIcon className="text-primary size-5" />,
+    FAILED: <CircleXIcon className="text-destructive size-5" />,
+  };
+
   return (
     <section className="border-b py-6">
-      <h2 className="text-md mb-4 font-medium">Installments</h2>
+      <h2 className="text-md mb-4 font-semibold">Installments</h2>
       <div className="relative space-y-6">
         {data?.map((installment, index) => (
           <div key={installment.id} className="relative flex items-start gap-3">
@@ -156,27 +171,27 @@ function StatusTimeline({ data }) {
 
             {/* Icon */}
             <div className="bg-background z-10 mt-0.5">
-              {installment.status === "COMPLETED" ? (
-                <CheckCircle className="text-primary size-5" />
-              ) : (
-                <Clock className="text-primary size-5" />
-              )}
+              {iconConfig[installment.status]}
             </div>
 
             {/* Text */}
-            <div className="space-y-2">
+            <Link
+              to={`/mutual-funds/orders/${installment.id}`}
+              state={installment}
+              className="space-y-2"
+            >
               <h6
                 className={`flex items-center gap-2 text-sm font-medium ${
                   installment.status === "COMPLETED" && "text-muted-foreground"
                 }`}
               >
-                {format(setDate(new Date(), index + 1), "do")} installment{" "}
-                <ChevronRightIcon className="size-4" />
+                {format(setDate(new Date(), data.length - index), "do")}{" "}
+                installment <ChevronRightIcon className="size-4" />
               </h6>
               <span className="text-muted-foreground text-xs">
                 {format(installment.createdAt, "dd MMM yy, h:mm a")}
               </span>
-            </div>
+            </Link>
           </div>
         ))}
       </div>
