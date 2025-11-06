@@ -18,6 +18,7 @@ import {
   calculateSIPReturns,
 } from "../utils/returnCalculatorHelper";
 import SIPCalculationInfo from "./overlays/info/SIPCalculationInfo";
+import { getChangeColor } from "@/utils/helper";
 
 const TIME_OPTIONS = [
   { label: "1 year", year: 1 },
@@ -132,7 +133,7 @@ function ReturnCalculator({ fund }) {
           <NumberFlow
             value={result.returnPercentage}
             suffix="%"
-            className={`${result.returnPercentage > 0 ? "text-positive" : "text-negative"} text-md sm:text-base`}
+            className={`text-md sm:text-base ${getChangeColor(result.returnPercentage)}`}
           />
           {type === "sip" && result.annualizedReturn && (
             <span className="text-muted-foreground text-sm">

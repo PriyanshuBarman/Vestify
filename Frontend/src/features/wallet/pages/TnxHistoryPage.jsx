@@ -1,12 +1,9 @@
 import GoBackBar from "@/components/GoBackBar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatToINR } from "@/utils/formatters";
-import { formatDate } from "date-fns";
-import { Fragment, lazy } from "react";
-import { useGetAllTnx } from "../hooks/useGetAllTnx";
-import { assetConfig } from "../utils/constants";
+import { lazy } from "react";
 import TransactionItem from "../components/TransactionItem";
-import { ItemSeparator } from "@/components/ui/item";
+import { useGetAllTnx } from "../hooks/useGetAllTnx";
+import { ItemGroup } from "@/components/ui/item";
 const NoTransactions = lazy(
   () => import("../components/empty-states/NoTransactions"),
 );
@@ -33,15 +30,15 @@ function TnxHistoryPage() {
               </span>
             </div>
 
-            {/* Transactions */}
-            <ul className="px-4">
-              {monthGroup.transactions.map((tnx, index, array) => (
-                <Fragment key={tnx.id}>
-                  <TransactionItem tnx={tnx} />
-                  {index !== array.length - 1 && <ItemSeparator />}
-                </Fragment>
+            <ItemGroup className="px-4">
+              {monthGroup.transactions.map((tnx, index) => (
+                <TransactionItem
+                  key={tnx.id}
+                  tnx={tnx}
+                  length={monthGroup.transactions.length}
+                />
               ))}
-            </ul>
+            </ItemGroup>
           </li>
         ))}
       </ul>

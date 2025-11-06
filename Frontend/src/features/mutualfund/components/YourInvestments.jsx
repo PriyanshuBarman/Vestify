@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { useGetPortfolioSummary } from "../hooks/useGetPortfolioSummary";
 import SectionHeading from "./SectionHeading";
 import { formatToINR } from "@/utils/formatters";
+import { getChangeColor } from "@/utils/helper";
 
 function YourInvestments() {
   const { data: portfolio = {} } = useGetPortfolioSummary();
@@ -17,7 +18,7 @@ function YourInvestments() {
         <CardContent className="flex justify-between text-center lg:flex-col xl:flex-row">
           <div>
             <span
-              className={`font-semibold tabular-nums sm:text-lg ${portfolio && portfolio.pnl < 0 ? "text-negative" : "text-positive"} `}
+              className={`font-semibold tabular-nums sm:text-lg ${getChangeColor(portfolio.pnl)} `}
             >
               {formatToINR(portfolio.pnl || 0)}
             </span>

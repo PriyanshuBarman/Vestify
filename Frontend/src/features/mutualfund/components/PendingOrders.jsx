@@ -8,6 +8,7 @@ import { useGetAllOrders } from "../hooks/useGetAllOrders";
 import { formatToINR } from "@/utils/formatters";
 import { Link, useNavigate } from "react-router";
 import { ChevronRightIcon } from "lucide-react";
+import OrderItem from "./OrderItem";
 
 const OrderTypeConfig = {
   ONE_TIME: "One-Time",
@@ -32,41 +33,23 @@ function PendingOrders() {
       }
     >
       <AccordionItem value="item-1" className="px-4">
-        <AccordionTrigger className="pt-0 text-base sm:text-lg sm:font-semibold">
+        <AccordionTrigger className="pt-0 text-base sm:text-lg">
           Orders ({pendingOrders?.length})
         </AccordionTrigger>
 
         <AccordionContent>
-          {pendingOrders?.map((order) => (
-            <div
-              onClick={() => navigate(`/mutual-funds/orders/${order.id}`)}
+          {pendingOrders?.map((order, index) => (
+            <OrderItem
               key={order.id}
-              className="flex justify-between border-b py-4"
-            >
-              <div className="max-w-[60%]">
-                <h4 className="sm:text-md truncate sm:font-medium">
-                  {order.fundName}
-                </h4>
-                <p className="text-muted-foreground mt-2 text-sm">
-                  {OrderTypeConfig[order.orderType]}
-                </p>
-              </div>
-
-              <div className="flex flex-col items-end">
-                <span className="text-[14px] font-medium tabular-nums sm:text-base">
-                  {formatToINR(order.amount, 2)}
-                </span>
-                <div className="text-muted-foreground mt-2 flex items-center gap-2 text-xs">
-                  <div className="bg-primary size-2 rounded-full"></div>
-                  <span>In progress</span>
-                </div>
-              </div>
-            </div>
+              order={order}
+              index={index}
+              length={pendingOrders.length}
+            />
           ))}
 
           <Link
             to="/orders"
-            className="sm:text-md flex items-center justify-between gap-1 border-b py-4 text-sm font-medium sm:justify-start"
+            className="sm:text-md flex items-center justify-between gap-1 border-y py-4 text-sm font-medium sm:justify-start"
           >
             <span>All Orders</span>
             <ChevronRightIcon size={20} />

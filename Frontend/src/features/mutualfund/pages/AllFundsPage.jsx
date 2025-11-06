@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FilterBtns from "../components/filters/FilterBtns";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
-import { DEFAULT_COLUMNS } from "../constants/collectionConstants";
+import { DEFAULT_COLUMNS } from "../constants/collection";
 import { useGetFilteredFunds } from "../hooks/useGetFilteredFunds";
 import {
   columnsConfig,

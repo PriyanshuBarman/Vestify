@@ -15,7 +15,7 @@ import { getActiveFilterCount } from "../../utils/filterUtils";
 import SortByBtn from "../filters/SortByButton";
 import ActiveFilterButtons from "./ActiveFilterButtons";
 import OpenFilterSheetBtn from "./OpenFilterSheetBtn";
-import { sortOptions } from "../../constants/collectionConstants";
+import { sortOptions } from "../../constants/collection";
 
 const FUND_CATEGORIES = ["Flexi Cap Fund", "Small Cap Fund"];
 

@@ -9,6 +9,7 @@ import { formatToINR } from "@/utils/formatters";
 import { ChevronRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
+import { getChangeColor } from "@/utils/helper";
 
 function FundPortfolioPreview({ schemeCode }) {
   const { data: fundPortfolio } = useGetFundPortfolio(schemeCode);
@@ -16,10 +17,7 @@ function FundPortfolioPreview({ schemeCode }) {
   if (!fundPortfolio) return null;
 
   return (
-    <Item
-      variant="outline"
-      className="bg-card mx-4 mt-4 gap-2 rounded-2xl sm:p-6"
-    >
+    <Item variant="outline" className="mx-4 mt-4 gap-2 rounded-2xl sm:p-6">
       <ItemContent className="flex flex-row justify-between">
         <div>
           <ItemDescription className="text-sm">Invested</ItemDescription>
@@ -30,7 +28,7 @@ function FundPortfolioPreview({ schemeCode }) {
         <div>
           <ItemDescription className="text-sm">Total returns</ItemDescription>
           <ItemTitle
-            className={`text-md ml-auto tabular-nums sm:text-lg sm:font-medium ${fundPortfolio.current >= fundPortfolio.returnPercent ? "text-positive" : "text-negative"}`}
+            className={`text-md ml-auto tabular-nums sm:text-lg sm:font-medium ${getChangeColor(fundPortfolio.returnPercent)}`}
           >
             {fundPortfolio.returnPercent || 0}%
           </ItemTitle>

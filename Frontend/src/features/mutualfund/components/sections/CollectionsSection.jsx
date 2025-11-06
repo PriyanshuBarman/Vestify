@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import SectionHeading from "../SectionHeading";
-import { collectionConfig } from "../../constants/collectionConstants";
+import { collectionConfig } from "../../constants/collection";
 
 function CollectionsSection() {
   return (

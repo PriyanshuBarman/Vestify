@@ -5,6 +5,7 @@ import { ChevronsLeftRightIcon } from "lucide-react";
 import { useState } from "react";
 import FundLogo from "../FundLogo";
 import SortByButton from "../filters/SortByButton";
+import { getChangeColor } from "@/utils/helper";
 
 const columns = [
   {
@@ -48,20 +49,13 @@ function PortfolioTable({
   const getColor = (fund) => {
     switch (activeColumn.label) {
       case "Current (Invested)":
-        return Number(fund.current) >= Number(fund.invested)
-          ? "text-positive"
-          : "text-negative";
-
+        return getChangeColor(fund.current, fund.invested);
       case "Returns (%)":
-        return Number(fund.pnl) >= 0 ? "text-positive" : "text-negative";
-
+        return getChangeColor(fund.pnl);
       case "Day change (%)":
-        return Number(fund.dayChangeValue) >= 0
-          ? "text-positive"
-          : "text-negative";
-
+        return getChangeColor(fund.dayChangeValue);
       default:
-        return "text-positive";
+        return "text-foreground";
     }
   };
 

@@ -6,22 +6,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { formatToINR } from "@/utils/formatters";
+import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { CheckCircle, ChevronRightIcon, Clock, Clock4Icon } from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
 import { Link, useLocation, useParams } from "react-router";
+import OrderStatusIcon from "../components/OrderStatusIcon";
+import OrderStatusTimeline from "../components/OrderStatusTimeline";
+import { orderStatusConfig, orderTypeConfig } from "../constants/order";
 import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
-
-const helperConfig = {
-  ONE_TIME: "One-Time",
-  NEW_SIP: "New SIP",
-  REDEEM: "Redeem",
-};
-
-const statusConfig = {
-  PENDING: "In Progress",
-  COMPLETED: "Completed",
-  FAILED: "Failed",
-};
 
 function OrderDetailsPage() {
   const { orderId } = useParams();
@@ -34,21 +26,21 @@ function OrderDetailsPage() {
     queryClient.setQueryData(["order", orderId], orderFromState);
   }
 
-  const { data: order } = useGetOrderDetail(orderId);
+  const { data: order = {} } = useGetOrderDetail(orderId);
 
   return (
     <div className="sm:mx-auto sm:max-w-xl">
       <GoBackBar title="Order Details" />
       <div className="px-4">
         <div className="space-y-4">
-          <Clock4Icon className="fill-primary size-10 text-white" />
-
+          <OrderStatusIcon status={order.status} className="size-12" />
           <div>
             <h2 className="text-xl font-medium">
               {formatToINR(order.amount, 2)}
             </h2>
             <span className="text-muted-foreground mt-2 space-x-6 text-xs">
-              {helperConfig[order.orderType]} • {statusConfig[order.status]}
+              {orderTypeConfig[order.orderType]} •{" "}
+              {orderStatusConfig[order.status]}
             </span>
           </div>
 
@@ -81,7 +73,7 @@ function OrderDetailsPage() {
           </div>
         </div>
 
-        <StatusTimeline order={order} />
+        <OrderStatusTimeline order={order} />
 
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
@@ -113,66 +105,3 @@ function OrderDetailsPage() {
   );
 }
 export default OrderDetailsPage;
-
-import { CheckCircleIcon, ClockIcon, CircleXIcon } from "lucide-react";
-import { useQueryClient } from "@tanstack/react-query";
-export function StatusTimeline({ order }) {
-  const iconConfig = {
-    COMPLETED: <CheckCircleIcon className="text-primary size-5" />,
-    PENDING: <ClockIcon className="text-primary size-5" />,
-    FAILED: <CircleXIcon className="text-destructive size-5" />,
-  };
-
-  const steps = [
-    {
-      id: 1,
-      label: "Payment confirmed",
-      date: order.createdAt && format(order.createdAt, "dd MMM yy, h:mm a"),
-      completed: true,
-    },
-    {
-      id: 2,
-      label:
-        order.status === "FAILED"
-          ? `Order Failed Reason: ${order.failureReason}`
-          : order.status === "PENDING"
-            ? "Order to be process"
-            : "Order processed",
-      date: order.processDate && format(order.processDate, "dd MMM yy"),
-      completed: order.status === "PENDING" ? false : true,
-    },
-  ];
-
-  return (
-    <div className="border-b py-6">
-      <h2 className="text-md mb-4 font-medium">Status</h2>
-      <div className="relative space-y-6">
-        {steps.map((step, index) => (
-          <div key={step.id} className="relative flex items-start gap-3">
-            {/* Vertical line */}
-            {index !== steps.length - 1 && (
-              <div className="absolute top-6 left-[10px] h-full w-px bg-gray-300"></div>
-            )}
-
-            {/* Icon */}
-            <div className="bg-background z-10 mt-0.5">
-              {iconConfig[order.status]}
-            </div>
-
-            {/* Text */}
-            <div className="space-y-2">
-              <p
-                className={`text-sm font-medium ${
-                  step.completed && "text-muted-foreground"
-                }`}
-              >
-                {step.label}
-              </p>
-              <p className="text-xs text-gray-500">{step.date}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}

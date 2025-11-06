@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
-import { DEFAULT_COLUMNS, sortOptions } from "../constants/collectionConstants";
+import { DEFAULT_COLUMNS, sortOptions } from "../constants/collection";
 import { useGetManagerFunds } from "../hooks/useGetManagerFunds";
 import {
   columnsConfig,
@@ -77,8 +77,7 @@ function ManagerFundsPage() {
             </h2>
           </div>
           <p className="text-sm sm:text-base">
-            Funds Managed By{" "}
-            <span className="font-semibold">{managerName}</span>
+            Funds Managed By <span className="font-medium">{managerName}</span>
           </p>
         </div>
 

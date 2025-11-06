@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,34 +6,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Item,
-  ItemContent,
-  ItemDescription,
-  ItemGroup,
-  ItemMedia,
-  ItemSeparator,
-  ItemTitle,
-} from "@/components/ui/item";
-import { formatToINR } from "@/utils/formatters";
-import { formatDate } from "date-fns";
+import { ItemGroup } from "@/components/ui/item";
 import { ChevronRightIcon } from "lucide-react";
-import { Fragment } from "react";
-import { useGetAllTnx } from "../../hooks/useGetAllTnx";
-import { assetConfig } from "../../utils/constants";
-import { getLatestTnx } from "../../utils/getLatestTnx";
 import { useNavigate } from "react-router";
+import { useGetAllTnx } from "../../hooks/useGetAllTnx";
+import { getLatestTnx } from "../../utils/getLatestTnx";
 import TransactionItem from "../TransactionItem";
 
 function RecentTnxCard() {
   const { data: tnxHistory } = useGetAllTnx();
   const navigate = useNavigate();
 
+  const recentTnx = getLatestTnx(tnxHistory, 3);
   return (
     <Card>
       <CardContent>
         <CardHeader className="items-center px-0">
-          <CardTitle className="font-medium text-md sm:text-xl sm:font-semibold">
+          <CardTitle className="text-md font-medium sm:text-xl sm:font-semibold">
             Recent Transactions
           </CardTitle>
           <CardAction className="row-span-1">
@@ -51,11 +39,13 @@ function RecentTnxCard() {
 
         {tnxHistory ? (
           <ItemGroup className="mt-2">
-            {getLatestTnx(tnxHistory, 5)?.map((tnx, index, array) => (
-              <Fragment key={tnx.id}>
-                <TransactionItem tnx={tnx} />
-                {index !== array.length - 1 && <ItemSeparator />}
-              </Fragment>
+            {recentTnx?.map((tnx, index) => (
+              <TransactionItem
+                key={tnx.id}
+                tnx={tnx}
+                index={index}
+                length={recentTnx.length}
+              />
             ))}
           </ItemGroup>
         ) : (
@@ -75,43 +65,3 @@ function RecentTnxCard() {
   );
 }
 export default RecentTnxCard;
-
-// function TransactionItem({ tnx }) {
-//   return (
-//     <Item className="cursor-pointer px-0">
-//       <ItemMedia>
-//         <Avatar className="size-9">
-//           <AvatarImage
-//             src={
-//               tnx.peerUser?.profile?.avatar ||
-//               assetConfig[tnx.assetCategory]?.img
-//             }
-//           />
-//           <AvatarFallback className="text-sm uppercase">
-//             {tnx.peerUser?.profile?.name?.charAt(0) ||
-//               tnx.assetCategory?.charAt(0)}
-//           </AvatarFallback>
-//         </Avatar>
-//       </ItemMedia>
-//       <ItemContent>
-//         <ItemTitle className="capitalize">
-//           {tnx.peerUser?.profile?.name || assetConfig[tnx.assetCategory]?.name}
-//         </ItemTitle>
-//         <ItemDescription className="text-xs">
-//           {formatDate(tnx.createdAt, "dd MMM, h:mm a")}
-//         </ItemDescription>
-//       </ItemContent>
-//       <div className="flex flex-col items-end gap-1.5">
-//         <div
-//           className={`${tnx.type === "CREDIT" && "text-positive"} text-sm font-[550] tabular-nums`}
-//         >
-//           <span className="mr-0.5">{tnx.type === "CREDIT" ? "+" : "-"}</span>
-//           {formatToINR(tnx.amount)}
-//         </div>
-//         <div className="text-muted-foreground text-xs">
-//           Bal. {formatToINR(tnx.updatedBalance)}
-//         </div>
-//       </div>
-//     </Item>
-//   );
-// }

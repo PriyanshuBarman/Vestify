@@ -12,6 +12,7 @@ import { formatToINR } from "@/utils/formatters";
 import { ChartNoAxesCombinedIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useGetPortfolioSummary } from "../hooks/useGetPortfolioSummary";
+import { getChangeColor } from "../../../utils/helper";
 
 function PortFolioSummary({ count }) {
   const { data = {} } = useGetPortfolioSummary();
@@ -40,7 +41,7 @@ function PortFolioSummary({ count }) {
         <div className="flex items-center justify-between">
           <span>1D returns</span>
           <span
-            className={`font-medium ${data.dayChangeValue >= 0 ? "text-positive" : "text-negative"}`}
+            className={`font-medium ${getChangeColor(data.dayChangeValue)}`}
           >
             {formatToINR(data.dayChangeValue, 2)}(
             {data.dayChangePercent?.toFixed(2)}%)
@@ -48,9 +49,7 @@ function PortFolioSummary({ count }) {
         </div>
         <div className="flex items-center justify-between">
           <span>Total returns</span>
-          <span
-            className={`font-medium ${data.pnl >= 0 ? "text-positive" : "text-negative"}`}
-          >
+          <span className={`font-medium ${getChangeColor(data.pnl)}`}>
             {formatToINR(data.pnl, 2)} ({data.returnPercent?.toFixed(2)}%)
           </span>
         </div>

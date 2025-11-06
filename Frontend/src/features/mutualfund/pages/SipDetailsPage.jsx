@@ -11,15 +11,13 @@ import { format, formatDate, setDate } from "date-fns";
 import {
   ArrowLeftIcon,
   CalendarRangeIcon,
-  CheckCircleIcon,
   ChevronRightIcon,
-  CircleXIcon,
-  ClockIcon,
   CopyIcon,
-  PencilIcon,
+  PencilIcon
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
+import OrderStatusIcon from "../components/OrderStatusIcon";
 import CancelSipButton from "../components/overlays/CancelSipButton";
 import SkipSipButton from "../components/overlays/SkipSipButton";
 import { useGetSipDetail } from "../hooks/useGetSipDetail";
@@ -152,12 +150,6 @@ function SipDetailsPage() {
 }
 
 function StatusTimeline({ data }) {
-  const iconConfig = {
-    COMPLETED: <CheckCircleIcon className="text-primary size-5" />,
-    PENDING: <ClockIcon className="text-primary size-5" />,
-    FAILED: <CircleXIcon className="text-destructive size-5" />,
-  };
-
   return (
     <section className="border-b py-6">
       <h2 className="text-md mb-4 font-semibold">Installments</h2>
@@ -170,9 +162,7 @@ function StatusTimeline({ data }) {
             )}
 
             {/* Icon */}
-            <div className="bg-background z-10 mt-0.5">
-              {iconConfig[installment.status]}
-            </div>
+            <OrderStatusIcon status={installment.status} />
 
             {/* Text */}
             <Link

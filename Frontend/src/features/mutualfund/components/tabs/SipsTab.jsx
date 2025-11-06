@@ -9,10 +9,10 @@ import {
 } from "@/components/ui/item";
 import { formatToINR } from "@/utils/formatters";
 import { format, getDate } from "date-fns";
+import { lazy } from "react";
 import { Link } from "react-router";
 import { useGetSips } from "../../hooks/useGetSips";
 import FundLogo from "../FundLogo";
-import { lazy, Fragment } from "react";
 const NoActiveSips = lazy(() => import("../empty-states/NoActiveSips"));
 
 function SipsTab() {
@@ -47,36 +47,12 @@ function SipsTab() {
         </div>
 
         {data?.sips?.map((sip, index) => (
-          <Fragment key={sip.id}>
-            <Item asChild size="sm" className="px-0">
-              <Link to={`/mutual-funds/sip/${sip.id}`}>
-                <ItemMedia>
-                  <FundLogo
-                    noFormat
-                    fundHouseDomain={sip.fundHouseDomain}
-                    className="size-10"
-                  />
-                </ItemMedia>
-                <ItemContent>
-                  <ItemTitle className="Fund-Name line-clamp-2 text-sm text-wrap">
-                    {sip.fundName}
-                  </ItemTitle>
-                  <ItemDescription className="mt-1 text-sm font-medium">
-                    {formatToINR(sip.amount, 2)}
-                  </ItemDescription>
-                </ItemContent>
-                <div className="Date mx-4 rounded-xl border px-3 py-2 text-center leading-tight">
-                  <h2 className="font-medium">
-                    {getDate(sip.nextInstallmentDate)}
-                  </h2>
-                  <span className="text-muted-foreground text-xs">
-                    {format(sip.nextInstallmentDate, "MMM")}
-                  </span>
-                </div>
-              </Link>
-            </Item>
-            {index !== data.sips.length - 1 && <ItemSeparator />}
-          </Fragment>
+          <SipItem
+            key={sip.id}
+            sip={sip}
+            index={index}
+            length={data.sips.length}
+          />
         ))}
       </section>
       <div className="hidden h-full w-1/2 lg:block">
@@ -87,3 +63,36 @@ function SipsTab() {
 }
 
 export default SipsTab;
+
+function SipItem({ sip, index, length }) {
+  return (
+    <>
+      <Item asChild size="sm" className="px-0">
+        <Link to={`/mutual-funds/sip/${sip.id}`}>
+          <ItemMedia>
+            <FundLogo
+              noFormat
+              fundHouseDomain={sip.fundHouseDomain}
+              className="size-10"
+            />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle className="Fund-Name line-clamp-2 text-sm text-wrap">
+              {sip.shortName}
+            </ItemTitle>
+            <ItemDescription className="mt-1 text-sm font-medium">
+              {formatToINR(sip.amount, 2)}
+            </ItemDescription>
+          </ItemContent>
+          <div className="Date mx-4 rounded-xl border px-3 py-2 text-center leading-tight">
+            <h2 className="font-medium">{getDate(sip.nextInstallmentDate)}</h2>
+            <span className="text-muted-foreground text-xs">
+              {format(sip.nextInstallmentDate, "MMM")}
+            </span>
+          </div>
+        </Link>
+      </Item>
+      {index !== length - 1 && <ItemSeparator />}
+    </>
+  );
+}

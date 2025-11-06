@@ -8,7 +8,7 @@ import { useLocation } from "react-router";
 import SortByButton from "../components/filters/SortByButton";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
-import { DEFAULT_COLUMNS, sortOptions } from "../constants/collectionConstants";
+import { DEFAULT_COLUMNS, sortOptions } from "../constants/collection";
 import { useGetFundsByFilter } from "../hooks/useGetFundsByFilter";
 import {
   columnsConfig,
