@@ -19,37 +19,3 @@ export const searchProfile = asyncHandler(async (req, res) => {
 
   return res.status(200).json({ success: true, profiles });
 });
-
-export const updateProfile = asyncHandler(async (req, res) => {
-  const { userId } = req.user;
-  const { name, username } = req.body;
-
-  const profile = await profileService.updateProfile(userId, name, username);
-
-  return res.status(200).json({ success: true, profile });
-});
-
-export const uploadProfilePhoto = asyncHandler(async (req, res) => {
-  const { userId } = req.user;
-  const { file } = req;
-
-  if (!file) {
-    throw new ApiError(400, "Please uploade a file");
-  }
-
-  const avatar = await profileService.uploadProfilePhoto(userId, file);
-
-  return res
-    .status(200)
-    .json({ success: true, message: "Avatar uploaded successfully", avatar });
-});
-
-export const deleteProfilePhoto = asyncHandler(async (req, res) => {
-  const { userId } = req.user;
-
-  const avatar = await profileService.deleteProfilePhoto(userId);
-
-  return res
-    .status(200)
-    .json({ success: true, message: "Avatar deleted successfully", avatar });
-});

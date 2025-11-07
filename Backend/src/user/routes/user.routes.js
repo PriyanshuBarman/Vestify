@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { authenticate } from "../../shared/middlewares/auth.middleware.js";
 import * as userController from "../controllers/user.controller.js";
+import upload from "../../shared/middlewares/multer.middleware.js";
 
 export const userRoutes = Router();
 
-userRoutes.get("/", authenticate, userController.getMe);
+userRoutes.get("/", authenticate, userController.getUser);
 userRoutes.get("/referrals", authenticate, userController.getReferrals);
 userRoutes.patch(
   "/claim-daily-reward",
@@ -12,21 +13,11 @@ userRoutes.patch(
   userController.claimDailyReward
 );
 
-userRoutes.patch("/set-pin", authenticate, userController.setPin);
-userRoutes.patch("/change-pin", authenticate, userController.changePin);
-
+userRoutes.patch("/", authenticate, userController.updateProfile);
 userRoutes.patch(
-  "/change-password",
+  "/avatar",
   authenticate,
-  userController.changePassword
+  upload.single("avatar"),
+  userController.uploadAvatar
 );
-userRoutes.post(
-  "/change-email",
-  authenticate,
-  userController.requestEmailChange
-);
-userRoutes.patch(
-  "/change-email/:otp",
-  authenticate,
-  userController.verifyEmailChange
-);
+userRoutes.delete("/avatar", authenticate, userController.deleteAvatar);

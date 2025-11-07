@@ -7,11 +7,6 @@ export const fetchUserData = async () => {
   return data.user;
 };
 
-export const fetchSessions = async () => {
-  const { data } = await api.get(`/users/sessions`);
-  return data.activeSessions;
-};
-
 export const fetchReferrals = async () => {
   const { data } = await api.get(`/users/referrals`);
   return data.referrals;
@@ -24,45 +19,27 @@ export const claimDailyReward = async () => {
   return data;
 };
 
-export const changePassword = async ({ currentPassword, newPassword }) => {
-  const { data } = await api.patch(`/users/change-password`, {
-    currentPassword,
-    newPassword,
+// ---------------- Profile ----------------
+export const updateProfile = async ({ name, username }) => {
+  const { data } = await api.patch(`/users/profiles`, {
+    name,
+    username,
   });
 
-  return data;
+  return data.profile;
 };
 
-export const requestEmailChange = async ({ password, newEmail }) => {
-  const { data } = await api.post(`/users/change-email`, {
-    password,
-    newEmail,
+export const updateAvatar = async (formData) => {
+  const { data } = await api.patch(`/users/profiles/avatar`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
   });
 
-  return data;
+  return data.avatar;
 };
 
-export const verifyEmailChangeOTP = async ({ otp }) => {
-  const { data } = await api.patch(`/users/change-email/${otp}`);
-  return data.email;
-};
-
-export const setPin = async ({ pin }) => {
-  const { data } = await api.patch(`/users/set-pin`, { pin });
-  return data;
-};
-
-export const changePin = async ({ currentPin, newPin }) => {
-  const { data } = await api.patch(`/users/change-pin`, { currentPin, newPin });
-  return data;
-};
-
-export const deleteSession = async ({ sessionId }) => {
-  const { data } = await api.delete(`/users/sessions/${sessionId}`);
-  return data;
-};
-
-export const deleteAllSessions = async () => {
-  const { data } = await api.delete(`/users/sessions`);
+export const removeAvatar = async () => {
+  const { data } = await api.delete(`/users/profiles/avatar`);
   return data;
 };

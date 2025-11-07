@@ -17,7 +17,7 @@ function RecentTnxCard() {
   const { data: tnxHistory } = useGetAllTnx();
   const navigate = useNavigate();
 
-  const recentTnx = getLatestTnx(tnxHistory, 3);
+  const recentTnx = getLatestTnx(tnxHistory, 5);
   return (
     <Card>
       <CardContent>

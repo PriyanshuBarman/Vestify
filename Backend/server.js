@@ -21,8 +21,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/v1", userRoutes);
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/wallet", walletRoutes);
 app.use("/api/v1/mutual-funds", mutualFundRoutes);
 app.use("/api/v1/events", eventRoutes);

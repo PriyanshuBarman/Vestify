@@ -133,17 +133,17 @@ model Transaction {
   createdAt      DateTime        @default(now())
 
   // Wallet owner
-  user   User   @relation("UserTransactions", fields: [userId], references: [id], onDelete: Restrict)
+  user   User   @relation("UserTransactions", fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   // For Peer-to-peer transactions
-  peerUser   User?   @relation("PeerTransactions", fields: [peerUserId], references: [id], onDelete: Restrict)
+  peerUser   User?   @relation("PeerTransactions", fields: [peerUserId], references: [id], onDelete: SetNull)
   peerUserId String?
 
   // For Asset-based transactions
   assetCategory AssetCategory?
   // assetId       String? // e.g. fund code, stock symbol, etc.
-  assetOrder    MfOrder?       @relation(fields: [assetOrderId], references: [id], onDelete: Restrict)
+  assetOrder    MfOrder?       @relation(fields: [assetOrderId], references: [id], onDelete: Cascade)
   assetOrderId  String?        @unique
 
   @@map("transactions")

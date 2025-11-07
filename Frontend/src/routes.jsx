@@ -9,6 +9,7 @@ import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
 
+const DeleteAccountPage = lazy(() => import("./pages/DeleteAccountPage"));
 const NotFoundPage = lazy(
   () => import("./components/empty-states/NotFoundPage"),
 );
@@ -162,6 +163,14 @@ export const routes = createBrowserRouter([
             element: (
               <Suspense fallback={<LoadingState fullPage />}>
                 <ActiveDevicesPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "delete-account",
+            element: (
+              <Suspense fallback={<LoadingState fullPage />}>
+                <DeleteAccountPage />
               </Suspense>
             ),
           },

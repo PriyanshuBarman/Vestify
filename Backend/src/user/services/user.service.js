@@ -1,14 +1,11 @@
 import { tz, TZDate } from "@date-fns/tz";
-import bcrypt from "bcrypt";
 import { isToday } from "date-fns";
 import { db } from "../../../config/db.config.js";
 import { sendUserEvent } from "../../shared/events/eventManager.js";
 import { ApiError } from "../../shared/utils/apiError.utils.js";
-import { generateOtp } from "../utils/generateOtp.utils.js";
-import { sendEmail } from "../../shared/services/email.service.js";
-import { changeEmailTemplate } from "../../shared/utils/emailTemplates.js";
+import cloudinary from "../../../config/cloudinary.config.js";
 
-export const getMe = async (userId) => {
+export const getUser = async (userId) => {
   const user = await db.user.findUnique({
     where: { id: userId },
     select: {
@@ -20,9 +17,7 @@ export const getMe = async (userId) => {
     },
   });
 
-  if (!user) {
-    throw new ApiError(404, "User not found");
-  }
+  if (!user) throw new ApiError(404, "User not found");
 
   return user;
 };
@@ -91,130 +86,74 @@ export const claimDailyReward = async (userId) => {
   return updatedBalance;
 };
 
-export const setPin = async (userId, pin) => {
-  const hashPin = await bcrypt.hash(pin.toString(), 10);
+// ----------------------------------------------------------------------
+//  Profile
+// ----------------------------------------------------------------------
 
-  await db.user.update({
-    where: { id: userId },
-    data: {
-      pin: hashPin,
-      hasPin: true,
-    },
-  });
-};
-
-export const changePin = async (userId, currentPin, newPin) => {
-  const user = await db.user.findUnique({
-    where: { id: userId },
-    select: { pin: true },
-  });
-
-  const isPinValid = await bcrypt.compare(currentPin.toString(), user.pin);
-  if (!isPinValid) {
-    throw new ApiError(400, "Current pin is incorrect");
-  }
-
-  const hashNewPin = await bcrypt.hash(newPin.toString(), 10);
-
-  await db.user.update({
-    where: { id: userId },
-    data: {
-      pin: hashNewPin,
-    },
-  });
-};
-
-export const changePassword = async (userId, currentPassword, newPassword) => {
-  const user = await db.user.findUnique({
-    where: { id: userId },
-    select: { password: true },
-  });
-
-  const isMatch = await bcrypt.compare(currentPassword, user.password);
-  if (!isMatch) {
-    throw new ApiError(401, "Current password is incorrect");
-  }
-
-  const hashPassword = await bcrypt.hash(newPassword, 10);
-  const updatePassword = db.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      password: hashPassword,
-    },
-  });
-  const clearAllSessions = db.session.deleteMany({
+export const updateProfile = async (userId, name, username) => {
+  const profile = await db.profile.update({
     where: { userId },
+    data: { name, username },
   });
 
-  await db.$transaction([updatePassword, clearAllSessions]);
+  return profile;
 };
 
-export const requestEmailChange = async (userId, password, newEmail) => {
-  const user = await db.user.findUnique({
-    where: { id: userId },
-    include: { profile: true },
-  });
+export const uploadAvatar = async (userId, file) => {
+  const fileBuffer = file.buffer;
+  try {
+    await deleteAvatar(userId); // delete old image
 
-  if (user.email === newEmail) {
+    const result = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: "Vestify-User-Avatars",
+          resource_type: "auto",
+          allowed_formats: ["png", "jpg", "jpeg", "webp"],
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+
+      uploadStream.end(fileBuffer);
+    });
+
+    const profile = await db.profile.update({
+      where: { userId },
+      data: { avatar: result.secure_url },
+    });
+
+    return profile.avatar;
+  } catch (error) {
     throw new ApiError(
-      400,
-      "New email cannot be the same as the current email"
+      error?.http_code || 500,
+      error?.message || "Internal server error"
     );
   }
-
-  const isPinValid = await bcrypt.compare(password.toString(), user.password);
-  if (!isPinValid) {
-    throw new ApiError(400, "Incorrect password");
-  }
-
-  const otp = generateOtp();
-  const hashOtp = await bcrypt.hash(otp, 10);
-  const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-
-  await db.emailChangeRequest.upsert({
-    where: { userId },
-    create: {
-      userId,
-      newEmail,
-      otpHash: hashOtp,
-      expiresAt,
-    },
-    update: {
-      newEmail,
-      otpHash: hashOtp,
-      expiresAt,
-    },
-  });
-
-  await sendEmail({
-    to: newEmail,
-    subject: `${otp} - Email verification code`,
-    html: changeEmailTemplate(user.profile.name, otp),
-  });
 };
 
-export const verifyEmailChange = async (userId, otp) => {
-  const record = await db.emailChangeRequest.findUnique({
+export const deleteAvatar = async (userId) => {
+  const profile = await db.profile.findUnique({
     where: { userId },
+    select: { avatar: true },
   });
 
-  if (!record || record.expiresAt < new Date()) {
-    throw new ApiError(404, "Expired OTP");
+  // Only delete from Cloudinary if the avatar is stored there
+  // (not for null avatars or Google OAuth profile images)
+  if (profile?.avatar?.startsWith("https://res.cloudinary.com/")) {
+    const publicId = profile.avatar
+      .split("/")
+      .slice(-2) // Get last two parts
+      .join("/") // Join them with a slash
+      .replace(/\.[^/.]+$/, ""); // Remove file extension
+
+    await cloudinary.uploader.destroy(publicId);
   }
 
-  const isOtpValid = await bcrypt.compare(otp.toString(), record.otpHash);
-  if (!isOtpValid) {
-    throw new ApiError(400, "Invalid OTP");
-  }
-
-  await db.user.update({
-    where: { id: record.userId },
-    data: { email: record.newEmail },
-  });
-
-  await db.emailChangeRequest.delete({
+  await db.profile.update({
     where: { userId },
+    data: { avatar: null },
   });
 };

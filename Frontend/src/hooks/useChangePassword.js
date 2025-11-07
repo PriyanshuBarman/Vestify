@@ -1,4 +1,4 @@
-import { changePassword } from "@/api/user";
+import { changePassword } from "@/api/account";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";

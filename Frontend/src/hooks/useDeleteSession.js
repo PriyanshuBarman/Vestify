@@ -1,4 +1,4 @@
-import { deleteSession } from "@/api/user";
+import { deleteSession } from "@/api/account";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

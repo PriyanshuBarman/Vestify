@@ -11,6 +11,7 @@ import {
   MonitorSmartphone,
   MoonIcon,
   SunIcon,
+  Trash2Icon,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
@@ -87,6 +88,23 @@ function SettingsPage() {
           <MonitorSmartphone className="text-muted-foreground" />
           <div className="flex items-center justify-between border-b p-4 font-medium">
             Active devices
+            <ChevronRightIcon className="text-muted-foreground stroke-[1.5px]" />
+          </div>
+        </Link>
+      </section>
+
+      <section className="mt-4 ml-4 text-sm">
+        <h6 className="text-muted-foreground text-2xs mb-2 tracking-wider">
+          DANGER ZONE
+        </h6>
+
+        <Link
+          to="/settings/delete-account"
+          className="grid grid-cols-[auto_1fr] items-center"
+        >
+          <Trash2Icon className="text-muted-foreground size-5" />
+          <div className="flex items-center justify-between border-b p-4 font-medium">
+            Delete account
             <ChevronRightIcon className="text-muted-foreground stroke-[1.5px]" />
           </div>
         </Link>

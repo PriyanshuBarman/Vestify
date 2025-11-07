@@ -1,4 +1,4 @@
-import { fetchSessions } from "@/api/user";
+import { fetchSessions } from "@/api/account";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetSessions() {

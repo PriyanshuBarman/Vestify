@@ -1,4 +1,4 @@
-import { updateAvatar } from "@/api/profile";
+import { updateAvatar } from "@/api/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

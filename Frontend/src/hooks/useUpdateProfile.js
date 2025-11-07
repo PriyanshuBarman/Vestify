@@ -1,4 +1,4 @@
-import { updateProfile } from "@/api/profile";
+import { updateProfile } from "@/api/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

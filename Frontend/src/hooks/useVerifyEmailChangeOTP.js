@@ -1,4 +1,4 @@
-import { verifyEmailChangeOTP } from "@/api/user";
+import { verifyEmailChangeOTP } from "@/api/account";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
