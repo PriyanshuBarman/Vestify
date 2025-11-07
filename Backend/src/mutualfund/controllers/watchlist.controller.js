@@ -4,13 +4,13 @@ import { ApiError } from "../../shared/utils/apiError.utils.js";
 
 export const addToWatchlist = asyncHandler(async (req, res) => {
   const { userId } = req.user;
-  const { schemeCode, fundName, shortName, fundHouseDomain } = req.body;
+  const { schemeCode, fundName, fundShortName, fundHouseDomain } = req.body;
 
   await watchlistService.addToWatchlist({
     userId,
     schemeCode,
     fundName,
-    shortName,
+    fundShortName,
     fundHouseDomain,
   });
 

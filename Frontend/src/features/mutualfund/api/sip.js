@@ -21,7 +21,7 @@ export const createSip = async ({ amount, sipDate, fund, pin }) => {
     sipDate,
     schemeCode: fund.scheme_code,
     fundName: fund.name,
-    shortName: fund.short_name,
+    fundShortName: fund.short_name,
     fundCategory: fund.fund_category,
     fundType: fund.fund_type,
     fundHouseDomain: fund.detail_info,

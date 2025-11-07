@@ -57,7 +57,7 @@ function WatchlistTab() {
           <FundLogo fundHouseDomain={fund.fundHouseDomain} />
 
           <div className="ml-4 space-y-2 space-x-2">
-            <h3 className="sm:text-md text-sm">{fund.shortName}</h3>
+            <h3 className="sm:text-md text-sm">{fund.fundShortName}</h3>
             <div className="text-muted-foreground flex items-center gap-2 text-xs">
               <span className="capitalize">
                 {fundsData[index]?.fund_category}

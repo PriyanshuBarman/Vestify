@@ -7,7 +7,7 @@ export const validateSip = (req, res, next) => {
     "sipDate",
     "schemeCode",
     "fundName",
-    "shortName", // required for order placement
+    "fundShortName", // required for order placement
     "fundCategory",
     "fundHouseDomain",
     "fundType", // required for order placement

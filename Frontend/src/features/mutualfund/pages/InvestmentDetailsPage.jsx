@@ -15,19 +15,7 @@ import FundPortfolioSummary from "../components/FundPortfolioSummary";
 import { useGetFundOrders } from "../hooks/useGetFundOrders";
 import { formatToINR } from "@/utils/formatters";
 import SectionHeading from "../components/SectionHeading";
-
-const orderTypeConfig = {
-  ONE_TIME: "Invested",
-  SIP_INSTALLMENT: "SIP Installment",
-  NEW_SIP: "New SIP",
-  REDEEM: "Redeem",
-};
-
-const statusConfig = {
-  PENDING: "In Progress",
-  COMPLETED: "Success",
-  FAILED: "Failed",
-};
+import { orderTypeConfig } from "../constants/order";
 
 function InvestmentDetailsPage() {
   const location = useLocation();
@@ -38,7 +26,7 @@ function InvestmentDetailsPage() {
   return (
     <div className="sm:mx-auto sm:max-w-xl">
       <GoBackBar title="Investment details" />
-      <Item asChild>
+      <Item size="sm" asChild>
         <Link to={`/mutual-funds/${fund.schemeCode}`}>
           <ItemMedia variant="image" className="sm:size-14">
             <FundLogo
@@ -48,18 +36,20 @@ function InvestmentDetailsPage() {
             />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle className="text-md">{fund.shortName} Fund</ItemTitle>
+            <ItemTitle className="text-md">{fund.fundShortName} Fund</ItemTitle>
             <ItemDescription>
               Invested for {formatDistanceToNow(new Date(fund.createdAt))}
             </ItemDescription>
           </ItemContent>
           <ItemActions>
-            <ChevronRightIcon />
+            <ChevronRightIcon className="size-5" />
           </ItemActions>
         </Link>
       </Item>
 
-      <h3 className="px-4 text-sm font-semibold">Folio no. XXXXXXXX</h3>
+      <h3 className="mt-2 px-4 text-sm font-semibold">
+        Folio no. {fund.folio}
+      </h3>
 
       <FundPortfolioSummary fund={fund} className="mt-4" />
 

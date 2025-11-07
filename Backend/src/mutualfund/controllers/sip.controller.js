@@ -8,7 +8,7 @@ export const createSip = asyncHandler(async (req, res) => {
     amount,
     sipDate,
     fundName,
-    shortName,
+    fundShortName,
     fundCategory,
     schemeCode,
     fundHouseDomain,
@@ -20,7 +20,7 @@ export const createSip = asyncHandler(async (req, res) => {
     amount,
     sipDate,
     fundName,
-    shortName, // required for order placement
+    fundShortName, // required for order placement
     fundCategory,
     schemeCode,
     fundHouseDomain,

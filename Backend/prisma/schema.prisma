@@ -168,7 +168,7 @@ model MfOrder {
   id              String    @id @default(uuid())
   schemeCode      Int
   fundName        String
-  shortName       String
+  fundShortName   String
   fundHouseDomain String
   fundType        FundType
   orderType       OrderType
@@ -189,6 +189,7 @@ model MfOrder {
 
   transaction Transaction?
 
+  @@index([userId, schemeCode])
   @@map("mf_orders")
 }
 
@@ -212,10 +213,10 @@ enum OrderType {
 }
 
 model MfPortfolio {
-  id               String   @id @default(uuid())
+  folio            Int      @id @default(autoincrement()) @db.UnsignedInt
   schemeCode       Int
   fundName         String
-  shortName        String
+  fundShortName    String
   fundType         FundType
   fundHouseDomain  String // it's need to get fund logo
   units            Decimal  @db.Decimal(36, 18)
@@ -235,6 +236,7 @@ model MfPortfolio {
   holdings MfHolding[]
 
   @@unique([userId, schemeCode])
+  @@index([userId])
   @@map("mf_portfolios")
 }
 
@@ -255,11 +257,12 @@ model MfHolding {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
-  portfolio   MfPortfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
-  portfolioId String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  portfolio MfPortfolio @relation(fields: [folio], references: [folio], onDelete: Cascade)
+  folio     Int         @db.UnsignedInt
 
+  @@index([userId, schemeCode])
   @@map("mf_holdings")
 }
 
@@ -268,7 +271,7 @@ model MfSip {
   sipDate             Int
   nextInstallmentDate DateTime @db.Date
   fundName            String
-  shortName           String
+  fundShortName       String
   fundCategory        String
   fundType            FundType
   schemeCode          Int
@@ -277,10 +280,10 @@ model MfSip {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 
-  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
-  portfolio   MfPortfolio? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
-  portfolioId String?
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  portfolio MfPortfolio? @relation(fields: [folio], references: [folio], onDelete: Cascade)
+  folio     Int?         @db.UnsignedInt
 
   pendingChanges PendingMfSipChange[]
 
@@ -309,7 +312,7 @@ model PendingMfSipChange {
 model MfWatchlist {
   id              String   @id @default(uuid())
   schemeCode      Int
-  shortName       String
+  fundShortName   String
   fundName        String
   fundHouseDomain String
   createdAt       DateTime @default(now())

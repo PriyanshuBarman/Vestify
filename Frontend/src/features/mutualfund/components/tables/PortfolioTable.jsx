@@ -49,7 +49,7 @@ function PortfolioTable({
   const getColor = (fund) => {
     switch (activeColumn.label) {
       case "Current (Invested)":
-        return getChangeColor(fund.current, fund.invested);
+        return getChangeColor(fund.invested, fund.current);
       case "Returns (%)":
         return getChangeColor(fund.pnl);
       case "Day change (%)":
@@ -96,7 +96,7 @@ function PortfolioTable({
 
                 <div>
                   <h4 className="sm:text-md font-medium text-wrap">
-                    {fund.shortName}
+                    {fund.fundShortName}
                   </h4>
                   <span className="text-muted-foreground mt-1 flex items-center text-xs font-medium">
                     {!!fund?.sips?.length && "SIP"}

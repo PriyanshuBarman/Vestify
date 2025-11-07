@@ -8,18 +8,19 @@ import {
 import { formatToINR } from "@/utils/formatters";
 import { Link } from "react-router";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
+import { cn } from "@/lib/utils";
 
-function OrderItem({ order, index, length }) {
+function OrderItem({ order, index, length, className }) {
   return (
     <>
-      <Item asChild size="sm" className="cursor-pointer">
+      <Item asChild size="sm" className={cn("cursor-pointer",className)}>
         <Link
           to={`/mutual-funds/orders/${order.id}`}
           key={order.id}
           className="flex justify-between border-b py-4"
         >
           <ItemContent>
-            <ItemTitle>{order.shortName}</ItemTitle>
+            <ItemTitle>{order.fundShortName}</ItemTitle>
             <ItemDescription className="text-xs">
               {orderTypeConfig[order.orderType]}
             </ItemDescription>

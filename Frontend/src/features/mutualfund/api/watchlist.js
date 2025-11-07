@@ -17,13 +17,13 @@ export const isInWatchlist = async (schemeCode) => {
 export const addToWatchlist = async ({
   schemeCode,
   fundName,
-  shortName,
+  fundShortName,
   fundHouseDomain,
 }) => {
   const { data } = await api.post(`/mutual-funds/watchlist`, {
     schemeCode,
     fundName,
-    shortName,
+    fundShortName,
     fundHouseDomain,
   });
 

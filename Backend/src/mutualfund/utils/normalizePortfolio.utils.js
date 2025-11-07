@@ -1,8 +1,6 @@
-export const formatPortfolio = (portfolio) => {
-  
+export const normalizePortfolio = (portfolio) => {
   const normalizeFundValues = (fund) => ({
     ...fund,
-    latestNav: fund.latestNav?.toNumber(),
     units: fund.units?.toNumber(),
     invested: fund.invested?.toNumber(),
     current: fund.current?.toNumber(),

@@ -17,7 +17,7 @@ export const processInvestmentOrder = async (orderData) => {
     navDate,
     fundType,
     fundHouseDomain,
-    shortName,
+    fundShortName,
   } = orderData;
   amount = amount.toNumber();
 
@@ -40,7 +40,7 @@ export const processInvestmentOrder = async (orderData) => {
           userId,
           schemeCode,
           fundName,
-          shortName,
+          fundShortName,
           fundType,
           units,
           current: amount,

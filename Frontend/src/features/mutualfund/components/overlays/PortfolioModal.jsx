@@ -10,9 +10,12 @@ import { formatToINR } from "@/utils/formatters";
 import { ChevronRightIcon, LogsIcon, MoveUpRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import PurchaseBtns from "../PurchaseBtns";
+import { useGetFundOrders } from "../../hooks/useGetFundOrders";
 
 function PortfolioModal({ fund, isOpen, onOpenChange }) {
   if (!fund) return null;
+
+  useGetFundOrders(fund.schemeCode); // prefetch
 
   return (
     <ResponsiveModal open={isOpen} onOpenChange={onOpenChange}>
@@ -23,7 +26,7 @@ function PortfolioModal({ fund, isOpen, onOpenChange }) {
               to={`/mutual-funds/${fund.schemeCode}`}
               className="flex items-center gap-2"
             >
-              {fund.shortName} Fund
+              {fund.fundShortName} Fund
               <ChevronRightIcon className="size-4 text-inherit" />
             </Link>
           </ResponsiveModalTitle>

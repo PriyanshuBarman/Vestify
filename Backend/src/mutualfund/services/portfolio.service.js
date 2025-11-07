@@ -1,6 +1,6 @@
 import { db } from "../../../config/db.config.js";
 import { ApiError } from "../../shared/utils/apiError.utils.js";
-import { formatPortfolio } from "../utils/formatPortfolio.utils.js";
+import { normalizePortfolio } from "../utils/normalizePortfolio.utils.js";
 
 export const fetchPortfolio = async (data) => {
   const { userId, fundType, sort_by = "current", order_by = "desc" } = data;
@@ -14,18 +14,21 @@ export const fetchPortfolio = async (data) => {
     throw new ApiError(404, "No portfolio found.");
   }
 
-  return formatPortfolio(portfolio);
+  return normalizePortfolio(portfolio);
 };
 
 export const fetchFundPortfolio = async (userId, schemeCode) => {
-  schemeCode = parseInt(schemeCode);
+  schemeCode = Number(schemeCode);
+
   const fund = await db.mfPortfolio.findUnique({
-    where: { userId_schemeCode: { userId, schemeCode } },
+    where: {
+      userId_schemeCode: { userId, schemeCode },
+    },
   });
 
   if (!fund) throw new ApiError(404, "Fund not found in portfolio.");
 
-  return formatPortfolio(fund);
+  return normalizePortfolio(fund);
 };
 
 export const fetchPortfolioSummary = async (userId) => {

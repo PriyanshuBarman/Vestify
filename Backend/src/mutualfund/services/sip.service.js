@@ -12,7 +12,7 @@ export const createSip = async ({
   sipDate,
   schemeCode,
   fundName,
-  shortName, // required for order placement
+  fundShortName, // required for order placement
   fundCategory,
   fundHouseDomain,
   fundType, // required for order placement
@@ -25,7 +25,7 @@ export const createSip = async ({
       sipDate,
       schemeCode,
       fundName,
-      shortName,
+      fundShortName,
       fundType: fundType.toUpperCase(),
       fundCategory,
       fundHouseDomain: getMainDomain(fundHouseDomain),
@@ -39,7 +39,7 @@ export const createSip = async ({
     userId,
     amount,
     fundName,
-    shortName, //
+    fundShortName, //
     fundCategory,
     schemeCode,
     fundHouseDomain,

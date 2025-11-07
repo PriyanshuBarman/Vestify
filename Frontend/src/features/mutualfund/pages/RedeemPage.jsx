@@ -17,14 +17,14 @@ function RedeemPage() {
   const [amount, setAmount] = useState("");
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const { schemeCode, current, units, id } = location.state;
+  const { schemeCode, current, units, folio } = location.state;
   const { data: fund = {} } = useGetFundData(schemeCode);
 
   const { mutate: redeemFund, isPending, isError } = useRedeemFund();
 
   const handleRedeem = () => {
     redeemFund({
-      fundId: id,
+      folio,
       amount: amount,
     });
   };

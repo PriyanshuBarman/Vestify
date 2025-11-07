@@ -5,7 +5,7 @@ export const validateInvestmentOrder = (req, res, next) => {
     amount,
     schemeCode,
     fundName,
-    shortName,
+    fundShortName,
     fundType,
     fundCategory,
     fundHouseDomain,
@@ -15,7 +15,7 @@ export const validateInvestmentOrder = (req, res, next) => {
     "amount",
     "schemeCode",
     "fundName",
-    "shortName",
+    "fundShortName",
     "fundType",
     "fundCategory",
     "fundHouseDomain",
@@ -35,10 +35,10 @@ export const validateInvestmentOrder = (req, res, next) => {
 };
 
 export const validateRedemptionOrder = (req, res, next) => {
-  const { amount, fundId } = req.body;
+  const { amount, folio } = req.body;
 
-  if (!fundId) {
-    throw new ApiError(400, "fundId required");
+  if (!folio) {
+    throw new ApiError(400, "folio is required");
   }
 
   if (!amount) {

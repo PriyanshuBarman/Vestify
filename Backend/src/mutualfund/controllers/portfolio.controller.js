@@ -19,8 +19,8 @@ export const getPortfolio = asyncHandler(async (req, res) => {
 });
 
 export const getFundPortfolio = asyncHandler(async (req, res) => {
-  const { userId } = req.user;
   const { schemeCode } = req.params;
+  const { userId } = req.user;
 
   if (!schemeCode) {
     throw new ApiError(400, "schemeCode is required");

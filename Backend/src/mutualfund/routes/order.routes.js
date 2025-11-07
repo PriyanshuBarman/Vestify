@@ -26,4 +26,8 @@ orderRoutes.put(
 
 orderRoutes.get("/", authenticate, orderController.getAllOrders);
 orderRoutes.get("/:orderId", authenticate, orderController.getOrderDetail);
-orderRoutes.get("/fund/:schemeCode", authenticate, orderController.getFundOrders);
+orderRoutes.get(
+  "/fund/:schemeCode",
+  authenticate,
+  orderController.getFundOrders
+);

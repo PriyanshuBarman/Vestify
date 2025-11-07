@@ -5,7 +5,7 @@ export const addToWatchlist = async ({
   userId,
   schemeCode,
   fundName,
-  shortName,
+  fundShortName,
   fundHouseDomain,
 }) => {
   const isAlreadyWatchlisted = await isInWatchlist(userId, schemeCode);
@@ -18,7 +18,7 @@ export const addToWatchlist = async ({
       userId,
       schemeCode: parseInt(schemeCode),
       fundName,
-      shortName,
+      fundShortName,
       fundHouseDomain,
     },
   });

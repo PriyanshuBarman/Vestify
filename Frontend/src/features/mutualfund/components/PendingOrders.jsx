@@ -4,21 +4,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { AccordionItem } from "@radix-ui/react-accordion";
-import { useGetAllOrders } from "../hooks/useGetAllOrders";
-import { formatToINR } from "@/utils/formatters";
-import { Link, useNavigate } from "react-router";
 import { ChevronRightIcon } from "lucide-react";
+import { Link } from "react-router";
+import { useGetAllOrders } from "../hooks/useGetAllOrders";
 import OrderItem from "./OrderItem";
 
-const OrderTypeConfig = {
-  ONE_TIME: "One-Time",
-  SIP_INSTALLMENT: "SIP Installment",
-  NEW_SIP: "New SIP",
-  REDEEM: "Redeem",
-};
-
 function PendingOrders() {
-  const navigate = useNavigate();
   const { data } = useGetAllOrders();
   const pendingOrders = data?.filter((order) => order.status === "PENDING");
 
@@ -44,6 +35,7 @@ function PendingOrders() {
               order={order}
               index={index}
               length={pendingOrders.length}
+              className="px-0"
             />
           ))}
 

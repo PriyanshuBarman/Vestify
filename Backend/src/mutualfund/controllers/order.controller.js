@@ -1,3 +1,4 @@
+import { ApiError } from "../../shared/utils/apiError.utils.js";
 import { asyncHandler } from "../../shared/utils/asyncHandler.utils.js";
 import * as orderService from "../services/order.service.js";
 
@@ -7,7 +8,7 @@ export const placeInvestmentOrder = asyncHandler(async (req, res) => {
     amount,
     schemeCode,
     fundName,
-    shortName,
+    fundShortName,
     fundType,
     fundCategory,
     fundHouseDomain,
@@ -18,7 +19,7 @@ export const placeInvestmentOrder = asyncHandler(async (req, res) => {
     amount,
     schemeCode,
     fundName,
-    shortName,
+    fundShortName,
     fundType,
     fundCategory,
     fundHouseDomain,
@@ -33,14 +34,14 @@ export const placeInvestmentOrder = asyncHandler(async (req, res) => {
 
 export const placeRedemptionOrder = asyncHandler(async (req, res) => {
   const { userId } = req.user;
-  const { amount, fundId, isInstant = false } = req.body;
+  const { amount, folio, isInstant = false } = req.body;
 
-  const order = await orderService.placeRedemptionOrder(
+  const order = await orderService.placeRedemptionOrder({
     userId,
     amount,
-    fundId,
-    isInstant
-  );
+    folio,
+    isInstant,
+  });
 
   return res.status(201).json({
     success: true,
@@ -76,7 +77,7 @@ export const getFundOrders = asyncHandler(async (req, res) => {
   const { schemeCode } = req.params;
 
   if (!schemeCode) {
-    throw new ApiError(400, "Fund ID is required");
+    throw new ApiError(400, "schemeCode is required");
   }
 
   const orders = await orderService.getFundOrders(userId, schemeCode);

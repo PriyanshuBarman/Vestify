@@ -25,7 +25,7 @@ export const createInvestOrder = async ({ amount, fund, pin }) => {
     amount: Number(amount),
     schemeCode: fund.scheme_code,
     fundName: fund.name,
-    shortName: fund.short_name,
+    fundShortName: fund.short_name,
     fundType: fund.fund_type,
     fundCategory: fund.fund_category,
     fundHouseDomain: fund.detail_info,
@@ -34,9 +34,9 @@ export const createInvestOrder = async ({ amount, fund, pin }) => {
   return data.order;
 };
 
-export const redeemFund = async ({ fundId, amount, isInstant = false }) => {
+export const redeemFund = async ({ folio, amount, isInstant = false }) => {
   const { data } = await api.put(`/mutual-funds/orders/redeem`, {
-    fundId,
+    folio,
     amount: Number(amount),
     isInstant,
   });

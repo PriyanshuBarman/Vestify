@@ -54,7 +54,7 @@ function TransactionItem({ tnx, index, length }) {
           </div>
         </div>
       </Item>
-      {index !== length - 1 && <ItemSeparator />}
+      {/* {index !== length - 1 && <ItemSeparator />} */}
     </>
   );
 }

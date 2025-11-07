@@ -17,9 +17,9 @@ function RecentTnxCard() {
   const { data: tnxHistory } = useGetAllTnx();
   const navigate = useNavigate();
 
-  const recentTnx = getLatestTnx(tnxHistory, 5);
+  const recentTnx = getLatestTnx(tnxHistory, 4);
   return (
-    <Card>
+    <Card className="mt-10">
       <CardContent>
         <CardHeader className="items-center px-0">
           <CardTitle className="text-md font-medium sm:text-xl sm:font-semibold">

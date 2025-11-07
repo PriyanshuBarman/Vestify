@@ -13,7 +13,7 @@ export const placeInvestmentOrder = async ({
   amount,
   schemeCode,
   fundName,
-  shortName,
+  fundShortName,
   fundType,
   fundCategory,
   fundHouseDomain,
@@ -43,7 +43,7 @@ export const placeInvestmentOrder = async ({
         amount,
         schemeCode,
         fundName,
-        shortName,
+        fundShortName,
         fundType: fundType.toUpperCase(),
         fundHouseDomain: getMainDomain(fundHouseDomain),
         processDate,
@@ -74,14 +74,14 @@ export const placeInvestmentOrder = async ({
   return order; // Return Order Details
 };
 
-export const placeRedemptionOrder = async (
+export const placeRedemptionOrder = async ({
   userId,
   amount,
-  fundId,
-  isInstant
-) => {
+  folio,
+  isInstant,
+}) => {
   const fund = await db.mfPortfolio.findUnique({
-    where: { id: fundId },
+    where: { folio: Number(folio) },
   });
 
   if (!fund) {
@@ -105,7 +105,7 @@ export const placeRedemptionOrder = async (
       userId,
       schemeCode: fund.schemeCode,
       fundName: fund.fundName,
-      shortName: fund.shortName,
+      fundShortName: fund.fundShortName,
       fundType: fund.fundType,
       fundCategory: fund.fundCategory,
       fundHouseDomain: fund.fundHouseDomain,
@@ -144,7 +144,11 @@ export const getOrderDetail = async (orderId) => {
 
 export const getFundOrders = async (userId, schemeCode) => {
   const orders = await db.mfOrder.findMany({
-    where: { userId, schemeCode: parseInt(schemeCode) },
+    where: {
+      userId,
+      schemeCode: parseInt(schemeCode),
+      status: "COMPLETED",
+    },
     orderBy: {
       createdAt: "desc",
     },

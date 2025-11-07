@@ -78,7 +78,7 @@ function SipItem({ sip, index, length }) {
           </ItemMedia>
           <ItemContent>
             <ItemTitle className="Fund-Name line-clamp-2 text-sm text-wrap">
-              {sip.shortName}
+              {sip.fundShortName}
             </ItemTitle>
             <ItemDescription className="mt-1 text-sm font-medium">
               {formatToINR(sip.amount, 2)}

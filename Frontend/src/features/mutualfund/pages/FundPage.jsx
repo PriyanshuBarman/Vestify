@@ -43,7 +43,7 @@ function FundPage() {
       addToWatchlist({
         schemeCode: scheme_code,
         fundName: fund.name,
-        shortName: fund.short_name,
+        fundShortName: fund.short_name,
         fundHouseDomain: fund.detail_info,
       });
     }
