@@ -31,7 +31,7 @@ export const processInvestmentOrder = async (orderData) => {
       },
     });
 
-    let portfolioId = prevInv?.id;
+    let folio = prevInv?.folio;
 
     // 1. Create new portfolio if first investment
     if (!prevInv) {
@@ -49,7 +49,7 @@ export const processInvestmentOrder = async (orderData) => {
         },
       });
 
-      portfolioId = newPortfolio.id;
+      folio = newPortfolio.folio;
     } else {
       // 2. Update portfolio if subsequent investment
       const updatedValues = calcPortfolioAfterInvestment(
@@ -58,7 +58,7 @@ export const processInvestmentOrder = async (orderData) => {
         units
       );
       await tx.mfPortfolio.update({
-        where: { id: prevInv.id },
+        where: { folio },
         data: updatedValues,
       });
     }
@@ -71,7 +71,7 @@ export const processInvestmentOrder = async (orderData) => {
         userId,
         amount,
         schemeCode,
-        portfolioId,
+        folio,
       },
     });
 
@@ -90,7 +90,7 @@ export const processInvestmentOrder = async (orderData) => {
       await tx.mfSip.update({
         where: { id: sipId },
         data: {
-          portfolioId,
+          folio,
         },
       });
     }
@@ -117,25 +117,28 @@ export const processRedemptionOrder = async (orderData) => {
   // Fetch NAV after passing validation
   const nav = await fetchNavByDate(schemeCode, navDate);
 
-  let redemptionUnits = units || amount / nav;
-  const isFullRedemption = units || amount === fund.current.toNumber();
+  const isFullRedemption = !!units || amount === fund.current.toNumber();
 
-  return db.$transaction(async (tx) => {
+  // Calculate final redemption values
+  const finalUnits = units || amount / nav;
+  const finalAmount = isFullRedemption ? fund.current.toNumber() : amount;
+
+  await db.$transaction(async (tx) => {
     if (isFullRedemption) {
       // 1. Delete portfolio
-      await tx.mfPortfolio.delete({ where: { id: fund.id } });
+      await tx.mfPortfolio.delete({ where: { folio: fund.folio } });
 
       // 2. Credit Balance
       const user = await tx.user.update({
         where: { id: userId },
-        data: { balance: { increment: fund.current.toNumber() } },
+        data: { balance: { increment: finalAmount } },
       });
 
       // 3. Log transaction
       await tx.transaction.create({
         data: {
           userId,
-          amount: fund.current.toNumber(),
+          amount: finalAmount,
           assetCategory: "MUTUAL_FUND",
           assetOrderId: orderId,
           type: "CREDIT",
@@ -147,19 +150,14 @@ export const processRedemptionOrder = async (orderData) => {
       const costBasis = await fifoRedemption(
         userId,
         schemeCode,
-        redemptionUnits,
+        finalUnits,
         tx
       );
 
       // 2. Update portfolio
       await tx.mfPortfolio.update({
-        where: { id: fund.id },
-        data: calcPortfolioAfterRedemption(
-          fund,
-          costBasis,
-          amount,
-          redemptionUnits
-        ),
+        where: { folio: fund.folio },
+        data: calcPortfolioAfterRedemption(fund, costBasis, finalAmount, finalUnits),
       });
 
       // 3. Credit Balance
@@ -181,10 +179,15 @@ export const processRedemptionOrder = async (orderData) => {
       });
     }
 
-    // At the end mark the order as completed
+    // Mark order as completed with final values
     await tx.mfOrder.update({
       where: { id: orderId },
-      data: { status: "COMPLETED", nav, units: redemptionUnits },
+      data: {
+        status: "COMPLETED",
+        nav,
+        units: finalUnits,
+        amount: finalAmount,
+      },
     });
   });
 };

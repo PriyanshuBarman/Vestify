@@ -6,11 +6,11 @@ import {
 import { AccordionItem } from "@radix-ui/react-accordion";
 import { ChevronRightIcon } from "lucide-react";
 import { Link } from "react-router";
-import { useGetAllOrders } from "../hooks/useGetAllOrders";
+import { useGetPendingOrders } from "../hooks/useGetPendingOrders";
 import OrderItem from "./OrderItem";
 
 function PendingOrders() {
-  const { data } = useGetAllOrders();
+  const { data } = useGetPendingOrders();
   const pendingOrders = data?.filter((order) => order.status === "PENDING");
 
   if (!pendingOrders?.length) return null;

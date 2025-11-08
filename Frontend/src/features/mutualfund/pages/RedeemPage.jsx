@@ -79,7 +79,7 @@ function RedeemPage() {
 
           <Label className="text-muted-foreground flex items-center text-sm">
             <Checkbox
-              checked={amount === current}
+              checked={amount == current}
               onCheckedChange={(checked) => {
                 setAmount(checked ? current : "");
               }}
@@ -109,7 +109,7 @@ function RedeemPage() {
         <ConfirmRedeemModal
           onConfirm={handleRedeem}
           amount={amount}
-          units={amount === current ? units : null}
+          units={amount == current ? units : null} // pass units if full-redemption
           fund={fund}
           isOpen={open}
           onOpenChange={setOpen}
@@ -163,7 +163,7 @@ function RedeemPage() {
 
           <Label className="flex items-center text-sm">
             <Checkbox
-              checked={amount === current}
+              checked={amount == current}
               onCheckedChange={(checked) => {
                 setAmount(checked ? current : "");
               }}
@@ -188,7 +188,7 @@ function RedeemPage() {
         <ConfirmRedeemModal
           onConfirm={handleRedeem}
           amount={amount}
-          units={amount === current ? units : null}
+          units={amount == current ? units : null} // pass units if full-redemption
           fund={fund}
           isOpen={open}
           onOpenChange={setOpen}

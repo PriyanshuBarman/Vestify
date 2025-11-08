@@ -80,9 +80,9 @@ export const mutualFundRoutes = {
     {
       path: ":scheme_code",
       element: (
-        <Suspense fallback={<LoadingState fullPage />}>
+        // <Suspense fallback={<LoadingState fullPage />}>
           <FundPage />
-        </Suspense>
+        // </Suspense>
       ),
     },
     {

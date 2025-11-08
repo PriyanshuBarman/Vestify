@@ -7,6 +7,7 @@ export const fetchPortfolio = async (data) => {
 
   const portfolio = await db.mfPortfolio.findMany({
     where: { userId, fundType },
+    include: { sips: true },
     orderBy: { [sort_by]: order_by },
   });
 
@@ -24,6 +25,7 @@ export const fetchFundPortfolio = async (userId, schemeCode) => {
     where: {
       userId_schemeCode: { userId, schemeCode },
     },
+    include: { sips: true },
   });
 
   if (!fund) throw new ApiError(404, "Fund not found in portfolio.");

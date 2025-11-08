@@ -61,6 +61,17 @@ export const getAllOrders = asyncHandler(async (req, res) => {
   });
 });
 
+export const getPendingOrders = asyncHandler(async (req, res) => {
+  const { userId } = req.user;
+
+  const orders = await orderService.getPendingOrders(userId);
+
+  return res.status(200).json({
+    success: true,
+    orders,
+  });
+});
+
 export const getOrderDetail = asyncHandler(async (req, res) => {
   const { orderId } = req.params;
 

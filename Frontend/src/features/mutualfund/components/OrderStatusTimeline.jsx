@@ -5,7 +5,7 @@ function OrderStatusTimeline({ order }) {
   const steps = [
     {
       id: 1,
-      label: "Payment confirmed",
+      label: "Order Placed",
       date: order.createdAt && formatDate(order.createdAt, "dd MMM yy, h:mm a"),
       completed: true,
       status: "COMPLETED",

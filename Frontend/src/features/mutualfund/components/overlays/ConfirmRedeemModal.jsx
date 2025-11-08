@@ -31,10 +31,10 @@ function ConfirmRedeemModal({
           <ResponsiveModalTitle className="text-muted-foreground text-sm font-normal">
             Amount you get
           </ResponsiveModalTitle>
-          <div className="flex items-center gap-2 text-3xl font-semibold">
+          <h2 className="flex items-center gap-2 text-3xl font-semibold">
             {formatToINR(amount)}
-            <Badge variant="secondary">Approx</Badge>
-          </div>
+            {units && <Badge variant="secondary">Approx</Badge>}
+          </h2>
           <ResponsiveModalDescription className="text-start">
             The amount you get will depend on the NAV of{" "}
             {formatDate(navDate, "dd MMM")}
@@ -85,7 +85,7 @@ function ConfirmRedeemModal({
         <ResponsiveModalFooter>
           <ResponsiveModalClose asChild>
             <Button onClick={onConfirm} size="lg" className="w-full">
-              Redeem
+              Confirm Redeem
             </Button>
           </ResponsiveModalClose>
         </ResponsiveModalFooter>

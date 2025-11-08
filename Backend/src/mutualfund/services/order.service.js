@@ -71,7 +71,7 @@ export const placeInvestmentOrder = async ({
 
   sendUserEvent(userId, { balance: user.balance });
 
-  return order; // Return Order Details
+  return order;
 };
 
 export const placeRedemptionOrder = async ({
@@ -111,7 +111,7 @@ export const placeRedemptionOrder = async ({
       fundHouseDomain: fund.fundHouseDomain,
       method: "REGULAR",
       orderType: "REDEEM",
-      amount: !isFullRedemption ? amount : null, // Store amount for partial-redemption
+      amount,
       units: isFullRedemption ? fund.units.toNumber() : null, // Store total units for full-redemption
       processDate,
       navDate,
@@ -131,6 +131,21 @@ export const getAllOrders = async (userId) => {
 
   if (!orders.length) {
     throw new ApiError(404, "No orders found");
+  }
+
+  return orders;
+};
+
+export const getPendingOrders = async (userId) => {
+  const orders = await db.mfOrder.findMany({
+    where: { userId, status: "PENDING" },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  if (!orders.length) {
+    throw new ApiError(404, "No pending orders");
   }
 
   return orders;

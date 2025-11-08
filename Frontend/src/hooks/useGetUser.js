@@ -9,8 +9,6 @@ export const useGetUser = () => {
     queryKey: ["user"],
     queryFn: fetchUserData,
     initialData: () => (initialData ? JSON.parse(initialData) : undefined),
-    staleTime: Infinity,
-    gcTime: Infinity,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });

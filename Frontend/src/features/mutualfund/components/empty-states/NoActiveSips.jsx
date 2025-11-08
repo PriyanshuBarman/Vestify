@@ -20,7 +20,7 @@ function NoActiveSips() {
   const isMobile = useIsMobile();
 
   return (
-    <>
+    <div className="pb-20">
       <Empty>
         <EmptyHeader className="max-w-none">
           <EmptyMedia>
@@ -53,7 +53,7 @@ function NoActiveSips() {
           <ScrollBar orientation="horizontal" className="max-sm:hidden" />
         </ScrollArea>
       </section>
-    </>
+    </div>
   );
 }
 

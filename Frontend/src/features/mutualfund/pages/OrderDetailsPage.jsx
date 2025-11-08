@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import { formatToINR } from "@/utils/formatters";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -35,8 +36,11 @@ function OrderDetailsPage() {
         <div className="space-y-4">
           <OrderStatusIcon status={order.status} className="size-12" />
           <div>
-            <h2 className="text-xl font-medium">
+            <h2 className="flex items-center gap-4 text-2xl font-semibold">
               {formatToINR(order.amount, 2)}
+              {order?.units && order.status === "PENDING" && (
+                <Badge variant="secondary">Approx</Badge>
+              )}
             </h2>
             <span className="text-muted-foreground mt-2 space-x-6 text-xs">
               {orderTypeConfig[order.orderType]} •{" "}
@@ -64,7 +68,7 @@ function OrderDetailsPage() {
 
             <div className="w-1/2 border-l pl-6">
               <span className="text-muted-foreground text-xs">
-                Expected NAV Date
+                {order.status === "PENDING" && "Expected"} NAV Date
               </span>
               <h4 className="text-sm font-medium">
                 {order.navDate && format(order.navDate, "dd MMM yy")}

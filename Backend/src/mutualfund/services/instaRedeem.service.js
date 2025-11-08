@@ -14,7 +14,6 @@ export const instantRedemption = async (fund, amount) => {
 
   const units = amount / latestNav; // Redemption units
 
-  // prisma $transaction
   const user = await db.$transaction(async (tx) => {
     const costBasis = await fifoRedemption(userId, schemeCode, units, tx);
 

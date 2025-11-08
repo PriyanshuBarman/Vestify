@@ -29,13 +29,15 @@ function RedemptionRequestSuccessPage() {
               <CardTitle className="text-center">{order.fundName} </CardTitle>
             </CardHeader>
             <div className="flex items-center justify-between">
-              <span>Amount (Approx) </span>
+              <span>Amount {order.units && "(Approx)"} </span>
               <span className="font-medium">{formatToINR(order.amount)}</span>
             </div>
             {order.units && (
               <div className="flex items-center justify-between">
                 <span>Units redeemed </span>
-                <span className="font-medium">{order.units}</span>
+                <span className="font-medium">
+                  {Number(order.units).toFixed(3)}
+                </span>
               </div>
             )}
             <div className="flex items-center justify-between">

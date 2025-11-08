@@ -25,7 +25,7 @@ export const updateFundPortfolio = async (fund) => {
   const dayChangePercent = (dayChangeValue / fund.current.toNumber()) * 100;
 
   await db.mfPortfolio.update({
-    where: { id: fund.id },
+    where: { folio: fund.folio },
     data: {
       current,
       pnl,

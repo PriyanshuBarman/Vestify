@@ -7,6 +7,11 @@ export const fetchOrders = async () => {
   return data.orders;
 };
 
+export const fetchPendingOrders = async () => {
+  const { data } = await api.get(`/mutual-funds/orders/pending`);
+  return data.orders;
+};
+
 export const fetchFundOrders = async (schemeCode) => {
   const { data } = await api.get(`/mutual-funds/orders/fund/${schemeCode}`);
   return data.orders;

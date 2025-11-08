@@ -23,13 +23,13 @@ export const fifoRedemption = async (
 
       await tx.mfHolding.delete({ where: { id: holding.id } });
     } else {
-      await tx.mfHolding.update(
-        { where: { id: holding.id } },
-        {
+      await tx.mfHolding.update({
+        where: { id: holding.id },
+        data: {
           units: holding.units.toNumber() - remainingUnits,
           amount: holding.amount.toNumber() - remainingUnits * holdingNav,
-        }
-      );
+        },
+      });
 
       // Add the amount to cost basis
       costBasis += remainingUnits * holdingNav;

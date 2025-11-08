@@ -173,6 +173,9 @@ export const getSipDetail = async (sipId) => {
 
   const installments = await db.mfOrder.findMany({
     where: { sipId },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return { sipDetail, installments };
