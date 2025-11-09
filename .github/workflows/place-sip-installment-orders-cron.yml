@@ -1,9 +1,9 @@
-name: Portfolio Updater Cron
+name: SIP Installment Order Placement Cron
 
 on:
   schedule:
-    - cron: "30 22 * * *" # 4:00 AM IST
-    - cron: "30 23 * * *" # 5:00 AM IST
+    - cron: "30 20 * * *" # 2:00 AM IST
+    - cron: "30 21 * * *" # 3:00 AM IST
   workflow_dispatch: # Allow manual trigger
 
 defaults:
@@ -11,7 +11,7 @@ defaults:
     working-directory: Backend
 
 jobs:
-  portfolio-updater-cron:
+  sip-installment-order-cron:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,10 +31,9 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Portfolio Updater
+      - name: SIP Installment Order Placement
         id: update-script
-        run: node scripts/tasks/update-portfolios.js
+        run: node scripts/tasks/place-sip-installment-orders.js
         env:
           NODE_ENV: cron
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          MF_API_BASE_URL: ${{ secrets.MF_API_BASE_URL }}
