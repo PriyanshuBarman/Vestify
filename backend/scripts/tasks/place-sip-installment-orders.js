@@ -2,7 +2,7 @@ import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
 import { placeSipInstallmentOrder } from "../processors/sip-installment-processor.js";
 import { printSummary } from "../utils/print-summary.utils.js";
-import { db } from "../../config/db.config.js";
+import { db } from "#config/db.config.js";
 
 async function placeSipInstallmentOrders() {
   const today = new Date(format(TZDate.tz("Asia/Kolkata"), "yyyy-MM-dd"));

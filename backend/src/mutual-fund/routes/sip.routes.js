@@ -1,8 +1,8 @@
+import { authenticate } from "#shared/middlewares/auth.middleware.js";
+import { verifyPin } from "#shared/middlewares/verify-pin.middleware.js";
 import { Router } from "express";
-import { authenticate } from "../../shared/middlewares/auth.middleware.js";
-import { validateSip } from "../validators/sip.validator.js";
 import * as sipController from "../controllers/sip.controller.js";
-import { verifyPin } from "../../shared/middlewares/verify-pin.middleware.js";
+import { validateSip } from "../validators/sip.validator.js";
 
 export const sipRoutes = Router();
 

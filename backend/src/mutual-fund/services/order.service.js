@@ -1,8 +1,8 @@
-import { db } from "../../../config/db.config.js";
-import { sendUserEvent } from "../../shared/events/event-manager.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
-import { getDomain } from "../utils/get-domain.utils.js";
+import { db } from "#config/db.config.js";
+import { sendUserEvent } from "#shared/events/event-manager.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 import { getApplicableDates } from "../utils/get-applicable-dates.utiils.js";
+import { getDomain } from "../utils/get-domain.utils.js";
 import { instantRedemption } from "./insta-redemption.service.js";
 
 export const placeInvestmentOrder = async ({

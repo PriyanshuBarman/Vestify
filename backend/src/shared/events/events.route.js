@@ -2,9 +2,9 @@ import { Router } from "express";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { addClient } from "./event-manager.js";
 
-const router = Router();
+export const eventRoutes = Router();
 
-router.get("/", authenticate, (req, res) => {
+eventRoutes.get("/", authenticate, (req, res) => {
   const { userId } = req.user;
 
   res.setHeader("Content-Type", "text/event-stream");
@@ -17,5 +17,3 @@ router.get("/", authenticate, (req, res) => {
   // Initial connection message
   res.write(`data: ${JSON.stringify({ type: "CONNECTED" })}\n\n`);
 });
-
-export default router;

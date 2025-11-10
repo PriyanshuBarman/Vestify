@@ -1,4 +1,4 @@
-import { NODE_ENV } from "../../../config/env.config.js";
+import { NODE_ENV } from "#config/env.config.js";
 
 const isProd = NODE_ENV === "production";
 

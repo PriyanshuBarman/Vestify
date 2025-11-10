@@ -1,9 +1,9 @@
 import { tz, TZDate } from "@date-fns/tz";
 import { isToday } from "date-fns";
-import { db } from "../../../config/db.config.js";
-import { sendUserEvent } from "../../shared/events/event-manager.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
-import cloudinary from "../../../config/cloudinary.config.js";
+import { db } from "#config/db.config.js";
+import { sendUserEvent } from "#shared/events/event-manager.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
+import cloudinary from "#config/cloudinary.config.js";
 
 export const getUser = async (userId) => {
   const user = await db.user.findUnique({

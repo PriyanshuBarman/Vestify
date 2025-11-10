@@ -1,4 +1,4 @@
-import { asyncHandler } from "../../shared/utils/async-handler.utils.js";
+import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as profileService from "../services/profile.service.js";
 
 export const getProfile = asyncHandler(async (req, res) => {

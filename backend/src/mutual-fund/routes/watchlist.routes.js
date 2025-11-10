@@ -1,5 +1,5 @@
+import { authenticate } from "#shared/middlewares/auth.middleware.js";
 import { Router } from "express";
-import { authenticate } from "../../shared/middlewares/auth.middleware.js";
 import * as watchlistService from "../controllers/watchlist.controller.js";
 import { validateWatchlist } from "../validators/watchlist.validator.js";
 

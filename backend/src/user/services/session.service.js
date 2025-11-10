@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import { db } from "../../../config/db.config.js";
-import { JWT_SECRET } from "../../../config/env.config.js";
+import { db } from "#config/db.config.js";
+import { JWT_SECRET } from "#config/env.config.js";
 
 export const getActiveSessions = async (userId) => {
   return await db.session.findMany({

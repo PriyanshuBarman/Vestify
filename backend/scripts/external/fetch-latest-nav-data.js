@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MF_API_BASE_URL } from "../../config/env.config.js";
+import { MF_API_BASE_URL } from "#config/env.config.js";
 
 export const navCache = new Map();
 

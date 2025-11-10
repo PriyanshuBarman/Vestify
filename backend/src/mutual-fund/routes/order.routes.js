@@ -1,11 +1,11 @@
+import { authenticate } from "#shared/middlewares/auth.middleware.js";
+import { verifyPin } from "#shared/middlewares/verify-pin.middleware.js";
 import { Router } from "express";
-import { authenticate } from "../../shared/middlewares/auth.middleware.js";
 import * as orderController from "../controllers/order.controller.js";
 import {
-  validateRedemptionOrder,
   validateInvestmentOrder,
+  validateRedemptionOrder,
 } from "../validators/order.validator.js";
-import { verifyPin } from "../../shared/middlewares/verify-pin.middleware.js";
 
 export const orderRoutes = Router();
 

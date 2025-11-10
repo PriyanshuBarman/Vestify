@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../../../config/env.config.js";
+import { JWT_SECRET } from "#config/env.config.js";
 import { ApiError } from "../utils/api-error.utils.js";
 import { asyncHandler } from "../utils/async-handler.utils.js";
 

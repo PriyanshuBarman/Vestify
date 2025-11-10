@@ -1,4 +1,4 @@
-import { ApiError } from "../../shared/utils/api-error.utils.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 
 export const validateSip = (req, res, next) => {
   const amount = req.body.amount;

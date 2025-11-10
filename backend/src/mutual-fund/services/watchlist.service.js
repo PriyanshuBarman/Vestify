@@ -1,5 +1,5 @@
-import { db } from "../../../config/db.config.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
+import { db } from "#config/db.config.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 
 export const addToWatchlist = async ({
   userId,

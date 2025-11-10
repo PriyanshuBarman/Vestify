@@ -1,6 +1,6 @@
-import { NODE_ENV } from "../../../config/env.config.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
-import { asyncHandler } from "../../shared/utils/async-handler.utils.js";
+import { NODE_ENV } from "#config/env.config.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
+import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as authService from "../services/auth.service.js";
 import {
   ACCESS_COOKIE_OPTIONS,

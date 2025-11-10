@@ -1,6 +1,6 @@
-import { db } from "../../../config/db.config.js";
-import { sendUserEvent } from "../../shared/events/event-manager.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
+import { db } from "#config/db.config.js";
+import { sendUserEvent } from "#shared/events/event-manager.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 
 export const applyReferralBonus = async (referrerId, userId) => {
   const REFERRER_BONUS = 10000;

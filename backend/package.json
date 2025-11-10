@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "vestify-backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,11 @@
     "dev": "nodemon server.js"
   },
   "type": "module",
+  "imports": {
+    "#src/*": "./src/*",
+    "#shared/*": "./src/shared/*",
+    "#config/*": "./config/*"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

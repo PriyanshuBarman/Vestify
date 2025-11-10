@@ -1,7 +1,7 @@
 import { formatDate } from "date-fns";
-import { db } from "../../../config/db.config.js";
-import { sendUserEvent } from "../../shared/events/event-manager.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
+import { db } from "#config/db.config.js";
+import { sendUserEvent } from "#shared/events/event-manager.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 
 export const sendMoney = async ({ userId, amount, note, receiverId }) => {
   const { sender, receiver } = await db.$transaction(async (tx) => {

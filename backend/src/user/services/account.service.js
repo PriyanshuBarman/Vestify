@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
-import { db } from "../../../config/db.config.js";
-import { sendEmail } from "../../shared/services/email.service.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
-import { changeEmailTemplate } from "../../shared/utils/email-templates.js";
+import { db } from "#config/db.config.js";
+import { sendEmail } from "#shared/services/email.service.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
+import { changeEmailTemplate } from "#shared/utils/email-templates.js";
 import { generateOtp } from "../utils/generate-otp.utils.js";
 
 export const deleteAccount = async (userId) => {

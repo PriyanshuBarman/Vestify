@@ -1,6 +1,6 @@
 import { OAuth2Client } from "google-auth-library";
-import { CLIENT_ID, CLIENT_SECRET } from "../../../config/env.config.js";
-import { asyncHandler } from "../../shared/utils/async-handler.utils.js";
+import { CLIENT_ID, CLIENT_SECRET } from "#config/env.config.js";
+import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import {
   ACCESS_COOKIE_OPTIONS,
   REFRESH_COOKIE_OPTIONS,

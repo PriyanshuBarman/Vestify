@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { authenticate } from "../../shared/middlewares/auth.middleware.js";
+import { authenticate } from "#shared/middlewares/auth.middleware.js";
+import upload from "#shared/middlewares/multer.middleware.js";
 import * as userController from "../controllers/user.controller.js";
-import upload from "../../shared/middlewares/multer.middleware.js";
 
 export const userRoutes = Router();
 

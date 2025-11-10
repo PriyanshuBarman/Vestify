@@ -1,4 +1,4 @@
-import { asyncHandler } from "../../shared/utils/async-handler.utils.js";
+import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as userService from "../services/user.service.js";
 
 export const getUser = asyncHandler(async (req, res) => {

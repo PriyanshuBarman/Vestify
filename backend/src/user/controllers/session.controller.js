@@ -1,5 +1,5 @@
-import { ApiError } from "../../shared/utils/api-error.utils.js";
-import { asyncHandler } from "../../shared/utils/async-handler.utils.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
+import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as sessionService from "../services/session.service.js";
 
 export const getActiveSessions = asyncHandler(async (req, res) => {

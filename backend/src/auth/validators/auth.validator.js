@@ -1,4 +1,4 @@
-import { ApiError } from "../../shared/utils/api-error.utils.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 
 export const signupValidator = (req, res, next) => {
   let { name, email, password } = req.body;

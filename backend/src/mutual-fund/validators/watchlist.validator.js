@@ -1,4 +1,4 @@
-import { ApiError } from "../../shared/utils/api-error.utils.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 
 export const validateWatchlist = (req, res, next) => {
   const { schemeCode, fundName, fundShortName, fundHouseDomain } = req.body;

@@ -1,5 +1,5 @@
+import { authenticate } from "#shared/middlewares/auth.middleware.js";
 import { Router } from "express";
-import { authenticate } from "../../shared/middlewares/auth.middleware.js";
 import * as portfolioController from "../controllers/portfolio.controller.js";
 import { validateQuery } from "../validators/portfolio-query.validator.js";
 

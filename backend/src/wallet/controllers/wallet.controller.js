@@ -1,5 +1,5 @@
-import { ApiError } from "../../shared/utils/api-error.utils.js";
-import { asyncHandler } from "../../shared/utils/async-handler.utils.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
+import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as walletService from "../services/wallet.service.js";
 
 export const sendMoney = asyncHandler(async (req, res) => {

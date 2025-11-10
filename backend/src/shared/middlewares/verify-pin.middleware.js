@@ -1,4 +1,4 @@
-import { db } from "../../../config/db.config.js";
+import { db } from "#config/db.config.js";
 import { ApiError } from "../utils/api-error.utils.js";
 import bcrypt from "bcrypt";
 

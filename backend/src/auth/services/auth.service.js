@@ -1,16 +1,16 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "../../../config/db.config.js";
-import { JWT_SECRET, OWNER_EMAIL } from "../../../config/env.config.js";
-import { sendEmail } from "../../shared/services/email.service.js";
-import { generateUniqueUsername } from "../../shared/services/username.service.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
-import { refreshTokenReuseTemplate } from "../../shared/utils/email-templates.js";
+import { db } from "#config/db.config.js";
+import { JWT_SECRET, OWNER_EMAIL } from "#config/env.config.js";
+import { sendEmail } from "#shared/services/email.service.js";
+import { generateUniqueUsername } from "#shared/services/username.service.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
+import { refreshTokenReuseTemplate } from "#shared/utils/email-templates.js";
 import {
   generateTokenHash,
   generateTokens,
-} from "../../shared/utils/token.utils.js";
+} from "#shared/utils/token.utils.js";
 import * as referralService from "./referral.service.js";
 
 export const signupUser = async ({

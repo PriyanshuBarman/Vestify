@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { authenticate } from "../../shared/middlewares/auth.middleware.js";
-import { verifyPin } from "../../shared/middlewares/verify-pin.middleware.js";
+import { authenticate } from "#shared/middlewares/auth.middleware.js";
+import { verifyPin } from "#shared/middlewares/verify-pin.middleware.js";
 import * as walletController from "../controllers/wallet.controller.js";
 
 export const walletRoutes = Router();

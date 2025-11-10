@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
-import { db } from "../../../config/db.config.js";
-import { generateUniqueUsername } from "../../shared/services/username.service.js";
+import { db } from "#config/db.config.js";
+import { generateUniqueUsername } from "#shared/services/username.service.js";
 import {
   generateTokenHash,
   generateTokens,
-} from "../../shared/utils/token.utils.js";
+} from "#shared/utils/token.utils.js";
 import * as referralService from "./referral.service.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 
 export const googleAuth = async ({
   email,

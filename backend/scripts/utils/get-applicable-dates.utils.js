@@ -2,7 +2,7 @@ import {
   getNextBusinessDate,
   getPrevBusinessDate,
   isBusinessDay,
-} from "../../src/shared/utils/holidays.utils.js";
+} from "#shared/utils/holidays.utils.js";
 
 /**
  * @param {Date} date - Transaction date.

@@ -1,6 +1,6 @@
-import { asyncHandler } from "../../shared/utils/async-handler.utils.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
+import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as watchlistService from "../services/watchlist.service.js";
-import { ApiError } from "../../shared/utils/api-error.utils.js";
 
 export const addToWatchlist = asyncHandler(async (req, res) => {
   const { userId } = req.user;

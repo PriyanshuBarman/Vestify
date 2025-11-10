@@ -6,7 +6,7 @@ import {
   processRedemptionOrder,
 } from "../processors/order-processor.js";
 import { printSummary } from "../utils/print-summary.utils.js";
-import { db } from "../../config/db.config.js";
+import { db } from "#config/db.config.js";
 
 async function processOrders() {
   navCache.clear();

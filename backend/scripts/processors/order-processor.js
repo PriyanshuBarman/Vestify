@@ -1,9 +1,9 @@
-import { db } from "../../config/db.config.js";
-import { fifoRedemption } from "../../src/mutual-fund/services/fifo.service.js";
+import { db } from "#config/db.config.js";
+import { fifoRedemption } from "#src/mutual-fund/services/fifo.service.js";
 import {
   calcPortfolioAfterInvestment,
   calcPortfolioAfterRedemption,
-} from "../../src/mutual-fund/utils/calculate-updated-portfolio.utils.js";
+} from "#src/mutual-fund/utils/calculate-updated-portfolio.utils.js";
 import { fetchNavByDate } from "../external/fetch-nav-by-date.js";
 
 export const processInvestmentOrder = async (orderData) => {

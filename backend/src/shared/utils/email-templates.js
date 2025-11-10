@@ -1,4 +1,4 @@
-import { FRONTEND_URL } from "../../../config/env.config.js";
+import { FRONTEND_URL } from "#config/env.config.js";
 
 export const passwordResetTemplate = (name, token) =>
   `<!DOCTYPE html>
