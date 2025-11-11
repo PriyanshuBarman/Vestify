@@ -9,7 +9,10 @@ import { ChevronRightIcon, ChevronsLeftRightIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import { useGetFilteredFunds } from "../../hooks/useGetFilteredFunds";
-import { columnsConfig, getNextColumn } from "../../utils/similarFundsTable";
+import {
+  columnsConfig,
+  getNextColumn,
+} from "../../utils/similarFundsTableUtils";
 import FilterBtns from "../filters/FilterBtns";
 import SectionHeading from "../SectionHeading";
 import TableSM from "../tables/TableSM";

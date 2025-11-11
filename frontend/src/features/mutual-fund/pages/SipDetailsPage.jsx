@@ -13,7 +13,7 @@ import {
   CalendarRangeIcon,
   ChevronRightIcon,
   CopyIcon,
-  PencilIcon
+  PencilIcon,
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
@@ -88,7 +88,6 @@ function SipDetailsPage() {
                 <h6 className="flex items-center gap-2 text-sm font-medium">
                   {format(setDate(new Date(), installments.length + 1), "do")}{" "}
                   installment
-                  <ChevronRightIcon className="size-4" />
                 </h6>
                 <span className="text-muted-foreground text-xs">
                   {sipDetail.nextInstallmentDate &&

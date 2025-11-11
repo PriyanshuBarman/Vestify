@@ -4,6 +4,7 @@ import { useGetUser } from "@/hooks/useGetUser";
 import { selectTheme, setTheme } from "@/store/slices/themeSlice";
 import {
   ChevronRightIcon,
+  DatabaseZapIcon,
   KeyRoundIcon,
   LockIcon,
   LogOutIcon,
@@ -11,7 +12,7 @@ import {
   MonitorSmartphone,
   MoonIcon,
   SunIcon,
-  Trash2Icon,
+  User2Icon,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
@@ -102,22 +103,34 @@ function SettingsPage() {
           to="/settings/delete-account"
           className="grid grid-cols-[auto_1fr] items-center"
         >
-          <Trash2Icon className="text-muted-foreground size-5" />
+          <User2Icon className="text-muted-foreground size-5" />
           <div className="flex items-center justify-between border-b p-4 font-medium">
             Delete account
             <ChevronRightIcon className="text-muted-foreground stroke-[1.5px]" />
           </div>
         </Link>
+        {/* <Link
+          to="/settings/delete-account"
+          className="grid grid-cols-[auto_1fr] items-center"
+        >
+          <DatabaseZapIcon className="text-muted-foreground size-5" />
+          <div className="flex items-center justify-between border-b p-4 font-medium">
+            Clear cache
+            <ChevronRightIcon className="text-muted-foreground stroke-[1.5px]" />
+          </div>
+        </Link> */}
       </section>
 
       <Button
-        onClick={() => navigate("/auth/logout")}
+        asChild
         size="lg"
         variant="outline"
-        className="mx-auto mt-auto mb-4 w-[95%] sm:mt-4"
+        className="mx-auto mt-auto mb-4 w-[90%] sm:mt-4"
       >
-        Logout
-        <LogOutIcon />
+        <Link to="/auth/logout">
+          Logout
+          <LogOutIcon />
+        </Link>
       </Button>
     </div>
   );

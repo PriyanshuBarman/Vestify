@@ -15,7 +15,7 @@ import {
   getNewOrder,
   getNextColumn,
   sortPeersBy,
-} from "../utils/collectionsHelper";
+} from "../utils/collectionsUtils";
 
 function CollectionPage() {
   const isMobile = useIsMobile();

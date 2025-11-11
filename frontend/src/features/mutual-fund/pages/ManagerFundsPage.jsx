@@ -14,7 +14,7 @@ import {
   getNewOrder,
   getNextColumn,
   sortPeersBy,
-} from "../utils/collectionsHelper";
+} from "../utils/collectionsUtils";
 
 function ManagerFundsPage() {
   const isMobile = useIsMobile();

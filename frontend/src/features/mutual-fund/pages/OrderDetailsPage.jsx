@@ -9,12 +9,13 @@ import { Badge } from "@/components/ui/badge";
 import { formatToINR } from "@/utils/formatters";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, CopyIcon } from "lucide-react";
 import { Link, useLocation, useParams } from "react-router";
 import OrderStatusIcon from "../components/OrderStatusIcon";
 import OrderStatusTimeline from "../components/OrderStatusTimeline";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
 import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
+import { Button } from "@/components/ui/button";
 
 function OrderDetailsPage() {
   const { orderId } = useParams();
@@ -97,9 +98,16 @@ function OrderDetailsPage() {
                   Vestify Wallet (Virtual Money)
                 </span>
               </div>
-              <div className="space-x-10">
-                <span>Order ID:</span>
-                <span className="font-medium">{order.id}</span>
+              <div className="flex space-x-10">
+                <span className="shrink-0">Order Id:</span>
+                <p className="font-medium">{order.id}</p>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  onClick={() => navigator.clipboard.writeText(order.id)}
+                >
+                  <CopyIcon />
+                </Button>
               </div>
             </AccordionContent>
           </AccordionItem>

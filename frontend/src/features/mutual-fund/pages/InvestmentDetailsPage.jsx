@@ -36,7 +36,7 @@ function InvestmentDetailsPage() {
             />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle className="text-md">{fund.fundShortName} Fund</ItemTitle>
+            <ItemTitle>{fund.fundShortName}</ItemTitle>
             <ItemDescription>
               Invested for {formatDistanceToNow(new Date(fund.createdAt))}
             </ItemDescription>

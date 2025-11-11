@@ -10,7 +10,7 @@ import {
 } from "@/store/slices/mutualFundSlice";
 import { XIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { columnsConfig } from "../../utils/collectionsHelper";
+import { columnsConfig } from "../../utils/collectionsUtils";
 import { getActiveFilterCount } from "../../utils/filterUtils";
 import SortByBtn from "./SortByButton";
 import ActiveFilterButtons from "./ActiveFilterButtons";

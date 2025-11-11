@@ -1,35 +1,28 @@
 import { useIsMobile } from "@/hooks/useIsMobile";
 import {
-  ChartNoAxesCombined,
-  HandCoins,
-  PieChartIcon,
-  Wallet2Icon,
-} from "lucide-react";
+  ChartPieSliceIcon,
+  ChartBarHorizontalIcon,
+  WalletIcon,
+} from "@phosphor-icons/react";
 import { NavLink, useLocation } from "react-router";
 
 const tabsMapping = [
   {
     id: 1,
     name: "Mutual Funds",
-    icon: PieChartIcon,
+    icon: ChartPieSliceIcon,
     link: "/mutual-funds#explore",
   },
   {
     id: 2,
     name: "Stocks",
-    icon: ChartNoAxesCombined,
+    icon: ChartBarHorizontalIcon,
     link: "/stocks",
   },
-  // {
-  //   id: 3,
-  //   name: "Gold",
-  //   icon: HandCoins,
-  //   link: "/gold",
-  // },
   {
-    id: 4,
+    id: 3,
     name: "Wallet",
-    icon: Wallet2Icon,
+    icon: WalletIcon,
     link: "/wallet",
   },
 ];
@@ -60,7 +53,8 @@ function BottomNavbar() {
           }
         >
           <tab.icon
-            className={`size-5 ${tab.link.includes(currentPath) && "stroke-[2.5]"}`}
+            weight={tab.link.includes(currentPath) ? "fill" : "regular"}
+            className="size-6"
           />
           {tab.name}
         </NavLink>

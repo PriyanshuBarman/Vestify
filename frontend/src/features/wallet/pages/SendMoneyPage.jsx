@@ -1,13 +1,20 @@
 import GoBackBar from "@/components/GoBackBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
 import { Spinner } from "@/components/ui/spinner";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useSearchProfile } from "@/hooks/useSearchProfile";
 import { SearchIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router";
-
+import { Link, useNavigate } from "react-router";
 
 function SendMoneyPage() {
   const navigate = useNavigate();
@@ -53,37 +60,38 @@ function SendMoneyPage() {
 
       <div className="mx-4 mt-6">
         {searchResult?.length > 0 ? (
-          <ul className="space-y-2">
+          <ItemGroup>
             {searchResult.map((profile) => (
-              <li
+              <Item
                 key={profile.userId}
-                onClick={() =>
-                  navigate("/wallet/enter-amount", {
-                    state: {
-                      receiverId: profile.userId,
-                      receiverName: profile.name,
-                      receiverUsername: profile.username,
-                      receiverAvatar: profile.avatar,
-                    },
-                  })
-                }
-                className="flex cursor-pointer gap-4 p-3"
+                asChild
+                className="hover:bg-accent/50 cursor-pointer transition-colors duration-100"
               >
-                <Avatar className="size-12">
-                  <AvatarImage src={profile.avatar} />
-                  <AvatarFallback className="uppercase">
-                    {profile?.name.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <h3 className="font-medium capitalize">{profile.name}</h3>
-                  <p className="text-muted-foreground text-md">
-                    @{profile.username}
-                  </p>
-                </div>
-              </li>
+                <Link
+                  to="/wallet/enter-amount"
+                  state={{
+                    receiverId: profile.userId,
+                    receiverName: profile.name,
+                    receiverUsername: profile.username,
+                    receiverAvatar: profile.avatar,
+                  }}
+                >
+                  <ItemMedia variant="image">
+                    <Avatar className="size-10">
+                      <AvatarImage src={profile.avatar} />
+                      <AvatarFallback className="uppercase">
+                        {profile?.name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </ItemMedia>
+                  <ItemContent className="gap-0">
+                    <ItemTitle className="capitalize">{profile.name}</ItemTitle>
+                    <ItemDescription>@{profile.username}</ItemDescription>
+                  </ItemContent>
+                </Link>
+              </Item>
             ))}
-          </ul>
+          </ItemGroup>
         ) : (
           query && (
             <div className="text-muted-foreground text-center">

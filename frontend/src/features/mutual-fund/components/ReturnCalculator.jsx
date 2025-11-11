@@ -16,7 +16,7 @@ import { useGetChart } from "../hooks/useGetChart";
 import {
   calculateAbsoluteReturn,
   calculateSIPReturns,
-} from "../utils/returnCalculatorHelper";
+} from "../utils/returnCalculatorUtils";
 import SIPCalculationInfo from "./overlays/info/SIPCalculationInfo";
 import { getChangeColor } from "@/utils/helper";
 

@@ -8,6 +8,7 @@ import { mutualFundRoutes } from "./features/mutual-fund/routes";
 import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
+import SearchPage from "./features/search/pages/Page";
 
 const DeleteAccountPage = lazy(() => import("./pages/DeleteAccountPage"));
 const NotFoundPage = lazy(
@@ -15,7 +16,6 @@ const NotFoundPage = lazy(
 );
 const ReferAndEarnPage = lazy(() => import("./pages/ReferAndEarnPage"));
 const ActiveDevicesPage = lazy(() => import("./pages/ActiveDevicesPage"));
-const SearchPage = lazy(() => import("./features/search/pages/Page"));
 const AllOrdersPage = lazy(
   () => import("./features/mutual-fund/pages/AllOrdersPage"),
 );
@@ -49,11 +49,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/search",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <SearchPage />
-          </Suspense>
-        ),
+        element: <SearchPage />,
       },
       {
         path: "/payment-success",

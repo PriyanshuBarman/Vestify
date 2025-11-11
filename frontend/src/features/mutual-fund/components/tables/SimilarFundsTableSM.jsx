@@ -13,7 +13,7 @@ import {
   columnsConfig,
   getNextColumn,
   sortPeersBy,
-} from "../../utils/similarFundsTable";
+} from "../../utils/similarFundsTableUtils";
 import { formatToINR } from "@/utils/formatters";
 
 function SimilarFundsTableSM({ fund }) {

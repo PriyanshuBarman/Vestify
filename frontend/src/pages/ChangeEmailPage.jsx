@@ -37,6 +37,7 @@ function ChangeEmailPage() {
             Enter your new email
           </FieldLabel>
           <Input
+            autoFocus
             placeholder={user?.email}
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
@@ -56,7 +57,6 @@ function ChangeEmailPage() {
           </FieldLabel>
 
           <Input
-            autoFocus
             aria-invalid={isInvalidPassword}
             value={password}
             onChange={(e) => {
@@ -80,7 +80,7 @@ function ChangeEmailPage() {
         className="mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleSave}
       >
-        {isPending && <Spinner />} Save Changes
+        {isPending && <Spinner />} Send OTP
       </Button>
     </div>
   );

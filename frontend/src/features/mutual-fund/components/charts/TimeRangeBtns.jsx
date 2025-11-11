@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
-import { isValidRange } from "../../utils/chartHelper";
+import { isValidRange } from "../../utils/chartUtils";
 
 function TimeRangeBtns({ setSelectedRange, selectedRange, fullChartData }) {
   return (

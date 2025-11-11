@@ -2,7 +2,7 @@ import ScrollToTop from "@/components/layouts/ScrollToTop";
 import LoadingState from "@/components/LoadingState";
 import { lazy, useEffect, useState } from "react";
 import { useGetPortfolio } from "../../hooks/useGetPortfolio";
-import { sortPortfolio } from "../../utils/investmentTabHelper";
+import { sortPortfolio } from "../../utils/investmentTabUtils";
 import PortfolioModal from "../overlays/PortfolioModal";
 import PendingOrders from "../PendingOrders";
 import PortfolioSummary from "../PortfolioSummary";

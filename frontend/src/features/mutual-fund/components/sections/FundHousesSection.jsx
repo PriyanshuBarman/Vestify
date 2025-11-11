@@ -17,9 +17,9 @@ function FundHousesSection() {
       />
 
       <div className="scrollbar-none grid auto-cols-[49%] grid-flow-col grid-rows-2 gap-3 px-4 max-sm:overflow-auto sm:m-0.5 sm:auto-cols-fr sm:gap-x-4 sm:px-0">
-        {amcs?.slice(0, isMobile ? 8 : 6).map((amc) => (
+        {amcs?.slice(0, isMobile ? 8 : 6).map((amc, index) => (
           <Link
-            key={amc.amc_code}
+            key={index}
             to={`/mutual-funds/amc-funds/${amc.amc_code}`}
             className="bg-card cursor-pointer space-y-2 rounded-2xl border p-3 duration-200 hover:scale-101 sm:m-0.5 sm:space-y-4 sm:p-4"
           >

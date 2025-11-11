@@ -16,7 +16,7 @@ import {
   getNewOrder,
   getNextColumn,
   sortPeersBy,
-} from "../utils/collectionsHelper";
+} from "../utils/collectionsUtils";
 import { formatToINR } from "@/utils/formatters";
 
 function AmcFundsPage() {

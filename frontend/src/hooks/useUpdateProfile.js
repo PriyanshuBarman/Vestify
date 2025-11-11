@@ -10,13 +10,8 @@ export function useUpdateProfile() {
     mutationFn: updateProfile,
 
     onMutate: async (variables) => {
-      // Cancel any outgoing refetches
       await queryClient.cancelQueries({ queryKey: ["user"] });
-
-      // Snapshot the previous value
       const previousValue = queryClient.getQueryData(["user"]);
-
-      // Optimistically update the user data
       queryClient.setQueryData(["user"], (user) => {
         return {
           ...user,
@@ -31,7 +26,6 @@ export function useUpdateProfile() {
     },
 
     onError: (error, variables, context) => {
-      console.log(error);
       // Revert the optimistic update on error
       if (context?.previousValue) {
         queryClient.setQueryData(["user"], context.previousValue);

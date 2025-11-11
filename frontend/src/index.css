@@ -20,14 +20,6 @@ body {
   display: none; /* For Chrome, Safari, and Opera */
 }
 
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  /* max-width: 1216px; */
-  max-width: 1250px;
-}
-
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

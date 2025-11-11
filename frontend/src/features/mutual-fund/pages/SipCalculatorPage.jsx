@@ -5,7 +5,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useMemo, useState } from "react";
 import FutureValuePieChart from "../components/charts/FutureValuePieChart";
 import { formatToINR } from "@/utils/formatters";
-import { calcFutureValues } from "../utils/returnCalculatorHelper";
+import { calcFutureValues } from "../utils/returnCalculatorUtils";
 
 function SipCalculatorPage() {
   const [type, setType] = useState("sip");

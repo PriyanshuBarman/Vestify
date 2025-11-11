@@ -30,7 +30,7 @@ function FundPortfolioSummary({ fund, className }) {
 
       <Separator className="mx-auto data-[orientation=horizontal]:w-[90%]" />
 
-      <CardContent className="text-md space-y-4">
+      <CardContent className="space-y-4 text-sm">
         <div className="flex items-center justify-between">
           <span>Total returns</span>
           <span className={`font-medium ${getChangeColor(fund.pnl)}`}>
@@ -39,7 +39,9 @@ function FundPortfolioSummary({ fund, className }) {
         </div>
         <div className="flex items-center justify-between">
           <span>1D returns</span>
-          <span className={`font-medium ${getChangeColor(fund.dayChangeValue)}`}>
+          <span
+            className={`font-medium ${getChangeColor(fund.dayChangeValue)}`}
+          >
             {formatToINR(fund.dayChangeValue, 2)}(
             {fund.dayChangePercent?.toFixed(2)}%)
           </span>

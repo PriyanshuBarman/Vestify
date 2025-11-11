@@ -18,11 +18,11 @@ function PopularFundsSection() {
       />
       <ScrollArea>
         <div className="flex justify-between gap-4 px-4 sm:m-0.5 sm:gap-3 sm:px-0">
-          {funds?.map((fund) =>
+          {funds.map((fund, index) =>
             isMobile ? (
-              <CardSM key={fund.id} fund={fund} />
+              <CardSM key={index} fund={fund} />
             ) : (
-              <CardLG key={fund.id} fund={fund} />
+              <CardLG key={index} fund={fund} />
             ),
           )}
         </div>

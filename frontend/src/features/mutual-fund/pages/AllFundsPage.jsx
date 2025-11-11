@@ -20,7 +20,7 @@ import {
   columnsConfig,
   getNewOrder,
   getNextColumn,
-} from "../utils/collectionsHelper";
+} from "../utils/collectionsUtils";
 
 function AllFundsPage() {
   const isMobile = useIsMobile();

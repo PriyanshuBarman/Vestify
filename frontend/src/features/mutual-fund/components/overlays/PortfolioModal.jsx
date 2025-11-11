@@ -21,7 +21,7 @@ function PortfolioModal({ fund, isOpen, onOpenChange }) {
     <ResponsiveModal open={isOpen} onOpenChange={onOpenChange}>
       <ResponsiveModalContent>
         <ResponsiveModalHeader className="flex-row justify-between border-b pb-6 sm:p-4">
-          <ResponsiveModalTitle className="text-md max-w-3/4 font-normal sm:text-lg">
+          <ResponsiveModalTitle className="max-w-3/4 text-sm font-normal sm:text-lg">
             <Link
               to={`/mutual-funds/${fund.schemeCode}`}
               className="flex items-center gap-2"

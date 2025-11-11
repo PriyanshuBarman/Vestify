@@ -9,13 +9,13 @@ function Layout() {
   useSSEConnection();
 
   return (
-    <>
+    <div className="mx-auto max-w-7xl">
       <Navbar />
       <Outlet />
       <ScrollToTop />
       <BottomNavbar />
       <DailyRewardModal />
-    </>
+    </div>
   );
 }
 

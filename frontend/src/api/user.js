@@ -21,7 +21,7 @@ export const claimDailyReward = async () => {
 
 // ---------------- Profile ----------------
 export const updateProfile = async ({ name, username }) => {
-  const { data } = await api.patch(`/users/profiles`, {
+  const { data } = await api.patch(`/users`, {
     name,
     username,
   });
@@ -30,7 +30,7 @@ export const updateProfile = async ({ name, username }) => {
 };
 
 export const updateAvatar = async (formData) => {
-  const { data } = await api.patch(`/users/profiles/avatar`, formData, {
+  const { data } = await api.patch(`/users/avatar`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -40,6 +40,6 @@ export const updateAvatar = async (formData) => {
 };
 
 export const removeAvatar = async () => {
-  const { data } = await api.delete(`/users/profiles/avatar`);
+  const { data } = await api.delete(`/users/avatar`);
   return data;
 };

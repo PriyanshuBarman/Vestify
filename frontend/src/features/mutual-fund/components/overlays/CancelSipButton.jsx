@@ -12,6 +12,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { MessageCircleXIcon } from "lucide-react";
 import { useState } from "react";
 import { useDeleteSip } from "../../hooks/useDeleteSip";
+import IconWrapper from "@/components/IconWrapper";
 
 function CancelSipButton({ sipId }) {
   const { mutate: cancelSip, isPending } = useDeleteSip();
@@ -26,18 +27,20 @@ function CancelSipButton({ sipId }) {
     <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
       <ResponsiveModalTrigger asChild>
         <Button variant="ghost" disabled={isPending}>
-          <span className="border-muted-foreground border-b border-dashed">
-            Cancel SIP
+          <span className="border-muted-foreground flex items-center gap-2 border-b border-dashed">
+            {isPending && <Spinner className="text-primary" />} Cancel SIP
           </span>
         </Button>
       </ResponsiveModalTrigger>
 
-      <ResponsiveModalContent className="gap-4">
+      <ResponsiveModalContent>
         <ResponsiveModalHeader className="items-center">
-          <MessageCircleXIcon className="text-primary size-12" />
+          <IconWrapper>
+            <MessageCircleXIcon className="sm:size-8" />
+          </IconWrapper>
         </ResponsiveModalHeader>
 
-        <ResponsiveModalTitle className="text-center text-lg font-medium">
+        <ResponsiveModalTitle className="text-center">
           Future installments will be stopped
         </ResponsiveModalTitle>
 

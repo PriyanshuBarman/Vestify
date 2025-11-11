@@ -13,7 +13,7 @@ import {
   columnsConfig,
   getNewOrder,
   sortPeersBy,
-} from "../../utils/similarFundsTable";
+} from "../../utils/similarFundsTableUtils";
 
 const DEFAULT_COLUMNS = [
   "return_1y",
