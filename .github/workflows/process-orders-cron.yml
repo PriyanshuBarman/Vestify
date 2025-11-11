@@ -8,7 +8,7 @@ on:
 
 defaults:
   run:
-    working-directory: Backend
+    working-directory: backend
 
 jobs:
   order-processor-cron:
