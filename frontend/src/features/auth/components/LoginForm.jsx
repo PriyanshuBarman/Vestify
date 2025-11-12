@@ -64,7 +64,6 @@ function LoginForm() {
               variant="outline"
               className="w-full rounded-full py-5.5 shadow-none sm:shadow-xs"
             >
-              {(isPending || isLoading) && <Spinner className="size-5" />}
               <GoogleIcon />
               Login with Google
             </Button>
@@ -118,7 +117,7 @@ function LoginForm() {
               size="lg"
               disabled={isPending || isLoading}
               type="submit"
-              className="from-primary to-primary/70 rounded-full bg-gradient-to-r py-5.5"
+              className="rounded-full bg-gradient-to-r from-[#00b35c] to-[#00b35c91] py-5.5"
             >
               {(isPending || isLoading) && <Spinner />} Login
             </Button>

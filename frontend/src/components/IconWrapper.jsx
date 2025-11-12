@@ -11,7 +11,7 @@ function IconWrapper({ children, color = "default", className }) {
     <div className="glass rounded-2xl border-r border-b p-2 shadow-lg">
       <div
         className={cn(
-          "text-background w-fit rounded-lg p-2 outline-2 drop-shadow-md outline-solid",
+          "text-background w-fit rounded-lg p-2 outline-2 drop-shadow-md",
           colorMap[color],
           className,
         )}

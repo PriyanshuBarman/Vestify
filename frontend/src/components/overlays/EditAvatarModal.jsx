@@ -2,16 +2,11 @@ import {
   ResponsiveModal,
   ResponsiveModalContent,
   ResponsiveModalHeader,
-  ResponsiveModalTitle
+  ResponsiveModalTitle,
 } from "@/components/ui/responsive-modal";
 import { useRemoveAvatar } from "@/hooks/useRemoveAvatar.js.js";
-import {
-  ChevronRightIcon,
-  ImageUpIcon,
-  Trash2Icon
-} from "lucide-react";
+import { ChevronRightIcon, ImageUpIcon, Trash2Icon } from "lucide-react";
 import { useRef } from "react";
-import IconWrapper from "../IconWrapper";
 import {
   Item,
   ItemActions,
@@ -60,10 +55,9 @@ function EditAvatarModal({ isOpen, onOpenChange, uploadAvatar }) {
               accept=".png, .jpeg, .jpg"
               className="hidden"
             />
+
             <ItemMedia variant="icon">
-              <IconWrapper>
-                <ImageUpIcon className="size-3" />
-              </IconWrapper>
+              <ImageUpIcon />
             </ItemMedia>
             <ItemContent>
               <ItemTitle>
@@ -79,10 +73,8 @@ function EditAvatarModal({ isOpen, onOpenChange, uploadAvatar }) {
           <ItemSeparator />
 
           <Item size="sm" onClick={handleRemoveAvatarClick}>
-            <ItemMedia>
-              <IconWrapper>
-                <Trash2Icon className="size-3" />
-              </IconWrapper>
+            <ItemMedia variant="icon">
+              <Trash2Icon />
             </ItemMedia>
             <ItemContent>
               <ItemTitle>Remove</ItemTitle>

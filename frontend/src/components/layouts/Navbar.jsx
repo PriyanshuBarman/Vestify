@@ -1,15 +1,13 @@
 import Logo from "@/components/Logo";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/mode-togle";
-import { useGetUser } from "@/hooks/useGetUser";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { BellIcon, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { lazy } from "react";
 import MediaQuery from "react-responsive";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import ProfileAvatar from "../ProfileAvatar";
-const ProfileSheet = lazy(() => import("@/components/ProfileSheet"));
+import ProfileSheet from "../ProfileSheet";
 const DesktopSearch = lazy(
   () => import("../../features/search/components/DesktopSearch"),
 );
@@ -26,7 +24,6 @@ function Navbar() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const location = useLocation();
-  const { data: user } = useGetUser();
 
   if (!allowedRoutes.has(location.pathname) && isMobile) return;
 
@@ -52,9 +49,6 @@ function Navbar() {
         >
           <SearchIcon className="size-5.5" />
         </Button>
-        {/* <Button aria-label="cart" variant="ghost" size="icon">
-          <BellIcon className="size-5.5" />
-        </Button> */}
 
         {!isMobile && <ModeToggle />}
 
