@@ -1,13 +1,17 @@
 import { OAuth2Client } from "google-auth-library";
-import { CLIENT_ID, CLIENT_SECRET } from "#config/env.config.js";
+import config from "#config/env.config.js";
+import * as gAuthService from "../services/google-auth.service.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import {
   ACCESS_COOKIE_OPTIONS,
   REFRESH_COOKIE_OPTIONS,
 } from "../constants/auth.constants.js";
-import * as gAuthService from "../services/google-auth.service.js";
 
-const client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, "postmessage");
+const client = new OAuth2Client(
+  config.CLIENT_ID,
+  config.CLIENT_SECRET,
+  "postmessage"
+);
 
 export const googleAuth = asyncHandler(async (req, res) => {
   const { code, referralCode } = req.body;
@@ -18,7 +22,7 @@ export const googleAuth = asyncHandler(async (req, res) => {
 
   const ticket = await client.verifyIdToken({
     idToken: tokens.id_token,
-    audience: CLIENT_ID,
+    audience: config.CLIENT_ID,
   });
 
   const { email, name, picture } = ticket.getPayload();

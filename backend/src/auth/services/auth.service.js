@@ -1,8 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "#config/db.config.js";
-import { JWT_SECRET, OWNER_EMAIL } from "#config/env.config.js";
+import db from "#config/db.config.js";
+import config from "#config/env.config.js";
+import * as referralService from "./referral.service.js";
 import { sendEmail } from "#shared/services/email.service.js";
 import { generateUniqueUsername } from "#shared/services/username.service.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
@@ -11,7 +12,6 @@ import {
   generateTokenHash,
   generateTokens,
 } from "#shared/utils/token.utils.js";
-import * as referralService from "./referral.service.js";
 
 export const signupUser = async ({
   name,
@@ -24,15 +24,7 @@ export const signupUser = async ({
   const existingUser = await db.user.findUnique({ where: { email } });
   if (existingUser) throw new ApiError(400, "User Already Exists");
 
-  // Check if referralCode is valid or not
-  let referrer;
-  if (referralCode) {
-    referrer = await db.profile.findUnique({
-      where: { username: referralCode },
-    });
-
-    if (!referrer) throw new ApiError(400, "Invalid referral code");
-  }
+  const referrer = await referralService.validateReferral(ip, referralCode);
 
   const hashPassword = await bcrypt.hash(password, 10);
   const username = await generateUniqueUsername(name);
@@ -92,6 +84,12 @@ export const loginUser = async ({ email, password, userAgent, ip }) => {
   });
 
   if (!user) throw new ApiError(400, "Email or password is invalid");
+  if (user.authProvider === "GOOGLE") {
+    throw new ApiError(
+      400,
+      "This account was created with Google. Please use Google Login."
+    );
+  }
 
   const match = await bcrypt.compare(password, user.password);
 
@@ -116,7 +114,7 @@ export const loginUser = async ({ email, password, userAgent, ip }) => {
 };
 
 export const logoutUser = async (refreshToken) => {
-  const decoded = jwt.verify(refreshToken, JWT_SECRET);
+  const decoded = jwt.verify(refreshToken, config.REFRESH_TOKEN_SECRET);
   await db.session.deleteMany({
     where: {
       id: decoded.sessionId,
@@ -126,7 +124,7 @@ export const logoutUser = async (refreshToken) => {
 
 export const refreshToken = async (token, userAgent, ip) => {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, config.REFRESH_TOKEN_SECRET);
     const session = await db.session.findUnique({
       where: {
         id: decoded.sessionId,
@@ -149,7 +147,7 @@ export const refreshToken = async (token, userAgent, ip) => {
 
       // Notify owner
       await sendEmail({
-        to: OWNER_EMAIL,
+        to: config.OWNER_EMAIL,
         subject: "REUSE DETECTED",
         html: refreshTokenReuseTemplate(session, decoded, userAgent, ip),
       });

@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 
 export const generateUniqueUsername = async (name) => {
   const base = name.toLowerCase().replace(/\s+/g, "");

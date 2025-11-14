@@ -1,3 +1,4 @@
+import db from "#config/db.config.js";
 import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
 import { navCache } from "../external/fetch-nav-by-date.js";
@@ -6,7 +7,6 @@ import {
   processRedemptionOrder,
 } from "../processors/order-processor.js";
 import { printSummary } from "../utils/print-summary.utils.js";
-import { db } from "#config/db.config.js";
 
 async function processOrders() {
   navCache.clear();

@@ -1,6 +1,42 @@
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
+
+export const validateReferral = async (ip, referralCode) => {
+  if (!referralCode) return null;
+
+  const referrer = await db.profile.findUnique({
+    where: { username: referralCode },
+    select: {
+      userId: true,
+      user: {
+        select: {
+          sessions: {
+            orderBy: { updatedAt: "desc" },
+            select: {
+              ip: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!referrer) {
+    throw new ApiError(400, "Invalid referral code");
+  }
+
+  const hasSameSession = referrer.user.sessions.some((s) => s.ip === ip);
+
+  if (hasSameSession) {
+    throw new ApiError(
+      400,
+      "Referral not allowed from the same device or network"
+    );
+  }
+
+  return referrer;
+};
 
 export const applyReferralBonus = async (referrerId, userId) => {
   const REFERRER_BONUS = 10000;

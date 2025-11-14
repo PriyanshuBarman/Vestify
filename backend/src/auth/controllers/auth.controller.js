@@ -1,7 +1,7 @@
-import { NODE_ENV } from "#config/env.config.js";
+import config from "#config/env.config.js";
+import * as authService from "../services/auth.service.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
-import * as authService from "../services/auth.service.js";
 import {
   ACCESS_COOKIE_OPTIONS,
   REFRESH_COOKIE_OPTIONS,
@@ -59,8 +59,8 @@ export const logout = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    secure: NODE_ENV === "production",
-    sameSite: NODE_ENV === "production" ? "none" : "strict",
+    secure: config.NODE_ENV === "production",
+    sameSite: config.NODE_ENV === "production" ? "none" : "strict",
   };
 
   return res
@@ -75,7 +75,7 @@ export const refreshToken = asyncHandler(async (req, res) => {
   const userAgent = req.headers["user-agent"];
   const ip = req.clientIp;
 
-  if (!refreshToken) throw new ApiError(403, "Refresh token is required");
+  if (!refreshToken) throw new ApiError(400, "Refresh token is required");
 
   const newTokens = await authService.refreshToken(refreshToken, userAgent, ip);
 

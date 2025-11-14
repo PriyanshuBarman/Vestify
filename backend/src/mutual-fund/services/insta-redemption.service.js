@@ -1,7 +1,7 @@
 import { TZDate } from "@date-fns/tz";
 import { parse } from "date-fns";
-import { db } from "#config/db.config.js";
-import { MF_API_BASE_URL } from "#config/env.config.js";
+import db from "#config/db.config.js";
+import config from "#config/env.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { calcPortfolioAfterRedemption } from "../utils/calculate-updated-portfolio.utils.js";
 import { fifoRedemption } from "./fifo.service.js";
@@ -70,7 +70,9 @@ export const instantRedemption = async (fund, amount) => {
 
 export const fetchLatestNAVData = async (schemeCode) => {
   try {
-    const { data } = await axios.get(`${MF_API_BASE_URL}/${schemeCode}/latest`);
+    const { data } = await axios.get(
+      `${config.MF_API_BASE_URL}/${schemeCode}/latest`
+    );
 
     const latestEntry = data.data[0];
     const latestNav = parseFloat(latestEntry?.nav);

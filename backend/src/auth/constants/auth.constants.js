@@ -1,6 +1,6 @@
-import { NODE_ENV } from "#config/env.config.js";
+import config from "#config/env.config.js";
 
-const isProd = NODE_ENV === "production";
+const isProd = config.NODE_ENV === "production";
 
 export const REFRESH_COOKIE_OPTIONS = {
   httpOnly: true,

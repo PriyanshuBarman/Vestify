@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 import requestIp from "request-ip";
 import cookieParser from "cookie-parser";
-import { FRONTEND_URL } from "./config/env.config.js";
+import config from "./config/env.config.js";
 import { authRoutes } from "./src/auth/routes/auth.routes.js";
 import { walletRoutes } from "./src/wallet/routes/wallet.routes.js";
 import { eventRoutes } from "./src/shared/events/events.route.js";
@@ -11,10 +11,12 @@ import { mutualFundRoutes } from "./src/mutual-fund/routes/index.routes.js";
 import { errorHandler } from "./src/shared/middlewares/error.middleware.js";
 import { notFoundHandler } from "./src/shared/middlewares/not-found.middleware.js";
 import userRoutes from "./src/user/routes/index.routes.js";
+import { globalLimiter } from "#shared/middlewares/rate-limiter.middleware.js";
 
 const app = express();
 
-app.use(cors({ origin: FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: config.FRONTEND_URL, credentials: true }));
+app.use(globalLimiter);
 app.use(requestIp.mw());
 
 app.use(cookieParser());

@@ -1,4 +1,4 @@
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { getPrevBusinessDate } from "../../src/shared/utils/holidays.utils.js";
 import { fetchLatestNAVData } from "../external/fetch-latest-nav-data.js";
 import { parseDDMMYYYY } from "../utils/parse-date.utils.js";

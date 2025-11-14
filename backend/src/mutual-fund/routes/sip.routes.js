@@ -3,6 +3,7 @@ import { verifyPin } from "#shared/middlewares/verify-pin.middleware.js";
 import { Router } from "express";
 import * as sipController from "../controllers/sip.controller.js";
 import { validateSip } from "../validators/sip.validator.js";
+import { validatePinLimiter } from "#shared/middlewares/rate-limiter.middleware.js";
 
 export const sipRoutes = Router();
 
@@ -10,6 +11,7 @@ sipRoutes.post(
   "/",
   authenticate,
   validateSip,
+  validatePinLimiter,
   verifyPin,
   sipController.createSip
 );

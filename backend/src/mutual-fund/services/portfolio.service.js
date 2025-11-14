@@ -1,4 +1,4 @@
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { normalizePortfolio } from "../utils/normalize-portfolio.utils.js";
 

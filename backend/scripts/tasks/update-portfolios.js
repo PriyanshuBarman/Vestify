@@ -1,9 +1,9 @@
+import db from "#config/db.config.js";
 import { tz } from "@date-fns/tz";
 import { startOfToday } from "date-fns";
 import { navCache } from "../external/fetch-latest-nav-data.js";
 import { updateFundPortfolio } from "../processors/portfolio-updater.js";
 import { printSummary } from "../utils/print-summary.utils.js";
-import { db } from "#config/db.config.js";
 
 export async function portfolioUpdater() {
   navCache.clear();

@@ -1,5 +1,5 @@
 import { formatDate } from "date-fns";
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { sendEmail } from "#shared/services/email.service.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { passwordResetTemplate } from "#shared/utils/email-templates.js";

@@ -1,4 +1,4 @@
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 
 export const applySipChanges = async (data) => {
   const { id, sipId, amount, dateOfMonth, nextInstallmentDate } = data;

@@ -6,6 +6,7 @@ import {
   validateInvestmentOrder,
   validateRedemptionOrder,
 } from "../validators/order.validator.js";
+import { validatePinLimiter } from "#shared/middlewares/rate-limiter.middleware.js";
 
 export const orderRoutes = Router();
 
@@ -13,6 +14,7 @@ orderRoutes.post(
   "/invest",
   authenticate,
   validateInvestmentOrder,
+  validatePinLimiter,
   verifyPin,
   orderController.placeInvestmentOrder
 );

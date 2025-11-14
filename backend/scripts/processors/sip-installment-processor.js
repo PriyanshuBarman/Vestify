@@ -1,5 +1,5 @@
+import db from "#config/db.config.js";
 import { addMonths } from "date-fns";
-import { db } from "#config/db.config.js";
 import { getApplicableDates } from "../utils/get-applicable-dates.utils.js";
 
 export const placeSipInstallmentOrder = async (data) => {

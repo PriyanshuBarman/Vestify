@@ -1,7 +1,7 @@
 import { Resend } from "resend";
-import { RESEND_API_KEY } from "#config/env.config.js";
+import config from "#config/env.config.js";
 
-const resend = new Resend(RESEND_API_KEY);
+const resend = new Resend(config.RESEND_API_KEY);
 
 export const sendEmail = async ({ to, subject, html }) => {
   try {

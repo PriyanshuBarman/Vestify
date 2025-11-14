@@ -1,4 +1,4 @@
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { applySipChanges } from "../processors/sip-change-processor.js";
 import { printSummary } from "../utils/print-summary.utils.js";
 

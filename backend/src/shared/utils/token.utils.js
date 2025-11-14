@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { JWT_SECRET } from "#config/env.config.js";
+import config from "#config/env.config.js";
 
 export const generateTokens = (userId, sessionId) => {
-  const refreshToken = jwt.sign({ sessionId }, JWT_SECRET, {
-    expiresIn: "30d",
+  const refreshToken = jwt.sign({ sessionId }, config.REFRESH_TOKEN_SECRET, {
+    expiresIn: config.REFRESH_TOKEN_EXPIRY,
   });
 
-  const accessToken = jwt.sign({ userId }, JWT_SECRET, {
-    expiresIn: "15m",
+  const accessToken = jwt.sign({ userId }, config.ACCESS_TOKEN_SECRET, {
+    expiresIn: config.ACCESS_TOKEN_EXPIRY,
   });
 
   return { refreshToken, accessToken };

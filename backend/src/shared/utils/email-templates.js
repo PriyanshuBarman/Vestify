@@ -1,4 +1,4 @@
-import { FRONTEND_URL } from "#config/env.config.js";
+import config from "#config/env.config.js";
 
 export const passwordResetTemplate = (name, token) =>
   `<!DOCTYPE html>
@@ -66,7 +66,7 @@ export const passwordResetTemplate = (name, token) =>
           <!-- Call-to-Action Button -->
            <div style="margin: 40px 0; padding: 20px 0; text-align: center">
             <a
-              href="${FRONTEND_URL}/auth/reset-password/${token}"
+              href="${config.FRONTEND_URL}/auth/reset-password/${token}"
               style="
                 display: inline-block;
                 background: linear-gradient(135deg, #04ad83, #00a46e);

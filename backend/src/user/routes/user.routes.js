@@ -2,6 +2,7 @@ import { Router } from "express";
 import { authenticate } from "#shared/middlewares/auth.middleware.js";
 import upload from "#shared/middlewares/multer.middleware.js";
 import * as userController from "../controllers/user.controller.js";
+import { avatarUploadLimiter } from "#shared/middlewares/rate-limiter.middleware.js";
 
 export const userRoutes = Router();
 
@@ -17,6 +18,7 @@ userRoutes.patch("/", authenticate, userController.updateProfile);
 userRoutes.patch(
   "/avatar",
   authenticate,
+  avatarUploadLimiter,
   upload.single("avatar"),
   userController.uploadAvatar
 );

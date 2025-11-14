@@ -1,6 +1,6 @@
 import { tz } from "@date-fns/tz";
 import { addDays, addMonths, differenceInDays } from "date-fns";
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { getDomain } from "../utils/get-domain.utils.js";
 import { getNextInstallmentDate } from "../utils/get-next-installment-date.utils.js";

@@ -12,6 +12,8 @@ export const signupValidator = (req, res, next) => {
 
   if (password.includes(" "))
     throw new ApiError(400, "password should not contain spaces");
+  if (password.length < 6)
+    throw new ApiError(400, "password should be at least 6 characters long");
 
   req.body.name = name;
   req.body.email = email;

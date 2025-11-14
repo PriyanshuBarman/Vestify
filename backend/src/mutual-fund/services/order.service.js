@@ -1,4 +1,4 @@
-import { db } from "#config/db.config.js";
+import db from "#config/db.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { getApplicableDates } from "../utils/get-applicable-dates.utiils.js";
