@@ -9,17 +9,17 @@ import {
   setSeconds,
 } from "date-fns";
 
-function getSmartStaleTime() {
+const getSmartStaleTime = () => {
   const istTime = TZDate.tz("Asia/Kolkata");
   const hour = istTime.getHours();
 
-  if (hour >= 1 && hour < 6) return 15 * 60 * 1000; // 15 minutes
+  if (hour >= 1 && hour < 7) return 15 * 60 * 1000; // 15 minutes
 
   let nextRun = setSeconds(setMinutes(setHours(istTime, 1), 0), 0);
   if (hour >= 1) nextRun = addDays(nextRun, 1);
 
   return differenceInMilliseconds(nextRun, istTime);
-}
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -24,7 +24,7 @@ function ConfirmModal({
     <ResponsiveModal open={isOpen} onOpenChange={onOpenChange}>
       <ResponsiveModalContent>
         <ResponsiveModalHeader className="items-center gap-2">
-          <IconWrapper color={variant === "destructive" && "destructive"}>
+          <IconWrapper color={variant === "destructive" && "red"}>
             {icon}
           </IconWrapper>
           <ResponsiveModalTitle>{title}</ResponsiveModalTitle>

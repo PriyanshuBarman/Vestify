@@ -22,7 +22,7 @@ const FILTER_TABS = [
   { label: "Fund House", key: "amc_name" },
 ];
 
-function FilterSheet({ onClose }) {
+function FilterSheetContent({ onClose }) {
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ function FilterSheet({ onClose }) {
 
   return (
     <div className="flex h-full flex-col sm:pr-4">
-      <div className="sm:text-foreground-secondary flex items-center justify-between py-4 sm:py-6 sm:pr-6">
+      <div className="sm:text-foreground-secondary flex items-center justify-between py-4 sm:pr-6">
         <div className="flex items-center">
           <Button variant="ghost" onClick={handleClose}>
             <XIcon className="size-5" />
@@ -79,11 +79,11 @@ function FilterSheet({ onClose }) {
 
       <div className="flex min-h-0 flex-1 border-t">
         {/* Vertical Tabs */}
-        <nav className="flex w-32 flex-col border-r">
+        <div className="flex w-32 flex-col border-r">
           {FILTER_TABS.map((tab) => (
             <button
               key={tab.key}
-              className={`relative flex justify-between border-b px-4 py-4 text-left text-sm font-medium transition-all sm:px-6 sm:py-6 sm:font-semibold ${
+              className={`relative flex justify-between border-b px-4 py-4 text-left text-sm font-medium transition-all sm:font-semibold ${
                 activeTab === tab.label
                   ? "before:bg-primary sm:text-foreground-secondary before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:rounded-r-4xl before:content-[''] sm:before:w-[5px]"
                   : "text-muted-foreground sm:text-foreground hover:bg-muted"
@@ -96,7 +96,7 @@ function FilterSheet({ onClose }) {
               </span>
             </button>
           ))}
-        </nav>
+        </div>
 
         {/* Tab Content */}
         <div className="flex-1 overflow-y-auto px-4 py-2">
@@ -120,4 +120,4 @@ function FilterSheet({ onClose }) {
   );
 }
 
-export default FilterSheet;
+export default FilterSheetContent;

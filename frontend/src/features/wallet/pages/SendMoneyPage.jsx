@@ -14,10 +14,9 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useSearchProfile } from "@/hooks/useSearchProfile";
 import { SearchIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 function SendMoneyPage() {
-  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query.trim().replace("@", ""));
   const inputRef = useRef(null);

@@ -1,6 +1,7 @@
 import LoadingState from "@/components/LoadingState";
 import { lazy, Suspense } from "react";
 
+const TnxDetailsPage = lazy(() => import("./pages/TnxDetailsPage"));
 const TnxHistoryPage = lazy(() => import("./pages/TnxHistoryPage"));
 const SendMoneyPage = lazy(() => import("./pages/SendMoneyPage"));
 const EnterAmountPage = lazy(() => import("./pages/EnterAmountPage"));
@@ -34,6 +35,14 @@ export const walletRoutes = {
       element: (
         <Suspense fallback={<LoadingState fullPage />}>
           <TnxHistoryPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "tnx-details",
+      element: (
+        <Suspense fallback={<LoadingState fullPage />}>
+          <TnxDetailsPage />
         </Suspense>
       ),
     },

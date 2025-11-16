@@ -11,7 +11,7 @@ function LoginPage() {
           Vestify
         </Link>
       </div>
-      <div className="max-w-sm">
+      <div className="w-full max-w-md">
         <LoginForm />
       </div>
     </div>

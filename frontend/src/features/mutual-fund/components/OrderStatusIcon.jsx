@@ -1,5 +1,5 @@
-import { CheckCircleIcon, ClockIcon, CircleXIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CheckCheckIcon, CircleXIcon, ClockFadingIcon } from "lucide-react";
 
 /**
  * Reusable component for displaying order status icons
@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils";
  */
 function OrderStatusIcon({ status, className = "size-5" }) {
   const icons = {
-    COMPLETED: <CheckCircleIcon className={cn("text-primary", className)} />,
-    PENDING: <ClockIcon className={cn("text-primary", className)} />,
+    COMPLETED: <CheckCheckIcon className={cn("text-primary", className)} />,
+    PENDING: <ClockFadingIcon className={cn("text-primary", className)} />,
     FAILED: <CircleXIcon className={cn("text-destructive", className)} />,
   };
 

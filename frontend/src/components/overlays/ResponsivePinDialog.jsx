@@ -131,14 +131,14 @@ function ResponsivePinDialog({
         <DialogHeader className="p-6 sm:p-0">
           <DialogTitle className="text sr-only">Confirm Payment</DialogTitle>
           <DialogDescription className="bg-accent text-foreground space-y-2 rounded-2xl px-6 py-4 font-medium shadow">
-            <div className="flex justify-between">
+            <p className="flex justify-between">
               Sending:
               <span className="tabular-nums">{formatToINR(amount)}</span>
-            </div>
-            <div className="flex justify-between">
+            </p>
+            <p className="flex justify-between">
               To:
               <span className="ml-2 max-w-[900%]">{sendingTo}</span>
-            </div>
+            </p>
           </DialogDescription>
         </DialogHeader>
 

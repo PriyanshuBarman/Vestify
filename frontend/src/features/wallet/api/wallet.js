@@ -16,6 +16,6 @@ export const sendMoney = async ({ amount, note, receiverId, pin }) => {
     receiverId,
     pin,
   });
-
+  
   return data.balance;
 };

@@ -1,11 +1,12 @@
 import GoBackBar from "@/components/GoBackBar";
-import DeleteAccountModal from "@/components/overlays/DeleteAccountModal";
+import ConfirmModal from "@/components/overlays/ConfirmModal";
 import { Button } from "@/components/ui/button";
 import { useDeleteAccount } from "@/hooks/useDeleteAccount";
+import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
 
 function DeleteAccountPage() {
-  const [openModal, setOpenModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: deleteAccount } = useDeleteAccount();
 
   return (
@@ -22,17 +23,22 @@ function DeleteAccountPage() {
       </section>
 
       <Button
-        onClick={() => setOpenModal(true)}
+        onClick={() => setIsModalOpen(true)}
         size="lg"
         variant="destructive"
         className="mx-auto mt-auto w-full sm:mt-14 sm:w-fit"
       >
         Delete Account
       </Button>
-      <DeleteAccountModal
-        open={openModal}
-        onOpenChange={setOpenModal}
-        deleteAccount={deleteAccount}
+      <ConfirmModal
+        title="Delete account?"
+        description="Are you sure you want to delete your account?"
+        isOpen={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        action={deleteAccount}
+        actionMessage="Yes, Delete Account"
+        variant="destructive"
+        icon={<Trash2Icon />}
       />
     </div>
   );

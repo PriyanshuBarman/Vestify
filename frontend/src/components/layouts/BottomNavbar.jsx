@@ -1,7 +1,7 @@
 import { useIsMobile } from "@/hooks/useIsMobile";
 import {
-  ChartPieSliceIcon,
   ChartBarHorizontalIcon,
+  ChartPieSliceIcon,
   WalletIcon,
 } from "@phosphor-icons/react";
 import { NavLink, useLocation } from "react-router";
@@ -26,13 +26,7 @@ const tabsMapping = [
     link: "/wallet",
   },
 ];
-const allowedRoutes = [
-  "/mutual-funds",
-  "/mutual-funds/",
-  "/wallet",
-  "/stocks",
-  "/gold",
-];
+const allowedRoutes = ["/mutual-funds", "/mutual-funds/", "/wallet", "/stocks"];
 
 function BottomNavbar() {
   const isMobile = useIsMobile();
@@ -49,7 +43,7 @@ function BottomNavbar() {
           to={tab.link}
           key={tab.id}
           className={({ isActive }) =>
-            `flex flex-col items-center gap-1 text-[0.65rem] font-medium transition-all duration-200 hover:scale-105 sm:text-xs ${isActive ? "text-primary font-semibold dark:text-white" : "text-zinc-500 dark:text-zinc-400"}`
+            `flex flex-col items-center gap-0.5 text-[0.65rem] font-medium tracking-tighter transition-all duration-200 hover:scale-105 sm:text-xs ${isActive ? "text-primary font-semibold dark:text-white" : "text-zinc-500 dark:text-zinc-400"}`
           }
         >
           <tab.icon

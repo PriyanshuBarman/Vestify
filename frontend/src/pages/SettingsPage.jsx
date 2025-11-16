@@ -109,8 +109,8 @@ function SettingsPage() {
             <ChevronRightIcon className="text-muted-foreground stroke-[1.5px]" />
           </div>
         </Link>
-        {/* <Link
-          to="/settings/delete-account"
+        <Link
+          to="/settings/clear-cache"
           className="grid grid-cols-[auto_1fr] items-center"
         >
           <DatabaseZapIcon className="text-muted-foreground size-5" />
@@ -118,7 +118,7 @@ function SettingsPage() {
             Clear cache
             <ChevronRightIcon className="text-muted-foreground stroke-[1.5px]" />
           </div>
-        </Link> */}
+        </Link>
       </section>
 
       <Button

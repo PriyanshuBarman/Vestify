@@ -11,9 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./features/search/pages/Page";
 
 const DeleteAccountPage = lazy(() => import("./pages/DeleteAccountPage"));
-const NotFoundPage = lazy(
-  () => import("./components/empty-states/NotFoundPage"),
-);
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const ReferAndEarnPage = lazy(() => import("./pages/ReferAndEarnPage"));
 const ActiveDevicesPage = lazy(() => import("./pages/ActiveDevicesPage"));
 const AllOrdersPage = lazy(
@@ -22,6 +20,7 @@ const AllOrdersPage = lazy(
 const VerifyEmailChangeOTPPage = lazy(
   () => import("./pages/VerifyEmailChangeOTPPage"),
 );
+const ClearCachePage = lazy(() => import("./pages/ClearCachePage"));
 const ChangePasswordPage = lazy(() => import("./pages/ChangePasswordPage"));
 const ChangePinPage = lazy(() => import("./pages/ChangePinPage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
@@ -167,6 +166,14 @@ export const routes = createBrowserRouter([
             element: (
               <Suspense fallback={<LoadingState fullPage />}>
                 <DeleteAccountPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "clear-cache",
+            element: (
+              <Suspense fallback={<LoadingState fullPage />}>
+                <ClearCachePage />
               </Suspense>
             ),
           },

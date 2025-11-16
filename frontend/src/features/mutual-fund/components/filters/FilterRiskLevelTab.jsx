@@ -41,7 +41,7 @@ function FilterRiskLevelTab() {
       {RISK_LEVELS.map((risk) => (
         <Label
           key={risk}
-          className="flex items-center space-x-2 border-b p-2 py-4 font-normal sm:py-6"
+          className="flex items-center space-x-2 border-b p-2 py-4 font-normal"
         >
           <Checkbox
             checked={selected.includes(risk)}

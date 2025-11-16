@@ -12,7 +12,7 @@ import ConfirmRedeemModal from "../components/overlays/ConfirmRedeemModal";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useRedeemFund } from "../hooks/useRedeemFund";
 
-function RedeemPage() {
+function RedemptionPage() {
   const isMobile = useIsMobile();
   const [amount, setAmount] = useState("");
   const [open, setOpen] = useState(false);
@@ -36,6 +36,11 @@ function RedeemPage() {
   if (isMobile)
     return (
       <div className="flex h-dvh flex-col">
+        {isPending && (
+          <div className="absolute inset-0 z-50 grid place-items-center">
+            <Spinner className="text-primary size-12 sm:hidden" />
+          </div>
+        )}
         {/* ================= Title ================= */}
         <div className="Title mt-4 flex items-center gap-4 px-4">
           <GoBackBtn />
@@ -103,7 +108,13 @@ function RedeemPage() {
             }
             className="my-4 w-[88%]"
           >
-            Proceed
+            {isPending ? (
+              <>
+                <Spinner /> Processing
+              </>
+            ) : (
+              "Proceed"
+            )}
           </Button>
         </div>
         <ConfirmRedeemModal
@@ -197,4 +208,4 @@ function RedeemPage() {
     );
 }
 
-export default RedeemPage;
+export default RedemptionPage;

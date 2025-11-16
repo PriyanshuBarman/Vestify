@@ -13,7 +13,7 @@ const AmcFundsPage = lazy(() => import("./pages/AmcFundsPage"));
 const SipDetailsPage = lazy(() => import("./pages/SipDetailsPage"));
 const EditSipPage = lazy(() => import("./pages/EditSipPage"));
 const InvestPage = lazy(() => import("./pages/InvestPage"));
-const RedeemPage = lazy(() => import("./pages/RedeemPage"));
+const RedeemPage = lazy(() => import("./pages/RedemptionPage"));
 const CollectionPage = lazy(() => import("./pages/CollectionPage"));
 const FundPage = lazy(() => import("./pages/FundPage"));
 const AllFundsPage = lazy(() => import("./pages/AllFundsPage"));
@@ -80,9 +80,9 @@ export const mutualFundRoutes = {
     {
       path: ":scheme_code",
       element: (
-        // <Suspense fallback={<LoadingState fullPage />}>
+        <Suspense fallback={<LoadingState fullPage />}>
           <FundPage />
-        // </Suspense>
+        </Suspense>
       ),
     },
     {

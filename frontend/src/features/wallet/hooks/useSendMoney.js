@@ -10,7 +10,7 @@ export const useSendMoney = () => {
 
   return useMutation({
     mutationFn: sendMoney,
-    onSuccess: (balance, variables) => {
+    onSuccess: (data, variables) => {
       const { amount, name } = variables;
       playPaymentSuccessSound();
       navigate("/payment-success", {

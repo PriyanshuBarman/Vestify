@@ -1,13 +1,13 @@
 import {
-    Empty,
-    EmptyContent,
-    EmptyDescription,
-    EmptyHeader,
-    EmptyTitle,
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
 } from "@/components/ui/empty";
 import { ChevronLeftIcon } from "lucide-react";
 import { useNavigate } from "react-router";
-import { Button } from "../ui/button";
+import { Button } from "../components/ui/button";
 
 function NotFoundPage() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function NotFoundPage() {
   return (
     <Empty className="flex h-dvh items-center justify-center">
       <EmptyHeader>
-        <EmptyTitle>404 - Not Found</EmptyTitle>
+        <EmptyTitle className="sm:text-2xl">404 - Not Found</EmptyTitle>
         <EmptyDescription>
           The page you&apos;re looking for doesn&apos;t exist.
         </EmptyDescription>

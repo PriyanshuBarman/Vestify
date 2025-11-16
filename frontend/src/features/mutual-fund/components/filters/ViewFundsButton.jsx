@@ -5,14 +5,11 @@ function ViewFundsButton({ totalCount, isFetching, onClick }) {
   return (
     <Button
       disabled={!totalCount && isFetching}
-      className={`h-12 w-full font-semibold`}
+      size="lg"
+      className="w-full"
       onClick={onClick}
     >
-      {isFetching ? (
-         <Spinner />
-      ) : (
-        `View ${totalCount} funds`
-      )}
+      {isFetching ? <Spinner /> : `View ${totalCount} funds`}
     </Button>
   );
 }

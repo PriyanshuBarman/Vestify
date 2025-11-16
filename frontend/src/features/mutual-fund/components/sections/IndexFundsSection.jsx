@@ -35,7 +35,7 @@ function IndexFundsSection() {
             >
               <Card className="h-40 w-40 cursor-pointer justify-between gap-0 p-4 text-inherit duration-200 hover:scale-101 sm:h-44 sm:w-48">
                 <FundLogo fundHouseDomain={fund.detail_info} />
-                <CardTitle className="text-[0.75rem] font-medium sm:text-sm">
+                <CardTitle className="text-xs font-[450] sm:text-sm sm:font-medium">
                   {fund.short_name}
                 </CardTitle>
 

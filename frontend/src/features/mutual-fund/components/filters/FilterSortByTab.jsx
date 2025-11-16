@@ -38,7 +38,7 @@ function FilterSortByTab() {
       {SORT_OPTIONS.map((option) => (
         <div
           key={option.value}
-          className="flex cursor-pointer items-center space-x-3 border-b px-2 py-4 sm:py-6"
+          className="flex cursor-pointer items-center space-x-3 border-b px-2 py-4"
           onClick={() => handleSortChange(option.value)}
         >
           <RadioGroupItem

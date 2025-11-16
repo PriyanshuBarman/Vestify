@@ -5,7 +5,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import LoadingSkeleton from "@/features/search/components/LoadingSkeleton";
 import { formatToINR } from "@/utils/formatters";
 import { format, formatDate, setDate } from "date-fns";
 import {
@@ -21,6 +20,7 @@ import OrderStatusIcon from "../components/OrderStatusIcon";
 import CancelSipButton from "../components/overlays/CancelSipButton";
 import SkipSipButton from "../components/overlays/SkipSipButton";
 import { useGetSipDetail } from "../hooks/useGetSipDetail";
+import LoadingState from "@/components/LoadingState";
 
 function SipDetailsPage() {
   const { sipId } = useParams();
@@ -30,7 +30,7 @@ function SipDetailsPage() {
   const sipDetail = data?.sip || {};
   const installments = data?.installments || [];
 
-  if (isPending) return <LoadingSkeleton fullPage />;
+  if (isPending) return <LoadingState fullPage />;
 
   return (
     <div className="md:w-[50%]">
@@ -118,23 +118,21 @@ function SipDetailsPage() {
             <AccordionContent className="text-muted-foreground space-y-4">
               <div className="space-x-8">
                 <span>Created on:</span>
-                <span className="font-medium">
+                <span>
                   {sipDetail.createdAt &&
                     format(sipDetail.createdAt, "dd MMM yy, h:mm a")}
                 </span>
               </div>
               <div className="space-x-10">
                 <span>Paid Via:</span>
-                <span className="font-medium">
-                  Vestify Wallet (Virtual Money)
-                </span>
+                <span>Vestify Wallet (Virtual Money)</span>
               </div>
               <div className="flex space-x-10">
                 <span className="shrink-0">SIP Id:</span>
-                <p className="font-medium">{sipDetail.id}</p>
+                <p>{sipDetail.id}</p>
                 <Button
                   variant="secondary"
-                  size="icon"
+                  size="icon-sm"
                   onClick={() => navigator.clipboard.writeText(sipDetail.id)}
                 >
                   <CopyIcon />

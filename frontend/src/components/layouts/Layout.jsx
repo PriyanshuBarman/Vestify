@@ -4,18 +4,22 @@ import BottomNavbar from "./BottomNavbar";
 import DailyRewardModal from "./DailyRewardModal";
 import Navbar from "./Navbar";
 import ScrollToTop from "./ScrollToTop";
+import Footer from "../Footer";
 
 function Layout() {
   useSSEConnection();
 
   return (
-    <div className="mx-auto max-w-7xl">
-      <Navbar />
-      <Outlet />
-      <ScrollToTop />
-      <BottomNavbar />
-      <DailyRewardModal />
-    </div>
+    <>
+      <div className="mx-auto max-w-7xl">
+        <Navbar />
+        <Outlet />
+        <ScrollToTop />
+        <BottomNavbar />
+        <DailyRewardModal />
+      </div>
+      <Footer />
+    </>
   );
 }
 

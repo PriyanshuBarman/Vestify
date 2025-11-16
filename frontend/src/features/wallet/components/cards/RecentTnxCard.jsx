@@ -45,6 +45,7 @@ function RecentTnxCard() {
                 tnx={tnx}
                 index={index}
                 length={recentTnx.length}
+                hideSeparator
               />
             ))}
           </ItemGroup>

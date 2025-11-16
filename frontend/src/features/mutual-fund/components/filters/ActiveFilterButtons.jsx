@@ -17,7 +17,7 @@ import ViewFundsButton from "./ViewFundsButton";
 const filterComponents = {
   FilterCategoriesTab,
   FilterFundHouseTab,
-  FilterRiskTab: FilterRiskLevelTab,
+  FilterRiskLevelTab,
   FilterRatingsTab,
 };
 

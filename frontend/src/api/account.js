@@ -3,7 +3,7 @@ import { api } from "@/lib/axios";
 // ================ QUERIES ================
 
 export const fetchSessions = async () => {
-  const { data } = await api.get(`/users/sessions`);
+  const { data } = await api.get(`/sessions`);
   return data.activeSessions;
 };
 

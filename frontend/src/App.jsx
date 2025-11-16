@@ -5,14 +5,18 @@ import { RouterProvider } from "react-router";
 import { Toaster } from "sonner";
 import { routes } from "./routes";
 import { selectTheme } from "./store/slices/themeSlice";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const theme = useSelector(selectTheme);
   return (
-    <GoogleOAuthProvider clientId={VITE_GOOGLE_CLIENT_ID}>
-      <RouterProvider router={routes} />
-      <Toaster theme={theme} position="top-right" richColors />
-    </GoogleOAuthProvider>
+    <ErrorBoundary fallback={<ErrorPage />}>
+      <GoogleOAuthProvider clientId={VITE_GOOGLE_CLIENT_ID}>
+        <RouterProvider router={routes} />
+        <Toaster theme={theme} position="top-right" richColors />
+      </GoogleOAuthProvider>
+    </ErrorBoundary>
   );
 }
 

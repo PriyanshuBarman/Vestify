@@ -15,6 +15,9 @@ export function useRedeemFund() {
       queryClient.setQueryData(["orders"], (old) =>
         old ? [order, ...old] : [order],
       );
+      queryClient.setQueryData(["pending-orders"], (old) =>
+        old ? [order, ...old] : [order],
+      );
 
       navigate("/mutual-funds/redeem-success", {
         state: order,

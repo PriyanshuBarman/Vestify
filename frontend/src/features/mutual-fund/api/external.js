@@ -6,15 +6,13 @@ export const fetchFund = async (schemeCode) => {
 };
 
 export const fetchIndexFunds = async () => {
-  const { data } = await mfHelperApi.get(
-    `?plan=GROWTH&fund_category=index funds&limit=4`,
-  );
+  const { data } = await mfHelperApi.get(`?fund_category=index funds&limit=4`);
   return data.funds;
 };
 
 export const fetchPopularFunds = async () => {
   const { data } = await mfHelperApi.get(
-    `?plan=GROWTH&limit=4&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
+    `?limit=4&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
   );
   return data.funds;
 };
@@ -26,7 +24,7 @@ export const fetchCategoryFundList = async (url) => {
 
 export const fetchAllFunds = async () => {
   const { data } = await mfHelperApi.get(
-    `?plan=GROWTH&sort_by=return_3y&category=Equity&fund_rating_gte=4`,
+    `?sort_by=return_3y&category=Equity&fund_rating_gte=4`,
   );
   return data.funds;
 };

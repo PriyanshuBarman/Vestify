@@ -13,7 +13,7 @@ import { SlidersHorizontalIcon } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getActiveFilterCount } from "../../utils/filterUtils";
-import FilterSheet from "./FilterSheet";
+import FilterSheetContent from "./FilterSheetContent";
 
 const OpenFilterSheetBtn = () => {
   const isMobile = useIsMobile();
@@ -44,10 +44,10 @@ const OpenFilterSheetBtn = () => {
       </SheetTrigger>
       <SheetContent
         side={isMobile ? "bottom" : "left"}
-        className={`[&>button]:hidden ${isMobile ? "fixed inset-0 data-[state=open]:duration-300" : "min-w-md overflow-hidden rounded-r-3xl data-[state=open]:duration-300"}`}
+        className={`[&>button]:hidden ${isMobile ? "fixed inset-0" : "min-w-sm overflow-hidden data-[state=open]:duration-300"}`}
       >
         <SheetTitle className="sr-only">Filter Sheet</SheetTitle>
-        <FilterSheet onClose={() => setIsOpen(false)} />
+        <FilterSheetContent onClose={() => setIsOpen(false)} />
       </SheetContent>
     </Sheet>
   );

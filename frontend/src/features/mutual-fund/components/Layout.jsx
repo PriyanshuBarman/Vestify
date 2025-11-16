@@ -3,7 +3,7 @@ import Tabs from "./Tabs";
 
 function Layout() {
   return (
-    <div className="sm:px-6 sm:pb-24">
+    <div className="sm:px-6">
       <Tabs />
       <Outlet />
     </div>

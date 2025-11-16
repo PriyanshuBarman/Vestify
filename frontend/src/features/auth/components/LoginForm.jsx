@@ -117,7 +117,7 @@ function LoginForm() {
               size="lg"
               disabled={isPending || isLoading}
               type="submit"
-              className="rounded-full bg-gradient-to-r from-[#00b35c] to-[#00b35c91] py-5.5"
+              className="rounded-full bg-gradient-to-r from-[#00b35c] via-[#00b35c91] to-[#00b35c] [background-size:200%_auto] py-5.5 hover:bg-[99%_center]"
             >
               {(isPending || isLoading) && <Spinner />} Login
             </Button>

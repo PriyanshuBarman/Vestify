@@ -109,7 +109,7 @@ function FilterCategoriesTab() {
         {Object.entries(data).map(([fundType, fundCategories]) => {
           return (
             <AccordionItem key={fundType} value={fundType}>
-              <AccordionTrigger className="py-6">
+              <AccordionTrigger className="py-5">
                 <div className="flex w-full items-center space-x-3">
                   <CustomCheckbox
                     onChange={() => handleFundTypeClick(fundType)}

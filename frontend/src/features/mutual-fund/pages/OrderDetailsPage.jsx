@@ -87,23 +87,21 @@ function OrderDetailsPage() {
             <AccordionContent className="text-muted-foreground space-y-4">
               <div className="space-x-8">
                 <span>Placed on:</span>
-                <span className="font-medium">
+                <span>
                   {order.createdAt &&
                     format(order.createdAt, "dd MMM yy, h:mm a")}
                 </span>
               </div>
               <div className="space-x-10">
                 <span>Paid Via:</span>
-                <span className="font-medium">
-                  Vestify Wallet (Virtual Money)
-                </span>
+                <span>Vestify Wallet (Virtual Money)</span>
               </div>
               <div className="flex space-x-10">
                 <span className="shrink-0">Order Id:</span>
-                <p className="font-medium">{order.id}</p>
+                <p>{order.id}</p>
                 <Button
                   variant="secondary"
-                  size="icon"
+                  size="icon-sm"
                   onClick={() => navigator.clipboard.writeText(order.id)}
                 >
                   <CopyIcon />

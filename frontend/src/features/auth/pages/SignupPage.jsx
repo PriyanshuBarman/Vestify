@@ -11,7 +11,7 @@ function SignupPage() {
           Vestify
         </Link>
       </div>
-      <div className="max-w-md">
+      <div className="w-full max-w-md">
         <SignupForm />
       </div>
     </div>
