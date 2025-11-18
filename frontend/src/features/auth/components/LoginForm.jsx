@@ -49,7 +49,7 @@ function LoginForm() {
             </h1>
             <FieldDescription>
               Don&apos;t have an account?{" "}
-              <Link to="/auth/signup" className="font-medium sm:font-semibold">
+              <Link to="/auth/signup" className="font-medium">
                 Sign up
               </Link>
             </FieldDescription>
@@ -79,6 +79,7 @@ function LoginForm() {
                 type="email"
                 placeholder="m@example.com"
                 required
+                maxLength={50}
                 value={formData.email}
                 onChange={handleChange}
               />
@@ -95,6 +96,7 @@ function LoginForm() {
                 type={showPassword ? "text" : "password"}
                 placeholder="•••••••••"
                 required
+                maxLength={20}
                 value={formData.password}
                 onChange={handleChange}
                 className="placeholder:text-muted-foreground/50"
@@ -125,8 +127,9 @@ function LoginForm() {
         </FieldGroup>
       </form>
       <FieldDescription className="text-2xs px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms</a> and{" "}
-        <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our{" "}
+        <Link to="/terms-and-conditions">Terms</Link> and{" "}
+        <Link to="/privacy-policy">Privacy Policy</Link>.
       </FieldDescription>
     </div>
   );

@@ -26,7 +26,7 @@ function NoInvestments() {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button asChild>
+        <Button asChild className="rounded-full">
           <Link to="/mutual-funds/all-funds">Start Investing</Link>
         </Button>
       </EmptyContent>

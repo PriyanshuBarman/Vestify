@@ -32,7 +32,7 @@ function NoActiveSips() {
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
-          <Button asChild>
+          <Button asChild className="rounded-full">
             <Link to="/mutual-funds/all-funds">Start SIP</Link>
           </Button>
         </EmptyContent>

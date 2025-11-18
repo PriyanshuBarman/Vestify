@@ -136,13 +136,13 @@ function TnxDetailsPage() {
             <SendIcon />
             Send Again
           </Button>
-          <ProfileDialog
-            isOpen={isOpen}
-            onOpenChange={setIsOpen}
-            clickedProfile={clickedProfile}
-          />
         </>
       )}
+      <ProfileDialog
+        isOpen={isOpen}
+        onOpenChange={setIsOpen}
+        clickedProfile={clickedProfile}
+      />
     </div>
   );
 }

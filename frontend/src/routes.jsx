@@ -10,6 +10,9 @@ import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./features/search/pages/Page";
 
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
 const DeleteAccountPage = lazy(() => import("./pages/DeleteAccountPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const ReferAndEarnPage = lazy(() => import("./pages/ReferAndEarnPage"));
@@ -182,4 +185,28 @@ export const routes = createBrowserRouter([
     ],
   },
   authRoutes,
+  {
+    path: "/terms-and-conditions",
+    element: (
+      <Suspense fallback={<LoadingState fullPage />}>
+        <TermsPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/about",
+    element: (
+      <Suspense fallback={<LoadingState fullPage />}>
+        <AboutPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/privacy-policy",
+    element: (
+      <Suspense fallback={<LoadingState fullPage />}>
+        <PrivacyPage />
+      </Suspense>
+    ),
+  },
 ]);

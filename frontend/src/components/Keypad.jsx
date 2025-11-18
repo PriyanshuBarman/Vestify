@@ -22,7 +22,7 @@ function Keypad({ amount, setAmount, className }) {
         <Button
           key={idx}
           variant="ghost"
-          className="active:bg-accent h-14 w-24 rounded-2xl text-2xl font-semibold"
+          className="active:bg-accent h-14 w-24 rounded-2xl text-2xl"
           onClick={() => handleNumberClick(num)}
         >
           {num}
@@ -38,7 +38,7 @@ function Keypad({ amount, setAmount, className }) {
       </Button>
       <Button
         variant="ghost"
-        className="active:bg-accent h-14 w-24 rounded-2xl text-2xl font-semibold"
+        className="active:bg-accent h-14 w-24 rounded-2xl text-2xl"
         onClick={() => handleNumberClick(0)}
       >
         0

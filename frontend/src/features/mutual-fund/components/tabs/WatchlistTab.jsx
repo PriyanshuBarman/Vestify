@@ -6,6 +6,7 @@ import { useGetFundsData } from "../../hooks/useGetFundsData";
 import { useGetWatchlist } from "../../hooks/useGetWatchlist";
 import FundLogo from "../FundLogo";
 import FundRating from "../FundRating";
+import LoadingState from "@/components/LoadingState";
 const NoWatchlist = lazy(() => import("../empty-states/NoWatchlist"));
 
 const labelArr = [
@@ -17,7 +18,7 @@ const labelArr = [
 
 function WatchlistTab() {
   const [activeLabelIdx, setActiveLabelIdx] = useState(0);
-  const { data: watchlist = [] } = useGetWatchlist();
+  const { data: watchlist = [], isPending } = useGetWatchlist();
   const { data: fundsData = [] } = useGetFundsData(
     watchlist?.map((fund) => fund.schemeCode),
   );
@@ -28,6 +29,7 @@ function WatchlistTab() {
     setActiveLabelIdx(nextIndex);
   };
 
+  if (isPending) return <LoadingState />;
   if (!watchlist?.length) return <NoWatchlist />;
 
   return (

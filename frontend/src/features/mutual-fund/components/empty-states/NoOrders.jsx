@@ -29,7 +29,7 @@ function NoOrders() {
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
-          <Button asChild>
+          <Button asChild className="rounded-full">
             <Link to="/mutual-funds/all-funds">Explore Funds</Link>
           </Button>
         </EmptyContent>

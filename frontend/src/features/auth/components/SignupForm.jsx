@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
@@ -26,6 +27,7 @@ import { useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
 import { useSignup } from "../hooks/useSignup";
+import { toast } from "sonner";
 
 function SignupForm() {
   const [searchParams] = useSearchParams();
@@ -42,6 +44,10 @@ function SignupForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.password.length < 6) {
+      toast.info("Password must be at least 6 characters long");
+      return;
+    }
     signup({ ...formData, referralCode });
   };
   const handleChange = (e) => {
@@ -59,7 +65,7 @@ function SignupForm() {
             </h1>
             <FieldDescription>
               Already have an account?{" "}
-              <Link to="/auth/login" className="font-medium sm:font-semibold">
+              <Link to="/auth/login" className="font-medium">
                 Login
               </Link>
             </FieldDescription>
@@ -90,6 +96,7 @@ function SignupForm() {
                 type="text"
                 placeholder="elon musk"
                 required
+                maxLength={20}
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -106,6 +113,7 @@ function SignupForm() {
                 type="email"
                 placeholder="m@example.com"
                 required
+                maxLength={50}
                 value={formData.email}
                 onChange={handleChange}
               />
@@ -114,7 +122,12 @@ function SignupForm() {
               </InputGroupAddon>
             </InputGroup>
           </Field>
-          <Field className="gap-2">
+          <Field
+            data-invalid={
+              formData.password.length > 0 && formData.password.length < 6
+            }
+            className="gap-2"
+          >
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <InputGroup className="rounded-full px-2 py-5.5 shadow-none sm:shadow-xs">
               <InputGroupInput
@@ -122,6 +135,8 @@ function SignupForm() {
                 type={showPassword ? "text" : "password"}
                 placeholder="•••••••••"
                 required
+                minLength={6}
+                maxLength={20}
                 value={formData.password}
                 onChange={handleChange}
                 className="placeholder:text-muted-foreground/50"
@@ -138,6 +153,11 @@ function SignupForm() {
                 </InputGroupButton>
               </InputGroupAddon>
             </InputGroup>
+            {formData.password.length > 0 && formData.password.length < 6 && (
+              <FieldError>
+                Password must be at least 6 characters long
+              </FieldError>
+            )}
           </Field>
           <Field>
             <Button
@@ -152,8 +172,9 @@ function SignupForm() {
         </FieldGroup>
       </form>
       <FieldDescription className="text-2xs px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms</a> and{" "}
-        <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our{" "}
+        <Link to="/terms-and-conditions">Terms</Link> and{" "}
+        <Link to="/privacy-policy">Privacy Policy</Link>.
       </FieldDescription>
     </div>
   );

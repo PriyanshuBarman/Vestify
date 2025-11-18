@@ -1,10 +1,11 @@
 import { useSSEConnection } from "@/hooks/useSSEConnection";
+import { lazy } from "react";
 import { Outlet } from "react-router";
 import BottomNavbar from "./BottomNavbar";
 import DailyRewardModal from "./DailyRewardModal";
 import Navbar from "./Navbar";
 import ScrollToTop from "./ScrollToTop";
-import Footer from "../Footer";
+const Footer = lazy(() => import("../Footer"));
 
 function Layout() {
   useSSEConnection();

@@ -1,12 +1,14 @@
+import { footerLinks } from "@/constants/footer";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   GithubLogoIcon,
   LinkedinLogoIcon,
   TwitterLogoIcon,
 } from "@phosphor-icons/react";
 import { Link, useLocation } from "react-router";
+import ButtonAnimatedLink from "./ButtonAnimatedLink";
 import LogoShapeOnly from "./LogoShapeOnly";
 import { Separator } from "./ui/separator";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 function Footer() {
   const location = useLocation();
@@ -24,31 +26,25 @@ function Footer() {
               <LogoShapeOnly className="size-18" />
               <h6 className="text-xl font-semibold">Vestify</h6>
             </div>
-            <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="https://www.linkedin.com/in/priyanshubarman"
-                target="_blank"
-              >
-                <LinkedinLogoIcon weight="regular" className="h-5 w-5" />
-              </a>
-              <a href="https://twitter.com/priyanshuwb" target="_blank">
-                <TwitterLogoIcon weight="regular" className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/priyanshubarman/vestify"
-                target="_blank"
-              >
-                <GithubLogoIcon weight="regular" className="h-5 w-5" />
-              </a>
-            </div>
+            <ul className="gap- flex flex-wrap items-center">
+              {footerLinks.map(({ title, href }) => (
+                <ButtonAnimatedLink key={title} className="text-foreground">
+                  <Link to={href}>{title}</Link>
+                </ButtonAnimatedLink>
+              ))}
+            </ul>
           </div>
 
           {/* Credits */}
           <div className="w-full max-w-xs">
             <h6 className="text-sm font-medium">Credits</h6>
             <div className="mt-2 flex flex-col text-xs">
-              <a href="https://storyset.com">Illustrations by Storyset</a>
-              <a href="https://logo.dev">Logos provided by Logo.dev</a>
+              <a href="https://storyset.com" className="hover:underline">
+                Illustrations by Storyset
+              </a>
+              <a href="https://logo.dev" className="hover:underline">
+                Logos provided by Logo.dev
+              </a>
             </div>
           </div>
         </div>
@@ -63,15 +59,21 @@ function Footer() {
 
           <div className="flex items-center gap-5">
             <a
+              aria-label="Go to creators linkedin profile"
               href="https://www.linkedin.com/in/priyanshubarman"
               target="_blank"
             >
               <LinkedinLogoIcon weight="fill" className="h-5 w-5" />
             </a>
-            <a href="https://twitter.com/priyanshuwb" target="_blank">
+            <a
+              aria-label="Go to creators twitter profile"
+              href="https://twitter.com/priyanshuwb"
+              target="_blank"
+            >
               <TwitterLogoIcon weight="fill" className="h-5 w-5" />
             </a>
             <a
+              aria-label="Go to creators github profile"
               href="https://github.com/priyanshubarman/vestify"
               target="_blank"
             >

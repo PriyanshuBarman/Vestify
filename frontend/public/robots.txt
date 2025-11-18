@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://www.vestiffy.vercel.app/sitemap.xml
