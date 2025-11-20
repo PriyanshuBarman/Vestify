@@ -4,7 +4,16 @@ import config from "#config/env.config.js";
 
 export const navCache = new Map();
 
-export const fetchNavByDate = async (schemeCode, date) => {
+/**
+ * Fetches the NavInfo(nav,date) for the given schemeCode and date.
+ * Caches the result for future use.
+ *
+ * @param {number} schemeCode
+ * @param {Date} date
+ * @returns {Promise<{nav: string, date: string}>}
+ */
+
+export const fetchNavInfoByDate = async (schemeCode, date) => {
   try {
     if (navCache.has(schemeCode)) {
       return navCache.get(schemeCode);
@@ -13,17 +22,17 @@ export const fetchNavByDate = async (schemeCode, date) => {
     const { data } = await axios.get(`${config.MF_API_BASE_URL}/${schemeCode}`);
     const chartData = data.data;
 
-    const matchedNavData = chartData
+    const matchedNavInfo = chartData
       .slice(0, 10)
       .find((i) => i.date === format(date, "dd-MM-yyyy"));
 
-    if (!matchedNavData) {
+    if (!matchedNavInfo) {
       throw new Error(`Nav not found for schemeCode: ${schemeCode} ${date}`);
     }
 
-    navCache.set(schemeCode, matchedNavData.nav);
-    return matchedNavData.nav;
+    navCache.set(schemeCode, matchedNavInfo);
+    return matchedNavInfo;
   } catch (error) {
-    throw new Error(`Error At fetchNavByDate: ${error}`);
+    throw new Error(`Error At fetchNavByDate: ${error.message}`);
   }
 };

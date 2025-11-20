@@ -4,7 +4,7 @@ import {
   calcPortfolioAfterInvestment,
   calcPortfolioAfterRedemption,
 } from "../../src/mutual-fund/utils/calculate-updated-portfolio.utils.js";
-import { fetchNavByDate } from "../external/fetch-nav-by-date.js";
+import { fetchNavInfoByDate } from "../external/fetch-nav-by-date.js";
 
 export const processInvestmentOrder = async (orderData) => {
   let {
@@ -21,7 +21,8 @@ export const processInvestmentOrder = async (orderData) => {
   } = orderData;
   amount = amount.toNumber();
 
-  const nav = await fetchNavByDate(schemeCode, navDate);
+  const navInfo = await fetchNavInfoByDate(schemeCode, navDate);
+  const nav = parseFloat(navInfo.nav);
   const units = amount / nav;
 
   await db.$transaction(async (tx) => {
@@ -46,6 +47,7 @@ export const processInvestmentOrder = async (orderData) => {
           current: amount,
           invested: amount,
           fundHouseDomain,
+          nav: navInfo,
         },
       });
 
@@ -115,7 +117,7 @@ export const processRedemptionOrder = async (orderData) => {
   if (!isValid) return; // return if invalid
 
   // Fetch NAV after passing validation
-  const nav = await fetchNavByDate(schemeCode, navDate);
+  const nav = await fetchNavInfoByDate(schemeCode, navDate);
 
   const isFullRedemption = !!units || amount === fund.current.toNumber();
 

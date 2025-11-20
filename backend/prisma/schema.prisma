@@ -226,6 +226,7 @@ model MfPortfolio {
   returnPercent    Decimal  @default(0.00) @db.Decimal(8, 2)
   dayChangePercent Decimal? @default(0.00) @db.Decimal(5, 2)
   dayChangeValue   Decimal? @default(0) @db.Decimal(10, 2)
+  nav              Json // latest nav info
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 

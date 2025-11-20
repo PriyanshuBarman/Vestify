@@ -14,6 +14,7 @@ export const getUser = async (userId) => {
       hasPin: true,
       createdAt: true,
       profile: true,
+      authProvider: true,
     },
   });
 
