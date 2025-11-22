@@ -18,7 +18,6 @@ export const useSendMoney = () => {
           amount,
           title: "Payment Successful",
           description: `${formatToINR(amount)} has been successfully sent to ${name}.`,
-          orderDetailsRoute: "/wallet/transactions",
           doneRoute: "/wallet",
         },
         replace: true,

@@ -1,3 +1,4 @@
+import CopyButton from "@/components/CopyButton";
 import GoBackBar from "@/components/GoBackBar";
 import {
   Accordion,
@@ -9,13 +10,12 @@ import { Badge } from "@/components/ui/badge";
 import { formatToINR } from "@/utils/formatters";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { ChevronRightIcon, CopyIcon } from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
 import { Link, useLocation, useParams } from "react-router";
 import OrderStatusIcon from "../components/OrderStatusIcon";
 import OrderStatusTimeline from "../components/OrderStatusTimeline";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
 import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
-import { Button } from "@/components/ui/button";
 
 function OrderDetailsPage() {
   const { orderId } = useParams();
@@ -98,14 +98,10 @@ function OrderDetailsPage() {
               </div>
               <div className="flex space-x-10">
                 <span className="shrink-0">Order Id:</span>
-                <p>{order.id}</p>
-                <Button
-                  variant="secondary"
-                  size="icon-sm"
-                  onClick={() => navigator.clipboard.writeText(order.id)}
-                >
-                  <CopyIcon />
-                </Button>
+                <div className="flex items-start gap-2 break-all">
+                  <span>{order.id}</span>
+                  <CopyButton text={order.id} className="text-foreground" />
+                </div>
               </div>
             </AccordionContent>
           </AccordionItem>

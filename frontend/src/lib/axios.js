@@ -76,8 +76,9 @@ api.interceptors.response.use(
       } catch (refreshError) {
         // ❌ Refresh failed → logout
         localStorage.clear();
-        if (!window.location.pathname.startsWith("/auth")) {
-          window.location.href = "/auth/login";
+        const currentPath = window.location.pathname;
+        if (!currentPath.startsWith("/auth") && currentPath !== "/") {
+          window.location.href = "/";
         }
         processQueue(refreshError);
         return Promise.reject(refreshError);

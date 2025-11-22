@@ -20,7 +20,6 @@ import { orderTypeConfig } from "../constants/order";
 function InvestmentDetailsPage() {
   const location = useLocation();
   const fund = location.state;
-
   const { data: orders } = useGetFundOrders(fund.schemeCode);
 
   return (
@@ -59,7 +58,7 @@ function InvestmentDetailsPage() {
         <div className="px-4">
           {orders?.map((order) => (
             <Link
-              to={`/mutual-funds/order/${order.id}`}
+              to={`/mutual-funds/orders/${order.id}`}
               key={order.id}
               className="flex justify-between border-b py-4"
             >

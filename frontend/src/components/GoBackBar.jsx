@@ -13,24 +13,27 @@ function GoBackBar({ title, showSearchIcon = true, className }) {
   return (
     <div
       className={cn(
-        "bg-background sticky top-0 z-10 flex items-center justify-between p-4",
+        "bg-background sticky top-0 z-10 flex items-center p-4",
         className,
       )}
     >
-      <div className="flex items-center gap-2">
-        <button onClick={() => navigate(-1)}>
-          <ArrowLeftIcon />
-        </button>
-        {title && <h1 className="font-medium">{title}</h1>}
-      </div>
+      <Button
+        size="icon-sm"
+        onClick={() => navigate(-1)}
+        className="bg-background text-foreground rounded-full"
+      >
+        <ArrowLeftIcon className="size-6" />
+      </Button>
+
+      {title && <h1 className="ml-1 font-medium">{title}</h1>}
 
       {showSearchIcon && (
         <Button
           aria-label="search"
           variant="ghost"
           onClick={() => navigate("/search")}
-          size="icon"
-          className="min-[1100px]:hidden"
+          size="icon-sm"
+          className="ml-auto min-[1100px]:hidden"
         >
           <SearchIcon className="size-5.5" />
         </Button>

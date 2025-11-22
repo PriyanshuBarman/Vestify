@@ -32,12 +32,10 @@ import {
 import { Fragment } from "react";
 import { toast } from "sonner";
 
-const shareText = `Try *Vestify* — 
-a virtual investment platform with a *Groww-like UI*.
+const shareText = `*Virtually Invest in Mutual funds* with a *Groww app UI*.
 
-Invest in mutual funds using virtual money, _start virtual SIPs_, manage your virtual wallet, and track portfolio
-
-— all without any market risk.
+Invest, start SIPs, track portfolio, use a virtual wallet, send your virtual money to others and more.
+— all virtually with a Groww app UI.
 
 `;
 
@@ -49,7 +47,7 @@ function ReferAndEarnPage() {
     if (navigator.share) {
       await navigator.share({
         text: shareText,
-        url: `${window.location.origin}/auth/signup?referralCode=${user.profile.username}`,
+        url: `${window.location.origin}?referralCode=${user.profile.username}`,
       });
     } else {
       toast.info("Not supported");

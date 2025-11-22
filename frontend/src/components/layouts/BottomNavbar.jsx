@@ -37,7 +37,7 @@ function BottomNavbar() {
   if (!isMobile) return;
 
   return (
-    <nav className="bg-background fixed inset-x-0 bottom-0 z-10 flex w-full justify-around border-t py-2">
+    <nav className="bg-background fixed inset-x-0 bottom-0 z-10 flex w-full justify-around border-t pt-2 pb-1">
       {tabsMapping.map((tab) => (
         <NavLink
           to={tab.link}

@@ -5,10 +5,11 @@ import Layout from "./components/layouts/Layout";
 import LoadingState from "./components/LoadingState";
 import { authRoutes } from "./features/auth/routes";
 import { mutualFundRoutes } from "./features/mutual-fund/routes";
+import SearchPage from "./features/search/pages/Page";
 import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
-import SearchPage from "./features/search/pages/Page";
+import WelcomePage from "./features/auth/pages/WelcomePage";
 
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -34,6 +35,35 @@ const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
 const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
 
 export const routes = createBrowserRouter([
+  authRoutes,
+  {
+    path: "/about",
+    element: (
+      <Suspense fallback={<LoadingState fullPage />}>
+        <AboutPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/terms-and-conditions",
+    element: (
+      <Suspense fallback={<LoadingState fullPage />}>
+        <TermsPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/privacy-policy",
+    element: (
+      <Suspense fallback={<LoadingState fullPage />}>
+        <PrivacyPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/",
+    element: <WelcomePage />,
+  },
   {
     path: "/",
     element: (
@@ -45,10 +75,6 @@ export const routes = createBrowserRouter([
       walletRoutes,
       stockRoutes,
       mutualFundRoutes,
-      {
-        index: true,
-        element: <Navigate to="/mutual-funds#explore" replace />,
-      },
       {
         path: "/search",
         element: <SearchPage />,
@@ -183,30 +209,5 @@ export const routes = createBrowserRouter([
         ],
       },
     ],
-  },
-  authRoutes,
-  {
-    path: "/terms-and-conditions",
-    element: (
-      <Suspense fallback={<LoadingState fullPage />}>
-        <TermsPage />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/about",
-    element: (
-      <Suspense fallback={<LoadingState fullPage />}>
-        <AboutPage />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/privacy-policy",
-    element: (
-      <Suspense fallback={<LoadingState fullPage />}>
-        <PrivacyPage />
-      </Suspense>
-    ),
   },
 ]);

@@ -1,8 +1,6 @@
-import GoogleIcon from "@/components/icons/GoogleIcon";
 import { Button } from "@/components/ui/button";
 import {
   Field,
-  FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
@@ -16,11 +14,11 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router";
-import { useGoogleAuth } from "../hooks/useGoogleAuth";
+import { useNavigate } from "react-router";
 import { useLogin } from "../hooks/useLogin";
 
 function LoginForm() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -28,7 +26,6 @@ function LoginForm() {
   });
 
   const { mutate: login, isPending } = useLogin();
-  const { googleLogin, isLoading } = useGoogleAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,34 +39,12 @@ function LoginForm() {
   return (
     <div className="flex flex-col gap-6">
       <form onSubmit={handleSubmit}>
-        <FieldGroup className="gap">
+        <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
-            <h1 className="mt-4 text-xl font-medium sm:text-2xl">
+            <h1 className="mb-4 text-[1.4rem] font-medium sm:text-3xl">
               Login to your account
             </h1>
-            <FieldDescription>
-              Don&apos;t have an account?{" "}
-              <Link to="/auth/signup" className="font-medium">
-                Sign up
-              </Link>
-            </FieldDescription>
           </div>
-
-          <Field>
-            <Button
-              size="lg"
-              onClick={googleLogin}
-              disabled={isPending || isLoading}
-              type="button"
-              variant="outline"
-              className="w-full rounded-full py-5.5 shadow-none sm:shadow-xs"
-            >
-              <GoogleIcon />
-              Login with Google
-            </Button>
-          </Field>
-
-          <FieldSeparator>Or</FieldSeparator>
 
           <Field>
             <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -88,13 +63,14 @@ function LoginForm() {
               </InputGroupAddon>
             </InputGroup>
           </Field>
+
           <Field>
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <InputGroup className="rounded-full px-2 py-5.5 shadow-none sm:shadow-xs">
               <InputGroupInput
                 name="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="•••••••••"
+                placeholder="••••••"
                 required
                 maxLength={20}
                 value={formData.password}
@@ -114,23 +90,32 @@ function LoginForm() {
               </InputGroupAddon>
             </InputGroup>
           </Field>
+
           <Field>
             <Button
               size="lg"
-              disabled={isPending || isLoading}
+              disabled={isPending}
               type="submit"
               className="rounded-full bg-gradient-to-r from-[#00b35c] via-[#00b35c91] to-[#00b35c] [background-size:200%_auto] py-5.5 hover:bg-[99%_center]"
             >
-              {(isPending || isLoading) && <Spinner />} Login
+              {isPending && <Spinner />} Login
             </Button>
           </Field>
+
+          <FieldSeparator>Don't have an account?</FieldSeparator>
+
+          <Button
+            type="button"
+            size="lg"
+            variant="secondary"
+            disabled={isPending}
+            onClick={() => navigate("/auth/signup")}
+            className="rounded-full border py-5.5"
+          >
+            Signup
+          </Button>
         </FieldGroup>
       </form>
-      <FieldDescription className="text-2xs px-6 text-center">
-        By clicking continue, you agree to our{" "}
-        <Link to="/terms-and-conditions">Terms</Link> and{" "}
-        <Link to="/privacy-policy">Privacy Policy</Link>.
-      </FieldDescription>
     </div>
   );
 }

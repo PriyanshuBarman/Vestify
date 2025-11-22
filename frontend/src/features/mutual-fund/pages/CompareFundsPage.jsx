@@ -48,7 +48,7 @@ function CompareFundsPage() {
 
   return (
     <section>
-      <GoBackBar showSearchIcon={false} />
+      <GoBackBar title="Compare funds" showSearchIcon={false} />
       <div className="sm:overflow-hidden sm:rounded-3xl sm:border">
         <div className="bg-accent sticky top-14 grid h-28 grid-cols-2 border-b sm:top-0 sm:grid-cols-4">
           {!isMobile && (

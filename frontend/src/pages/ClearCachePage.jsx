@@ -13,7 +13,7 @@ function ClearCachePage() {
   const navigate = useNavigate();
 
   const clearCache = () => {
-    queryClient.invalidateQueries();
+    queryClient.clear();
     navigate("/");
     toast.success("Cache cleared successfully");
   };

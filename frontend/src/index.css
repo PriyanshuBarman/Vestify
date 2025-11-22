@@ -17,26 +17,21 @@ body {
 }
 
 .scrollbar-none::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
+  display: none;
 }
 
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  /* --foreground: oklch(0.145 0 0); */
-  --foreground: #44475b;
+  --foreground: oklch(0.145 0 0);
   --foreground-secondary: black;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  /* --primary: oklch(0.205 0 0); */
   --primary: #04ad83;
-  /* --primary: #10be41; */
-
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
-  /* --secondary: #c4f0e5; */
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -68,15 +63,11 @@ body {
   --foreground: oklch(0.985 0 0);
   --foreground-secondary: white;
   --card: oklch(0.205 0 0);
-  /* --card: transparent; */
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  /* --primary: oklch(0.922 0 0); */
   --primary: #04ad83;
-  /* --primary-foreground: oklch(0.205 0 0); */
-  --primary-foreground: white;
-
+  --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -162,6 +153,26 @@ body {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --radius-md: calc(var(--radius) - 2px);
+
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 @layer base {
@@ -188,18 +199,6 @@ body {
 
   .invest-input-error {
     @apply absolute mt-1 hidden text-xs font-medium text-red-400 peer-[&:invalid:not(:placeholder-shown)]:block;
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --foreground: rgb(5, 5, 5);
-    --foreground-secondary: #44475b;
-  }
-
-  .dark {
-    --foreground: oklch(0.985 0 0);
-    --foreground-secondary: oklch(0.985 0 0);
   }
 }
 

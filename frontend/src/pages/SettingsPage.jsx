@@ -127,7 +127,7 @@ function SettingsPage() {
         variant="outline"
         className="mx-auto mt-auto mb-4 w-[90%] sm:mt-4"
       >
-        <Link to="/auth/logout">
+        <Link to="/auth/logout" replace>
           Logout
           <LogOutIcon />
         </Link>

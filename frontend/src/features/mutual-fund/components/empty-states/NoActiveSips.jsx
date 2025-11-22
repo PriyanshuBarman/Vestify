@@ -24,7 +24,7 @@ function NoActiveSips() {
       <Empty>
         <EmptyHeader className="max-w-none">
           <EmptyMedia>
-            <img src="/sip.svg" alt="No Active SIPs" className="h-50 sm:h-70" />
+            <img src="/sip.svg" alt="No Active SIPs" className="h-50" />
           </EmptyMedia>
           <EmptyTitle>No Active SIPs</EmptyTitle>
           <EmptyDescription>
@@ -38,7 +38,7 @@ function NoActiveSips() {
         </EmptyContent>
       </Empty>
 
-      <section className="swiper-no-swiping mt-26 sm:mt-12">
+      <section className="swiper-no-swiping mt-10 sm:mt-0">
         <SectionHeading heading={"Start SIP with ₹100"} />
         <ScrollArea>
           <div className="flex justify-between gap-4 px-4 sm:m-0.5 sm:gap-3 sm:px-0">

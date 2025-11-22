@@ -20,7 +20,7 @@ function OrderItem({ order, index, length, className }) {
           className="flex justify-between border-b py-4"
         >
           <ItemContent>
-            <ItemTitle>{order.fundShortName}</ItemTitle>
+            <ItemTitle className='font-normal'>{order.fundShortName}</ItemTitle>
             <ItemDescription className="text-xs">
               {orderTypeConfig[order.orderType]}
             </ItemDescription>

@@ -1,3 +1,5 @@
+import CopyButton from "@/components/CopyButton";
+import LoadingState from "@/components/LoadingState";
 import {
   Accordion,
   AccordionContent,
@@ -11,8 +13,7 @@ import {
   ArrowLeftIcon,
   CalendarRangeIcon,
   ChevronRightIcon,
-  CopyIcon,
-  PencilIcon,
+  PencilIcon
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
@@ -20,7 +21,6 @@ import OrderStatusIcon from "../components/OrderStatusIcon";
 import CancelSipButton from "../components/overlays/CancelSipButton";
 import SkipSipButton from "../components/overlays/SkipSipButton";
 import { useGetSipDetail } from "../hooks/useGetSipDetail";
-import LoadingState from "@/components/LoadingState";
 
 function SipDetailsPage() {
   const { sipId } = useParams();
@@ -55,7 +55,7 @@ function SipDetailsPage() {
             <h2 className="text-3xl font-semibold">
               {formatToINR(sipDetail.amount, 2)}
             </h2>
-            <span className="mt-2 space-x-6 text-xs">
+            <span className="mt-2 space-x-6 text-sm font-medium">
               {formatDate(setDate(new Date(), sipDetail.sipDate), "do")} of
               every month
             </span>
@@ -129,14 +129,10 @@ function SipDetailsPage() {
               </div>
               <div className="flex space-x-10">
                 <span className="shrink-0">SIP Id:</span>
-                <p>{sipDetail.id}</p>
-                <Button
-                  variant="secondary"
-                  size="icon-sm"
-                  onClick={() => navigator.clipboard.writeText(sipDetail.id)}
-                >
-                  <CopyIcon />
-                </Button>
+                <div className="flex items-start gap-2 break-all">
+                  <span>{sipDetail.id}</span>
+                  <CopyButton text={sipDetail.id} className="text-foreground" />
+                </div>
               </div>
             </AccordionContent>
           </AccordionItem>

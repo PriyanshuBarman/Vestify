@@ -40,7 +40,7 @@ function CancelSipButton({ sipId }) {
           </IconWrapper>
         </ResponsiveModalHeader>
 
-        <ResponsiveModalTitle className="text-center">
+        <ResponsiveModalTitle className="pb-2 text-center font-medium">
           Future installments will be stopped
         </ResponsiveModalTitle>
 

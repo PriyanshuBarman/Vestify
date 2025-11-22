@@ -13,7 +13,7 @@ import SearchHistoryList from "../components/SearchHistoryList";
 import SearchResultList from "../components/SearchResultList";
 import TrendingSearchList from "../components/TrendingSearchList";
 
-function Page() {
+function SearchPage() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [searchType, setSearchType] = useState("mutualFunds");
@@ -90,4 +90,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default SearchPage;

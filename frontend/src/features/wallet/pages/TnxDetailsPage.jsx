@@ -1,3 +1,4 @@
+import CopyButton from "@/components/CopyButton";
 import GoBackBar from "@/components/GoBackBar";
 import IncognitoIcon from "@/components/icons/IncognitoIcon";
 import SendIcon from "@/components/icons/SendIcon";
@@ -7,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatToINR } from "@/utils/formatters";
 import { formatDate } from "date-fns";
-import { ArrowDownIcon, CheckIcon, CopyIcon } from "lucide-react";
+import { ArrowDownIcon, CheckIcon } from "lucide-react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import ProfileDialog from "../components/ProfileDialog";
@@ -74,54 +75,29 @@ function TnxDetailsPage() {
             <span className="text-center text-wrap capitalize">
               {displayData.name}
             </span>
-            <Avatar onClick={handleAvatarClick} className="size-9">
-              <AvatarImage src={displayData.avatar} />
-              <AvatarFallback className="text-sm uppercase">
-                {displayData.fallback || <IncognitoIcon className="size-5" />}
-              </AvatarFallback>
-            </Avatar>
+            <Button
+              size="icon"
+              className="text-foreground bg-transparent"
+              onClick={handleAvatarClick}
+            >
+              <Avatar className="size-9">
+                <AvatarImage src={displayData.avatar} />
+                <AvatarFallback className="text-sm uppercase">
+                  {displayData.fallback || <IncognitoIcon className="size-5" />}
+                </AvatarFallback>
+              </Avatar>
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="mt-6 w-full">
-        <CardContent className="space-y-6 text-sm">
-          <CardHeader>
-            <CardTitle className="text-md text-center font-medium">
-              Transaction details{" "}
-            </CardTitle>
-          </CardHeader>
-
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2">Updated balance</span>
-            <span className="font-medium">
-              {formatToINR(tnx.updatedBalance)}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2">Time</span>
-            <span className="font-medium">
-              {formatDate(tnx.createdAt, "h:mm a")}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2">Date</span>
-            <span className="font-medium">
-              {formatDate(tnx.createdAt, "dd MMM yy")}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2">Transaction Id</span>
-            <span className="font-medium">{tnx.id}</span>
-          </div>
-        </CardContent>
-      </Card>
+      <TnxDetailsCard tnx={tnx} />
 
       {peerProfile && peerProfile?.userId !== "system" && (
         <>
           <Button
             size="lg"
-            className="mx-auto mt-6 w-full sm:mt-14 sm:w-fit"
+            className="mx-auto mt-auto w-full sm:mt-14 sm:w-fit"
             onClick={() => {
               navigate(`/wallet/enter-amount`, {
                 state: {
@@ -148,3 +124,43 @@ function TnxDetailsPage() {
 }
 
 export default TnxDetailsPage;
+
+function TnxDetailsCard({ tnx }) {
+  return (
+    <Card className="mt-6 w-full">
+      <CardContent className="space-y-6 text-sm">
+        <CardHeader>
+          <CardTitle className="text-md text-center font-medium">
+            Transaction details{" "}
+          </CardTitle>
+        </CardHeader>
+
+        <div className="flex items-center justify-between">
+          <span>Updated balance</span>
+          <span className="max-w-1/2 font-medium">
+            {formatToINR(tnx.updatedBalance)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span>Time</span>
+          <span className="max-w-1/2 font-medium">
+            {formatDate(tnx.createdAt, "h:mm a")}
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span>Date</span>
+          <span className="max-w-1/2 font-medium">
+            {formatDate(tnx.createdAt, "dd MMM yy")}
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span>Transaction Id</span>
+          <div className="flex max-w-1/2 flex-wrap items-center font-medium break-all">
+            <span>{tnx.id}</span>
+            <CopyButton text={tnx.id} />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

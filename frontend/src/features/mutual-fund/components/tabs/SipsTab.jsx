@@ -3,6 +3,7 @@ import {
   Item,
   ItemContent,
   ItemDescription,
+  ItemGroup,
   ItemMedia,
   ItemSeparator,
   ItemTitle,
@@ -30,13 +31,13 @@ function SipsTab() {
             <span className="text-muted-foreground text-xs">
               Monthly SIP amount
             </span>
-            <h2 className="text-xl font-medium">
+            <h2 className="text-xl leading-tight font-semibold tabular-nums">
               {formatToINR(data?.totalActiveSipAmount, 2)}
             </h2>
           </div>
 
-          <div className="mt-4 flex justify-between">
-            <h2 className="text-sm font-medium sm:text-lg">
+          <div className="mt-6 flex justify-between">
+            <h2 className="text-md font-medium sm:text-lg">
               Active SIPs ({data?.sips?.length})
             </h2>
             {/* <div className="flex items-center gap-2 text-xs">
@@ -46,14 +47,16 @@ function SipsTab() {
           </div>
         </div>
 
-        {data?.sips?.map((sip, index) => (
-          <SipItem
-            key={sip.id}
-            sip={sip}
-            index={index}
-            length={data.sips.length}
-          />
-        ))}
+        <ItemGroup className="mt-2">
+          {data?.sips?.map((sip, index) => (
+            <SipItem
+              key={sip.id}
+              sip={sip}
+              index={index}
+              length={data.sips.length}
+            />
+          ))}
+        </ItemGroup>
       </section>
       <div className="hidden h-full w-1/2 lg:block">
         <img src="/sip.svg" alt="sip" className="h-50 sm:h-70" />
@@ -77,10 +80,10 @@ function SipItem({ sip, index, length }) {
             />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle className="Fund-Name line-clamp-2 text-sm text-wrap">
+            <ItemTitle className="text-sm leading-tight text-wrap line-clamp-2">
               {sip.fundShortName}
             </ItemTitle>
-            <ItemDescription className="mt-1 text-sm font-medium">
+            <ItemDescription className="text-sm font-medium">
               {formatToINR(sip.amount, 2)}
             </ItemDescription>
           </ItemContent>

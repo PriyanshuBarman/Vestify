@@ -29,16 +29,18 @@ function PaymentSuccessPage() {
             Done
           </Link>
         </Button>
-        <Button
-          asChild
-          size="lg"
-          variant="ghost"
-          className="text-primary w-full"
-        >
-          <Link to={orderDetailsRoute} replace>
-            Order Details
-          </Link>
-        </Button>
+        {orderDetailsRoute && (
+          <Button
+            asChild
+            size="lg"
+            variant="ghost"
+            className="text-primary w-full"
+          >
+            <Link to={orderDetailsRoute} replace>
+              Order Details
+            </Link>
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
           </IconWrapper>
         </ResponsiveModalHeader>
 
-        <ResponsiveModalTitle className="text-center">
+        <ResponsiveModalTitle className="pb-2 text-center font-medium">
           Are you sure you want to skip{" "}
           {format(nextInstallmentDate, "dd MMM yy")} installment?
         </ResponsiveModalTitle>

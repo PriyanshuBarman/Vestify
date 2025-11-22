@@ -8,14 +8,14 @@ import { toast } from "sonner";
 export function useGoogleAuth() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get("referralCode");
 
   const fnc = useGoogleLogin({
     onSuccess: async ({ code }) => {
       try {
-        setIsLoading(true);
+        setIsPending(true);
         const { data } = await api.post("/auth/google", { code, referralCode });
         if (data.success) {
           queryClient.setQueryData(["user"], data.user);
@@ -24,7 +24,7 @@ export function useGoogleAuth() {
       } catch (err) {
         toast.error("Something went wrong.");
       } finally {
-        setIsLoading(false);
+        setIsPending(false);
       }
     },
     onError: (errorResponse) => {
@@ -34,5 +34,5 @@ export function useGoogleAuth() {
     flow: "auth-code",
   });
 
-  return { googleLogin: fnc, isLoading };
+  return { googleLogin: fnc, isPending };
 }

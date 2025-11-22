@@ -1,8 +1,6 @@
-import GoogleIcon from "@/components/icons/GoogleIcon";
 import { Button } from "@/components/ui/button";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -20,16 +18,15 @@ import {
   EyeOffIcon,
   LockIcon,
   MailIcon,
-  TrashIcon,
   UserIcon,
 } from "lucide-react";
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router";
-import { useGoogleAuth } from "../hooks/useGoogleAuth";
-import { useSignup } from "../hooks/useSignup";
+import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
+import { useSignup } from "../hooks/useSignup";
 
 function SignupForm() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
   const referralCode = searchParams.get("referralCode");
@@ -40,7 +37,6 @@ function SignupForm() {
   });
 
   const { mutate: signup, isPending } = useSignup();
-  const { googleLogin, isLoading } = useGoogleAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +46,7 @@ function SignupForm() {
     }
     signup({ ...formData, referralCode });
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -60,36 +57,13 @@ function SignupForm() {
       <form onSubmit={handleSubmit}>
         <FieldGroup className="gap-6">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h1 className="mt-4 text-xl font-medium sm:text-2xl">
+            <h1 className="mt-4 text-[1.4rem] font-medium sm:text-3xl">
               Create your account
             </h1>
-            <FieldDescription>
-              Already have an account?{" "}
-              <Link to="/auth/login" className="font-medium">
-                Login
-              </Link>
-            </FieldDescription>
           </div>
-
-          <Field>
-            <Button
-              size="lg"
-              onClick={googleLogin}
-              disabled={isPending || isLoading}
-              type="button"
-              variant="outline"
-              className="w-full rounded-full py-5.5 shadow-none sm:shadow-xs"
-            >
-              <GoogleIcon />
-              Signup with Google
-            </Button>
-          </Field>
-
-          <FieldSeparator>Or</FieldSeparator>
 
           <Field className="gap-2">
             <FieldLabel htmlFor="name">Name</FieldLabel>
-
             <InputGroup className="rounded-full px-2 py-5.5 shadow-none sm:shadow-xs">
               <InputGroupInput
                 name="name"
@@ -105,6 +79,7 @@ function SignupForm() {
               </InputGroupAddon>
             </InputGroup>
           </Field>
+
           <Field className="gap-2">
             <FieldLabel htmlFor="email">Email</FieldLabel>
             <InputGroup className="rounded-full px-2 py-5.5 shadow-none sm:shadow-xs">
@@ -122,6 +97,7 @@ function SignupForm() {
               </InputGroupAddon>
             </InputGroup>
           </Field>
+
           <Field
             data-invalid={
               formData.password.length > 0 && formData.password.length < 6
@@ -133,7 +109,7 @@ function SignupForm() {
               <InputGroupInput
                 name="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="•••••••••"
+                placeholder="••••••"
                 required
                 minLength={6}
                 maxLength={20}
@@ -159,23 +135,32 @@ function SignupForm() {
               </FieldError>
             )}
           </Field>
+
           <Field>
             <Button
               size="lg"
-              disabled={isPending || isLoading}
+              disabled={isPending}
               type="submit"
               className="rounded-full bg-gradient-to-r from-[#00b35c] via-[#00b35c91] to-[#00b35c] [background-size:200%_auto] py-5.5 hover:bg-[99%_center]"
             >
-              {(isPending || isLoading) && <Spinner />} Signup
+              {isPending && <Spinner />} Signup
             </Button>
           </Field>
+
+          <FieldSeparator> Already have an account? </FieldSeparator>
+
+          <Button
+            type="button"
+            size="lg"
+            variant="secondary"
+            disabled={isPending}
+            onClick={() => navigate("/auth/login")}
+            className="rounded-full border py-5.5"
+          >
+            Login
+          </Button>
         </FieldGroup>
       </form>
-      <FieldDescription className="text-2xs px-6 text-center">
-        By clicking continue, you agree to our{" "}
-        <Link to="/terms-and-conditions">Terms</Link> and{" "}
-        <Link to="/privacy-policy">Privacy Policy</Link>.
-      </FieldDescription>
     </div>
   );
 }
