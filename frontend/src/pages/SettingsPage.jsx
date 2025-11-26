@@ -1,32 +1,19 @@
 import GoBackBar from "@/components/GoBackBar";
+import ThemeChangeButton from "@/components/ThemeChangeButton";
 import { Button } from "@/components/ui/button";
 import { useGetUser } from "@/hooks/useGetUser";
-import { selectTheme, setTheme } from "@/store/slices/themeSlice";
 import {
   ChevronRightIcon,
   DatabaseZapIcon,
   KeyRoundIcon,
   LockIcon,
   LogOutIcon,
-  MonitorIcon,
   MonitorSmartphone,
-  MoonIcon,
-  SunIcon,
   User2Icon,
 } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router";
-
-const THEMES = [
-  { name: "system", icon: <MonitorIcon /> },
-  { name: "dark", icon: <MoonIcon /> },
-  { name: "light", icon: <SunIcon /> },
-];
+import { Link } from "react-router";
 
 function SettingsPage() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const currentTheme = useSelector(selectTheme);
   const { data: user } = useGetUser();
 
   return (
@@ -39,19 +26,7 @@ function SettingsPage() {
         </h6>
         <div className="flex items-center justify-between">
           Theme
-          <div className="flex justify-between rounded-full border p-0.5">
-            {THEMES.map((theme) => (
-              <div key={theme.name}>
-                <Button
-                  onClick={() => dispatch(setTheme(theme.name))}
-                  variant="secondery"
-                  className={`w-20 rounded-full border-none shadow-none ${currentTheme === theme.name && "bg-primary text-background ring"}`}
-                >
-                  {theme.icon}
-                </Button>
-              </div>
-            ))}
-          </div>
+          <ThemeChangeButton />
         </div>
       </section>
 

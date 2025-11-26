@@ -1,5 +1,6 @@
 import LoadingState from "@/components/LoadingState";
 import { lazy, Suspense } from "react";
+import Page from "./pages/Page";
 
 const RedemptionRequestSuccessPage = lazy(
   () => import("./pages/RedemptionRequestSuccessPage"),
@@ -20,7 +21,6 @@ const AllFundsPage = lazy(() => import("./pages/AllFundsPage"));
 const OrderDetailsPage = lazy(() => import("./pages/OrderDetailsPage"));
 const CompareFundsPage = lazy(() => import("./pages/CompareFundsPage"));
 const SipCalculatorPage = lazy(() => import("./pages/SipCalculatorPage"));
-const Page = lazy(() => import("./pages/Page"));
 const Layout = lazy(() => import("./components/Layout"));
 
 export const mutualFundRoutes = {
@@ -29,13 +29,7 @@ export const mutualFundRoutes = {
   children: [
     {
       index: true,
-      element: (
-        <Suspense
-          fallback={<LoadingState fullPage className="h-[calc(100vh-250px)]" />}
-        >
-          <Page />
-        </Suspense>
-      ),
+      element: <Page />,
     },
     {
       path: "investment-details",
@@ -71,19 +65,11 @@ export const mutualFundRoutes = {
     },
     {
       path: "collections",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <CollectionPage />
-        </Suspense>
-      ),
+      element: <CollectionPage />,
     },
     {
       path: ":scheme_code",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <FundPage />
-        </Suspense>
-      ),
+      element: <FundPage />,
     },
     {
       path: "compare-funds",
@@ -135,19 +121,11 @@ export const mutualFundRoutes = {
     },
     {
       path: "fund-houses",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <FundHousesPage />
-        </Suspense>
-      ),
+      element: <FundHousesPage />,
     },
     {
       path: "amc-funds/:amcCode",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <AmcFundsPage />
-        </Suspense>
-      ),
+      element: <AmcFundsPage />,
     },
     {
       path: "fund-manager/:managerName",

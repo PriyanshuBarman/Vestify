@@ -31,11 +31,6 @@ function NoActiveSips() {
             Your SIPs will appear here once you start one.
           </EmptyDescription>
         </EmptyHeader>
-        <EmptyContent>
-          <Button asChild className="rounded-full">
-            <Link to="/mutual-funds/all-funds">Start SIP</Link>
-          </Button>
-        </EmptyContent>
       </Empty>
 
       <section className="swiper-no-swiping mt-10 sm:mt-0">

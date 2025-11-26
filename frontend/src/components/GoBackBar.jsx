@@ -18,9 +18,10 @@ function GoBackBar({ title, showSearchIcon = true, className }) {
       )}
     >
       <Button
+        aria-label="Go back button"
         size="icon-sm"
         onClick={() => navigate(-1)}
-        className="bg-background text-foreground rounded-full"
+        className="bg-background text-foreground w-fit rounded-full hover:bg-transparent"
       >
         <ArrowLeftIcon className="size-6" />
       </Button>

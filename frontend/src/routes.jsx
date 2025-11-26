@@ -9,8 +9,8 @@ import SearchPage from "./features/search/pages/Page";
 import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
-import WelcomePage from "./features/auth/pages/WelcomePage";
 
+const WelcomePage = lazy(() => import("./features/auth/pages/WelcomePage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
@@ -31,7 +31,6 @@ const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
 const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
 const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
-const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
 const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
 
 export const routes = createBrowserRouter([
@@ -89,11 +88,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <AllOrdersPage />
-          </Suspense>
-        ),
+        element: <AllOrdersPage />,
       },
       {
         path: "/profile",
@@ -101,11 +96,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/account-details",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <AccountDetailsPage />
-          </Suspense>
-        ),
+        element: <AccountDetailsPage />,
       },
       {
         path: "/edit-field/:field",
@@ -133,19 +124,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/refer-and-earn",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <ReferAndEarnPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/coming-soon",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <ComingSoonPage />
-          </Suspense>
-        ),
+        element: <ReferAndEarnPage />,
       },
       {
         path: "*",
@@ -160,11 +139,7 @@ export const routes = createBrowserRouter([
         children: [
           {
             index: true,
-            element: (
-              <Suspense fallback={<LoadingState fullPage />}>
-                <SettingsPage />
-              </Suspense>
-            ),
+            element: <SettingsPage />,
           },
           {
             path: "change-pin",

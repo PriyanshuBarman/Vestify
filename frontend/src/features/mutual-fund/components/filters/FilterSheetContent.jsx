@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { useGetFilteredFunds } from "../../hooks/useGetFilteredFunds";
 import { getActiveFilterCount } from "../../utils/filterUtils";
-import FilterCategoriesTab from "./FilterCategoriesTab";
-import FilterFundHouseTab from "./FilterFundHouseTab";
-import FilterRatingsTab from "./FilterRatingsTab";
-import FilterRiskLevelTab from "./FilterRiskLevelTab";
-import FilterSortByTab from "./FilterSortByTab";
-import ViewFundsButton from "./ViewFundsButton";
+import { lazy, Suspense } from "react";
+
+const FilterCategoriesTab = lazy(() => import("./FilterCategoriesTab"));
+const FilterFundHouseTab = lazy(() => import("./FilterFundHouseTab"));
+const FilterRatingsTab = lazy(() => import("./FilterRatingsTab"));
+const FilterRiskLevelTab = lazy(() => import("./FilterRiskLevelTab"));
+const FilterSortByTab = lazy(() => import("./FilterSortByTab"));
+const ViewFundsButton = lazy(() => import("./ViewFundsButton"));
 
 const FILTER_TABS = [
   { label: "Sort by", key: "sort_by" },

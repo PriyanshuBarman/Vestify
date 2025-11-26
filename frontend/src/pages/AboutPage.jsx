@@ -10,8 +10,8 @@ import {
 
 function AboutPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-8 px-6 py-12">
-      <h1 className="sm:text-foreground-secondary text-center text-2xl font-bold sm:text-3xl">
+    <div className="mx-auto w-full max-w-3xl space-y-12 px-6 py-12">
+      <h1 className="sm:text-foreground-secondary text-center text-2xl font-semibold sm:text-4xl">
         About Vestify
       </h1>
       {aboutData.map((section, index) => (

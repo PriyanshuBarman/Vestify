@@ -1,15 +1,14 @@
-import LoadingState from "@/components/LoadingState";
 import {
   selectActiveTabIndex,
   setActiveTabIndex,
 } from "@/store/slices/mutualFundSlice";
-import { Suspense, lazy } from "react";
+import { lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "swiper/css";
 import { HashNavigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import InvestmentsTab from "../components/tabs/InvestmentsTab";
 
-const InvestmentsTab = lazy(() => import("../components/tabs/InvestmentsTab"));
 const SipsTab = lazy(() => import("../components/tabs/SipsTab"));
 const WatchlistTab = lazy(() => import("../components/tabs/WatchlistTab"));
 const ExploreTab = lazy(() => import("../components/tabs/ExploreTab"));
@@ -45,27 +44,15 @@ function Page() {
         data-hash="investments"
         className="min-h-[calc(100vh-200px)]"
       >
-        {activeTabIndex === 1 && (
-          <Suspense fallback={<LoadingState />}>
-            <InvestmentsTab />
-          </Suspense>
-        )}
+        {activeTabIndex === 1 && <InvestmentsTab />}
       </SwiperSlide>
 
       <SwiperSlide data-hash="sips" className="min-h-[calc(100vh-200px)]">
-        {activeTabIndex === 2 && (
-          <Suspense fallback={<LoadingState />}>
-            <SipsTab />
-          </Suspense>
-        )}
+        {activeTabIndex === 2 && <SipsTab />}
       </SwiperSlide>
 
       <SwiperSlide data-hash="watchlist" className="min-h-[calc(100vh-200px)]">
-        {activeTabIndex === 3 && (
-          <Suspense fallback={<LoadingState />}>
-            <WatchlistTab />
-          </Suspense>
-        )}
+        {activeTabIndex === 3 && <WatchlistTab />}
       </SwiperSlide>
     </Swiper>
   );

@@ -25,7 +25,7 @@ function PinSetupPage() {
         <div className="text-center">
           <h1 className="mb-1 text-xl font-semibold">Set up your PIN</h1>
           <p className="text-muted-foreground text-sm">
-            Your PIN will be required for investments and sending the virtual
+            This PIN will be required for investments and sending the virtual
             money to other users
           </p>
         </div>

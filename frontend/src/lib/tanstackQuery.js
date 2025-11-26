@@ -24,9 +24,10 @@ const getSmartStaleTime = () => {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: getSmartStaleTime(),
+      staleTime: () => getSmartStaleTime(),
       gcTime: 7 * 24 * 60 * 60 * 1000, // 7 days
       retry: false,
+      retryOnMount: false,
     },
   },
 });

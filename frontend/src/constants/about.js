@@ -10,10 +10,10 @@ export const aboutData = [
     title: "2. What Can You Do in Vestify?",
     paragraphs: [
       "Virtual Investing — invest in real mutual funds using virtual money.",
-      "Start & Manage Virtual SIPs — create, pause, edit, resume, or cancel SIPs.",
+      "Start & Manage Virtual SIPs — create, edit, or cancel SIPs.",
       "Track a Realistic Virtual Portfolio — see market value, returns, gains, allocations, and more.",
       "Virtual Wallet — get virtual money to invest and manage your balance.",
-      "Send Virtual Money to Other Vestify Users — share virtual funds instantly.",
+      "Send Virtual Money to Other Vestify Users — shareable virtual money.",
       "Scan & Pay (Virtual UPI-Style) — transfer virtual money using a QR code.",
       "All with Zero Real Money Involved — completely risk-free, safe, and fun.",
     ],

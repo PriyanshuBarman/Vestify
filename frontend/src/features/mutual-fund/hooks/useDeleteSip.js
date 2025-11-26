@@ -9,10 +9,11 @@ export function useDeleteSip() {
 
   return useMutation({
     mutationFn: deleteSip,
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       toast.success(data.message);
       queryClient.invalidateQueries({ queryKey: ["sips"] });
-      queryClient.invalidateQueries({ queryKey: ["sip", data.sipId] });
+      queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
+
       navigate("/mutual-funds/#sips");
     },
     onError: (error) => {

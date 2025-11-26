@@ -2,16 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
 import { ChevronDownIcon } from "lucide-react";
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFilteredFunds } from "../../hooks/useGetFilteredFunds";
 import { getActiveFilterButtons } from "../../utils/filterUtils";
-import FundRating from "../FundRating";
-import FilterCategoriesTab from "./FilterCategoriesTab";
-import FilterFundHouseTab from "./FilterFundHouseTab";
-import FilterRatingsTab from "./FilterRatingsTab";
-import FilterRiskLevelTab from "./FilterRiskLevelTab";
-import ViewFundsButton from "./ViewFundsButton";
+
+const FundRating = lazy(() => import("../FundRating"));
+const FilterCategoriesTab = lazy(() => import("./FilterCategoriesTab"));
+const FilterFundHouseTab = lazy(() => import("./FilterFundHouseTab"));
+const FilterRatingsTab = lazy(() => import("./FilterRatingsTab"));
+const FilterRiskLevelTab = lazy(() => import("./FilterRiskLevelTab"));
+const ViewFundsButton = lazy(() => import("./ViewFundsButton"));
 
 // Component mapping for filter tabs
 const filterComponents = {

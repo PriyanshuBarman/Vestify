@@ -28,21 +28,6 @@ function SearchResultList({
                 {item.fund_category || item.subcategory}
               </span>
             </div>
-
-            {/*  Return */}
-            {/* <div className="Returns hidden text-xs sm:flex">
-              1Y
-              <span
-                className={`ml-1 flex gap-1 ${item.one_year_return < 0 ? "text-red-400" : "text-primary"} `}
-              >
-                {Math.floor(parseFloat(item.one_year_return) * 10) / 10}%
-                {item.one_year_return < 0 ? (
-                  <TrendingDownIcon size={16} className="text-inherit" />
-                ) : (
-                  <TrendingUpIcon size={16} className="text-inherit" />
-                )}
-              </span>
-            </div> */}
           </div>
         </li>
       ))}

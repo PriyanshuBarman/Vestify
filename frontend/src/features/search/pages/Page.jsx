@@ -5,13 +5,14 @@ import { useKeyboardDismiss } from "@/features/search/hooks/useKeyboardDismis";
 import { useDebounce } from "@/hooks/useDebounce";
 import { addToSearchHistory } from "@/store/slices/searchSlice";
 import { X } from "lucide-react";
-import { useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import FilterTabs from "../components/FilterTabs";
-import SearchHistoryList from "../components/SearchHistoryList";
-import SearchResultList from "../components/SearchResultList";
 import TrendingSearchList from "../components/TrendingSearchList";
+
+// const FilterTabs = lazy(() => import("../components/FilterTabs"));
+const SearchHistoryList = lazy(() => import("../components/SearchHistoryList"));
+const SearchResultList = lazy(() => import("../components/SearchResultList"));
 
 function SearchPage() {
   const navigate = useNavigate();
@@ -65,23 +66,23 @@ function SearchPage() {
         </button>
       </div>
       {/* ============================// SearchBar ============================ */}
-
-      <FilterTabs searchType={searchType} setSearchType={setSearchType} />
+      {/* <FilterTabs searchType={searchType} setSearchType={setSearchType} /> */}
 
       <div className="Lists space-y-4 px-2">
-        <SearchResultList
-          searchResult={searchResult}
-          searchType={searchType}
-          handleClick={handleClick}
-        />
-        {!searchResult && !isLoading && (
-          <SearchHistoryList
-            searchHistory={searchHistory}
+        <Suspense fallback={null}>
+          <SearchResultList
+            searchResult={searchResult}
             searchType={searchType}
             handleClick={handleClick}
           />
-        )}
-
+          {!searchResult && !isLoading && (
+            <SearchHistoryList
+              searchHistory={searchHistory}
+              searchType={searchType}
+              handleClick={handleClick}
+            />
+          )}
+        </Suspense>
         {!searchResult && !searchHistory[searchType]?.length && !isLoading && (
           <TrendingSearchList handleClick={handleClick} />
         )}

@@ -80,7 +80,7 @@ function SipItem({ sip, index, length }) {
             />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle className="text-sm leading-tight text-wrap line-clamp-2">
+            <ItemTitle className="line-clamp-2 text-sm leading-tight text-wrap">
               {sip.fundShortName}
             </ItemTitle>
             <ItemDescription className="text-sm font-medium">

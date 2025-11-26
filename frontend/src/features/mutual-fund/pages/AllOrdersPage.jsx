@@ -3,11 +3,13 @@ import { lazy } from "react";
 import OrderItem from "../components/OrderItem";
 import { useGetAllOrders } from "../hooks/useGetAllOrders";
 import { ItemGroup } from "@/components/ui/item";
+import LoadingState from "@/components/LoadingState";
 const NoOrders = lazy(() => import("../components/empty-states/NoOrders"));
 
 function AllOrdersPage() {
-  const { data: orders } = useGetAllOrders();
+  const { data: orders, isPending } = useGetAllOrders();
 
+  if (isPending) return <LoadingState fullPage />;
   if (!orders?.length) return <NoOrders />;
 
   return (
@@ -15,7 +17,12 @@ function AllOrdersPage() {
       <GoBackBar title="All Orders" showSearchIcon={false} />
       <ItemGroup>
         {orders?.map((order, index) => (
-          <OrderItem key={order.id} order={order} index={index} length={orders.length} />
+          <OrderItem
+            key={order.id}
+            order={order}
+            index={index}
+            length={orders.length}
+          />
         ))}
       </ItemGroup>
     </div>

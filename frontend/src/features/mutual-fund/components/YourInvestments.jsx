@@ -1,15 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { useMediaQuery } from "react-responsive";
-import { useGetPortfolioSummary } from "../hooks/useGetPortfolioSummary";
-import SectionHeading from "./SectionHeading";
 import { formatToINR } from "@/utils/formatters";
 import { getChangeColor } from "@/utils/helper";
+import { useGetPortfolioSummary } from "../hooks/useGetPortfolioSummary";
+import SectionHeading from "./SectionHeading";
 
 function YourInvestments() {
   const { data: portfolio = {} } = useGetPortfolioSummary();
-
-  const hide = useMediaQuery({ maxWidth: 1125 });
-  if (hide) return null;
 
   return (
     <div className="h-full w-sm">

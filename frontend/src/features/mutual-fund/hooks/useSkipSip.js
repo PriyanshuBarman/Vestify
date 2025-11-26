@@ -7,10 +7,10 @@ export function useSkipSip() {
 
   return useMutation({
     mutationFn: skipSip,
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       toast.success(data.message);
       queryClient.invalidateQueries({ queryKey: ["sips"] });
-      queryClient.invalidateQueries({ queryKey: ["sip", data.sipId] });
+      queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
     },
     onError: (error) => {
       toast.error(

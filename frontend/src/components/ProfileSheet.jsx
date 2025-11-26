@@ -1,22 +1,20 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import ProfilePage from "@/pages/ProfilePage";
-import { Button } from "./ui/button";
+import { toast } from "sonner";
 
-function ProfileSheet({ children }) {
+function ProfileSheet({ open, onOpenChange }) {
+  const isMobile = useIsMobile();
+
+  const closeSheet = () => {
+    if (isMobile) return;
+    onOpenChange(false);
+  };
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          type="button"
-          className="relative flex size-8.5 shrink-0 overflow-hidden rounded-full"
-        >
-          {children}
-        </Button>
-      </SheetTrigger>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="h-svh min-w-md pt-18">
-        <ProfilePage />
+        <ProfilePage closeSheet={closeSheet} />
       </SheetContent>
     </Sheet>
   );

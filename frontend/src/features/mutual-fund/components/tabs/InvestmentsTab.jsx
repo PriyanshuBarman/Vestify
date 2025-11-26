@@ -3,10 +3,10 @@ import LoadingState from "@/components/LoadingState";
 import { lazy, useEffect, useState } from "react";
 import { useGetPortfolio } from "../../hooks/useGetPortfolio";
 import { sortPortfolio } from "../../utils/investmentTabUtils";
-import PortfolioModal from "../overlays/PortfolioModal";
-import PendingOrders from "../PendingOrders";
-import PortfolioSummary from "../PortfolioSummary";
-import PortfolioTable from "../tables/PortfolioTable";
+const PortfolioModal = lazy(() => import("../overlays/PortfolioModal"));
+const PendingOrders = lazy(() => import("../PendingOrders"));
+const PortfolioSummary = lazy(() => import("../PortfolioSummary"));
+const PortfolioTable = lazy(() => import("../tables/PortfolioTable"));
 const NoInvestments = lazy(() => import("../empty-states/NoInvestments"));
 
 const sortOptions = {
@@ -25,7 +25,7 @@ function InvestmentsTab() {
   const [selectedFund, setSelectedFund] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isPending } = useGetPortfolio();
+  const { data, isLoading } = useGetPortfolio();
 
   useEffect(() => {
     if (data) setPortfolio(data);
@@ -47,7 +47,7 @@ function InvestmentsTab() {
     setIsModalOpen(true);
   };
 
-  if (isPending) return <LoadingState />;
+  if (isLoading) return <LoadingState />;
 
   return (
     <div className="space-y-6 pb-20 sm:mx-auto sm:max-w-xl">

@@ -12,7 +12,7 @@ export function useDeleteAccount() {
     onSuccess: () => {
       queryClient.clear();
       localStorage.clear();
-      navigate("/auth/login", { replace: true });
+      navigate("/", { replace: true });
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || "Something went wrong");

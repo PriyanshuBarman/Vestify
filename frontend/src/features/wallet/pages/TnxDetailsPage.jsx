@@ -127,7 +127,7 @@ export default TnxDetailsPage;
 
 function TnxDetailsCard({ tnx }) {
   return (
-    <Card className="mt-6 w-full">
+    <Card className="my-6 w-full">
       <CardContent className="space-y-6 text-sm">
         <CardHeader>
           <CardTitle className="text-md text-center font-medium">

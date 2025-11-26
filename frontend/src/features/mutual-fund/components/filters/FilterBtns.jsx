@@ -13,9 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { columnsConfig } from "../../utils/collectionsUtils";
 import { getActiveFilterCount } from "../../utils/filterUtils";
 import SortByBtn from "./SortByButton";
-import ActiveFilterButtons from "./ActiveFilterButtons";
 import OpenFilterSheetBtn from "./OpenFilterSheetBtn";
 import { sortOptions } from "../../constants/collection";
+import ActiveFilterButtons from "./ActiveFilterButtons";
 
 const FUND_CATEGORIES = ["Flexi Cap Fund", "Small Cap Fund"];
 

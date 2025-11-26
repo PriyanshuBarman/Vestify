@@ -12,7 +12,11 @@ export const walletRoutes = {
   children: [
     {
       index: true,
-      element: <Page />,
+      element: (
+        <Suspense fallback={<LoadingState fullPage />}>
+          <Page />,
+        </Suspense>
+      ),
     },
     {
       path: "send",

@@ -10,7 +10,10 @@ import FundLogo from "./FundLogo";
 
 function CardSM({ fund }) {
   return (
-    <Link to={`/mutual-funds/${fund.scheme_code}`}>
+    <Link
+      to={`/mutual-funds/${fund.scheme_code}`}
+      onTouchStart={() => import("../pages/FundPage")}
+    >
       <Card className="min-w-72 gap-2 p-4">
         <FundLogo fundHouseDomain={fund.detail_info} className="size-8.5" />
 

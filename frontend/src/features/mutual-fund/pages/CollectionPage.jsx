@@ -3,11 +3,9 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { ChevronsLeftRightIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import SortByButton from "../components/filters/SortByButton";
-import TableLG from "../components/tables/TableLG";
-import TableSM from "../components/tables/TableSM";
 import { DEFAULT_COLUMNS, sortOptions } from "../constants/collection";
 import { useGetFundsByFilter } from "../hooks/useGetFundsByFilter";
 import {
@@ -16,6 +14,8 @@ import {
   getNextColumn,
   sortPeersBy,
 } from "../utils/collectionsUtils";
+const TableLG = lazy(() => import("../components/tables/TableLG"));
+const TableSM = lazy(() => import("../components/tables/TableSM"));
 
 function CollectionPage() {
   const isMobile = useIsMobile();
@@ -63,14 +63,8 @@ function CollectionPage() {
     setActiveColumn(columnKey);
   };
 
-  const handleOrderChange = () => {
-    const newOrder = orderBy === "asc" ? "desc" : "asc";
-    setOrderBy(newOrder);
-    setPeers((prevPeers) => sortPeersBy(prevPeers, activeColumn, newOrder));
-  };
-
   return (
-    <div className="relative">
+    <div className="relative sm:pt-6">
       <section className="bg-background sticky top-0 z-10 pb-1">
         <GoBackBar />
         <div className="mb-4 flex items-center gap-8 px-4 sm:mb-10">

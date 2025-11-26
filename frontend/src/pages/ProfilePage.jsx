@@ -1,4 +1,5 @@
 import CopyrightFooter from "@/components/CopyrightFooter";
+import GoBackBtn from "@/components/GoBackBtn";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -6,7 +7,6 @@ import { useGetBalance } from "@/hooks/useGetBalance";
 import { useGetUser } from "@/hooks/useGetUser";
 import NumberFlow from "@number-flow/react";
 import {
-  ArrowLeftIcon,
   ArrowLeftRightIcon,
   HeartIcon,
   LogsIcon,
@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 
-const NAV_ITEMS = [
+const MENU_ITEMS = [
   {
     to: "/orders",
     icon: <LogsIcon className="text-muted-foreground" />,
@@ -44,7 +44,7 @@ const NAV_ITEMS = [
   },
 ];
 
-function ProfilePage() {
+function ProfilePage({ closeSheet }) {
   const navigate = useNavigate();
 
   const { data: user = {} } = useGetUser();
@@ -54,14 +54,7 @@ function ProfilePage() {
     <div className="flex h-dvh flex-col sm:min-w-md sm:rounded-l-2xl sm:pl-6">
       <div className="sticky top-0 z-10 p-4 sm:hidden">
         <div className="flex items-center justify-between">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-8"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeftIcon className="size-5" />
-          </Button>
+          <GoBackBtn />
           <Button
             variant="ghost"
             size="icon"
@@ -97,11 +90,12 @@ function ProfilePage() {
             </span>
           </div>
 
-          {NAV_ITEMS.map((item, index) => (
+          {MENU_ITEMS.map((item, index) => (
             <Link
-              key={index}
               to={item.to}
-              className="grid grid-cols-[auto_1fr] items-center gap-4"
+              key={index}
+              onClick={closeSheet}
+              className="grid w-full grid-cols-[auto_1fr] items-center gap-4"
             >
               {item.icon}
               <span className="border-b py-4">{item.text}</span>

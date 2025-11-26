@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/mode-togle";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { SearchIcon } from "lucide-react";
-import { lazy } from "react";
+import { lazy, useState } from "react";
 import MediaQuery from "react-responsive";
 import { NavLink, useLocation, useNavigate } from "react-router";
-import ProfileAvatar from "../ProfileAvatar";
-import ProfileSheet from "../ProfileSheet";
+const ProfileAvatar = lazy(() => import("../ProfileAvatar"));
+const ProfileSheet = lazy(() => import("../ProfileSheet"));
 const DesktopSearch = lazy(
   () => import("../../features/search/components/DesktopSearch"),
 );
@@ -24,8 +24,23 @@ function Navbar() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isProfileSheetOpen, setIsProfileSheetOpen] = useState(false);
 
   if (!allowedRoutes.has(location.pathname) && isMobile) return;
+
+  const handleAvatarClick = () => {
+    if (isMobile) {
+      navigate("/profile");
+      return;
+    }
+    setIsProfileSheetOpen(true);
+  };
+
+  const prefetchPage = () => {
+    import("@/pages/SettingsPage");
+    import("@/pages/AccountDetailsPage");
+    import("@/pages/ReferAndEarnPage");
+  };
 
   return (
     <nav className="bg-background z-50 flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:py-2">
@@ -51,19 +66,21 @@ function Navbar() {
         </Button>
 
         {!isMobile && <ModeToggle />}
-
-        {isMobile ? (
-          <ProfileAvatar
-            onClick={() => navigate("/profile")}
-            className="size-8.5"
-            fallbackClassName="text-sm"
-          />
-        ) : (
-          <ProfileSheet>
-            <ProfileAvatar className="size-8.5" fallbackClassName="text-sm" />
-          </ProfileSheet>
-        )}
+        <Button
+          onClick={handleAvatarClick}
+          onMouseEnter={prefetchPage}
+          onTouchStart={prefetchPage}
+          variant="ghost"
+          size="icon"
+          className="rounded-full"
+        >
+          <ProfileAvatar className="size-8.5" fallbackClassName="text-sm" />
+        </Button>
       </div>
+      <ProfileSheet
+        open={isProfileSheetOpen}
+        onOpenChange={setIsProfileSheetOpen}
+      />
     </nav>
   );
 }
@@ -76,7 +93,7 @@ function NavLinks() {
       <NavLink
         to="/stocks"
         className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden"} shrink-0 rounded-md p-2 font-semibold`
+          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden"} shrink-0 rounded-md p-2 font-medium`
         }
       >
         Stocks
@@ -85,7 +102,7 @@ function NavLinks() {
       <NavLink
         to="/mutual-funds#explore"
         className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2 font-semibold`
+          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2 font-medium`
         }
       >
         Mutual Funds
@@ -93,7 +110,7 @@ function NavLinks() {
       <NavLink
         to="/wallet"
         className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2 font-semibold`
+          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2 font-medium`
         }
       >
         Wallet

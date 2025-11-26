@@ -7,18 +7,23 @@ import { Bookmark, LockKeyholeIcon, Search } from "lucide-react";
 import { lazy } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import Chart from "../components/charts/Chart";
 import FundDescription from "../components/FundDescription";
 import FundLogo from "../components/FundLogo";
 import FundPageAccordions from "../components/accordions/FundPageAccordions.jsx";
-import FundPortfolioPreview from "../components/FundPortfolioPreview";
-import RecentlyViewedFunds from "../components/RecentlyViewedFunds";
 import { useAddToWatchlist } from "../hooks/useAddToWatchlist";
 import { useGetFundData } from "../hooks/useGetFundData";
+import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
 import { useGetIsInWatchlist } from "../hooks/useGetIsInWatchlist";
 import { useRemoveFromWatchlist } from "../hooks/useRemoveFromWatchlist";
 import { formatFundCategory } from "../utils/formaters";
 
+const Chart = lazy(() => import("../components/charts/Chart"));
+const FundPortfolioPreview = lazy(
+  () => import("../components/FundPortfolioPreview"),
+);
+const RecentlyViewedFunds = lazy(
+  () => import("../components/RecentlyViewedFunds"),
+);
 const PurchaseBtns = lazy(() => import("../components/PurchaseBtns"));
 const DesktopPaymentCard = lazy(
   () => import("../components/DesktopPaymentCard"),
@@ -27,6 +32,7 @@ const DesktopPaymentCard = lazy(
 function FundPage() {
   const isMobile = useIsMobile({ maxWidth: 1024 });
   const { scheme_code } = useParams();
+  const { data: fundPortfolio } = useGetFundPortfolio(scheme_code);
   const { data: fund = {}, isPending } = useGetFundData(scheme_code);
   const { data: isInWatchlist } = useGetIsInWatchlist(scheme_code);
   const dispatch = useDispatch();
@@ -119,7 +125,7 @@ function FundPage() {
         </div>
 
         <Chart fund={fund} />
-        <FundPortfolioPreview schemeCode={scheme_code} />
+        {fundPortfolio && <FundPortfolioPreview schemeCode={scheme_code} />}
         <FundDescription fund={fund} />
         <FundPageAccordions fund={fund} />
         <RecentlyViewedFunds />
@@ -139,8 +145,7 @@ function FundPage() {
           </div>
         )}
       </div>
-
-      <DesktopPaymentCard fund={fund} />
+      {!isMobile && <DesktopPaymentCard fund={fund} />}
     </div>
   );
 }

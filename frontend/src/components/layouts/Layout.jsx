@@ -1,10 +1,10 @@
 import { useSSEConnection } from "@/hooks/useSSEConnection";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { Outlet } from "react-router";
-import BottomNavbar from "./BottomNavbar";
-import DailyRewardModal from "./DailyRewardModal";
-import Navbar from "./Navbar";
 import ScrollToTop from "./ScrollToTop";
+const DailyRewardModal = lazy(() => import("./DailyRewardModal"));
+const BottomNavbar = lazy(() => import("./BottomNavbar"));
+const Navbar = lazy(() => import("./Navbar"));
 const Footer = lazy(() => import("../Footer"));
 
 function Layout() {
@@ -19,7 +19,9 @@ function Layout() {
         <BottomNavbar />
         <DailyRewardModal />
       </div>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </>
   );
 }

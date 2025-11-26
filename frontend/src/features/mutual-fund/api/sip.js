@@ -38,12 +38,12 @@ export const editSip = async ({ sipId, amount, sipDate }) => {
   return data;
 };
 
-export const deleteSip = async (sipId) => {
+export const deleteSip = async ({ sipId }) => {
   const { data } = await api.delete(`/mutual-funds/sips/${sipId}`);
   return data;
 };
 
-export const skipSip = async (sipId) => {
+export const skipSip = async ({ sipId }) => {
   const { data } = await api.patch(`/mutual-funds/sips/${sipId}/skip`);
   return data;
 };
