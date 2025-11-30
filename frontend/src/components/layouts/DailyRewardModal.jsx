@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { VITE_DAILY_REWARD_AMOUNT } from "@/config/env";
 import { useClaimDailyReward } from "@/hooks/useClaimDailyReward";
+import { formatToINR } from "@/utils/formatters";
 import { isToday } from "date-fns";
 import { useEffect, useState } from "react";
 import {
@@ -30,6 +32,8 @@ function DailyRewardModal() {
     }
   }, [isSuccess]);
 
+  const dailyRewardAmount = formatToINR(VITE_DAILY_REWARD_AMOUNT);
+
   return (
     <ResponsiveModal open={dialogOpen} onOpenChange={setDialogOpen}>
       <ResponsiveModalContent>
@@ -38,12 +42,12 @@ function DailyRewardModal() {
             <img src="/piggy-bank.svg" className="size-50" />
           </div>
           <ResponsiveModalTitle className="text-center text-lg">
-            ₹1000 Added!
+            {dailyRewardAmount} Added!
           </ResponsiveModalTitle>
 
           <ResponsiveModalDescription className="text-center text-sm whitespace-pre-line">
-            {`Your daily reward of ₹1000 has been credited! 
-            Visit every day to earn ₹1000 daily.`}
+            {`Your daily reward of ${dailyRewardAmount} has been credited! 
+            Visit every day to earn ${dailyRewardAmount} daily.`}
           </ResponsiveModalDescription>
         </ResponsiveModalHeader>
 

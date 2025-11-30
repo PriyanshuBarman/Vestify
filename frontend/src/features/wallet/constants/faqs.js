@@ -1,8 +1,16 @@
+import {
+  VITE_DAILY_REWARD_AMOUNT,
+  VITE_REFERRER_REWARD_AMOUNT,
+} from "@/config/env";
+import { formatToINR } from "@/utils/formatters";
+
+const dailyRewardAmount = formatToINR(VITE_DAILY_REWARD_AMOUNT);
+const REFERRER_REWARD = formatToINR(VITE_REFERRER_REWARD_AMOUNT);
+
 export const walletFAQs = [
   {
     question: "How do I get more virtual money?",
-    answer:
-      "You’ll receive ₹1000 as a daily credit when you visit the platform each day. You only get it once per day, so make sure to check in daily.",
+    answer: `You’ll receive ${dailyRewardAmount} as a daily credit when you visit the platform each day. You only get it once per day, so make sure to check in daily.`,
   },
   {
     question: "Can I transfer virtual money to others?",
@@ -16,12 +24,10 @@ export const walletFAQs = [
   },
   {
     question: "How can I earn more than the daily credit?",
-    answer:
-      "You can earn extra virtual money through our referral program. For every person you refer, you’ll get ₹10,000 (virtual money) added to your wallet. To know more about the referral program, go to the Referral page from your Profile section.",
+    answer: `You can earn extra virtual money through our referral program. For every person you refer, you’ll get ${REFERRER_REWARD} (virtual money) added to your wallet. To know more about the referral program, go to the Referral page from your Profile section.`,
   },
   {
     question: "What happens if I don’t visit the platform daily?",
-    answer:
-      "If you skip a day, you’ll just miss that day’s ₹1000 daily credit. Your portfolio and investments will still stay updated automatically, so you can check your progress anytime.",
+    answer: `If you skip a day, you’ll just miss that day’s ${dailyRewardAmount} daily credit. Your portfolio and investments will still stay updated automatically, so you can check your progress anytime.`,
   },
 ];

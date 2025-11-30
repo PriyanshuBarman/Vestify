@@ -1,3 +1,4 @@
+import config from "#config/env.config.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as userService from "../services/user.service.js";
 
@@ -19,12 +20,16 @@ export const getReferrals = asyncHandler(async (req, res) => {
 
 export const claimDailyReward = asyncHandler(async (req, res) => {
   const { userId } = req.user;
+  const rewardAmount = Number(config.DAILY_REWARD_AMOUNT);
 
-  const updatedBalance = await userService.claimDailyReward(userId);
+  const updatedBalance = await userService.claimDailyReward(
+    userId,
+    rewardAmount
+  );
 
   return res.status(200).json({
     success: true,
-    message: "₹1000 reward has been added",
+    message: `₹${rewardAmount} reward has been added`,
     updatedBalance,
   });
 });

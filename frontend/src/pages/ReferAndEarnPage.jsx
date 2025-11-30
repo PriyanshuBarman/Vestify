@@ -20,6 +20,10 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
+import {
+  VITE_REFERRED_USER_REWARD_AMOUNT,
+  VITE_REFERRER_REWARD_AMOUNT,
+} from "@/config/env";
 import { useGetReferrals } from "@/hooks/useGetReferrals";
 import { useGetUser } from "@/hooks/useGetUser";
 import { formatToINR } from "@/utils/formatters";
@@ -42,6 +46,8 @@ Invest, start SIPs, track portfolio, use a virtual wallet, send your virtual mon
 function ReferAndEarnPage() {
   const { data: user } = useGetUser();
   const { data: referrals } = useGetReferrals();
+  const REFERRER_REWARD = formatToINR(VITE_REFERRER_REWARD_AMOUNT);
+  const REFERRED_USER_REWARD = formatToINR(VITE_REFERRED_USER_REWARD_AMOUNT);
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -77,7 +83,7 @@ function ReferAndEarnPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="flex justify-between">
-          <h3 className="text-primary text-3xl font-bold">₹10,000</h3>
+          <h3 className="text-primary text-3xl font-bold">{REFERRER_REWARD}</h3>
           <TrophyIcon className="text-muted absolute right-6 bottom-6 size-20 rotate-12" />
         </CardContent>
       </Card>
@@ -110,8 +116,8 @@ function ReferAndEarnPage() {
           <div className="flex items-start gap-4">
             <Badge className="size-6 rounded-full">3</Badge>
             <p className="text-muted-foreground flex-1">
-              You will get ₹10,000 and your friend will get ₹5,000 in virtual
-              wallet.
+              You will get {REFERRER_REWARD} and your friend will get{" "}
+              {REFERRED_USER_REWARD} in virtual wallet.
             </p>
           </div>
           <CardFooter className="mt-8 rounded-md px-4 py-2">

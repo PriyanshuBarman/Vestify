@@ -1,4 +1,5 @@
 import db from "#config/db.config.js";
+import config from "#config/env.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 
@@ -39,15 +40,15 @@ export const validateReferral = async (ip, referralCode) => {
 };
 
 export const applyReferralBonus = async (referrerId, userId) => {
-  const REFERRER_BONUS = 10000;
-  const NEW_USER_BONUS = 5000;
+  const REFERRER_REWARD = Number(config.REFERRER_REWARD_AMOUNT);
+  const REFERRED_USER_REWARD = Number(config.REFERRED_USER_REWARD_AMOUNT);
 
   const { referrer, user } = await db.$transaction(async (tx) => {
     // Credit referrer
     const referrer = await tx.user.update({
       where: { id: referrerId },
       data: {
-        balance: { increment: REFERRER_BONUS },
+        balance: { increment: REFERRER_REWARD },
       },
     });
 
@@ -59,7 +60,7 @@ export const applyReferralBonus = async (referrerId, userId) => {
     const user = await tx.user.update({
       where: { id: userId },
       data: {
-        balance: { increment: NEW_USER_BONUS },
+        balance: { increment: REFERRED_USER_REWARD },
       },
     });
 
@@ -68,14 +69,14 @@ export const applyReferralBonus = async (referrerId, userId) => {
       data: [
         {
           userId: referrerId,
-          amount: REFERRER_BONUS,
+          amount: REFERRER_REWARD,
           type: "CREDIT",
           updatedBalance: referrer.balance,
           peerUserId: "system",
         },
         {
           userId,
-          amount: NEW_USER_BONUS,
+          amount: REFERRED_USER_REWARD,
           type: "CREDIT",
           updatedBalance: user.balance,
           peerUserId: "system",
@@ -87,7 +88,7 @@ export const applyReferralBonus = async (referrerId, userId) => {
     await tx.referral.create({
       data: {
         userId: referrer.id,
-        amount: REFERRER_BONUS,
+        amount: REFERRER_REWARD,
         referredUserId: user.id,
       },
     });

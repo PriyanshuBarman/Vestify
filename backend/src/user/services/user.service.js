@@ -4,6 +4,7 @@ import db from "#config/db.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import cloudinary from "#config/cloudinary.config.js";
+import config from "#config/env.config.js";
 
 export const getUser = async (userId) => {
   const user = await db.user.findUnique({
@@ -45,9 +46,7 @@ export const getReferrals = async (userId) => {
   return referrals;
 };
 
-export const claimDailyReward = async (userId) => {
-  const rewardAmount = 1000;
-
+export const claimDailyReward = async (userId, rewardAmount) => {
   const updatedBalance = await db.$transaction(async (tx) => {
     const user = await tx.user.findUnique({
       where: { id: userId },
