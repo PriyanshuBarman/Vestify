@@ -35,6 +35,7 @@ function WelcomePage() {
           <a
             href="https://groww.in"
             target="_blank"
+            tabIndex={-1}
             className="hover:underline"
           >
             Groww.in
@@ -96,12 +97,13 @@ export default WelcomePage;
 
 function Heading() {
   return (
-    <h2 className="text-center text-4xl leading-tight font-[550] tracking-tight sm:text-[4.25rem]/20 sm:font-medium">
+    <h2 className="text-center text-4xl leading-tight font-[550] sm:text-[4.25rem]/20 sm:font-medium sm:tracking-tight">
       <span className="text-[#00b35c]">Virtually</span> Invest in Mutual funds
       with{" "}
       <a
         href="https://groww.in"
         target="_blank"
+        tabIndex={-1}
         className="text-muted-foreground hover:underline"
       >
         Groww

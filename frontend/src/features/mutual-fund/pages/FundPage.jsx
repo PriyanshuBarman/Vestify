@@ -10,6 +10,7 @@ import { useNavigate, useParams } from "react-router";
 import FundDescription from "../components/FundDescription";
 import FundLogo from "../components/FundLogo";
 import FundPageAccordions from "../components/accordions/FundPageAccordions.jsx";
+import Chart from "../components/charts/Chart";
 import { useAddToWatchlist } from "../hooks/useAddToWatchlist";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
@@ -17,7 +18,6 @@ import { useGetIsInWatchlist } from "../hooks/useGetIsInWatchlist";
 import { useRemoveFromWatchlist } from "../hooks/useRemoveFromWatchlist";
 import { formatFundCategory } from "../utils/formaters";
 
-const Chart = lazy(() => import("../components/charts/Chart"));
 const FundPortfolioPreview = lazy(
   () => import("../components/FundPortfolioPreview"),
 );

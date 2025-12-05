@@ -25,7 +25,7 @@ function InvestmentsTab() {
   const [selectedFund, setSelectedFund] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isLoading } = useGetPortfolio();
+  const { data, isPending } = useGetPortfolio();
 
   useEffect(() => {
     if (data) setPortfolio(data);
@@ -47,14 +47,14 @@ function InvestmentsTab() {
     setIsModalOpen(true);
   };
 
-  if (isLoading) return <LoadingState />;
+  if (isPending) return <LoadingState />;
 
   return (
     <div className="space-y-6 pb-20 sm:mx-auto sm:max-w-xl">
       <ScrollToTop />
       <PendingOrders />
 
-      {!portfolio.length ? (
+      {!data?.length ? (
         <NoInvestments />
       ) : (
         <>

@@ -10,8 +10,7 @@ import { useGetPendingOrders } from "../hooks/useGetPendingOrders";
 import OrderItem from "./OrderItem";
 
 function PendingOrders() {
-  const { data } = useGetPendingOrders();
-  const pendingOrders = data?.filter((order) => order.status === "PENDING");
+  const { data: pendingOrders } = useGetPendingOrders();
 
   if (!pendingOrders?.length) return null;
 

@@ -16,10 +16,11 @@ export function useCreateInvestOrder() {
       queryClient.setQueryData(["orders"], (old) =>
         old ? [order, ...old] : [order],
       );
+      queryClient.setQueryData(["pending-orders"], (old) =>
+        old ? [order, ...old] : [order],
+      );
 
       playPaymentSuccessSound();
-
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
       navigate("/payment-success", {
         state: {
           amount: order.amount,

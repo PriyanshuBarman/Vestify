@@ -69,7 +69,11 @@ export const mutualFundRoutes = {
     },
     {
       path: ":scheme_code",
-      element: <FundPage />,
+      element: (
+        <Suspense fallback={<LoadingState fullPage />}>
+          <FundPage />
+        </Suspense>
+      ),
     },
     {
       path: "compare-funds",

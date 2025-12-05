@@ -3,6 +3,7 @@ import {
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
+  EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
 import { RefreshCwIcon } from "lucide-react";
@@ -12,10 +13,21 @@ function ErrorPage() {
   return (
     <Empty className="flex h-dvh items-center justify-center">
       <EmptyHeader>
-        <EmptyTitle className="sm:text-2xl">Something went wrong</EmptyTitle>
-        <EmptyDescription className="whitespace-pre-line">{`Please refresh the page or goback.
-        If not solved contact the owner.
-        `}</EmptyDescription>
+        <EmptyMedia>
+          <img src="/server-error.svg" alt="" className="size-70 sm:size-90" />
+        </EmptyMedia>
+        <EmptyTitle className="sm:text-2xl">
+          Oops! Something went wrong
+        </EmptyTitle>
+        <EmptyDescription>
+          <p>Please refresh the page or go back.</p>
+          <p>
+            If issue persist, please notify us at{" "}
+            <a href="mailto:vestify.contact@gmail.com" className="underline">
+              vestify.contact@gmail.com
+            </a>
+          </p>
+        </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button

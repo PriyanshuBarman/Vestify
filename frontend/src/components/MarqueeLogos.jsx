@@ -13,12 +13,13 @@ function MarqueeLogos({ classNames }) {
       <div className="animate-marquee mr-[4rem] flex gap-[4rem] will-change-transform group-hover:[animation-play-state:paused] sm:mr-[8rem] sm:gap-[8rem]">
         {amcs.map((amc) => (
           <a
+            key={amc.id}
             href={amc.detail_info}
             target="_blank"
+            tabIndex={-1}
             aria-label={`Visit ${amc.amc_name}'s website`}
           >
             <FundLogo
-              key={amc.id}
               fundHouseDomain={amc.detail_info}
               className="animate-in fade-in size-10.5 flex-shrink-0 rounded-lg duration-900 sm:size-16 sm:rounded-2xl sm:drop-shadow-xs"
             />
@@ -32,12 +33,13 @@ function MarqueeLogos({ classNames }) {
       >
         {amcs.map((amc) => (
           <a
+            key={amc.id}
             href={amc.detail_info}
             target="_blank"
+            tabIndex={-1}
             aria-label={`Visit ${amc.amc_name}'s website`}
           >
             <FundLogo
-              key={amc.id}
               fundHouseDomain={amc.detail_info}
               className="animate-in fade-in size-10.5 flex-shrink-0 rounded-lg duration-900 sm:size-16 sm:rounded-2xl sm:drop-shadow-xs"
             />

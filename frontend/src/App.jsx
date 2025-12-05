@@ -1,23 +1,31 @@
 import { VITE_GOOGLE_CLIENT_ID } from "@/config/env";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { lazy } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
+import { lazy, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RouterProvider } from "react-router";
 import { Toaster } from "sonner";
 import { routes } from "./routes";
 import { selectTheme } from "./store/slices/themeSlice";
-const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+import { shouldInvalidateCache } from "./utils/shouldInvalidateCache";
 
 function App() {
   const theme = useSelector(selectTheme);
+  const isRestoring = useIsRestoring();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (isRestoring) return;
+    if (shouldInvalidateCache()) {
+      queryClient.invalidateQueries();
+    }
+  }, [isRestoring, queryClient]);
+
   return (
-    <ErrorBoundary fallback={<ErrorPage />}>
-      <GoogleOAuthProvider clientId={VITE_GOOGLE_CLIENT_ID}>
-        <RouterProvider router={routes} />
-        <Toaster theme={theme} position="top-right" richColors />
-      </GoogleOAuthProvider>
-    </ErrorBoundary>
+    <GoogleOAuthProvider clientId={VITE_GOOGLE_CLIENT_ID}>
+      <RouterProvider router={routes} />
+      <Toaster theme={theme} position="top-right" richColors />
+    </GoogleOAuthProvider>
   );
 }
 
