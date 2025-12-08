@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router";
 import { useGetFilteredFunds } from "../../hooks/useGetFilteredFunds";
 import { getActiveFilterCount } from "../../utils/filterUtils";
 import { lazy, Suspense } from "react";
+import LoadingState from "@/components/LoadingState";
 
 const FilterCategoriesTab = lazy(() => import("./FilterCategoriesTab"));
 const FilterFundHouseTab = lazy(() => import("./FilterFundHouseTab"));
@@ -99,14 +100,33 @@ function FilterSheetContent({ onClose }) {
             </button>
           ))}
         </div>
-
         {/* Tab Content */}
         <div className="flex-1 overflow-y-auto px-4 py-2">
-          {activeTab === "Sort by" && <FilterSortByTab />}
-          {activeTab === "Categories" && <FilterCategoriesTab />}
-          {activeTab === "Risk" && <FilterRiskLevelTab />}
-          {activeTab === "Ratings" && <FilterRatingsTab />}
-          {activeTab === "Fund House" && <FilterFundHouseTab />}
+          {activeTab === "Sort by" && (
+            <Suspense>
+              <FilterSortByTab />
+            </Suspense>
+          )}
+          {activeTab === "Categories" && (
+            <Suspense>
+              <FilterCategoriesTab />
+            </Suspense>
+          )}
+          {activeTab === "Risk" && (
+            <Suspense>
+              <FilterRiskLevelTab />
+            </Suspense>
+          )}
+          {activeTab === "Ratings" && (
+            <Suspense>
+              <FilterRatingsTab />
+            </Suspense>
+          )}
+          {activeTab === "Fund House" && (
+            <Suspense>
+              <FilterFundHouseTab />
+            </Suspense>
+          )}
         </div>
       </div>
 

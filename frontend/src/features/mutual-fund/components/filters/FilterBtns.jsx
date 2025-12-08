@@ -16,6 +16,7 @@ import SortByBtn from "./SortByButton";
 import OpenFilterSheetBtn from "./OpenFilterSheetBtn";
 import { sortOptions } from "../../constants/collection";
 import ActiveFilterButtons from "./ActiveFilterButtons";
+import { Suspense } from "react";
 
 const FUND_CATEGORIES = ["Flexi Cap Fund", "Small Cap Fund"];
 

@@ -10,7 +10,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { selectFilters } from "@/store/slices/mutualFundSlice";
 import { SlidersHorizontalIcon } from "lucide-react";
-import { lazy, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
 import { getActiveFilterCount } from "../../utils/filterUtils";
 const FilterSheetContent = lazy(() => import("./FilterSheetContent"));
@@ -47,7 +47,9 @@ const OpenFilterSheetBtn = () => {
         className={`[&>button]:hidden ${isMobile ? "fixed inset-0" : "min-w-sm overflow-hidden data-[state=open]:duration-300"}`}
       >
         <SheetTitle className="sr-only">Filter Sheet</SheetTitle>
-        <FilterSheetContent onClose={() => setIsOpen(false)} />
+        <Suspense>
+          <FilterSheetContent onClose={() => setIsOpen(false)} />
+        </Suspense>
       </SheetContent>
     </Sheet>
   );

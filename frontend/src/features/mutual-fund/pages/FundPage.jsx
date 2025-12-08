@@ -41,7 +41,7 @@ function FundPage() {
 
   const { mutate: addToWatchlist } = useAddToWatchlist();
   const { mutate: removeFromWatchlist } = useRemoveFromWatchlist();
-
+  
   const handleWatchlistClick = () => {
     if (isInWatchlist) {
       removeFromWatchlist({ schemeCode: scheme_code });
@@ -68,7 +68,7 @@ function FundPage() {
           <div className="flex items-center justify-between">
             <FundLogo
               fundHouseDomain={fund?.detail_info}
-              className="border sm:size-13"
+              className="border size-9 sm:size-13"
             />
             <div className="icons flex items-center gap-4">
               <Button

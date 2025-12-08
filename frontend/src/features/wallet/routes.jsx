@@ -12,43 +12,23 @@ export const walletRoutes = {
   children: [
     {
       index: true,
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <Page />,
-        </Suspense>
-      ),
+      element: <Page />,
     },
     {
       path: "send",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <SendMoneyPage />
-        </Suspense>
-      ),
+      element: <SendMoneyPage />,
     },
     {
       path: "enter-amount",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <EnterAmountPage />
-        </Suspense>
-      ),
+      element: <EnterAmountPage />,
     },
     {
       path: "transactions",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <TnxHistoryPage />
-        </Suspense>
-      ),
+      element: <TnxHistoryPage />,
     },
     {
       path: "tnx-details",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <TnxDetailsPage />
-        </Suspense>
-      ),
+      element: <TnxDetailsPage />,
     },
   ],
 };

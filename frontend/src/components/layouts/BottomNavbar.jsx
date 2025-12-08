@@ -1,6 +1,6 @@
 import { useIsMobile } from "@/hooks/useIsMobile";
 import {
-  ChartBarHorizontalIcon,
+  ChartBarIcon,
   ChartPieSliceIcon,
   WalletIcon,
 } from "@phosphor-icons/react";
@@ -16,7 +16,7 @@ const tabsMapping = [
   {
     id: 2,
     name: "Stocks",
-    icon: ChartBarHorizontalIcon,
+    icon: ChartBarIcon,
     link: "/stocks",
   },
   {

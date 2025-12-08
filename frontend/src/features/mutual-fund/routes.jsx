@@ -1,5 +1,4 @@
-import LoadingState from "@/components/LoadingState";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import Page from "./pages/Page";
 
 const RedemptionRequestSuccessPage = lazy(
@@ -33,35 +32,19 @@ export const mutualFundRoutes = {
     },
     {
       path: "investment-details",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <InvestmentDetailsPage />
-        </Suspense>
-      ),
+      element: <InvestmentDetailsPage />,
     },
     {
       path: "invest",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <InvestPage />
-        </Suspense>
-      ),
+      element: <InvestPage />,
     },
     {
       path: "redeem",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <RedeemPage />
-        </Suspense>
-      ),
+      element: <RedeemPage />,
     },
     {
       path: "redeem-success",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <RedemptionRequestSuccessPage />
-        </Suspense>
-      ),
+      element: <RedemptionRequestSuccessPage />,
     },
     {
       path: "collections",
@@ -69,59 +52,31 @@ export const mutualFundRoutes = {
     },
     {
       path: ":scheme_code",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <FundPage />
-        </Suspense>
-      ),
+      element: <FundPage />,
     },
     {
       path: "compare-funds",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <CompareFundsPage />
-        </Suspense>
-      ),
+      element: <CompareFundsPage />,
     },
     {
       path: "all-funds",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <AllFundsPage />
-        </Suspense>
-      ),
+      element: <AllFundsPage />,
     },
     {
       path: "orders/:orderId",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <OrderDetailsPage />
-        </Suspense>
-      ),
+      element: <OrderDetailsPage />,
     },
     {
       path: "sip/:sipId",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <SipDetailsPage />
-        </Suspense>
-      ),
+      element: <SipDetailsPage />,
     },
     {
       path: "edit/sip/:sipId",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <EditSipPage />
-        </Suspense>
-      ),
+      element: <EditSipPage />,
     },
     {
       path: "sip-calculator",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <SipCalculatorPage />
-        </Suspense>
-      ),
+      element: <SipCalculatorPage />,
     },
     {
       path: "fund-houses",
@@ -133,11 +88,7 @@ export const mutualFundRoutes = {
     },
     {
       path: "fund-manager/:managerName",
-      element: (
-        <Suspense fallback={<LoadingState fullPage />}>
-          <ManagerFundsPage />
-        </Suspense>
-      ),
+      element: <ManagerFundsPage />,
     },
   ],
 };

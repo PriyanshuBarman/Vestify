@@ -1,6 +1,7 @@
 import GoBackBar from "@/components/GoBackBar";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { formatToINR } from "@/utils/formatters";
 import { ChevronsLeftRightIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -17,13 +18,12 @@ import {
   getNextColumn,
   sortPeersBy,
 } from "../utils/collectionsUtils";
-import { formatToINR } from "@/utils/formatters";
 
 function AmcFundsPage() {
   const isMobile = useIsMobile();
   const { amcCode } = useParams();
   const { data: amcs } = useGetAMCs();
-  const amc = amcs?.find((amc) => amc.amc_code === amcCode);
+  const amc = amcs?.find((amc) => amc.amc_code === amcCode) || {};
 
   const { data, isPending } = useGetAmcFunds(amcCode);
   const [funds, setFunds] = useState([]);
@@ -92,6 +92,7 @@ function AmcFundsPage() {
           />
         </div>
         <FilterCategoryButton
+          isPending={isPending}
           categories={categories}
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}

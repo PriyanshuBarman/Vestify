@@ -1,8 +1,7 @@
-import { lazy, Suspense } from "react";
-import { createBrowserRouter, Navigate } from "react-router";
+import { lazy } from "react";
+import { createBrowserRouter } from "react-router";
 import AuthGuard from "./components/AuthGuard";
 import Layout from "./components/layouts/Layout";
-import LoadingState from "./components/LoadingState";
 import { authRoutes } from "./features/auth/routes";
 import { mutualFundRoutes } from "./features/mutual-fund/routes";
 import SearchPage from "./features/search/pages/Page";
@@ -37,27 +36,15 @@ export const routes = createBrowserRouter([
   authRoutes,
   {
     path: "/about",
-    element: (
-      <Suspense fallback={<LoadingState fullPage />}>
-        <AboutPage />
-      </Suspense>
-    ),
+    element: <AboutPage />,
   },
   {
     path: "/terms-and-conditions",
-    element: (
-      <Suspense fallback={<LoadingState fullPage />}>
-        <TermsPage />
-      </Suspense>
-    ),
+    element: <TermsPage />,
   },
   {
     path: "/privacy-policy",
-    element: (
-      <Suspense fallback={<LoadingState fullPage />}>
-        <PrivacyPage />
-      </Suspense>
-    ),
+    element: <PrivacyPage />,
   },
   {
     path: "/",
@@ -80,11 +67,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/payment-success",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <PaymentSuccessPage />
-          </Suspense>
-        ),
+        element: <PaymentSuccessPage />,
       },
       {
         path: "/orders",
@@ -100,27 +83,15 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/edit-field/:field",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <EditFieldPage />
-          </Suspense>
-        ),
+        element: <EditFieldPage />,
       },
       {
         path: "/change-email",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <ChangeEmailPage />
-          </Suspense>
-        ),
+        element: <ChangeEmailPage />,
       },
       {
         path: "/verify-email-change-otp",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <VerifyEmailChangeOTPPage />
-          </Suspense>
-        ),
+        element: <VerifyEmailChangeOTPPage />,
       },
       {
         path: "/refer-and-earn",
@@ -128,11 +99,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "*",
-        element: (
-          <Suspense fallback={<LoadingState fullPage />}>
-            <NotFoundPage />
-          </Suspense>
-        ),
+        element: <NotFoundPage />,
       },
       {
         path: "/settings",
@@ -143,43 +110,23 @@ export const routes = createBrowserRouter([
           },
           {
             path: "change-pin",
-            element: (
-              <Suspense fallback={<LoadingState fullPage />}>
-                <ChangePinPage />
-              </Suspense>
-            ),
+            element: <ChangePinPage />,
           },
           {
             path: "change-password",
-            element: (
-              <Suspense fallback={<LoadingState fullPage />}>
-                <ChangePasswordPage />
-              </Suspense>
-            ),
+            element: <ChangePasswordPage />,
           },
           {
             path: "active-devices",
-            element: (
-              <Suspense fallback={<LoadingState fullPage />}>
-                <ActiveDevicesPage />
-              </Suspense>
-            ),
+            element: <ActiveDevicesPage />,
           },
           {
             path: "delete-account",
-            element: (
-              <Suspense fallback={<LoadingState fullPage />}>
-                <DeleteAccountPage />
-              </Suspense>
-            ),
+            element: <DeleteAccountPage />,
           },
           {
             path: "clear-cache",
-            element: (
-              <Suspense fallback={<LoadingState fullPage />}>
-                <ClearCachePage />
-              </Suspense>
-            ),
+            element: <ClearCachePage />,
           },
         ],
       },

@@ -1,4 +1,3 @@
-import LoadingState from "@/components/LoadingState";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -8,6 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -17,9 +17,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import FundRating from "@/features/mutual-fund/components/FundRating";
-import { formatToINR } from "@/utils/formatters";
 import { ChevronDownIcon } from "lucide-react";
 import { Link } from "react-router";
+import { getColumnValueLg } from "../../utils/tableUtils";
 import FundLogo from "../FundLogo";
 
 /**
@@ -55,10 +55,10 @@ function TableLG({
             {visibleColumns.map((key) => (
               <TableHead key={key} className="relative">
                 <div
-                  onClick={() => onClick(key)}
+                  onClick={() => !isPending && onClick(key)}
                   className={`flex items-center justify-center gap-2 ${
                     activeColumn === key &&
-                    "after:bg-primary after:absolute after:bottom-0 after:h-1 after:w-full after:rounded-t-xl after:content-['']"
+                    "after:bg-primary font-semibold after:absolute after:bottom-0 after:h-1 after:w-full after:rounded-t-xl after:content-['']"
                   }`}
                 >
                   <span>{columnsConfig[key].shortName}</span>
@@ -114,57 +114,19 @@ function TableLG({
 
         <TableBody className={`${isFetchingNextPage && "blur-xs"}`}>
           {funds?.map((fund) => (
-            <TableRow key={fund.scheme_code}>
-              <TableCell className="flex items-center gap-8 py-4 pl-8">
-                <FundLogo fundHouseDomain={fund.detail_info} />
-                <div>
-                  <Link to={`/mutual-funds/${fund.scheme_code}`}>
-                    <h4 className="text-base text-wrap">{fund.short_name}</h4>
-                  </Link>
-                  <p className="text-muted-foreground mt-1 flex gap-2 text-xs">
-                    <span>{fund.fund_type}</span>
-                    <span>
-                      {fund.fund_category === "Fund of Funds"
-                        ? fund.fund_category
-                        : fund.fund_category.replace(/\bFund\b/, "")}
-                    </span>
-                    <FundRating
-                      rating={fund.fund_rating}
-                      className="text-sm leading-none"
-                    />
-                  </p>
-                </div>
-              </TableCell>
-
-              {visibleColumns.map((key) => (
-                <TableCell
-                  onClick={() => onClick(key)}
-                  key={key}
-                  className={` ${activeColumn === key && "font-semibold"} text-md text-center`}
-                >
-                  {key === "aum"
-                    ? fund[key]
-                      ? `${formatToINR(fund[key] / 10, 1)}Cr`
-                      : "-"
-                    : fund[key]
-                      ? `${columnsConfig[key].prefix || ""} ${fund[key]}${columnsConfig[key].suffix || ""}`
-                      : "-"}
-                </TableCell>
-              ))}
-
-              {/* this table cell is for add more btn */}
-              <TableCell />
-            </TableRow>
+            <TableRowLG
+              key={fund.scheme_code}
+              fund={fund}
+              visibleColumns={visibleColumns}
+              onClick={onClick}
+              activeColumn={activeColumn}
+              columnsConfig={columnsConfig}
+            />
           ))}
 
-          {/* =============== Loading States =============== */}
-          {/* First Request Loading State */}
+          {/* Initial Loading Skeleton  */}
           {isPending && (
-            <TableRow className="border-none">
-              <TableCell colSpan={visibleColumns.length + 2} className="p-0">
-                <LoadingState fullPage className="h-[calc(100vh-200px)]" />
-              </TableCell>
-            </TableRow>
+            <TableRowSkeleton count={10} visibleColumns={visibleColumns} />
           )}
 
           {/* Pagination */}
@@ -193,3 +155,66 @@ function TableLG({
 }
 
 export default TableLG;
+
+function TableRowLG({
+  fund,
+  visibleColumns,
+  onClick,
+  activeColumn,
+  columnsConfig,
+}) {
+  return (
+    <TableRow>
+      <TableCell className="flex items-center gap-8 py-4 pl-8">
+        <FundLogo fundHouseDomain={fund.detail_info} />
+
+        <div>
+          <Link to={`/mutual-funds/${fund.scheme_code}`}>
+            <h4 className="text-base">{fund.short_name}</h4>
+          </Link>
+
+          <p className="text-muted-foreground mt-1 flex gap-2 text-xs">
+            <span>{fund.fund_type}</span>
+            <span>{fund.fund_category.replace(/\bFund\b/, "")}</span>
+            <FundRating rating={fund.fund_rating} />
+          </p>
+        </div>
+      </TableCell>
+
+      {/* Dynamic columns */}
+      {visibleColumns.map((key) => (
+        <TableCell
+          key={key}
+          onClick={() => onClick(key)}
+          className={`text-md text-center ${
+            activeColumn === key && "font-semibold"
+          }`}
+        >
+          {getColumnValueLg(fund, key, columnsConfig)}
+        </TableCell>
+      ))}
+
+      <TableCell />
+    </TableRow>
+  );
+}
+
+function TableRowSkeleton({ count = 10, visibleColumns }) {
+  return Array.from({ length: count }).map((_, index) => (
+    <TableRow key={index}>
+      <TableCell className="flex items-center gap-8 py-4 pl-8">
+        <Skeleton className="size-10" />
+        <div>
+          <Skeleton className="h-3 w-52" />
+          <Skeleton className="mt-3 h-3 w-28" />
+        </div>
+      </TableCell>
+
+      {visibleColumns.map((key) => (
+        <TableCell key={key}>
+          <Skeleton className="mx-auto h-3 w-12" />
+        </TableCell>
+      ))}
+    </TableRow>
+  ));
+}

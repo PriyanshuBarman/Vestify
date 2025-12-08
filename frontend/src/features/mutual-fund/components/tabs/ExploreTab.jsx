@@ -24,19 +24,17 @@ function ExploreTab() {
         <StartSipCard />
         <PopularFundsSection />
         <CollectionsSection />
-        <Suspense fallback={null}>
-          <FundHousesSection />
-        </Suspense>
-        <Suspense fallback={null}>
+        <FundHousesSection />
+        <Suspense>
           <RecentlyViewedSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense>
           <IndexFundsSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense>
           <QuickAccessSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense>
           <AllFundsSection />
         </Suspense>
         <CopyrightFooter className="mt-6 mb-20 sm:hidden" />

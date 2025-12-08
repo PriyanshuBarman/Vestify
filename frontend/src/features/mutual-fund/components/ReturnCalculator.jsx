@@ -82,7 +82,7 @@ function ReturnCalculator({ fund }) {
 
       <CardContent className="px-0 sm:px-10">
         <div className="mt-4 flex items-center gap-2 font-semibold">
-          <span className="text-primary sm:text-foreground text-lg tracking-tighter tabular-nums">
+          <span className="text-primary sm:text-foreground text-lg tracking-tighter tabular-nums sm:text-xl">
             {formatToINR(amount)}
           </span>
           <div className="sm:text-foreground flex items-center font-normal sm:text-base">
@@ -92,7 +92,7 @@ function ReturnCalculator({ fund }) {
         </div>
 
         <Slider
-          className="mt-6 cursor-pointer sm:mt-10 [&_[role=slider]]:h-6 [&_[role=slider]]:w-8 [&_[role=slider]]:rounded-lg sm:[&_[role=slider]]:h-8 sm:[&_[role=slider]]:w-12 sm:[&_[role=slider]]:border-2"
+          className="mt-6 cursor-pointer sm:mt-10 [&_[data-orientation=horizontal]]:h-1 [&_[role=slider]]:h-6 [&_[role=slider]]:w-6 sm:[&_[role=slider]]:h-8 sm:[&_[role=slider]]:w-8 sm:[&_[role=slider]]:border-2"
           value={[amount]}
           onValueChange={(newValue) => setAmount(newValue[0])}
           min={100}
@@ -127,7 +127,7 @@ function ReturnCalculator({ fund }) {
             format={{ maximumFractionDigits: 0 }}
             value={result.finalValue}
             prefix="₹"
-            className="text-md sm:text-base"
+            className="text-md sm:text-lg"
           />
           <NumberFlow
             value={result.returnPercentage}

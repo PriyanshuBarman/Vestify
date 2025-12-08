@@ -1,11 +1,11 @@
-import LoadingState from "@/components/LoadingState";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Loader2 } from "lucide-react";
 import { Link } from "react-router";
 import { formatFundCategory } from "../../utils/formaters";
+import { getColumnValueSm } from "../../utils/tableUtils";
 import FundLogo from "../FundLogo";
-import { formatToINR } from "@/utils/formatters";
 
 /**
  *  Reusable Small screen table with pagination support
@@ -24,61 +24,23 @@ function TableSM({
   isFetching = false,
   inViewRef = null,
 }) {
-  const getValue = (fund) => {
-    if (activeColumn === "popularity") {
-      return fund["return_3y"] ? `${fund["return_3y"]}%` : "NA";
-    }
-    if (activeColumn === "aum") {
-      return fund[activeColumn]
-        ? `${formatToINR(fund[activeColumn] / 10, 0)} Cr`
-        : "NA";
-    }
-    return fund[activeColumn]
-      ? `${columnsConfig[activeColumn].prefix || ""}${fund[activeColumn]} ${columnsConfig[activeColumn].suffix || ""}`
-      : "NA";
-  };
-
   return (
     <ScrollArea className="overflow-x-auto">
       <Table className="table-fixed">
         <TableBody>
           {funds?.map((fund) => (
-            <TableRow key={fund.scheme_code}>
-              <TableCell className="flex items-center gap-4 py-4 pl-4">
-                <FundLogo fundHouseDomain={fund.detail_info} />
-                <div>
-                  <h4 className="Fund-Name text-foreground text-wrap">
-                    <Link to={`/mutual-funds/${fund.scheme_code}`}>
-                      {fund.short_name}
-                    </Link>
-                  </h4>
-
-                  <p className="text-muted-foreground mt-1 space-x-1 text-xs text-wrap">
-                    <span>{fund.fund_type}</span>
-                    <span>{formatFundCategory(fund.fund_category)}</span>
-                    {fund.fund_rating ? <span>{fund.fund_rating} ★</span> : ""}
-                  </p>
-                </div>
-              </TableCell>
-
-              <TableCell
-                onClick={onColumnClick}
-                className="w-[25%] pr-4 text-right font-[450] break-words whitespace-normal"
-              >
-                {getValue(fund)}
-              </TableCell>
-            </TableRow>
+            <TableRowFund
+              key={fund.scheme_code}
+              fund={fund}
+              activeColumn={activeColumn}
+              columnsConfig={columnsConfig}
+              onColumnClick={onColumnClick}
+            />
           ))}
 
-          {/* =============== Loading States =============== */}
-          {/* First Request Loading State */}
-          {isPending && (
-            <TableRow className="border-none">
-              <TableCell colSpan={2} className="p-0">
-                <LoadingState fullPage className="h-[calc(100vh-200px)]" />
-              </TableCell>
-            </TableRow>
-          )}
+          {/* Initial Loading Skeleton  */}
+          {isPending && <TableRowSkeleton count={10} />}
+
           {/* Pagination loader row - only show if pagination is enabled */}
           {enablePagination && (
             <TableRow>
@@ -106,3 +68,51 @@ function TableSM({
 }
 
 export default TableSM;
+
+function TableRowFund({ fund, activeColumn, columnsConfig, onColumnClick }) {
+  return (
+    <TableRow key={fund.scheme_code}>
+      <TableCell className="flex items-center gap-4 py-4 pl-4">
+        <FundLogo fundHouseDomain={fund.detail_info} />
+        <div>
+          <h4 className="Fund-Name text-foreground text-wrap">
+            <Link to={`/mutual-funds/${fund.scheme_code}`}>
+              {fund.short_name}
+            </Link>
+          </h4>
+
+          <p className="text-muted-foreground mt-1 space-x-1 text-xs text-wrap">
+            <span>{fund.fund_type}</span>
+            <span>{formatFundCategory(fund.fund_category)}</span>
+            {!!fund.fund_rating && <span>{fund.fund_rating} ★</span>}
+          </p>
+        </div>
+      </TableCell>
+
+      <TableCell
+        className="w-[25%] pr-4 text-right font-[450]"
+        onClick={onColumnClick}
+      >
+        {getColumnValueSm(fund, activeColumn, columnsConfig)}
+      </TableCell>
+    </TableRow>
+  );
+}
+
+function TableRowSkeleton({ count = 10 }) {
+  return Array.from({ length: count }).map((_, index) => (
+    <TableRow key={index}>
+      <TableCell className="flex items-center gap-4 py-4 pl-4">
+        <Skeleton className="size-8" />
+        <div>
+          <Skeleton className="h-3 w-46" />
+          <Skeleton className="mt-3 h-3 w-28" />
+        </div>
+      </TableCell>
+
+      <TableCell className="w-[25%] pr-4">
+        <Skeleton className="ml-auto h-3 w-1/2" />
+      </TableCell>
+    </TableRow>
+  ));
+}

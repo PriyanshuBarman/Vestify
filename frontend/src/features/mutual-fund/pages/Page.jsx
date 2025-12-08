@@ -3,16 +3,12 @@ import {
   selectActiveTabIndex,
   setActiveTabIndex,
 } from "@/store/slices/mutualFundSlice";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "swiper/css";
 import { HashNavigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import InvestmentsTab from "../components/tabs/InvestmentsTab";
-import { useGetPortfolio } from "../hooks/useGetPortfolio";
-import { useQueryClient } from "@tanstack/react-query";
-import { fetchPortfolio } from "../api/portfolio";
-import { fetchBalance } from "@/api/wallet";
 
 const SipsTab = lazy(() => import("../components/tabs/SipsTab"));
 const WatchlistTab = lazy(() => import("../components/tabs/WatchlistTab"));
@@ -21,18 +17,7 @@ const ExploreTab = lazy(() => import("../components/tabs/ExploreTab"));
 function Page() {
   const activeTabIndex = useSelector(selectActiveTabIndex);
   const dispatch = useDispatch();
-  // useGetPortfolio(); // prefetch
 
-  const queryClient = useQueryClient();
-
-  // useEffect(() => {
-  //   queryClient.prefetchQuery({
-  //     queryKey: ["balance"],
-  //     queryFn: fetchBalance,
-  //   });
-  // }, [queryClient]);
-
-  console.count();
   return (
     <Swiper
       modules={[HashNavigation]}

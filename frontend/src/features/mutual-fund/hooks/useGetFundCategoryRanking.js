@@ -3,7 +3,7 @@ import { fetchFundCategoryRanking } from "../api/external";
 
 export function useGetFundCategoryRanking(schemeCode) {
   return useQuery({
-    queryKey: ["FundRanking", schemeCode],
+    queryKey: ["fund-category-ranking", Number(schemeCode)],
     queryFn: () => fetchFundCategoryRanking(schemeCode),
   });
 }

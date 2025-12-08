@@ -15,7 +15,7 @@ function PurchaseBtns({ schemeCode, isPending = false, className }) {
       )}
     >
       <Button
-        className="text-primary bg-primary/15 w-[42%] shadow-xs"
+        className="text-primary bg-primary/15 w-[42%] py-5.5 shadow-xs"
         size="lg"
         variant="ghost"
         disabled={isPending || fund.lump_available === "N"}
@@ -36,7 +36,7 @@ function PurchaseBtns({ schemeCode, isPending = false, className }) {
             state: { orderType: "sip", schemeCode },
           })
         }
-        className="w-[42%]"
+        className="w-[42%] py-5.5"
       >
         Monthly SIP
       </Button>
