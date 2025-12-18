@@ -22,7 +22,7 @@ export default defineConfig({
         name: "Vestify",
         short_name: "Vestify",
         description:
-          "Vestify is a virtual investment platform that simulates real mutual fund investing, providing a real, professional-grade experience with a Groww-inspired UI.",
+          "Vestify is a virtual investment platform that helps beginners learn and practice investing using virtual money, with zero real money involved.",
         start_url: "/?source=pwa",
         scope: "/",
         background_color: "#ffffff",

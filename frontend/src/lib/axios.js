@@ -45,7 +45,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // ✅ only handle 401 (unauthorized) errors (token expired)
+    // only handle 401 (unauthorized) errors (token expired)
     if (
       error.response?.status === 401 &&
       !originalRequest.url?.includes("/auth/refresh-token") &&
@@ -75,9 +75,9 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         // ❌ Refresh failed → logout
-        localStorage.clear();
         const currentPath = window.location.pathname;
         if (!currentPath.startsWith("/auth") && currentPath !== "/") {
+          localStorage.clear();
           window.location.href = "/";
         }
         processQueue(refreshError);

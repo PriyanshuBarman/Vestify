@@ -11,8 +11,13 @@ import {
 function AboutPage() {
   return (
     <div className="mx-auto w-full max-w-3xl space-y-12 px-6 py-12">
+      <title>About us</title>
+      <meta
+        name="description"
+        content="Vestify is a virtual investment platform that simulates real mutual fund investing, providing a real, professional-grade experience with a Groww-inspired UI."
+      />
       <h1 className="sm:text-foreground-secondary text-center text-2xl font-semibold sm:text-4xl">
-        About Vestify
+        About Us
       </h1>
       {aboutData.map((section, index) => (
         <section key={index} className="mb-8">

@@ -1,13 +1,14 @@
 import GoBackBar from "@/components/GoBackBar";
 import ConfirmModal from "@/components/overlays/ConfirmModal";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { useDeleteAccount } from "@/hooks/useDeleteAccount";
 import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
 
 function DeleteAccountPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { mutate: deleteAccount } = useDeleteAccount();
+  const { mutate: deleteAccount, isPending } = useDeleteAccount();
 
   return (
     <div className="flex h-dvh flex-col px-4 pb-4 sm:mx-auto sm:h-fit sm:max-w-lg">
@@ -28,7 +29,7 @@ function DeleteAccountPage() {
         variant="destructive"
         className="mx-auto mt-auto w-full sm:mt-14 sm:w-fit"
       >
-        Delete Account
+        {isPending && <Spinner />} Delete Account
       </Button>
       <ConfirmModal
         title="Delete account?"

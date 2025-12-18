@@ -21,7 +21,7 @@ function MarqueeLogos({ classNames }) {
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
-              className="animate-in fade-in size-10.5 flex-shrink-0 rounded-lg duration-900 sm:size-16 sm:rounded-2xl sm:drop-shadow-xs"
+              className="animate-in fade-in size-10.5 flex-shrink-0 rounded-lg duration-900 hover:scale-105 hover:shadow-lg sm:size-13 sm:rounded-2xl sm:drop-shadow-xs"
             />
           </a>
         ))}
@@ -41,7 +41,7 @@ function MarqueeLogos({ classNames }) {
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
-              className="animate-in fade-in size-10.5 flex-shrink-0 rounded-lg duration-900 sm:size-16 sm:rounded-2xl sm:drop-shadow-xs"
+              className="animate-in fade-in size-10.5 flex-shrink-0 rounded-lg duration-900 hover:scale-105 hover:shadow-lg sm:size-13 sm:rounded-2xl sm:drop-shadow-xs"
             />
           </a>
         ))}

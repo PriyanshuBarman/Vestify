@@ -1,4 +1,5 @@
 import CopyrightFooter from "@/components/CopyrightFooter";
+import InstallAppCard from "@/components/InstallAppCard";
 import { lazy, Suspense } from "react";
 import { useMediaQuery } from "react-responsive";
 const CollectionsSection = lazy(() => import("../sections/CollectionsSection"));
@@ -21,6 +22,7 @@ function ExploreTab() {
   return (
     <div className="flex justify-between sm:gap-6">
       <div className="flex w-full max-w-[820px] flex-col space-y-10 lg:space-y-14">
+        <InstallAppCard />
         <StartSipCard />
         <PopularFundsSection />
         <CollectionsSection />

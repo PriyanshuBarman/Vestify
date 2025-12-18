@@ -23,9 +23,9 @@ function NavbarPublic({ googleLogin, isPending }) {
         <Button
           disabled={isPending}
           onClick={googleLogin}
-          className="rounded-full bg-gradient-to-r from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] max-sm:text-xs sm:p-5"
+          className="h-8.5 rounded-full bg-gradient-to-r from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] max-sm:text-xs sm:p-5"
         >
-          {isPending && <Spinner />} SignUp
+          {isPending && <Spinner />} Signup
         </Button>
       </div>
       <ProfileSheet
