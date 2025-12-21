@@ -24,7 +24,7 @@ export function useCreateSip() {
       );
 
       playPaymentSuccessSound();
-      navigate("/payment-success", {
+      navigate("/success", {
         state: {
           amount: order.amount,
           title: "SIP Order Placed",

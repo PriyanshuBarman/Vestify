@@ -73,7 +73,7 @@ function CollectionPage() {
             <p className="text-muted-foreground text-sm">{description || ""}</p>
           </div>
           {img && (
-            <Avatar className="size-18 rounded-lg border p-2 sm:h-24 sm:w-34 dark:mix-blend-hard-light">
+            <Avatar className="h-18 w-22 rounded-2xl border p-2 sm:h-24 sm:w-34 dark:mix-blend-hard-light">
               <AvatarImage src={img} />
             </Avatar>
           )}

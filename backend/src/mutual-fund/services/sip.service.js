@@ -1,9 +1,15 @@
-import { tz } from "@date-fns/tz";
-import { addDays, addMonths, differenceInDays } from "date-fns";
 import db from "#config/db.config.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
+import { tz } from "@date-fns/tz";
+import {
+  addDays,
+  addMonths,
+  differenceInCalendarDays,
+  setDate
+} from "date-fns";
 import { getDomain } from "../utils/get-domain.utils.js";
 import { getNextInstallmentDate } from "../utils/get-next-installment-date.utils.js";
+import { getSipEditResponse } from "../utils/sip.utils.js";
 import * as orderService from "./order.service.js";
 
 export const createSip = async ({
@@ -17,7 +23,7 @@ export const createSip = async ({
   fundHouseDomain,
   fundType, // required for order placement
 }) => {
-  //1. create/subscribe to new SIP
+  // 1. create/subscribe to new SIP
   const sip = await db.mfSip.create({
     data: {
       userId,
@@ -29,54 +35,67 @@ export const createSip = async ({
       fundType: fundType.toUpperCase(),
       fundCategory,
       fundHouseDomain: getDomain(fundHouseDomain),
-      nextInstallmentDate: getNextInstallmentDate(sipDate),
+      nextInstallmentDate: addMonths(setDate(new Date(), sipDate), 1),
     },
   });
 
-  //2. place initial investment order
+  // 2. place initial investment order
   const order = await orderService.placeInvestmentOrder({
     sipId: sip.id,
     userId,
     amount,
     fundName,
-    fundShortName, //
+    fundShortName,
     fundCategory,
     schemeCode,
     fundHouseDomain,
-    fundType: fundType.toUpperCase(), //
+    fundType: fundType.toUpperCase(),
   });
 
   return { sip, order };
 };
 
 export const editSip = async ({ userId, sipId, amount, sipDate }) => {
-  // Fetch the current SIP
   const sip = await db.mfSip.findUnique({ where: { id: sipId, userId } });
-  if (!sip) {
-    throw new ApiError(404, "SIP not found");
-  }
+  if (!sip) throw new ApiError(404, "SIP not found");
 
-  if (amount === sip.amount && sipDate === sip.sipDate) {
+  amount = amount ?? sip.amount.toNumber();
+  sipDate = sipDate ?? sip.sipDate;
+
+  if (Number(amount) === sip.amount.toNumber() && sipDate === sip.sipDate) {
     throw new ApiError(400, "No changes detected");
   }
 
-  const diffDays = differenceInDays(sip.nextInstallmentDate, new Date(), {
-    in: tz("Asia/Kolkata"),
-  });
+  const diffDays = differenceInCalendarDays(
+    sip.nextInstallmentDate,
+    new Date(),
+    {
+      in: tz("Asia/Kolkata"),
+    }
+  );
 
-  // If next installment is more than 2 days away, update directly
+  const newNextInstallmentDate = getNextInstallmentDate(
+    sipDate,
+    sip.nextInstallmentDate
+  );
+
+  // ====== If next installment is more than 2 days away, update directly ======
   if (diffDays > 2) {
-    return await db.mfSip.update({
+    await db.mfSip.update({
       where: { id: sipId },
       data: {
         amount,
         sipDate,
-        nextInstallmentDate: getNextInstallmentDate(sipDate),
+        nextInstallmentDate: newNextInstallmentDate,
       },
     });
+
+    return { message: "SIP updated successfully" };
   }
 
-  // Otherwise, create or update a pending change
+  // ====== Otherwise, create or update a pending change ======
+  const applyDate = addDays(sip.nextInstallmentDate, 1); // apply the changes after the next installment
+
   await db.pendingMfSipChange.upsert({
     where: { userId_sipId: { userId, sipId } },
     create: {
@@ -84,14 +103,18 @@ export const editSip = async ({ userId, sipId, amount, sipDate }) => {
       sipId,
       amount,
       sipDate,
-      applyDate: addDays(sip.nextInstallmentDate, 1), // apply the changes after the next installment
+      nextInstallmentDate: newNextInstallmentDate,
+      applyDate: applyDate,
     },
     update: {
       amount,
       sipDate,
-      applyDate: addDays(sip.nextInstallmentDate, 1), // apply the changes after the next installment
+      nextInstallmentDate: newNextInstallmentDate,
+      applyDate: applyDate,
     },
   });
+
+  return getSipEditResponse(applyDate, sip.nextInstallmentDate);
 };
 
 export const skipSip = async (userId, sipId) => {
@@ -100,32 +123,41 @@ export const skipSip = async (userId, sipId) => {
     throw new ApiError(404, "SIP not found");
   }
 
-  const diffDays = differenceInDays(sip.nextInstallmentDate, new Date(), {
-    in: tz("Asia/Kolkata"),
-  });
+  const diffDays = differenceInCalendarDays(
+    sip.nextInstallmentDate,
+    new Date(),
+    {
+      in: tz("Asia/Kolkata"),
+    }
+  );
 
-  // If next installment is more than 2 days away, update directly
+  // ===== If next installment is more than 2 days away, update directly =====
   if (diffDays > 2) {
+    const newNextInstallmentDate = addMonths(sip.nextInstallmentDate, 1);
+
     return await db.mfSip.update({
       where: { id: sipId },
       data: {
-        nextInstallmentDate: addMonths(sip.nextInstallmentDate, 1),
+        nextInstallmentDate: newNextInstallmentDate,
       },
     });
   }
 
-  // Otherwise, create or update a pending change
+  // ===== Otherwise, create or update a pending change =====
+  const applyDate = addDays(sip.nextInstallmentDate, 1); // apply the changes after the next installment
+  const newNextInstallmentDate = addMonths(sip.nextInstallmentDate, 2);
+
   await db.pendingMfSipChange.upsert({
     where: { userId_sipId: { userId, sipId } },
     create: {
       userId,
       sipId,
-      nextInstallmentDate: addMonths(sip.nextInstallmentDate, 1),
-      applyDate: addDays(sip.nextInstallmentDate, 1), // apply the changes after the next installment
+      applyDate,
+      nextInstallmentDate: newNextInstallmentDate,
     },
     update: {
-      nextInstallmentDate: addMonths(sip.nextInstallmentDate, 1),
-      applyDate: addDays(sip.nextInstallmentDate, 1), // apply the changes after the next installment
+      applyDate,
+      nextInstallmentDate: newNextInstallmentDate,
     },
   });
 };
@@ -137,14 +169,18 @@ export const cancelSip = async (sipId) => {
     throw new ApiError(404, "SIP not found");
   }
 
-  const diffDays = differenceInDays(sip.nextInstallmentDate, new Date(), {
-    in: tz("Asia/Kolkata"),
-  });
+  const diffDays = differenceInCalendarDays(
+    sip.nextInstallmentDate,
+    new Date(),
+    {
+      in: tz("Asia/Kolkata"),
+    }
+  );
 
-  if (diffDays <= 3) {
+  if (diffDays <= 2) {
     throw new ApiError(
       400,
-      "You Can't cancel SIP before 3 days of next installment"
+      "You Can't cancel SIP before 2 days of next installment"
     );
   }
 

@@ -19,40 +19,40 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { tz } from "@date-fns/tz";
-import { addMonths, differenceInDays, format } from "date-fns";
+import { format } from "date-fns";
 import { CalendarCheck2Icon, ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 import { addSuffix } from "../utils/formaters";
+import { getNextInstallmentDateAfterEdit } from "../utils/sip";
 import SipDayPicker from "./SipDayPicker";
 
 function EditSipDatePicker({ sipDate, setSipDate, sipDetail }) {
   const isMobile = useIsMobile();
   const [selectedDate, setSelectedDate] = useState(sipDate);
 
-  const getNextinstallmentMonth = () => {
-    const diff = differenceInDays(sipDetail.nextInstallmentDate, new Date(), {
-      in: tz("Asia/Kolkata"),
-    });
+  const newNextInstallmentDate = getNextInstallmentDateAfterEdit(
+    selectedDate,
+    sipDetail.nextInstallmentDate,
+  );
 
-    return format(
-      addMonths(sipDetail.nextInstallmentDate, diff <= 2 ? 1 : 0),
-      "LLLL",
-    );
-  };
+  const TriggerButton = (
+    <Button
+      variant="outline"
+      className="max-sm:rounded-2xl max-sm:text-xs max-sm:font-normal max-sm:shadow-none"
+    >
+      <CalendarCheck2Icon />
+      Monthly on {addSuffix(sipDate)}
+      <ChevronDownIcon />
+    </Button>
+  );
 
   return isMobile ? (
     <Drawer onOpenChange={() => setSelectedDate(sipDate)}>
-      <DrawerTrigger asChild>
-        <Button variant="outline" className="rounded-full">
-          <CalendarCheck2Icon /> Monthly on {addSuffix(sipDate)}{" "}
-          <ChevronDownIcon />
-        </Button>
-      </DrawerTrigger>
+      <DrawerTrigger asChild>{TriggerButton}</DrawerTrigger>
 
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Choose SIP installment date</DrawerTitle>
+          <DrawerTitle>Choose new SIP installment date</DrawerTitle>
         </DrawerHeader>
 
         <SipDayPicker
@@ -62,10 +62,11 @@ function EditSipDatePicker({ sipDate, setSipDate, sipDetail }) {
           className="p-4"
         />
 
-        {sipDate < 29 && (
+        {newNextInstallmentDate && selectedDate !== sipDate && (
           <p className="text-muted-foreground mt-4 text-center text-sm">
-            Next SIP installment on {addSuffix(selectedDate)} of{" "}
-            {getNextinstallmentMonth()}.
+            Next SIP installment on{" "}
+            {addSuffix(format(newNextInstallmentDate, "d"))} of{" "}
+            {format(newNextInstallmentDate, "LLLL")}.
           </p>
         )}
 
@@ -73,8 +74,8 @@ function EditSipDatePicker({ sipDate, setSipDate, sipDetail }) {
           <DrawerClose asChild>
             <Button
               onClick={() => setSipDate(selectedDate)}
-              disabled={sipDate === selectedDate || selectedDate > 28}
-              className="disabled:bg-muted-foreground w-full"
+              disabled={selectedDate === sipDetail.sipDate || selectedDate > 28}
+              className="w-full"
             >
               Update
             </Button>
@@ -84,17 +85,12 @@ function EditSipDatePicker({ sipDate, setSipDate, sipDetail }) {
     </Drawer>
   ) : (
     <Dialog onOpenChange={() => setSelectedDate(sipDate)}>
-      <DialogTrigger asChild>
-        <Button variant="outline">
-          <CalendarCheck2Icon /> Monthly on {addSuffix(sipDate)}{" "}
-          <ChevronDownIcon />
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{TriggerButton}</DialogTrigger>
 
       <DialogContent className="p-8">
         <DialogHeader>
           <DialogTitle className="text-center font-medium">
-            Choose SIP installment date
+            Choose new SIP installment date
           </DialogTitle>
         </DialogHeader>
 
@@ -105,25 +101,23 @@ function EditSipDatePicker({ sipDate, setSipDate, sipDetail }) {
           className="py-6"
         />
 
-        {selectedDate < 29 && (
+        {newNextInstallmentDate && selectedDate !== sipDate && (
           <DialogDescription className="text-center">
-            Next SIP installment on {addSuffix(selectedDate)} of{" "}
-            {getNextinstallmentMonth()}.
+            Next SIP installment on{" "}
+            {addSuffix(format(newNextInstallmentDate, "d"))} of{" "}
+            {format(newNextInstallmentDate, "LLLL")}.
           </DialogDescription>
         )}
 
         <DialogFooter>
           <DialogClose asChild>
             <Button
+              size="lg"
               onClick={() => setSipDate(selectedDate)}
-              disabled={
-                selectedDate === sipDetail.sipDate ||
-                sipDate === selectedDate ||
-                selectedDate > 28
-              }
+              disabled={selectedDate === sipDetail.sipDate || selectedDate > 28}
               className="w-full"
             >
-              Save Changes
+              Update
             </Button>
           </DialogClose>
         </DialogFooter>

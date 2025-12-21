@@ -43,7 +43,7 @@ function BottomNavbar() {
           to={tab.link}
           key={tab.id}
           className={({ isActive }) =>
-            `flex flex-col items-center gap-0.5 text-[0.65rem] font-medium tracking-tighter transition-all duration-100 ease-in-out sm:text-xs ${isActive ? "text-primary dark:text-white" : "text-zinc-500 dark:text-zinc-400"}`
+            `flex flex-col items-center gap-0.5 text-[0.65rem] font-medium tracking-tighter transition-all duration-100 ease-in-out sm:text-xs ${isActive ? "text-primary dark:text-foreground" : "dark:text-muted-foreground text-zinc-500"}`
           }
         >
           <tab.icon

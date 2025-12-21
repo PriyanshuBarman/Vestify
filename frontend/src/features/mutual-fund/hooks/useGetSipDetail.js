@@ -5,5 +5,6 @@ export function useGetSipDetail(sipId) {
   return useQuery({
     queryKey: ["sip", sipId],
     queryFn: () => fetchSipDetail(sipId),
+    staleTime: 0,
   });
 }

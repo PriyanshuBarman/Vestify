@@ -13,7 +13,7 @@ export const useSendMoney = () => {
     onSuccess: (data, variables) => {
       const { amount, name } = variables;
       playPaymentSuccessSound();
-      navigate("/payment-success", {
+      navigate("/success", {
         state: {
           amount,
           title: "Payment Successful",

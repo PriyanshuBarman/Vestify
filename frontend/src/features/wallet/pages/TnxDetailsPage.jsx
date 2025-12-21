@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatToINR } from "@/utils/formatters";
 import { formatDate } from "date-fns";
-import { ArrowDownIcon, CheckIcon } from "lucide-react";
+import { MoveDownLeftIcon, MoveUpRightIcon } from "lucide-react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import ProfileDialog from "../components/ProfileDialog";
@@ -48,9 +48,9 @@ function TnxDetailsPage() {
       <div className="mt-6 flex flex-col items-center gap-6">
         <div className="bg-primary ring-primary/50 w-fit rounded-full ring-6">
           {isCredit ? (
-            <ArrowDownIcon className="stroke-2.5 text-background m-auto size-18 p-4" />
+            <MoveDownLeftIcon className="text-background m-auto size-18 p-5" />
           ) : (
-            <CheckIcon className="text-background m-auto size-18 stroke-3 p-4" />
+            <MoveUpRightIcon className="text-background m-auto size-18 p-5" />
           )}
         </div>
 

@@ -32,8 +32,8 @@ export const createSip = async ({ amount, sipDate, fund, pin }) => {
 
 export const editSip = async ({ sipId, amount, sipDate }) => {
   const { data } = await api.patch(`/mutual-funds/sips/${sipId}`, {
-    amount: Number(amount),
-    sipDate,
+    amount: amount ? Number(amount) : null,
+    sipDate: sipDate ? sipDate : null,
   });
   return data;
 };
@@ -43,7 +43,7 @@ export const deleteSip = async ({ sipId }) => {
   return data;
 };
 
-export const skipSip = async ({ sipId }) => {
+export const skipSip = async ({ sipId, diff }) => {
   const { data } = await api.patch(`/mutual-funds/sips/${sipId}/skip`);
   return data;
 };

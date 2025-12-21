@@ -11,7 +11,6 @@ import OrderItem from "./OrderItem";
 
 function PendingOrders() {
   const { data: pendingOrders } = useGetPendingOrders();
-
   if (!pendingOrders?.length) return null;
 
   return (

@@ -1,9 +1,16 @@
 import db from "#config/db.config.js";
+import { TZDate } from "@date-fns/tz";
+import { format } from "date-fns";
 import { applySipChanges } from "../processors/sip-change-processor.js";
 import { printSummary } from "../utils/print-summary.utils.js";
 
 export async function applySipChangess() {
-  const pendingChanges = await db.pendingMfSipChange.findMany();
+  const today = new Date(format(TZDate.tz("Asia/Kolkata"), "yyyy-MM-dd"));
+  const pendingChanges = await db.pendingMfSipChange.findMany({
+    where: {
+      applyDate: today,
+    },
+  });
 
   if (!pendingChanges.length) {
     return console.log("No pending SIP changes to apply");

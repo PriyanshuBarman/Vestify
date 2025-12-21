@@ -28,10 +28,10 @@ function WelcomePage() {
   return (
     <div className="mx-auto flex min-h-svh flex-col items-center sm:pb-4">
       <NavbarPublic googleLogin={googleLogin} isPending={isPending} />
-      <div className="relative mt-10 flex max-w-4xl flex-col items-center justify-center px-4 sm:mt-16">
+      <div className="relative mt-10 flex max-w-5xl flex-col items-center justify-center px-4 sm:mt-16">
         <InstallAppButton alwaysVisible />
         <Heading />
-        <p className="text-foreground/80 mt-6 max-w-[34ch] text-center tracking-tight duration-700 sm:mt-8 sm:max-w-[52ch] sm:text-lg">
+        <p className="text-foreground/80 text-md mt-6 max-w-[34ch] text-center tracking-tight duration-700 sm:mt-8 sm:max-w-[52ch] sm:text-lg">
           Invest, start SIPs, track portfolio, use virtual wallet, send virtual
           money to others — all virtually with a Groww.in UI.
         </p>
@@ -88,7 +88,7 @@ export default WelcomePage;
 
 function Heading() {
   return (
-    <h2 className="mt-6 text-center text-4xl leading-tight font-medium sm:text-[4.25rem]/20 sm:tracking-tight">
+    <h2 className="mt-6 text-center text-[2.3rem] leading-tight font-medium sm:text-[4.25rem]/20 sm:tracking-tight">
       <span className="text-[#00b35c]">Virtually</span> Invest in Mutual funds
       with{" "}
       <a

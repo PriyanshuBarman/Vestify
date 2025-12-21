@@ -2,6 +2,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { lazy } from "react";
 import { useGetPopularFunds } from "../../hooks/useGetPopularFunds";
+import { usePrefetchPopularFunds } from "../../hooks/usePrefetchPopularFunds";
 import SectionHeading from "../SectionHeading";
 
 const CardLG = lazy(() => import("../CardLG"));
@@ -10,6 +11,7 @@ const CardSM = lazy(() => import("../CardSM"));
 function PopularFundsSection() {
   const { data: funds } = useGetPopularFunds();
   const isMobile = useIsMobile();
+  usePrefetchPopularFunds(funds);
 
   return (
     <section className="swiper-no-swiping">

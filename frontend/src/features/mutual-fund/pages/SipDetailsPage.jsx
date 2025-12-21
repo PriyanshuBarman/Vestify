@@ -13,7 +13,7 @@ import {
   ArrowLeftIcon,
   CalendarRangeIcon,
   ChevronRightIcon,
-  PencilIcon
+  PencilIcon,
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
@@ -38,7 +38,7 @@ function SipDetailsPage() {
       <DesktopEditSipCard sipDetail={sipDetail} />
 
       {/* Heading */}
-      <div className="bg-background sticky top-0 z-10 flex items-center justify-between p-4">
+      <div className="bg-background sticky top-0 z-10 flex items-center justify-between p-4 sm:pl-0">
         <div className="flex items-center gap-2">
           <button onClick={() => navigate(-1)}>
             <ArrowLeftIcon />
@@ -124,11 +124,11 @@ function SipDetailsPage() {
                 </span>
               </div>
               <div className="space-x-10">
-                <span>Paid Via:</span>
-                <span>Vestify Wallet (Virtual Money)</span>
+                <span>Autopay linked to</span>
+                <span>Vestify Wallet</span>
               </div>
               <div className="flex space-x-10">
-                <span className="shrink-0">SIP Id:</span>
+                <span className="shrink-0">SIP ID:</span>
                 <div className="flex items-start gap-2 break-all">
                   <span>{sipDetail.id}</span>
                   <CopyButton text={sipDetail.id} className="text-foreground" />
@@ -172,7 +172,7 @@ function StatusTimeline({ data }) {
                 installment <ChevronRightIcon className="size-4" />
               </h6>
               <span className="text-muted-foreground text-xs">
-                {format(installment.createdAt, "dd MMM yy, h:mm a")}
+                {format(installment.processDate, "dd MMM yy, h:mm a")}
               </span>
             </Link>
           </div>

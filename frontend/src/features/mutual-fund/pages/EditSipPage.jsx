@@ -3,28 +3,40 @@ import Keypad from "@/components/Keypad";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { formatToINR } from "@/utils/formatters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "sonner";
 import EditSipDatePicker from "../components/EditSipDatePicker";
+import ConfirmEditSipModal from "../components/overlays/ConfirmEditSipModal";
 import { useEditSip } from "../hooks/useEditSip";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetSipDetail } from "../hooks/useGetSipDetail";
 
 function EditSipPage() {
   const { sipId } = useParams();
-  const { data } = useGetSipDetail(sipId);
+  const { data, isFetching } = useGetSipDetail(sipId);
   const sipDetail = data?.sip || {};
 
   const { data: fund = {} } = useGetFundData(sipDetail.schemeCode);
   const [amount, setAmount] = useState(sipDetail.amount);
   const [sipDate, setSipDate] = useState(sipDetail.sipDate);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const { mutate: editSip, isPending } = useEditSip();
 
   const handleUpdateSip = () => {
     if (!amount) return toast.error("Please enter amount");
     editSip({ sipId, amount, sipDate });
   };
+
+  // handle refresh
+  useEffect(() => {
+    if (sipDetail.amount) {
+      setAmount(sipDetail.amount);
+    }
+    if (sipDetail.sipDate) {
+      setSipDate(sipDetail.sipDate);
+    }
+  }, [sipDetail.amount, sipDetail.sipDate]);
 
   return (
     <div className="flex h-svh flex-col justify-between">
@@ -58,8 +70,9 @@ function EditSipPage() {
         {/* Add Extra Buttons */}
         <div className="flex justify-center gap-4">
           <Button
+            size="sm"
             variant="outline"
-            className="rounded-full"
+            className="rounded-2xl text-xs font-normal shadow-none"
             onClick={() =>
               setAmount((prev) => (parseInt(prev) + 500).toString())
             }
@@ -67,8 +80,9 @@ function EditSipPage() {
             + ₹500
           </Button>
           <Button
+            size="sm"
             variant="outline"
-            className="rounded-full"
+            className="rounded-2xl text-xs font-normal shadow-none"
             onClick={() =>
               setAmount((prev) => (parseInt(prev) + 1000).toString())
             }
@@ -76,8 +90,9 @@ function EditSipPage() {
             + ₹1,0000
           </Button>
           <Button
+            size="sm"
             variant="outline"
-            className="rounded-full"
+            className="rounded-2xl text-xs font-normal shadow-none"
             onClick={() =>
               setAmount((prev) => (parseInt(prev) + 5000).toString())
             }
@@ -86,6 +101,7 @@ function EditSipPage() {
           </Button>
         </div>
         <EditSipDatePicker
+          isFetching={isFetching}
           sipDate={sipDate}
           setSipDate={setSipDate}
           sipDetail={sipDetail}
@@ -105,11 +121,20 @@ function EditSipPage() {
               (amount === sipDetail.amount && sipDate === sipDetail.sipDate)
             }
             size="lg"
-            onClick={handleUpdateSip}
+            onClick={() => setOpenConfirmModal(true)}
             className="w-full"
           >
             {isPending && <Spinner />} Save Changes
           </Button>
+
+          <ConfirmEditSipModal
+            onConfirm={handleUpdateSip}
+            isOpen={openConfirmModal}
+            onOpenChange={setOpenConfirmModal}
+            sipDetail={sipDetail}
+            amount={amount}
+            selectedDate={sipDate}
+          />
         </div>
       </div>
     </div>

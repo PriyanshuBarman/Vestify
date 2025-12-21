@@ -11,10 +11,12 @@ function InstallAppButton({ alwaysVisible = false }) {
     <Button
       onClick={handleInstall}
       variant="outline"
-      className="mt-4 h-8 gap-2 rounded-full border pr-0.5 pl-1.5 shadow-none sm:h-9 sm:gap-3 sm:pr-1.5 sm:pl-2"
+      className="bg-accent mt-4 flex h-auto items-center gap-2 rounded-full px-1 py-0.5 text-sm shadow-none transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:scale-101 hover:shadow-lg sm:mt-0"
     >
-      <Badge className="rounded-full bg-[#00b35cc1] font-normal">NEW</Badge>
-      <span className="sm:text-md text-sm font-normal">Install web app</span>
+      <Badge className="dark:text-foreground h-6 rounded-full bg-[#00b35cc1] text-xs font-normal">
+        NEW
+      </Badge>
+      <span className="font-normal">Install web app</span>
       <span className="flex size-7 items-center justify-center rounded-full">
         <ArrowRightIcon className="size-4" />
       </span>

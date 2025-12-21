@@ -9,9 +9,12 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { formatToINR } from "@/utils/formatters";
-import { format, getDate } from "date-fns";
+import { tz } from "@date-fns/tz";
+import { differenceInCalendarDays, format, getDate } from "date-fns";
+import { CalendarRangeIcon, Clock4Icon } from "lucide-react";
 import { lazy } from "react";
 import { Link } from "react-router";
+import { useGetPendingOrders } from "../../hooks/useGetPendingOrders";
 import { useGetSips } from "../../hooks/useGetSips";
 import FundLogo from "../FundLogo";
 const NoActiveSips = lazy(() => import("../empty-states/NoActiveSips"));
@@ -31,13 +34,13 @@ function SipsTab() {
             <span className="text-muted-foreground text-xs">
               Monthly SIP amount
             </span>
-            <h2 className="text-xl leading-tight font-semibold tabular-nums">
+            <h2 className="text-2xl leading-tight font-semibold tabular-nums">
               {formatToINR(data?.totalActiveSipAmount, 2)}
             </h2>
           </div>
 
           <div className="mt-6 flex justify-between">
-            <h2 className="text-md font-medium sm:text-lg">
+            <h2 className="text-sm font-medium sm:text-lg">
               Active SIPs ({data?.sips?.length})
             </h2>
             {/* <div className="flex items-center gap-2 text-xs">
@@ -47,7 +50,7 @@ function SipsTab() {
           </div>
         </div>
 
-        <ItemGroup className="mt-2">
+        <ItemGroup>
           {data?.sips?.map((sip, index) => (
             <SipItem
               key={sip.id}
@@ -68,6 +71,17 @@ function SipsTab() {
 export default SipsTab;
 
 function SipItem({ sip, index, length }) {
+  const { data: pendingOrders } = useGetPendingOrders();
+  const dueWithinDays = differenceInCalendarDays(
+    sip.nextInstallmentDate,
+    new Date(),
+    {
+      in: tz("Asia/Kolkata"),
+    },
+  );
+
+  const isProcessing = pendingOrders?.some((order) => order.sipId === sip.id);
+
   return (
     <>
       <Item asChild size="sm" className="px-0">
@@ -83,8 +97,21 @@ function SipItem({ sip, index, length }) {
             <ItemTitle className="line-clamp-2 text-sm leading-tight text-wrap">
               {sip.fundShortName}
             </ItemTitle>
-            <ItemDescription className="text-sm font-medium">
+            <ItemDescription className="flex items-center gap-4 text-sm font-medium">
               {formatToINR(sip.amount, 2)}
+
+              {dueWithinDays < 5 && (
+                <span className="flex items-center gap-1.5 text-xs font-normal">
+                  <CalendarRangeIcon className="mb-0.5 size-4" /> Due in{" "}
+                  {dueWithinDays} days
+                </span>
+              )}
+              {isProcessing && (
+                <span className="flex items-center gap-1.5 text-xs font-normal">
+                  <Clock4Icon className="text-primary mb-0.5 size-4" /> In
+                  progress
+                </span>
+              )}
             </ItemDescription>
           </ItemContent>
           <div className="Date mx-4 rounded-xl border px-3 py-2 text-center leading-tight">

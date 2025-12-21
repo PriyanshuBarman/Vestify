@@ -2,8 +2,8 @@ function Page() {
   return (
     <div className="flex h-dvh items-center justify-center p-4">
       <div className="mb-24 max-w-md space-y-4 text-center sm:space-y-6">
-        <h1 className="text-foreground text-xl font-semibold sm:text-3xl">
-          Planning !
+        <h1 className="text-foreground text-2xl font-semibold sm:text-3xl">
+          Stay Tuned!
         </h1>
 
         {/* Divider line */}

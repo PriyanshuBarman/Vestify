@@ -3,12 +3,13 @@ import {
   selectActiveTabIndex,
   setActiveTabIndex,
 } from "@/store/slices/mutualFundSlice";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "swiper/css";
 import { HashNavigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import InvestmentsTab from "../components/tabs/InvestmentsTab";
+import { usePrefetchRequiredQueries } from "../hooks/usePrefetchRequiredQueries";
 
 const SipsTab = lazy(() => import("../components/tabs/SipsTab"));
 const WatchlistTab = lazy(() => import("../components/tabs/WatchlistTab"));
@@ -17,6 +18,7 @@ const ExploreTab = lazy(() => import("../components/tabs/ExploreTab"));
 function Page() {
   const activeTabIndex = useSelector(selectActiveTabIndex);
   const dispatch = useDispatch();
+  usePrefetchRequiredQueries();
 
   return (
     <Swiper

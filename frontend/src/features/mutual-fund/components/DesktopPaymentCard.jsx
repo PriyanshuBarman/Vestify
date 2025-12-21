@@ -132,8 +132,7 @@ function DesktopPaymentCard({ fund }) {
           </div>
 
           <p className="mb-4 space-y-2 text-sm font-medium tabular-nums">
-            Available Balance:
-            <NumberFlow value={balance || 0} prefix="₹" />
+            Available Balance: <NumberFlow value={balance || 0} prefix="₹" />
           </p>
 
           <Button

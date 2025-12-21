@@ -1,18 +1,18 @@
 import db from "#config/db.config.js";
 
 export const applySipChanges = async (data) => {
-  const { id, sipId, amount, dateOfMonth, nextInstallmentDate } = data;
+  const { id, sipId, amount, sipDate, nextInstallmentDate } = data;
 
   await db.$transaction(async (tx) => {
-    await db.mfSip.update({
+    await tx.mfSip.update({
       where: { id: sipId },
       data: {
         amount: amount || undefined,
-        dateOfMonth: dateOfMonth || undefined,
+        sipDate: sipDate || undefined,
         nextInstallmentDate: nextInstallmentDate || undefined,
       },
     });
 
-    await db.pendingMfSipChange.delete({ where: { id } });
+    await tx.pendingMfSipChange.delete({ where: { id } });
   });
 };

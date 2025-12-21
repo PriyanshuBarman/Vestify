@@ -1,18 +1,35 @@
 import GoBackBar from "@/components/GoBackBar";
 import { Button } from "@/components/ui/button";
-import { CheckIcon } from "lucide-react";
+import {
+  ArrowUpRight,
+  ArrowUpRightIcon,
+  CheckIcon,
+  MoveUpRightIcon,
+} from "lucide-react";
 import { Link, useLocation } from "react-router";
 
-function PaymentSuccessPage() {
+function SuccessPage() {
   const location = useLocation();
-  const { title, description, orderDetailsRoute, doneRoute } = location.state;
+  const {
+    title,
+    description,
+    orderDetailsRoute,
+    doneRoute,
+    notice,
+    icon = "check",
+  } = location.state;
 
   return (
     <div className="flex h-dvh flex-col px-4 pb-4 sm:mx-auto sm:h-fit sm:max-w-lg">
-      <GoBackBar className="px-0" />
+      <GoBackBar className="px-0" showSearchIcon={false} />
       <div className="mt-20 flex flex-col items-center justify-center gap-8">
         <div className="bg-primary animate-in zoom-in ring-primary/50 w-fit rounded-full ring-6 duration-500 will-change-transform">
-          <CheckIcon className="text-background animate-in spin-in-90 zoom-in size-20 stroke-3 p-4 duration-500" />
+          {icon === "check" && (
+            <CheckIcon className="text-background animate-in spin-in-90 zoom-in size-20 stroke-3 p-4 duration-500" />
+          )}
+          {icon === "arrow" && (
+            <MoveUpRightIcon className="text-background animate-in spin-in-90 zoom-in size-20 stroke-3 p-5 duration-500" />
+          )}
         </div>
 
         <div>
@@ -22,6 +39,12 @@ function PaymentSuccessPage() {
           </p>
         </div>
       </div>
+
+      {notice && (
+        <div className="bg-accent mt-auto rounded-2xl p-4 sm:mt-12">
+          <p className="text-muted-foreground text-sm">{notice}</p>
+        </div>
+      )}
 
       <div className="mt-auto flex w-full flex-col items-center justify-end gap-4 sm:mt-16">
         <Button asChild size="lg" className="w-full">
@@ -46,4 +69,4 @@ function PaymentSuccessPage() {
   );
 }
 
-export default PaymentSuccessPage;
+export default SuccessPage;

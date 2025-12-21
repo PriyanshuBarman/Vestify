@@ -1,3 +1,4 @@
+import IconWrapper from "@/components/IconWrapper";
 import { Button } from "@/components/ui/button";
 import {
   ResponsiveModal,
@@ -10,11 +11,11 @@ import {
   ResponsiveModalTrigger,
 } from "@/components/ui/responsive-modal";
 import { Spinner } from "@/components/ui/spinner";
-import { tz } from "@date-fns/tz";
-import { addMonths, differenceInDays, format } from "date-fns";
+import { differenceInCalendarDays, format } from "date-fns";
 import { SkipForwardIcon } from "lucide-react";
 import { useSkipSip } from "../../hooks/useSkipSip";
-import IconWrapper from "@/components/IconWrapper";
+import { getNextInstallmentDateAfterSkip } from "../../utils/sip";
+import { tz } from "@date-fns/tz";
 
 function SkipSipButton({ sipId, nextInstallmentDate }) {
   const { mutate: skipSip, isPending } = useSkipSip();
@@ -22,21 +23,12 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
   if (!sipId || !nextInstallmentDate) {
     return null;
   }
+  const diff = differenceInCalendarDays(nextInstallmentDate, new Date(), {
+    in: tz("Asia/Kolkata"),
+  });
+
   const handleSkipSip = () => {
-    skipSip({ sipId });
-  };
-
-  const getNextInstallmentDate = () => {
-    const diff = differenceInDays(nextInstallmentDate, new Date(), {
-      in: tz("Asia/Kolkata"),
-    });
-
-    const newNextInstallmentDate = addMonths(
-      nextInstallmentDate,
-      diff > 2 ? 1 : 2,
-    );
-
-    return format(newNextInstallmentDate, "dd MMM yy");
+    skipSip({ sipId, diff });
   };
 
   return (
@@ -61,8 +53,15 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
           {format(nextInstallmentDate, "dd MMM yy")} installment?
         </ResponsiveModalTitle>
 
+        {diff <= 2 && (
+          <ResponsiveModalDescription className="bg-accent mx-4 my-2 rounded-lg p-4 text-center text-sm">
+            Your next SIP installment is within the next 2 days, so it can’t be
+            skipped. The following installment will be skipped instead.
+          </ResponsiveModalDescription>
+        )}
         <ResponsiveModalDescription className="bg-accent mx-4 my-2 rounded-lg p-4 text-center text-sm">
-          Your next due date will be {getNextInstallmentDate()}
+          Your next due date will be{" "}
+          {getNextInstallmentDateAfterSkip(nextInstallmentDate, diff)}
         </ResponsiveModalDescription>
 
         <ResponsiveModalFooter>

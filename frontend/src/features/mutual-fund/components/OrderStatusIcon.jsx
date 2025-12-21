@@ -1,5 +1,9 @@
 import { cn } from "@/lib/utils";
-import { CheckCheckIcon, CircleXIcon, ClockFadingIcon } from "lucide-react";
+import {
+  CheckCircleIcon,
+  ClockCountdownIcon,
+  XCircleIcon,
+} from "@phosphor-icons/react";
 
 /**
  * Reusable component for displaying order status icons
@@ -8,11 +12,21 @@ import { CheckCheckIcon, CircleXIcon, ClockFadingIcon } from "lucide-react";
  * @param {string} props.className - Custom Tailwind classes for the icon (default: "size-5")
  * @returns {JSX.Element} The status icon component
  */
-function OrderStatusIcon({ status, className = "size-5" }) {
+function OrderStatusIcon({ status, className = "size-5.5" }) {
   const icons = {
-    COMPLETED: <CheckCheckIcon className={cn("text-primary", className)} />,
-    PENDING: <ClockFadingIcon className={cn("text-primary", className)} />,
-    FAILED: <CircleXIcon className={cn("text-destructive", className)} />,
+    COMPLETED: (
+      <CheckCircleIcon
+        weight="fill"
+        className={cn("text-primary", className)}
+      />
+    ),
+    PENDING: <ClockCountdownIcon className={cn("text-primary", className)} />,
+    FAILED: (
+      <XCircleIcon
+        weight="fill"
+        className={cn("text-destructive", className)}
+      />
+    ),
   };
 
   return icons[status] || null;

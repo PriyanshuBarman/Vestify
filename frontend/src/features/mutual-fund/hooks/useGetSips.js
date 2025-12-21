@@ -5,5 +5,6 @@ export function useGetSips() {
   return useQuery({
     queryKey: ["sips"],
     queryFn: fetchSips,
+    staleTime: 0,
   });
 }

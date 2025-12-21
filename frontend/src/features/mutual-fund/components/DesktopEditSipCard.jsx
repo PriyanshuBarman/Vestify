@@ -7,21 +7,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { IndianRupeeIcon } from "lucide-react";
 import { useState } from "react";
-import { toast } from "sonner";
+import { useEditSip } from "../hooks/useEditSip";
 import { useGetFundData } from "../hooks/useGetFundData";
 import EditSipDatePicker from "./EditSipDatePicker";
-import { useEditSip } from "../hooks/useEditSip";
+import ConfirmEditSipModal from "./overlays/ConfirmEditSipModal";
 
 function DesktopPaymentCard({ sipDetail }) {
   const { data: fund = {} } = useGetFundData(sipDetail.schemeCode);
   const [amount, setAmount] = useState();
   const [sipDate, setSipDate] = useState(sipDetail.sipDate);
   const { mutate: updateSip, isPending } = useEditSip();
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   const handleUpdateSip = () => {
-    if (!amount) return toast.error("Please enter amount");
     updateSip({ sipId: sipDetail.id, amount, sipDate });
   };
 
@@ -66,17 +67,24 @@ function DesktopPaymentCard({ sipDetail }) {
       <CardFooter>
         <Button
           disabled={
-            sipDate > 28 ||
-            (amount && amount < fund?.sip_min) ||
+            (amount && Number(amount) < fund?.sip_min) ||
             (amount === sipDetail.amount && sipDate === sipDetail.sipDate) ||
             (!amount && sipDate === sipDetail.sipDate)
           }
           size="lg"
-          onClick={handleUpdateSip}
+          onClick={() => setOpenConfirmModal(true)}
           className="w-full p-2"
         >
-          Confirm Update
+          {isPending && <Spinner />} Confirm Update
         </Button>
+        <ConfirmEditSipModal
+          isOpen={openConfirmModal}
+          onOpenChange={setOpenConfirmModal}
+          onConfirm={handleUpdateSip}
+          amount={amount}
+          selectedDate={sipDate}
+          sipDetail={sipDetail}
+        />
       </CardFooter>
     </Card>
   );

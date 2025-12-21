@@ -9,5 +9,6 @@ export function useGetFundOrders(schemeCode) {
   return useQuery({
     queryKey: ["fund-orders", schemeCode],
     queryFn: () => fetchFundOrders(schemeCode),
+    staleTime: 0,
   });
 }

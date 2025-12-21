@@ -13,14 +13,14 @@ import { cn } from "@/lib/utils";
 function OrderItem({ order, index, length, className }) {
   return (
     <>
-      <Item asChild size="sm" className={cn("cursor-pointer",className)}>
+      <Item asChild size="sm" className={cn("cursor-pointer", className)}>
         <Link
           to={`/mutual-funds/orders/${order.id}`}
           key={order.id}
           className="flex justify-between border-b py-4"
         >
           <ItemContent>
-            <ItemTitle className='font-normal'>{order.fundShortName}</ItemTitle>
+            <ItemTitle className="font-normal">{order.fundShortName}</ItemTitle>
             <ItemDescription className="text-xs">
               {orderTypeConfig[order.orderType]}
             </ItemDescription>
@@ -32,7 +32,13 @@ function OrderItem({ order, index, length, className }) {
             </span>
             <div className="text-muted-foreground flex items-center gap-2 text-xs">
               <div
-                className={`size-2 rounded-full ${order.status === "FAILED" ? "bg-destructive" : "bg-primary"}`}
+                className={`size-2 rounded-full ${
+                  order.status === "FAILED"
+                    ? "bg-destructive"
+                    : order.status === "PENDING"
+                      ? "bg-yellow-500"
+                      : "bg-primary"
+                }`}
               />
               <span>{orderStatusConfig[order.status]}</span>
             </div>

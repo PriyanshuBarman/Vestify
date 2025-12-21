@@ -30,7 +30,7 @@ const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
 const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
 const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
-const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
+const SuccessPage = lazy(() => import("./pages/SuccessPage"));
 
 export const routes = createBrowserRouter([
   authRoutes,
@@ -66,8 +66,8 @@ export const routes = createBrowserRouter([
         element: <SearchPage />,
       },
       {
-        path: "/payment-success",
-        element: <PaymentSuccessPage />,
+        path: "/success",
+        element: <SuccessPage />,
       },
       {
         path: "/orders",

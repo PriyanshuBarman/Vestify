@@ -40,20 +40,18 @@ export const editSip = asyncHandler(async (req, res) => {
   if (!sipId || sipId === "") {
     throw new ApiError(400, "sipId is required");
   }
-  if (!amount || !sipDate) {
+  if (!amount && !sipDate) {
     throw new ApiError(400, "amount or sipDate one is required");
   }
 
-  await sipService.editSip({
+  const { message, notice } = await sipService.editSip({
     userId,
     sipId,
     amount,
     sipDate,
   });
 
-  return res
-    .status(200)
-    .json({ success: true, message: "SIP edit request placed" });
+  return res.status(200).json({ success: true, message, notice });
 });
 
 export const skipSip = asyncHandler(async (req, res) => {

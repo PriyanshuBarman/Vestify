@@ -35,7 +35,7 @@ function OrderDetailsPage() {
       <GoBackBar title="Order Details" />
       <div className="px-4">
         <div className="space-y-4">
-          <OrderStatusIcon status={order.status} className="size-12" />
+          <OrderStatusIcon status={order.status} className="size-16" />
           <div>
             <h2 className="flex items-center gap-4 text-2xl font-semibold">
               {formatToINR(order.amount, 2)}

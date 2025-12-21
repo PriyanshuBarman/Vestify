@@ -10,10 +10,19 @@ export function useEditSip() {
   return useMutation({
     mutationFn: editSip,
     onSuccess: (data, variables) => {
-      toast.success(data.message);
-      navigate("/mutual-funds/#sips", {
+      navigate("/success", {
+        state: {
+          title: data?.notice
+            ? "SIP Edit Requested"
+            : "SIP Updated Successfully",
+          description: data.message,
+          notice: data?.notice,
+          doneRoute: "/mutual-funds/#sips",
+          icon: data?.notice ? "arrow" : "check",
+        },
         replace: true,
       });
+
       queryClient.invalidateQueries({ queryKey: ["sips"] });
       queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
     },

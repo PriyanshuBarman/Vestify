@@ -14,8 +14,8 @@ export function useSSEConnection() {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        queryClient.invalidateQueries({ queryKey: ["transactions"] });
         queryClient.setQueryData(["balance"], data.balance);
+        queryClient.invalidateQueries({ queryKey: ["transactions"] });
       } catch (err) {
         console.error("Failed to parse SSE event", err);
       }

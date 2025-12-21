@@ -21,7 +21,7 @@ export function useCreateInvestOrder() {
       );
 
       playPaymentSuccessSound();
-      navigate("/payment-success", {
+      navigate("/success", {
         state: {
           amount: order.amount,
           title: "Order Placed",

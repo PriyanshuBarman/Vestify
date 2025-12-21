@@ -1,9 +1,20 @@
-import { TZDate } from "@date-fns/tz";
-import { addMonths } from "date-fns";
+import { addMonths, differenceInCalendarDays, setDate } from "date-fns";
 
-export const getNextInstallmentDate = (sipDate) => {
-  const nextInstallmentDate = addMonths(TZDate.tz("Asia/Kolkata"), 1);
-  nextInstallmentDate.setDate(sipDate);
+export function getNextInstallmentDate(selectedDay, nextInstallmentDate) {
+  const today = new Date();
 
-  return nextInstallmentDate;
-};
+  const diffDays = differenceInCalendarDays(nextInstallmentDate, today);
+
+  // if next installment is more than 2 days away → apply from next cycle
+  if (diffDays <= 2) {
+    return setDate(addMonths(today, 1), selectedDay);
+  }
+
+  // selected day is in current month but ahead of today + 2 days -> return date
+  if (selectedDay > today.getDate() + 2) {
+    return setDate(today, selectedDay);
+  }
+
+  // otherwise → add one month to the date
+  return setDate(addMonths(today, 1), selectedDay);
+}
