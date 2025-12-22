@@ -278,6 +278,7 @@ model MfSip {
   schemeCode          Int
   amount              Decimal  @db.Decimal(18, 2)
   fundHouseDomain     String
+  failedCount         Int      @default(0) @db.UnsignedInt
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `mf_sips` ADD COLUMN `failedCount` INTEGER UNSIGNED NOT NULL DEFAULT 0;

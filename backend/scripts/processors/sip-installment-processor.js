@@ -14,6 +14,7 @@ export const placeSipInstallmentOrder = async (data) => {
     fundCategory,
     fundHouseDomain,
     nextInstallmentDate,
+    failedCount,
   } = data;
 
   const { processDate, navDate } = getApplicableDates(
@@ -50,9 +51,21 @@ export const placeSipInstallmentOrder = async (data) => {
           failureReason: "Insufficient balance",
         },
       });
+      // If failed count reaches 3, delete the SIP
+      if (failedCount.toNumber() + 1 >= 3) {
+        await tx.mfSip.delete({
+          where: { id: sipId },
+        });
+        return;
+      }
       await tx.mfSip.update({
         where: { id: sipId },
-        data: { nextInstallmentDate: addMonths(nextInstallmentDate, 1) },
+        data: {
+          nextInstallmentDate: addMonths(nextInstallmentDate, 1),
+          failedCount: {
+            increment: 1,
+          },
+        },
       });
       // Early return to exit the transaction
       return;
@@ -97,7 +110,10 @@ export const placeSipInstallmentOrder = async (data) => {
     // 6. Update next installment date
     await tx.mfSip.update({
       where: { id: sipId },
-      data: { nextInstallmentDate: addMonths(nextInstallmentDate, 1) },
+      data: {
+        failedCount: 0,
+        nextInstallmentDate: addMonths(nextInstallmentDate, 1),
+      },
     });
   });
 };
