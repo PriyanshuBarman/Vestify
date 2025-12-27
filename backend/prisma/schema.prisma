@@ -268,19 +268,25 @@ model MfHolding {
 }
 
 model MfSip {
-  id                  String   @id @default(uuid())
-  sipDate             Int
-  nextInstallmentDate DateTime @db.Date
-  fundName            String
-  fundShortName       String
-  fundCategory        String
-  fundType            FundType
-  schemeCode          Int
-  amount              Decimal  @db.Decimal(18, 2)
-  fundHouseDomain     String
-  failedCount         Int      @default(0) @db.UnsignedInt
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id                   String    @id @default(uuid())
+  sipDate              Int
+  nextInstallmentDate  DateTime  @db.Date
+  fundName             String
+  fundShortName        String
+  fundCategory         String
+  fundType             FundType
+  schemeCode           Int
+  amount               Decimal   @db.Decimal(18, 2)
+  fundHouseDomain      String
+  failedCount          Int       @default(0) @db.UnsignedInt
+  // step-up sip fields
+  nextStepUpDate       DateTime? @db.Date
+  stepUpAmount         Decimal?  @db.Decimal(18, 2)
+  stepUpPercentage     Decimal?  @db.Decimal(18, 2)
+  stepUpIntervalInMonths Int?      @db.UnsignedInt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String

@@ -11,7 +11,9 @@ import { formatToINR } from "@/utils/formatters";
 import { format, formatDate, setDate } from "date-fns";
 import {
   ArrowLeftIcon,
+  BarChartIcon,
   CalendarRangeIcon,
+  ChevronDownIcon,
   ChevronRightIcon,
   PencilIcon,
 } from "lucide-react";
@@ -21,6 +23,7 @@ import OrderStatusIcon from "../components/OrderStatusIcon";
 import CancelSipButton from "../components/overlays/CancelSipButton";
 import SkipSipButton from "../components/overlays/SkipSipButton";
 import { useGetSipDetail } from "../hooks/useGetSipDetail";
+import StepUpSipButton from "../components/StepUpSipButton";
 
 function SipDetailsPage() {
   const { sipId } = useParams();
@@ -52,7 +55,7 @@ function SipDetailsPage() {
         {/* SIP Details/Summary */}
         <section className="space-y-4 py-6">
           <div>
-            <h2 className="text-3xl font-semibold">
+            <h2 className="text-4xl font-semibold">
               {formatToINR(sipDetail.amount, 2)}
             </h2>
             <span className="mt-2 space-x-6 text-sm font-medium">
@@ -69,12 +72,19 @@ function SipDetailsPage() {
             <ChevronRightIcon className="size-5" />
           </Link>
 
-          <Button asChild variant="outline" className="py-4 md:hidden">
-            <Link to={`/mutual-funds/edit/sip/${sipId}`}>
-              <PencilIcon className="mr-2 h-4 w-4" />
-              Change amount/date
-            </Link>
-          </Button>
+          <div className="flex gap-4">
+            <StepUpSipButton sipDetail={sipDetail} />
+            <Button
+              asChild
+              variant="outline"
+              className="py-4 text-[0.8rem] tracking-tight sm:text-sm sm:tracking-normal md:hidden"
+            >
+              <Link to={`/mutual-funds/edit/sip/${sipId}`}>
+                <PencilIcon className="h-4 w-4" />
+                Change amount/date
+              </Link>
+            </Button>
+          </div>
         </section>
 
         {/* Upcoming SIP */}
@@ -172,7 +182,7 @@ function StatusTimeline({ data }) {
                 installment <ChevronRightIcon className="size-4" />
               </h6>
               <span className="text-muted-foreground text-xs">
-                {format(installment.processDate, "dd MMM yy, h:mm a")}
+                {format(installment.createdAt, "dd MMM yy, h:mm a")}
               </span>
             </Link>
           </div>

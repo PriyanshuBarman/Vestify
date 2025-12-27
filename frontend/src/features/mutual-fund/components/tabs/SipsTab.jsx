@@ -21,7 +21,6 @@ const NoActiveSips = lazy(() => import("../empty-states/NoActiveSips"));
 
 function SipsTab() {
   const { data, isPending } = useGetSips();
-
   if (isPending) return <LoadingState />;
   if (!data) return <NoActiveSips />;
 
@@ -86,15 +85,15 @@ function SipItem({ sip, index, length }) {
     <>
       <Item asChild size="sm" className="px-0">
         <Link to={`/mutual-funds/sip/${sip.id}`}>
-          <ItemMedia>
+          <ItemMedia className="!self-center">
             <FundLogo
               noFormat
               fundHouseDomain={sip.fundHouseDomain}
-              className="size-10"
+              className="size-9"
             />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle className="line-clamp-2 text-sm leading-tight text-wrap">
+            <ItemTitle className="line-clamp-2 text-sm leading-tight font-[450] text-wrap">
               {sip.fundShortName}
             </ItemTitle>
             <ItemDescription className="flex items-center gap-4 text-sm font-medium">

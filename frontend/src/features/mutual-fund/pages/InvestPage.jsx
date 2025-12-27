@@ -85,21 +85,21 @@ function InvestPage() {
         <div className="flex justify-center gap-4">
           <Button
             variant="outline"
-            className="rounded-full text-xs"
+            className="rounded-full text-xs shadow-none"
             onClick={() => handleAddExtra(500)}
           >
             + ₹500
           </Button>
           <Button
             variant="outline"
-            className="rounded-full text-xs"
+            className="rounded-full text-xs shadow-none"
             onClick={() => handleAddExtra(1000)}
           >
             + ₹1,000
           </Button>
           <Button
             variant="outline"
-            className="rounded-full text-xs"
+            className="rounded-full text-xs shadow-none"
             onClick={() => handleAddExtra(5000)}
           >
             + ₹5,000

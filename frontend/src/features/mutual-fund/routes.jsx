@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import Page from "./pages/Page";
+import StepUpSipPage from "./pages/StepUpSipPage";
 
 const RedemptionRequestSuccessPage = lazy(
   () => import("./pages/RedemptionRequestSuccessPage"),
@@ -65,6 +66,10 @@ export const mutualFundRoutes = {
     {
       path: "orders/:orderId",
       element: <OrderDetailsPage />,
+    },
+    {
+      path: "step-up",
+      element: <StepUpSipPage />,
     },
     {
       path: "sip/:sipId",

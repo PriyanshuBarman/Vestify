@@ -169,7 +169,7 @@ function ResponsivePinDialog({
                   id={`pin-input-${index}`}
                   ref={(el) => (inputRefs.current[index] = el)}
                   className={cn(
-                    "size-13 rounded-xl text-center !text-2xl font-medium",
+                    "size-13 rounded-2xl text-center !text-2xl font-medium shadow-none",
                     currentIndex === index && isMobile
                       ? "border-ring ring-ring/50 ring-[3px]"
                       : "",

@@ -20,7 +20,7 @@ function ThemeChangeButton() {
           <Button
             onClick={() => dispatch(setTheme(theme.name))}
             variant="secondery"
-            className={`w-20 rounded-full border-none shadow-none ${currentTheme === theme.name && "bg-primary text-background ring"}`}
+            className={`w-20 rounded-full border-none shadow-none ${currentTheme === theme.name && "text-background bg-[#00b35ccd] ring"}`}
           >
             {theme.icon}
           </Button>

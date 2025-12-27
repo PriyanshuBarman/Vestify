@@ -25,15 +25,15 @@ function PinSetupPage() {
         <div className="text-center">
           <h1 className="mb-1 text-xl font-semibold">Set up your PIN</h1>
           <p className="text-muted-foreground text-sm">
-            This PIN will be required for investments and sending the virtual
-            money to other users
+            This PIN will be required to make investments and send virtual money
+            to other users
           </p>
         </div>
 
         {/* PIN Input */}
         <div className="mx-auto w-full max-w-sm place-items-center">
           <p className="text-muted-foreground mb-4 text-center text-sm font-medium">
-            Enter PIN
+            Create PIN
           </p>
 
           <InputOTP
@@ -50,19 +50,19 @@ function PinSetupPage() {
           >
             <InputOTPGroup className="gap-3">
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-xs first:rounded-xl"
+                className="size-13 text-base font-medium shadow-none first:rounded-xl"
                 index={0}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-xs"
+                className="size-13 rounded-xl text-base font-medium shadow-none"
                 index={1}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-xs"
+                className="size-13 rounded-xl text-base font-medium shadow-none"
                 index={2}
               />
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-xs last:rounded-xl"
+                className="size-13 text-base font-medium shadow-none last:rounded-xl"
                 index={3}
               />
             </InputOTPGroup>

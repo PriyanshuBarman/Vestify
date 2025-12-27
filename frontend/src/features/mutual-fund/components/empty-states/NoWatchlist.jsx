@@ -26,7 +26,7 @@ function NoWatchlist() {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button asChild className="rounded-full">
+        <Button asChild className="rounded-full text-xs font-normal">
           <Link to="/mutual-funds/all-funds">Add Funds</Link>
         </Button>
       </EmptyContent>

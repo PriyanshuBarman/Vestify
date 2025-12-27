@@ -1,9 +1,9 @@
-name: SIP Installment Order Placement Cron
+name: Step-Up SIP Processor Cron
 
 on:
   schedule:
-    - cron: "30 21 * * *" # 3:00 AM IST
-    - cron: "00 22 * * *" # 3:30 AM IST
+    - cron: "30 20 * * *" # 2:00 AM IST
+    - cron: "00 21 * * *" # 2:30 AM IST
   workflow_dispatch: # Allow manual trigger
 
 defaults:
@@ -31,9 +31,9 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: SIP Installment Order Placement
+      - name: Step-Up SIP Processer
         id: update-script
-        run: node scripts/tasks/place-sip-installment-orders.js
+        run: node scripts/tasks/process-step-up-sips.js
         env:
           NODE_ENV: cron
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

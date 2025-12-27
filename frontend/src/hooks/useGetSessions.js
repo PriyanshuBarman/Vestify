@@ -6,5 +6,6 @@ export function useGetSessions() {
     queryKey: ["sessions"],
     queryFn: fetchSessions,
     staleTime: 0,
+    gcTime: 0,
   });
 }

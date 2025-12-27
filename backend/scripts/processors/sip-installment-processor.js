@@ -1,15 +1,17 @@
 import db from "#config/db.config.js";
-import { addMonths } from "date-fns";
+import { addMonths, setDate } from "date-fns";
 import { getApplicableDates } from "../utils/get-applicable-dates.utils.js";
+import { tz } from "@date-fns/tz";
 
 export const placeSipInstallmentOrder = async (data) => {
   const {
     userId,
     id: sipId,
     amount,
-    schemeCode,
+    sipDate,
     fundName,
     fundShortName,
+    schemeCode,
     fundType,
     fundCategory,
     fundHouseDomain,
@@ -21,6 +23,10 @@ export const placeSipInstallmentOrder = async (data) => {
     nextInstallmentDate,
     fundCategory
   );
+
+  const newNextInstallmentDate = addMonths(setDate(new Date(), sipDate), 1, {
+    in: tz("Asia/Kolkata"),
+  });
 
   // prisma $transaction
   await db.$transaction(async (tx) => {
@@ -61,7 +67,7 @@ export const placeSipInstallmentOrder = async (data) => {
       await tx.mfSip.update({
         where: { id: sipId },
         data: {
-          nextInstallmentDate: addMonths(nextInstallmentDate, 1),
+          nextInstallmentDate: newNextInstallmentDate,
           failedCount: {
             increment: 1,
           },
@@ -112,7 +118,7 @@ export const placeSipInstallmentOrder = async (data) => {
       where: { id: sipId },
       data: {
         failedCount: 0,
-        nextInstallmentDate: addMonths(nextInstallmentDate, 1),
+        nextInstallmentDate: newNextInstallmentDate,
       },
     });
   });

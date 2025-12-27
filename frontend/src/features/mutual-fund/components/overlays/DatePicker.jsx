@@ -38,7 +38,7 @@ function DatePicker({ sipDate, setSipDate }) {
   return isMobile ? (
     <Drawer onOpenChange={() => setSelectedDate(sipDate)}>
       <DrawerTrigger asChild>
-        <Button variant="outline" className="rounded-full text-xs">
+        <Button variant="outline" className="rounded-xl text-xs shadow-none">
           <CalendarCheck2Icon />{" "}
           {sipDate ? `Monthly on ${addSuffix(sipDate)}` : "Select Date"}
           <ChevronDownIcon />

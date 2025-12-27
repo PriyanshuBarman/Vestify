@@ -1,5 +1,6 @@
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
+import { formatDate } from "date-fns";
 import * as sipService from "../services/sip.service.js";
 
 export const createSip = asyncHandler(async (req, res) => {
@@ -33,19 +34,10 @@ export const createSip = asyncHandler(async (req, res) => {
 });
 
 export const editSip = asyncHandler(async (req, res) => {
-  const { userId } = req.user;
   const { sipId } = req.params;
   const { amount, sipDate } = req.body;
 
-  if (!sipId || sipId === "") {
-    throw new ApiError(400, "sipId is required");
-  }
-  if (!amount && !sipDate) {
-    throw new ApiError(400, "amount or sipDate one is required");
-  }
-
   const { message, notice } = await sipService.editSip({
-    userId,
     sipId,
     amount,
     sipDate,
@@ -58,7 +50,7 @@ export const skipSip = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { sipId } = req.params;
 
-  if (!sipId || sipId === "") {
+  if (!sipId) {
     throw new ApiError(400, `sipId is required`);
   }
 
@@ -72,7 +64,7 @@ export const skipSip = asyncHandler(async (req, res) => {
 export const cancelSip = asyncHandler(async (req, res) => {
   const { sipId } = req.params;
 
-  if (!sipId || sipId === "") {
+  if (!sipId) {
     throw new ApiError(400, `sipId is required`);
   }
 
@@ -109,4 +101,39 @@ export const getSipDetail = asyncHandler(async (req, res) => {
     sip: data.sipDetail,
     installments: data.installments,
   });
+});
+
+// ---------------------------------------------------
+// Step-up SIP controllers
+// ---------------------------------------------------
+
+export const addEditStepUp = asyncHandler(async (req, res) => {
+  const { userId } = req.user;
+  const { sipId, amount, percentage, intervalInMonths } = req.body;
+
+  const sip = await sipService.addEditStepUp({
+    sipId,
+    amount,
+    percentage,
+    intervalInMonths,
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "Step-Up added/edited successfully",
+    sip,
+  });
+});
+
+export const removeStepUp = asyncHandler(async (req, res) => {
+  const { sipId } = req.params;
+  if (!sipId) {
+    throw new ApiError(400, "sipId is required");
+  }
+
+  await sipService.removeStepUp(sipId);
+
+  return res
+    .status(200)
+    .json({ success: true, message: "Step-Up removed successfully" });
 });

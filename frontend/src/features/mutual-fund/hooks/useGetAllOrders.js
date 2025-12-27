@@ -6,5 +6,6 @@ export function useGetAllOrders() {
     queryKey: ["orders"],
     queryFn: fetchOrders,
     staleTime: 0,
+    gcTime: 0,
   });
 }

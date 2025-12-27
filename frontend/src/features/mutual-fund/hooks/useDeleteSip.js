@@ -14,7 +14,7 @@ export function useDeleteSip() {
       queryClient.invalidateQueries({ queryKey: ["sips"] });
       queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
 
-      navigate("/mutual-funds/#sips");
+      navigate("/mutual-funds/#sips", { replace: true });
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || "Error deleting SIP");

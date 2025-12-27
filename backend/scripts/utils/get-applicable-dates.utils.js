@@ -10,8 +10,7 @@ import {
  * @returns {{ navDate: Date, processDate: Date }}
  */
 
-export function getApplicableDates(date, fundCategory) {
-  const installmentDate = date;
+export function getApplicableDates(installmentDate, fundCategory) {
   const isLiquid = ["Liquid Fund", "Overnight Fund"].includes(fundCategory);
 
   const nextBday = getNextBusinessDate(0, installmentDate);

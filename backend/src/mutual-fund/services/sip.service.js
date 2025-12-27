@@ -5,7 +5,7 @@ import {
   addDays,
   addMonths,
   differenceInCalendarDays,
-  setDate
+  setDate,
 } from "date-fns";
 import { getDomain } from "../utils/get-domain.utils.js";
 import { getNextInstallmentDate } from "../utils/get-next-installment-date.utils.js";
@@ -55,8 +55,8 @@ export const createSip = async ({
   return { sip, order };
 };
 
-export const editSip = async ({ userId, sipId, amount, sipDate }) => {
-  const sip = await db.mfSip.findUnique({ where: { id: sipId, userId } });
+export const editSip = async ({ sipId, amount, sipDate }) => {
+  const sip = await db.mfSip.findUnique({ where: { id: sipId } });
   if (!sip) throw new ApiError(404, "SIP not found");
 
   amount = amount ?? sip.amount.toNumber();
@@ -215,4 +215,39 @@ export const getSipDetail = async (sipId) => {
   });
 
   return { sipDetail, installments };
+};
+
+// ---------------------------------------------------
+// Step-up SIP services
+// ---------------------------------------------------
+
+export const addEditStepUp = async ({
+  sipId,
+  amount,
+  percentage,
+  intervalInMonths,
+}) => {
+  return await db.mfSip.update({
+    where: { id: sipId },
+    data: {
+      stepUpAmount: amount ?? null,
+      stepUpPercentage: percentage ?? null,
+      stepUpIntervalInMonths: intervalInMonths,
+      nextStepUpDate: addMonths(new Date(), intervalInMonths, {
+        in: tz("Asia/Kolkata"),
+      }),
+    },
+  });
+};
+
+export const removeStepUp = async (sipId) => {
+  return await db.mfSip.update({
+    where: { id: sipId },
+    data: {
+      stepUpAmount: null,
+      stepUpPercentage: null,
+      stepUpIntervalInMonths: null,
+      nextStepUpDate: null,
+    },
+  });
 };

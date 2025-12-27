@@ -22,7 +22,7 @@ function ErrorPage() {
         <EmptyDescription>
           <p>Please refresh the page or go back.</p>
           <p>
-            If issue persist, please notify us {" "}
+            If issue persist, please notify us{" "}
             <a href="mailto:vestify.contact@gmail.com" className="underline">
               here
             </a>
@@ -32,7 +32,7 @@ function ErrorPage() {
       <EmptyContent>
         <Button
           onClick={() => window.location.reload()}
-          className="rounded-full"
+          className="rounded-full text-xs font-normal"
         >
           <RefreshCwIcon /> Refresh
         </Button>

@@ -1,9 +1,6 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
-  fetchChartData,
-  fetchFund,
-  fetchFundCategoryRanking,
-  fetchPopularFunds,
+  fetchPopularFunds
 } from "../api/external";
 
 export function useGetPopularFunds() {

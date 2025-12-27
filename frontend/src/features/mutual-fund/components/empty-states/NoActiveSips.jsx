@@ -1,19 +1,16 @@
-import { Button } from "@/components/ui/button";
 import {
   Empty,
-  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
+  EmptyTitle
 } from "@/components/ui/empty";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { Link } from "react-router";
-import { useGetFundsByFilter } from "../../hooks/useGetFundsByFilter";
-import SectionHeading from "../SectionHeading";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { useGetFundsByFilter } from "../../hooks/useGetFundsByFilter";
 import CardLG from "../CardLG";
 import CardSM from "../CardSM";
+import SectionHeading from "../SectionHeading";
 
 function NoActiveSips() {
   const isMobile = useIsMobile();

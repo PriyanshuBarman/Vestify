@@ -47,3 +47,23 @@ export const skipSip = async ({ sipId, diff }) => {
   const { data } = await api.patch(`/mutual-funds/sips/${sipId}/skip`);
   return data;
 };
+
+export const addStepUp = async ({
+  sipId,
+  amount,
+  percentage,
+  intervalInMonths,
+}) => {
+  const { data } = await api.patch("/mutual-funds/sips/step-up", {
+    sipId,
+    amount,
+    percentage,
+    intervalInMonths,
+  });
+  return data.sip;
+};
+
+export const removeStepUp = async ({ sipId }) => {
+  const { data } = await api.delete(`/mutual-funds/sips/step-up/${sipId}`);
+  return data;
+};

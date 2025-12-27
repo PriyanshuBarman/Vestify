@@ -9,7 +9,7 @@ function TermsPage() {
       <div className="justify-centers relative flex items-center">
         <GoBackBtn className="bg-accent absolute left-0 size-9 border" />
         <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
-         Terms and Conditions
+          Terms & Conditions
         </h1>
       </div>
       <p className="text-md sm:text-base">

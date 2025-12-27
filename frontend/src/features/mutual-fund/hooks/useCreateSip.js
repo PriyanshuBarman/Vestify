@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { createSip, fetchSips } from "../api/sip";
+import { createSip } from "../api/sip";
 import { formatToINR } from "@/utils/formatters";
 import { playPaymentSuccessSound } from "@/utils/sound";
 
@@ -12,9 +12,22 @@ export function useCreateSip() {
   return useMutation({
     mutationFn: createSip,
     onSuccess: (data) => {
-      const { order } = data;
+      const { order, sip } = data;
 
-      queryClient.invalidateQueries({ queryKey: ["sips"] });
+      queryClient.setQueryData(["sips"], (old) => {
+        if (!old) {
+          return {
+            sips: [sip],
+            totalActiveSipAmount: sip.amount,
+          };
+        }
+        return {
+          sips: [sip, ...old.sips],
+          totalActiveSipAmount:
+            (old.totalActiveSipAmount || 0) + Number(sip.amount),
+        };
+      });
+
       queryClient.setQueryData(["order", order.id], order);
       queryClient.setQueryData(["orders"], (old) =>
         old ? [order, ...old] : [order],
@@ -22,6 +35,7 @@ export function useCreateSip() {
       queryClient.setQueryData(["pending-orders"], (old) =>
         old ? [order, ...old] : [order],
       );
+      queryClient.invalidateQueries({ queryKey: ["sips"] });
 
       playPaymentSuccessSound();
       navigate("/success", {
