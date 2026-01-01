@@ -8,7 +8,7 @@ async function placeSipInstallmentOrders() {
   const today = new Date(format(TZDate.tz("Asia/Kolkata"), "yyyy-MM-dd"));
   const activeSips = await db.mfSip.findMany({
     where: {
-      nextInstallmentDate: today,
+      nextInstallmentDate: { lte: today },
     },
   });
 

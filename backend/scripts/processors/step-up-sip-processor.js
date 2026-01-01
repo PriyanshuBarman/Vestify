@@ -7,6 +7,7 @@ export const processStepUp = async (data) => {
     id: sipId,
     amount,
     stepUpAmount,
+    nextStepUpDate,
     stepUpPercentage,
     stepUpIntervalInMonths,
   } = data;
@@ -16,9 +17,12 @@ export const processStepUp = async (data) => {
   const newSipAmount = stepUpAmount
     ? currentAmount + stepUpAmount
     : currentAmount + currentAmount * (stepUpPercentage / 100);
-  const newNextStepUpDate = addMonths(new Date(), stepUpIntervalInMonths, {
-    in: tz("Asia/Kolkata"),
-  });
+
+  const newNextStepUpDate = addMonths(
+    new Date(nextStepUpDate),
+    stepUpIntervalInMonths,
+    { in: tz("Asia/Kolkata") }
+  );
 
   await db.mfSip.update({
     where: { id: sipId },

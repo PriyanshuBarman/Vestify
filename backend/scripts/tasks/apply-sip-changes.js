@@ -8,7 +8,7 @@ export async function applySipChangess() {
   const today = new Date(format(TZDate.tz("Asia/Kolkata"), "yyyy-MM-dd"));
   const pendingChanges = await db.pendingMfSipChange.findMany({
     where: {
-      applyDate: today,
+      applyDate: { lte: today },
     },
   });
 

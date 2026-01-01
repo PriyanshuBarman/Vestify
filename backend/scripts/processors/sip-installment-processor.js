@@ -24,9 +24,11 @@ export const placeSipInstallmentOrder = async (data) => {
     fundCategory
   );
 
-  const newNextInstallmentDate = addMonths(setDate(new Date(), sipDate), 1, {
-    in: tz("Asia/Kolkata"),
-  });
+  const newNextInstallmentDate = addMonths(
+    setDate(new Date(nextInstallmentDate), sipDate),
+    1,
+    { in: tz("Asia/Kolkata") }
+  );
 
   // prisma $transaction
   await db.$transaction(async (tx) => {

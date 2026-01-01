@@ -8,7 +8,7 @@ async function stepUpSip() {
   const today = new Date(format(TZDate.tz("Asia/Kolkata"), "yyyy-MM-dd"));
   const stepUps = await db.mfSip.findMany({
     where: {
-      nextStepUpDate: today,
+      nextStepUpDate: { lte: today },
     },
   });
 

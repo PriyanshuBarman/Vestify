@@ -128,7 +128,7 @@ export function isBusinessDay(date) {
 }
 
 export function getNextBusinessDate(offset = 0, fromDate) {
-  let newDate = fromDate || TZDate.tz("Asia/Kolkata");
+  let newDate = new Date(fromDate || TZDate.tz("Asia/Kolkata"));
   let count = 0;
 
   while (count <= offset) {
@@ -142,7 +142,7 @@ export function getNextBusinessDate(offset = 0, fromDate) {
 }
 
 export function getPrevBusinessDate(offset = 0, fromDate) {
-  let date = fromDate || TZDate.tz("Asia/Kolkata");
+  let date = new Date(fromDate || TZDate.tz("Asia/Kolkata"));
   let moved = 0;
 
   while (moved <= offset) {
