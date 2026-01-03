@@ -16,15 +16,17 @@ function PinSetupPage() {
   const { mutate, isPending } = useSetPin();
   const { data: user } = useGetUser();
 
-  if (!user || user?.hasPin) return <Navigate to="/" />;
+  if (!user || user?.hasPin) return <Navigate to="/mutual-funds#explore" />;
 
   return (
     <div className="flex h-dvh flex-col sm:justify-center sm:gap-4">
       {/* Top Content */}
-      <div className="mt-10 flex flex-1 flex-col gap-y-8 px-8 sm:flex-0">
+      <div className="mt-10 flex flex-1 flex-col items-center gap-y-8 px-8 sm:flex-0">
         <div className="text-center">
-          <h1 className="mb-1 text-xl font-semibold">Set up your PIN</h1>
-          <p className="text-muted-foreground text-sm">
+          <h1 className="mb-1 text-xl font-semibold sm:text-2xl">
+            Set up your PIN
+          </h1>
+          <p className="text-muted-foreground text-sm sm:max-w-[50ch] sm:text-base">
             This PIN will be required to make investments and send virtual money
             to other users
           </p>

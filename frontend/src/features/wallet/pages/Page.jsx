@@ -5,11 +5,10 @@ import NumberFlow from "@number-flow/react";
 import { QrCodeIcon, ScanLineIcon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import FaqsCard from "../components/cards/FaqsCard";
-import RecentTnxCard from "../components/cards/RecentTnxCard";
+import RecentTnxCard from "../components/RecentTnxCard";
+import Faqs from "../components/Faqs";
 import MyQrCodeDrawer from "../components/MyQrCodeDrawer";
 import QrReader from "../components/QrReader";
-
 function Page() {
   const navigate = useNavigate();
   const { data: balance } = useGetBalance();
@@ -72,7 +71,7 @@ function Page() {
       </div>
 
       <RecentTnxCard />
-      <FaqsCard />
+      <Faqs />
     </div>
   );
 }

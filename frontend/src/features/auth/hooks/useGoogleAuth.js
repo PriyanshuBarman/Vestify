@@ -19,7 +19,7 @@ export function useGoogleAuth() {
         const { data } = await api.post("/auth/google", { code, referralCode });
         if (data.success) {
           queryClient.setQueryData(["user"], data.user);
-          navigate("/", { replace: true });
+          navigate("/mutual-funds#explore", { replace: true });
         }
       } catch (err) {
         toast.error("Something went wrong.");

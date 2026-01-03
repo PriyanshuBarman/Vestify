@@ -1,7 +1,6 @@
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import ProfilePage from "@/pages/ProfilePage";
-import { toast } from "sonner";
 
 function ProfileSheet({ open, onOpenChange }) {
   const isMobile = useIsMobile();

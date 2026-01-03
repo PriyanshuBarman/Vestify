@@ -117,7 +117,7 @@ export const passwordResetTemplate = (name, token) =>
             margin: 16px 0 0 0;
           "
         >
-          © 2025 Vestify. All rights reserved.
+          © 2026 Vestify. All rights reserved.
         </p>
       </div>
       </div>
@@ -286,7 +286,7 @@ export const changeEmailTemplate = (name, otp) => `<!DOCTYPE html>
             margin: 16px 0 0 0;
           "
         >
-          © 2025 Vestify. All rights reserved.
+          © 2026 Vestify. All rights reserved.
         </p>
       </div>
       </div>

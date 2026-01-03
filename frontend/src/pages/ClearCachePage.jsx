@@ -14,7 +14,7 @@ function ClearCachePage() {
 
   const clearCache = () => {
     queryClient.clear();
-    navigate("/", { replace: true });
+    navigate("/mutual-funds#explore", { replace: true });
     toast.success("Cache cleared successfully");
   };
 

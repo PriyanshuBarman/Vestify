@@ -4,11 +4,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { walletFAQs } from "../../constants/faqs";
+import { walletFAQs } from "@/constants/faqs";
 
-function FaqsCard() {
+function Faqs() {
   return (
-    <section className="mt-10" >
+    <section className="mt-10">
       <h2 className="ml-2 font-medium sm:text-xl sm:font-semibold">FAQ's</h2>
 
       <Accordion type="single" collapsible className="mt-4 space-y-3">
@@ -16,7 +16,7 @@ function FaqsCard() {
           <AccordionItem
             key={index}
             value={`item-${index}`}
-            className="bg-accent rounded-2xl px-4"
+            className="bg-accent rounded-xl px-4"
           >
             <AccordionTrigger className="sm:text-md text-sm">
               {faq.question}
@@ -30,4 +30,4 @@ function FaqsCard() {
     </section>
   );
 }
-export default FaqsCard;
+export default Faqs;

@@ -6,10 +6,12 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { RefreshCwIcon } from "lucide-react";
+import { ArrowLeftIcon, RefreshCwIcon } from "lucide-react";
 import { Button } from "../components/ui/button";
+import { useNavigate } from "react-router";
 
 function ErrorPage() {
+  const navigate = useNavigate();
   return (
     <Empty className="flex h-dvh items-center justify-center">
       <EmptyHeader>
@@ -31,10 +33,10 @@ function ErrorPage() {
       </EmptyHeader>
       <EmptyContent>
         <Button
-          onClick={() => window.location.reload()}
+          onClick={() => navigate(-1)}
           className="rounded-full text-xs font-normal"
         >
-          <RefreshCwIcon /> Refresh
+          <ArrowLeftIcon /> Go Back
         </Button>
       </EmptyContent>
     </Empty>

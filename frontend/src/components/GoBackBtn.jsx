@@ -17,7 +17,7 @@ function GoBackBtn({ className, ...props }) {
       )}
       {...props}
     >
-      <ArrowLeftIcon className="size-6" />
+      <ArrowLeftIcon className="size-4 sm:size-5" />
     </Button>
   );
 }

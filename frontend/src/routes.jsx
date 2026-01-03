@@ -9,10 +9,11 @@ import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
 
-const WelcomePage = lazy(() => import("./features/auth/pages/WelcomePage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
+const ContactUsPage = lazy(() => import("./pages/ContactUsPage"));
 const DeleteAccountPage = lazy(() => import("./pages/DeleteAccountPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const ReferAndEarnPage = lazy(() => import("./pages/ReferAndEarnPage"));
@@ -35,6 +36,10 @@ const SuccessPage = lazy(() => import("./pages/SuccessPage"));
 export const routes = createBrowserRouter([
   authRoutes,
   {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
     path: "/about",
     element: <AboutPage />,
   },
@@ -47,8 +52,8 @@ export const routes = createBrowserRouter([
     element: <PrivacyPage />,
   },
   {
-    path: "/",
-    element: <WelcomePage />,
+    path: "/contact-us",
+    element: <ContactUsPage />,
   },
   {
     path: "/",

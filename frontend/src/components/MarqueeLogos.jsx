@@ -2,48 +2,60 @@ import { amcs } from "@/constants/amc";
 import FundLogo from "@/features/mutual-fund/components/FundLogo";
 import { cn } from "@/lib/utils";
 
-function MarqueeLogos({ classNames }) {
+function MarqueeLogos({ classNames, reverse = false }) {
   return (
     <div
       className={cn(
-        "group flex w-full overflow-hidden mask-x-from-70% mask-x-to-95% p-2 [--duration:120s] [--gap:4rem] sm:mask-x-from-70% sm:mask-x-to-90% sm:[--duration:150s] sm:[--gap:8rem]",
+        "group flex w-full overflow-hidden mask-x-from-70% mask-x-to-95% p-2 [--duration:250s] [--gap:5rem] sm:mask-x-from-70% sm:mask-x-to-90% sm:[--duration:250s] sm:[--gap:10rem]",
         classNames,
       )}
     >
-      <div className="animate-marquee mr-[4rem] flex gap-[4rem] will-change-transform group-hover:[animation-play-state:paused] sm:mr-[8rem] sm:gap-[8rem]">
+      <div
+        className={cn(
+          "animate-marquee mr-[5rem] flex gap-[5rem] will-change-transform sm:mr-[10rem] sm:gap-[10rem]",
+          {
+            "[animation-direction:reverse]": reverse,
+          },
+        )}
+      >
         {amcs.map((amc) => (
-          <a
+          <div
             key={amc.id}
-            href={amc.detail_info}
-            target="_blank"
-            tabIndex={-1}
-            aria-label={`Visit ${amc.amc_name}'s website`}
+            className="flex items-center gap-2 rounded-2xl sm:gap-4"
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
-              className="animate-in fade-in size-10 flex-shrink-0 rounded-lg duration-900 hover:scale-105 sm:size-13 sm:rounded-2xl"
+              className="size-8.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-          </a>
+            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-lg sm:italic">
+              {amc.amc_name}
+            </p>
+          </div>
         ))}
       </div>
 
       <div
         aria-hidden="true"
-        className="animate-marquee flex gap-[4rem] will-change-transform group-hover:[animation-play-state:paused] sm:gap-[8rem]"
+        className={cn(
+          "animate-marquee flex gap-[5rem] will-change-transform sm:gap-[10rem]",
+          {
+            "[animation-direction:reverse]": reverse,
+          },
+        )}
       >
         {amcs.map((amc) => (
-          <a
+          <div
             key={amc.id}
-            href={amc.detail_info}
-            target="_blank"
-            tabIndex={-1}
-            aria-label={`Visit ${amc.amc_name}'s website`}
+            className="flex items-center gap-2 rounded-2xl sm:gap-4"
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
-              className="animate-in fade-in size-10 flex-shrink-0 rounded-lg duration-900 hover:scale-105 sm:size-13 sm:rounded-2xl"
+              className="size-8.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-          </a>
+            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-lg sm:italic">
+              {amc.amc_name}
+            </p>
+          </div>
         ))}
       </div>
     </div>

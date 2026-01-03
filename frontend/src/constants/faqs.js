@@ -7,6 +7,38 @@ import { formatToINR } from "@/utils/formatters";
 const dailyRewardAmount = formatToINR(VITE_DAILY_REWARD_AMOUNT);
 const REFERRER_REWARD = formatToINR(VITE_REFERRER_REWARD_AMOUNT);
 
+export const faqs = [
+  {
+    question: "What is Vestify?",
+    answer:
+      "Vestify is a virtual investment platform that simulates real mutual fund investing using virtual money. It’s designed to help beginners learn how investing, SIPs works in a risk-free way.",
+  },
+  {
+    question: "Is it a real investment platform?",
+    answer:
+      "No. Vestify does not involve real money or actual investments. All funds, portfolios, SIPs, and returns are completely virtual and meant only for learning and practice.",
+  },
+  {
+    question: "Is Vestify free to use?",
+    answer:
+      "Yes, Vestify is completely free to use. There are no hidden charges, subscriptions, or premium plans.",
+  },
+  {
+    question: "Is Vestify an open-source project?",
+    answer:
+      "Yes, Vestify is an open-source project. Anyone can explore the codebase and contribute to improving the platform.",
+  },
+  {
+    question: "Can I contribute to Vestify?",
+    answer:
+      "Absolutely. Developers, designers, and contributors are welcome to contribute. You can check the GitHub repository to get started.",
+  },
+  {
+    question: "How do I will get virtual money?",
+    answer: `You’ll receive ${dailyRewardAmount} as a daily credit when you visit the platform each day. You only get it once per day, so make sure to check in daily.`,
+  },
+];
+
 export const walletFAQs = [
   {
     question: "How do I get more virtual money?",

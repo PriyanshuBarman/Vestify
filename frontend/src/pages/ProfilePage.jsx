@@ -10,6 +10,7 @@ import {
   ArrowLeftRightIcon,
   HeartIcon,
   LogsIcon,
+  MessageSquareIcon,
   SettingsIcon,
   UserIcon,
   WalletIcon,
@@ -41,6 +42,11 @@ const MENU_ITEMS = [
     to: "/refer-and-earn",
     icon: <HeartIcon className="text-muted-foreground" />,
     text: "Refer & earn",
+  },
+  {
+    to: "/contact-us",
+    icon: <MessageSquareIcon className="text-muted-foreground" />,
+    text: "Help",
   },
 ];
 
@@ -101,11 +107,6 @@ function ProfilePage({ closeSheet }) {
               <span className="border-b py-4">{item.text}</span>
             </Link>
           ))}
-        </div>
-
-        {/* Footer */}
-        <div className="mt-auto flex w-full flex-col items-center justify-center gap-6 pb-4 sm:font-medium">
-          <CopyrightFooter />
         </div>
       </div>
     </div>

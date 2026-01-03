@@ -29,13 +29,13 @@ function SignupForm() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
-  const referralCode = searchParams.get("referralCode");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
+  const referralCode = searchParams.get("referralCode");
   const { mutate: signup, isPending } = useSignup();
 
   const handleSubmit = (e) => {
@@ -154,7 +154,13 @@ function SignupForm() {
             size="lg"
             variant="secondary"
             disabled={isPending}
-            onClick={() => navigate("/auth/login")}
+            onClick={() =>
+              navigate(
+                referralCode
+                  ? `/auth/login?referralCode=${referralCode}`
+                  : "/auth/login",
+              )
+            }
             className="rounded-full border py-5.5"
           >
             Login

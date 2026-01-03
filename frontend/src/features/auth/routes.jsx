@@ -1,6 +1,7 @@
 import AuthGuard from "@/components/AuthGuard";
 import { lazy } from "react";
 
+const AuthPage = lazy(() => import("./pages/AuthPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const LogoutPage = lazy(() => import("./pages/LogoutPage"));
 const SignupPage = lazy(() => import("./pages/SignupPage"));
@@ -9,6 +10,14 @@ const PinSetupPage = lazy(() => import("./pages/PinSetUpPage"));
 export const authRoutes = {
   path: "/auth",
   children: [
+    {
+      path: "",
+      element: (
+        <AuthGuard mode="private">
+          <AuthPage />
+        </AuthGuard>
+      ),
+    },
     {
       path: "login",
       element: (

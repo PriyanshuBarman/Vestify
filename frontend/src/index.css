@@ -14,6 +14,7 @@ body {
   height: 100%;
   width: 100%;
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
 }
 
 .scrollbar-none::-webkit-scrollbar {
@@ -95,20 +96,6 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@keyframes caret-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-.animate-caret-blink {
-  animation: caret-blink 1s steps(1) infinite;
-}
-
 @theme inline {
   --text-sm: 0.83rem;
   --text-2xs: 0.7rem;
@@ -153,9 +140,53 @@ body {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --radius-md: calc(var(--radius) - 2px);
-
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-underline: underline 6s ease-in-out 1s infinite;
+
+  @keyframes underline {
+    /* START: not drawn */
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+
+    /* DRAW underline */
+    15% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    /* HOLD drawn state */
+    20% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    90% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    /* ERASE underline (reverse) */
+    100% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes underline-2 {
+    0% {
+      transform: rotate(-3deg) scaleX(0);
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(-3deg) scaleX(1);
+      opacity: 1;
+    }
+  }
 
   @keyframes marquee {
     from {
@@ -216,6 +247,20 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-caret-blink {
+  animation: caret-blink 1s steps(1) infinite;
 }
 
 @keyframes shake {

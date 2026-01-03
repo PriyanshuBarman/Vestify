@@ -57,7 +57,7 @@ export const termsData = [
   {
     title: "4.2 Kuvera Unofficial API (Weekly Metadata Updates Only)",
     paragraphs: [
-      "Vestify stores fund metadata for 1,500+ mutual funds in Vestify’s own database.",
+      "Vestify stores fund metadata for 1,550+ mutual funds in Vestify’s own database.",
       "This includes metadata like expense ratio, exit load, fund size, and more (that doesn't change frequently).",
       "To keep this database updated, Vestify uses the Kuvera Unofficial API only once per week, through a cron job.",
       "The API is used only to update the metadata in our own database on a weekly basis. Vestify has no partnership, affiliation, permission, or collaboration with Kuvera.",

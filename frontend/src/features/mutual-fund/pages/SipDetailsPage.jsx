@@ -36,7 +36,7 @@ function SipDetailsPage() {
   if (isPending) return <LoadingState fullPage />;
 
   return (
-    <div className="md:w-[50%]">
+    <div className="pb-4 md:w-[50%]">
       {/* Desktop Edit SIP Card (shown on the right side ) */}
       <DesktopEditSipCard sipDetail={sipDetail} />
 

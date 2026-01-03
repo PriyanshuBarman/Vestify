@@ -13,7 +13,7 @@ export function useSetPin() {
       queryClient.setQueryData(["user"], (prev) => {
         return { ...prev, hasPin: true };
       });
-      navigate("/", { replace: true });
+      navigate("/mutual-funds#explore", { replace: true });
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || "Something went wrong");

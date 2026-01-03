@@ -17,6 +17,10 @@ const navs = [
     name: "Privacy",
     link: "/privacy-policy",
   },
+  {
+    name: "Contact us",
+    link: "/contact-us",
+  },
 ];
 
 function SidebarSheet({ open, onOpenChange }) {
@@ -33,13 +37,20 @@ function SidebarSheet({ open, onOpenChange }) {
           </Button>
         </SheetHeader>
         <div className="flex h-full flex-col gap-4 px-4">
-          <Button
-            variant="ghost"
+          <a
             onClick={() => onOpenChange(false)}
-            className="text-foreground flex w-full justify-start text-start text-lg"
+            href="#"
+            className="shrink-0 rounded-full px-4 py-1 text-lg font-medium"
           >
             Home
-          </Button>
+          </a>
+          <a
+            onClick={() => onOpenChange(false)}
+            href="#features"
+            className="shrink-0 rounded-full px-4 py-1 text-lg font-medium"
+          >
+            Features
+          </a>
           {navs.map((nav) => (
             <Button
               variant="link"

@@ -8,8 +8,8 @@ function LogoShapeOnly({ className }) {
         className,
       )}
     >
-      <div className="circle absolute top-[29%] left-[26%] h-[16%] w-[16%] rounded-full bg-[#00a669]" />
-      <div className="absolute top-[27%] right-[34%] h-[48%] w-[16%] rotate-30 rounded-full bg-[#00a669]" />
+      <div className="circle absolute top-[29%] left-[26%] h-[16%] w-[16%] rounded-full bg-[#00b35c]" />
+      <div className="absolute top-[27%] right-[34%] h-[48%] w-[16%] rotate-30 rounded-full bg-[#00b35c]" />
     </div>
   );
 }
