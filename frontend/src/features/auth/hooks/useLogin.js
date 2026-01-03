@@ -11,7 +11,7 @@ export function useLogin() {
     mutationFn: loginUser,
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user);
-      navigate("/");
+      navigate("/mutual-funds#explore", { replace: true });
     },
     onError: (error) => {
       toast.error(error?.response?.data?.message || "Something went wrong.");

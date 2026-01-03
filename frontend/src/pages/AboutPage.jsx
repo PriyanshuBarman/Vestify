@@ -19,7 +19,7 @@ function AboutPage() {
         content="Vestify is a virtual investment platform that simulates real mutual fund investing, providing a real, professional-grade experience with a Groww-inspired UI."
       />
       <div className="justify-centers relative flex items-center">
-        <GoBackBtn className="bg-accent absolute left-0 size-9 border" />
+        <GoBackBtn className="bg-accent absolute left-0 size-9  " />
         <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
           About Us
         </h1>

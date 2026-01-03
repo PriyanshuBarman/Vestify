@@ -1,9 +1,5 @@
 export const footerLinks = [
   {
-    title: "Home",
-    href: "/",
-  },
-  {
     title: "About",
     href: "/about",
   },
@@ -14,5 +10,9 @@ export const footerLinks = [
   {
     title: "Privacy",
     href: "/privacy-policy",
+  },
+  {
+    title: "Contact us",
+    href: "/contact-us",
   },
 ];

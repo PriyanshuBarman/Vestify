@@ -10,7 +10,7 @@ export function useChangePin() {
     mutationFn: changePin,
     onSuccess: () => {
       toast.success("Pin changed successfully");
-      navigate("/", { replace: true });
+      navigate("/mutual-funds#explore", { replace: true });
     },
     onError: (error) => {
       toast.error(error.response?.data?.message);

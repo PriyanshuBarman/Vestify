@@ -10,7 +10,7 @@ export function useChangePassword() {
     mutationFn: changePassword,
     onSuccess: () => {
       toast.success("Password changed successfully");
-      navigate("/", { replace: true });
+      navigate("/mutual-funds#explore", { replace: true });
     },
     onError: (error) => {
       toast.error(error.response?.data?.message);

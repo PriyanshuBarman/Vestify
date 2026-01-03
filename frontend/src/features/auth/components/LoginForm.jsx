@@ -14,17 +14,19 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useLogin } from "../hooks/useLogin";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  const referralCode = searchParams.get("referralCode");
   const { mutate: login, isPending } = useLogin();
 
   const handleSubmit = (e) => {
@@ -109,7 +111,13 @@ function LoginForm() {
             size="lg"
             variant="secondary"
             disabled={isPending}
-            onClick={() => navigate("/auth/signup")}
+            onClick={() =>
+              navigate(
+                referralCode
+                  ? `/auth/signup?referralCode=${referralCode}`
+                  : "/auth/signup",
+              )
+            }
             className="rounded-full border py-5.5"
           >
             Signup

@@ -22,10 +22,6 @@ export function usePrefetchPopularFunds(funds) {
         queryKey: ["fund-chart", Number(fund.scheme_code)],
         queryFn: () => fetchChartData(fund.scheme_code),
       });
-      queryClient.prefetchQuery({
-        queryKey: ["fund-category-ranking", Number(fund.scheme_code)],
-        queryFn: () => fetchFundCategoryRanking(fund.scheme_code),
-      });
     }
   }, []);
 }

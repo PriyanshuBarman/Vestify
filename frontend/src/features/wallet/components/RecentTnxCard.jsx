@@ -9,9 +9,9 @@ import {
 import { ItemGroup } from "@/components/ui/item";
 import { ChevronRightIcon } from "lucide-react";
 import { useNavigate } from "react-router";
-import { useGetAllTnx } from "../../hooks/useGetAllTnx";
-import { getLatestTnx } from "../../utils/getLatestTnx";
-import TransactionItem from "../TransactionItem";
+import { useGetAllTnx } from "../hooks/useGetAllTnx";
+import { getLatestTnx } from "../utils/getLatestTnx";
+import TransactionItem from "./TransactionItem";
 
 function RecentTnxCard() {
   const { data: tnxHistory } = useGetAllTnx();
