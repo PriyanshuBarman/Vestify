@@ -14,7 +14,6 @@ body {
   height: 100%;
   width: 100%;
   scrollbar-gutter: stable;
-  scroll-behavior: smooth;
 }
 
 .scrollbar-none::-webkit-scrollbar {
@@ -171,20 +170,6 @@ body {
     100% {
       transform: scaleX(0);
       opacity: 0;
-    }
-  }
-
-  @keyframes underline-2 {
-    0% {
-      transform: rotate(-3deg) scaleX(0);
-      opacity: 0;
-    }
-    30% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(-3deg) scaleX(1);
-      opacity: 1;
     }
   }
 

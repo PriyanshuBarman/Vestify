@@ -121,7 +121,7 @@ function ResponsivePinDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="flex h-full w-full max-w-full flex-col overflow-hidden rounded-none p-0 sm:h-fit sm:gap-8 sm:rounded-2xl sm:p-6">
+      <DialogContent className="flex h-full w-full max-w-full flex-col overflow-hidden rounded-none p-0 sm:h-fit sm:gap-8 sm:rounded-3xl sm:p-6">
         {isPending && (
           <div className="absolute inset-0 z-50 grid place-items-center">
             <Spinner className="text-primary size-12 sm:hidden" />
@@ -169,7 +169,7 @@ function ResponsivePinDialog({
                   id={`pin-input-${index}`}
                   ref={(el) => (inputRefs.current[index] = el)}
                   className={cn(
-                    "size-13 rounded-2xl text-center !text-2xl font-medium shadow-none",
+                    "size-13 rounded-2xl text-center !text-2xl font-medium shadow-none sm:size-14",
                     currentIndex === index && isMobile
                       ? "border-ring ring-ring/50 ring-[3px]"
                       : "",

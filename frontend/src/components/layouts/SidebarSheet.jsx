@@ -44,13 +44,6 @@ function SidebarSheet({ open, onOpenChange }) {
           >
             Home
           </a>
-          <a
-            onClick={() => onOpenChange(false)}
-            href="#features"
-            className="shrink-0 rounded-full px-4 py-1 text-lg font-medium"
-          >
-            Features
-          </a>
           {navs.map((nav) => (
             <Button
               variant="link"

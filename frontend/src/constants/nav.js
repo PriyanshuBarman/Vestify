@@ -1,17 +1,7 @@
 export const navs = [
   {
     name: "Home",
-    link: "#",
-    isSection: true,
-  },
-  {
-    name: "Features",
-    link: "#features",
-    isSection: true,
-  },
-  {
-    name: "Faq",
-    link: "#faqs",
+    link: "/#",
     isSection: true,
   },
   {

@@ -1,6 +1,4 @@
 import ButtonAnimatedLink from "@/components/ButtonAnimatedLink";
-import GoBackBtn from "@/components/GoBackBtn";
-import ScrollToTop from "@/components/layouts/ScrollToTop";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { aboutData } from "@/constants/about";
 import {
@@ -11,19 +9,15 @@ import {
 
 function AboutPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-12 px-6 py-12">
-      <ScrollToTop />
+    <div className="mx-auto w-full max-w-3xl space-y-12 px-6 pt-20 sm:pt-26">
       <title>About us</title>
       <meta
         name="description"
         content="Vestify is a virtual investment platform that simulates real mutual fund investing, providing a real, professional-grade experience with a Groww-inspired UI."
       />
-      <div className="justify-centers relative flex items-center">
-        <GoBackBtn className="bg-accent absolute left-0 size-9  " />
-        <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
-          About Us
-        </h1>
-      </div>
+      <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
+        About Us
+      </h1>
       {aboutData.map((section, index) => (
         <section key={index} className="mb-8">
           <h2 className="sm:text-foreground-secondary mb-4 text-xl font-semibold">

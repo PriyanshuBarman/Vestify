@@ -30,10 +30,10 @@ function Layout() {
       <div className="mx-auto max-w-7xl">
         <Navbar />
         <Outlet />
-        <ScrollToTop />
-        <BottomNavbar />
-        <DailyRewardModal />
       </div>
+      <ScrollToTop />
+      <BottomNavbar />
+      <DailyRewardModal />
       <Suspense fallback={null}>
         <Footer />
       </Suspense>

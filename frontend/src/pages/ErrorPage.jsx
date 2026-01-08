@@ -16,12 +16,12 @@ function ErrorPage() {
     <Empty className="flex h-dvh items-center justify-center">
       <EmptyHeader>
         <EmptyMedia>
-          <img src="/server-error.svg" alt="" className="size-70 sm:size-90" />
+          <img src="/server-error.svg" alt="" className="size-70 sm:size-96" />
         </EmptyMedia>
         <EmptyTitle className="sm:text-2xl">
           Oops! Something went wrong
         </EmptyTitle>
-        <EmptyDescription>
+        <EmptyDescription className="sm:text-md">
           <p>Please refresh the page or go back.</p>
           <p>
             If issue persist, please notify us{" "}
@@ -31,12 +31,18 @@ function ErrorPage() {
           </p>
         </EmptyDescription>
       </EmptyHeader>
-      <EmptyContent>
+      <EmptyContent className="flex flex-row items-center justify-center">
         <Button
           onClick={() => navigate(-1)}
-          className="rounded-full text-xs font-normal"
+          className="rounded-full text-xs font-normal sm:!p-5 sm:text-sm"
         >
           <ArrowLeftIcon /> Go Back
+        </Button>
+        <Button
+          onClick={() => window.location.reload()}
+          className="rounded-full text-xs font-normal sm:p-5"
+        >
+          <RefreshCwIcon />
         </Button>
       </EmptyContent>
     </Empty>

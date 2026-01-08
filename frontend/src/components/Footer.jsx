@@ -48,12 +48,12 @@ function Footer({ className }) {
       <div className="mx-auto max-w-(--breakpoint-xl)">
         <div className="flex flex-col justify-between gap-x-8 gap-y-4 py-6 sm:flex-row sm:gap-y-10 sm:px-6 xl:px-0">
           <div>
-            <div className="flex items-center">
+            <Link to="/" className="flex items-center">
               <LogoShapeOnly className="size-18" />
               <span className="relative right-2 text-xl font-semibold">
                 Vestify
               </span>
-            </div>
+            </Link>
             <ul className="flex flex-wrap items-center px-2">
               {footerLinks.map(({ title, href, isSection }) => (
                 <li key={title}>
@@ -82,6 +82,7 @@ function Footer({ className }) {
                 <a
                   key={item.label}
                   href={item.link}
+                  target="_blank"
                   className="hover:underline"
                 >
                   {item.label}

@@ -1,17 +1,11 @@
-import GoBackBtn from "@/components/GoBackBtn";
-import ScrollToTop from "@/components/layouts/ScrollToTop";
 import { privacySections } from "@/constants/privacy";
 
 function PrivacyPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-8 px-6 py-12">
-      <ScrollToTop />
-      <div className="justify-centers relative flex items-center">
-        <GoBackBtn className="bg-accent absolute left-0 size-9" />
-        <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
-          Privacy Policy
-        </h1>
-      </div>
+    <div className="mx-auto w-full max-w-3xl space-y-8 px-6 pt-20 sm:pt-26">
+      <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
+        Privacy Policy
+      </h1>
       <p className="text-md sm:text-base">
         Welcome to Vestify. Your privacy is important to us. This Privacy Policy
         outlines how we collect, use, and protect your information when you

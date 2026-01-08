@@ -21,7 +21,7 @@ function FundHousesSection() {
           <Link
             key={index}
             to={`/mutual-funds/amc-funds/${amc.amc_code}`}
-            className="bg-card cursor-pointer space-y-2 rounded-2xl border p-3 duration-200 hover:scale-101 sm:m-0.5 sm:space-y-4 sm:p-4"
+            className="bg-card cursor-pointer space-y-2 rounded-2xl sm:rounded-[1.25rem] border p-3 duration-200 hover:scale-101 sm:m-0.5 sm:space-y-4 sm:p-4"
           >
             <div className="flex items-end gap-2 sm:gap-4">
               <FundLogo fundHouseDomain={amc.detail_info} />

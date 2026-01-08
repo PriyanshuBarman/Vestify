@@ -11,13 +11,13 @@ import {
 const features = [
   {
     icon: ShieldIcon,
-    title: "Virtual Investing",
+    title: "Invest Virtually",
     description:
       "Invest in mutual funds using virtual money and experience real investing without financial risk.",
   },
   {
     icon: OrbitIcon,
-    title: "Start SIPs",
+    title: "Start Virtual SIPs",
     description:
       "Start SIPs in Mutual Funds and understand how real SIPs work through an automated process.",
   },
@@ -37,13 +37,13 @@ const features = [
     icon: ScanTextIcon,
     title: "P2P Transfer",
     description:
-      "Send, receive, and Scan & Pay your virtual money instantly—just like UPI.",
+      "Send, receive, Scan & Pay your virtual money with others instantly—just like UPI.",
   },
   {
     icon: OnigiriIcon,
     title: "Groww App UI",
     description:
-      "Simple, familiar UI inspired by Groww for an easy and distraction-free investing journey.",
+      "Experience real mutual fund investing experience just like on the groww app.",
   },
 ];
 
@@ -56,11 +56,11 @@ function Features({ className }) {
         className,
       )}
     >
-      <h2 className="text-center text-[1.37rem] leading-loose font-semibold tracking-tight sm:text-5xl">
-        Experience Real Investing
+      <h2 className="text-center text-[1.37rem] leading-tight font-semibold tracking-tight sm:max-w-[24ch] sm:text-5xl">
+        Experience Real Investing, in a Virtual environment
       </h2>
-      <p className="text-muted-foreground sm:text-foreground text-md text-center sm:text-xl">
-        Invest in a fully virtual environment & experience real investing
+      <p className="text-muted-foreground sm:text-foreground text-md mt-4 text-center sm:text-xl">
+        Risk free & safe, Perfect for learning.
       </p>
       <div className="mx-auto mt-10 grid max-w-(--breakpoint-xl) gap-6 sm:mt-16 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
         {features.map((feature) => (
@@ -77,7 +77,7 @@ function FeatureCard({ feature }) {
   return (
     <div
       key={feature.title}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border px-5 py-5 transition-transform duration-300 ease-in-out hover:scale-105 sm:p-6"
+      className="group relative flex flex-col overflow-hidden rounded-[1.25rem] border px-5 py-5 transition-transform duration-300 ease-in-out hover:scale-105 sm:p-6"
     >
       <div className="absolute -top-10 -right-8 size-32 rounded-full bg-gradient-to-t from-[#00b35c16] transition-transform duration-300 group-hover:scale-110 sm:size-36" />
       <div className="text-background flex w-fit items-center justify-center rounded-xl bg-gradient-to-b from-[#00b35cd9] to-[#00b35c64] p-3.5 shadow-lg">

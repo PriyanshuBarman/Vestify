@@ -7,7 +7,7 @@ function Page() {
         </h1>
 
         {/* Divider line */}
-        <div className="bg-primary mx-auto h-0.5 w-32 rounded-full" />
+        <div className="bg-primary mx-auto h-0.5 w-46 rounded-full" />
 
         <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
           We’re exploring the possibility of adding stock investing to Vestify.

@@ -21,7 +21,7 @@ function ScrollToTopButton({ scrollThreshold = 600 }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (!isVisible || !isMobile) return null;
+  if (!isVisible) return null;
 
   return (
     <Button

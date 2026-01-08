@@ -1,7 +1,7 @@
 export const footerLinks = [
   {
     title: "Home",
-    href: "#",
+    href: "/#",
     isSection: true,
   },
   {

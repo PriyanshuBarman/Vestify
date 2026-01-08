@@ -24,6 +24,10 @@ export const faqs = [
       "Yes, Vestify is completely free to use. There are no hidden charges, subscriptions, or premium plans.",
   },
   {
+    question: "How do I will get virtual money?",
+    answer: `You’ll receive ${dailyRewardAmount} as a daily credit when you visit the platform each day. You only get it once per day, so make sure to check in daily.`,
+  },
+  {
     question: "Is Vestify an open-source project?",
     answer:
       "Yes, Vestify is an open-source project. Anyone can explore the codebase and contribute to improving the platform.",
@@ -32,10 +36,6 @@ export const faqs = [
     question: "Can I contribute to Vestify?",
     answer:
       "Absolutely. Developers, designers, and contributors are welcome to contribute. You can check the GitHub repository to get started.",
-  },
-  {
-    question: "How do I will get virtual money?",
-    answer: `You’ll receive ${dailyRewardAmount} as a daily credit when you visit the platform each day. You only get it once per day, so make sure to check in daily.`,
   },
 ];
 

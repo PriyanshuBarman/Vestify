@@ -17,7 +17,7 @@ function Card() {
   const { handleInstall } = useInstallApp();
 
   return (
-    <div className="text-background flex flex-wrap justify-center gap-10 rounded-3xl border bg-gradient-to-l from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] transition-colors ease-linear sm:gap-8 lg:justify-between">
+    <div className="text-background flex flex-wrap justify-center gap-10 rounded-3xl border bg-gradient-to-t from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] transition-colors ease-linear sm:gap-8 sm:bg-gradient-to-l lg:justify-between">
       <div className="mt-10 mr-10 ml-8 lg:my-auto lg:ml-10">
         <h2 className="text-2xl font-semibold tracking-tight lg:text-5xl">
           Install the Web App
@@ -30,7 +30,7 @@ function Card() {
           variant="ghost"
           className="bg-background group text-foreground mt-8 h-12 w-fit rounded-full !px-6 sm:mt-10"
         >
-          Install Web App{" "}
+          Install WebApp{" "}
           <ArrowUpRightIcon className="size-5 transition-all duration-300 group-hover:translate-x-2 group-hover:-translate-y-1 group-hover:scale-102" />
         </Button>
       </div>

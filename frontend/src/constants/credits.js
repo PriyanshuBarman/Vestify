@@ -1,13 +1,13 @@
 export const credits = [
-    {
-      label: "Groww",
-      link: "https://groww.in",
-    },
-    {
-      label: "Kuvera",
-      link: "https://kuvera.in",
-    },
-    {
+  {
+    label: "Groww",
+    link: "https://groww.in",
+  },
+  {
+    label: "Kuvera",
+    link: "https://kuvera.in",
+  },
+  {
     label: "Illustrations by Storyset",
     link: "https://storyset.com",
   },

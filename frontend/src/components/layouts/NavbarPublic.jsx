@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { ModeToggle } from "../ui/mode-togle";
 import SidebarSheet from "./SidebarSheet";
 import { navs } from "@/constants/nav";
@@ -13,11 +13,11 @@ function NavbarPublic() {
   const isMobile = useIsMobile();
 
   return (
-    <nav className="bg-background/50 fixed top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-5 py-4 backdrop-blur-xs sm:p-4">
-      <div className="flex items-center justify-center gap-2 sm:gap-4">
+    <nav className="bg-backgroun fixed top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-5 py-4 sm:p-4">
+      <Link to="/" className="flex items-center justify-center gap-2 sm:gap-4">
         <Logo className="size-8" />
         <span className="font-[550] sm:text-2xl">Vestify</span>
-      </div>
+      </Link>
 
       <div className="flex items-center justify-start gap-2 xl:gap-6">
         <NavLinks />

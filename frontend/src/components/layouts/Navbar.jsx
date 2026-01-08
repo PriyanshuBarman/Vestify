@@ -5,7 +5,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { SearchIcon } from "lucide-react";
 import { lazy, useState } from "react";
 import MediaQuery from "react-responsive";
-import { NavLink, useLocation, useNavigate } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 const ProfileAvatar = lazy(() => import("../ProfileAvatar"));
 const ProfileSheet = lazy(() => import("../ProfileSheet"));
 const DesktopSearch = lazy(
@@ -43,11 +43,14 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-background z-50 flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:py-2">
-      <div className="flex items-center gap-2 sm:gap-4">
+    <nav className="bg-background z-50 flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:pt-2 sm:pb-6">
+      <Link
+        to="mutual-funds#explore"
+        className="flex items-center gap-2 sm:gap-4"
+      >
         <Logo />
         <NavLinks />
-      </div>
+      </Link>
 
       <MediaQuery minWidth={1100}>
         <DesktopSearch />

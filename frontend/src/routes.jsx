@@ -8,6 +8,7 @@ import SearchPage from "./features/search/pages/Page";
 import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
+import PublicLayout from "./components/layouts/PublicLayout";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
@@ -37,23 +38,29 @@ export const routes = createBrowserRouter([
   authRoutes,
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/about",
-    element: <AboutPage />,
-  },
-  {
-    path: "/terms-and-conditions",
-    element: <TermsPage />,
-  },
-  {
-    path: "/privacy-policy",
-    element: <PrivacyPage />,
-  },
-  {
-    path: "/contact-us",
-    element: <ContactUsPage />,
+    element: <PublicLayout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsPage />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPage />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUsPage />,
+      },
+    ],
   },
   {
     path: "/",

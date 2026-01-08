@@ -26,7 +26,7 @@ function QuickAccessSection() {
       <ScrollArea>
         <div className="flex justify-between gap-4 px-4 sm:m-0.5 sm:gap-4.5 sm:px-0">
           <Link to="/mutual-funds/all-funds">
-            <Card className="w-36 cursor-pointer justify-between gap-2 p-3 sm:w-46 sm:min-w-40 sm:p-4 sm:transition-all sm:duration-500 sm:hover:scale-101">
+            <Card className="w-36 cursor-pointer justify-between gap-2 rounded-2xl p-3 sm:w-46 sm:min-w-40 sm:rounded-[1.25rem] sm:p-4 sm:transition-all sm:duration-500 sm:hover:scale-101">
               <CardContent className="flex flex-col items-start gap-1 p-0">
                 <CompassIcon className="size-6 sm:size-7" />
               </CardContent>
@@ -38,7 +38,7 @@ function QuickAccessSection() {
 
           {cardsMapping.map(({ label, img, to }) => (
             <Link key={label} to={to}>
-              <Card className="w-36 cursor-pointer gap-2 p-3 sm:w-46 sm:min-w-40 sm:p-4 sm:transition-all sm:duration-500 sm:hover:scale-101">
+              <Card className="w-36 cursor-pointer gap-2 rounded-2xl p-3 sm:w-46 sm:min-w-40 sm:rounded-[1.25rem] sm:p-4 sm:transition-all sm:duration-500 sm:hover:scale-101">
                 <CardContent className="p-0">
                   <img
                     src={img}

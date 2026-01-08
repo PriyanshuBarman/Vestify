@@ -16,7 +16,7 @@ function RecentlyViewedSection() {
           <Link
             key={fund.scheme_code}
             to={`/mutual-funds/${fund.scheme_code}`}
-            className="flex w-[48%] cursor-pointer items-center gap-2 rounded-2xl border px-3 py-3 duration-200 hover:scale-101 sm:m-0.5"
+            className="flex w-[48%] cursor-pointer items-center gap-2 rounded-2xl sm:rounded-[1.25rem] border px-3 py-3 duration-200 hover:scale-101 sm:m-0.5"
           >
             <FundLogo fundHouseDomain={fund.detail_info} />
             <p className="sm:text-foreground line-clamp-2 text-xs sm:text-sm sm:font-medium">

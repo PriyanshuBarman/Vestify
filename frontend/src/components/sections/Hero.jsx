@@ -12,12 +12,18 @@ function Hero() {
       <div className="relative mt-4 flex max-w-5xl flex-col items-center justify-center px-4 sm:mt-0">
         <InstallAppButton alwaysVisible />
         <Heading />
-        <p className="text-foreground/80 mt-6 max-w-[32ch] text-center tracking-tight duration-700 sm:mt-10 sm:max-w-[52ch] sm:text-xl">
-          Invest, start SIPs, track portfolio, send virtual money to others —
-          all virtually with a{" "}
-          <span className="after:animate-underline active:text-primary relative mx-0.5 w-fit after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-left after:-rotate-3 after:rounded-full after:bg-gradient-to-r after:from-green-600 after:via-green-300 after:to-transparent after:opacity-0 after:content-['']">
+        <p className="text-foreground/80 mt-6 max-w-[30ch] text-center tracking-tight duration-700 sm:mt-10 sm:max-w-[52ch] sm:text-xl">
+          Invest, redeem, start SIPs, track portfolio{" "}
+          <span className="max-sm:hidden">—</span> all in a fully virtual
+          environment with a{" "}
+          <a
+            href="https://groww.in"
+            target="_blank"
+            tabIndex={-1}
+            className="after:animate-underline active:text-primary relative mx-0.5 w-fit after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-left after:-rotate-3 after:rounded-full after:bg-gradient-to-r after:from-green-600 after:via-green-300 after:to-transparent after:opacity-0 after:content-['']"
+          >
             Groww.in
-          </span>{" "}
+          </a>{" "}
           UI.
         </p>
       </div>
@@ -25,7 +31,7 @@ function Hero() {
       <Button
         asChild
         size="lg"
-        className="dark:text-foreground sm:text-md group mt-16 rounded-2xl bg-gradient-to-l from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] !px-6 py-6 text-[0.84rem] font-[450] transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] active:scale-95 sm:mt-16 sm:w-fit sm:!px-8 sm:py-6"
+        className="dark:text-foreground sm:text-md group mt-16 rounded-2xl bg-gradient-to-l from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] !px-6 py-6 text-[0.84rem] font-[450] shadow-lg transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] active:scale-95 sm:mt-16 sm:w-fit sm:!px-8 sm:py-6"
       >
         <Link
           to={{
@@ -47,9 +53,8 @@ export default Hero;
 
 function Heading() {
   return (
-    <h2 className="mt-6 text-center text-[2.37rem] leading-tight font-[550] sm:text-7xl sm:tracking-tight">
-      <span>Virtually</span> Invest in Mutual funds with{" "}
-      <span className="text-[2.37rem] sm:text-7xl">zero financial risk</span>
+    <h2 className="mt-6 text-center text-[2.4rem] leading-tight font-[550] sm:text-7xl sm:tracking-tight">
+      Virtually Invest in Mutual funds with zero financial risk
     </h2>
   );
 }

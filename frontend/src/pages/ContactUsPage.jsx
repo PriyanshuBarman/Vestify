@@ -29,7 +29,7 @@ function ContactUsPage() {
     <div className="flex h-svh flex-col px-4 pb-4 sm:mx-auto sm:h-fit sm:max-w-lg sm:pt-12">
       <GoBackBar showSearchIcon={false} className="px-0" />
 
-      <Card className="w-full border-none shadow-none">
+      <Card className="w-full border-none bg-transparent shadow-none">
         <CardHeader className="space-y-4 text-center">
           <HelpCircleIcon className="mx-auto size-14" />
           <CardTitle className="text-2xl font-semibold">Need Help?</CardTitle>
