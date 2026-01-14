@@ -92,11 +92,11 @@ export default Navbar;
 
 function NavLinks() {
   return (
-    <div className="flex sm:text-lg">
+    <div className="flex font-medium sm:text-lg sm:font-[550]">
       <NavLink
         to="/stocks"
         className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden"} shrink-0 rounded-md p-2 font-medium`
+          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden"} shrink-0 rounded-md p-2`
         }
       >
         Stocks
@@ -105,7 +105,7 @@ function NavLinks() {
       <NavLink
         to="/mutual-funds#explore"
         className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2 font-medium`
+          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2`
         }
       >
         Mutual Funds
@@ -113,7 +113,7 @@ function NavLinks() {
       <NavLink
         to="/wallet"
         className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2 font-medium`
+          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2`
         }
       >
         Wallet

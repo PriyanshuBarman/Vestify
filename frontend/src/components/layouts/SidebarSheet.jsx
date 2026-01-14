@@ -1,10 +1,14 @@
 import { Sheet, SheetContent, SheetHeader } from "@/components/ui/sheet";
 import { XIcon } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import ThemeChangeButton from "../ThemeChangeButton";
 import { Button } from "../ui/button";
 
 const navs = [
+  {
+    name: "Home",
+    link: "/",
+  },
   {
     name: "About",
     link: "/about",
@@ -24,6 +28,12 @@ const navs = [
 ];
 
 function SidebarSheet({ open, onOpenChange }) {
+  const navigate = useNavigate();
+  const handleNavClick = (link) => {
+    navigate(link);
+    onOpenChange(false);
+  };
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-[80%] [&>button]:hidden">
@@ -37,23 +47,14 @@ function SidebarSheet({ open, onOpenChange }) {
           </Button>
         </SheetHeader>
         <div className="flex h-full flex-col gap-4 px-4">
-          <a
-            onClick={() => onOpenChange(false)}
-            href="#"
-            className="shrink-0 rounded-full px-4 py-1 text-lg font-medium"
-          >
-            Home
-          </a>
           {navs.map((nav) => (
             <Button
-              variant="link"
               key={nav.link}
-              asChild
+              onClick={() => handleNavClick(nav.link)}
+              variant="link"
               className="text-foreground flex w-full justify-start text-start text-lg"
             >
-              <Link key={nav.link} to={nav.link}>
-                {nav.name}
-              </Link>
+              {nav.name}
             </Button>
           ))}
           <div className="mt-auto mb-4 text-sm">

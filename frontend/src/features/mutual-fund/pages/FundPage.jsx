@@ -100,7 +100,7 @@ function FundPage() {
           </h2>
 
           {/* Fund Category, Risk Level Badges */}
-          <div className="text-muted-foreground/90 sm:text-foreground flex items-center sm:mt-4 sm:space-x-2">
+          <div className="text-muted-foreground/90 sm:text-foreground flex items-center sm:mt-6 sm:space-x-2">
             <Badge variant="mutualFund" className="pl-0">
               {fund.fund_type}
             </Badge>

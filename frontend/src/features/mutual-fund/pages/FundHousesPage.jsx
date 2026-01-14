@@ -6,13 +6,13 @@ import { useGetAMCs } from "../hooks/useGetAMCs";
 function FundHousesPage() {
   const { data: amcs } = useGetAMCs();
   return (
-    <div className="pb-4 sm:pt-6">
+    <div className="pb-8 sm:pt-6">
       <GoBackBar showSearchIcon={false} />
 
       <section className="top-0 z-10">
         <div className="bg-background px-4 sm:mb-10 sm:space-y-4">
           <h2 className="text-lg font-semibold sm:text-2xl">Fund Houses </h2>
-          <p className="text-muted-foreground flex flex-col text-sm">
+          <p className="text-muted-foreground flex flex-col max-sm:text-sm">
             All Fund houses are ranked by the total AUM
             <i>Note: Total AUM & Fund count may differ from actual platform.</i>
           </p>
@@ -34,7 +34,7 @@ function FundHousesPage() {
               rank:
                 amcs.findIndex((item) => item.amc_code === amc.amc_code) + 1,
             }}
-            className="w-full cursor-pointer space-y-2 rounded-2xl border p-3 duration-200 ease-in-out hover:scale-101 sm:m-0.5 sm:space-y-4 sm:p-4"
+            className="w-full cursor-pointer space-y-2 rounded-2xl border p-3 duration-200 ease-in-out hover:scale-101 sm:m-0.5 sm:space-y-6 sm:rounded-[1.25rem]  sm:p-4"
           >
             <div className="flex items-end gap-2 sm:gap-4">
               <FundLogo fundHouseDomain={amc.detail_info} className="size-9" />
@@ -43,7 +43,7 @@ function FundHousesPage() {
                 <span className="ml-0.5 text-[85%] sm:ml-1">Funds</span>
               </p>
             </div>
-            <p className="line-clamp-1 text-xs font-[450] sm:text-sm sm:font-medium">
+            <p className="line-clamp-1 text-xs font-[450] sm:text-md sm:font-medium">
               {amc.amc_name}
             </p>
           </Link>

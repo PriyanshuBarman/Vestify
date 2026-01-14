@@ -1,40 +1,11 @@
-import { footerLinks } from "@/constants/footer";
+import { credits } from "@/constants/credits";
+import { footerLinks, socialLinks } from "@/constants/footer";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
-import {
-  GithubLogoIcon,
-  LinkedinLogoIcon,
-  RedditLogoIcon,
-  TwitterLogoIcon,
-} from "@phosphor-icons/react";
 import { Link, useLocation } from "react-router";
 import ButtonAnimatedLink from "./ButtonAnimatedLink";
 import LogoShapeOnly from "./LogoShapeOnly";
 import { Separator } from "./ui/separator";
-import { credits } from "@/constants/credits";
-
-const socialLinks = [
-  {
-    label: "Go to vestify reddit comunity",
-    href: "https://www.reddit.com/r/Vestify",
-    Icon: RedditLogoIcon,
-  },
-  {
-    label: "Go to creators twitter profile",
-    href: "https://twitter.com/priyanshuwb",
-    Icon: TwitterLogoIcon,
-  },
-  {
-    label: "Go to creators github profile",
-    href: "https://github.com/priyanshubarman/vestify",
-    Icon: GithubLogoIcon,
-  },
-  {
-    label: "Go to creators linkedin profile",
-    href: "https://www.linkedin.com/in/priyanshubarman",
-    Icon: LinkedinLogoIcon,
-  },
-];
 
 function Footer({ className }) {
   const location = useLocation();
@@ -60,7 +31,7 @@ function Footer({ className }) {
                   {isSection ? (
                     <a
                       href={href}
-                      className="text-foreground sm:text-md px-2 text-sm font-normal"
+                      className="text-foreground px-2 text-sm sm:text-base sm:font-medium"
                     >
                       {title}
                     </a>
@@ -76,7 +47,7 @@ function Footer({ className }) {
 
           {/* Credits */}
           <div className="my-auto ml-4 w-full max-w-xs">
-            <span className="sm:text-md text-sm font-medium">Credits</span>
+            <span className="sm:text-md text-sm font-semibold">Credits</span>
             <div className="mt-2 flex flex-col gap-2 text-xs sm:text-sm">
               {credits.map((item) => (
                 <a

@@ -30,7 +30,7 @@ function Page() {
             onClick={() => navigate("/wallet/send")}
             size="lg"
             variant="outline"
-            className="h-16 w-22 rounded-xl sm:h-22 sm:w-38"
+            className="h-16 w-22 rounded-xl sm:h-22 sm:w-38 sm:rounded-2xl"
           >
             <SendIcon className="text-primary fill size-8 sm:size-10" />
           </Button>
@@ -45,7 +45,7 @@ function Page() {
             onClick={() => setIsScannerOpen(true)}
             size="lg"
             variant="outline"
-            className="h-16 w-22 rounded-xl sm:h-22 sm:w-38"
+            className="h-16 w-22 rounded-xl sm:h-22 sm:w-38 sm:rounded-2xl"
           >
             <ScanLineIcon className="text-primary size-8 stroke-[2.4px] sm:size-10" />
           </Button>
@@ -59,7 +59,7 @@ function Page() {
             <Button
               size="lg"
               variant="outline"
-              className="h-16 w-22 rounded-xl sm:h-22 sm:w-38"
+              className="h-16 w-22 rounded-xl sm:h-22 sm:w-38 sm:rounded-2xl"
             >
               <QrCodeIcon className="text-primary size-8.5 sm:size-10" />
             </Button>

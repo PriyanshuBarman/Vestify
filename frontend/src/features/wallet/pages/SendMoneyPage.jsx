@@ -29,12 +29,12 @@ function SendMoneyPage() {
 
       {/* Searchbar */}
       <div className="SearchBar relative mx-4 mt-2">
-        <SearchIcon className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2 sm:size-6" />
+        <SearchIcon className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2 sm:left-5 sm:size-6" />
         <Input
           ref={inputRef}
           type="search"
           placeholder="Search by name or username"
-          className="sm:!text-md sm:placeholder:text-md rounded-xl pl-10 text-sm sm:py-6"
+          className="sm:!text-md sm:placeholder:text-md rounded-xl pl-10 text-sm sm:py-6 sm:pl-14"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           autoFocus

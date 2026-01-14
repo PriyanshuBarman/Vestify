@@ -52,7 +52,7 @@ function ReturnCalculator({ fund }) {
   }, [type, chartData, debouncedValue, selectedYear, fund]);
 
   return (
-    <Card className="text-muted-foreground bg-background border-0 pt-0 pb-4 sm:gap-8 sm:rounded-xl sm:border sm:py-10">
+    <Card className="text-muted-foreground bg-background border-0 pt-0 pb-4 sm:gap-8 sm:rounded-3xl sm:border sm:py-10">
       <CardHeader className="px-0 sm:px-8">
         <CardTitle>
           <Button

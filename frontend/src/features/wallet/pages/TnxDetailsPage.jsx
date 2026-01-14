@@ -66,7 +66,7 @@ function TnxDetailsPage() {
         </div>
       </div>
 
-      <Card className="mt-6 w-full py-4">
+      <Card className="mt-6 w-full rounded-3xl py-4">
         <CardContent className="flex flex-row justify-between text-sm">
           <span className="flex items-center gap-2 font-medium">
             {isCredit ? "Received from" : "Sent to"}
@@ -127,7 +127,7 @@ export default TnxDetailsPage;
 
 function TnxDetailsCard({ tnx }) {
   return (
-    <Card className="my-6 w-full">
+    <Card className="my-6 w-full rounded-3xl">
       <CardContent className="space-y-6 text-sm">
         <CardHeader>
           <CardTitle className="text-md text-center font-medium">

@@ -22,7 +22,7 @@ function Card() {
         <h2 className="text-2xl font-semibold tracking-tight lg:text-5xl">
           Install the Web App
         </h2>
-        <p className="mt-1 text-sm sm:mt-4 sm:text-base">
+        <p className="mt-2 text-sm sm:mt-4 sm:text-base">
           Install our WebApp for better experience and offline support
         </p>
         <Button

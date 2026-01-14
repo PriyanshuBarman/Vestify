@@ -9,7 +9,7 @@ function CopyrightFooter({ className }) {
         <span className="text-xs font-medium tracking-wider">Vestify</span>
       </div>
       <p className="text-muted-foreground flex items-center text-center text-xs">
-        Copyright © 2026 Vestify
+        Copyright &copy; {new Date().getFullYear()} Vestify
       </p>
     </footer>
   );

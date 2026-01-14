@@ -11,8 +11,11 @@ function Hero() {
     <section className="flex min-h-svh flex-col items-center justify-center">
       <div className="relative mt-4 flex max-w-5xl flex-col items-center justify-center px-4 sm:mt-0">
         <InstallAppButton alwaysVisible />
-        <Heading />
-        <p className="text-foreground/80 mt-6 max-w-[30ch] text-center tracking-tight duration-700 sm:mt-10 sm:max-w-[52ch] sm:text-xl">
+        <h1 className="mt-6 text-center text-[2.4rem] leading-[1.2] font-semibold sm:mt-10 sm:text-7xl sm:font-[550] sm:tracking-tight">
+          Invest in Indian Mutual Funds with{" "}
+          <span className="text-[#00b35c] italic">virtual money</span>
+        </h1>
+        <p className="text-muted-foreground/90 mt-6 max-w-[30ch] text-center text-base tracking-tight duration-700 sm:mt-12 sm:max-w-[42ch] sm:text-2xl">
           Invest, redeem, start SIPs, track portfolio{" "}
           <span className="max-sm:hidden">—</span> all in a fully virtual
           environment with a{" "}
@@ -31,7 +34,7 @@ function Hero() {
       <Button
         asChild
         size="lg"
-        className="dark:text-foreground sm:text-md group mt-16 rounded-2xl bg-gradient-to-l from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] !px-6 py-6 text-[0.84rem] font-[450] shadow-lg transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] active:scale-95 sm:mt-16 sm:w-fit sm:!px-8 sm:py-6"
+        className="dark:text-foreground group mt-16 rounded-2xl bg-gradient-to-l from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] !px-6 py-6 text-sm font-[450] shadow-lg transition-all duration-300 ease-linear hover:scale-105 hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] active:scale-95 sm:mt-16 sm:w-fit sm:!px-8 sm:py-6.5 sm:text-base"
       >
         <Link
           to={{
@@ -40,7 +43,7 @@ function Hero() {
           }}
         >
           Start Investing{" "}
-          <ArrowUpRightIcon className="size-5 transition-all duration-300 group-hover:translate-x-2 group-hover:-translate-y-1 group-hover:scale-102 sm:size-5" />
+          <ArrowUpRightIcon className="size-4.5 transition-all duration-400 group-hover:translate-x-2 group-hover:-translate-y-1 group-hover:scale-102 sm:size-5" />
         </Link>
       </Button>
 
@@ -50,11 +53,3 @@ function Hero() {
 }
 
 export default Hero;
-
-function Heading() {
-  return (
-    <h2 className="mt-6 text-center text-[2.4rem] leading-tight font-[550] sm:text-7xl sm:tracking-tight">
-      Virtually Invest in Mutual funds with zero financial risk
-    </h2>
-  );
-}

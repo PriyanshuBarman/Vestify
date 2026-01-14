@@ -17,7 +17,7 @@ function Faqs({ className }) {
       )}
     >
       <div className="flex w-full flex-col items-center justify-between gap-y-6 md:flex-row">
-        <h2 className="text-center text-[1.37rem] font-semibold tracking-tight sm:text-5xl">
+        <h2 className="text-center text-2xl font-semibold tracking-tight sm:text-5xl">
           Questions And Answers
         </h2>
 
@@ -30,12 +30,12 @@ function Faqs({ className }) {
             <AccordionItem
               key={question}
               value={`question-${index}`}
-              className="bg-accent rounded-xl px-4 py-px sm:pl-6"
+              className="bg-accent rounded-xl px-4 py-0.5 sm:pl-6"
             >
               <AccordionTrigger className="text-md text-left font-[450] sm:text-lg">
                 {question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed sm:text-base">
+              <AccordionContent className="text-muted-foreground text-[0.9rem] leading-relaxed text-balance sm:text-base">
                 {answer}
               </AccordionContent>
             </AccordionItem>

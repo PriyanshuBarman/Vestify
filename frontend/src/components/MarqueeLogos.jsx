@@ -6,13 +6,13 @@ function MarqueeLogos({ classNames, reverse = false }) {
   return (
     <div
       className={cn(
-        "group flex w-full overflow-hidden mask-x-from-70% mask-x-to-95% p-2 [--duration:250s] [--gap:5rem] sm:mask-x-from-70% sm:mask-x-to-90% sm:[--duration:250s] sm:[--gap:10rem]",
+        "group flex w-full overflow-hidden mask-x-from-70% mask-x-to-95% p-2 [--duration:250s] [--gap:3rem] sm:mask-x-from-70% sm:mask-x-to-90% sm:[--duration:250s] sm:[--gap:10rem]",
         classNames,
       )}
     >
       <div
         className={cn(
-          "animate-marquee mr-[5rem] flex gap-[5rem] will-change-transform sm:mr-[10rem] sm:gap-[10rem]",
+          "animate-marquee mr-[3rem] flex gap-[3rem] will-change-transform sm:mr-[10rem] sm:gap-[10rem]",
           {
             "[animation-direction:reverse]": reverse,
           },
@@ -25,9 +25,9 @@ function MarqueeLogos({ classNames, reverse = false }) {
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
-              className="size-8.5 rounded-lg sm:size-13 sm:rounded-2xl"
+              className="size-9.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-lg sm:italic">
+            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-xl sm:italic">
               {amc.amc_name}
             </p>
           </div>
@@ -37,7 +37,7 @@ function MarqueeLogos({ classNames, reverse = false }) {
       <div
         aria-hidden="true"
         className={cn(
-          "animate-marquee flex gap-[5rem] will-change-transform sm:gap-[10rem]",
+          "animate-marquee flex gap-[3rem] will-change-transform sm:gap-[10rem]",
           {
             "[animation-direction:reverse]": reverse,
           },
@@ -50,9 +50,9 @@ function MarqueeLogos({ classNames, reverse = false }) {
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
-              className="size-8.5 rounded-lg sm:size-13 sm:rounded-2xl"
+              className="size-9.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-lg sm:italic">
+            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-xl sm:italic">
               {amc.amc_name}
             </p>
           </div>

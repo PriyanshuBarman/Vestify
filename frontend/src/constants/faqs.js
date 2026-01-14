@@ -11,12 +11,17 @@ export const faqs = [
   {
     question: "What is Vestify?",
     answer:
-      "Vestify is a virtual investment platform that simulates real mutual fund investing using virtual money. It’s designed to help beginners learn how investing, SIPs works in a risk-free way.",
+      "Vestify is a virtual investment platform that simulates real world mutual fund investing using virtual money. It’s designed to help beginners learn how investing, SIPs works in a risk-free way.",
   },
   {
     question: "Is it a real investment platform?",
     answer:
       "No. Vestify does not involve real money or actual investments. All funds, portfolios, SIPs, and returns are completely virtual and meant only for learning and practice.",
+  },
+  {
+    question: "Can I lose real money on Vestify?",
+    answer:
+      "No, you cannot lose real money on Vestify since all investments are virtual. However, your virtual portfolio value can go down based on real market movements, which helps you learn about investment risks without actual financial loss.",
   },
   {
     question: "Is Vestify free to use?",

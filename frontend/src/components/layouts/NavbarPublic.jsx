@@ -1,19 +1,23 @@
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
+import { navs } from "@/constants/nav";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { ModeToggle } from "../ui/mode-togle";
 import SidebarSheet from "./SidebarSheet";
-import { navs } from "@/constants/nav";
 
 function NavbarPublic() {
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("referralCode");
   const [openSidebar, setOpenSidebar] = useState(false);
   const isMobile = useIsMobile();
 
   return (
-    <nav className="bg-backgroun fixed top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-5 py-4 sm:p-4">
+    <nav className="bg-backgroun fixed top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-5 py-4 backdrop-blur-xs sm:p-4">
       <Link to="/" className="flex items-center justify-center gap-2 sm:gap-4">
         <Logo className="size-8" />
         <span className="font-[550] sm:text-2xl">Vestify</span>
@@ -21,9 +25,7 @@ function NavbarPublic() {
 
       <div className="flex items-center justify-start gap-2 xl:gap-6">
         <NavLinks />
-        {!isMobile && <ModeToggle />}
-
-        {isMobile && (
+        {isMobile ? (
           <>
             <Button
               variant="ghost"
@@ -34,6 +36,22 @@ function NavbarPublic() {
             </Button>
             <SidebarSheet open={openSidebar} onOpenChange={setOpenSidebar} />
           </>
+        ) : (
+          <div className="flex items-center justify-center gap-4 lg:gap-6">
+            <ModeToggle />
+            <Button
+              onClick={() =>
+                navigate(
+                  referralCode
+                    ? `/auth/signup?referralCode=${referralCode}`
+                    : "/auth/signup",
+                )
+              }
+              className="h-8.5 rounded-xl bg-gradient-to-r from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] font-normal shadow-md transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] max-sm:text-xs sm:p-5"
+            >
+              Signup
+            </Button>
+          </div>
         )}
       </div>
     </nav>

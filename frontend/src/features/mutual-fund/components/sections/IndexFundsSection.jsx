@@ -33,9 +33,9 @@ function IndexFundsSection() {
               key={fund.scheme_code}
               to={`/mutual-funds/${fund.scheme_code}`}
             >
-              <Card className="h-40 w-40 cursor-pointer justify-between gap-0 p-4 text-inherit duration-200 hover:scale-101 sm:h-44 sm:w-48">
+              <Card className="h-40 w-40 cursor-pointer justify-between gap-0 rounded-3xl p-4 text-inherit duration-200 hover:scale-101 sm:h-44 sm:w-48">
                 <FundLogo fundHouseDomain={fund.detail_info} />
-                <CardTitle className="text-xs font-[450] sm:text-sm sm:font-medium">
+                <CardTitle className="text-xs font-[450] sm:text-[0.9rem]">
                   {fund.short_name}
                 </CardTitle>
 

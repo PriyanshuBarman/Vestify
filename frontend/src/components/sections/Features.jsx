@@ -1,51 +1,5 @@
+import { features } from "@/constants/features";
 import { cn } from "@/lib/utils";
-import { OnigiriIcon } from "@phosphor-icons/react";
-import {
-  ChartSplineIcon,
-  OrbitIcon,
-  Rotate3DIcon,
-  ScanTextIcon,
-  ShieldIcon,
-} from "lucide-react";
-
-const features = [
-  {
-    icon: ShieldIcon,
-    title: "Invest Virtually",
-    description:
-      "Invest in mutual funds using virtual money and experience real investing without financial risk.",
-  },
-  {
-    icon: OrbitIcon,
-    title: "Start Virtual SIPs",
-    description:
-      "Start SIPs in Mutual Funds and understand how real SIPs work through an automated process.",
-  },
-  {
-    icon: Rotate3DIcon,
-    title: "Step-Up SIPs",
-    description:
-      "Periodically increase SIP amounts by a fixed value or percentage, similar to real-world step-up SIPs.",
-  },
-  {
-    icon: ChartSplineIcon,
-    title: "Track Portfolio",
-    description:
-      "Track how your portfolio grows over time and experience how real investments perform in different market conditions.",
-  },
-  {
-    icon: ScanTextIcon,
-    title: "P2P Transfer",
-    description:
-      "Send, receive, Scan & Pay your virtual money with others instantly—just like UPI.",
-  },
-  {
-    icon: OnigiriIcon,
-    title: "Groww App UI",
-    description:
-      "Experience real mutual fund investing experience just like on the groww app.",
-  },
-];
 
 function Features({ className }) {
   return (
@@ -56,13 +10,16 @@ function Features({ className }) {
         className,
       )}
     >
-      <h2 className="text-center text-[1.37rem] leading-tight font-semibold tracking-tight sm:max-w-[24ch] sm:text-5xl">
-        Experience Real Investing, in a Virtual environment
+      <h2 className="max-w-[20ch] text-center text-2xl leading-snug font-semibold sm:max-w-[24ch] sm:text-5xl sm:leading-tight sm:tracking-tight">
+        Experience Real Investing,{" "}
+        <span className="tracking-tight text-[#00b35c] italic">
+          in a Virtual environment
+        </span>
       </h2>
-      <p className="text-muted-foreground sm:text-foreground text-md mt-4 text-center sm:text-xl">
-        Risk free & safe, Perfect for learning.
+      <p className="text-muted-foreground text-md mt-4 text-center max-sm:tracking-tight sm:text-2xl">
+        Learn investing by actually doing it, safely.
       </p>
-      <div className="mx-auto mt-10 grid max-w-(--breakpoint-xl) gap-6 sm:mt-16 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+      <div className="mx-auto mt-10 grid gap-6 sm:mt-16 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
         {features.map((feature) => (
           <FeatureCard key={feature.title} feature={feature} />
         ))}
@@ -77,18 +34,27 @@ function FeatureCard({ feature }) {
   return (
     <div
       key={feature.title}
-      className="group relative flex flex-col overflow-hidden rounded-[1.25rem] border px-5 py-5 transition-transform duration-300 ease-in-out hover:scale-105 sm:p-6"
+      className={cn(
+        "group bg-card relative overflow-hidden rounded-[2rem] border p-6 backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-101 active:scale-95 max-sm:shadow-xs sm:border sm:shadow-xs sm:hover:shadow-lg md:p-8 max-sm:dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]",
+        feature.className,
+      )}
     >
-      <div className="absolute -top-10 -right-8 size-32 rounded-full bg-gradient-to-t from-[#00b35c16] transition-transform duration-300 group-hover:scale-110 sm:size-36" />
-      <div className="text-background flex w-fit items-center justify-center rounded-xl bg-gradient-to-b from-[#00b35cd9] to-[#00b35c64] p-3.5 shadow-lg">
-        <feature.icon className="size-4.5 max-sm:stroke-[2.5px] sm:size-6.5" />
+      {/* Floating Icon */}
+      <div className="pointer-events-none absolute -top-6 -right-6 p-8 opacity-[0.025] transition-all duration-700 group-hover:scale-125 group-hover:-rotate-12 group-hover:opacity-[0.08] sm:opacity-[0.02]">
+        <feature.icon className="size-26 md:size-28" />
       </div>
-      <span className="text-md mt-3 font-semibold sm:mt-4 sm:text-xl">
-        {feature.title}
-      </span>
-      <p className="text-foreground/80 sm:text-md mt-1.5 text-sm sm:mt-2">
-        {feature.description}
-      </p>
+
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="mb-6 inline-flex w-fit items-center justify-center rounded-2xl p-3.5 shadow transition-all duration-500 group-hover:rotate-[10deg] group-hover:shadow-md md:mb-8 md:p-4 dark:border-b">
+          <feature.icon className="h-6 w-6 md:h-7 md:w-7" />
+        </div>
+        <h3 className="mb-2 text-[1.05rem] font-semibold transition-colors md:text-[1.35rem]">
+          {feature.title}
+        </h3>
+        <p className="text-muted-foreground text-[0.9rem] transition-opacity group-hover:opacity-100 sm:opacity-80 md:text-[1.05rem]">
+          {feature.description}
+        </p>
+      </div>
     </div>
   );
 }

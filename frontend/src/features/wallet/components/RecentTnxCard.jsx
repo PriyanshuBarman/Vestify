@@ -19,7 +19,7 @@ function RecentTnxCard() {
 
   const recentTnx = getLatestTnx(tnxHistory, 4);
   return (
-    <Card className="mt-10">
+    <Card className="mt-10 rounded-3xl">
       <CardContent>
         <CardHeader className="items-center px-0">
           <CardTitle className="text-md font-medium sm:text-xl sm:font-semibold">
