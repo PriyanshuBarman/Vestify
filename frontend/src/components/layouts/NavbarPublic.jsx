@@ -42,9 +42,7 @@ function NavbarPublic() {
             <Button
               onClick={() =>
                 navigate(
-                  referralCode
-                    ? `/auth/signup?referralCode=${referralCode}`
-                    : "/auth/signup",
+                  referralCode ? `/auth?referralCode=${referralCode}` : "/auth",
                 )
               }
               className="h-8.5 rounded-xl bg-gradient-to-r from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] font-normal shadow-md transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] max-sm:text-xs sm:p-5"

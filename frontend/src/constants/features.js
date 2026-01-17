@@ -10,7 +10,7 @@ import {
 export const features = [
   {
     icon: ShieldIcon,
-    title: "Invest Virtually",
+    title: "Virtual Investing",
     description:
       "Invest in mutual funds using virtual money and experience real investing without financial risk.",
   },

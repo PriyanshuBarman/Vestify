@@ -9,13 +9,13 @@ function Hero() {
   const referralCode = searchParams.get("referralCode");
   return (
     <section className="flex min-h-svh flex-col items-center justify-center">
-      <div className="relative mt-4 flex max-w-5xl flex-col items-center justify-center px-4 sm:mt-0">
+      <div className="relative mt-4 flex max-w-5xl flex-col items-center justify-center px-4">
         <InstallAppButton alwaysVisible />
-        <h1 className="mt-6 text-center text-[2.4rem] leading-[1.2] font-semibold sm:mt-10 sm:text-7xl sm:font-[550] sm:tracking-tight">
+        <h1 className="mt-6 text-center text-[2.4rem] leading-[1.2] font-semibold sm:mt-8 sm:text-7xl sm:tracking-tight">
           Invest in Indian Mutual Funds with{" "}
           <span className="text-[#00b35c] italic">virtual money</span>
         </h1>
-        <p className="text-muted-foreground/90 mt-6 max-w-[30ch] text-center text-base tracking-tight duration-700 sm:mt-12 sm:max-w-[42ch] sm:text-2xl">
+        <p className="text-muted-foreground/90 mt-6 max-w-[30ch] text-center text-base tracking-tight duration-700 sm:mt-10 sm:max-w-[42ch] sm:text-2xl">
           Invest, redeem, start SIPs, track portfolio{" "}
           <span className="max-sm:hidden">—</span> all in a fully virtual
           environment with a{" "}

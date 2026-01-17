@@ -11,7 +11,7 @@ import FundLogo from "./FundLogo";
 function CardSM({ fund }) {
   return (
     <Link to={`/mutual-funds/${fund.scheme_code}`}>
-      <Card className="min-w-72 gap-2 p-4">
+      <Card className="min-w-72 gap-2 rounded-3xl p-4">
         <FundLogo fundHouseDomain={fund.detail_info} className="size-8.5" />
 
         <CardContent className="p-0">

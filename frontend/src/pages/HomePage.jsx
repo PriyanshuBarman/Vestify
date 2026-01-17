@@ -1,9 +1,10 @@
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import AmcMarquee from "@/components/sections/AmcMarquee";
-import Cta from "@/components/sections/Cta";
-import Faqs from "@/components/sections/Faqs";
-import Features from "@/components/sections/Features";
-import Hero from "@/components/sections/Hero";
+import AmcMarquee from "@/components/landing/AmcMarquee";
+import Cta from "@/components/landing/Cta";
+import Faqs from "@/components/landing/Faqs";
+import Features from "@/components/landing/Features";
+import Hero from "@/components/landing/Hero";
+import Quote from "@/components/landing/Quote";
 
 function HomePage() {
   return (
@@ -11,8 +12,9 @@ function HomePage() {
       <Hero />
       <Features />
       <AmcMarquee className="mt-24 sm:mt-34" />
-      <Faqs className="mt-24 sm:mt-34" />
-      <Cta className="mt-20 sm:mt-34" />
+      <Faqs className="mt-28 sm:mt-34" />
+      <Quote />
+      <Cta className="mt-24 sm:mt-34" />
       <ScrollToTopButton />
     </div>
   );
