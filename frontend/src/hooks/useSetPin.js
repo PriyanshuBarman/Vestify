@@ -16,7 +16,16 @@ export function useSetPin() {
       navigate("/mutual-funds#explore", { replace: true });
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      const message = error.response?.data?.message || "";
+      const isAuthError =
+        error.response?.status === 401 ||
+        message.toLowerCase().includes("refresh token is required") ||
+        message.toLowerCase().includes("prisma");
+
+      if (isAuthError) {
+        return navigate("/auth/help");
+      }
+      toast.error(message || "Something went wrong");
     },
   });
 }
