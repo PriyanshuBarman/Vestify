@@ -1,7 +1,7 @@
 import rateLimit from "express-rate-limit";
 
 const createLimiter = ({
-  max = 5,
+  max = 7,
   windowMs = 15 * 60 * 1000, // 15 min
   skipSuccessfulRequests = false,
   skipFailedRequests = false,
@@ -16,7 +16,8 @@ const createLimiter = ({
     legacyHeaders: false,
     message: {
       success: false,
-      message: message || "Too many requests. Please try again later.",
+      message:
+        message || "Too many requests. Please try again after 15 minutes.",
     },
   });
 };
@@ -44,7 +45,7 @@ export const validatePinLimiter = createLimiter({
 export const avatarUploadLimiter = createLimiter({
   windowMs: 24 * 60 * 60 * 1000,
   skipFailedRequests: true,
-  message: "Avatar upload limit reached: max 5 uploads per day.",
+  message: "Avatar upload limit reached: max 7 uploads per day.",
 });
 export const signUpLimiter = createLimiter({
   windowMs: 24 * 60 * 60 * 1000,
