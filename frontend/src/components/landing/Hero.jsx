@@ -9,13 +9,13 @@ function Hero() {
   const referralCode = searchParams.get("referralCode");
   return (
     <section className="flex min-h-svh flex-col items-center justify-center">
-      <div className="relative mt-4 flex max-w-5xl flex-col items-center justify-center px-4">
+      <div className="relative mt-4 flex max-w-5xl flex-col items-center justify-center px-4 sm:mt-6">
         <InstallAppButton alwaysVisible />
         <h1 className="mt-6 text-center text-[2.4rem] leading-[1.2] font-semibold sm:mt-8 sm:text-7xl sm:tracking-tight">
           Invest in Indian Mutual Funds with{" "}
           <span className="text-[#00b35c] italic">virtual money</span>
         </h1>
-        <p className="text-muted-foreground/90 mt-6 max-w-[30ch] text-center text-base tracking-tight duration-700 sm:mt-10 sm:max-w-[42ch] sm:text-2xl">
+        <p className="text-foreground/70 mt-6 max-w-[30ch] text-center text-base tracking-tight duration-700 sm:mt-10 sm:max-w-[42ch] sm:text-2xl">
           Invest, redeem, start SIPs, track portfolio{" "}
           <span className="max-sm:hidden">—</span> all in a fully virtual
           environment with a{" "}
@@ -34,7 +34,7 @@ function Hero() {
       <Button
         asChild
         size="lg"
-        className="dark:text-foreground group mt-16 rounded-2xl bg-gradient-to-l from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] !px-6 py-6 text-sm font-[450] shadow-lg transition-all duration-300 ease-linear hover:scale-105 hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] active:scale-95 sm:mt-16 sm:w-fit sm:!px-8 sm:py-6.5 sm:text-base"
+        className="dark:text-foreground group shadow-lgs mt-16 rounded-2xl bg-gradient-to-l from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] !px-6 py-6 text-sm font-[450] transition-all duration-300 ease-linear hover:scale-105 hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] active:scale-95 sm:mt-16 sm:w-fit sm:!px-8 sm:py-6.5 sm:text-base"
       >
         <Link
           to={{

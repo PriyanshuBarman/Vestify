@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import CountUp from "../CountUp";
 import MarqueeLogos from "../MarqueeLogos";
 
 function AmcMarquee({ className }) {
@@ -32,7 +33,7 @@ function AmcMarquee({ className }) {
       opacity: 1,
       transition: {
         duration: 0.8,
-        delay: 1,
+        delay: 0.8,
         ease: [0.22, 1, 0.36, 1],
       },
     },
@@ -47,20 +48,38 @@ function AmcMarquee({ className }) {
       variants={containerVariants}
     >
       <motion.h2
-        className="flex flex-col text-center text-3xl font-semibold sm:text-[3.5rem]"
+        className="text-muted- text-center text-2xl font-[550] sm:text-[2.95rem]"
         variants={itemVarients}
       >
-        Invest in India's top
-        <span className="text-[#00b35c] italic">Mutual Funds</span>
+        Virtually invest in{" "}
+        <CountUp
+          value={1550}
+          startValue={1000}
+          className="tracking-tight text-[#00b35c] tabular-nums"
+        />
+        <motion.span
+          variants={{
+            hidden: { opacity: 0, scale: 0, width: 0, marginLeft: 0 },
+            visible: {
+              opacity: 1,
+              scale: 1,
+              width: "auto",
+              marginLeft: "0.125rem",
+              transition: {
+                delay: 4.5,
+                type: "spring",
+              },
+            },
+          }}
+          className="inline-block overflow-hidden whitespace-nowrap text-[#00b35c]"
+        >
+          +
+        </motion.span>{" "}
+        mutual funds
       </motion.h2>
-      <motion.p
-        className="text-md text-muted-foreground mt-4 text-center sm:mt-8 sm:text-2xl"
-        variants={itemVarients}
-      >
-        Learn real investing with virtual investing
-      </motion.p>
+
       <motion.div
-        className="mt-10 space-y-2 sm:mt-18 sm:space-y-8"
+        className="mt-10 space-y-4 sm:mt-18 sm:space-y-8"
         variants={marqueeVarients}
       >
         <MarqueeLogos />

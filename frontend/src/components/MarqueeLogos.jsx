@@ -21,13 +21,13 @@ function MarqueeLogos({ classNames, reverse = false }) {
         {amcs.map((amc) => (
           <div
             key={amc.id}
-            className="flex items-center gap-2 rounded-2xl sm:gap-4"
+            className="flex items-center gap-3 rounded-2xl sm:gap-4"
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
               className="size-9.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-xl sm:italic">
+            <p className="text-foreground/60 font-[450] sm:font-medium text-sm whitespace-nowrap sm:text-xl sm:italic">
               {amc.amc_name}
             </p>
           </div>
@@ -46,13 +46,13 @@ function MarqueeLogos({ classNames, reverse = false }) {
         {amcs.map((amc) => (
           <div
             key={amc.id}
-            className="flex items-center gap-2 rounded-2xl sm:gap-4"
+            className="flex items-center gap-3 rounded-2xl sm:gap-4"
           >
             <FundLogo
               fundHouseDomain={amc.detail_info}
               className="size-9.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-            <p className="text-foreground/70 text-sm whitespace-nowrap sm:text-xl sm:italic">
+            <p className="text-foreground/60 font-[450] sm:font-medium text-sm whitespace-nowrap sm:text-xl sm:italic">
               {amc.amc_name}
             </p>
           </div>

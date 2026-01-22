@@ -55,10 +55,10 @@ function SidebarSheet({ open, onOpenChange }) {
         <SheetHeader>
           <Button
             size="icon"
-            className="animate-in zoom-in spin-in fade-in ml-auto rounded-full bg-[#00b35cc1] shadow-none delay-200 duration-300"
+            className="animate-in zoom-in spin-in fade-in text-foreground ml-auto rounded-full bg-[#] p-5 shadow-none delay-200 duration-300"
             onClick={() => onOpenChange(false)}
           >
-            <XIcon className="size-6" />
+            <XIcon className="size-8 stroke-[1.5px]" />
           </Button>
         </SheetHeader>
         <motion.div
@@ -72,7 +72,7 @@ function SidebarSheet({ open, onOpenChange }) {
               <Button
                 onClick={() => handleNavClick(nav.link)}
                 variant="link"
-                className="text-foreground flex w-full justify-start text-start text-lg"
+                className="text-foreground flex w-full justify-start text-start text-xl font-[450]"
               >
                 {nav.name}
               </Button>
@@ -84,9 +84,7 @@ function SidebarSheet({ open, onOpenChange }) {
             animate={open ? "visible" : "hidden"}
             variants={themeVariants}
           >
-            <h6 className="text-muted-foreground text-2xs mb-2 tracking-wider">
-              APPEARENCE
-            </h6>
+            <h6 className="text-2xs mb-2 ml-2 tracking-wider">APPEARENCE</h6>
 
             <ThemeChangeButton />
           </motion.div>

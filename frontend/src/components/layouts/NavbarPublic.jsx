@@ -17,7 +17,7 @@ function NavbarPublic() {
   const isMobile = useIsMobile();
 
   return (
-    <nav className="bg-backgroun fixed top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-5 py-4 backdrop-blur-xs sm:p-4">
+    <nav className="fixed top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-5 py-4 backdrop-blur-xs sm:p-4">
       <Link to="/" className="flex items-center justify-center gap-2 sm:gap-4">
         <Logo className="size-8" />
         <span className="font-[550] sm:text-2xl">Vestify</span>
@@ -32,7 +32,10 @@ function NavbarPublic() {
               size="icon-sm"
               onClick={() => setOpenSidebar(true)}
             >
-              <MenuIcon className="size-6" />
+              <div className="flex flex-col items-center justify-center gap-1.5">
+                <span className="bg-foreground h-0.5 w-7"></span>
+                <span className="bg-foreground h-0.5 w-7"></span>
+              </div>
             </Button>
             <SidebarSheet open={openSidebar} onOpenChange={setOpenSidebar} />
           </>
@@ -45,7 +48,7 @@ function NavbarPublic() {
                   referralCode ? `/auth?referralCode=${referralCode}` : "/auth",
                 )
               }
-              className="h-8.5 rounded-xl bg-gradient-to-r from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] font-normal shadow-md transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] max-sm:text-xs sm:p-5"
+              className="h-8.5 rounded-xl bg-gradient-to-r from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] font-normal transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] max-sm:text-xs sm:p-5"
             >
               Signup
             </Button>

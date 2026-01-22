@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { trackPageView } from "@/lib/analytics";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+// import Features from "@/components/features";
 import AmcMarquee from "@/components/landing/AmcMarquee";
 import Cta from "@/components/landing/Cta";
 import Faqs from "@/components/landing/Faqs";
@@ -16,8 +17,8 @@ function HomePage() {
   return (
     <div className="flex flex-col items-center">
       <Hero />
-      <Features />
-      <AmcMarquee className="mt-24 sm:mt-34" />
+      <AmcMarquee />
+      <Features className="mt-24 sm:mt-34" />
       <Faqs className="mt-28 sm:mt-34" />
       <Quote />
       <Cta className="mt-24 sm:mt-34" />

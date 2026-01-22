@@ -6,7 +6,6 @@ const GA_MEASUREMENT_ID = VITE_GA_MEASUREMENT_ID;
 export const initGA = () => {
   if (GA_MEASUREMENT_ID) {
     ReactGA.initialize(GA_MEASUREMENT_ID);
-    console.log("GA4 Initialized");
   } else {
     console.warn("GA4 Measurement ID not found. Analytics disabled.");
   }

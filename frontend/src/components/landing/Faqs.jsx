@@ -5,17 +5,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { faqs } from "@/constants/faqs";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 
 function Faqs({ className }) {
+  const isMobile = useIsMobile();
   const slideInLeft = {
     hidden: { opacity: 0, x: -60 },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 1.8,
+        duration: isMobile ? 1.8 : 0.8,
         ease: [0.22, 1, 0.36, 1],
       },
     },
@@ -88,9 +90,7 @@ function FaqItem({ question, answer, index }) {
         <AccordionTrigger className="text-md text-left font-[450] sm:text-lg">
           {question}
         </AccordionTrigger>
-        <AccordionContent
-          className="text-muted-foreground overflow-hidden text-[0.9rem] leading-relaxed text-balance sm:text-base"
-        >
+        <AccordionContent className="text-muted-foreground overflow-hidden text-[0.9rem] leading-relaxed text-balance sm:text-base">
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}

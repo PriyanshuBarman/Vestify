@@ -24,7 +24,7 @@ function Card() {
       scale: 1,
       y: 0,
       transition: {
-        duration: 0.9,
+        duration: 1,
         ease: [0.22, 1, 0.36, 1],
       },
     },
