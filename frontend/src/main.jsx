@@ -6,9 +6,12 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.jsx";
 import ThemeProvider from "./components/ThemeProvider.jsx";
+import { initGA } from "./lib/analytics.js";
 import "./index.css";
 import { persistor, store } from "./store/store.js";
 import { queryClient, persister } from "./lib/tanstackQuery.js";
+
+initGA();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

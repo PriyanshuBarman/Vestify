@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { trackPageView } from "@/lib/analytics";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import AmcMarquee from "@/components/landing/AmcMarquee";
 import Cta from "@/components/landing/Cta";
@@ -7,6 +9,10 @@ import Hero from "@/components/landing/Hero";
 import Quote from "@/components/landing/Quote";
 
 function HomePage() {
+  useEffect(() => {
+    trackPageView(window.location.pathname + window.location.search, "Landing Page");
+  }, []);
+
   return (
     <div className="flex flex-col items-center">
       <Hero />

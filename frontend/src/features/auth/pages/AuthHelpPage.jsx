@@ -24,6 +24,7 @@ import {
   ExternalLink,
   MOBILE_STEPS,
 } from "../constants/auth-help";
+import { trackPageView } from "@/lib/analytics";
 
 export default function AuthHelpPage() {
   const navigate = useNavigate();
@@ -33,6 +34,10 @@ export default function AuthHelpPage() {
   useEffect(() => {
     localStorage.clear();
     queryClient.clear();
+    trackPageView(
+      window.location.pathname + window.location.search,
+      "Auth Help",
+    );
   }, []);
 
   return (
