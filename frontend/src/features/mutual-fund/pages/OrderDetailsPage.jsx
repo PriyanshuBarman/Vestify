@@ -20,15 +20,18 @@ import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
 function OrderDetailsPage() {
   const { orderId } = useParams();
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const userId = searchParams.get("userId");
+
   const orderFromState = location.state;
   const queryClient = useQueryClient();
 
   // If navigated with state & there is no cache, set it in the query cache
-  if (orderFromState && !queryClient.getQueryData(["order", orderId])) {
-    queryClient.setQueryData(["order", orderId], orderFromState);
+  if (orderFromState && !queryClient.getQueryData(["order", orderId, userId])) {
+    queryClient.setQueryData(["order", orderId, userId], orderFromState);
   }
 
-  const { data: order = {} } = useGetOrderDetail(orderId);
+  const { data: order = {} } = useGetOrderDetail(orderId, userId);
 
   return (
     <div className="sm:mx-auto sm:max-w-xl">
@@ -49,13 +52,19 @@ function OrderDetailsPage() {
             </span>
           </div>
 
-          <Link
-            to={`/mutual-funds/${order.schemeCode}`}
-            className="text-md text-muted-foreground flex items-center gap-4"
-          >
-            <span className="text-sm">{order.fundName}</span>
-            <ChevronRightIcon className="size-5" />
-          </Link>
+          {!userId ? (
+            <Link
+              to={`/mutual-funds/${order.schemeCode}`}
+              className="text-md text-muted-foreground flex items-center gap-4"
+            >
+              <span className="text-sm">{order.fundName}</span>
+              <ChevronRightIcon className="size-5" />
+            </Link>
+          ) : (
+            <div className="text-md text-muted-foreground flex items-center gap-4">
+              <span className="text-sm">{order.fundName}</span>
+            </div>
+          )}
 
           <div className="flex justify-between border-y py-4">
             <div>
@@ -63,7 +72,8 @@ function OrderDetailsPage() {
                 Completion By
               </span>
               <h4 className="text-sm font-medium">
-                {order.processDate && format(order.processDate, "dd MMM yy")}
+                {order.processDate &&
+                  format(new Date(order.processDate), "dd MMM yy")}
               </h4>
             </div>
 
@@ -72,7 +82,7 @@ function OrderDetailsPage() {
                 {order.status === "PENDING" && "Expected"} NAV Date
               </span>
               <h4 className="text-sm font-medium">
-                {order.navDate && format(order.navDate, "dd MMM yy")}
+                {order.navDate && format(new Date(order.navDate), "dd MMM yy")}
               </h4>
             </div>
           </div>
@@ -89,7 +99,7 @@ function OrderDetailsPage() {
                 <span>Placed on:</span>
                 <span>
                   {order.createdAt &&
-                    format(order.createdAt, "dd MMM yy, h:mm a")}
+                    format(new Date(order.createdAt), "dd MMM yy, h:mm a")}
                 </span>
               </div>
               <div className="space-x-10">

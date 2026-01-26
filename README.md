@@ -10,6 +10,7 @@ Vestify is a virtual investment platform that simulates real mutual fund investi
 - **Virtual SIPs** — Start virtual SIPs in Mutual Funds and learn how real SIPs work through an automated process.
 - **Step-Up SIPs** — Periodically increase SIP amounts by a fixed value or percentage, similar to real-world step-up SIPs.
 - **Portfolio Tracking** — Track how your portfolio grows over time and experience how real investments perform in different market conditions.
+- **Community Features** — View other users' profiles, portfolios, SIPs, and watchlists. Learn from other investors' strategies.
 - **P2P Transfer(UPI simulation)** — Send, receive, and Scan & Pay your virtual money instantly—just like UPI.
 - **Groww app Inspired UI** — Experience real investing just like on the Groww app.
 - All with Zero Real Money Involved — Completely risk-free, safe, and fun.
@@ -150,6 +151,7 @@ Vestify/
 │   │   └── utils/             # Helper utilities
 │   ├── src/                   # Source code
 │   │   ├── auth/              # Authentication logic and routes
+│   │   ├── community/         # Community features (user profiles, social)
 │   │   ├── mutual-fund/       # Mutual fund related features
 │   │   ├── shared/            # Shared utilities and middleware
 │   │   ├── user/              # User management features
@@ -176,6 +178,11 @@ Vestify/
     │   │       ├── pages/         # Feature-specific pages
     │   │       ├── utils/         # Feature-specific utilities
     │   │       └── routes.jsx     # Feature-specific route definitions
+    │   │
+    │   │   Note: The community feature reuses components and hooks
+    │   │   from other feature folders (e.g., displaying portfolios,
+    │   │   SIPs, and watchlists). This follows DRY principles and
+    │   │   maintains consistency across the application.
     │   ├── hooks/             # Custom React hooks
     │   ├── lib/               # Utility libraries
     │   │   ├── axios.js       # Axios client configuration and interceptors

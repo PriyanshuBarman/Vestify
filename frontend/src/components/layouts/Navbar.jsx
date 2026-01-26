@@ -36,21 +36,17 @@ function Navbar() {
     setIsProfileSheetOpen(true);
   };
 
-  const prefetchPage = () => {
-    import("@/pages/SettingsPage");
-    import("@/pages/AccountDetailsPage");
-    import("@/pages/ReferAndEarnPage");
-  };
-
   return (
-    <nav className="bg-background z-50 flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:pt-2 sm:pb-6">
-      <Link
-        to="mutual-funds#explore"
-        className="flex items-center gap-2 sm:gap-4"
-      >
-        <Logo />
+    <nav className="bg-background z-50 flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:pt-4 sm:pb-6">
+      <div className="flex items-center gap-2 sm:gap-4">
+        <Link
+          to="mutual-funds#explore"
+          className="flex items-center gap-2 sm:gap-4"
+        >
+          <Logo />
+        </Link>
         <NavLinks />
-      </Link>
+      </div>
 
       <MediaQuery minWidth={1100}>
         <DesktopSearch />
@@ -71,8 +67,6 @@ function Navbar() {
         {!isMobile && <ModeToggle />}
         <Button
           onClick={handleAvatarClick}
-          onMouseEnter={prefetchPage}
-          onTouchStart={prefetchPage}
           variant="ghost"
           size="icon"
           className="rounded-full"
@@ -89,35 +83,30 @@ function Navbar() {
 }
 
 export default Navbar;
-
 function NavLinks() {
-  return (
-    <div className="flex font-medium sm:text-lg sm:font-[550]">
-      <NavLink
-        to="/stocks"
-        className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden"} shrink-0 rounded-md p-2`
-        }
-      >
-        Stocks
-      </NavLink>
+  const links = [
+    { to: "/mutual-funds#explore", label: "Mutual Funds" },
+    { to: "/community", label: "Community" },
+    { to: "/wallet", label: "Wallet" },
+  ];
 
-      <NavLink
-        to="/mutual-funds#explore"
-        className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2`
-        }
-      >
-        Mutual Funds
-      </NavLink>
-      <NavLink
-        to="/wallet"
-        className={({ isActive }) =>
-          `${isActive ? "sm:text-foreground" : "text-muted-foreground hidden sm:inline-block"} shrink-0 rounded-md p-2`
-        }
-      >
-        Wallet
-      </NavLink>
+  return (
+    <div className="flex space-x-1 font-medium sm:text-[1.1rem] sm:font-[550]">
+      {links.map(({ to, label }) => (
+        <NavLink
+          key={to}
+          to={to}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "sm:text-foreground font-semibold"
+                : "text-muted-foreground hidden sm:inline-block"
+            } shrink-0 rounded-md p-2`
+          }
+        >
+          {label}
+        </NavLink>
+      ))}
     </div>
   );
 }

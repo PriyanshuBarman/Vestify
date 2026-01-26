@@ -27,7 +27,7 @@ function Layout() {
 
   return (
     <ErrorBoundary fallback={<ErrorPage />}>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1300px]">
         <Navbar />
         <Outlet />
       </div>

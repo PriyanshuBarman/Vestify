@@ -3,7 +3,7 @@ import {
   selectActiveTabIndex,
   setActiveTabIndex,
 } from "@/store/slices/mutualFundSlice";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "swiper/css";
 import { HashNavigation } from "swiper/modules";

@@ -14,11 +14,11 @@ import { toast } from "sonner";
 import { useGetPortfolioSummary } from "../hooks/useGetPortfolioSummary";
 import { getChangeColor } from "../../../utils/helper";
 
-function PortFolioSummary({ count }) {
-  const { data = {} } = useGetPortfolioSummary();
+function PortFolioSummary({ count, username }) {
+  const { data = {} } = useGetPortfolioSummary(username);
 
   return (
-    <Card className="mx-4">
+    <Card className="mx-4 rounded-3xl">
       <CardHeader>
         <CardDescription className="text-xs tracking-widest">
           HOLDINGS ({count})

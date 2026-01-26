@@ -282,6 +282,7 @@ Vestify/
 │   │   └── utils/             # Helper utilities
 │   ├── src/                   # Source code
 │   │   ├── auth/              # Authentication logic and routes
+│   │   ├── community/         # Community features (user profiles, social)
 │   │   ├── mutual-fund/       # Mutual fund related features
 │   │   ├── shared/            # Shared utilities and middleware
 │   │   ├── user/              # User management features
@@ -308,6 +309,11 @@ Vestify/
     │   │       ├── pages/         # Feature-specific pages
     │   │       ├── utils/         # Feature-specific utilities
     │   │       └── routes.jsx     # Feature-specific route definitions
+    │   │
+    │   │   Note: The community feature reuses components and hooks
+    │   │   from other feature folders (e.g., displaying portfolios,
+    │   │   SIPs, and watchlists). This follows DRY principles and
+    │   │   maintains consistency across the application.
     │   ├── hooks/             # Custom React hooks
     │   ├── lib/               # Utility libraries
     │   │   ├── axios.js       # Axios client configuration and interceptors

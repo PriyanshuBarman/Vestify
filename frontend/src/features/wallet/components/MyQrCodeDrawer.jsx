@@ -16,7 +16,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { DownloadIcon, ShareIcon } from "lucide-react";
 import { toast } from "sonner";
 
-export default function MyQrCodeDrawer({ children }) {
+function MyQrCodeDrawer({ children }) {
   const isMobile = useIsMobile();
   const [qrCodeUrl, setQrCodeUrl] = useState();
   const { data: user } = useGetUser();
@@ -105,3 +105,5 @@ export default function MyQrCodeDrawer({ children }) {
     </Drawer>
   );
 }
+
+export default MyQrCodeDrawer;

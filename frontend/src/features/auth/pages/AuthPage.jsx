@@ -21,6 +21,7 @@ function AuthPage() {
 
   return (
     <div className="mx-auto flex min-h-svh flex-col items-center justify-center px-4">
+      <title>Vestify Login/SignUp</title>
       <div className="relative mt-10 flex max-w-5xl flex-col items-center justify-center px-4 sm:mt-16">
         <div className="flex items-center justify-center">
           <LogoShapeOnly className="size-30 sm:size-42" />

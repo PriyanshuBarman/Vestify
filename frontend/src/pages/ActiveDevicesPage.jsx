@@ -40,7 +40,7 @@ const deviceIcons = {
   unknown: <MonitorIcon />,
 };
 
-export default function ActiveDevicesPage() {
+function ActiveDevicesPage() {
   const { data: sessions = [], isPending } = useGetSessions();
   const { mutate: revoke } = useDeleteSession();
   const { mutate: revokeAll } = useDeleteAllSessions();
@@ -146,6 +146,8 @@ export default function ActiveDevicesPage() {
     </div>
   );
 }
+
+export default ActiveDevicesPage;
 
 /* Device Item */
 function DeviceItem({ userAgent, updatedAt, onClick }) {

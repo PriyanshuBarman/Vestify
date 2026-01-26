@@ -6,5 +6,6 @@ export function useSearchProfile(query) {
     queryKey: ["profiles", query],
     queryFn: () => searchProfile(query),
     enabled: !!query,
+    staleTime: 0,
   });
 }

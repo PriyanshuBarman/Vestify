@@ -2,13 +2,19 @@ import { api } from "@/lib/axios";
 
 // ================ QUERIES ================
 
-export const fetchSips = async () => {
-  const { data } = await api.get(`/mutual-funds/sips`);
+export const fetchSips = async (username) => {
+  const url = username
+    ? `/community/users/${username}/sips`
+    : `/mutual-funds/sips`;
+  const { data } = await api.get(url);
   return data;
 };
 
-export const fetchSipDetail = async (sipId) => {
-  const { data } = await api.get(`/mutual-funds/sips/${sipId}`);
+export const fetchSipDetail = async (sipId, username) => {
+  const url = username
+    ? `/community/users/${username}/sips/${sipId}`
+    : `/mutual-funds/sips/${sipId}`;
+  const { data } = await api.get(url);
   return data;
 };
 

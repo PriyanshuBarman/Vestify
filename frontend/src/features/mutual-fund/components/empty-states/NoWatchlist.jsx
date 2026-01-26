@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/empty";
 import { Link } from "react-router";
 
-function NoWatchlist() {
+function NoWatchlist({ readOnly }) {
   return (
     <Empty>
       <EmptyHeader>
@@ -20,16 +20,20 @@ function NoWatchlist() {
             className="size-60 sm:size-90"
           />
         </EmptyMedia>
-        <EmptyTitle>Watchlist is empty.</EmptyTitle>
+        <EmptyTitle>Watchlist is empty</EmptyTitle>
         <EmptyDescription>
-          Add funds to your watchlist to see them here.
+          {readOnly
+            ? "This user hasn't added any funds to their watchlist yet."
+            : "Add funds to your watchlist to see them here."}
         </EmptyDescription>
       </EmptyHeader>
-      <EmptyContent>
-        <Button asChild className="rounded-full text-xs font-normal">
-          <Link to="/mutual-funds/all-funds">Add Funds</Link>
-        </Button>
-      </EmptyContent>
+      {!readOnly && (
+        <EmptyContent>
+          <Button asChild className="rounded-full text-xs font-normal">
+            <Link to="/mutual-funds/all-funds">Add Funds</Link>
+          </Button>
+        </EmptyContent>
+      )}
     </Empty>
   );
 }

@@ -9,27 +9,33 @@ import {
 } from "@/components/ui/empty";
 import { Link } from "react-router";
 
-function NoInvestments() {
+function NoInvestments({ readOnly }) {
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia>
           <img
             src="/start.svg"
-            alt="Start Investing"
+            alt="No Investments"
             className="size-50 sm:size-70"
           />
         </EmptyMedia>
-        <EmptyTitle>You haven't invested yet.</EmptyTitle>
+        <EmptyTitle>
+          {readOnly ? "No investments yet" : "You haven't invested yet."}
+        </EmptyTitle>
         <EmptyDescription>
-          Start investing in a fund to see your portfolio grow here.
+          {readOnly
+            ? "This user has no active investments in mutual funds."
+            : "Start investing in a fund to see your portfolio grow here."}
         </EmptyDescription>
       </EmptyHeader>
-      <EmptyContent>
-        <Button asChild className="rounded-full text-xs font-normal">
-          <Link to="/mutual-funds/all-funds">Start Investing</Link>
-        </Button>
-      </EmptyContent>
+      {!readOnly && (
+        <EmptyContent>
+          <Button asChild className="rounded-full text-xs font-normal">
+            <Link to="/mutual-funds/all-funds">Start Investing</Link>
+          </Button>
+        </EmptyContent>
+      )}
     </Empty>
   );
 }

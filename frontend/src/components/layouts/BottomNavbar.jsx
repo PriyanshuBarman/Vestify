@@ -1,8 +1,8 @@
 import { useIsMobile } from "@/hooks/useIsMobile";
 import {
-  ChartBarIcon,
   ChartPieSliceIcon,
   WalletIcon,
+  UsersThreeIcon,
 } from "@phosphor-icons/react";
 import { NavLink, useLocation } from "react-router";
 
@@ -14,10 +14,10 @@ const tabsMapping = [
     link: "/mutual-funds#explore",
   },
   {
-    id: 2,
-    name: "Stocks",
-    icon: ChartBarIcon,
-    link: "/stocks",
+    id: 4,
+    name: "Community",
+    icon: UsersThreeIcon,
+    link: "/community",
   },
   {
     id: 3,
@@ -26,14 +26,20 @@ const tabsMapping = [
     link: "/wallet",
   },
 ];
-const allowedRoutes = ["/mutual-funds", "/mutual-funds/", "/wallet", "/stocks"];
+const allowedRoutes = [
+  "/mutual-funds",
+  "/mutual-funds/",
+  "/wallet",
+  "/stocks", // keeping stocks route allowed for direct access even if tab is removed
+  "/community",
+];
 
 function BottomNavbar() {
   const isMobile = useIsMobile();
   const location = useLocation();
   const currentPath = location.pathname;
 
-  if (!allowedRoutes.includes(currentPath)) return;
+  if (!allowedRoutes.some((route) => currentPath.startsWith(route))) return;
   if (!isMobile) return;
 
   return (

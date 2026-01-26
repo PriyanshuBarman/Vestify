@@ -18,7 +18,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const description = "A donut chart";
 
-export default function FutureValuePieChart({ investedAmount, estReturn }) {
+function FutureValuePieChart({ investedAmount, estReturn }) {
   const isMobile = useIsMobile();
   const chartData = [
     {
@@ -77,3 +77,5 @@ export default function FutureValuePieChart({ investedAmount, estReturn }) {
     </Card>
   );
 }
+
+export default FutureValuePieChart;

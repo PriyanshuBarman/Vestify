@@ -2,8 +2,11 @@ import { api } from "@/lib/axios";
 
 // ================ QUERIES ================
 
-export const fetchWatchlist = async () => {
-  const { data } = await api.get(`/mutual-funds/watchlist`);
+export const fetchWatchlist = async (username) => {
+  const url = username
+    ? `/community/users/${username}/watchlist`
+    : `/mutual-funds/watchlist`;
+  const { data } = await api.get(url);
   return data.watchlist;
 };
 

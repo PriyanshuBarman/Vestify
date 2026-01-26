@@ -18,14 +18,18 @@ const sortOptions = {
   dayChangePercent: "Day Change (%)",
 };
 
-function InvestmentsTab() {
+import { useNavigate } from "react-router";
+
+function InvestmentsTab({ username }) {
+  const isOtherUserProfile = !!username;
+  const navigate = useNavigate();
   const [portfolio, setPortfolio] = useState([]);
   const [sortBy, setSortBy] = useState("current");
   const [orderBy, setOrderBy] = useState("desc");
   const [selectedFund, setSelectedFund] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isPending } = useGetPortfolio();
+  const { data, isPending } = useGetPortfolio(username);
 
   useEffect(() => {
     if (data) setPortfolio(data);
@@ -43,6 +47,12 @@ function InvestmentsTab() {
   };
 
   const handleFundClick = (fund) => {
+    if (username) {
+      navigate(`/mutual-funds/investment-details?username=${username}`, {
+        state: fund,
+      });
+      return;
+    }
     setSelectedFund(fund);
     setIsModalOpen(true);
   };
@@ -51,14 +61,14 @@ function InvestmentsTab() {
 
   return (
     <div className="space-y-6 pb-20 sm:mx-auto sm:max-w-xl">
-      <ScrollToTop />
-      <PendingOrders />
+      {!isOtherUserProfile && <ScrollToTop />}
+      {!isOtherUserProfile && <PendingOrders />}
 
       {!data?.length ? (
-        <NoInvestments />
+        <NoInvestments readOnly={isOtherUserProfile} />
       ) : (
         <>
-          <PortfolioSummary count={portfolio.length} />
+          <PortfolioSummary username={username} count={portfolio.length} />
           <PortfolioTable
             portfolio={portfolio}
             sortOptions={sortOptions}
@@ -67,6 +77,7 @@ function InvestmentsTab() {
             onOrderChange={handleOrderChange}
             order={orderBy}
             onFundClick={handleFundClick}
+            readOnly={isOtherUserProfile}
           />
         </>
       )}

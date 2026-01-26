@@ -18,6 +18,7 @@ function StepUpDetailsModal({
   onConfirm,
   isPending,
   sipDetail,
+  isOtherUserProfile,
 }) {
   const navigate = useNavigate();
 
@@ -49,7 +50,7 @@ function StepUpDetailsModal({
             <div className="flex gap-2 sm:mt-4">
               <Button
                 size="lg"
-                disabled={isPending}
+                disabled={isPending || isOtherUserProfile}
                 variant="outline"
                 onClick={() => onConfirm({ sipId: sipDetail.id })}
                 className="flex-1"
@@ -58,7 +59,7 @@ function StepUpDetailsModal({
               </Button>
               <Button
                 size="lg"
-                disabled={isPending}
+                disabled={isPending || isOtherUserProfile}
                 className="flex-1"
                 onClick={() =>
                   navigate("/mutual-funds/step-up", { state: sipDetail })

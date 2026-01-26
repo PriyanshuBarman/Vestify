@@ -11,24 +11,23 @@ import { formatToINR } from "@/utils/formatters";
 import { format, formatDate, setDate } from "date-fns";
 import {
   ArrowLeftIcon,
-  BarChartIcon,
   CalendarRangeIcon,
-  ChevronDownIcon,
   ChevronRightIcon,
-  PencilIcon,
+  PencilIcon
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
 import OrderStatusIcon from "../components/OrderStatusIcon";
 import CancelSipButton from "../components/overlays/CancelSipButton";
 import SkipSipButton from "../components/overlays/SkipSipButton";
-import { useGetSipDetail } from "../hooks/useGetSipDetail";
 import StepUpSipButton from "../components/StepUpSipButton";
+import { useGetSipDetail } from "../hooks/useGetSipDetail";
 
 function SipDetailsPage() {
-  const { sipId } = useParams();
+  const { sipId, username } = useParams();
+  const isOtherUserProfile = !!username;
   const navigate = useNavigate();
-  const { data, isPending } = useGetSipDetail(sipId);
+  const { data, isPending } = useGetSipDetail(sipId, username);
 
   const sipDetail = data?.sip || {};
   const installments = data?.installments || [];
@@ -38,7 +37,7 @@ function SipDetailsPage() {
   return (
     <div className="pb-4 md:w-[50%]">
       {/* Desktop Edit SIP Card (shown on the right side ) */}
-      <DesktopEditSipCard sipDetail={sipDetail} />
+      {!isOtherUserProfile && <DesktopEditSipCard sipDetail={sipDetail} />}
 
       {/* Heading */}
       <div className="bg-background sticky top-0 z-10 flex items-center justify-between p-4 sm:pl-0">
@@ -48,7 +47,7 @@ function SipDetailsPage() {
           </button>
           <h1 className="font-medium">Sip Details</h1>
         </div>
-        <CancelSipButton sipId={sipId} />
+        {!isOtherUserProfile && <CancelSipButton sipId={sipId} />}
       </div>
 
       <div className="px-4">
@@ -73,17 +72,22 @@ function SipDetailsPage() {
           </Link>
 
           <div className="flex gap-4">
-            <StepUpSipButton sipDetail={sipDetail} />
-            <Button
-              asChild
-              variant="outline"
-              className="py-4 text-[0.8rem] tracking-tight sm:text-sm sm:tracking-normal md:hidden"
-            >
-              <Link to={`/mutual-funds/edit/sip/${sipId}`}>
-                <PencilIcon className="h-4 w-4" />
-                Change amount/date
-              </Link>
-            </Button>
+            <StepUpSipButton
+              sipDetail={sipDetail}
+              isOtherUserProfile={isOtherUserProfile}
+            />
+            {!isOtherUserProfile && (
+              <Button
+                asChild
+                variant="outline"
+                className="py-4 text-[0.8rem] tracking-tight sm:text-sm sm:tracking-normal md:hidden"
+              >
+                <Link to={`/mutual-funds/edit/sip/${sipId}`}>
+                  <PencilIcon className="h-4 w-4" />
+                  Change amount/date
+                </Link>
+              </Button>
+            )}
           </div>
         </section>
 
@@ -108,17 +112,22 @@ function SipDetailsPage() {
                 </span>
               </div>
             </div>
-            <div>
-              <SkipSipButton
-                sipId={sipId}
-                nextInstallmentDate={sipDetail.nextInstallmentDate}
-              />
-            </div>
+            {!isOtherUserProfile && (
+              <div>
+                <SkipSipButton
+                  sipId={sipId}
+                  nextInstallmentDate={sipDetail.nextInstallmentDate}
+                />
+              </div>
+            )}
           </div>
         </section>
 
         {/* Installments Timeline */}
-        <StatusTimeline data={installments} />
+        <StatusTimeline
+          data={installments}
+          isOtherUserProfile={isOtherUserProfile}
+        />
 
         {/* Details */}
         <Accordion type="single" collapsible>
@@ -130,20 +139,25 @@ function SipDetailsPage() {
                 <span>Created on:</span>
                 <span>
                   {sipDetail.createdAt &&
-                    format(sipDetail.createdAt, "dd MMM yy, h:mm a")}
+                    format(new Date(sipDetail.createdAt), "dd MMM yy, h:mm a")}
                 </span>
               </div>
               <div className="space-x-10">
                 <span>Autopay linked to</span>
                 <span>Vestify Wallet</span>
               </div>
-              <div className="flex space-x-10">
-                <span className="shrink-0">SIP ID:</span>
-                <div className="flex items-start gap-2 break-all">
-                  <span>{sipDetail.id}</span>
-                  <CopyButton text={sipDetail.id} className="text-foreground" />
+              {!isOtherUserProfile && (
+                <div className="flex space-x-10">
+                  <span className="shrink-0">SIP ID:</span>
+                  <div className="flex items-start gap-2 break-all">
+                    <span>{sipDetail.id}</span>
+                    <CopyButton
+                      text={sipDetail.id}
+                      className="text-foreground"
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -152,27 +166,14 @@ function SipDetailsPage() {
   );
 }
 
-function StatusTimeline({ data }) {
+function StatusTimeline({ data, isOtherUserProfile }) {
   return (
     <section className="border-b py-6">
       <h2 className="text-md mb-4 font-semibold">Installments</h2>
       <div className="relative space-y-6">
-        {data?.map((installment, index) => (
-          <div key={installment.id} className="relative flex items-start gap-3">
-            {/* Vertical line */}
-            {index !== data.length - 1 && (
-              <div className="absolute top-6 left-[10px] h-full w-px bg-gray-300"></div>
-            )}
-
-            {/* Icon */}
-            <OrderStatusIcon status={installment.status} />
-
-            {/* Text */}
-            <Link
-              to={`/mutual-funds/orders/${installment.id}`}
-              state={installment}
-              className="space-y-2"
-            >
+        {data?.map((installment, index) => {
+          const Content = (
+            <>
               <h6
                 className={`flex items-center gap-2 text-sm font-medium ${
                   installment.status === "COMPLETED" && "text-muted-foreground"
@@ -182,11 +183,39 @@ function StatusTimeline({ data }) {
                 installment <ChevronRightIcon className="size-4" />
               </h6>
               <span className="text-muted-foreground text-xs">
-                {format(installment.createdAt, "dd MMM yy, h:mm a")}
+                {format(new Date(installment.createdAt), "dd MMM yy, h:mm a")}
               </span>
-            </Link>
-          </div>
-        ))}
+            </>
+          );
+
+          return (
+            <div
+              key={installment.id}
+              className="relative flex items-start gap-3"
+            >
+              {/* Vertical line */}
+              {index !== data.length - 1 && (
+                <div className="absolute top-6 left-[10px] h-full w-px bg-gray-300"></div>
+              )}
+
+              {/* Icon */}
+              <OrderStatusIcon status={installment.status} />
+
+              {/* Text */}
+              {isOtherUserProfile ? (
+                <div className="space-y-2">{Content}</div>
+              ) : (
+                <Link
+                  to={`/mutual-funds/orders/${installment.id}`}
+                  state={installment}
+                  className="space-y-2"
+                >
+                  {Content}
+                </Link>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

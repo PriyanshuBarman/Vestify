@@ -5,5 +5,6 @@ export function useGetIsInWatchlist(schemeCode) {
   return useQuery({
     queryKey: ["isInWatchlist", schemeCode],
     queryFn: () => isInWatchlist(schemeCode),
+    staleTime: 0,
   });
 }

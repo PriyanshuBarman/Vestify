@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { BarChartIcon, ChevronDownIcon } from "lucide-react";
-import { Link } from "react-router";
-import StepUpDetailsModal from "./overlays/StepUpDetailsModal";
 import { useState } from "react";
+import { Link } from "react-router";
 import { useRemoveStepUp } from "../hooks/useRemoveStepUp";
+import StepUpDetailsModal from "./overlays/StepUpDetailsModal";
 
-function StepUpSipButton({ sipDetail }) {
+function StepUpSipButton({ sipDetail, isOtherUserProfile }) {
   const isStepUpAdded = sipDetail?.stepUpIntervalInMonths;
   const [openModal, setOpenModal] = useState(false);
   const { mutate: removeStepUp, isPending } = useRemoveStepUp();
@@ -34,17 +34,19 @@ function StepUpSipButton({ sipDetail }) {
             sipDetail={sipDetail}
             onConfirm={removeStepUp}
             isPending={isPending}
+            isOtherUserProfile={isOtherUserProfile}
           />
         </>
       ) : (
         <Button
+          disabled={isPending || isOtherUserProfile}
           asChild
           variant="ghost"
           className="bg-primary/10 text-primary py-4"
         >
           <Link to="/mutual-funds/step-up" state={sipDetail}>
             <BarChartIcon className="h-4 w-4 stroke-4" />
-            Add step-up
+            {isOtherUserProfile ? "No step-up" : "Add step-up"}
           </Link>
         </Button>
       )}

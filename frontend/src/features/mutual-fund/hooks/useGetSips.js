@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchSips } from "../api/sip";
 
-export function useGetSips() {
+export function useGetSips(userId) {
   return useQuery({
-    queryKey: ["sips"],
-    queryFn: fetchSips,
+    queryKey: ["sips", userId],
+    queryFn: () => fetchSips(userId),
     staleTime: 0,
   });
 }

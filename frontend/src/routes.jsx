@@ -4,8 +4,8 @@ import AuthGuard from "./components/AuthGuard";
 import Layout from "./components/layouts/Layout";
 import { authRoutes } from "./features/auth/routes";
 import { mutualFundRoutes } from "./features/mutual-fund/routes";
+import { communityRoutes } from "./features/community/routes";
 import SearchPage from "./features/search/pages/Page";
-import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
 import PublicLayout from "./components/layouts/PublicLayout";
@@ -71,8 +71,8 @@ export const routes = createBrowserRouter([
     ),
     children: [
       walletRoutes,
-      stockRoutes,
       mutualFundRoutes,
+      communityRoutes,
       {
         path: "/search",
         element: <SearchPage />,

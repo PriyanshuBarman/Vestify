@@ -10,7 +10,7 @@ function StartSipCard() {
   if (sips) return null;
 
   return (
-    <Card className="text-foreground relative mx-auto w-[90%] min-w-xs flex-row items-center overflow-hidden p-4 sm:w-full sm:px-6 sm:py-8">
+    <Card className="text-foreground relative mx-auto w-[90%] min-w-xs flex-row items-center overflow-hidden rounded-3xl p-4 sm:w-full sm:px-6 sm:py-8">
       <div className="w-[70%] space-y-4">
         <CardTitle>
           <p className="text-sm font-medium sm:text-base">

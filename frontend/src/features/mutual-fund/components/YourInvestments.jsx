@@ -8,9 +8,9 @@ function YourInvestments() {
   const { data: portfolio = {} } = useGetPortfolioSummary();
 
   return (
-    <div className="h-full w-sm">
-      <SectionHeading heading={"Your investments"} subHeading={"Dashboard"} />
-      <Card className="mt-4">
+    <div className="w-sm">
+      <SectionHeading heading={"Your investments"} />
+      <Card className="mt-4 rounded-3xl">
         <CardContent className="flex justify-between text-center lg:flex-col xl:flex-row">
           <div>
             <span

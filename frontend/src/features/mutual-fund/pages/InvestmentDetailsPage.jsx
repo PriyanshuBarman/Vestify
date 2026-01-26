@@ -19,8 +19,11 @@ import { orderTypeConfig } from "../constants/order";
 
 function InvestmentDetailsPage() {
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const username = searchParams.get("username");
+
   const fund = location.state;
-  const { data: orders } = useGetFundOrders(fund.schemeCode);
+  const { data: orders } = useGetFundOrders(fund.schemeCode, username);
 
   return (
     <div className="sm:mx-auto sm:max-w-xl">
@@ -46,9 +49,11 @@ function InvestmentDetailsPage() {
         </Link>
       </Item>
 
-      <h3 className="mt-2 px-4 text-sm font-semibold">
-        Folio no. {fund.folio}
-      </h3>
+      {!userId && (
+        <h3 className="mt-2 px-4 text-sm font-semibold">
+          Folio no. {fund.folio}
+        </h3>
+      )}
 
       <FundPortfolioSummary fund={fund} className="mt-4" />
 
@@ -56,35 +61,45 @@ function InvestmentDetailsPage() {
       <section className="mt-8">
         <SectionHeading heading="Transaction history" />
         <div className="px-4">
-          {orders?.map((order) => (
-            <Link
-              to={`/mutual-funds/orders/${order.id}`}
-              key={order.id}
-              className="flex justify-between border-b py-4"
-            >
-              <div className="max-w-[60%]">
-                <h4 className="sm:text-md truncate text-sm sm:font-medium">
-                  {orderTypeConfig[order.orderType]}
-                </h4>
-                <p className="text-muted-foreground mt-2 text-xs">
-                  {formatDate(order.createdAt, "dd MMM, yy")}
-                </p>
-              </div>
+          {orders?.map((order) => {
+            const Content = (
+              <div className="flex w-full justify-between border-b py-4">
+                <div className="max-w-[60%]">
+                  <h4 className="sm:text-md truncate text-sm sm:font-medium">
+                    {orderTypeConfig[order.orderType]}
+                  </h4>
+                  <p className="text-muted-foreground mt-2 text-xs">
+                    {formatDate(order.createdAt, "dd MMM, yy")}
+                  </p>
+                </div>
 
-              <div className="flex flex-col items-end">
-                <span className="text-sm font-medium tabular-nums sm:text-base">
-                  {order.orderType === "REDEEM" ? "-" : "+"}
-                  {formatToINR(order.amount, 2)}
-                </span>
-                <div className="text-muted-foreground mt-2 flex items-center gap-2 text-xs">
-                  <span>
-                    {Number(order.units)?.toFixed(3)} units /{" "}
-                    {formatToINR(order.nav)} NAV
+                <div className="flex flex-col items-end">
+                  <span className="text-sm font-medium tabular-nums sm:text-base">
+                    {order.orderType === "REDEEM" ? "-" : "+"}
+                    {formatToINR(order.amount, 2)}
                   </span>
+                  <div className="text-muted-foreground mt-2 flex items-center gap-2 text-xs">
+                    <span>
+                      {Number(order.units)?.toFixed(3)} units /{" "}
+                      {formatToINR(order.nav)} NAV
+                    </span>
+                  </div>
                 </div>
               </div>
-            </Link>
-          ))}
+            );
+
+            return userId ? (
+              <div key={order.id}>{Content}</div>
+            ) : (
+              <Link
+                to={`/mutual-funds/orders/${order.id}`}
+                key={order.id}
+                className="block"
+              >
+                {Content}
+              </Link>
+            );
+          })}
         </div>
       </section>
     </div>

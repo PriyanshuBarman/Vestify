@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { trackPageView } from "@/lib/analytics";
 import { InfoIcon } from "@phosphor-icons/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -24,9 +25,8 @@ import {
   ExternalLink,
   MOBILE_STEPS,
 } from "../constants/auth-help";
-import { trackPageView } from "@/lib/analytics";
 
-export default function AuthHelpPage() {
+function AuthHelpPage() {
   const navigate = useNavigate();
   const SITE_URL = window.location.hostname;
   const queryClient = useQueryClient();

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useInView, useMotionValue, useSpring } from "motion/react";
 import { useEffect, useRef } from "react";
 
-export default function NumberTicker({
+function NumberTicker({
   value,
   startValue = 0,
   direction = "up",
@@ -54,3 +54,5 @@ export default function NumberTicker({
     </span>
   );
 }
+
+export default NumberTicker;

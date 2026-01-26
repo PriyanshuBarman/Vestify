@@ -15,6 +15,7 @@ const RecentlyViewedSection = lazy(
 );
 const StartSipCard = lazy(() => import("../StartSipCard"));
 const YourInvestments = lazy(() => import("../YourInvestments"));
+const YourWatchlist = lazy(() => import("../YourWatchlist"));
 
 function ExploreTab() {
   const showInvestmentCard = useMediaQuery({ minWidth: 1125 });
@@ -41,7 +42,12 @@ function ExploreTab() {
         </Suspense>
         <CopyrightFooter className="mt-6 mb-20 sm:hidden" />
       </div>
-      {showInvestmentCard && <YourInvestments />}
+      {showInvestmentCard && (
+        <div className="space-y-12">
+          <YourInvestments />
+          <YourWatchlist />
+        </div>
+      )}
     </div>
   );
 }

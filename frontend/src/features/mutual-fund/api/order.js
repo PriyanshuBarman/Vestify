@@ -12,13 +12,19 @@ export const fetchPendingOrders = async () => {
   return data.orders;
 };
 
-export const fetchFundOrders = async (schemeCode) => {
-  const { data } = await api.get(`/mutual-funds/orders/fund/${schemeCode}`);
+export const fetchFundOrders = async (schemeCode, username) => {
+  const url = username
+    ? `/community/users/${username}/portfolio/${schemeCode}/orders`
+    : `/mutual-funds/orders/fund/${schemeCode}`;
+  const { data } = await api.get(url);
   return data.orders;
 };
 
-export const fetchOrderDetail = async (orderId) => {
-  const { data } = await api.get(`/mutual-funds/orders/${orderId}`);
+export const fetchOrderDetail = async (orderId, username) => {
+  const url = username
+    ? `/community/orders/${orderId}`
+    : `/mutual-funds/orders/${orderId}`;
+  const { data } = await api.get(url);
   return data.order;
 };
 
