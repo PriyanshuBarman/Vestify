@@ -39,9 +39,8 @@ function BottomNavbar() {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  if (!allowedRoutes.some((route) => currentPath.startsWith(route))) return;
+   if (!allowedRoutes.includes(currentPath)) return;
   if (!isMobile) return;
-
   return (
     <nav className="bg-background fixed inset-x-0 bottom-0 z-10 flex w-full justify-around border-t pt-2 pb-1">
       {tabsMapping.map((tab) => (

@@ -46,29 +46,31 @@ function StepUpDetailsModal({
         </Card>
 
         <ResponsiveModalFooter>
-          <ResponsiveModalClose asChild>
-            <div className="flex gap-2 sm:mt-4">
-              <Button
-                size="lg"
-                disabled={isPending || isOtherUserProfile}
-                variant="outline"
-                onClick={() => onConfirm({ sipId: sipDetail.id })}
-                className="flex-1"
-              >
-                Remove Step-up
-              </Button>
-              <Button
-                size="lg"
-                disabled={isPending || isOtherUserProfile}
-                className="flex-1"
-                onClick={() =>
-                  navigate("/mutual-funds/step-up", { state: sipDetail })
-                }
-              >
-                Edit details
-              </Button>
-            </div>
-          </ResponsiveModalClose>
+          {!isOtherUserProfile && (
+            <ResponsiveModalClose asChild>
+              <div className="flex gap-2 sm:mt-4">
+                <Button
+                  size="lg"
+                  disabled={isPending}
+                  variant="outline"
+                  onClick={() => onConfirm({ sipId: sipDetail.id })}
+                  className="flex-1"
+                >
+                  Remove Step-up
+                </Button>
+                <Button
+                  size="lg"
+                  disabled={isPending}
+                  className="flex-1"
+                  onClick={() =>
+                    navigate("/mutual-funds/step-up", { state: sipDetail })
+                  }
+                >
+                  Edit details
+                </Button>
+              </div>
+            </ResponsiveModalClose>
+          )}
         </ResponsiveModalFooter>
       </ResponsiveModalContent>
     </ResponsiveModal>

@@ -39,12 +39,14 @@ function StepUpSipButton({ sipDetail, isOtherUserProfile }) {
         </>
       ) : (
         <Button
-          disabled={isPending || isOtherUserProfile}
           asChild
           variant="ghost"
           className="bg-primary/10 text-primary py-4"
         >
-          <Link to="/mutual-funds/step-up" state={sipDetail}>
+          <Link
+            to={isOtherUserProfile ? "#" : "/mutual-funds/step-up"}
+            state={sipDetail}
+          >
             <BarChartIcon className="h-4 w-4 stroke-4" />
             {isOtherUserProfile ? "No step-up" : "Add step-up"}
           </Link>

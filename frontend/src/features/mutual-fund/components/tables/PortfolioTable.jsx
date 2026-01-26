@@ -37,6 +37,7 @@ function PortfolioTable({
   order,
   columnsConfig,
   onFundClick,
+  isOtherUserProfile,
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeColumn = columns[activeIndex];

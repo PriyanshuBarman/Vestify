@@ -1,6 +1,12 @@
-function Tabs({ swiper, activeTabIndex }) {
+import { cn } from "@/lib/utils";
+
+function Tabs({ swiper, activeTabIndex, className }) {
   return (
-    <div className="bg-background scrollbar-none sticky top-0 z-10 mb-6 flex space-x-2 overflow-y-auto border-b px-4 pt-2 sm:justify-center">
+    <div
+      className={cn(
+        `bg-background scrollbar-none sticky top-0 z-10 mb-6 flex space-x-2 overflow-y-auto border-b px-4 pt-2 sm:justify-center ${className}`,
+      )}
+    >
       {["Investments", "SIPs", "Watchlist"].map((tab, idx) => (
         <button
           key={tab}

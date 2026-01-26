@@ -25,7 +25,7 @@ function SipsTab({ username }) {
   const { data, isPending } = useGetSips(username);
   if (isPending) return <LoadingState />;
   if (!data?.sips?.length)
-    return <NoActiveSips readOnly={isOtherUserProfile} />;
+    return <NoActiveSips isOtherUserProfile={isOtherUserProfile} />;
 
   return (
     <div className="flex justify-center px-4 pb-20">

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/empty";
 import { Link } from "react-router";
 
-function NoInvestments({ readOnly }) {
+function NoInvestments({ isOtherUserProfile }) {
   return (
     <Empty>
       <EmptyHeader>
@@ -21,15 +21,17 @@ function NoInvestments({ readOnly }) {
           />
         </EmptyMedia>
         <EmptyTitle>
-          {readOnly ? "No investments yet" : "You haven't invested yet."}
+          {isOtherUserProfile
+            ? "No investments yet"
+            : "You haven't invested yet."}
         </EmptyTitle>
         <EmptyDescription>
-          {readOnly
+          {isOtherUserProfile
             ? "This user has no active investments in mutual funds."
             : "Start investing in a fund to see your portfolio grow here."}
         </EmptyDescription>
       </EmptyHeader>
-      {!readOnly && (
+      {!isOtherUserProfile && (
         <EmptyContent>
           <Button asChild className="rounded-full text-xs font-normal">
             <Link to="/mutual-funds/all-funds">Start Investing</Link>

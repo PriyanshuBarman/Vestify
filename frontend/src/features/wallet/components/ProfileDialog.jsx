@@ -52,10 +52,10 @@ function ProfileDialog({ isOpen, onOpenChange, clickedProfile }) {
               onClick={() =>
                 navigate("/wallet/enter-amount", {
                   state: {
-                    receiverId: clickedProfile.userId,
-                    receiverName: clickedProfile.name,
-                    receiverUsername: clickedProfile.username,
-                    receiverAvatar: clickedProfile.avatar,
+                    receiverId: clickedProfile?.userId,
+                    receiverName: clickedProfile?.name,
+                    receiverUsername: clickedProfile?.username,
+                    receiverAvatar: clickedProfile?.avatar,
                   },
                 })
               }

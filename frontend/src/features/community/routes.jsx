@@ -2,7 +2,7 @@ import { lazy } from "react";
 import Layout from "./components/Layout";
 
 const Page = lazy(() => import("./pages/Page"));
-const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const ProfilePage = lazy(() => import("./pages/UserProfilePage"));
 const SipDetailsPage = lazy(
   () => import("../mutual-fund/pages/SipDetailsPage"),
 );

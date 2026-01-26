@@ -14,32 +14,28 @@ const WatchlistTab = lazy(
   () => import("../../mutual-fund/components/tabs/WatchlistTab"),
 );
 
-function ProfilePage() {
+function UserProfilePage() {
   const { username } = useParams();
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
 
-  const { data: profile, isPending } = useUserProfile(username);
-
-  if (isPending) return <LoadingState fullPage />;
-  if (!profile)
-    return (
-      <div className="text-muted-foreground p-8 text-center">
-        User not found
-      </div>
-    );
+  const { data: profile } = useUserProfile(username);
 
   return (
     <div className="sm:mx-auto sm:max-w-6xl">
       <div className="flex flex-col lg:flex-row lg:items-center">
         {/* Left Side: Profile Header */}
-        <div className="lg:w-1/3 lg:shrink-0">
+        <div className="max-sm:sticky max-sm:top-0 lg:w-1/3 lg:shrink-0">
           <ProfileHeader profile={profile} />
         </div>
 
         {/* Right Side: Tabs and Content */}
         <div className="scrollbar-none sm:h-[calc(100vh-100px)] sm:overflow-x-hidden sm:overflow-y-auto">
-          <Tabs swiper={swiper} activeTabIndex={activeTabIndex} />
+          <Tabs
+            swiper={swiper}
+            activeTabIndex={activeTabIndex}
+            className="max-sm:sticky max-sm:top-[184px]"
+          />
 
           <Swiper
             onSwiper={(s) => setSwiper(s)}
@@ -94,4 +90,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default UserProfilePage;

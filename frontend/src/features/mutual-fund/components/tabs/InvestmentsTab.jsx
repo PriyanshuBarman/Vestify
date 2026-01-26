@@ -65,7 +65,7 @@ function InvestmentsTab({ username }) {
       {!isOtherUserProfile && <PendingOrders />}
 
       {!data?.length ? (
-        <NoInvestments readOnly={isOtherUserProfile} />
+        <NoInvestments isOtherUserProfile={isOtherUserProfile} />
       ) : (
         <>
           <PortfolioSummary username={username} count={portfolio.length} />
@@ -77,7 +77,7 @@ function InvestmentsTab({ username }) {
             onOrderChange={handleOrderChange}
             order={orderBy}
             onFundClick={handleFundClick}
-            readOnly={isOtherUserProfile}
+            isOtherUserProfile={isOtherUserProfile}
           />
         </>
       )}

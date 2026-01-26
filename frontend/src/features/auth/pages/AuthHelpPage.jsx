@@ -122,6 +122,8 @@ function AuthHelpPage() {
   );
 }
 
+export default AuthHelpPage;
+
 function GuideStep({ step, SITE_URL }) {
   return (
     <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">

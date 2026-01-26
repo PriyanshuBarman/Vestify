@@ -31,7 +31,8 @@ function WatchlistTab({ username }) {
   };
 
   if (isPending) return <LoadingState />;
-  if (!watchlist?.length) return <NoWatchlist readOnly={isOtherUserProfile} />;
+  if (!watchlist?.length)
+    return <NoWatchlist isOtherUserProfile={isOtherUserProfile} />;
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-4 sm:mt-1 sm:space-y-4">

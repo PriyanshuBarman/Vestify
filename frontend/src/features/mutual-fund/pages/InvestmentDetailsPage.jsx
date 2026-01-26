@@ -21,6 +21,7 @@ function InvestmentDetailsPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const username = searchParams.get("username");
+  const isOtherUserProfile = !!username;
 
   const fund = location.state;
   const { data: orders } = useGetFundOrders(fund.schemeCode, username);
@@ -49,7 +50,7 @@ function InvestmentDetailsPage() {
         </Link>
       </Item>
 
-      {!userId && (
+      {!isOtherUserProfile && (
         <h3 className="mt-2 px-4 text-sm font-semibold">
           Folio no. {fund.folio}
         </h3>
@@ -61,48 +62,51 @@ function InvestmentDetailsPage() {
       <section className="mt-8">
         <SectionHeading heading="Transaction history" />
         <div className="px-4">
-          {orders?.map((order) => {
-            const Content = (
-              <div className="flex w-full justify-between border-b py-4">
-                <div className="max-w-[60%]">
-                  <h4 className="sm:text-md truncate text-sm sm:font-medium">
-                    {orderTypeConfig[order.orderType]}
-                  </h4>
-                  <p className="text-muted-foreground mt-2 text-xs">
-                    {formatDate(order.createdAt, "dd MMM, yy")}
-                  </p>
-                </div>
-
-                <div className="flex flex-col items-end">
-                  <span className="text-sm font-medium tabular-nums sm:text-base">
-                    {order.orderType === "REDEEM" ? "-" : "+"}
-                    {formatToINR(order.amount, 2)}
-                  </span>
-                  <div className="text-muted-foreground mt-2 flex items-center gap-2 text-xs">
-                    <span>
-                      {Number(order.units)?.toFixed(3)} units /{" "}
-                      {formatToINR(order.nav)} NAV
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-
-            return userId ? (
-              <div key={order.id}>{Content}</div>
-            ) : (
-              <Link
-                to={`/mutual-funds/orders/${order.id}`}
-                key={order.id}
-                className="block"
-              >
-                {Content}
-              </Link>
-            );
-          })}
+          {orders?.map((order) => (
+            <OrderItem
+              key={order.id}
+              order={order}
+              isOtherUserProfile={isOtherUserProfile}
+            />
+          ))}
         </div>
       </section>
     </div>
   );
 }
 export default InvestmentDetailsPage;
+
+function OrderItem({ order, isOtherUserProfile }) {
+  const Wrapper = isOtherUserProfile ? "div" : Link;
+  const wrapperProps = isOtherUserProfile
+    ? {}
+    : { to: `/mutual-funds/orders/${order.id}` };
+
+  return (
+    <Wrapper {...wrapperProps} className="block">
+      <div className="flex w-full justify-between border-b py-4">
+        <div className="max-w-[60%]">
+          <h4 className="sm:text-md truncate text-sm sm:font-medium">
+            {orderTypeConfig[order.orderType]}
+          </h4>
+          <p className="text-muted-foreground mt-2 text-xs">
+            {formatDate(order.createdAt, "dd MMM, yy")}
+          </p>
+        </div>
+
+        <div className="flex flex-col items-end">
+          <span className="text-sm font-medium tabular-nums sm:text-base">
+            {order.orderType === "REDEEM" ? "-" : "+"}
+            {formatToINR(order.amount, 2)}
+          </span>
+          <div className="text-muted-foreground mt-2 flex items-center gap-2 text-xs">
+            <span>
+              {Number(order.units)?.toFixed(3)} units / {formatToINR(order.nav)}{" "}
+              NAV
+            </span>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  );
+}

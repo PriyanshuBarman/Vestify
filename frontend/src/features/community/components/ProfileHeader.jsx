@@ -1,6 +1,6 @@
 import GoBackBar from "@/components/GoBackBar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ProfileDialog from "@/features/wallet/components/ProfileDialog";
-import UserAvatar from "@/features/wallet/components/UserAvatar";
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
 
@@ -11,31 +11,32 @@ function ProfileHeader({ profile }) {
     setIsOpen(true);
   };
 
-  if (!profile) return null;
-
   return (
-    <div className="flex w-full flex-col items-center gap-4 pb-6 text-center">
+    <div className="w-full pb-6 text-center">
       <GoBackBar className="w-full" showSearchIcon={false} />
-      <UserAvatar
-        onClick={handleAvatarClick}
-        user={profile}
-        className="size-24 lg:size-34"
-      />
+      <div className="flex items-center justify-center gap-6 lg:flex-col">
+        <Avatar onClick={handleAvatarClick} className="size-24 lg:size-34">
+          <AvatarImage src={profile?.avatar} />
+          <AvatarFallback>
+            {profile?.name?.charAt(0)?.toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
 
-      <div className="space-y-1 lg:mt-2 lg:space-y-2">
-        <h1 className="text-2xl font-semibold lg:text-2xl">{profile.name}</h1>
-        <p className="text-muted-foreground max-sm:text-sm">
-          @{profile.username}
-        </p>
-
-        {profile.lastActiveAt && (
-          <p className="text-muted-foreground/60 text-xs sm:text-sm">
-            Active{" "}
-            {formatDistanceToNow(new Date(profile.lastActiveAt), {
-              addSuffix: true,
-            })}
+        <div className="mt-2 space-y-1 text-start sm:text-center lg:space-y-2">
+          <h1 className="text-xl font-semibold lg:text-2xl">{profile?.name}</h1>
+          <p className="text-muted-foreground/80 max-sm:text-xs">
+            @{profile?.username}
           </p>
-        )}
+
+          {profile?.lastActiveAt && (
+            <p className="text-muted-foreground/60 text-xs sm:text-sm">
+              Active{" "}
+              {formatDistanceToNow(new Date(profile?.lastActiveAt), {
+                addSuffix: true,
+              })}
+            </p>
+          )}
+        </div>
       </div>
       <ProfileDialog
         isOpen={isOpen}

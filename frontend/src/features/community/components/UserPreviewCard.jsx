@@ -17,7 +17,7 @@ function UserPreviewCard({ user }) {
     <>
       <div
         onClick={() => navigate(`/community/${user.username}`)}
-        className="bg-card hover:bg-accent/50 flex flex-col gap-4 rounded-3xl border p-4 transition-colors sm:px-5 sm:pt-5"
+        className="bg-card hover:bg-accent/50 flex flex-col gap-4 rounded-3xl border p-4 pb-3 transition-colors sm:px-5 sm:pt-5"
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -27,7 +27,7 @@ function UserPreviewCard({ user }) {
               className="size-9.5 sm:size-10"
             />
             <div>
-              <h3 className="text-md font-medium sm:text-base">{user.name}</h3>
+              <h3 className="text-md font-medium">{user.name}</h3>
               <p className="text-muted-foreground text-xs sm:text-sm">
                 @{user.username}
               </p>
@@ -35,10 +35,8 @@ function UserPreviewCard({ user }) {
           </div>
 
           <div className="text-right">
-            <p className="text-muted-foreground text-xs ">
-              Invested
-            </p>
-            <p className="text-base font-medium sm:font-semibold tabular-nums sm:text-lg">
+            <p className="text-muted-foreground text-xs">Invested</p>
+            <p className="text-base font-medium tabular-nums sm:text-lg sm:font-semibold">
               {formatToINR(user.totalInvested)}
             </p>
           </div>
@@ -49,7 +47,7 @@ function UserPreviewCard({ user }) {
             <span className="text-muted-foreground text-[0.7rem] tracking-wider sm:font-medium">
               Funds
             </span>
-            <span className="text-foreground/90 text-xs sm:font-semibold">
+            <span className="text-foreground text-xs sm:font-semibold">
               {user.portfolioCount || 0}
             </span>
           </div>
@@ -57,7 +55,7 @@ function UserPreviewCard({ user }) {
             <span className="text-muted-foreground text-[0.7rem] tracking-wider sm:font-medium">
               SIPs
             </span>
-            <span className="text-foreground/90 text-xs sm:font-medium">
+            <span className="text-foreground text-xs sm:font-medium">
               {user.activeSipCount || 0}
             </span>
           </div>

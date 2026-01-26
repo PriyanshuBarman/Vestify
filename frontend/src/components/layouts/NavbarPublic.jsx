@@ -32,9 +32,9 @@ function NavbarPublic() {
               size="icon-sm"
               onClick={() => setOpenSidebar(true)}
             >
-              <div className="flex flex-col items-center justify-center gap-1.5">
+              <div className="flex flex-col items-end gap-1.5">
                 <span className="bg-foreground h-0.5 w-7"></span>
-                <span className="bg-foreground h-0.5 w-7"></span>
+                <span className="bg-foreground h-0.5 w-5"></span>
               </div>
             </Button>
             <SidebarSheet open={openSidebar} onOpenChange={setOpenSidebar} />

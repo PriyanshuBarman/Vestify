@@ -12,13 +12,13 @@ import CardLG from "../CardLG";
 import CardSM from "../CardSM";
 import SectionHeading from "../SectionHeading";
 
-function NoActiveSips({ readOnly }) {
+function NoActiveSips({ isOtherUserProfile }) {
   const isMobile = useIsMobile();
   const { data: funds } = useGetFundsByFilter(
     { sip_min: 100, limit: 6 },
     {
       placeholderData: [{}, {}, {}, {}],
-      enabled: !readOnly, // Don't fetch if read-only
+      enabled: !isOtherUserProfile, // Don't fetch if viewing other user's profile
     },
   );
 
@@ -31,14 +31,14 @@ function NoActiveSips({ readOnly }) {
           </EmptyMedia>
           <EmptyTitle>No active SIPs</EmptyTitle>
           <EmptyDescription>
-            {readOnly
+            {isOtherUserProfile
               ? "This user has no active SIPs."
               : "Your SIPs will appear here once you start one."}
           </EmptyDescription>
         </EmptyHeader>
       </Empty>
 
-      {!readOnly && (
+      {!isOtherUserProfile && (
         <section className="swiper-no-swiping mt-10 sm:mt-0">
           <SectionHeading heading={"Start SIP with ₹100"} />
           <ScrollArea>
