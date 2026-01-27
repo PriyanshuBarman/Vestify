@@ -19,8 +19,5 @@ export function useGetFundsData(schemeCodes) {
   // Combine results into one array
   const data = queries.map((q) => q.data).filter(Boolean);
 
-  return {
-    data,
-    // isLoading
-  };
+  return { data };
 }

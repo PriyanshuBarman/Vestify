@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { fetchOrders, fetchPendingOrders } from "../api/order";
 import { fetchPortfolio, fetchPortfolioSummary } from "../api/portfolio";
 
-export function usePrefetchRequiredQueries() {
+export function usePrefetchRequiredQueries(username) {
   const queryClient = useQueryClient();
   const isRestoring = useIsRestoring();
 
@@ -11,20 +11,21 @@ export function usePrefetchRequiredQueries() {
     if (isRestoring) return;
 
     queryClient.prefetchQuery({
-      queryKey: ["mfPortfolio"],
-      queryFn: fetchPortfolio,
+      queryKey: ["mfPortfolio", username ? username : "self"],
+      queryFn: () => fetchPortfolio(username),
     });
     queryClient.prefetchQuery({
-      queryKey: ["mfPortfolioSummary"],
-      queryFn: fetchPortfolioSummary,
+      queryKey: ["mfPortfolioSummary", username ? username : "self"],
+      queryFn: () => fetchPortfolioSummary(username),
     });
+    queryClient.prefetchQuery({
+      queryKey: ["orders", username ? username : "self"],
+      queryFn: () => fetchOrders(username),
+    });
+
     queryClient.prefetchQuery({
       queryKey: ["pending-orders"],
       queryFn: fetchPendingOrders,
     });
-    queryClient.prefetchQuery({
-      queryKey: ["orders"],
-      queryFn: fetchOrders,
-    });
-  }, []);
+  }, [isRestoring, username]);
 }

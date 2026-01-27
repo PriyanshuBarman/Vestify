@@ -70,7 +70,7 @@ function AmcFundsPage() {
   const categories = data ? Object.keys(data) : [];
 
   return (
-    <div className="relative">
+    <div className="relative sm:py-6">
       <section className="bg-background sticky top-0 z-10 sm:relative">
         <GoBackBar />
         <div className="flex items-center justify-between gap-8 px-4 sm:mb-10 sm:justify-start sm:gap-12">
@@ -78,11 +78,11 @@ function AmcFundsPage() {
             <h2 className="text-lg font-semibold sm:text-2xl">
               {amc.amc_name}{" "}
             </h2>
-            <p className="text-muted-foreground mt-2 space-x-2 text-xs whitespace-pre-line sm:mt-4 sm:text-sm">
+            <p className="text-muted-foreground sm:text-md mt-2 space-x-2 text-xs whitespace-pre-line">
               Rank(total asset):
               <b>#{amc.rank} in India</b>
             </p>
-            <p className="text-muted-foreground mt-2 space-x-2 text-xs sm:text-sm">
+            <p className="text-muted-foreground sm:text-md mt-2 space-x-2 text-xs">
               Total AUM <b>{formatToINR(amc.totalAum / 10)}Cr</b>
             </p>
           </div>

@@ -5,6 +5,11 @@ import * as sipService from "../../mutual-fund/services/sip.service.js";
 import * as watchlistService from "../../mutual-fund/services/watchlist.service.js";
 import * as communityService from "../services/community.service.js";
 
+export const getUserCount = asyncHandler(async (req, res) => {
+  const count = await communityService.getUserCount();
+  return res.status(200).json({ success: true, count });
+});
+
 export const getUsers = asyncHandler(async (req, res) => {
   const { offset = 0, limit = 20 } = req.query;
   const { users, totalCount } = await communityService.getUsers({
@@ -44,6 +49,13 @@ export const getPortfolio = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, sort_by, order_by, fund_type, portfolio });
+});
+
+export const getAllOrders = asyncHandler(async (req, res) => {
+  const { username } = req.params;
+  const userId = await communityService.getUserIdByUsername(username);
+  const orders = await orderService.getAllOrders(userId);
+  return res.status(200).json({ success: true, orders });
 });
 
 export const getFundOrders = asyncHandler(async (req, res) => {

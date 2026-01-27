@@ -3,7 +3,7 @@ import { fetchPortfolio } from "../api/portfolio";
 
 export function useGetPortfolio(username) {
   return useQuery({
-    queryKey: ["mfPortfolio", username],
+    queryKey: ["mfPortfolio", username ? username : "self"],
     queryFn: () => fetchPortfolio(username),
     ...(username && { staleTime: 0 }),
   });

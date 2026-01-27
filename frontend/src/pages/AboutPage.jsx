@@ -9,7 +9,7 @@ import {
 
 function AboutPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-12 px-6 pt-20 sm:pt-26">
+    <div className="mx-auto w-full max-w-3xl space-y-12 px-6 py-20 sm:py-26">
       <title>About us</title>
       <meta
         name="description"

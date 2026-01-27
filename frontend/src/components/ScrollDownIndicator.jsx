@@ -31,7 +31,7 @@ function ScrollIndicator() {
 
   return (
     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce delay-1000">
-      <ChevronDownIcon className="text-muted-foreground size-9 stroke-[1.5px] transition-transform duration-300 group-hover:translate-y-1 sm:size-10 sm:stroke-1" />
+      <ChevronDownIcon className="text-muted-foreground size-8 stroke-[1.5px] transition-transform duration-300 group-hover:translate-y-1 sm:size-10 sm:stroke-1" />
     </div>
   );
 }

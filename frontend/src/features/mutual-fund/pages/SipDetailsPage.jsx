@@ -13,7 +13,7 @@ import {
   ArrowLeftIcon,
   CalendarRangeIcon,
   ChevronRightIcon,
-  PencilIcon
+  PencilIcon,
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
@@ -126,6 +126,7 @@ function SipDetailsPage() {
         {/* Installments Timeline */}
         <StatusTimeline
           data={installments}
+          username={username}
           isOtherUserProfile={isOtherUserProfile}
         />
 
@@ -166,14 +167,33 @@ function SipDetailsPage() {
   );
 }
 
-function StatusTimeline({ data, isOtherUserProfile }) {
+export default SipDetailsPage;
+
+function StatusTimeline({ data, username, isOtherUserProfile }) {
   return (
     <section className="border-b py-6">
       <h2 className="text-md mb-4 font-semibold">Installments</h2>
       <div className="relative space-y-6">
-        {data?.map((installment, index) => {
-          const Content = (
-            <>
+        {data?.map((installment, index) => (
+          <div key={installment.id} className="relative flex items-start gap-3">
+            {/* Vertical line */}
+            {index !== data.length - 1 && (
+              <div className="absolute top-6 left-[10px] h-full w-px bg-gray-300"></div>
+            )}
+
+            {/* Icon */}
+            <OrderStatusIcon status={installment.status} />
+
+            {/* Text */}
+            <Link
+              to={
+                isOtherUserProfile
+                  ? `/mutual-funds/orders/${installment.id}?username=${username}`
+                  : `/mutual-funds/orders/${installment.id}`
+              }
+              state={installment}
+              className="space-y-2"
+            >
               <h6
                 className={`flex items-center gap-2 text-sm font-medium ${
                   installment.status === "COMPLETED" && "text-muted-foreground"
@@ -185,40 +205,10 @@ function StatusTimeline({ data, isOtherUserProfile }) {
               <span className="text-muted-foreground text-xs">
                 {format(new Date(installment.createdAt), "dd MMM yy, h:mm a")}
               </span>
-            </>
-          );
-
-          return (
-            <div
-              key={installment.id}
-              className="relative flex items-start gap-3"
-            >
-              {/* Vertical line */}
-              {index !== data.length - 1 && (
-                <div className="absolute top-6 left-[10px] h-full w-px bg-gray-300"></div>
-              )}
-
-              {/* Icon */}
-              <OrderStatusIcon status={installment.status} />
-
-              {/* Text */}
-              {isOtherUserProfile ? (
-                <div className="space-y-2">{Content}</div>
-              ) : (
-                <Link
-                  to={`/mutual-funds/orders/${installment.id}`}
-                  state={installment}
-                  className="space-y-2"
-                >
-                  {Content}
-                </Link>
-              )}
-            </div>
-          );
-        })}
+            </Link>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
-
-export default SipDetailsPage;

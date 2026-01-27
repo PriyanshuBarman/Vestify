@@ -47,7 +47,7 @@ function CompareFundsPage() {
   const slots = isMobile ? 2 : 3;
 
   return (
-    <section>
+    <section className="pb-6">
       <GoBackBar title="Compare funds" showSearchIcon={false} />
       <div className="sm:overflow-hidden sm:rounded-3xl sm:border">
         <div className="bg-accent sticky top-14 grid h-28 grid-cols-2 border-b sm:top-0 sm:grid-cols-4">
@@ -88,9 +88,9 @@ function CompareFundsPage() {
         />
 
         {/* Accordions */}
-        <Accordion type="single" collapsible>
+        <Accordion type="multiple" collapsible>
           <AccordionItem value="item-1">
-            <AccordionTrigger className="mx-4 sm:mx-8 sm:text-base">
+            <AccordionTrigger className="mx-4 sm:mx-8 sm:py-8 sm:text-base sm:font-bold">
               FUND DETAILS
             </AccordionTrigger>
             <AccordionContent>
@@ -160,7 +160,7 @@ function CompareFundsPage() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger className="mx-4 sm:mx-8 sm:text-base">
+            <AccordionTrigger className="mx-4 sm:mx-8 sm:py-8 sm:text-base sm:font-bold">
               RETURNS
             </AccordionTrigger>
             <AccordionContent>

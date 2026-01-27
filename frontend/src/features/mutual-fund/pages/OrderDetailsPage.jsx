@@ -11,27 +11,35 @@ import { formatToINR } from "@/utils/formatters";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ChevronRightIcon } from "lucide-react";
-import { Link, useLocation, useParams } from "react-router";
+import { Link, useLocation, useParams, useSearchParams } from "react-router";
 import OrderStatusIcon from "../components/OrderStatusIcon";
 import OrderStatusTimeline from "../components/OrderStatusTimeline";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
 import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
 
 function OrderDetailsPage() {
+  const queryClient = useQueryClient();
   const { orderId } = useParams();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const userId = searchParams.get("userId");
-
-  const orderFromState = location.state;
-  const queryClient = useQueryClient();
+  const [searchParams] = useSearchParams();
+  const username = searchParams.get("username");
+  const isOtherUserProfile = !!username;
+  const { data: order = {} } = useGetOrderDetail(orderId, username);
 
   // If navigated with state & there is no cache, set it in the query cache
-  if (orderFromState && !queryClient.getQueryData(["order", orderId, userId])) {
-    queryClient.setQueryData(["order", orderId, userId], orderFromState);
+  if (
+    location.state &&
+    !queryClient.getQueryData([
+      isOtherUserProfile ? username : "self",
+      "order",
+      orderId,
+    ])
+  ) {
+    queryClient.setQueryData(
+      [isOtherUserProfile ? username : "self", "order", orderId],
+      location.state,
+    );
   }
-
-  const { data: order = {} } = useGetOrderDetail(orderId, userId);
 
   return (
     <div className="sm:mx-auto sm:max-w-xl">
@@ -52,19 +60,13 @@ function OrderDetailsPage() {
             </span>
           </div>
 
-          {!userId ? (
-            <Link
-              to={`/mutual-funds/${order.schemeCode}`}
-              className="text-md text-muted-foreground flex items-center gap-4"
-            >
-              <span className="text-sm">{order.fundName}</span>
-              <ChevronRightIcon className="size-5" />
-            </Link>
-          ) : (
-            <div className="text-md text-muted-foreground flex items-center gap-4">
-              <span className="text-sm">{order.fundName}</span>
-            </div>
-          )}
+          <Link
+            to={`/mutual-funds/${order.schemeCode}`}
+            className="text-md text-muted-foreground flex items-center gap-4"
+          >
+            <span className="text-sm">{order.fundName}</span>
+            <ChevronRightIcon className="size-5" />
+          </Link>
 
           <div className="flex justify-between border-y py-4">
             <div>
@@ -106,13 +108,15 @@ function OrderDetailsPage() {
                 <span>Paid Via:</span>
                 <span>Vestify Wallet (Virtual Money)</span>
               </div>
-              <div className="flex space-x-10">
-                <span className="shrink-0">Order Id:</span>
-                <div className="flex items-start gap-2 break-all">
-                  <span>{order.id}</span>
-                  <CopyButton text={order.id} className="text-foreground" />
+              {!isOtherUserProfile && (
+                <div className="flex space-x-10">
+                  <span className="shrink-0">Order Id:</span>
+                  <div className="flex items-start gap-2 break-all">
+                    <span>{order.id}</span>
+                    <CopyButton text={order.id} className="text-foreground" />
+                  </div>
                 </div>
-              </div>
+              )}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -120,4 +124,5 @@ function OrderDetailsPage() {
     </div>
   );
 }
+
 export default OrderDetailsPage;

@@ -65,7 +65,7 @@ function AllFundsPage() {
   };
 
   return (
-    <section className="sm:pt-6">
+    <section className="sm:py-6">
       <div className="bg-background sticky top-0 z-10 w-full">
         <GoBackBar title="All Mutual Funds" />
         <FilterBtns />

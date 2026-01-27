@@ -14,6 +14,11 @@ export function SearchModal({ isOpen, onClose, onSelectFund }) {
     "mutualFunds",
   );
 
+  const handleResultClick = (fund) => {
+    onSelectFund(fund.scheme_code);
+    setQuery("");
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="data-[state=open]:slide-in-from-top-6 data-[state=closed]:slide-out-to-top-6 fixed top-6 flex -translate-y-0 flex-col rounded-[1.25rem] p-2 sm:!max-w-[640px] [&>button:last-child]:hidden">
@@ -32,16 +37,14 @@ export function SearchModal({ isOpen, onClose, onSelectFund }) {
         </DialogHeader>
         <div className="flex-1 overflow-y-auto py-2">
           {isLoading ? (
-            <Spinner className="text-primary mx-auto" />
+            <Spinner className="text-primary sm:size-6 mx-auto" />
           ) : searchResult?.length > 0 ? (
             <ul className="space-y-2">
               {searchResult.map((fund) => (
                 <li
                   key={fund.id}
                   className="hover:bg-accent cursor-pointer rounded-lg p-3 transition-colors"
-                  onClick={() => {
-                    onSelectFund(fund.scheme_code);
-                  }}
+                  onClick={() => handleResultClick(fund)}
                 >
                   <div className="text-sm font-medium">{fund.short_name}</div>
                 </li>

@@ -4,6 +4,9 @@ import { authenticate } from "#shared/middlewares/auth.middleware.js";
 
 const router = Router();
 
+// Public route - no auth needed
+router.get("/users/count", communityController.getUserCount);
+
 router.get("/users", authenticate, communityController.getUsers);
 router.get("/search", authenticate, communityController.searchUsers);
 router.get(
@@ -15,6 +18,11 @@ router.get(
   "/users/:username/portfolio",
   authenticate,
   communityController.getPortfolio,
+);
+router.get(
+  "/users/:username/orders",
+  authenticate,
+  communityController.getAllOrders,
 );
 router.get(
   "/users/:username/portfolio/:schemeCode/orders",

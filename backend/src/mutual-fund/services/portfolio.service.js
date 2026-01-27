@@ -47,7 +47,15 @@ export const getPortfolioSummary = async (userId) => {
   });
 
   if (!result._sum.invested) {
-    throw new ApiError(404, "No portfolio found.");
+    // Return zero values for users with no portfolio
+    return {
+      current: 0,
+      invested: 0,
+      pnl: 0,
+      returnPercent: 0,
+      dayChangeValue: 0,
+      dayChangePercent: 0,
+    };
   }
 
   const current = result._sum.current?.toNumber();

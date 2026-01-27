@@ -15,5 +15,6 @@ export function useGetUsers() {
       if (!users || users.length < LIMIT) return undefined;
       return allPages.length * LIMIT;
     },
+    staleTime: 0,
   });
 }

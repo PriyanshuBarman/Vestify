@@ -13,6 +13,9 @@ export const sendMoney = async ({ userId, amount, note, receiverId }) => {
       },
     });
 
+    if (sender.id < userId) {
+      throw new ApiError(400, "You cannot send money to yourself");
+    }
     // 2. Ensure sender has enough balance
     if (sender.balance < 0) {
       throw new ApiError(400, "Insufficient Balance");

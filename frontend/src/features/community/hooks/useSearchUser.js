@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { searchUsers } from "../api/community";
 
-export function useSearchUsers(query) {
+export function useSearchUser(query) {
   return useQuery({
     queryKey: ["community", "users", "search", query],
     queryFn: () => searchUsers({ query, LIMIT: 10 }),

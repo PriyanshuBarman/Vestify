@@ -54,7 +54,7 @@ function AmcMarquee({ className }) {
         Virtually invest in{" "}
         <CountUp
           value={1550}
-          startValue={1000}
+          startValue={1250}
           className="tracking-tight text-[#00b35c] tabular-nums"
         />
         <motion.span

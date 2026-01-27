@@ -64,7 +64,7 @@ function CollectionPage() {
   };
 
   return (
-    <div className="relative sm:pt-6">
+    <div className="relative sm:py-6">
       <section className="bg-background sticky top-0 z-10 pb-1">
         <GoBackBar />
         <div className="mb-4 flex items-center gap-8 px-4 sm:mb-10">

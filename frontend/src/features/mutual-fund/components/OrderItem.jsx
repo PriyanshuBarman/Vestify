@@ -5,18 +5,22 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
+import { cn } from "@/lib/utils";
 import { formatToINR } from "@/utils/formatters";
 import { Link } from "react-router";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
-import { cn } from "@/lib/utils";
 
-function OrderItem({ order, index, length, className }) {
+function OrderItem({ order, username, index, length, className }) {
   return (
     <>
       <Item asChild size="sm" className={cn("cursor-pointer", className)}>
         <Link
-          to={`/mutual-funds/orders/${order.id}`}
           key={order.id}
+          to={
+            username
+              ? `/mutual-funds/orders/${order.id}?username=${username}`
+              : `/mutual-funds/orders/${order.id}`
+          }
           className="flex justify-between border-b py-4"
         >
           <ItemContent>

@@ -1,12 +1,14 @@
+import LoadingState from "@/components/LoadingState";
 import { Button } from "@/components/ui/button";
-import { ChevronsLeftRightIcon } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
+import { ChevronsLeftRightIcon, Trash2Icon } from "lucide-react";
 import { lazy, useState } from "react";
 import { Link } from "react-router";
 import { useGetFundsData } from "../../hooks/useGetFundsData";
 import { useGetWatchlist } from "../../hooks/useGetWatchlist";
+import { useRemoveFromWatchlist } from "../../hooks/useRemoveFromWatchlist";
 import FundLogo from "../FundLogo";
 import FundRating from "../FundRating";
-import LoadingState from "@/components/LoadingState";
 const NoWatchlist = lazy(() => import("../empty-states/NoWatchlist"));
 
 const labelArr = [
@@ -75,15 +77,17 @@ function WatchlistItem({
   handleClick,
   isOtherUserProfile,
 }) {
-  const Wrapper = isOtherUserProfile ? "div" : Link;
-  const wrapperProps = isOtherUserProfile
-    ? {}
-    : { to: `/mutual-funds/${fund.schemeCode}` };
+  const { mutate, isPending } = useRemoveFromWatchlist();
+
+  const handleRemoveClick = (e) => {
+    e.preventDefault();
+    mutate({ schemeCode: fund.schemeCode });
+  };
 
   return (
-    <Wrapper
-      {...wrapperProps}
-      className={`flex min-w-full items-center border-b py-4 sm:rounded-2xl sm:border sm:px-4 ${!isOtherUserProfile ? "hover:bg-accent" : ""}`}
+    <Link
+      to={`/mutual-funds/${fund.schemeCode}`}
+      className="group hover:bg-accent flex min-w-full items-center border-b py-4 sm:rounded-2xl sm:border sm:px-4"
     >
       <FundLogo fundHouseDomain={fund.fundHouseDomain} />
 
@@ -95,20 +99,32 @@ function WatchlistItem({
         </div>
       </div>
 
-      <div
-        onClick={(e) => {
-          e.preventDefault();
-          handleClick();
-        }}
-        className="ml-auto flex cursor-pointer flex-col items-end space-y-1"
-      >
-        <span className="sm:text-md text-sm font-medium">
-          {fundData?.[labelArr[activeLabelIdx].key] || "NA"}%
-        </span>
-        <span className="text-muted-foreground mr-0.5 text-xs">
-          {labelArr[activeLabelIdx].shortLabel}
-        </span>
+      <div className="ml-auto flex flex-col items-end">
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+            handleClick();
+          }}
+          className={`flex cursor-pointer flex-col items-end space-y-1 ${!isOtherUserProfile ? "group-hover:hidden" : ""}`}
+        >
+          <span className="sm:text-md text-sm font-medium">
+            {fundData?.[labelArr[activeLabelIdx].key] || "NA"}%
+          </span>
+          <span className="text-muted-foreground mr-0.5 text-xs">
+            {labelArr[activeLabelIdx].shortLabel}
+          </span>
+        </div>
+        {!isOtherUserProfile && (
+          <Button
+            disabled={isPending}
+            onClick={handleRemoveClick}
+            variant="icon-sm"
+            className="hover:bg-accent hover:text-destructive animate-in fade-ins zoom-in hidden size-9 rounded-full group-hover:flex"
+          >
+            {isPending ? <Spinner /> : <Trash2Icon />}
+          </Button>
+        )}
       </div>
-    </Wrapper>
+    </Link>
   );
 }

@@ -2,7 +2,7 @@ import { termsData } from "../constants/terms";
 
 function TermsPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-8 px-6 sm:pt-26 pt-20">
+    <div className="mx-auto w-full max-w-3xl space-y-8 px-6 sm:py-26 py-20">
       <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
         Terms & Conditions
       </h1>

@@ -18,3 +18,8 @@ export const fetchUserProfile = async (username) => {
   const { data } = await api.get(`/community/users/${username}`);
   return data.profile;
 };
+
+export const fetchUserOrders = async (username) => {
+  const res = await api.get(`/community/users/${username}/orders`);
+  return res.data.orders;
+};

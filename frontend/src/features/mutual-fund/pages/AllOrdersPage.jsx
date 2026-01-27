@@ -1,13 +1,13 @@
 import GoBackBar from "@/components/GoBackBar";
 import { lazy } from "react";
 import OrderItem from "../components/OrderItem";
-import { useGetAllOrders } from "../hooks/useGetAllOrders";
+import { useGetOrders } from "../hooks/useGetOrders";
 import { ItemGroup } from "@/components/ui/item";
 import LoadingState from "@/components/LoadingState";
 const NoOrders = lazy(() => import("../components/empty-states/NoOrders"));
 
 function AllOrdersPage() {
-  const { data: orders, isPending } = useGetAllOrders();
+  const { data: orders, isPending } = useGetOrders();
 
   if (isPending) return <LoadingState fullPage />;
   if (!orders?.length) return <NoOrders />;
