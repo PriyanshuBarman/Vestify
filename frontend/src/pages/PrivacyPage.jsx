@@ -2,7 +2,7 @@ import { privacySections } from "@/constants/privacy";
 
 function PrivacyPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-8 px-6 pt-20 sm:pt-26">
+    <div className="mx-auto w-full max-w-3xl space-y-8 px-6 py-20 sm:py-26">
       <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
         Privacy Policy
       </h1>

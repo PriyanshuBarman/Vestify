@@ -2,17 +2,27 @@ import { credits } from "@/constants/credits";
 import { footerLinks, socialLinks } from "@/constants/footer";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import ButtonAnimatedLink from "./ButtonAnimatedLink";
 import LogoShapeOnly from "./LogoShapeOnly";
 import { Separator } from "./ui/separator";
 
 function Footer({ className }) {
-  const location = useLocation();
   const isMobile = useIsMobile();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   if (isMobile && location.pathname !== "/") return null;
   if (!location.hash && location.pathname !== "/") return null;
+  if (location.hash && location.hash !== "#explore") return null;
+
+  const handleHomeClick = () => {
+    if (location.pathname === "/") {
+      console.log("scroll to top");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    navigate("/");
+  };
 
   return (
     <footer className={cn("w-full border-t", className)}>
@@ -26,20 +36,18 @@ function Footer({ className }) {
               </span>
             </Link>
             <ul className="flex flex-wrap items-center px-2">
-              {footerLinks.map(({ title, href, isSection }) => (
+              <ButtonAnimatedLink
+                onClick={handleHomeClick}
+                className="text-foreground sm:text-md font-normal max-sm:px-2"
+              >
+                <div>Home</div>
+              </ButtonAnimatedLink>
+
+              {footerLinks.map(({ title, href }) => (
                 <li key={title}>
-                  {isSection ? (
-                    <a
-                      href={href}
-                      className="text-foreground px-2 text-sm sm:text-base sm:font-medium"
-                    >
-                      {title}
-                    </a>
-                  ) : (
-                    <ButtonAnimatedLink className="text-foreground sm:text-md font-normal max-sm:px-2">
-                      <Link to={href}>{title}</Link>
-                    </ButtonAnimatedLink>
-                  )}
+                  <ButtonAnimatedLink className="text-foreground sm:text-md font-normal max-sm:px-2">
+                    <Link to={href}>{title}</Link>
+                  </ButtonAnimatedLink>
                 </li>
               ))}
             </ul>

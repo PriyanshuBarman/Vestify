@@ -27,7 +27,7 @@ function MarqueeLogos({ classNames, reverse = false }) {
               fundHouseDomain={amc.detail_info}
               className="size-9.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-            <p className="text-foreground/60 font-[450] sm:font-medium text-sm whitespace-nowrap sm:text-xl sm:italic">
+            <p className="text-foreground/80 text-sm whitespace-nowrap sm:text-xl sm:font-medium sm:italic">
               {amc.amc_name}
             </p>
           </div>
@@ -52,7 +52,7 @@ function MarqueeLogos({ classNames, reverse = false }) {
               fundHouseDomain={amc.detail_info}
               className="size-9.5 rounded-lg sm:size-13 sm:rounded-2xl"
             />
-            <p className="text-foreground/60 font-[450] sm:font-medium text-sm whitespace-nowrap sm:text-xl sm:italic">
+            <p className="text-foreground/80 text-sm whitespace-nowrap sm:text-xl sm:font-medium sm:italic">
               {amc.amc_name}
             </p>
           </div>

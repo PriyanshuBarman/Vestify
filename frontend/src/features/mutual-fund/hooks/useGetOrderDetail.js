@@ -3,8 +3,7 @@ import { fetchOrderDetail } from "../api/order";
 
 export function useGetOrderDetail(orderId, username) {
   return useQuery({
-    queryKey: ["order", orderId, username],
-    queryFn: () => fetchOrderDetail(orderId, username),
-    ...(username && { staleTime: 0 }),
+    queryKey: [username ? username : "self", "order", orderId],
+    queryFn: () => fetchOrderDetail(orderId),
   });
 }

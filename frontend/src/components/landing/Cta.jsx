@@ -6,7 +6,12 @@ import { useInstallApp } from "@/hooks/useInstallApp";
 
 function Cta({ className }) {
   return (
-    <section className={cn("w-full max-w-7xl overflow-hidden px-4", className)}>
+    <section
+      className={cn(
+        "w-full max-w-[1300px] overflow-hidden max-sm:px-4",
+        className,
+      )}
+    >
       <Card />
     </section>
   );

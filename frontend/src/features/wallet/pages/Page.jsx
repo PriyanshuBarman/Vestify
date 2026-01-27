@@ -27,7 +27,9 @@ function Page() {
       <div className="flex justify-between">
         <div className="Slot flex flex-col items-center justify-center">
           <Button
-            onClick={() => navigate("/wallet/send")}
+            onClick={() =>
+              navigate("/search-user", { state: { mode: "send-money" } })
+            }
             size="lg"
             variant="outline"
             className="h-16 w-22 rounded-xl sm:h-22 sm:w-38 sm:rounded-2xl"

@@ -22,8 +22,9 @@ function NoWatchlist({ isOtherUserProfile }) {
         </EmptyMedia>
         <EmptyTitle>Watchlist is empty</EmptyTitle>
         <EmptyDescription>
-          {!isOtherUserProfile &&
-            "Add funds to your watchlist to see them here."}
+          {isOtherUserProfile
+            ? "User has not added any funds to their watchlist."
+            : "Add funds to your watchlist to see them here."}
         </EmptyDescription>
       </EmptyHeader>
       {!isOtherUserProfile && (

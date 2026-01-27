@@ -99,7 +99,7 @@ function TnxDetailsPage() {
             size="lg"
             className="mx-auto mt-auto w-full sm:mt-14 sm:w-fit"
             onClick={() => {
-              navigate(`/wallet/enter-amount`, {
+              navigate(`/wallet/send`, {
                 state: {
                   receiverId: peerProfile.userId,
                   receiverName: peerProfile.name,

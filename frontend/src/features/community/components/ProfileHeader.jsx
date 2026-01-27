@@ -14,17 +14,19 @@ function ProfileHeader({ profile }) {
   return (
     <div className="w-full pb-6 text-center">
       <GoBackBar className="w-full" showSearchIcon={false} />
-      <div className="flex items-center justify-center gap-6 lg:flex-col">
-        <Avatar onClick={handleAvatarClick} className="size-24 lg:size-34">
+      <div className="flex items-center justify-center gap-6 px-4 lg:flex-col">
+        <Avatar onClick={handleAvatarClick} className="size-20 lg:size-34">
           <AvatarImage src={profile?.avatar} />
-          <AvatarFallback>
+          <AvatarFallback className="text-3xl sm:text-4xl sm:font-medium">
             {profile?.name?.charAt(0)?.toUpperCase()}
           </AvatarFallback>
         </Avatar>
 
-        <div className="mt-2 space-y-1 text-start sm:text-center lg:space-y-2">
-          <h1 className="text-xl font-semibold lg:text-2xl">{profile?.name}</h1>
-          <p className="text-muted-foreground/80 max-sm:text-xs">
+        <div className="mt-2 space-y-1 text-start max-sm:max-w-1/2 sm:text-center lg:space-y-2">
+          <h1 className="line-clamp-2 text-lg font-semibold lg:text-2xl">
+            {profile?.name}
+          </h1>
+          <p className="text-muted-foreground/80 line-clamp-2 max-sm:text-xs">
             @{profile?.username}
           </p>
 

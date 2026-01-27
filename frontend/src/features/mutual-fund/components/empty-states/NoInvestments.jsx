@@ -27,7 +27,7 @@ function NoInvestments({ isOtherUserProfile }) {
         </EmptyTitle>
         <EmptyDescription>
           {isOtherUserProfile
-            ? "This user has no active investments in mutual funds."
+            ? "This user has no investments."
             : "Start investing in a fund to see your portfolio grow here."}
         </EmptyDescription>
       </EmptyHeader>

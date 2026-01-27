@@ -60,8 +60,8 @@ function InvestmentsTab({ username }) {
   if (isPending) return <LoadingState />;
 
   return (
-    <div className="space-y-6 pb-20 sm:mx-auto sm:max-w-xl">
-      {!isOtherUserProfile && <ScrollToTop />}
+    <div className="space-y-6 sm:mx-auto sm:max-w-xl sm:pb-12">
+      <ScrollToTop />
       {!isOtherUserProfile && <PendingOrders />}
 
       {!data?.length ? (

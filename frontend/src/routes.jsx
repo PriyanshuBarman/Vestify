@@ -33,6 +33,7 @@ const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
 const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
 const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
 const SuccessPage = lazy(() => import("./pages/SuccessPage"));
+const SearchUserPage = lazy(() => import("./pages/SearchUserPage"));
 
 export const routes = createBrowserRouter([
   authRoutes,
@@ -76,6 +77,10 @@ export const routes = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage />,
+      },
+      {
+        path: "/search-user",
+        element: <SearchUserPage />,
       },
       {
         path: "/success",

@@ -3,8 +3,17 @@ import { ApiError } from "#shared/utils/api-error.utils.js";
 import * as portfolioService from "../../mutual-fund/services/portfolio.service.js";
 
 /**
- * Get list of all users sorted by total invested amount
+ * Get total count of users (excluding system user)
  */
+export const getUserCount = async () => {
+  const count = await db.user.count({
+    where: {
+      id: { not: "system" },
+    },
+  });
+  return count;
+};
+
 /**
  * Get list of all users sorted by total invested amount
  */
@@ -50,6 +59,7 @@ export const getUsers = async ({ skip = 0, take = 20 } = {}) => {
     const currentValue = aggregate?._sum?.current || 0;
 
     return {
+      userId: user.id,
       name: user.profile?.name || "Unknown User",
       username: user.profile?.username || "user",
       avatar: user.profile?.avatar,
@@ -109,6 +119,7 @@ export const searchUsers = async ({ query, limit = 10 }) => {
       );
 
       return {
+        userId: user.id,
         name: user.profile?.name || "Unknown",
         username: user.profile?.username,
         avatar: user.profile?.avatar,
@@ -139,9 +150,21 @@ export const getUserProfile = async (username) => {
 
   if (!user) throw new ApiError(404, "User not found");
 
-  // Get portfolio summary
-  let portfolioSummary = { current: 0, invested: 0 };
-  portfolioSummary = await portfolioService.getPortfolioSummary(user.id);
+  // Get portfolio summary - handle case where user has no portfolio
+  let portfolioSummary = {
+    current: 0,
+    invested: 0,
+    pnl: 0,
+    returnPercent: 0,
+    dayChangeValue: 0,
+    dayChangePercent: 0,
+  };
+  try {
+    portfolioSummary = await portfolioService.getPortfolioSummary(user.id);
+  } catch (error) {
+    // User has no portfolio, use default zero values
+    if (error.statusCode !== 404) throw error;
+  }
 
   return {
     name: user.profile?.name,

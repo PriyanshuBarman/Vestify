@@ -25,7 +25,7 @@ function QrReader({ isOpen, setIsOpen }) {
 
   const handleScanSuccess = (result) => {
     if (result?.startsWith("vestify@")) {
-      navigate("/wallet/enter-amount", {
+      navigate("/wallet/send", {
         state: {
           receiverId: result?.replace("vestify@", ""),
         },

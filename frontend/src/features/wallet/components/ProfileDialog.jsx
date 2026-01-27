@@ -9,10 +9,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useGetUser } from "@/hooks/useGetUser";
 import { useNavigate } from "react-router";
 
 function ProfileDialog({ isOpen, onOpenChange, clickedProfile }) {
   const navigate = useNavigate();
+  const { data: user } = useGetUser();
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -47,10 +50,13 @@ function ProfileDialog({ isOpen, onOpenChange, clickedProfile }) {
         <DialogFooter>
           <DialogClose asChild>
             <Button
-              disabled={clickedProfile?.userId === "system"}
+              disabled={
+                clickedProfile?.userId === "system" ||
+                clickedProfile?.userId === user.id
+              }
               className="w-full"
               onClick={() =>
-                navigate("/wallet/enter-amount", {
+                navigate("/wallet/send", {
                   state: {
                     receiverId: clickedProfile?.userId,
                     receiverName: clickedProfile?.name,

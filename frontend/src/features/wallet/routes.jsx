@@ -4,7 +4,6 @@ import { lazy, Suspense } from "react";
 const TnxDetailsPage = lazy(() => import("./pages/TnxDetailsPage"));
 const TnxHistoryPage = lazy(() => import("./pages/TnxHistoryPage"));
 const SendMoneyPage = lazy(() => import("./pages/SendMoneyPage"));
-const EnterAmountPage = lazy(() => import("./pages/EnterAmountPage"));
 const Page = lazy(() => import("./pages/Page"));
 
 export const walletRoutes = {
@@ -17,10 +16,6 @@ export const walletRoutes = {
     {
       path: "send",
       element: <SendMoneyPage />,
-    },
-    {
-      path: "enter-amount",
-      element: <EnterAmountPage />,
     },
     {
       path: "transactions",
