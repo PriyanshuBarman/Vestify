@@ -33,7 +33,7 @@ jobs:
 
       - name: Apply SIP Change
         id: update-script
-        run: node scripts/tasks/apply-sip-changes.js
+        run: npm run apply-sip-changes
         env:
           NODE_ENV: cron
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

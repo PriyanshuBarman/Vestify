@@ -33,7 +33,7 @@ jobs:
 
       - name: SIP Installment Order Placement
         id: update-script
-        run: node scripts/tasks/place-sip-installment-orders.js
+        run: npm run place-sip-installment-orders
         env:
           NODE_ENV: cron
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

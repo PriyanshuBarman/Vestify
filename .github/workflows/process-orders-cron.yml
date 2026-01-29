@@ -33,7 +33,7 @@ jobs:
 
       - name: Order Processor
         id: update-script
-        run: node scripts/tasks/process-orders.js
+        run: npm run process-orders
         env:
           NODE_ENV: cron
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

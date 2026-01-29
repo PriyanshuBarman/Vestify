@@ -33,7 +33,7 @@ jobs:
 
       - name: Step-Up SIP Processer
         id: update-script
-        run: node scripts/tasks/process-step-up-sips.js
+        run: npm run process-step-up-sips
         env:
           NODE_ENV: cron
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

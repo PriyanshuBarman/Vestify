@@ -21,13 +21,13 @@ export const placeSipInstallmentOrder = async (data) => {
 
   const { processDate, navDate } = getApplicableDates(
     nextInstallmentDate,
-    fundCategory
+    fundCategory,
   );
 
   const newNextInstallmentDate = addMonths(
     setDate(new Date(nextInstallmentDate), sipDate),
     1,
-    { in: tz("Asia/Kolkata") }
+    { in: tz("Asia/Kolkata") },
   );
 
   // prisma $transaction
@@ -60,7 +60,7 @@ export const placeSipInstallmentOrder = async (data) => {
         },
       });
       // If failed count reaches 3, delete the SIP
-      if (failedCount.toNumber() + 1 >= 3) {
+      if (failedCount + 1 >= 3) {
         await tx.mfSip.delete({
           where: { id: sipId },
         });

@@ -5,7 +5,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "apply-sip-changes": "node scripts/tasks/apply-sip-changes.js",
+    "place-sip-installment-orders": "node scripts/tasks/place-sip-installment-orders.js",
+    "process-orders": "node scripts/tasks/process-orders.js",
+    "process-step-up-sips": "node scripts/tasks/process-step-up-sips.js",
+    "update-portfolios": "node scripts/tasks/update-portfolios.js"
   },
   "type": "module",
   "imports": {

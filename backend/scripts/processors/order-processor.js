@@ -5,6 +5,7 @@ import {
   calcPortfolioAfterRedemption,
 } from "../../src/mutual-fund/utils/calculate-updated-portfolio.utils.js";
 import { fetchNavInfoByDate } from "../external/fetch-nav-by-date.js";
+import { parseDDMMYYYY } from "../utils/parse-date.utils.js";
 
 export const processInvestmentOrder = async (orderData) => {
   let {
@@ -57,7 +58,7 @@ export const processInvestmentOrder = async (orderData) => {
       const updatedValues = calcPortfolioAfterInvestment(
         prevInv,
         amount,
-        units
+        units,
       );
       await tx.mfPortfolio.update({
         where: { folio },
@@ -89,12 +90,17 @@ export const processInvestmentOrder = async (orderData) => {
 
     // 5. Link SIP to portfolio if not already linked
     if (sipId) {
-      await tx.mfSip.update({
+      const sipExists = await tx.mfSip.findUnique({
         where: { id: sipId },
-        data: {
-          folio,
-        },
       });
+
+      if (sipExists) {
+        await tx.mfSip.update({ where: { id: sipId }, data: { folio } });
+        return;
+      }
+      console.warn(
+        `⚠️ SIP ID not found for order. Order will complete but SIP won't be linked to portfolio.\nSIP ID: ${sipId}\nOrder ID: ${orderId}`,
+      );
     }
   });
 };
@@ -117,7 +123,8 @@ export const processRedemptionOrder = async (orderData) => {
   if (!isValid) return; // return if invalid
 
   // Fetch NAV after passing validation
-  const nav = await fetchNavInfoByDate(schemeCode, navDate);
+  const navInfo = await fetchNavInfoByDate(schemeCode, navDate);
+  const nav = parseFloat(navInfo.nav);
 
   const isFullRedemption = !!units || amount === fund.current.toNumber();
 
@@ -153,7 +160,7 @@ export const processRedemptionOrder = async (orderData) => {
         userId,
         schemeCode,
         finalUnits,
-        tx
+        tx,
       );
 
       // 2. Update portfolio
@@ -163,7 +170,7 @@ export const processRedemptionOrder = async (orderData) => {
           fund,
           costBasis,
           finalAmount,
-          finalUnits
+          finalUnits,
         ),
       });
 

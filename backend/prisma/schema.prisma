@@ -290,7 +290,7 @@ model MfSip {
 
   user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
-  portfolio MfPortfolio? @relation(fields: [folio], references: [folio], onDelete: Cascade)
+  portfolio MfPortfolio? @relation(fields: [folio], references: [folio], onDelete: SetNull)
   folio     Int?         @db.UnsignedInt
 
   pendingChanges PendingMfSipChange[]

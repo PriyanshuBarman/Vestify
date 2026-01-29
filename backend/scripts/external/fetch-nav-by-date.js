@@ -33,6 +33,6 @@ export const fetchNavInfoByDate = async (schemeCode, date) => {
     navCache.set(schemeCode, matchedNavInfo);
     return matchedNavInfo;
   } catch (error) {
-    throw new Error(`Error At fetchNavByDate: ${error.message}`);
+    throw new Error(`Error At fetchNavInfoByDate: ${error.message}`);
   }
 };

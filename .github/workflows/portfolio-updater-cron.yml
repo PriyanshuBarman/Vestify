@@ -33,7 +33,7 @@ jobs:
 
       - name: Portfolio Updater
         id: update-script
-        run: node scripts/tasks/update-portfolios.js
+        run: npm run update-portfolios
         env:
           NODE_ENV: cron
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
