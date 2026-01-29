@@ -51,6 +51,13 @@ export const getPortfolio = asyncHandler(async (req, res) => {
     .json({ success: true, sort_by, order_by, fund_type, portfolio });
 });
 
+export const getPortfolioSummary = asyncHandler(async (req, res) => {
+  const { username } = req.params;
+  const userId = await communityService.getUserIdByUsername(username);
+  const portfolioSummary = await portfolioService.getPortfolioSummary(userId);
+  return res.status(200).json({ success: true, portfolioSummary });
+});
+
 export const getAllOrders = asyncHandler(async (req, res) => {
   const { username } = req.params;
   const userId = await communityService.getUserIdByUsername(username);

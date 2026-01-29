@@ -1,10 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 import ProfileDialog from "@/features/wallet/components/ProfileDialog";
-import { formatShortINR, formatToINR } from "@/utils/formatters";
+import UserAvatar from "@/features/wallet/components/UserAvatar";
+import { formatShortINR } from "@/utils/formatters";
+import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import UserAvatar from "@/features/wallet/components/UserAvatar";
-import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 
 function UserPreviewCard({ user }) {
   const navigate = useNavigate();

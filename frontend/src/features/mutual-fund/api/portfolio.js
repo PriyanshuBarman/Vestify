@@ -15,8 +15,8 @@ export const fetchFundPortfolio = async (schemeCode) => {
 
 export const fetchPortfolioSummary = async (username) => {
   const url = username
-    ? `/community/users/${username}` // Community profile endpoint returns summary
+    ? `/community/users/${username}/portfolio/summary` // Community profile endpoint returns summary
     : `/mutual-funds/portfolio/summary`;
   const { data } = await api.get(url);
-  return username ? data.profile.portfolioSummary : data.portfolioSummary;
+  return data.portfolioSummary;
 };

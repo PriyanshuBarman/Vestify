@@ -20,6 +20,11 @@ router.get(
   communityController.getPortfolio,
 );
 router.get(
+  "/users/:username/portfolio/summary",
+  authenticate,
+  communityController.getPortfolioSummary,
+);
+router.get(
   "/users/:username/orders",
   authenticate,
   communityController.getAllOrders,
