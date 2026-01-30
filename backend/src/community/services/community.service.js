@@ -23,6 +23,7 @@ export const getUsers = async ({ skip = 0, take = 20 }) => {
     skip,
     take,
     select: {
+      id: true,
       profile: {
         select: {
           name: true,
@@ -80,6 +81,7 @@ export const searchUsers = async ({ query, limit = 10 }) => {
     },
     take: limit,
     select: {
+      id: true,
       profile: {
         select: {
           name: true,
@@ -120,6 +122,7 @@ export const getUserProfile = async (username) => {
   const user = await db.user.findFirst({
     where: { profile: { username }, id: { not: "system" } },
     select: {
+      id: true,
       profile: {
         select: {
           name: true,
@@ -142,6 +145,7 @@ export const getUserProfile = async (username) => {
   if (!user) throw new ApiError(404, "User not found");
 
   return {
+    userId: user.id,
     name: user.profile?.name,
     username: user.profile?.username,
     avatar: user.profile?.avatar,

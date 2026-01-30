@@ -13,6 +13,7 @@ export const formatData = (user) => {
       : 0;
 
   return {
+    userId: user.id,
     name: user.profile?.name ?? "Unknown User",
     username: user.profile?.username ?? "user",
     avatar: user.profile?.avatar ?? null,

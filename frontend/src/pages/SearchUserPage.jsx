@@ -23,7 +23,6 @@ function SearchUserPage() {
   const debouncedQuery = useDebounce(query.trim().replace("@", ""));
   const inputRef = useRef(null);
   const location = useLocation();
-
   // Get mode from location state - "send-money" or "community" (default)
   const mode = location.state?.mode || "community";
 
@@ -31,7 +30,7 @@ function SearchUserPage() {
 
   const handleResultClick = (profile) => {
     const navConfig = getNavigationConfig(mode, profile);
-    navigate(navConfig);
+    navigate(navConfig.pathname, { state: navConfig.state });
   };
 
   return (
