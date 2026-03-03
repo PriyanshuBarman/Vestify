@@ -118,15 +118,20 @@ export const processRedemptionOrder = async (orderData) => {
     where: { userId_schemeCode: { userId, schemeCode } },
   });
 
+  const isFullRedemption = !!units || amount === fund.current.toNumber();
+
   // Validate and mark order FAILED if invalid
-  const isValid = await validateAndFailOrder(orderId, fund, amount);
+  const isValid = await validateAndFailOrder(
+    orderId,
+    fund,
+    amount,
+    isFullRedemption,
+  );
   if (!isValid) return; // return if invalid
 
   // Fetch NAV after passing validation
   const navInfo = await fetchNavInfoByDate(schemeCode, navDate);
   const nav = parseFloat(navInfo.nav);
-
-  const isFullRedemption = !!units || amount === fund.current.toNumber();
 
   // Calculate final redemption values
   const finalUnits = units || amount / nav;
@@ -206,10 +211,18 @@ export const processRedemptionOrder = async (orderData) => {
   });
 };
 
-export const validateAndFailOrder = async (orderId, fund, amount) => {
+export const validateAndFailOrder = async (
+  orderId,
+  fund,
+  amount,
+  isFullRedemption,
+) => {
   let failureReason;
   if (!fund) {
     failureReason = "Fund not available in portfolio";
+  } else if (isFullRedemption) {
+    // Skip amount validation for full redemption orders
+    return true;
   } else if (amount > fund.current.toNumber()) {
     failureReason = "Insufficient fund balance";
   }
