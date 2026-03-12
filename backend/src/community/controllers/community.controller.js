@@ -5,11 +5,6 @@ import * as sipService from "../../mutual-fund/services/sip.service.js";
 import * as watchlistService from "../../mutual-fund/services/watchlist.service.js";
 import * as communityService from "../services/community.service.js";
 
-export const getUserCount = asyncHandler(async (req, res) => {
-  const count = await communityService.getUserCount();
-  return res.status(200).json({ success: true, count });
-});
-
 export const getUsers = asyncHandler(async (req, res) => {
   const { offset = 0, limit = 20 } = req.query;
   const { users, totalCount } = await communityService.getUsers({

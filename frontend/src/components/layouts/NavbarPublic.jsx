@@ -22,10 +22,10 @@ function NavbarPublic() {
   const isMobile = useIsMobile();
 
   return (
-    <nav className="fixed top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-5 py-4 backdrop-blur-xs sm:p-4">
+    <nav className="font-poppins fixed top-0 left-1/2 z-50 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between gap-8 mask-b-from-70% px-4 py-4 backdrop-blur-xs sm:p-4 sm:px-6 md:px-8">
       <Link to="/" className="flex items-center justify-center gap-2 sm:gap-4">
         <Logo className="size-8" />
-        <span className="font-[550] sm:text-2xl">Vestify</span>
+        <span className="font-medium sm:text-2xl">Vestify</span>
       </Link>
 
       <div className="flex items-center justify-start gap-2 xl:gap-6">
@@ -53,7 +53,8 @@ function NavbarPublic() {
                   referralCode ? `/auth?referralCode=${referralCode}` : "/auth",
                 )
               }
-              className="h-8.5 rounded-xl bg-gradient-to-r from-[#00b35c91] via-[#00b35ce3] to-[#00b35c] font-normal transition-colors ease-linear hover:bg-transparent hover:from-[#00b35ce3] hover:to-[#00b35c91] max-sm:text-xs sm:p-5"
+              size="lg"
+              className="bg-landing hover:bg-landing rounded-full font-normal transition-transform hover:scale-105 max-sm:text-xs"
             >
               Signup
             </Button>

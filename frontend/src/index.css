@@ -2,25 +2,10 @@
 @plugin "tailwindcss-animate";
 @custom-variant dark (&:is(.dark *));
 
-* {
-  box-sizing: border-box;
-  user-select: none;
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-  scrollbar-gutter: stable;
-}
-
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-
 :root {
+  --landing: #07b561;
+  --font-family-inter: "Inter", sans-serif;
+  --font-family-poppins: "Poppins", sans-serif;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -96,9 +81,12 @@ body {
 }
 
 @theme inline {
+  --font-inter: var(--font-family-inter);
+  --font-poppins: var(--font-family-poppins);
   --text-sm: 0.83rem;
   --text-2xs: 0.7rem;
   --text-md: 0.95rem;
+  --color-landing: var(--landing);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radiusfont-medium-md: calc(var(--radius) - 2px);
@@ -143,36 +131,6 @@ body {
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   --animate-underline: underline 6s ease-in-out 1s infinite;
 
-  @keyframes underline {
-    /* START: not drawn */
-    0% {
-      transform: scaleX(0);
-      opacity: 0;
-    }
-
-    /* DRAW underline */
-    15% {
-      transform: scaleX(1);
-      opacity: 1;
-    }
-
-    /* HOLD drawn state */
-    20% {
-      transform: scaleX(1);
-      opacity: 1;
-    }
-    90% {
-      transform: scaleX(1);
-      opacity: 1;
-    }
-
-    /* ERASE underline (reverse) */
-    100% {
-      transform: scaleX(0);
-      opacity: 0;
-    }
-  }
-
   @keyframes marquee {
     from {
       transform: translateX(0);
@@ -194,9 +152,17 @@ body {
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
+    user-select: none;
+    font-optical-sizing: auto;
+    scrollbar-width: thin;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-family-inter);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
   }
 
   .input-wrapper {
@@ -216,6 +182,10 @@ body {
   .invest-input-error {
     @apply absolute mt-1 hidden text-xs font-medium text-red-400 peer-[&:invalid:not(:placeholder-shown)]:block;
   }
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 input[type="search"]::-webkit-search-decoration,

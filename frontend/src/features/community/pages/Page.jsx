@@ -33,7 +33,7 @@ function Page() {
     ? searchData || []
     : listData?.pages.flatMap((page) => page?.users || []) || [];
 
-    const isPending = isSearching ? isSearchPending : isListPending;
+  const isPending = isSearching ? isSearchPending : isListPending;
 
   const { ref: inViewRef, inView } = useInView({
     threshold: 0.1,

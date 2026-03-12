@@ -8,9 +8,7 @@ import ScrollToTop from "./ScrollToTop";
 function PublicLayout() {
   return (
     <ErrorBoundary fallback={<ErrorPage />}>
-      <div className="flex items-center justify-center">
-        <NavbarPublic />
-      </div>
+      <NavbarPublic />
       <Outlet />
       <Footer className="mt-20 border-transparent sm:mt-34" />
       <ScrollToTop />

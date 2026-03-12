@@ -1,13 +1,16 @@
-import { useEffect } from "react";
-import { trackPageView } from "@/lib/analytics";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import AmcMarquee from "@/components/landing/AmcMarquee";
-import Community from "@/components/landing/Community";
-import Cta from "@/components/landing/Cta";
+import Comparison from "@/components/landing/Comparison";
 import Faqs from "@/components/landing/Faqs";
 import Features from "@/components/landing/Features";
+import FinalCta from "@/components/landing/FinalCta";
 import Hero from "@/components/landing/Hero";
-import Quote from "@/components/landing/Quote";
+import Pwa from "@/components/landing/Pwa";
+import Stats from "@/components/landing/Stats";
+import UiShowcase from "@/components/landing/UiShowcase";
+import { Button } from "@/components/ui/button";
+import { trackPageView } from "@/lib/analytics";
+import { GithubLogoIcon } from "@phosphor-icons/react";
+import { useEffect } from "react";
 
 function HomePage() {
   useEffect(() => {
@@ -18,15 +21,19 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="font-poppins">
       <Hero />
-      <AmcMarquee />
-      <Features className="mt-24 sm:mt-34" />
-      <Community className="mt-24 sm:mt-34" />
-      <Faqs className="mt-28 sm:mt-34" />
-      <Quote />
-      <Cta className="mt-24 sm:mt-34" />
+      <Stats />
+      <Features />
+      <UiShowcase />
+      <Comparison />
+      <Faqs />
+      <Pwa />
+      <FinalCta />
       <ScrollToTopButton />
+      {/* <Button size="lg" className="ml-[30%] font-normal mt-20 bg-landing rounded-full">
+        <GithubLogoIcon /> Star On Github
+      </Button> */}
     </div>
   );
 }

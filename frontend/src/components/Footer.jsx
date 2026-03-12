@@ -25,13 +25,13 @@ function Footer({ className }) {
   };
 
   return (
-    <footer className={cn("w-full border-t", className)}>
+    <footer className={cn("font-poppins w-full border-t", className)}>
       <div className="mx-auto max-w-(--breakpoint-xl)">
         <div className="flex flex-col justify-between gap-x-8 gap-y-4 py-6 sm:flex-row sm:gap-y-10 sm:px-6 xl:px-0">
           <div>
             <Link to="/" className="flex items-center">
               <LogoShapeOnly className="size-18" />
-              <span className="relative right-2 text-xl font-semibold">
+              <span className="relative right-2 text-xl font-medium">
                 Vestify
               </span>
             </Link>
@@ -55,7 +55,7 @@ function Footer({ className }) {
 
           {/* Credits */}
           <div className="my-auto ml-4 w-full max-w-xs">
-            <span className="sm:text-md text-sm font-semibold">Credits</span>
+            <span className="sm:text-md text-sm font-medium">Credits</span>
             <div className="mt-2 flex flex-col gap-2 text-xs sm:text-sm">
               {credits.map((item) => (
                 <a
@@ -74,7 +74,7 @@ function Footer({ className }) {
 
         <div className="flex flex-col-reverse items-center justify-between gap-x-2 gap-y-5 px-6 py-8 sm:flex-row xl:px-0">
           {/* Copyright */}
-          <span className="text-muted-foreground sm:text-md text-sm">
+          <span className="text-muted-foreground font-inter sm:text-md text-sm tabular-nums">
             &copy; {new Date().getFullYear()} <Link href="/">Vestify</Link>. All
             rights reserved.
           </span>

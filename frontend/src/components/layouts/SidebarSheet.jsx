@@ -1,6 +1,6 @@
 import { Sheet, SheetContent, SheetHeader } from "@/components/ui/sheet";
 import { XIcon } from "lucide-react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import ThemeChangeButton from "../ThemeChangeButton";
 import { Button } from "../ui/button";
 import { sheetMenues } from "@/constants/sheet";
@@ -51,7 +51,7 @@ function SidebarSheet({ open, onOpenChange }) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-[80%] [&>button]:hidden">
+      <SheetContent className="font-poppins w-[80%] [&>button]:hidden">
         <SheetHeader>
           <Button
             size="icon"
@@ -72,7 +72,7 @@ function SidebarSheet({ open, onOpenChange }) {
               <Button
                 onClick={() => handleNavClick(nav.link)}
                 variant="link"
-                className="text-foreground flex w-full justify-start text-start text-xl font-[450]"
+                className="text-foreground flex w-full justify-start text-start text-xl font-normal"
               >
                 {nav.name}
               </Button>

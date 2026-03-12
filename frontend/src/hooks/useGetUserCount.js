@@ -1,4 +1,4 @@
-import { fetchUserCount } from "@/api/profile";
+import { fetchUserCount } from "@/api/landing";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUserCount() {

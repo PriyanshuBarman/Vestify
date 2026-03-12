@@ -1,19 +1,11 @@
 import db from "#config/db.config.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
-import * as portfolioService from "../../mutual-fund/services/portfolio.service.js";
 import { formatData } from "../utils/format.utils.js";
 
-export const getUserCount = async () => {
-  const count = await db.user.count({
-    where: {
-      id: { not: "system" },
-    },
-  });
-  return count;
-};
-
 export const getUsers = async ({ skip = 0, take = 20 }) => {
-  const totalCount = await getUserCount();
+  const totalCount = await db.user.count({
+    where: { id: { not: "system" } },
+  });
 
   // 1. Fetch paginated users with only required fields
   const users = await db.user.findMany({
