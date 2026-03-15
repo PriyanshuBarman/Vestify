@@ -73,6 +73,7 @@ function SendMoneyPage() {
           onChange={(e) => setNote(e.target.value)}
           value={note}
           placeholder="Add Note"
+          maxLength={100}
           className="min-h-0 w-fit max-w-3/4 resize-none overflow-hidden text-center text-sm"
         />
       </div>

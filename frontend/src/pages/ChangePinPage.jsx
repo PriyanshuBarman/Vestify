@@ -4,7 +4,7 @@ import {
   Field,
   FieldError,
   FieldGroup,
-  FieldLabel
+  FieldLabel,
 } from "@/components/ui/field";
 import {
   InputOTP,
@@ -57,19 +57,19 @@ function ChangePasswordPage() {
               className={`gap-3 sm:gap-6 ${isInvalidPin && "shake-animation"}`}
             >
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-xs first:rounded-xl"
+                className="size-13 text-base font-medium shadow-none first:rounded-xl"
                 index={0}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-xs"
+                className="size-13 rounded-xl text-base font-medium shadow-none"
                 index={1}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-xs"
+                className="size-13 rounded-xl text-base font-medium shadow-none"
                 index={2}
               />
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-xs last:rounded-xl"
+                className="size-13 text-base font-medium shadow-none last:rounded-xl"
                 index={3}
               />
             </InputOTPGroup>
@@ -98,19 +98,19 @@ function ChangePasswordPage() {
           >
             <InputOTPGroup className="gap-3 sm:gap-6">
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-xs first:rounded-xl"
+                className="size-13 text-base font-medium shadow-none first:rounded-xl"
                 index={0}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-xs"
+                className="size-13 rounded-xl text-base font-medium shadow-none"
                 index={1}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-xs"
+                className="size-13 rounded-xl text-base font-medium shadow-none"
                 index={2}
               />
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-xs last:rounded-xl"
+                className="size-13 text-base font-medium shadow-none last:rounded-xl"
                 index={3}
               />
             </InputOTPGroup>

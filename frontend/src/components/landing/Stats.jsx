@@ -15,7 +15,7 @@ function Stats() {
 
   return (
     <section className="w-full py-12 md:py-24">
-      <div className="flex max-w-7xl items-center justify-center gap-8 px-6 md:gap-22 md:px-12">
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-8 px-6 md:gap-22 md:px-12">
         {stats.map((stat, index) => (
           <motion.div
             key={index}

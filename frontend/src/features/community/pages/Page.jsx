@@ -48,14 +48,14 @@ function Page() {
   }, [fetchNextPage, inView, hasNextPage, isSearching]);
 
   return (
-    <div className="max-sm:px-4 max-sm:pb-16 sm:mx-auto sm:flex sm:gap-24">
+    <div className="font-poppins max-sm:px-4 max-sm:pb-16 sm:mx-auto sm:flex sm:gap-24">
       {/* Illustration */}
       {!isMobile && (
-        <div className="flex w-[40%] flex-col items-center justify-center max-sm:hidden">
+        <div className="flex w-[50%] flex-col items-center justify-center max-sm:hidden">
           <img
             src="./team-work.svg"
             alt="community illustrator"
-            className="size-90"
+            className="size-120"
           />
           <h2 className="text-2xl font-semibold tracking-tight">Community</h2>
           <p className="text-muted-foreground sm:text-md mt-2 text-sm">
@@ -104,33 +104,35 @@ function Page() {
         </div>
 
         <ScrollArea className="sm:h-[calc(100vh-150px)] sm:mask-b-from-95%">
-          {isPending ? (
-            <div className="space-y-4 pt-6 sm:mr-4">
-              {Array.from({ length: 3 }).map((_, index) => (
-                <UserPreviewCardSkeleton key={index} />
-              ))}
-            </div>
-          ) : !users?.length ? (
-            <NoUsersFound />
-          ) : (
-            <div className="space-y-4 pt-6 pb-8 sm:mr-4">
-              {users.map((user) => (
-                <UserPreviewCard key={user.username} user={user} />
-              ))}
+          <div className="space-y-6 pt-6 pb-8 sm:mr-4">
+            {isPending ? (
+              <>
+                {Array.from({ length: 4 }).map((_, index) => (
+                  <UserPreviewCardSkeleton key={index} />
+                ))}
+              </>
+            ) : !users?.length ? (
+              <NoUsersFound />
+            ) : (
+              <>
+                {users.map((user) => (
+                  <UserPreviewCard key={user.username} user={user} />
+                ))}
 
-              {/* Pagination sentinel */}
-              {!isSearching && hasNextPage && (
-                <div
-                  ref={inViewRef}
-                  className="flex h-16 w-full items-center justify-center"
-                >
-                  {isFetchingNextPage && (
-                    <Loader2Icon className="text-muted-foreground animate-spin" />
-                  )}
-                </div>
-              )}
-            </div>
-          )}
+                {/* Pagination sentinel */}
+                {!isSearching && hasNextPage && (
+                  <div
+                    ref={inViewRef}
+                    className="flex h-16 w-full items-center justify-center"
+                  >
+                    {isFetchingNextPage && (
+                      <Loader2Icon className="text-muted-foreground animate-spin" />
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
           <ScrollBar orientation="vertical" />
         </ScrollArea>
       </div>

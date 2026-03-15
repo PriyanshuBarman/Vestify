@@ -42,15 +42,9 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
       </ResponsiveModalTrigger>
 
       <ResponsiveModalContent>
-        <ResponsiveModalHeader className="items-center">
-          <IconWrapper>
-            <SkipForwardIcon className="sm:size-8" />
-          </IconWrapper>
-        </ResponsiveModalHeader>
-
-        <ResponsiveModalTitle className="pb-2 text-center font-medium">
+        <ResponsiveModalTitle className="py-2 mt-4 text-center font-medium">
           Are you sure you want to skip{" "}
-          {format(nextInstallmentDate, "dd MMM yy")} installment?
+          {format(nextInstallmentDate, "dd MMMM")} installment?
         </ResponsiveModalTitle>
 
         {diff <= 2 && (

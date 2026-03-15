@@ -40,7 +40,7 @@ function StepUpDetailsModal({
               {sipDetail.stepUpIntervalInMonths} months
             </Row>
             <Row label="Upcoming step-up">
-              {formatDate(sipDetail.nextStepUpDate, "MMM yy")}
+              {formatDate(sipDetail.nextStepUpDate, "dd MMM yyyy")}
             </Row>
           </CardContent>
         </Card>

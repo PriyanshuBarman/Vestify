@@ -161,7 +161,7 @@ function Description({
 }) {
   const stepUpDate = formatDate(
     addMonths(new Date(), intervalInMonths),
-    "MMM yy",
+    "MMM yyyy",
   );
   const stepUpValue =
     selected === "amount"

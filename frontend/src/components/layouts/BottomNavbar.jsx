@@ -1,8 +1,8 @@
 import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   ChartPieSliceIcon,
-  WalletIcon,
   UsersThreeIcon,
+  WalletIcon,
 } from "@phosphor-icons/react";
 import { NavLink, useLocation } from "react-router";
 
@@ -11,7 +11,7 @@ const tabsMapping = [
     id: 1,
     name: "Mutual Funds",
     icon: ChartPieSliceIcon,
-    link: "/mutual-funds#explore",
+    link: "/mutual-funds",
   },
   {
     id: 4,
@@ -30,7 +30,6 @@ const allowedRoutes = [
   "/mutual-funds",
   "/mutual-funds/",
   "/wallet",
-  "/stocks", // keeping stocks route allowed for direct access even if tab is removed
   "/community",
 ];
 
@@ -39,7 +38,7 @@ function BottomNavbar() {
   const location = useLocation();
   const currentPath = location.pathname;
 
-   if (!allowedRoutes.includes(currentPath)) return;
+  if (!allowedRoutes.includes(currentPath)) return;
   if (!isMobile) return;
   return (
     <nav className="bg-background fixed inset-x-0 bottom-0 z-10 flex w-full justify-around border-t pt-2 pb-1">

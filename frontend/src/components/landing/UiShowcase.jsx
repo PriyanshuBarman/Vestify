@@ -21,10 +21,10 @@ function UiShowcase() {
             transition: { duration: 0.6, delay: 0.4 },
           }}
           viewport={{ once: true }}
-          className="text-muted-foreground mt-4 mb-12 max-w-2xl text-base leading-relaxed md:text-lg"
+          className="text-muted-foreground mt-4 mb-12 max-w-2xl text-base md:text-lg"
         >
           Featuring{" "}
-          <span className="text-landing italic">Groww.in inspired UI</span> for
+          <span className="text-landing italic">Groww App inspired UI</span> for
           realistic investing experience.
         </motion.p>
       </div>
@@ -64,18 +64,5 @@ function ScreenshotMarquee() {
         ))}
       </Marquee>
     </motion.div>
-  );
-}
-function AMCLogoItem({ amc }) {
-  return (
-    <div key={amc.id} className="flex items-center gap-3 rounded-2xl sm:gap-4">
-      <FundLogo
-        fundHouseDomain={amc.detail_info}
-        className="size-9 rounded-lg sm:size-10 sm:rounded-xl"
-      />
-      <p className="text-foreground/80 text-sm whitespace-nowrap sm:text-base">
-        {amc.amc_name}
-      </p>
-    </div>
   );
 }

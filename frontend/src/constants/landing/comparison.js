@@ -1,14 +1,13 @@
 import {
-  ArrowDownCircleIcon,
   ArrowRightLeftIcon,
-  ArrowUpCircleIcon,
-  BarChart3Icon,
   CalendarDaysIcon,
+  CodeXmlIcon,
+  PieChartIcon,
   QrCodeIcon,
-  RefreshCwIcon,
+  Rotate3DIcon,
   TrendingUpIcon,
   UsersIcon,
-  WalletIcon,
+  Wallet2Icon,
 } from "lucide-react";
 
 export const comparisonFeatures = [
@@ -20,22 +19,21 @@ export const comparisonFeatures = [
 
   {
     icon: CalendarDaysIcon,
-
     label: "Virtual SIP (Auto-Invest)",
     others: false,
   },
   {
-    icon: ArrowUpCircleIcon,
+    icon: Rotate3DIcon,
     label: "Step-Up SIP",
     others: false,
   },
   {
-    icon: BarChart3Icon,
+    icon: PieChartIcon,
     label: "Virtual Portfolio",
     others: true,
   },
   {
-    icon: WalletIcon,
+    icon: Wallet2Icon,
     label: "Virtual Wallet",
     others: false,
   },

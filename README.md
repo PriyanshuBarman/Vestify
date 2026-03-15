@@ -31,7 +31,7 @@ Vestify is a virtual investment platform that simulates real mutual fund investi
 - Express.js
 - MySQL with Prisma ORM
 - Cloudinary (Image Upload)
-- GitHub Actions (sautomation)
+- GitHub Actions (automation)
 
 ### Prerequisites
 
@@ -220,8 +220,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- **Website**: [https://www.vestiffy.vercel.app](https://www.vestiffy.vercel.app)
-- **Reddit Comunity**: [r/Vestify](https://www.reddit.com/r/Vestify)
+- **Website**: [https://vestiffy.vercel.app](https://vestiffy.vercel.app)
+- **Reddit Comunity**: [r/Vestify](https://reddit.com/r/Vestify)
 - **GitHub**: [Vestify](https://github.com/PriyanshuBarman/Vestify)
 
 ## Credits

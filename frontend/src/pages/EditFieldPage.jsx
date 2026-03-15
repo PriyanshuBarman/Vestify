@@ -40,6 +40,7 @@ function EditFieldPage() {
           onChange={(e) => setValue(e.target.value)}
           className="h-11 w-full"
           autoFocus
+          maxlength="40"
         />
         {isSameValueEntered && (
           <FieldError>This is your current {field}</FieldError>

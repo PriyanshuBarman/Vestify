@@ -15,8 +15,8 @@ function SectionHeading({ heading, subheading, className }) {
           variants={itemVariants}
           className="text-landing flex items-center gap-2"
         >
-          <SparklesIcon size={16} />
-          <span className="text-xs font-medium tracking-wide uppercase md:text-sm">
+          <SparklesIcon className="size-4 md:size-5" />
+          <span className="text-xs font-medium tracking-wide  md:text-lg">
             {subheading}
           </span>
         </motion.div>

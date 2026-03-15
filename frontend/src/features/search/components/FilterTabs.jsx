@@ -4,10 +4,10 @@ import { Trash2Icon } from "lucide-react";
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const filterTabs = {
-  Stocks: "indianStocks",
-  "Mutual Funds": "mutualFunds",
-};
+// const filterTabs = {
+//   Stocks: "indianStocks",
+//   "Mutual Funds": "mutualFunds",
+// };
 
 function FilterTabs({ setSearchType, searchType }) {
   const searchHistory = useSelector((state) => state.search.searchHistory);
