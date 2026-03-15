@@ -14,7 +14,7 @@ function ProfileAvatar({ className, fallbackClassName, ...props }) {
       />
       <AvatarFallback
         className={cn(
-          "text-4xl font-semibold text-shadow-lg",
+          "text-foreground text-4xl font-semibold",
           fallbackClassName,
         )}
       >

@@ -12,17 +12,19 @@ import { getChangeColor } from "@/utils/helper";
 
 function FundPortfolioSummary({ fund, className }) {
   return (
-    <Card className={cn("mx-2 tabular-nums", className || "")}>
+    <Card
+      className={cn("mx-2 rounded-[1.25rem] tabular-nums", className || "")}
+    >
       <CardHeader className="flex justify-between">
         <div>
           <CardDescription>Current</CardDescription>
-          <CardTitle className="mt-2 text-lg leading-tight">
+          <CardTitle className="mt-1 text-lg leading-tight">
             {formatToINR(fund.current, 0)}
           </CardTitle>
         </div>
         <div>
           <CardDescription>Invested</CardDescription>
-          <CardTitle className="mt-2 text-lg leading-tight">
+          <CardTitle className="mt-1 text-lg leading-tight">
             {formatToINR(fund.invested, 0)}
           </CardTitle>
         </div>

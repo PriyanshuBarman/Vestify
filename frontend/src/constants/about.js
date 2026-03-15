@@ -36,7 +36,7 @@ export const aboutData = [
   {
     title: "4. Next Goal / Future Features",
     paragraphs: [
-      "Our next main feature is to add stocks to Vestify. Currently, we are unable to implement it because reliable and free real-time stock APIs are limited or paid.",
+      "Our next main feature is to add virtual stock & gold investing to Vestify. Currently, we are unable to implement it because reliable and free real-time stock APIs are limited or paid.",
     ],
   },
 ];

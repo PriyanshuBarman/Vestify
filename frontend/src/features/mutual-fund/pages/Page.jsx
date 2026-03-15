@@ -1,9 +1,8 @@
-import LoadingState from "@/components/LoadingState";
 import {
   selectActiveTabIndex,
   setActiveTabIndex,
 } from "@/store/slices/mutualFundSlice";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "swiper/css";
 import { HashNavigation } from "swiper/modules";
@@ -13,6 +12,29 @@ import InvestmentsTab from "../components/tabs/InvestmentsTab";
 const SipsTab = lazy(() => import("../components/tabs/SipsTab"));
 const WatchlistTab = lazy(() => import("../components/tabs/WatchlistTab"));
 const ExploreTab = lazy(() => import("../components/tabs/ExploreTab"));
+
+const TABS = [
+  {
+    id: 0,
+    name: "explore",
+    component: ExploreTab,
+  },
+  {
+    id: 1,
+    name: "investments",
+    component: InvestmentsTab,
+  },
+  {
+    id: 2,
+    name: "sips",
+    component: SipsTab,
+  },
+  {
+    id: 3,
+    name: "watchlist",
+    component: WatchlistTab,
+  },
+];
 
 function Page() {
   const activeTabIndex = useSelector(selectActiveTabIndex);
@@ -36,33 +58,17 @@ function Page() {
           allowTouchMove: false,
         },
       }}
+      initialSlide={activeTabIndex}
     >
-      <SwiperSlide data-hash="explore" className="min-h-[calc(100vh-200px)]">
-        <ExploreTab />
-      </SwiperSlide>
-
-      <SwiperSlide
-        data-hash="investments"
-        className="min-h-[calc(100vh-200px)]"
-      >
-        {activeTabIndex === 1 && <InvestmentsTab />}
-      </SwiperSlide>
-
-      <SwiperSlide data-hash="sips" className="min-h-[calc(100vh-200px)]">
-        {activeTabIndex === 2 && (
-          <Suspense fallback={<LoadingState />}>
-            <SipsTab />
-          </Suspense>
-        )}
-      </SwiperSlide>
-
-      <SwiperSlide data-hash="watchlist" className="min-h-[calc(100vh-200px)]">
-        {activeTabIndex === 3 && (
-          <Suspense fallback={<LoadingState />}>
-            <WatchlistTab />
-          </Suspense>
-        )}
-      </SwiperSlide>
+      {TABS.map(({ id, name, component: Component }) => (
+        <SwiperSlide
+          key={id}
+          data-hash={name}
+          className="min-h-[calc(100vh-200px)]"
+        >
+          <Component />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

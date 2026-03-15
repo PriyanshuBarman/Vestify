@@ -1,8 +1,6 @@
 import { Marquee } from "@/components/ui/marquee";
 import { useGetScreenshots } from "@/hooks/useGetScreenshots";
-import { selectTheme } from "@/store/slices/themeSlice";
 import { motion } from "motion/react";
-import { useSelector } from "react-redux";
 import SectionHeading from "./SectionHeading";
 
 function UiShowcase() {
@@ -21,10 +19,10 @@ function UiShowcase() {
             transition: { duration: 0.6, delay: 0.4 },
           }}
           viewport={{ once: true }}
-          className="text-muted-foreground mt-4 mb-12 max-w-2xl text-base leading-relaxed md:text-lg"
+          className="text-muted-foreground mt-4 mb-12 max-w-2xl text-base md:text-lg"
         >
           Featuring{" "}
-          <span className="text-landing italic">Groww.in inspired UI</span> for
+          <span className="text-landing italic">Groww App inspired UI</span> for
           realistic investing experience.
         </motion.p>
       </div>
@@ -38,7 +36,6 @@ export default UiShowcase;
 
 function ScreenshotMarquee() {
   const { data: screenshots } = useGetScreenshots();
-  const theme = useSelector(selectTheme);
 
   return (
     <motion.div
@@ -48,15 +45,26 @@ function ScreenshotMarquee() {
       viewport={{ once: true }}
     >
       <Marquee className="mx-auto mask-x-from-95% p-0 [--duration:80s] sm:max-w-7xl sm:mask-x-from-95% sm:py-10 sm:[--duration:100s]">
-        {screenshots?.[theme]?.map((img, index) => (
+        {screenshots?.light?.map((_, index) => (
           <div
             key={index}
             className="h-98 w-fit shrink-0 overflow-hidden rounded-3xl border px-1 sm:mx-4 sm:h-116 sm:w-auto sm:rounded-3xl sm:px-2 sm:shadow-lg"
           >
             <img
-              src={img}
+              src={screenshots.light[index]}
               alt="screenshot"
-              className="h-full w-full shrink-0"
+              height="462"
+              width="208"
+              className="h-full w-full shrink-0 dark:hidden"
+              draggable={false}
+              loading="lazy"
+            />
+            <img
+              src={screenshots.dark[index]}
+              alt="screenshot"
+              height="462"
+              width="208"
+              className="hidden h-full w-full shrink-0 dark:block"
               draggable={false}
               loading="lazy"
             />
@@ -64,18 +72,5 @@ function ScreenshotMarquee() {
         ))}
       </Marquee>
     </motion.div>
-  );
-}
-function AMCLogoItem({ amc }) {
-  return (
-    <div key={amc.id} className="flex items-center gap-3 rounded-2xl sm:gap-4">
-      <FundLogo
-        fundHouseDomain={amc.detail_info}
-        className="size-9 rounded-lg sm:size-10 sm:rounded-xl"
-      />
-      <p className="text-foreground/80 text-sm whitespace-nowrap sm:text-base">
-        {amc.amc_name}
-      </p>
-    </div>
   );
 }

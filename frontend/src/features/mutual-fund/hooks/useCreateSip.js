@@ -35,7 +35,6 @@ export function useCreateSip() {
       queryClient.setQueryData(["pending-orders"], (old) =>
         old ? [order, ...old] : [order],
       );
-      queryClient.invalidateQueries({ queryKey: ["sips"] });
 
       playPaymentSuccessSound();
       navigate("/success", {

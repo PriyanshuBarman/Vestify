@@ -1,9 +1,9 @@
-import { ChevronUpIcon } from "lucide-react";
+import { ArrowUpIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 
-function ScrollToTopButton({ scrollThreshold = 600 }) {
+function ScrollToTopButton({ scrollThreshold = 800 }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function ScrollToTopButton({ scrollThreshold = 600 }) {
             className="size-12 rounded-full bg-[#00c968] active:scale-95"
             aria-label="Scroll to top"
           >
-            <ChevronUpIcon className="size-7" />
+            <ArrowUpIcon className="size-6" />
           </Button>
         </motion.div>
       )}

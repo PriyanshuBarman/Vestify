@@ -12,13 +12,7 @@ const DesktopSearch = lazy(
   () => import("../../features/search/components/DesktopSearch"),
 );
 
-const allowedRoutes = new Set([
-  "/mutual-funds",
-  "/mutual-funds/",
-  "/wallet",
-  "/stocks",
-  "/gold",
-]);
+const allowedRoutes = new Set(["/mutual-funds", "/mutual-funds/", "/wallet"]);
 
 function Navbar() {
   const isMobile = useIsMobile();
@@ -85,7 +79,7 @@ function Navbar() {
 export default Navbar;
 function NavLinks() {
   const links = [
-    { to: "/mutual-funds#explore", label: "Mutual Funds" },
+    { to: "/mutual-funds", label: "Mutual Funds" },
     { to: "/community", label: "Community" },
     { to: "/wallet", label: "Wallet" },
   ];

@@ -81,7 +81,13 @@ function Footer({ className }) {
 
           <div className="flex items-center gap-5">
             {socialLinks.map(({ label, href, Icon }) => (
-              <a key={label} aria-label={label} href={href} target="_blank">
+              <a
+                key={label}
+                aria-label={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Icon weight="fill" className="h-5 w-5" />
               </a>
             ))}

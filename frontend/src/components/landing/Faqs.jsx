@@ -4,32 +4,20 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { itemVariants } from "@/constants/animations";
+import { itemVariants, slideInLeft } from "@/constants/animations";
 import { faqs } from "@/constants/faqs";
 import { motion } from "motion/react";
-
-const slideInLeft = {
-  hidden: { opacity: 0, x: -26 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
 
 function Faqs() {
   return (
     <section className="w-full py-12 sm:py-24">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between  px-4 sm:px-6 lg:flex-row md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between px-4 sm:px-6 md:px-8 lg:flex-row">
         <motion.h2
           initial="hidden"
           whileInView="visible"
           variants={slideInLeft}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center text-2xl font-medium tracking-tight sm:text-3xl md:text-4xl"
+          className="text-center text-2xl font-medium tracking-tight sm:text-3xl md:text-6xl"
         >
           Questions And Answers
         </motion.h2>
@@ -44,7 +32,7 @@ function Faqs() {
           <Accordion
             type="single"
             collapsible
-            className="w-full space-y-3 mt-12 lg:ml-auto lg:w-xl lg:space-y-4"
+            className="mt-12 w-full space-y-3 lg:ml-auto lg:w-xl lg:space-y-4"
           >
             {faqs.map(({ question, answer }, index) => (
               <FaqItem

@@ -95,9 +95,11 @@ function AccountDetailsPage() {
             <Button
               size="icon"
               variant="ghost"
+              // Email changes require a custom domain (needed for providers like Resend/SendGrid).
+              // We're currently on a free subdomain, so this is disabled for now.
               // onClick={() => navigate("/change-email")}
               onClick={() =>
-                toast("Currently email change option is not available")
+                toast.info("Please contact support to change your email address.")
               }
             >
               <Edit2Icon />

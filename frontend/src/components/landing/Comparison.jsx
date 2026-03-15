@@ -42,7 +42,7 @@ function Comparison() {
                   Others
                 </TableHead>
                 <TableHead
-                  className="text-background rounded-tr-3xl py-4 text-center text-sm sm:text-base"
+                  className="text-background py-4 text-center text-sm sm:text-base"
                   style={vestifyColStyle}
                 >
                   Vestify

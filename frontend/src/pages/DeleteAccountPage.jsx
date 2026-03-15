@@ -24,6 +24,7 @@ function DeleteAccountPage() {
       </section>
 
       <Button
+        isDisabled={isPending}
         onClick={() => setIsModalOpen(true)}
         size="lg"
         variant="destructive"

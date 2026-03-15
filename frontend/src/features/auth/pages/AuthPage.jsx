@@ -29,7 +29,7 @@ function AuthPage() {
             <span className="sr-only">V</span>estify
           </h2>
         </div>
-        <p className="text-foreground/80 mt-2 text-center text-base tracking-tight duration-700 max-sm:max-w-[28ch] sm:text-xl">
+        <p className="text-foreground/80 mt-2 text-center text-base font-[450] tracking-tight duration-700 max-sm:max-w-[28ch] sm:text-xl">
           Experience real investing, in a fully virtual environment
         </p>
       </div>

@@ -56,7 +56,7 @@ function NavbarPublic() {
               size="lg"
               className="bg-landing hover:bg-landing rounded-full font-normal transition-transform hover:scale-105 max-sm:text-xs"
             >
-              Signup
+              SignUp
             </Button>
           </div>
         )}

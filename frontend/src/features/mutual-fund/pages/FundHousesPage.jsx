@@ -34,16 +34,16 @@ function FundHousesPage() {
               rank:
                 amcs.findIndex((item) => item.amc_code === amc.amc_code) + 1,
             }}
-            className="w-full cursor-pointer space-y-2 rounded-2xl border p-3 duration-200 ease-in-out hover:scale-101 sm:m-0.5 sm:space-y-4 sm:rounded-[1.25rem]  sm:p-4.5"
+            className="w-full cursor-pointer space-y-3 rounded-[1.25rem] border p-3 duration-200 ease-in-out hover:scale-101 sm:m-0.5 sm:space-y-4 sm:rounded-3xl sm:p-4.5"
           >
-            <div className="flex items-end gap-2 sm:gap-3">
-              <FundLogo fundHouseDomain={amc.detail_info} className="size-9" />
+            <div className="flex items-center gap-3 sm:gap-4">
+              <FundLogo fundHouseDomain={amc.detail_info} className="size-8" />
               <p className="text-2xs sm:text-[0.9rem] sm:font-medium">
                 {amc.fundCount}
                 <span className="ml-0.5 text-[85%] sm:ml-1">Funds</span>
               </p>
             </div>
-            <p className="line-clamp-1 text-xs font-[450] sm:text-base sm:font-medium">
+            <p className="sm:text-md line-clamp-1 text-xs font-[450] sm:font-medium">
               {amc.amc_name}
             </p>
           </Link>

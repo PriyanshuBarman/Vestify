@@ -23,12 +23,12 @@ function PinSetupPage() {
       {/* Top Content */}
       <div className="mt-10 flex flex-1 flex-col items-center gap-y-8 px-8 sm:flex-0">
         <div className="text-center">
-          <h1 className="mb-1 text-xl font-semibold sm:text-2xl">
+          <h1 className="mb-4 text-xl font-semibold sm:text-2xl">
             Set up your PIN
           </h1>
-          <p className="text-muted-foreground text-sm sm:max-w-[50ch] sm:text-base">
-            This PIN will be required to make investments and send virtual money
-            to other users
+          <p className="text-muted-foreground text-sm text-balance sm:max-w-[50ch] sm:text-base">
+            This PIN will be required to make investments and to send virtual
+            money to other users from your virtual wallet
           </p>
         </div>
 

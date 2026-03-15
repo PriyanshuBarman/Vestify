@@ -18,7 +18,7 @@ function Faqs() {
             value={`item-${index}`}
             className="bg-accent rounded-xl px-4"
           >
-            <AccordionTrigger className="sm:text-md text-sm">
+            <AccordionTrigger className="sm:text-md font-[450] text-sm">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="text-muted-foreground leading-relaxed">
