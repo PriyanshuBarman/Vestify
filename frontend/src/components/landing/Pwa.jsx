@@ -1,11 +1,11 @@
-import { useInstallApp } from "@/hooks/useInstallApp";
+import { useInstallPWA } from "@/hooks/useInstallPWA";
 import { ArrowDownIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "motion/react";
 import { containerVariants, itemVariants } from "@/constants/animations";
 
 function Pwa() {
-  const { handleInstall } = useInstallApp();
+  const { handleInstallClick } = useInstallPWA();
 
   return (
     <section className="from-landing/70 via-landing to-landing my-12 w-full overflow-hidden bg-gradient-to-t py-12">
@@ -31,7 +31,7 @@ function Pwa() {
           </motion.p>
           <motion.div variants={itemVariants}>
             <Button
-              onClick={handleInstall}
+              onClick={handleInstallClick}
               variant="ghost"
               size="lg"
               className="bg-background text-foreground mt-8 w-fit rounded-full !px-6 max-sm:font-normal sm:h-12"

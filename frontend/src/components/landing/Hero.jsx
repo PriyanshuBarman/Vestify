@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import Mockup from "./Mockup";
 import { Link, useSearchParams } from "react-router";
 import { containerVariants, heroItemVariants } from "@/constants/animations";
+import { useInstallPWA } from "@/hooks/useInstallPWA";
 
 function Hero() {
   const [searchParams] = useSearchParams();
@@ -79,8 +80,16 @@ function Hero() {
 export default Hero;
 
 function Badge() {
+  const { isStandalone, isPwaSupported, handleInstallClick } = useInstallPWA();
+
+  const handleClick = () => {
+    if (isStandalone || !isPwaSupported) return;
+    handleInstallClick();
+  };
+
   return (
     <motion.div
+      onClick={handleClick}
       variants={heroItemVariants}
       className="bg-muted inline-flex w-fit items-center gap-2 rounded-full px-3 py-1 md:px-3.5 md:py-1.5"
     >

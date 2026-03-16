@@ -7,19 +7,19 @@ import {
 } from "@/components/ui/item";
 import { Download } from "lucide-react";
 import IconWrapper from "./IconWrapper";
-import { useInstallApp } from "@/hooks/useInstallApp";
+import { useInstallPWA } from "@/hooks/useInstallPWA";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 function InstallAppCard() {
   const isMobile = useIsMobile();
-  const { isInstallable, handleInstall } = useInstallApp();
-  if (!isInstallable || !isMobile) return null;
+  const { isPwaSupported, handleInstallClick } = useInstallPWA();
+  if (!isPwaSupported || !isMobile) return null;
 
   return (
     <Item
       variant="outline"
       className="mx-4 cursor-pointer rounded-2xl"
-      onClick={handleInstall}
+      onClick={handleInstallClick}
     >
       <ItemContent>
         <ItemTitle>Install Web App</ItemTitle>
