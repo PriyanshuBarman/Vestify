@@ -1,14 +1,17 @@
-import SendIcon from "@/components/icons/SendIcon";
-import { Button } from "@/components/ui/button";
-import { useGetBalance } from "@/hooks/useGetBalance";
+import { useState } from "react";
 import NumberFlow from "@number-flow/react";
 import { QrCodeIcon, ScanLineIcon } from "lucide-react";
-import { useState } from "react";
 import { useNavigate } from "react-router";
-import RecentTnxCard from "../components/RecentTnxCard";
+
+import { useGetBalance } from "@/hooks/useGetBalance";
+import { Button } from "@/components/ui/button";
+import SendIcon from "@/components/icons/SendIcon";
+
 import Faqs from "../components/Faqs";
 import MyQrCodeDrawer from "../components/MyQrCodeDrawer";
 import QrReader from "../components/QrReader";
+import RecentTnxCard from "../components/RecentTnxCard";
+
 function Page() {
   const navigate = useNavigate();
   const { data: balance } = useGetBalance();

@@ -1,3 +1,6 @@
+import { CheckIcon, XIcon } from "lucide-react";
+import { motion } from "motion/react";
+
 import {
   Table,
   TableBody,
@@ -6,10 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { containerVariants, itemVariants } from "@/constants/animations";
 import { comparisonFeatures } from "@/constants/landing/comparison";
-import { CheckIcon, XIcon } from "lucide-react";
-import { motion } from "motion/react";
+
 import SectionHeading from "./SectionHeading";
 
 const vestifyColStyle = {

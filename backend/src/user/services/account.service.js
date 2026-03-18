@@ -80,7 +80,7 @@ export const requestEmailChange = async (userId, password, newEmail) => {
   if (user.email === newEmail) {
     throw new ApiError(
       400,
-      "New email cannot be the same as the current email"
+      "New email cannot be the same as the current email",
     );
   }
 

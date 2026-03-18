@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from "lucide-react";
+import { useNavigate, useSearchParams } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -12,9 +16,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Spinner } from "@/components/ui/spinner";
-import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from "lucide-react";
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+
 import { useLogin } from "../hooks/useLogin";
 
 function LoginForm() {
@@ -104,7 +106,7 @@ function LoginForm() {
             </Button>
           </Field>
 
-          <FieldSeparator>Don't have an account?</FieldSeparator>
+          <FieldSeparator>Don&apos;t have an account?</FieldSeparator>
 
           <Button
             type="button"

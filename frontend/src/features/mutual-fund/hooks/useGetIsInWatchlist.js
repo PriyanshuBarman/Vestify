@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { isInWatchlist } from "../api/watchlist";
 
 export function useGetIsInWatchlist(schemeCode) {

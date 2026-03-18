@@ -1,5 +1,6 @@
-import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
+
 import { fetchOrders, fetchPendingOrders } from "../api/order";
 import { fetchPortfolio, fetchPortfolioSummary } from "../api/portfolio";
 
@@ -27,5 +28,5 @@ export function usePrefetchRequiredQueries(username) {
       queryKey: ["pending-orders"],
       queryFn: fetchPendingOrders,
     });
-  }, [isRestoring, username]);
+  }, [isRestoring, queryClient, username]);
 }

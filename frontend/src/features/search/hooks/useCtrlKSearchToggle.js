@@ -1,6 +1,7 @@
-import { setIsSearchOpen } from "@/store/slices/searchSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { setIsSearchOpen } from "@/store/slices/searchSlice";
 
 export function useCtrlKSearchToggle() {
   const isSearchOpen = useSelector((state) => state.search.isSearchOpen);
@@ -21,5 +22,7 @@ export function useCtrlKSearchToggle() {
     document.addEventListener("keydown", handleGlobalKeyDown);
 
     return () => document.removeEventListener("keydown", handleGlobalKeyDown);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSearchOpen]);
 }

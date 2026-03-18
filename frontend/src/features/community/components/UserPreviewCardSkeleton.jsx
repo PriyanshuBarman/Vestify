@@ -1,4 +1,3 @@
-import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function UserPreviewCardSkeleton() {
@@ -17,7 +16,7 @@ function UserPreviewCardSkeleton() {
         <Skeleton className="h-5 w-20" />
       </div>
 
-      <Skeleton className="bg-accent/80 m-2 h-15 rounded-3xl" />
+      <Skeleton className="bg-accent/80 mx-2 mb-2 h-15 rounded-3xl" />
     </div>
   );
 }

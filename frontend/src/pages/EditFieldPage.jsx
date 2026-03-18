@@ -1,12 +1,13 @@
-import GoBackBar from "@/components/GoBackBar";
-import { Button } from "@/components/ui/button";
-import { Field, FieldLabel, FieldError } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Spinner } from "@/components/ui/spinner";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
+
 import { useGetUser } from "@/hooks/useGetUser";
 import { useUpdateProfile } from "@/hooks/useUpdateProfile";
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
+import GoBackBar from "@/components/GoBackBar";
 
 function EditFieldPage() {
   const [value, setValue] = useState();

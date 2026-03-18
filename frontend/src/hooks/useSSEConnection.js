@@ -1,6 +1,7 @@
-import { VITE_BACKEND_BASE_URL } from "@/config/env";
-import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+
+import { VITE_BACKEND_BASE_URL } from "@/config/env";
 
 export function useSSEConnection() {
   const queryClient = useQueryClient();

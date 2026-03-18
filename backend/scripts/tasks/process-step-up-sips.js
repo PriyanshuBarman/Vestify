@@ -32,7 +32,7 @@ async function stepUpSip() {
           failureCount++;
           console.error("❌", error.message);
         }
-      })
+      }),
     );
   }
 

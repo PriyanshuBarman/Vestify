@@ -49,7 +49,7 @@ export const isInWatchlist = asyncHandler(async (req, res) => {
 
   const isWatchlisted = await watchlistService.isInWatchlist(
     userId,
-    schemeCode
+    schemeCode,
   );
 
   res.status(200).json({ success: true, isWatchlisted });

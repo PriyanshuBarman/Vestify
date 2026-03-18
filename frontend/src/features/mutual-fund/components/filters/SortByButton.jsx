@@ -1,20 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { DialogTitle } from "@/components/ui/dialog";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Separator } from "@/components/ui/separator";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
 import {
-  ArrowDownAZIcon,
-  ArrowUpZAIcon,
   ChartNoAxesColumnDecreasingIcon,
   ChartNoAxesColumnIncreasing,
   ChevronDownIcon,
   ChevronUpIcon,
 } from "lucide-react";
-import { useState } from "react";
+
+import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { Button } from "@/components/ui/button";
+import { DialogTitle } from "@/components/ui/dialog";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 function SortByButton({
   defaultSortBy,

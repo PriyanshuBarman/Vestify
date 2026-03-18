@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { ChevronsUpDown } from "lucide-react";
+import { Link } from "react-router";
+
 import {
   Table,
   TableBody,
@@ -6,15 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChevronsUpDown } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { formatToINR } from "@/utils/formatters";
+
 import {
   columnsConfig,
   getNextColumn,
   sortPeersBy,
 } from "../../utils/similarFundsTableUtils";
-import { formatToINR } from "@/utils/formatters";
 
 function SimilarFundsTableSM({ fund }) {
   const [activeColumn, setActiveColumn] = useState("return_1y");

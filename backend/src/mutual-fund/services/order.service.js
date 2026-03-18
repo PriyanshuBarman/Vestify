@@ -18,7 +18,7 @@ export const placeInvestmentOrder = async ({
 }) => {
   const { processDate, navDate } = getApplicableDates(
     "investment",
-    fundCategory
+    fundCategory,
   );
 
   const { order, user } = await db.$transaction(async (tx) => {

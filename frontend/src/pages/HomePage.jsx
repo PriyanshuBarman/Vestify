@@ -1,4 +1,6 @@
-import ScrollToTopButton from "@/components/ScrollToTopButton";
+import { useEffect } from "react";
+
+import { trackPageView } from "@/lib/analytics";
 import Comparison from "@/components/landing/Comparison";
 import Faqs from "@/components/landing/Faqs";
 import Features from "@/components/landing/Features";
@@ -8,8 +10,8 @@ import OpenScource from "@/components/landing/OpenSource";
 import Pwa from "@/components/landing/Pwa";
 import Stats from "@/components/landing/Stats";
 import UiShowcase from "@/components/landing/UiShowcase";
-import { trackPageView } from "@/lib/analytics";
-import { useEffect } from "react";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+
 function HomePage() {
   useEffect(() => {
     trackPageView(

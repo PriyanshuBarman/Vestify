@@ -1,11 +1,12 @@
-import GoBackBar from "@/components/GoBackBar";
-import ConfirmModal from "@/components/overlays/ConfirmModal";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { DatabaseZapIcon } from "lucide-react";
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
+import GoBackBar from "@/components/GoBackBar";
+import ConfirmModal from "@/components/overlays/ConfirmModal";
 
 function ClearCachePage() {
   const [openModal, setOpenModal] = useState(false);

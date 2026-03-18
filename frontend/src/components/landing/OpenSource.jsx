@@ -1,8 +1,10 @@
-import { containerVariants, itemVariants } from "@/constants/animations";
 import { GithubLogoIcon } from "@phosphor-icons/react";
-import { motion } from "motion/react";
-import { Button } from "../ui/button";
 import { CodeXmlIcon } from "lucide-react";
+import { motion } from "motion/react";
+
+import { containerVariants, itemVariants } from "@/constants/animations";
+
+import { Button } from "../ui/button";
 
 function OpenScource() {
   return (

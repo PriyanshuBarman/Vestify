@@ -1,6 +1,7 @@
-import { updateProfile } from "@/api/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { updateProfile } from "@/api/user";
 
 // Optimistic update
 export function useUpdateProfile() {

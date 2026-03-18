@@ -1,5 +1,6 @@
-import { useGetUser } from "@/hooks/useGetUser";
 import { Navigate } from "react-router";
+
+import { useGetUser } from "@/hooks/useGetUser";
 
 function AuthGuard({ children, mode = "protected" }) {
   const { data: user } = useGetUser();

@@ -1,4 +1,9 @@
-import GoBackBar from "@/components/GoBackBar";
+import { useRef, useState } from "react";
+import { SearchIcon, XIcon } from "lucide-react";
+import { useLocation, useNavigate } from "react-router";
+
+import { useDebounce } from "@/hooks/useDebounce";
+import { useSearchProfile } from "@/hooks/useSearchProfile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,12 +15,8 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { Spinner } from "@/components/ui/spinner";
-import { useDebounce } from "@/hooks/useDebounce";
-import { useSearchProfile } from "@/hooks/useSearchProfile";
+import GoBackBar from "@/components/GoBackBar";
 import { getNavigationConfig } from "@/utils/searchUserProfile";
-import { SearchIcon, XIcon } from "lucide-react";
-import { useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
 
 function SearchUserPage() {
   const navigate = useNavigate();

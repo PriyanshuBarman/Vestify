@@ -1,8 +1,9 @@
-import { containerVariants, itemVariants } from "@/constants/animations";
 import { SparklesIcon } from "lucide-react";
 import { motion } from "motion/react";
 
-function SectionHeading({ heading, subheading, className }) {
+import { containerVariants, itemVariants } from "@/constants/animations";
+
+function SectionHeading({ heading, subheading }) {
   return (
     <motion.div
       variants={containerVariants}
@@ -16,7 +17,7 @@ function SectionHeading({ heading, subheading, className }) {
           className="text-landing flex items-center gap-2"
         >
           <SparklesIcon className="size-4 md:size-5" />
-          <span className="text-xs font-medium tracking-wide  md:text-lg">
+          <span className="text-xs font-medium tracking-wide md:text-lg">
             {subheading}
           </span>
         </motion.div>
@@ -32,17 +33,3 @@ function SectionHeading({ heading, subheading, className }) {
 }
 
 export default SectionHeading;
-
-function Eyebrow({ label }) {
-  return (
-    <motion.div
-      variants={itemVariants}
-      className="text-landing mb-4 flex items-center gap-2"
-    >
-      <SparklesIcon size={16} />
-      <span className="text-xs font-semibold tracking-wide uppercase md:text-sm">
-        {label}
-      </span>
-    </motion.div>
-  );
-}

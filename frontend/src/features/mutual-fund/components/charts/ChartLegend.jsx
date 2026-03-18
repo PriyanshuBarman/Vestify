@@ -1,6 +1,7 @@
+import NumberFlow from "@number-flow/react";
+
 import { CardHeader } from "@/components/ui/card";
 import { getChangeColor } from "@/utils/helper";
-import NumberFlow from "@number-flow/react";
 
 function ChartLegend({ selectedRange, fund, returnPercent }) {
   return (

@@ -1,3 +1,6 @@
+import { tz } from "@date-fns/tz";
+import { differenceInCalendarDays, formatDate } from "date-fns";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -10,8 +13,7 @@ import {
   ResponsiveModalTitle,
 } from "@/components/ui/responsive-modal";
 import { formatToINR } from "@/utils/formatters";
-import { tz } from "@date-fns/tz";
-import { differenceInCalendarDays, formatDate } from "date-fns";
+
 import { getNextInstallmentDateAfterEdit } from "../../utils/sip";
 
 function ConfirmEditSipModal({
@@ -29,9 +31,13 @@ function ConfirmEditSipModal({
       )
     : sipDetail.nextInstallmentDate;
 
-  const diffDays = differenceInCalendarDays(sipDetail.nextInstallmentDate, new Date(), {
-    in: tz("Asia/Kolkata"),
-  });
+  const diffDays = differenceInCalendarDays(
+    sipDetail.nextInstallmentDate,
+    new Date(),
+    {
+      in: tz("Asia/Kolkata"),
+    },
+  );
 
   return (
     <ResponsiveModal open={isOpen} onOpenChange={onOpenChange}>

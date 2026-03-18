@@ -1,6 +1,8 @@
+import { Link } from "react-router";
+
 import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Link } from "react-router";
+
 import { useGetIndexFunds } from "../../hooks/useGetIndexFunds";
 import FundLogo from "../FundLogo";
 import SectionHeading from "../SectionHeading";

@@ -1,10 +1,11 @@
-import GoBackBar from "@/components/GoBackBar";
-import ConfirmModal from "@/components/overlays/ConfirmModal";
+import { useState } from "react";
+import { Trash2Icon } from "lucide-react";
+
+import { useDeleteAccount } from "@/hooks/useDeleteAccount";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { useDeleteAccount } from "@/hooks/useDeleteAccount";
-import { Trash2Icon } from "lucide-react";
-import { useState } from "react";
+import GoBackBar from "@/components/GoBackBar";
+import ConfirmModal from "@/components/overlays/ConfirmModal";
 
 function DeleteAccountPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);

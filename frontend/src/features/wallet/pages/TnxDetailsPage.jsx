@@ -1,16 +1,18 @@
-import CopyButton from "@/components/CopyButton";
-import GoBackBar from "@/components/GoBackBar";
-import IncognitoIcon from "@/components/icons/IncognitoIcon";
-import SendIcon from "@/components/icons/SendIcon";
+import { useState } from "react";
+import { formatDate } from "date-fns";
+import { MoveDownLeftIcon, MoveUpRightIcon } from "lucide-react";
+import { useLocation, useNavigate } from "react-router";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import CopyButton from "@/components/CopyButton";
+import GoBackBar from "@/components/GoBackBar";
+import IncognitoIcon from "@/components/icons/IncognitoIcon";
+import SendIcon from "@/components/icons/SendIcon";
 import { formatToINR } from "@/utils/formatters";
-import { formatDate } from "date-fns";
-import { MoveDownLeftIcon, MoveUpRightIcon } from "lucide-react";
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+
 import ProfileDialog from "../components/ProfileDialog";
 import { assetConfig } from "../utils/constants";
 

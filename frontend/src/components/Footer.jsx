@@ -1,8 +1,10 @@
+import { Link, useLocation, useNavigate } from "react-router";
+
+import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { credits } from "@/constants/credits";
 import { footerLinks, socialLinks } from "@/constants/footer";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { cn } from "@/lib/utils";
-import { Link, useLocation, useNavigate } from "react-router";
+
 import ButtonAnimatedLink from "./ButtonAnimatedLink";
 import LogoShapeOnly from "./LogoShapeOnly";
 import { Separator } from "./ui/separator";
@@ -17,7 +19,6 @@ function Footer({ className }) {
 
   const handleHomeClick = () => {
     if (location.pathname === "/") {
-      console.log("scroll to top");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }

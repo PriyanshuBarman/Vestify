@@ -1,11 +1,13 @@
+import { useState } from "react";
+import { ChevronsLeftRightIcon } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { formatToINR } from "@/utils/formatters";
-import { ChevronsLeftRightIcon } from "lucide-react";
-import { useState } from "react";
-import FundLogo from "../FundLogo";
-import SortByButton from "../filters/SortByButton";
 import { getChangeColor } from "@/utils/helper";
+
+import SortByButton from "../filters/SortByButton";
+import FundLogo from "../FundLogo";
 
 const columns = [
   {
@@ -37,7 +39,6 @@ function PortfolioTable({
   order,
   columnsConfig,
   onFundClick,
-  isOtherUserProfile,
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeColumn = columns[activeIndex];

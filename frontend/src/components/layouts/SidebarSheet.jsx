@@ -1,10 +1,12 @@
-import { Sheet, SheetContent, SheetHeader } from "@/components/ui/sheet";
 import { XIcon } from "lucide-react";
+import { motion } from "motion/react";
 import { useNavigate } from "react-router";
+
+import { Sheet, SheetContent, SheetHeader } from "@/components/ui/sheet";
+import { sheetMenues } from "@/constants/sheet";
+
 import ThemeChangeButton from "../ThemeChangeButton";
 import { Button } from "../ui/button";
-import { sheetMenues } from "@/constants/sheet";
-import { motion } from "motion/react";
 
 function SidebarSheet({ open, onOpenChange }) {
   const navigate = useNavigate();
@@ -67,7 +69,7 @@ function SidebarSheet({ open, onOpenChange }) {
           animate={open ? "visible" : "hidden"}
           variants={containerVariants}
         >
-          {sheetMenues.map((nav, index) => (
+          {sheetMenues.map((nav) => (
             <motion.div key={nav.link} variants={itemVariants}>
               <Button
                 onClick={() => handleNavClick(nav.link)}

@@ -1,6 +1,9 @@
-import QRCode from "qrcode";
 import { useEffect, useState } from "react";
+import { DownloadIcon, ShareIcon } from "lucide-react";
+import QRCode from "qrcode";
+import { toast } from "sonner";
 
+import { useGetUser } from "@/hooks/useGetUser";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -11,13 +14,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useGetUser } from "@/hooks/useGetUser";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { DownloadIcon, ShareIcon } from "lucide-react";
-import { toast } from "sonner";
 
 function MyQrCodeDrawer({ children }) {
-  const isMobile = useIsMobile();
   const [qrCodeUrl, setQrCodeUrl] = useState();
   const { data: user } = useGetUser();
 

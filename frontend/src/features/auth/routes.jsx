@@ -1,5 +1,6 @@
-import AuthGuard from "@/components/AuthGuard";
 import { lazy } from "react";
+
+import AuthGuard from "@/components/AuthGuard";
 
 const AuthPage = lazy(() => import("./pages/AuthPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));

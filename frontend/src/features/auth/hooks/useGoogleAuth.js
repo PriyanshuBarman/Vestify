@@ -1,9 +1,10 @@
-import { api } from "@/lib/axios";
+import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
+
+import { api } from "@/lib/axios";
 
 export function useGoogleAuth() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export function useGoogleAuth() {
           queryClient.setQueryData(["user"], data.user);
           navigate("/mutual-funds#explore", { replace: true });
         }
-      } catch (err) {
+      } catch {
         toast.error("Something went wrong.");
       } finally {
         setIsPending(false);

@@ -1,5 +1,7 @@
-import GoBackBar from "@/components/GoBackBar";
 import { Link } from "react-router";
+
+import GoBackBar from "@/components/GoBackBar";
+
 import FundLogo from "../components/FundLogo";
 import { useGetAMCs } from "../hooks/useGetAMCs";
 

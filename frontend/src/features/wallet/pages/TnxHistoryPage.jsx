@@ -1,10 +1,12 @@
-import GoBackBar from "@/components/GoBackBar";
-import LoadingState from "@/components/LoadingState";
-import { ItemGroup } from "@/components/ui/item";
-import { formatToINR } from "@/utils/formatters";
 import { lazy } from "react";
+
+import { ItemGroup } from "@/components/ui/item";
+import GoBackBar from "@/components/GoBackBar";
+import { formatToINR } from "@/utils/formatters";
+
 import TransactionItem from "../components/TransactionItem";
 import { useGetAllTnx } from "../hooks/useGetAllTnx";
+
 const NoTransactions = lazy(
   () => import("../components/empty-states/NoTransactions"),
 );
@@ -33,7 +35,7 @@ function TnxHistoryPage() {
               </div>
 
               <ItemGroup className="px-4">
-                {monthGroup.transactions.map((tnx, index) => (
+                {monthGroup.transactions.map((tnx) => (
                   <TransactionItem
                     key={tnx.id}
                     tnx={tnx}

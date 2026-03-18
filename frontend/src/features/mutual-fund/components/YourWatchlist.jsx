@@ -1,8 +1,10 @@
+import { Trash2Icon } from "lucide-react";
+import { Link } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
-import { Trash2Icon } from "lucide-react";
-import { Link } from "react-router";
+
 import { useGetFundsData } from "../hooks/useGetFundsData";
 import { useGetWatchlist } from "../hooks/useGetWatchlist";
 import { useRemoveFromWatchlist } from "../hooks/useRemoveFromWatchlist";

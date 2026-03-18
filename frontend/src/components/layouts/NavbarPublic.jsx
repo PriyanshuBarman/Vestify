@@ -1,7 +1,3 @@
-import Logo from "@/components/Logo";
-import { Button } from "@/components/ui/button";
-import { navs } from "@/constants/nav";
-import { useIsMobile } from "@/hooks/useIsMobile";
 import { useState } from "react";
 import {
   Link,
@@ -10,6 +6,12 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { Button } from "@/components/ui/button";
+import Logo from "@/components/Logo";
+import { navs } from "@/constants/nav";
+
 import { ModeToggle } from "../ui/mode-togle";
 import SidebarSheet from "./SidebarSheet";
 

@@ -55,7 +55,7 @@ export const createSip = async ({
   return { sip, order };
 };
 
-export const editSip = async ({ sipId, amount, sipDate }) => {
+export const editSip = async ({ userId, sipId, amount, sipDate }) => {
   const sip = await db.mfSip.findUnique({ where: { id: sipId } });
   if (!sip) throw new ApiError(404, "SIP not found");
 
@@ -71,12 +71,12 @@ export const editSip = async ({ sipId, amount, sipDate }) => {
     new Date(),
     {
       in: tz("Asia/Kolkata"),
-    }
+    },
   );
 
   const newNextInstallmentDate = getNextInstallmentDate(
     sipDate,
-    sip.nextInstallmentDate
+    sip.nextInstallmentDate,
   );
 
   // ====== If next installment is more than 2 days away, update directly ======
@@ -128,7 +128,7 @@ export const skipSip = async (userId, sipId) => {
     new Date(),
     {
       in: tz("Asia/Kolkata"),
-    }
+    },
   );
 
   // ===== If next installment is more than 2 days away, update directly =====
@@ -174,13 +174,13 @@ export const cancelSip = async (sipId) => {
     new Date(),
     {
       in: tz("Asia/Kolkata"),
-    }
+    },
   );
 
   if (diffDays <= 2) {
     throw new ApiError(
       400,
-      "You Can't cancel SIP before 2 days of next installment"
+      "You Can't cancel SIP before 2 days of next installment",
     );
   }
 

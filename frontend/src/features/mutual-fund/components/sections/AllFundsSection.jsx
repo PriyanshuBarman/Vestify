@@ -1,13 +1,15 @@
-import { Button } from "@/components/ui/button";
+import { ChevronRightIcon, ChevronsLeftRightIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router";
+
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { Button } from "@/components/ui/button";
 import {
   selectActiveColumn,
   selectFilters,
   setActiveColumn,
 } from "@/store/slices/mutualFundSlice";
-import { ChevronRightIcon, ChevronsLeftRightIcon } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
+
 import { useGetFilteredFunds } from "../../hooks/useGetFilteredFunds";
 import {
   columnsConfig,

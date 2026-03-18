@@ -1,11 +1,12 @@
-import ButtonAnimatedLink from "@/components/ButtonAnimatedLink";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { aboutData } from "@/constants/about";
 import {
   GithubLogoIcon,
   LinkedinLogoIcon,
   TwitterLogoIcon,
 } from "@phosphor-icons/react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ButtonAnimatedLink from "@/components/ButtonAnimatedLink";
+import { aboutData } from "@/constants/about";
 
 function AboutPage() {
   return (

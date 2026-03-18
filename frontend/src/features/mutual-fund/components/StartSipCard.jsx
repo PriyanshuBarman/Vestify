@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
-import { useNavigate } from "react-router";
+
 import { useGetSips } from "../hooks/useGetSips";
 
 function StartSipCard() {

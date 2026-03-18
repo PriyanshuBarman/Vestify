@@ -1,11 +1,15 @@
-import LoadingState from "@/components/LoadingState";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { usePrefetchRequiredQueries } from "@/features/mutual-fund/hooks/usePrefetchRequiredQueries";
 import { lazy, Suspense, useState } from "react";
 import { useParams } from "react-router";
+
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import LoadingState from "@/components/LoadingState";
+import { usePrefetchRequiredQueries } from "@/features/mutual-fund/hooks/usePrefetchRequiredQueries";
+
 import "swiper/css";
+
 import { HashNavigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import InvestmentsTab from "../../mutual-fund/components/tabs/InvestmentsTab";
 import ProfileHeader from "../components/ProfileHeader";
 import Tabs from "../components/Tabs";
@@ -23,7 +27,7 @@ function UserProfilePage() {
   const [swiper, setSwiper] = useState(null);
 
   const { data: profile } = useUserProfile(username);
- 
+
   usePrefetchRequiredQueries(username);
 
   return (

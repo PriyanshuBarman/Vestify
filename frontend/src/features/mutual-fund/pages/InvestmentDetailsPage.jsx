@@ -1,4 +1,7 @@
-import GoBackBar from "@/components/GoBackBar";
+import { formatDate, formatDistanceToNow } from "date-fns";
+import { ChevronRightIcon } from "lucide-react";
+import { Link, useLocation } from "react-router";
+
 import {
   Item,
   ItemActions,
@@ -7,15 +10,14 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/components/ui/item";
-import { formatDate, formatDistanceToNow } from "date-fns";
-import { ChevronRightIcon } from "lucide-react";
-import { Link, useLocation } from "react-router";
+import GoBackBar from "@/components/GoBackBar";
+import { formatToINR } from "@/utils/formatters";
+
 import FundLogo from "../components/FundLogo";
 import FundPortfolioSummary from "../components/FundPortfolioSummary";
-import { useGetFundOrders } from "../hooks/useGetFundOrders";
-import { formatToINR } from "@/utils/formatters";
 import SectionHeading from "../components/SectionHeading";
 import { orderTypeConfig } from "../constants/order";
+import { useGetFundOrders } from "../hooks/useGetFundOrders";
 
 function InvestmentDetailsPage() {
   const location = useLocation();

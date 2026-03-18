@@ -1,6 +1,8 @@
-import ErrorPage from "@/pages/ErrorPage";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router";
+
+import ErrorPage from "@/pages/ErrorPage";
+
 import Footer from "../Footer";
 import NavbarPublic from "./NavbarPublic";
 import ScrollToTop from "./ScrollToTop";

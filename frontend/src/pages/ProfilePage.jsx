@@ -1,10 +1,3 @@
-import CopyrightFooter from "@/components/CopyrightFooter";
-import GoBackBtn from "@/components/GoBackBtn";
-import ProfileAvatar from "@/components/ProfileAvatar";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { useGetBalance } from "@/hooks/useGetBalance";
-import { useGetUser } from "@/hooks/useGetUser";
 import NumberFlow from "@number-flow/react";
 import {
   ArrowLeftRightIcon,
@@ -16,6 +9,13 @@ import {
   WalletIcon,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
+
+import { useGetBalance } from "@/hooks/useGetBalance";
+import { useGetUser } from "@/hooks/useGetUser";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import GoBackBtn from "@/components/GoBackBtn";
+import ProfileAvatar from "@/components/ProfileAvatar";
 
 const MENU_ITEMS = [
   {

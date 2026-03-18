@@ -1,12 +1,14 @@
-import { useGetAMCs } from "../../hooks/useGetAMCs";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { useSelector, useDispatch } from "react-redux";
-import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
-import { SearchIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { useMemo, useState } from "react";
+import { SearchIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import LoadingState from "@/components/LoadingState";
+import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
+
+import { useGetAMCs } from "../../hooks/useGetAMCs";
 
 function FilterFundHouseTab() {
   const filters = useSelector(selectFilters);

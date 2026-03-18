@@ -1,3 +1,6 @@
+import { ChevronRightIcon } from "lucide-react";
+import { Link } from "react-router";
+
 import {
   Item,
   ItemActions,
@@ -6,10 +9,9 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { formatToINR } from "@/utils/formatters";
-import { ChevronRightIcon } from "lucide-react";
-import { Link } from "react-router";
-import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
 import { getChangeColor } from "@/utils/helper";
+
+import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
 
 function FundPortfolioPreview({ schemeCode }) {
   const { data: fundPortfolio } = useGetFundPortfolio(schemeCode);

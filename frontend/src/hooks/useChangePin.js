@@ -1,7 +1,8 @@
-import { changePin } from "@/api/account";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+
+import { changePin } from "@/api/account";
 
 export function useChangePin() {
   const navigate = useNavigate();

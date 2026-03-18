@@ -5,11 +5,12 @@ import config from "#config/env.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { calcPortfolioAfterRedemption } from "../utils/calculate-updated-portfolio.utils.js";
 import { fifoRedemption } from "./fifo.service.js";
+import axios from "axios";
 
 export const instantRedemption = async (fund, amount) => {
   const { schemeCode, userId } = fund;
   const { latestNav, latestNavDate, fundName } = fetchLatestNAVData(
-    fund.schemeCode
+    fund.schemeCode,
   );
 
   const units = amount / latestNav; // Redemption units
@@ -21,7 +22,7 @@ export const instantRedemption = async (fund, amount) => {
       fund,
       costBasis,
       amount,
-      units
+      units,
     );
 
     await tx.mfPortfolio.update({
@@ -71,7 +72,7 @@ export const instantRedemption = async (fund, amount) => {
 export const fetchLatestNAVData = async (schemeCode) => {
   try {
     const { data } = await axios.get(
-      `${config.MF_API_BASE_URL}/${schemeCode}/latest`
+      `${config.MF_API_BASE_URL}/${schemeCode}/latest`,
     );
 
     const latestEntry = data.data[0];
@@ -80,6 +81,8 @@ export const fetchLatestNAVData = async (schemeCode) => {
 
     return { latestNav, latestNavDate };
   } catch (error) {
-    throw new Error(`Error at fetchLatestNAVData: ${error.message}`);
+    throw new Error(`Error at fetchLatestNAVData: ${error.message}`, {
+      cause: error,
+    });
   }
 };

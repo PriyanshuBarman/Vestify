@@ -32,7 +32,7 @@ export const validateReferral = async (ip, referralCode) => {
   if (hasSameSession) {
     throw new ApiError(
       400,
-      "Referral not allowed from the same device or network"
+      "Referral not allowed from the same device or network",
     );
   }
 

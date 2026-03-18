@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { searchProfile } from "../api/profile";
 
 export function useSearchProfile(query) {

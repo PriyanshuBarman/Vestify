@@ -1,5 +1,6 @@
-import { useGetPopularFunds } from "@/features/mutual-fund/hooks/useGetPopularFunds";
 import { TrendingUpIcon } from "lucide-react";
+
+import { useGetPopularFunds } from "@/features/mutual-fund/hooks/useGetPopularFunds";
 
 function TrendingSearchList({ activeIdx, handleClick }) {
   const { data: popularFunds } = useGetPopularFunds();

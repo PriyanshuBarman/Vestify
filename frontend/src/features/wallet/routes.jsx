@@ -1,5 +1,4 @@
-import LoadingState from "@/components/LoadingState";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 
 const TnxDetailsPage = lazy(() => import("./pages/TnxDetailsPage"));
 const TnxHistoryPage = lazy(() => import("./pages/TnxHistoryPage"));

@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { selectTheme, setTheme } from "@/store/slices/themeSlice";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Button } from "@/components/ui/button";
+import { selectTheme, setTheme } from "@/store/slices/themeSlice";
 
 const THEMES = [
   { name: "system", icon: <MonitorIcon /> },

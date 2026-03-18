@@ -1,10 +1,11 @@
-import GoBackBar from "@/components/GoBackBar";
-import SendIcon from "@/components/icons/SendIcon";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LinkedinLogoIcon, TwitterLogoIcon } from "@phosphor-icons/react";
 import { RedditLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { ArrowUpRightIcon, HelpCircleIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import GoBackBar from "@/components/GoBackBar";
+import SendIcon from "@/components/icons/SendIcon";
 
 const socialLinks = [
   {

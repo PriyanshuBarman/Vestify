@@ -1,3 +1,6 @@
+import { XIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -8,13 +11,12 @@ import {
   setActiveColumn,
   setFilters,
 } from "@/store/slices/mutualFundSlice";
-import { XIcon } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { columnsConfig } from "../../utils/collectionsUtils";
 import { getActiveFilterCount } from "../../utils/filterUtils";
-import SortByButton from "./SortByButton";
 import ActiveFilterButtons from "./ActiveFilterButtons";
 import OpenFilterSheetBtn from "./OpenFilterSheetBtn";
+import SortByButton from "./SortByButton";
 
 const sortOptions = {
   popularity: "Popular",

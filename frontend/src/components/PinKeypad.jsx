@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { DeleteIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 function PinKeypad({ handleVirtualInput, className }) {
   const handleNumberClick = (num) => {

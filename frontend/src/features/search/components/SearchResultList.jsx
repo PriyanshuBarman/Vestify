@@ -1,6 +1,6 @@
 import { memo } from "react";
+
 import CompanyLogo from "./CompanyLogo";
-import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 
 function SearchResultList({
   searchResult,

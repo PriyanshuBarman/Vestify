@@ -18,7 +18,10 @@ function SIPCalculationInfo() {
             <li>
               • SIP investment on the <strong>1st of every month</strong>
             </li>
-            <li>• If 1st date of month is holiday, next available trading day is used</li>
+            <li>
+              • If 1st date of month is holiday, next available trading day is
+              used
+            </li>
             <li>• Exactly 12 monthly installments per year</li>
             <li>• Uses actual historical NAV data for calculations</li>
           </ul>

@@ -1,19 +1,20 @@
-import { useGetCategories } from "../../hooks/useGetCategories";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useDispatch, useSelector } from "react-redux";
-import { selectFilters } from "@/store/slices/mutualFundSlice";
-import { setFilters } from "@/store/slices/mutualFundSlice";
-import CustomCheckbox from "../CustomCheckbox";
-import { formatFundCategory } from "../../utils/formaters";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import LoadingState from "@/components/LoadingState";
+import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
+
+import { useGetCategories } from "../../hooks/useGetCategories";
+import { formatFundCategory } from "../../utils/formaters";
+import CustomCheckbox from "../CustomCheckbox";
 
 function FilterCategoriesTab() {
   const filters = useSelector(selectFilters);

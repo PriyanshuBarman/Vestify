@@ -1,4 +1,5 @@
-import GoBackBar from "@/components/GoBackBar";
+import { Link } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import {
   Empty,
@@ -8,7 +9,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { Link } from "react-router";
+import GoBackBar from "@/components/GoBackBar";
 
 function NoTransactions() {
   return (

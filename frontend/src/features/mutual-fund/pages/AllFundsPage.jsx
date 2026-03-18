@@ -1,16 +1,18 @@
-import GoBackBar from "@/components/GoBackBar";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { ChevronsLeftRightIcon } from "lucide-react";
+import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
+
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { Button } from "@/components/ui/button";
+import GoBackBar from "@/components/GoBackBar";
 import {
   selectActiveColumn,
   selectFilters,
   setActiveColumn,
   setFilters,
 } from "@/store/slices/mutualFundSlice";
-import { ChevronsLeftRightIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
+
 import FilterBtns from "../components/filters/FilterBtns";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";

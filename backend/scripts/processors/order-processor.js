@@ -5,7 +5,6 @@ import {
   calcPortfolioAfterRedemption,
 } from "../../src/mutual-fund/utils/calculate-updated-portfolio.utils.js";
 import { fetchNavInfoByDate } from "../external/fetch-nav-by-date.js";
-import { parseDDMMYYYY } from "../utils/parse-date.utils.js";
 
 export const processInvestmentOrder = async (orderData) => {
   let {

@@ -1,3 +1,6 @@
+import { XIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -8,15 +11,13 @@ import {
   setActiveColumn,
   setFilters,
 } from "@/store/slices/mutualFundSlice";
-import { XIcon } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
+
+import { sortOptions } from "../../constants/collection";
 import { columnsConfig } from "../../utils/collectionsUtils";
 import { getActiveFilterCount } from "../../utils/filterUtils";
-import SortByBtn from "./SortByButton";
-import OpenFilterSheetBtn from "./OpenFilterSheetBtn";
-import { sortOptions } from "../../constants/collection";
 import ActiveFilterButtons from "./ActiveFilterButtons";
-import { Suspense } from "react";
+import OpenFilterSheetBtn from "./OpenFilterSheetBtn";
+import SortByBtn from "./SortByButton";
 
 const FUND_CATEGORIES = ["Flexi Cap Fund", "Small Cap Fund"];
 

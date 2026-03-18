@@ -1,10 +1,11 @@
-import GoBackBar from "@/components/GoBackBar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatToINR } from "@/utils/formatters";
 import { formatDate } from "date-fns";
 import { CheckIcon } from "lucide-react";
 import { Link, useLocation } from "react-router";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import GoBackBar from "@/components/GoBackBar";
+import { formatToINR } from "@/utils/formatters";
 
 function RedemptionRequestSuccessPage() {
   const location = useLocation();

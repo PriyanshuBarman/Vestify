@@ -1,7 +1,3 @@
-import GoBackBar from "@/components/GoBackBar";
-import ThemeChangeButton from "@/components/ThemeChangeButton";
-import { Button } from "@/components/ui/button";
-import { useGetUser } from "@/hooks/useGetUser";
 import {
   ChevronRightIcon,
   DatabaseZapIcon,
@@ -12,6 +8,11 @@ import {
   User2Icon,
 } from "lucide-react";
 import { Link } from "react-router";
+
+import { useGetUser } from "@/hooks/useGetUser";
+import { Button } from "@/components/ui/button";
+import GoBackBar from "@/components/GoBackBar";
+import ThemeChangeButton from "@/components/ThemeChangeButton";
 
 function SettingsPage() {
   const { data: user } = useGetUser();

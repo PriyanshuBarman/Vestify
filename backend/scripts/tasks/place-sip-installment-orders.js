@@ -32,7 +32,7 @@ async function placeSipInstallmentOrders() {
           failureCount++;
           console.error("❌", error.message);
         }
-      })
+      }),
     );
   }
 

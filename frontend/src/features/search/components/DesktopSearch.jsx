@@ -1,19 +1,20 @@
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+
+import { useDebounce } from "@/hooks/useDebounce";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useGetPopularFunds } from "@/features/mutual-fund/hooks/useGetPopularFunds";
 import { useCtrlKSearchToggle } from "@/features/search/hooks/useCtrlKSearchToggle";
-import { useDebounce } from "@/hooks/useDebounce";
 import { useGetSearchResults } from "@/features/search/hooks/useGetSearchResults";
 import {
   addToSearchHistory,
   setIsSearchOpen,
 } from "@/store/slices/searchSlice";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+
 import FilterTabs from "./FilterTabs";
 import LoadingSkeleton from "./LoadingSkeleton";
 import SearchBar from "./SearchBar";
-import TrendingSearchList from "./TrendingSearchList";
 import SearchHistoryList from "./SearchHistoryList";
 import SearchResultList from "./SearchResultList";
 
@@ -93,6 +94,7 @@ function DesktopSearch() {
   // Purpose : to setDisplayQuery & show the selected item in the searchbar
   useEffect(() => {
     if (activeIdx >= 0 && list) setDisplayQuery(list[activeIdx]?.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIdx]);
 
   return (

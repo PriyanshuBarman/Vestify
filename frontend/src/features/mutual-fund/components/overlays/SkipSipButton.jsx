@@ -1,4 +1,6 @@
-import IconWrapper from "@/components/IconWrapper";
+import { tz } from "@date-fns/tz";
+import { differenceInCalendarDays, format } from "date-fns";
+
 import { Button } from "@/components/ui/button";
 import {
   ResponsiveModal,
@@ -6,16 +8,13 @@ import {
   ResponsiveModalContent,
   ResponsiveModalDescription,
   ResponsiveModalFooter,
-  ResponsiveModalHeader,
   ResponsiveModalTitle,
   ResponsiveModalTrigger,
 } from "@/components/ui/responsive-modal";
 import { Spinner } from "@/components/ui/spinner";
-import { differenceInCalendarDays, format } from "date-fns";
-import { SkipForwardIcon } from "lucide-react";
+
 import { useSkipSip } from "../../hooks/useSkipSip";
 import { getNextInstallmentDateAfterSkip } from "../../utils/sip";
-import { tz } from "@date-fns/tz";
 
 function SkipSipButton({ sipId, nextInstallmentDate }) {
   const { mutate: skipSip, isPending } = useSkipSip();
@@ -42,9 +41,9 @@ function SkipSipButton({ sipId, nextInstallmentDate }) {
       </ResponsiveModalTrigger>
 
       <ResponsiveModalContent>
-        <ResponsiveModalTitle className="py-2 mt-4 text-center font-medium">
-          Are you sure you want to skip{" "}
-          {format(nextInstallmentDate, "dd MMMM")} installment?
+        <ResponsiveModalTitle className="mt-4 py-2 text-center font-medium">
+          Are you sure you want to skip {format(nextInstallmentDate, "dd MMMM")}{" "}
+          installment?
         </ResponsiveModalTitle>
 
         {diff <= 2 && (

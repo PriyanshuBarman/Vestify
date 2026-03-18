@@ -1,4 +1,4 @@
-export const sheetMenues  = [
+export const sheetMenues = [
   {
     name: "Home",
     link: "/",

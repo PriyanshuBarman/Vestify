@@ -1,14 +1,15 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
+
 import AuthGuard from "./components/AuthGuard";
 import Layout from "./components/layouts/Layout";
+import PublicLayout from "./components/layouts/PublicLayout";
 import { authRoutes } from "./features/auth/routes";
-import { mutualFundRoutes } from "./features/mutual-fund/routes";
 import { communityRoutes } from "./features/community/routes";
+import { mutualFundRoutes } from "./features/mutual-fund/routes";
 import SearchPage from "./features/search/pages/Page";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
-import PublicLayout from "./components/layouts/PublicLayout";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));

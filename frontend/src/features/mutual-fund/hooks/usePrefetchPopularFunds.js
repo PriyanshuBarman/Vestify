@@ -1,5 +1,6 @@
-import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
+
 import { fetchChartData, fetchFund } from "../api/external";
 
 export function usePrefetchPopularFunds(funds) {
@@ -19,5 +20,5 @@ export function usePrefetchPopularFunds(funds) {
         queryFn: () => fetchChartData(fund.scheme_code),
       });
     }
-  }, [isRestoring, funds]);
+  }, [isRestoring, queryClient, funds]);
 }

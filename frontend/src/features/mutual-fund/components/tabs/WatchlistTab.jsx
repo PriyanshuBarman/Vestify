@@ -1,14 +1,17 @@
-import LoadingState from "@/components/LoadingState";
+import { lazy, useState } from "react";
+import { ChevronsLeftRightIcon, Trash2Icon } from "lucide-react";
+import { Link } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { ChevronsLeftRightIcon, Trash2Icon } from "lucide-react";
-import { lazy, useState } from "react";
-import { Link } from "react-router";
+import LoadingState from "@/components/LoadingState";
+
 import { useGetFundsData } from "../../hooks/useGetFundsData";
 import { useGetWatchlist } from "../../hooks/useGetWatchlist";
 import { useRemoveFromWatchlist } from "../../hooks/useRemoveFromWatchlist";
 import FundLogo from "../FundLogo";
 import FundRating from "../FundRating";
+
 const NoWatchlist = lazy(() => import("../empty-states/NoWatchlist"));
 
 const labelArr = [

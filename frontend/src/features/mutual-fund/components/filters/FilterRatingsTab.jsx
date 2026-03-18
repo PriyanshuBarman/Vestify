@@ -1,7 +1,8 @@
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import { StarIcon } from "lucide-react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
 
 const ratingOptions = [

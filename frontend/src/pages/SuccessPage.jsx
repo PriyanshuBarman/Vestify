@@ -1,12 +1,8 @@
-import GoBackBar from "@/components/GoBackBar";
-import { Button } from "@/components/ui/button";
-import {
-  ArrowUpRight,
-  ArrowUpRightIcon,
-  CheckIcon,
-  MoveUpRightIcon,
-} from "lucide-react";
+import { CheckIcon, MoveUpRightIcon } from "lucide-react";
 import { Link, useLocation } from "react-router";
+
+import { Button } from "@/components/ui/button";
+import GoBackBar from "@/components/GoBackBar";
 
 function SuccessPage() {
   const location = useLocation();

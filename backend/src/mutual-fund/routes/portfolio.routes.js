@@ -9,17 +9,17 @@ portfolioRoutes.get(
   "/",
   authenticate,
   validateQuery,
-  portfolioController.getPortfolio
+  portfolioController.getPortfolio,
 );
 
 portfolioRoutes.get(
   "/summary",
   authenticate,
-  portfolioController.getPortfolioSummary
+  portfolioController.getPortfolioSummary,
 );
 
 portfolioRoutes.get(
   "/:schemeCode",
   authenticate,
-  portfolioController.getFundPortfolio
+  portfolioController.getFundPortfolio,
 );

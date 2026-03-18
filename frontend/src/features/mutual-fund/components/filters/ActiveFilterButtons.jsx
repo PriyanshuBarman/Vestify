@@ -1,9 +1,11 @@
+import { lazy, useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
-import { ChevronDownIcon } from "lucide-react";
-import { lazy, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { useGetFilteredFunds } from "../../hooks/useGetFilteredFunds";
 import { getActiveFilterButtons } from "../../utils/filterUtils";
 

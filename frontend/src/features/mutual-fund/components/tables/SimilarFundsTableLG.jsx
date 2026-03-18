@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
+import { Link } from "react-router";
+
 import {
   Table,
   TableBody,
@@ -6,9 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChevronDownIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router";
+
 import {
   columnsConfig,
   getNewOrder,

@@ -1,3 +1,14 @@
+import { useState } from "react";
+import {
+  EyeIcon,
+  EyeOffIcon,
+  LockIcon,
+  MailIcon,
+  UserIcon,
+} from "lucide-react";
+import { useNavigate, useSearchParams } from "react-router";
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -13,16 +24,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Spinner } from "@/components/ui/spinner";
-import {
-  EyeIcon,
-  EyeOffIcon,
-  LockIcon,
-  MailIcon,
-  UserIcon,
-} from "lucide-react";
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
-import { toast } from "sonner";
+
 import { useSignup } from "../hooks/useSignup";
 
 function SignupForm() {

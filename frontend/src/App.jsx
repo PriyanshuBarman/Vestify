@@ -1,10 +1,12 @@
-import { VITE_GOOGLE_CLIENT_ID } from "@/config/env";
+import { useEffect } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
-import { lazy, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RouterProvider } from "react-router";
 import { Toaster } from "sonner";
+
+import { VITE_GOOGLE_CLIENT_ID } from "@/config/env";
+
 import { routes } from "./routes";
 import { selectTheme } from "./store/slices/themeSlice";
 import { shouldInvalidateCache } from "./utils/shouldInvalidateCache";

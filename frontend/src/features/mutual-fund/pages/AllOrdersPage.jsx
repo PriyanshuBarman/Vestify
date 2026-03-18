@@ -1,9 +1,12 @@
-import GoBackBar from "@/components/GoBackBar";
 import { lazy } from "react";
+
+import { ItemGroup } from "@/components/ui/item";
+import GoBackBar from "@/components/GoBackBar";
+import LoadingState from "@/components/LoadingState";
+
 import OrderItem from "../components/OrderItem";
 import { useGetOrders } from "../hooks/useGetOrders";
-import { ItemGroup } from "@/components/ui/item";
-import LoadingState from "@/components/LoadingState";
+
 const NoOrders = lazy(() => import("../components/empty-states/NoOrders"));
 
 function AllOrdersPage() {

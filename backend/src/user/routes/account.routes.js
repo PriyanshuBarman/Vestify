@@ -14,25 +14,25 @@ accountRoutes.patch(
   "/change-pin",
   pinChangeLimiter,
   authenticate,
-  accountController.changePin
+  accountController.changePin,
 );
 
 accountRoutes.patch(
   "/change-password",
   passwordChangeLimiter,
   authenticate,
-  accountController.changePassword
+  accountController.changePassword,
 );
 accountRoutes.post(
   "/change-email",
   emailChangeLimiter,
   authenticate,
-  accountController.requestEmailChange
+  accountController.requestEmailChange,
 );
 accountRoutes.patch(
   "/change-email/:otp",
   authenticate,
-  accountController.verifyEmailChange
+  accountController.verifyEmailChange,
 );
 
 accountRoutes.delete("/", authenticate, accountController.deleteAccount);

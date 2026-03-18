@@ -1,9 +1,10 @@
-import { cn } from "@/lib/utils";
 import {
   CheckCircleIcon,
   ClockCountdownIcon,
   XCircleIcon,
 } from "@phosphor-icons/react";
+
+import { cn } from "@/lib/utils";
 
 /**
  * Reusable component for displaying order status icons

@@ -1,3 +1,9 @@
+import { useState } from "react";
+import { TZDate } from "@date-fns/tz";
+import { addMonths, format, getDate } from "date-fns";
+import { CalendarCheck2Icon, ChevronDownIcon } from "lucide-react";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,13 +24,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { TZDate } from "@date-fns/tz";
-import { addMonths, format, getDate, setDate } from "date-fns";
-import { CalendarCheck2Icon, ChevronDownIcon } from "lucide-react";
-import { useState } from "react";
-import SipDayPicker from "../SipDayPicker";
+
 import { addSuffix } from "../../utils/formaters";
+import SipDayPicker from "../SipDayPicker";
 
 function DatePicker({ sipDate, setSipDate }) {
   const isMobile = useIsMobile();

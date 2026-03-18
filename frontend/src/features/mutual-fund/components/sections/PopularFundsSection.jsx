@@ -1,6 +1,8 @@
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useIsMobile } from "@/hooks/useIsMobile";
 import { lazy } from "react";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 import { useGetPopularFunds } from "../../hooks/useGetPopularFunds";
 import { usePrefetchPopularFunds } from "../../hooks/usePrefetchPopularFunds";
 import SectionHeading from "../SectionHeading";

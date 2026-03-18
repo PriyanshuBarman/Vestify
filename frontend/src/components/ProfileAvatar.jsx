@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useGetUser } from "@/hooks/useGetUser";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function ProfileAvatar({ className, fallbackClassName, ...props }) {
   const { data: user } = useGetUser();

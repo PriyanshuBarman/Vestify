@@ -1,4 +1,7 @@
-import GoBackBar from "@/components/GoBackBar";
+import { useState } from "react";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+
+import { useChangePin } from "@/hooks/useChangePin";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -12,9 +15,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Spinner } from "@/components/ui/spinner";
-import { useChangePin } from "@/hooks/useChangePin";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { useState } from "react";
+import GoBackBar from "@/components/GoBackBar";
 
 function ChangePasswordPage() {
   const [currentPin, setCurrentPin] = useState("");
@@ -116,7 +117,7 @@ function ChangePasswordPage() {
             </InputOTPGroup>
           </InputOTP>
           {!!newPin && currentPin === newPin && (
-            <FieldError>New pin can't be same as current pin</FieldError>
+            <FieldError>New pin can&apos;t be same as current pin</FieldError>
           )}
         </Field>
       </FieldGroup>

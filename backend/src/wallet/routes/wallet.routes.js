@@ -11,7 +11,7 @@ walletRoutes.post(
   authenticate,
   validatePinLimiter,
   verifyPin,
-  walletController.sendMoney
+  walletController.sendMoney,
 );
 walletRoutes.get("/balance", authenticate, walletController.checkBalance);
 walletRoutes.get("/transactions", authenticate, walletController.getAllTnx);

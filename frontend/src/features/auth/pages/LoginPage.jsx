@@ -1,5 +1,7 @@
-import LogoShapeOnly from "@/components/LogoShapeOnly";
 import { Link } from "react-router";
+
+import LogoShapeOnly from "@/components/LogoShapeOnly";
+
 import LoginForm from "../components/LoginForm";
 
 function LoginPage() {

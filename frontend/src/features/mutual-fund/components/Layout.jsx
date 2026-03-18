@@ -1,4 +1,5 @@
 import { Outlet } from "react-router";
+
 import { usePrefetchRequiredQueries } from "../hooks/usePrefetchRequiredQueries";
 import Tabs from "./Tabs";
 

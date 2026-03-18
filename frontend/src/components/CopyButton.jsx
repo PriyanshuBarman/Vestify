@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { CheckIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
+import { CheckIcon, CopyIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 function CopyButton({ text, timeout = 1500, className, ...props }) {
   const [copied, setCopied] = useState(false);

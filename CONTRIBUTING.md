@@ -112,12 +112,19 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
    VITE_MF_CHART_API_BASE_URL = "https://api.mfapi.in/mf"
    VITE_MF_API_BASE_URL =
 
-   VITE_DAILY_REWARD_AMOUNT = 2000
-   VITE_REFERRER_REWARD_AMOUNT = 15000
-   VITE_REFERRED_USER_REWARD_AMOUNT = 5000
+   VITE_DAILY_REWARD_AMOUNT = 10000
+   VITE_REFERRER_REWARD_AMOUNT = 50000
+   VITE_REFERRED_USER_REWARD_AMOUNT = 10000
    ```
 
-4. **Backend Setup**
+4. **Install Root Dependencies**
+
+   ```bash
+   # This installs Husky, commitlint, and lint-staged
+   npm install
+   ```
+
+5. **Backend Setup**
 
    ```bash
    cd backend
@@ -130,7 +137,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
    npm run dev
    ```
 
-5. **Frontend Setup**
+6. **Frontend Setup**
 
    ```bash
    cd frontend
@@ -156,6 +163,8 @@ The application should now be running at:
 - `test/description` - for adding or updating tests
 
 ### Commit Message Guidelines
+
+**We use Husky and commitlint to enforce conventional commit messages.** Commits that don't follow the conventional commits format will be rejected automatically.
 
 Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
@@ -184,6 +193,14 @@ feat(wallet): add P2P transfer functionality
 fix(sip): correct step-up SIP calculation
 docs(readme): update installation instructions
 ```
+
+### Code Quality Tools
+
+- **Husky** — Automatically runs git hooks (e.g., pre-commit, commit-msg)
+- **commitlint** — Validates commit messages against conventional commits standards
+- **lint-staged** — Runs linters on staged files before commits
+
+These tools are automatically set up when you run `npm install` and `npm run prepare` at the root of the project.
 
 ## Coding Standards
 

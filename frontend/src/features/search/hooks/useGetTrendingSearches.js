@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { fetchTrendingSearches } from "../api/search";
 
 export function useGetTrendingSearches() {

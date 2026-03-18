@@ -1,4 +1,10 @@
-import LoadingState from "@/components/LoadingState";
+import { lazy } from "react";
+import { tz } from "@date-fns/tz";
+import { differenceInCalendarDays, format, getDate } from "date-fns";
+import { CalendarRangeIcon, Clock4Icon } from "lucide-react";
+import { Link } from "react-router";
+
+import { cn } from "@/lib/utils";
 import {
   Item,
   ItemContent,
@@ -8,16 +14,13 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
+import LoadingState from "@/components/LoadingState";
 import { formatToINR } from "@/utils/formatters";
-import { tz } from "@date-fns/tz";
-import { differenceInCalendarDays, format, getDate } from "date-fns";
-import { CalendarRangeIcon, Clock4Icon } from "lucide-react";
-import { lazy } from "react";
-import { Link } from "react-router";
+
 import { useGetPendingOrders } from "../../hooks/useGetPendingOrders";
 import { useGetSips } from "../../hooks/useGetSips";
 import FundLogo from "../FundLogo";
-import { cn } from "@/lib/utils";
+
 const NoActiveSips = lazy(() => import("../empty-states/NoActiveSips"));
 
 function SipsTab({ username }) {

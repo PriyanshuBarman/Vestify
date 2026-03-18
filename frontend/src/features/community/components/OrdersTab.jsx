@@ -1,9 +1,10 @@
-import LoadingState from "@/components/LoadingState";
+import { lazy } from "react";
+
 import { ItemGroup } from "@/components/ui/item";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import LoadingState from "@/components/LoadingState";
 import OrderItem from "@/features/mutual-fund/components/OrderItem";
 import { useGetOrders } from "@/features/mutual-fund/hooks/useGetOrders";
-import { lazy } from "react";
 
 const NoOrders = lazy(
   () => import("@/features/mutual-fund/components/empty-states/NoOrders"),

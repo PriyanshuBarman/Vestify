@@ -1,7 +1,9 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { CompassIcon } from "lucide-react";
 import { Link } from "react-router";
+
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 import SectionHeading from "../SectionHeading";
 
 const cardsMapping = [

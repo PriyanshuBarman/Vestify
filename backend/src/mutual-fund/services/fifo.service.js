@@ -2,7 +2,7 @@ export const fifoRedemption = async (
   userId,
   schemeCode,
   redemptionUnits,
-  tx
+  tx,
 ) => {
   const holdings = await tx.mfHolding.findMany({
     where: { userId, schemeCode },

@@ -1,3 +1,9 @@
+import { useState } from "react";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { Navigate } from "react-router";
+
+import { useGetUser } from "@/hooks/useGetUser";
+import { useSetPin } from "@/hooks/useSetPin";
 import { Button } from "@/components/ui/button";
 import {
   InputOTP,
@@ -5,11 +11,6 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Spinner } from "@/components/ui/spinner";
-import { useGetUser } from "@/hooks/useGetUser";
-import { useSetPin } from "@/hooks/useSetPin";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { useState } from "react";
-import { Navigate } from "react-router";
 
 function PinSetupPage() {
   const [pin, setPin] = useState("");

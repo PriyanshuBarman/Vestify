@@ -1,7 +1,9 @@
 import { ArrowLeftIcon, SearchIcon } from "lucide-react";
 import { useNavigate } from "react-router";
-import { useIsMobile } from "@/hooks/useIsMobile";
+
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useIsMobile";
+
 import { Button } from "./ui/button";
 
 function GoBackBar({ title, showSearchIcon = true, className }) {

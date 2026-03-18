@@ -11,8 +11,8 @@ export function UnderstandTermsInfo() {
           </h4>
           <p className="text-muted-foreground leading-relaxed">
             A fee payable to a mutual fund house for managing your mutual fund
-            investments. It is the total percentage of a company's fund assets
-            used for administrative, management, advertising, and other
+            investments. It is the total percentage of a company&apos;s fund
+            assets used for administrative, management, advertising, and other
             expenses.
           </p>
         </div>
@@ -24,9 +24,9 @@ export function UnderstandTermsInfo() {
           </h4>
           <p className="text-muted-foreground leading-relaxed">
             A measure of how frequently a fund manager buys and sells securities
-            within the fund's portfolio. It is calculated as the percentage of
-            the fund's holdings that have been replaced over a given period,
-            typically expressed annually.
+            within the fund&apos;s portfolio. It is calculated as the percentage
+            of the fund&apos;s holdings that have been replaced over a given
+            period, typically expressed annually.
           </p>
         </div>
 

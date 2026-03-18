@@ -1,5 +1,7 @@
-import { useInstallPWA } from "@/hooks/useInstallPWA";
 import { SparklesIcon } from "lucide-react";
+
+import { useInstallPWA } from "@/hooks/useInstallPWA";
+
 import { Button } from "./ui/button";
 
 function InstallAppButton({ alwaysVisible = false }) {

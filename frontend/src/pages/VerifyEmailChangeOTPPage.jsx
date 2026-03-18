@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { useLocation } from "react-router";
+
+import { useRequestEmailChange } from "@/hooks/useRequestEmailChange";
 import { Button } from "@/components/ui/button";
 import {
   InputOTP,
@@ -5,12 +10,9 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Spinner } from "@/components/ui/spinner";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { useState } from "react";
-import { useVerifyEmailChangeOTP } from "../hooks/useVerifyEmailChangeOTP";
-import { useLocation } from "react-router";
 import GoBackBar from "@/components/GoBackBar";
-import { useRequestEmailChange } from "@/hooks/useRequestEmailChange";
+
+import { useVerifyEmailChangeOTP } from "../hooks/useVerifyEmailChangeOTP";
 
 function VerifyEmailChangeOTPPage() {
   const [otp, setOtp] = useState("");

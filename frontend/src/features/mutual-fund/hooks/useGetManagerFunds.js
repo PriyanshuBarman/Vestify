@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { fetchMangerFunds } from "../api/external";
 
 export function useGetManagerFunds(managerName) {

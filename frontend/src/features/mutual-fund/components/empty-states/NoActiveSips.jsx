@@ -1,3 +1,4 @@
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   Empty,
   EmptyDescription,
@@ -6,7 +7,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useIsMobile } from "@/hooks/useIsMobile";
+
 import { useGetFundsByFilter } from "../../hooks/useGetFundsByFilter";
 import CardLG from "../CardLG";
 import CardSM from "../CardSM";

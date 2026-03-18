@@ -1,10 +1,12 @@
-import GoBackBar from "@/components/GoBackBar";
+import { useMemo, useState } from "react";
+
+import { useDebounce } from "@/hooks/useDebounce";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { useDebounce } from "@/hooks/useDebounce";
-import { useMemo, useState } from "react";
-import FutureValuePieChart from "../components/charts/FutureValuePieChart";
+import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
+
+import FutureValuePieChart from "../components/charts/FutureValuePieChart";
 import { calcFutureValues } from "../utils/returnCalculatorUtils";
 
 function SipCalculatorPage() {
@@ -16,6 +18,7 @@ function SipCalculatorPage() {
 
   const result = useMemo(() => {
     return calcFutureValues(type, amount, annualReturn, years);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, debouncedValue, years, annualReturn]);
 
   return (

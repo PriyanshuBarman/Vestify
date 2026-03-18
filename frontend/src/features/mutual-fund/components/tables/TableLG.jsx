@@ -1,3 +1,6 @@
+import { ChevronDownIcon } from "lucide-react";
+import { Link } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -17,8 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import FundRating from "@/features/mutual-fund/components/FundRating";
-import { ChevronDownIcon } from "lucide-react";
-import { Link } from "react-router";
+
 import { getColumnValueLg } from "../../utils/tableUtils";
 import FundLogo from "../FundLogo";
 

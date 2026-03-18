@@ -1,4 +1,5 @@
 import { lazy } from "react";
+
 import Layout from "./components/Layout";
 
 const Page = lazy(() => import("./pages/Page"));

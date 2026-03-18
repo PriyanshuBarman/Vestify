@@ -1,4 +1,7 @@
-import GoBackBar from "@/components/GoBackBar";
+import { useState } from "react";
+import { addMonths, formatDate } from "date-fns";
+import { useLocation } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -8,12 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { formatToINR } from "@/utils/formatters";
-import { useState } from "react";
-import { useLocation } from "react-router";
-import { useAddStepUp } from "../hooks/useAddStepUp";
 import { Spinner } from "@/components/ui/spinner";
-import { addMonths, formatDate } from "date-fns";
+import GoBackBar from "@/components/GoBackBar";
+import { formatToINR } from "@/utils/formatters";
+
+import { useAddStepUp } from "../hooks/useAddStepUp";
 
 const intervals = {
   "3M": 3,

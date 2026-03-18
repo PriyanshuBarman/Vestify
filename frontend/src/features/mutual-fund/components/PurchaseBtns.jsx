@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
 import { useGetFundData } from "../hooks/useGetFundData";
 
 function PurchaseBtns({ schemeCode, isPending = false, className }) {

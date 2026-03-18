@@ -1,14 +1,16 @@
+import { memo } from "react";
+import { Trash2Icon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Button } from "@/components/ui/button";
 import { clearSearchHistory } from "@/store/slices/searchSlice";
-import { Trash2Icon } from "lucide-react";
-import { memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 // const filterTabs = {
 //   Stocks: "indianStocks",
 //   "Mutual Funds": "mutualFunds",
 // };
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 function FilterTabs({ setSearchType, searchType }) {
   const searchHistory = useSelector((state) => state.search.searchHistory);
   const dispatch = useDispatch();

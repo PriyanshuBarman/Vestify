@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { sanitizeAmount } from "@/utils/formatters";
 import { DeleteIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { sanitizeAmount } from "@/utils/formatters";
 
 function Keypad({ amount, setAmount, className }) {
   const handleNumberClick = (num) => {

@@ -40,7 +40,7 @@ export async function portfolioUpdater() {
             error: error.message,
           });
         }
-      })
+      }),
     );
   }
 

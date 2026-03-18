@@ -1,4 +1,5 @@
 import config from "#config/env.config.js";
+import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as userService from "../services/user.service.js";
 
@@ -24,7 +25,7 @@ export const claimDailyReward = asyncHandler(async (req, res) => {
 
   const updatedBalance = await userService.claimDailyReward(
     userId,
-    rewardAmount
+    rewardAmount,
   );
 
   return res.status(200).json({

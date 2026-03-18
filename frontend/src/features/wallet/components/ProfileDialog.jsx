@@ -1,4 +1,6 @@
-import SendIcon from "@/components/icons/SendIcon";
+import { useNavigate } from "react-router";
+
+import { useGetUser } from "@/hooks/useGetUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,8 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useGetUser } from "@/hooks/useGetUser";
-import { useNavigate } from "react-router";
+import SendIcon from "@/components/icons/SendIcon";
 
 function ProfileDialog({ isOpen, onOpenChange, clickedProfile }) {
   const navigate = useNavigate();

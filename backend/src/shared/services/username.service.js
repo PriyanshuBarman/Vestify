@@ -17,7 +17,7 @@ export const generateUniqueUsername = async (name) => {
     // Generate 5 random candidates/usernames in a batch
     const candidates = Array.from(
       { length: 5 },
-      () => base + crypto.randomInt(1, 1000) // 4-digit random
+      () => base + crypto.randomInt(1, 1000), // 4-digit random
     );
 
     // Fetch all usernames that already exist from this batch
@@ -30,7 +30,7 @@ export const generateUniqueUsername = async (name) => {
 
     // Find the first candidate not taken
     const available = candidates.find(
-      (u) => !taken.some((t) => t.username === u)
+      (u) => !taken.some((t) => t.username === u),
     );
 
     if (available) {

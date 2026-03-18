@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { FlashlightIcon, ImageUpIcon, XIcon } from "lucide-react";
 import QrScanner from "qr-scanner";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
 
 function QrReader({ isOpen, setIsOpen }) {
   // 🔹 Refs & State
@@ -11,7 +12,6 @@ function QrReader({ isOpen, setIsOpen }) {
   const videoEl = useRef(null);
   const qrBoxEl = useRef(null);
   const fileInputRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
   const [isFlashOn, setIsFlashOn] = useState(false);
   const navigate = useNavigate();
 
@@ -19,7 +19,6 @@ function QrReader({ isOpen, setIsOpen }) {
   const handleClose = () => {
     scanner.current?.stop();
     scanner.current = null;
-    setIsActive(false);
     setIsOpen(false);
   };
 
@@ -80,10 +79,9 @@ function QrReader({ isOpen, setIsOpen }) {
 
       scanner.current
         .start()
-        .then(() => setIsActive(true))
+        .then(() => setIsOpen(true))
         .catch((err) => {
           console.error("Camera start error:", err);
-          setIsActive(false);
           setIsOpen(false);
           toast.info(
             "Camera blocked or not accessible. Please allow in browser permissions & reload",
@@ -95,6 +93,7 @@ function QrReader({ isOpen, setIsOpen }) {
       scanner.current?.stop();
       scanner.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   if (!isOpen) return null;

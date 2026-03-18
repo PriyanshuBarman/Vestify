@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { useIsMobile } from "./useIsMobile";
 
 export function useBackClose(open, onClose) {
@@ -9,7 +10,7 @@ export function useBackClose(open, onClose) {
 
     window.history.pushState({ ...window.history.state, dialog: true }, "");
 
-    const handlePopState = (e) => {
+    const handlePopState = () => {
       onClose();
     };
 
@@ -18,5 +19,6 @@ export function useBackClose(open, onClose) {
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
-  }, [open]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobile, open]);
 }

@@ -1,6 +1,7 @@
-import { selectTheme } from "@/store/slices/themeSlice";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+
+import { selectTheme } from "@/store/slices/themeSlice";
 
 function ThemeProvider({ children }) {
   const theme = useSelector(selectTheme);

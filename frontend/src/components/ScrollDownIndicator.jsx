@@ -1,5 +1,5 @@
-import { ChevronDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
 
 function ScrollIndicator() {
   const [isVisible, setIsVisible] = useState(true);

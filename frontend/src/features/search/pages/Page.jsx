@@ -1,13 +1,15 @@
-import GoBackBtn from "@/components/GoBackBtn";
-import { Spinner } from "@/components/ui/spinner";
-import { useGetSearchResults } from "@/features/search/hooks/useGetSearchResults";
-import { useKeyboardDismiss } from "@/features/search/hooks/useKeyboardDismis";
-import { useDebounce } from "@/hooks/useDebounce";
-import { addToSearchHistory } from "@/store/slices/searchSlice";
-import { X } from "lucide-react";
 import { lazy, Suspense, useRef, useState } from "react";
+import { X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+
+import { useDebounce } from "@/hooks/useDebounce";
+import { Spinner } from "@/components/ui/spinner";
+import GoBackBtn from "@/components/GoBackBtn";
+import { useGetSearchResults } from "@/features/search/hooks/useGetSearchResults";
+import { useKeyboardDismiss } from "@/features/search/hooks/useKeyboardDismis";
+import { addToSearchHistory } from "@/store/slices/searchSlice";
+
 import TrendingSearchList from "../components/TrendingSearchList";
 
 // const FilterTabs = lazy(() => import("../components/FilterTabs"));
@@ -17,6 +19,7 @@ const SearchResultList = lazy(() => import("../components/SearchResultList"));
 function SearchPage() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const [searchType, setSearchType] = useState("mutualFunds");
   const debouncedQuery = useDebounce(query.trim());
 

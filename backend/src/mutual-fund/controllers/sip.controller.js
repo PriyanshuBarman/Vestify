@@ -1,6 +1,5 @@
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
-import { formatDate } from "date-fns";
 import * as sipService from "../services/sip.service.js";
 
 export const createSip = asyncHandler(async (req, res) => {
@@ -34,10 +33,12 @@ export const createSip = asyncHandler(async (req, res) => {
 });
 
 export const editSip = asyncHandler(async (req, res) => {
+  const { userId } = req.user;
   const { sipId } = req.params;
   const { amount, sipDate } = req.body;
 
   const { message, notice } = await sipService.editSip({
+    userId,
     sipId,
     amount,
     sipDate,
@@ -108,7 +109,6 @@ export const getSipDetail = asyncHandler(async (req, res) => {
 // ---------------------------------------------------
 
 export const addEditStepUp = asyncHandler(async (req, res) => {
-  const { userId } = req.user;
   const { sipId, amount, percentage, intervalInMonths } = req.body;
 
   const sip = await sipService.addEditStepUp({

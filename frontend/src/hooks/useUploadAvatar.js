@@ -1,6 +1,7 @@
-import { updateAvatar } from "@/api/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { updateAvatar } from "@/api/user";
 
 export function useUploadAvatar() {
   const queryClient = useQueryClient();

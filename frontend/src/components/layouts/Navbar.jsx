@@ -1,11 +1,13 @@
-import Logo from "@/components/Logo";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/ui/mode-togle";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { SearchIcon } from "lucide-react";
 import { lazy, useState } from "react";
+import { SearchIcon } from "lucide-react";
 import MediaQuery from "react-responsive";
 import { Link, NavLink, useLocation, useNavigate } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/mode-togle";
+import Logo from "@/components/Logo";
+
 const ProfileAvatar = lazy(() => import("../ProfileAvatar"));
 const ProfileSheet = lazy(() => import("../ProfileSheet"));
 const DesktopSearch = lazy(

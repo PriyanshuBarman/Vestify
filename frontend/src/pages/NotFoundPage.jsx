@@ -1,3 +1,6 @@
+import { ChevronLeftIcon } from "lucide-react";
+import { useNavigate } from "react-router";
+
 import {
   Empty,
   EmptyContent,
@@ -5,8 +8,7 @@ import {
   EmptyHeader,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { ChevronLeftIcon } from "lucide-react";
-import { useNavigate } from "react-router";
+
 import { Button } from "../components/ui/button";
 
 function NotFoundPage() {

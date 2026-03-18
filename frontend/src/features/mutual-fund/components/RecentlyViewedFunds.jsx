@@ -1,13 +1,15 @@
+import { useState } from "react";
+import { ChevronsUpDown } from "lucide-react";
+import { useNavigate } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { ChevronsUpDown, StarIcon } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import FundRating from "@/features/mutual-fund/components/FundRating";
+
 import { useRecentlyViewedFunds } from "../hooks/useRecentlyViewedFunds";
 import CardLG from "./CardLG";
 import FundLogo from "./FundLogo";
-import FundRating from "@/features/mutual-fund/components/FundRating";
 
 const labelArr = [
   { key: "return_1y", label: "1Y Returns" },

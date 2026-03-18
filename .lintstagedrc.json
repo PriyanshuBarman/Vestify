@@ -1,0 +1,10 @@
+{
+  "frontend/**/*.{js,jsx}": [
+    "npm --prefix ./frontend run lint:fix",
+    "npm --prefix ./frontend run format"
+  ],
+  "backend/**/*.js": [
+    "npm --prefix ./backend run lint:fix",
+    "npm --prefix ./backend run format"
+  ]
+}

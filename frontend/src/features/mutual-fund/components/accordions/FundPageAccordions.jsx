@@ -1,3 +1,7 @@
+import { ChevronRightIcon, UserIcon } from "lucide-react";
+import { Link } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   Accordion,
   AccordionContent,
@@ -5,15 +9,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Avatar } from "@/components/ui/avatar";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { ChevronRightIcon, UserIcon } from "lucide-react";
-import { Link } from "react-router";
-import ExpenseRatioExitLoad from "./ExpenseRatioExitLoad";
-import FundHouseAndInvestmentObjective from "./FundHouseAndInvestmentObjective";
-import ReturnAndRanking from "./ReturnAndRanking";
+
 import ReturnCalculator from "../ReturnCalculator";
 import SimilarFundsTableLG from "../tables/SimilarFundsTableLG";
 import SimilarFundsTableSM from "../tables/SimilarFundsTableSM";
+import ExpenseRatioExitLoad from "./ExpenseRatioExitLoad";
+import FundHouseAndInvestmentObjective from "./FundHouseAndInvestmentObjective";
+import ReturnAndRanking from "./ReturnAndRanking";
 
 function FundPageAccordions({ fund }) {
   const isMobile = useIsMobile();

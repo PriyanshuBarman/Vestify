@@ -11,7 +11,7 @@ userRoutes.get("/referrals", authenticate, userController.getReferrals);
 userRoutes.patch(
   "/claim-daily-reward",
   authenticate,
-  userController.claimDailyReward
+  userController.claimDailyReward,
 );
 
 userRoutes.patch("/", authenticate, userController.updateProfile);
@@ -20,6 +20,6 @@ userRoutes.patch(
   authenticate,
   avatarUploadLimiter,
   upload.single("avatar"),
-  userController.uploadAvatar
+  userController.uploadAvatar,
 );
 userRoutes.delete("/avatar", authenticate, userController.deleteAvatar);

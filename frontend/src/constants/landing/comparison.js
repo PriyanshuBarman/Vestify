@@ -1,7 +1,6 @@
 import {
   ArrowRightLeftIcon,
   CalendarDaysIcon,
-  CodeXmlIcon,
   PieChartIcon,
   QrCodeIcon,
   Rotate3DIcon,

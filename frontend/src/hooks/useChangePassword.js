@@ -1,7 +1,8 @@
-import { changePassword } from "@/api/account";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+
+import { changePassword } from "@/api/account";
 
 export function useChangePassword() {
   const navigate = useNavigate();

@@ -1,15 +1,18 @@
-import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
+import { lazy, useState } from "react";
+import NumberFlow from "@number-flow/react";
+import { IndianRupeeIcon } from "lucide-react";
+
+import { useGetBalance } from "@/hooks/useGetBalance";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useGetBalance } from "@/hooks/useGetBalance";
+import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
 import { sanitizeAmount } from "@/utils/formatters";
-import NumberFlow from "@number-flow/react";
-import { IndianRupeeIcon } from "lucide-react";
-import { lazy, useState } from "react";
+
 import { useCreateInvestOrder } from "../hooks/useCreateInvestOrder";
 import { useCreateSip } from "../hooks/useCreateSip";
+
 const DatePicker = lazy(() => import("./overlays/DatePicker"));
 
 function DesktopPaymentCard({ fund }) {

@@ -2,7 +2,7 @@ export const printSummary = (
   total,
   successCount,
   failureCount,
-  skippedCount
+  skippedCount,
 ) => {
   console.log("-------Summary------");
   console.log("TOTAL: ", total);

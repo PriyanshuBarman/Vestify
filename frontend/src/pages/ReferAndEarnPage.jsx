@@ -1,5 +1,18 @@
-import GoBackBar from "@/components/GoBackBar";
-import ShareIcon from "@/components/icons/ShareIcon";
+import { Fragment } from "react";
+import {
+  CheckCircle2Icon,
+  GiftIcon,
+  TrophyIcon,
+  UsersIcon,
+} from "lucide-react";
+import { toast } from "sonner";
+
+import {
+  VITE_REFERRED_USER_REWARD_AMOUNT,
+  VITE_REFERRER_REWARD_AMOUNT,
+} from "@/config/env";
+import { useGetReferrals } from "@/hooks/useGetReferrals";
+import { useGetUser } from "@/hooks/useGetUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,21 +33,9 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
-import {
-  VITE_REFERRED_USER_REWARD_AMOUNT,
-  VITE_REFERRER_REWARD_AMOUNT,
-} from "@/config/env";
-import { useGetReferrals } from "@/hooks/useGetReferrals";
-import { useGetUser } from "@/hooks/useGetUser";
+import GoBackBar from "@/components/GoBackBar";
+import ShareIcon from "@/components/icons/ShareIcon";
 import { formatToINR } from "@/utils/formatters";
-import {
-  CheckCircle2Icon,
-  GiftIcon,
-  TrophyIcon,
-  UsersIcon,
-} from "lucide-react";
-import { Fragment } from "react";
-import { toast } from "sonner";
 
 const shareText = `*Virtually Invest in Mutual funds* with a *Groww app UI*.
 
@@ -71,7 +72,7 @@ function ReferAndEarnPage() {
           Refer & Earn
         </h1>
         <p className="text-muted-foreground mt-4 px-4 sm:text-xl">
-          Share the love for Vestify and get rewarded. It's a win-win!
+          Share the love for Vestify and get rewarded. It&apos;s a win-win!
         </p>
       </div>
 
@@ -122,8 +123,8 @@ function ReferAndEarnPage() {
           </div>
           <CardFooter className="mt-8 rounded-md px-4 py-2">
             <CardDescription className="text-xs">
-              Note: It's virtual money and will be credited to your vestify
-              wallet. <b>It's not real money.</b>
+              Note: It&apos;s virtual money and will be credited to your vestify
+              wallet. <b>It&apos;s not real money.</b>
             </CardDescription>
           </CardFooter>
         </CardContent>

@@ -1,9 +1,10 @@
+import { useState } from "react";
+import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
+import { useNavigate } from "react-router";
+
 import ProfileDialog from "@/features/wallet/components/ProfileDialog";
 import UserAvatar from "@/features/wallet/components/UserAvatar";
 import { formatShortINR } from "@/utils/formatters";
-import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router";
 
 function UserPreviewCard({ user }) {
   const navigate = useNavigate();
@@ -49,18 +50,14 @@ function UserPreviewCard({ user }) {
           )}
         </div>
 
-        <div className="bg-muted/80 m-2 flex h-15 items-center justify-around rounded-3xl text-sm tabular-nums sm:h-16">
+        <div className="bg-muted/80 mx-2 mb-2 flex h-15 items-center justify-around rounded-3xl text-sm tabular-nums sm:h-16">
           <div className="flex flex-col items-center sm:gap-1">
             <span className="text-muted-foreground text-[0.725rem]">Funds</span>
-            <span className="text-md">
-              {user.portfolio.fundCount}
-            </span>
+            <span className="text-md">{user.portfolio.fundCount}</span>
           </div>
           <div className="flex flex-col items-center sm:gap-1">
             <span className="text-muted-foreground text-[0.725rem]">SIPs</span>
-            <span className="text-md">
-              {user.portfolio.sipCount}
-            </span>
+            <span className="text-md">{user.portfolio.sipCount}</span>
           </div>
           <div className="flex flex-col items-center sm:gap-1">
             <span className="text-muted-foreground text-[0.725rem]">

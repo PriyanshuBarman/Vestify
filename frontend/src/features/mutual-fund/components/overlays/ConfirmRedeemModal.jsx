@@ -1,3 +1,6 @@
+import { formatDate } from "date-fns";
+import { InfoIcon } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,9 +14,8 @@ import {
   ResponsiveModalTitle,
 } from "@/components/ui/responsive-modal";
 import { formatToINR } from "@/utils/formatters";
-import { InfoIcon } from "lucide-react";
+
 import { getNavAndProcessDateForRedemption } from "../../utils/getNavAndProcessDate";
-import { formatDate } from "date-fns";
 
 function ConfirmRedeemModal({
   amount,

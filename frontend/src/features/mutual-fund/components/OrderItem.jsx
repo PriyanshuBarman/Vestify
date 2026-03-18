@@ -1,3 +1,6 @@
+import { Link } from "react-router";
+
+import { cn } from "@/lib/utils";
 import {
   Item,
   ItemContent,
@@ -5,9 +8,8 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
-import { cn } from "@/lib/utils";
 import { formatToINR } from "@/utils/formatters";
-import { Link } from "react-router";
+
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
 
 function OrderItem({ order, username, index, length, className }) {

@@ -1,10 +1,12 @@
-import GoBackBar from "@/components/GoBackBar";
+import { lazy, useEffect, useState } from "react";
+import { ChevronsLeftRightIcon } from "lucide-react";
+import { useLocation } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { ChevronsLeftRightIcon } from "lucide-react";
-import { lazy, useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import GoBackBar from "@/components/GoBackBar";
+
 import SortByButton from "../components/filters/SortByButton";
 import { DEFAULT_COLUMNS, sortOptions } from "../constants/collection";
 import { useGetFundsByFilter } from "../hooks/useGetFundsByFilter";
@@ -14,6 +16,7 @@ import {
   getNextColumn,
   sortPeersBy,
 } from "../utils/collectionsUtils";
+
 const TableLG = lazy(() => import("../components/tables/TableLG"));
 const TableSM = lazy(() => import("../components/tables/TableSM"));
 

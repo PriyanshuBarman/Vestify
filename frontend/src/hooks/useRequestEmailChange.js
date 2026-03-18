@@ -1,7 +1,8 @@
-import { requestEmailChange } from "@/api/account";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
+
+import { requestEmailChange } from "@/api/account";
 
 export function useRequestEmailChange() {
   const navigate = useNavigate();

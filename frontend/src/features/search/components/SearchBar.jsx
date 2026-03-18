@@ -1,8 +1,9 @@
+import { memo } from "react";
+import { SearchIcon, XIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Spinner } from "@/components/ui/spinner";
 import { setIsSearchOpen } from "@/store/slices/searchSlice";
-import { SearchIcon, XIcon } from "lucide-react";
-import { memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 // Only used in DesktopSearch
 

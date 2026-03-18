@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { useLogout } from "../hooks/useLogout";
 
 function LogoutPage() {

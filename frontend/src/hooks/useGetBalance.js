@@ -1,5 +1,6 @@
-import { fetchBalance } from "@/api/wallet";
 import { useQuery } from "@tanstack/react-query";
+
+import { fetchBalance } from "@/api/wallet";
 
 export function useGetBalance() {
   return useQuery({

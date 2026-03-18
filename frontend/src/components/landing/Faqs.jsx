@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import {
   Accordion,
   AccordionContent,
@@ -6,7 +8,6 @@ import {
 } from "@/components/ui/accordion";
 import { itemVariants, slideInLeft } from "@/constants/animations";
 import { faqs } from "@/constants/faqs";
-import { motion } from "motion/react";
 
 function Faqs() {
   return (

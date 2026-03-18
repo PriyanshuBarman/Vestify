@@ -1,5 +1,18 @@
-import GoBackBar from "@/components/GoBackBar";
-import LoadingState from "@/components/LoadingState";
+import { useState } from "react";
+import { format } from "date-fns";
+import {
+  ChevronRightIcon,
+  LaptopMinimalIcon,
+  LogOutIcon,
+  MonitorIcon,
+  SmartphoneIcon,
+} from "lucide-react";
+import { useNavigate } from "react-router";
+import { UAParser } from "ua-parser-js";
+
+import { useDeleteAllSessions } from "@/hooks/useDeleteAllSession";
+import { useDeleteSession } from "@/hooks/useDeleteSession";
+import { useGetSessions } from "@/hooks/useGetSessions";
 import { Button } from "@/components/ui/button";
 import {
   Item,
@@ -18,20 +31,8 @@ import {
   ResponsiveModalTitle,
 } from "@/components/ui/responsive-modal";
 import { Separator } from "@/components/ui/separator";
-import { useDeleteAllSessions } from "@/hooks/useDeleteAllSession";
-import { useDeleteSession } from "@/hooks/useDeleteSession";
-import { useGetSessions } from "@/hooks/useGetSessions";
-import { format } from "date-fns";
-import {
-  ChevronRightIcon,
-  LaptopMinimalIcon,
-  LogOutIcon,
-  MonitorIcon,
-  SmartphoneIcon,
-} from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { UAParser } from "ua-parser-js";
+import GoBackBar from "@/components/GoBackBar";
+import LoadingState from "@/components/LoadingState";
 
 const deviceIcons = {
   mobile: <SmartphoneIcon />,
@@ -72,8 +73,8 @@ function ActiveDevicesPage() {
       />
 
       <p className="text-muted-foreground mt-2 text-xs">
-        You're currently logged in on these devices. Multiple sessions on the
-        same device mean you have Vestify open in more than one browser.
+        You&apos;re currently logged in on these devices. Multiple sessions on
+        the same device mean you have Vestify open in more than one browser.
       </p>
 
       {/* Current Device */}

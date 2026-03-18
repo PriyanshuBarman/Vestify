@@ -9,7 +9,7 @@
 export const calcPortfolioAfterInvestment = (
   prevInv,
   invested,
-  purchaseUnits
+  purchaseUnits,
 ) => {
   const newInvested = prevInv.invested.toNumber() + invested;
   const newUnits = prevInv.units.toNumber() + purchaseUnits;
@@ -39,7 +39,7 @@ export const calcPortfolioAfterRedemption = (
   fund,
   costBasis,
   redemptionAmt,
-  redemptionUnits
+  redemptionUnits,
 ) => {
   const newInvested = fund.invested.toNumber() - costBasis;
   const newCurrent = fund.current.toNumber() - redemptionAmt;

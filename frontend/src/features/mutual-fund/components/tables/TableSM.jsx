@@ -1,8 +1,10 @@
+import { Loader2 } from "lucide-react";
+import { Link } from "react-router";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Loader2 } from "lucide-react";
-import { Link } from "react-router";
+
 import { formatFundCategory } from "../../utils/formaters";
 import { getColumnValueSm } from "../../utils/tableUtils";
 import FundLogo from "../FundLogo";

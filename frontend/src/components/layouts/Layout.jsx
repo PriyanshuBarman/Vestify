@@ -1,11 +1,14 @@
-import { fetchBalance } from "@/api/wallet";
-import { useSSEConnection } from "@/hooks/useSSEConnection";
-import ErrorPage from "@/pages/ErrorPage";
-import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
+import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router";
+
+import { useSSEConnection } from "@/hooks/useSSEConnection";
+import { fetchBalance } from "@/api/wallet";
+import ErrorPage from "@/pages/ErrorPage";
+
 import ScrollToTop from "./ScrollToTop";
+
 const DailyRewardModal = lazy(() => import("./DailyRewardModal"));
 const BottomNavbar = lazy(() => import("./BottomNavbar"));
 const Navbar = lazy(() => import("./Navbar"));
@@ -23,7 +26,7 @@ function Layout() {
       queryKey: ["balance"],
       queryFn: fetchBalance,
     });
-  }, [isRestoring]);
+  }, [isRestoring, queryClient]);
 
   return (
     <ErrorBoundary fallback={<ErrorPage />}>

@@ -1,8 +1,10 @@
-import { useInstallPWA } from "@/hooks/useInstallPWA";
 import { ArrowDownIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import { motion } from "motion/react";
+
+import { useInstallPWA } from "@/hooks/useInstallPWA";
 import { containerVariants, itemVariants } from "@/constants/animations";
+
+import { Button } from "../ui/button";
 
 function Pwa() {
   const { handleInstallClick } = useInstallPWA();

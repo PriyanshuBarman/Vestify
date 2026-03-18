@@ -1,10 +1,12 @@
-import GoBackBar from "@/components/GoBackBar";
-import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { formatToINR } from "@/utils/formatters";
-import { ChevronsLeftRightIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ChevronsLeftRightIcon } from "lucide-react";
 import { useParams } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { Button } from "@/components/ui/button";
+import GoBackBar from "@/components/GoBackBar";
+import { formatToINR } from "@/utils/formatters";
+
 import FilterCategoryButton from "../components/filters/FilterCategoryButton";
 import FundLogo from "../components/FundLogo";
 import TableLG from "../components/tables/TableLG";

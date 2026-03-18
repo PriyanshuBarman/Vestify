@@ -1,9 +1,11 @@
-import { formatToINR } from "@/utils/formatters";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { sendMoney } from "../api/wallet";
+
+import { formatToINR } from "@/utils/formatters";
 import { playPaymentSuccessSound } from "@/utils/sound";
+
+import { sendMoney } from "../api/wallet";
 
 export const useSendMoney = () => {
   const navigate = useNavigate();

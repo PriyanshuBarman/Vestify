@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { InfoIcon, XIcon } from "lucide-react";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,9 +18,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { InfoIcon, XIcon } from "lucide-react";
-import { useState } from "react";
 
 /**
  * Reusable InfoDrawer component for displaying information
@@ -73,7 +74,7 @@ export function InfoDrawer({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{TriggerButton}</DialogTrigger>
-      <DialogContent >
+      <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold">{title}</DialogTitle>
         </DialogHeader>

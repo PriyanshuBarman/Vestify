@@ -1,3 +1,6 @@
+import { ArrowLeftIcon, RefreshCwIcon } from "lucide-react";
+import { useNavigate } from "react-router";
+
 import {
   Empty,
   EmptyContent,
@@ -6,9 +9,8 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { ArrowLeftIcon, RefreshCwIcon } from "lucide-react";
+
 import { Button } from "../components/ui/button";
-import { useNavigate } from "react-router";
 
 function ErrorPage() {
   const navigate = useNavigate();

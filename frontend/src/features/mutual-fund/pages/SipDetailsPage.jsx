@@ -1,13 +1,3 @@
-import CopyButton from "@/components/CopyButton";
-import LoadingState from "@/components/LoadingState";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { formatToINR } from "@/utils/formatters";
 import { format, formatDate, setDate } from "date-fns";
 import {
   ArrowLeftIcon,
@@ -16,6 +6,18 @@ import {
   PencilIcon,
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import CopyButton from "@/components/CopyButton";
+import LoadingState from "@/components/LoadingState";
+import { formatToINR } from "@/utils/formatters";
+
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
 import OrderStatusIcon from "../components/OrderStatusIcon";
 import CancelSipButton from "../components/overlays/CancelSipButton";

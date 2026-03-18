@@ -1,14 +1,16 @@
-import GoBackBar from "@/components/GoBackBar";
-import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
+import { useState } from "react";
+import { ArrowRightIcon } from "lucide-react";
+import { useLocation } from "react-router";
+
+import { useGetProfileById } from "@/hooks/useGetProfileById";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useGetProfileById } from "@/hooks/useGetProfileById";
+import GoBackBar from "@/components/GoBackBar";
+import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
 import { sanitizeAmount } from "@/utils/formatters";
-import { ArrowRightIcon } from "lucide-react";
-import { useState } from "react";
-import { useLocation } from "react-router";
+
 import { useSendMoney } from "../hooks/useSendMoney";
 
 function SendMoneyPage() {

@@ -1,13 +1,14 @@
-import GoBackBar from "@/components/GoBackBar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import ProfileDialog from "@/features/wallet/components/ProfileDialog";
-import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
+import { formatDistanceToNow } from "date-fns";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import GoBackBar from "@/components/GoBackBar";
+import ProfileDialog from "@/features/wallet/components/ProfileDialog";
 
 function ProfileHeader({ profile }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleAvatarClick = (e) => {
+  const handleAvatarClick = () => {
     setIsOpen(true);
   };
 

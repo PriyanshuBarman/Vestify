@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 /**
  * Custom hook that automatically dismisses/close the mobile keyboard when the user starts scrolling
  * or performs touch movements that suggest they want to interact with the page

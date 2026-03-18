@@ -21,7 +21,7 @@ export const processStepUp = async (data) => {
   const newNextStepUpDate = addMonths(
     new Date(nextStepUpDate),
     stepUpIntervalInMonths,
-    { in: tz("Asia/Kolkata") }
+    { in: tz("Asia/Kolkata") },
   );
 
   await db.mfSip.update({

@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { fetchUsers, searchUsers } from "../api/community";
+
+import { fetchUsers } from "../api/community";
 
 export function useGetUsers() {
   const LIMIT = 20;

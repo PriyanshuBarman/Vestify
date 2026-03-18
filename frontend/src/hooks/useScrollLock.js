@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 /**
  *
  * Prevents background page scrolling when modals, sheets, or overlays are open.

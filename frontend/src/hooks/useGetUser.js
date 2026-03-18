@@ -1,6 +1,7 @@
-import { fetchUserData } from "@/api/user";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+import { fetchUserData } from "@/api/user";
 
 export const useGetUser = () => {
   const initialData = localStorage.getItem("USER_DATA");

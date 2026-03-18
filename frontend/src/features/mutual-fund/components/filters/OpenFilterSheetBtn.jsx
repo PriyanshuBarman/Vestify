@@ -1,3 +1,9 @@
+import { lazy, Suspense, useState } from "react";
+import { SlidersHorizontalIcon } from "lucide-react";
+import { useSelector } from "react-redux";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -6,13 +12,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { useScrollLock } from "@/hooks/useScrollLock";
 import { selectFilters } from "@/store/slices/mutualFundSlice";
-import { SlidersHorizontalIcon } from "lucide-react";
-import { lazy, Suspense, useState } from "react";
-import { useSelector } from "react-redux";
+
 import { getActiveFilterCount } from "../../utils/filterUtils";
+
 const FilterSheetContent = lazy(() => import("./FilterSheetContent"));
 
 const OpenFilterSheetBtn = () => {

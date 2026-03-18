@@ -49,7 +49,7 @@ export const deleteSip = async ({ sipId }) => {
   return data;
 };
 
-export const skipSip = async ({ sipId, diff }) => {
+export const skipSip = async ({ sipId }) => {
   const { data } = await api.patch(`/mutual-funds/sips/${sipId}/skip`);
   return data;
 };

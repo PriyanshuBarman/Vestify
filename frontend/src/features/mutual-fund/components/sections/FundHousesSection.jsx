@@ -1,8 +1,10 @@
 import { Link } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+
 import { useGetAMCs } from "../../hooks/useGetAMCs";
 import FundLogo from "../FundLogo";
 import SectionHeading from "../SectionHeading";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 function FundHousesSection() {
   const isMobile = useIsMobile();
@@ -25,10 +27,7 @@ function FundHousesSection() {
             className="bg-card cursor-pointer space-y-3 rounded-[1.25rem] border p-3 duration-200 hover:scale-101 sm:m-0.5 sm:space-y-5 sm:rounded-[1.5rem] sm:p-4"
           >
             <div className="flex items-center gap-2 sm:gap-4">
-              <FundLogo
-                fundHouseDomain={amc.detail_info}
-                className="size-8"
-              />
+              <FundLogo fundHouseDomain={amc.detail_info} className="size-8" />
               <p className="text-2xs sm:text-[0.9rem] sm:font-[450]">
                 {amc.fundCount}
                 <span className="ml-0.5 text-[85%] sm:ml-1">Funds</span>

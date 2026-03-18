@@ -16,7 +16,7 @@ sipRoutes.patch(
   "/step-up",
   authenticate,
   validateStepUp,
-  sipController.addEditStepUp
+  sipController.addEditStepUp,
 );
 sipRoutes.delete("/step-up/:sipId", authenticate, sipController.removeStepUp);
 
@@ -27,13 +27,13 @@ sipRoutes.post(
   validateSip,
   validatePinLimiter,
   verifyPin,
-  sipController.createSip
+  sipController.createSip,
 );
 sipRoutes.patch(
   "/:sipId",
   authenticate,
   validateSipEdit,
-  sipController.editSip
+  sipController.editSip,
 );
 sipRoutes.delete("/:sipId", authenticate, sipController.cancelSip);
 sipRoutes.patch("/:sipId/skip", authenticate, sipController.skipSip);

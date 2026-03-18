@@ -1,3 +1,7 @@
+import { Download } from "lucide-react";
+
+import { useInstallPWA } from "@/hooks/useInstallPWA";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   Item,
   ItemActions,
@@ -5,10 +9,8 @@ import {
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
-import { Download } from "lucide-react";
+
 import IconWrapper from "./IconWrapper";
-import { useInstallPWA } from "@/hooks/useInstallPWA";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 function InstallAppCard() {
   const isMobile = useIsMobile();

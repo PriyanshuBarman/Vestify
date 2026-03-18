@@ -1,5 +1,6 @@
-import { fetchReferrals } from "@/api/user";
 import { useQuery } from "@tanstack/react-query";
+
+import { fetchReferrals } from "@/api/user";
 
 export function useGetReferrals() {
   return useQuery({

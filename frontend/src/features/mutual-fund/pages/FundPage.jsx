@@ -1,16 +1,18 @@
-import GoBackBar from "@/components/GoBackBar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { setIsSearchOpen } from "@/store/slices/searchSlice";
-import { Bookmark, LockKeyholeIcon, Search } from "lucide-react";
 import { lazy } from "react";
+import { Bookmark, LockKeyholeIcon, Search } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import FundDescription from "../components/FundDescription";
-import FundLogo from "../components/FundLogo";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import GoBackBar from "@/components/GoBackBar";
+import { setIsSearchOpen } from "@/store/slices/searchSlice";
+
 import FundPageAccordions from "../components/accordions/FundPageAccordions.jsx";
 import Chart from "../components/charts/Chart";
+import FundDescription from "../components/FundDescription";
+import FundLogo from "../components/FundLogo";
 import { useAddToWatchlist } from "../hooks/useAddToWatchlist";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
@@ -136,8 +138,8 @@ function FundPage() {
                 <p className="bg-accent rounded-md p-3 text-center text-xs">
                   This fund has blocked{" "}
                   {fund.lump_available === "N" ? "one-time" : "SIP"} investments
-                  in this fund. You can explore similar funds from the 'Peer
-                  Comparison' section.
+                  in this fund. You can explore similar funds from the
+                  &apos;Peer Comparison&apos; section.
                 </p>
               </div>
             )}

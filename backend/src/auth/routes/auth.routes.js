@@ -22,23 +22,23 @@ authRoutes.post(
   "/signup",
   signupValidator,
   signUpLimiter,
-  authController.signup
+  authController.signup,
 );
 authRoutes.post("/login", loginValidator, loginLimiter, authController.login);
 authRoutes.get("/logout", authController.logout);
 authRoutes.post(
   "/refresh-token",
   refreshTokenLimiter,
-  authController.refreshToken
+  authController.refreshToken,
 );
 
 authRoutes.post(
   "/forgot-password",
   forgotPasswordLimiter,
-  passwordController.forgotPassword
+  passwordController.forgotPassword,
 );
 authRoutes.post(
   "/reset-password/:token",
   passwordChangeLimiter,
-  passwordController.resetPassword
+  passwordController.resetPassword,
 );

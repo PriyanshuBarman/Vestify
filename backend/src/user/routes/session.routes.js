@@ -9,5 +9,5 @@ sessionRoutes.delete("/", authenticate, sessionController.revokeAllSessions);
 sessionRoutes.delete(
   "/:sessionId",
   authenticate,
-  sessionController.revokeSession
+  sessionController.revokeSession,
 );

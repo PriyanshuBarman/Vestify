@@ -1,12 +1,16 @@
+import { lazy } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   selectActiveTabIndex,
   setActiveTabIndex,
 } from "@/store/slices/mutualFundSlice";
-import { lazy } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import "swiper/css";
+
 import { HashNavigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import InvestmentsTab from "../components/tabs/InvestmentsTab";
 
 const SipsTab = lazy(() => import("../components/tabs/SipsTab"));

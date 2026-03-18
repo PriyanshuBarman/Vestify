@@ -1,17 +1,19 @@
-import GoBackBar from "@/components/GoBackBar";
-import { SearchModal } from "@/components/overlays/SearchModal";
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { formatDate } from "date-fns";
+import { CirclePlusIcon } from "lucide-react";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import GoBackBar from "@/components/GoBackBar";
+import { SearchModal } from "@/components/overlays/SearchModal";
 import { formatToINR } from "@/utils/formatters";
-import { useQueryClient } from "@tanstack/react-query";
-import { formatDate } from "date-fns";
-import { CirclePlusIcon } from "lucide-react";
-import { useState } from "react";
+
 import { fetchFund } from "../api/external";
 
 function CompareFundsPage() {

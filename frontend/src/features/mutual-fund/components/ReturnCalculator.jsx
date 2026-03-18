@@ -1,3 +1,7 @@
+import { useMemo, useState } from "react";
+import NumberFlow from "@number-flow/react";
+
+import { useDebounce } from "@/hooks/useDebounce";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,17 +11,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { useDebounce } from "@/hooks/useDebounce";
 import { formatToINR } from "@/utils/formatters";
-import NumberFlow from "@number-flow/react";
-import { useMemo, useState } from "react";
+import { getChangeColor } from "@/utils/helper";
+
 import { useGetChart } from "../hooks/useGetChart";
 import {
   calculateAbsoluteReturn,
   calculateSIPReturns,
 } from "../utils/returnCalculatorUtils";
 import SIPCalculationInfo from "./overlays/info/SIPCalculationInfo";
-import { getChangeColor } from "@/utils/helper";
 
 const TIME_OPTIONS = [
   { label: "1 year", year: 1 },
@@ -49,6 +51,7 @@ function ReturnCalculator({ fund }) {
         selectedYear,
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, chartData, debouncedValue, selectedYear, fund]);
 
   return (

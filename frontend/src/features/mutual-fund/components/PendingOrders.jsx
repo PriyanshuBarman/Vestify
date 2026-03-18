@@ -1,11 +1,13 @@
+import { AccordionItem } from "@radix-ui/react-accordion";
+import { ChevronRightIcon } from "lucide-react";
+import { Link } from "react-router";
+
 import {
   Accordion,
   AccordionContent,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { AccordionItem } from "@radix-ui/react-accordion";
-import { ChevronRightIcon } from "lucide-react";
-import { Link } from "react-router";
+
 import { useGetPendingOrders } from "../hooks/useGetPendingOrders";
 import OrderItem from "./OrderItem";
 

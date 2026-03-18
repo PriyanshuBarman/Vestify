@@ -1,3 +1,6 @@
+import { formatDate } from "date-fns";
+import { useNavigate } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -9,8 +12,6 @@ import {
   ResponsiveModalTitle,
 } from "@/components/ui/responsive-modal";
 import { formatToINR } from "@/utils/formatters";
-import { formatDate } from "date-fns";
-import { useNavigate } from "react-router";
 
 function StepUpDetailsModal({
   isOpen,

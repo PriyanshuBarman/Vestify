@@ -1,6 +1,7 @@
-import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
 import { Link } from "react-router";
+
+import { cn } from "@/lib/utils";
 
 function SectionHeading({
   heading,

@@ -87,7 +87,7 @@ export const loginUser = async ({ email, password, userAgent, ip }) => {
   if (user.authProvider === "GOOGLE") {
     throw new ApiError(
       400,
-      "This account was created with Google. Please use Google Login."
+      "This account was created with Google. Please use Google Login.",
     );
   }
 
@@ -170,7 +170,7 @@ export const refreshToken = async (token, userAgent, ip) => {
     });
 
     return newTokens;
-  } catch (error) {
+  } catch {
     throw new ApiError(401, "Invalid refresh token");
   }
 };

@@ -1,3 +1,8 @@
+import { useEffect, useRef, useState } from "react";
+
+import { cn } from "@/lib/utils";
+import { useBackClose } from "@/hooks/useBackClose";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   Dialog,
   DialogContent,
@@ -6,16 +11,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useBackClose } from "@/hooks/useBackClose";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { cn } from "@/lib/utils";
 import { formatToINR } from "@/utils/formatters";
-import { useEffect, useRef, useState } from "react";
+
+import SendIcon from "../icons/SendIcon";
 import PinKeypad from "../PinKeypad";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Spinner } from "../ui/spinner";
-import SendIcon from "../icons/SendIcon";
 
 const LENGTH = 4;
 

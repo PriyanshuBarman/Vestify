@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { IndianRupeeIcon } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,8 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
-import { IndianRupeeIcon } from "lucide-react";
-import { useState } from "react";
+
 import { useEditSip } from "../hooks/useEditSip";
 import { useGetFundData } from "../hooks/useGetFundData";
 import EditSipDatePicker from "./EditSipDatePicker";

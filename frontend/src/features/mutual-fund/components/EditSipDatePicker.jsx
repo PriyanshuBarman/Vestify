@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { format } from "date-fns";
+import { CalendarCheck2Icon, ChevronDownIcon } from "lucide-react";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,10 +23,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { format } from "date-fns";
-import { CalendarCheck2Icon, ChevronDownIcon } from "lucide-react";
-import { useState } from "react";
+
 import { addSuffix } from "../utils/formaters";
 import { getNextInstallmentDateAfterEdit } from "../utils/sip";
 import SipDayPicker from "./SipDayPicker";

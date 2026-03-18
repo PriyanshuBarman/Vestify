@@ -1,7 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
 import { addToWatchlist } from "../api/watchlist";
-import { useQueryClient } from "@tanstack/react-query";
 
 export function useAddToWatchlist() {
   const queryClient = useQueryClient();

@@ -1,9 +1,11 @@
-import { ChevronRightIcon } from "lucide-react";
-import FundLogo from "../FundLogo";
-import { Link } from "react-router";
-import { useGetAMCs } from "../../hooks/useGetAMCs";
 import { useState } from "react";
+import { ChevronRightIcon } from "lucide-react";
+import { Link } from "react-router";
+
 import { formatToINR } from "@/utils/formatters";
+
+import { useGetAMCs } from "../../hooks/useGetAMCs";
+import FundLogo from "../FundLogo";
 
 function FundHouseAndInvestmentObjective({ fund }) {
   const [textClamp, setTextClamp] = useState(true);

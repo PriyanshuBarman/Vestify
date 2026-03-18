@@ -16,7 +16,7 @@ export const fetchLatestNAVData = async (schemeCode) => {
 
   try {
     const { data } = await axios.get(
-      `${config.MF_API_BASE_URL}/${schemeCode}/latest`
+      `${config.MF_API_BASE_URL}/${schemeCode}/latest`,
     );
 
     const latestEntry = data.data[0];
@@ -28,6 +28,8 @@ export const fetchLatestNAVData = async (schemeCode) => {
 
     return navInfo;
   } catch (error) {
-    throw new Error(`Error at fetchLatestNAVData: ${error.message}`);
+    throw new Error(`Error at fetchLatestNAVData: ${error.message}`, {
+      cause: error,
+    });
   }
 };

@@ -1,5 +1,5 @@
-import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import ProfilePage from "@/pages/ProfilePage";
 
 function ProfileSheet({ open, onOpenChange }) {

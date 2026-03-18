@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import {
   Card,
   CardContent,
@@ -5,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import FundRating from "@/features/mutual-fund/components/FundRating";
-import { Link } from "react-router";
+
 import FundLogo from "./FundLogo";
 
 function CardSM({ fund }) {

@@ -52,7 +52,7 @@ async function processOrders() {
           failureCount++;
           console.error("❌", error.message);
         }
-      })
+      }),
     );
   }
 

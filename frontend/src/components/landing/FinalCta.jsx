@@ -1,7 +1,9 @@
-import { containerVariants, itemVariants } from "@/constants/animations";
 import { ArrowRightIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { Link, useSearchParams } from "react-router";
+
+import { containerVariants, itemVariants } from "@/constants/animations";
+
 import { Button } from "../ui/button";
 
 function FinalCta() {

@@ -1,6 +1,7 @@
-import { selectActiveTabIndex } from "@/store/slices/mutualFundSlice";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
+
+import { selectActiveTabIndex } from "@/store/slices/mutualFundSlice";
 
 const TABS = [
   { name: "Explore", hash: "#explore" },

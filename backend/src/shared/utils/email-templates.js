@@ -298,7 +298,7 @@ export const refreshTokenReuseTemplate = (
   session,
   decoded,
   userAgent,
-  ip
+  ip,
 ) => `<!DOCTYPE html>
 <html lang="en">
   <head>

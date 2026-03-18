@@ -1,8 +1,12 @@
+import { lazy, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+
 import ScrollToTop from "@/components/layouts/ScrollToTop";
 import LoadingState from "@/components/LoadingState";
-import { lazy, useEffect, useState } from "react";
+
 import { useGetPortfolio } from "../../hooks/useGetPortfolio";
 import { sortPortfolio } from "../../utils/investmentTabUtils";
+
 const PortfolioModal = lazy(() => import("../overlays/PortfolioModal"));
 const PendingOrders = lazy(() => import("../PendingOrders"));
 const PortfolioSummary = lazy(() => import("../PortfolioSummary"));
@@ -17,8 +21,6 @@ const sortOptions = {
   dayChangeValue: "Day Change (₹)",
   dayChangePercent: "Day Change (%)",
 };
-
-import { useNavigate } from "react-router";
 
 function InvestmentsTab({ username }) {
   const isOtherUserProfile = !!username;

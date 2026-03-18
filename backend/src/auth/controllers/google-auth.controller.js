@@ -10,7 +10,7 @@ import {
 const client = new OAuth2Client(
   config.CLIENT_ID,
   config.CLIENT_SECRET,
-  "postmessage"
+  "postmessage",
 );
 
 export const googleAuth = asyncHandler(async (req, res) => {

@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { ArrowUpIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+
 import { Button } from "./ui/button";
 
 function ScrollToTopButton({ scrollThreshold = 800 }) {

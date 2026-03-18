@@ -1,12 +1,15 @@
-import LogoShapeOnly from "@/components/LogoShapeOnly";
+import { lazy } from "react";
+import { AtSignIcon } from "lucide-react";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router";
+
+import { useGetUser } from "@/hooks/useGetUser";
 import { Button } from "@/components/ui/button";
 import { FieldDescription } from "@/components/ui/field";
 import { Spinner } from "@/components/ui/spinner";
-import { AtSignIcon } from "lucide-react";
-import { lazy } from "react";
-import { Link, Navigate, useNavigate, useSearchParams } from "react-router";
+import LogoShapeOnly from "@/components/LogoShapeOnly";
+
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
-import { useGetUser } from "@/hooks/useGetUser";
+
 const GoogleIcon = lazy(() => import("@/components/icons/GoogleIcon"));
 
 function AuthPage() {

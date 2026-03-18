@@ -1,7 +1,10 @@
-import CopyrightFooter from "@/components/CopyrightFooter";
-import GoBackBar from "@/components/GoBackBar";
-import EditAvatarModal from "@/components/overlays/EditAvatarModal";
-import ProfileAvatar from "@/components/ProfileAvatar";
+import { useState } from "react";
+import { CameraIcon, Edit2Icon } from "lucide-react";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+
+import { useGetUser } from "@/hooks/useGetUser";
+import { useUploadAvatar } from "@/hooks/useUploadAvatar";
 import { Button } from "@/components/ui/button";
 import {
   Item,
@@ -13,12 +16,10 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { Spinner } from "@/components/ui/spinner";
-import { useGetUser } from "@/hooks/useGetUser";
-import { useUploadAvatar } from "@/hooks/useUploadAvatar";
-import { CameraIcon, Edit2Icon } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { toast } from "sonner";
+import CopyrightFooter from "@/components/CopyrightFooter";
+import GoBackBar from "@/components/GoBackBar";
+import EditAvatarModal from "@/components/overlays/EditAvatarModal";
+import ProfileAvatar from "@/components/ProfileAvatar";
 
 function AccountDetailsPage() {
   const { data: user } = useGetUser();
@@ -99,7 +100,9 @@ function AccountDetailsPage() {
               // We're currently on a free subdomain, so this is disabled for now.
               // onClick={() => navigate("/change-email")}
               onClick={() =>
-                toast.info("Please contact support to change your email address.")
+                toast.info(
+                  "Please contact support to change your email address.",
+                )
               }
             >
               <Edit2Icon />

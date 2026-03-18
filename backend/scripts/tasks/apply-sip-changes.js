@@ -32,7 +32,7 @@ export async function applySipChangess() {
           failureCount++;
           console.error("❌", error.message);
         }
-      })
+      }),
     );
   }
 

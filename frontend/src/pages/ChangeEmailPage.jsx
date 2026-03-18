@@ -1,4 +1,7 @@
-import GoBackBar from "@/components/GoBackBar";
+import { useState } from "react";
+
+import { useGetUser } from "@/hooks/useGetUser";
+import { useRequestEmailChange } from "@/hooks/useRequestEmailChange";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -9,9 +12,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
-import { useGetUser } from "@/hooks/useGetUser";
-import { useRequestEmailChange } from "@/hooks/useRequestEmailChange";
-import { useState } from "react";
+import GoBackBar from "@/components/GoBackBar";
 
 function ChangeEmailPage() {
   const [newEmail, setNewEmail] = useState();

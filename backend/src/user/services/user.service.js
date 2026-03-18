@@ -4,7 +4,6 @@ import db from "#config/db.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import cloudinary from "#config/cloudinary.config.js";
-import config from "#config/env.config.js";
 
 export const getUser = async (userId) => {
   const user = await db.user.findUnique({
@@ -114,7 +113,7 @@ export const uploadAvatar = async (userId, file) => {
         (error, result) => {
           if (error) reject(error);
           else resolve(result);
-        }
+        },
       );
 
       uploadStream.end(fileBuffer);
@@ -129,7 +128,7 @@ export const uploadAvatar = async (userId, file) => {
   } catch (error) {
     throw new ApiError(
       error?.http_code || 500,
-      error?.message || "Internal server error"
+      error?.message || "Internal server error",
     );
   }
 };

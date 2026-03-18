@@ -1,14 +1,16 @@
+import { useEffect, useState } from "react";
+import { Loader2Icon, SearchIcon } from "lucide-react";
+import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { Loader2Icon, SearchIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { useNavigate } from "react-router";
+
+import NoUsersFound from "../components/empty-states/NoUsersFound";
 import UserPreviewCard from "../components/UserPreviewCard";
 import UserPreviewCardSkeleton from "../components/UserPreviewCardSkeleton";
-import NoUsersFound from "../components/empty-states/NoUsersFound";
 import { useGetUsers } from "../hooks/useGetUsers";
 import { useSearchUser } from "../hooks/useSearchUser";
 

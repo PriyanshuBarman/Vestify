@@ -1,18 +1,19 @@
+import { useState } from "react";
+import { TZDate } from "@date-fns/tz";
+import { getDate } from "date-fns";
+import { useLocation } from "react-router";
+
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import GoBackBtn from "@/components/GoBackBtn";
 import Keypad from "@/components/Keypad";
 import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
-import { Button } from "@/components/ui/button";
-import { TZDate } from "@date-fns/tz";
-import { getDate } from "date-fns";
-import { useState } from "react";
-import { useLocation } from "react-router";
+import { formatToINR, sanitizeAmount } from "@/utils/formatters";
+
 import DatePicker from "../components/overlays/DatePicker";
-import { Label } from "@/components/ui/label";
-import { sanitizeAmount } from "@/utils/formatters";
 import { useCreateInvestOrder } from "../hooks/useCreateInvestOrder";
 import { useCreateSip } from "../hooks/useCreateSip";
 import { useGetFundData } from "../hooks/useGetFundData";
-import { formatToINR } from "@/utils/formatters";
 
 function InvestPage() {
   const [amount, setAmount] = useState("");

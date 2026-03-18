@@ -16,14 +16,14 @@ orderRoutes.post(
   validateInvestmentOrder,
   validatePinLimiter,
   verifyPin,
-  orderController.placeInvestmentOrder
+  orderController.placeInvestmentOrder,
 );
 
 orderRoutes.put(
   "/redeem",
   authenticate,
   validateRedemptionOrder,
-  orderController.placeRedemptionOrder
+  orderController.placeRedemptionOrder,
 );
 
 orderRoutes.get("/", authenticate, orderController.getAllOrders);
@@ -32,5 +32,5 @@ orderRoutes.get("/:orderId", authenticate, orderController.getOrderDetail);
 orderRoutes.get(
   "/fund/:schemeCode",
   authenticate,
-  orderController.getFundOrders
+  orderController.getFundOrders,
 );

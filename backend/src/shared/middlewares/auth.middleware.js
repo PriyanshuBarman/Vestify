@@ -10,7 +10,7 @@ export const authenticate = asyncHandler(async (req, res, next) => {
     const decoded = jwt.verify(accessToken, config.ACCESS_TOKEN_SECRET);
     req.user = { userId: decoded.userId };
     return next();
-  } catch (error) {
+  } catch {
     throw new ApiError(401, "Invalid or expired access token");
   }
 });

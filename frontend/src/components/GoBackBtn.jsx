@@ -1,7 +1,9 @@
 import { ArrowLeftIcon } from "lucide-react";
 import { useNavigate } from "react-router";
-import { Button } from "./ui/button";
+
 import { cn } from "@/lib/utils";
+
+import { Button } from "./ui/button";
 
 function GoBackBtn({ className, ...props }) {
   const navigate = useNavigate();

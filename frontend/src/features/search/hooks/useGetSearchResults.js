@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { fetchSearchResults } from "../api/search";
 
 export function useGetSearchResults(query, type) {

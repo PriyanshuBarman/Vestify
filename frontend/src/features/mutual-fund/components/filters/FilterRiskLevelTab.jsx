@@ -1,6 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { useSelector, useDispatch } from "react-redux";
 import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
 
 const RISK_LEVELS = [

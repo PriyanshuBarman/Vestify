@@ -1,14 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { resetFilters, selectFilters } from "@/store/slices/mutualFundSlice";
+import { lazy, Suspense, useState } from "react";
 import { XIcon } from "lucide-react";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { Button } from "@/components/ui/button";
+import { resetFilters, selectFilters } from "@/store/slices/mutualFundSlice";
+
 import { useGetFilteredFunds } from "../../hooks/useGetFilteredFunds";
 import { getActiveFilterCount } from "../../utils/filterUtils";
-import { lazy, Suspense } from "react";
-import LoadingState from "@/components/LoadingState";
 
 const FilterCategoriesTab = lazy(() => import("./FilterCategoriesTab"));
 const FilterFundHouseTab = lazy(() => import("./FilterFundHouseTab"));

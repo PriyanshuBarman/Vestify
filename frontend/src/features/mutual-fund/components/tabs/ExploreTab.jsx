@@ -1,7 +1,9 @@
-import CopyrightFooter from "@/components/CopyrightFooter";
-import InstallAppCard from "@/components/InstallAppCard";
 import { lazy, Suspense } from "react";
 import { useMediaQuery } from "react-responsive";
+
+import CopyrightFooter from "@/components/CopyrightFooter";
+import InstallAppCard from "@/components/InstallAppCard";
+
 const CollectionsSection = lazy(() => import("../sections/CollectionsSection"));
 const FundHousesSection = lazy(() => import("../sections/FundHousesSection"));
 const IndexFundsSection = lazy(() => import("../sections/IndexFundsSection"));

@@ -5,6 +5,7 @@ const resend = new Resend(config.RESEND_API_KEY);
 
 export const sendEmail = async ({ to, subject, html }) => {
   try {
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const { data, error } = await resend.emails.send({
       from: "Vestify <no-reply@resend.dev>",
       to: [to],

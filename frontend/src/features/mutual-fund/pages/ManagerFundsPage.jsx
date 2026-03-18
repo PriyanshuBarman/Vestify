@@ -1,10 +1,12 @@
-import GoBackBar from "@/components/GoBackBar";
+import { useEffect, useState } from "react";
+import { ChevronsLeftRightIcon, UserIcon } from "lucide-react";
+import { useParams } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { ChevronsLeftRightIcon, UserIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import GoBackBar from "@/components/GoBackBar";
+
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import { DEFAULT_COLUMNS, sortOptions } from "../constants/collection";

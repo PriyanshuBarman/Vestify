@@ -1,5 +1,8 @@
-import CopyButton from "@/components/CopyButton";
-import GoBackBar from "@/components/GoBackBar";
+import { useQueryClient } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { ChevronRightIcon } from "lucide-react";
+import { Link, useLocation, useParams, useSearchParams } from "react-router";
+
 import {
   Accordion,
   AccordionContent,
@@ -7,11 +10,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import CopyButton from "@/components/CopyButton";
+import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
-import { useQueryClient } from "@tanstack/react-query";
-import { format } from "date-fns";
-import { ChevronRightIcon } from "lucide-react";
-import { Link, useLocation, useParams, useSearchParams } from "react-router";
+
 import OrderStatusIcon from "../components/OrderStatusIcon";
 import OrderStatusTimeline from "../components/OrderStatusTimeline";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";

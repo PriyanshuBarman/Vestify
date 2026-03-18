@@ -1,10 +1,12 @@
-import { Button } from "@/components/ui/button";
 import { ArrowUpRightIcon, SparklesIcon } from "lucide-react";
 import { motion } from "motion/react";
-import Mockup from "./Mockup";
 import { Link, useSearchParams } from "react-router";
-import { containerVariants, heroItemVariants } from "@/constants/animations";
+
 import { useInstallPWA } from "@/hooks/useInstallPWA";
+import { Button } from "@/components/ui/button";
+import { containerVariants, heroItemVariants } from "@/constants/animations";
+
+import Mockup from "./Mockup";
 
 function Hero() {
   const [searchParams] = useSearchParams();

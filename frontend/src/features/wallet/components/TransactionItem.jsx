@@ -1,4 +1,7 @@
-import IncognitoIcon from "@/components/icons/IncognitoIcon";
+import { useState } from "react";
+import { formatDate } from "date-fns";
+import { Link } from "react-router";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Item,
@@ -8,12 +11,11 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
+import IncognitoIcon from "@/components/icons/IncognitoIcon";
 import { formatToINR } from "@/utils/formatters";
-import { formatDate } from "date-fns";
+
 import { assetConfig } from "../utils/constants";
 import ProfileDialog from "./ProfileDialog";
-import { useState } from "react";
-import { Link } from "react-router";
 
 function TransactionItem({ tnx, index, length, hideSeparator }) {
   const peerProfile = tnx.peerUser?.profile;

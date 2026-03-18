@@ -1,6 +1,7 @@
-import { claimDailyReward } from "@/api/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { formatDate } from "date-fns";
+
+import { claimDailyReward } from "@/api/user";
 
 export function useClaimDailyReward() {
   const queryClient = useQueryClient();

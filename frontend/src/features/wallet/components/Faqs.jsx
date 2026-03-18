@@ -9,7 +9,9 @@ import { walletFAQs } from "@/constants/faqs";
 function Faqs() {
   return (
     <section className="mt-10">
-      <h2 className="ml-2 font-medium sm:text-xl sm:font-semibold">FAQ's</h2>
+      <h2 className="ml-2 font-medium sm:text-xl sm:font-semibold">
+        FAQ&apos;s
+      </h2>
 
       <Accordion type="single" collapsible className="mt-4 space-y-3">
         {walletFAQs.map((faq, index) => (
@@ -18,7 +20,7 @@ function Faqs() {
             value={`item-${index}`}
             className="bg-accent rounded-xl px-4"
           >
-            <AccordionTrigger className="sm:text-md font-[450] text-sm">
+            <AccordionTrigger className="sm:text-md text-sm font-[450]">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="text-muted-foreground leading-relaxed">

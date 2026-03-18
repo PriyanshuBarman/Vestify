@@ -1,4 +1,6 @@
-import GoBackBar from "@/components/GoBackBar";
+import { useState } from "react";
+
+import { useChangePassword } from "@/hooks/useChangePassword";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -8,8 +10,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
-import { useChangePassword } from "@/hooks/useChangePassword";
-import { useState } from "react";
+import GoBackBar from "@/components/GoBackBar";
 
 function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState();
@@ -64,7 +65,7 @@ function ChangePasswordPage() {
           />
           {isSameValueEntered && (
             <FieldError>
-              New password can't be same as current password
+              New password can&apos;t be same as current password
             </FieldError>
           )}
         </Field>
@@ -82,7 +83,7 @@ function ChangePasswordPage() {
         className="mt-auto w-full sm:mt-14 sm:w-fit"
         onClick={handleSave}
       >
-        {isPending && <Spinner />}  Save Changes
+        {isPending && <Spinner />} Save Changes
       </Button>
     </div>
   );

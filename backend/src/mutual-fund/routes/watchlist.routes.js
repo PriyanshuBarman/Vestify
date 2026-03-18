@@ -9,13 +9,13 @@ watchlistRoutes.post(
   "/",
   authenticate,
   validateWatchlist,
-  watchlistService.addToWatchlist
+  watchlistService.addToWatchlist,
 );
 
 watchlistRoutes.delete(
   "/:schemeCode",
   authenticate,
-  watchlistService.removeFromWatchlist
+  watchlistService.removeFromWatchlist,
 );
 
 watchlistRoutes.get("/", authenticate, watchlistService.getWatchlist);
@@ -23,5 +23,5 @@ watchlistRoutes.get("/", authenticate, watchlistService.getWatchlist);
 watchlistRoutes.get(
   "/:schemeCode",
   authenticate,
-  watchlistService.isInWatchlist
+  watchlistService.isInWatchlist,
 );

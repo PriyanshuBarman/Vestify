@@ -1,6 +1,8 @@
-import { Marquee } from "@/components/ui/marquee";
-import { useGetScreenshots } from "@/hooks/useGetScreenshots";
 import { motion } from "motion/react";
+
+import { useGetScreenshots } from "@/hooks/useGetScreenshots";
+import { Marquee } from "@/components/ui/marquee";
+
 import SectionHeading from "./SectionHeading";
 
 function UiShowcase() {

@@ -1,9 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { isToday } from "date-fns";
+
 import { VITE_DAILY_REWARD_AMOUNT } from "@/config/env";
 import { useClaimDailyReward } from "@/hooks/useClaimDailyReward";
+import { Button } from "@/components/ui/button";
 import { formatToINR } from "@/utils/formatters";
-import { isToday } from "date-fns";
-import { useEffect, useState } from "react";
+
 import {
   ResponsiveModal,
   ResponsiveModalClose,
@@ -24,6 +26,7 @@ function DailyRewardModal() {
     if (!isToday(new Date(lastRewardedAt))) {
       mutate();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+
 import LogoShapeOnly from "./LogoShapeOnly";
 
 function CopyrightFooter({ className }) {

@@ -1,12 +1,14 @@
+import { useRef } from "react";
+import { ChevronRightIcon, ImageUpIcon, Trash2Icon } from "lucide-react";
+
+import { useRemoveAvatar } from "@/hooks/useRemoveAvatar.js.js";
 import {
   ResponsiveModal,
   ResponsiveModalContent,
   ResponsiveModalHeader,
   ResponsiveModalTitle,
 } from "@/components/ui/responsive-modal";
-import { useRemoveAvatar } from "@/hooks/useRemoveAvatar.js.js";
-import { ChevronRightIcon, ImageUpIcon, Trash2Icon } from "lucide-react";
-import { useRef } from "react";
+
 import {
   Item,
   ItemActions,

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { fetchUserProfile } from "../api/community";
 
 export function useUserProfile(username) {

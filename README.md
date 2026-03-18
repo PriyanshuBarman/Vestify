@@ -94,15 +94,22 @@ VITE_BACKEND_BASE_URL = "http://localhost:3000/api/v1"
 VITE_MF_CHART_API_BASE_URL = "https://api.mfapi.in/mf"
 VITE_MF_API_BASE_URL =
 
-VITE_DAILY_REWARD_AMOUNT = 2000
-VITE_REFERRER_REWARD_AMOUNT = 15000
-VITE_REFERRED_USER_REWARD_AMOUNT = 5000
+VITE_DAILY_REWARD_AMOUNT = 10000
+VITE_REFERRER_REWARD_AMOUNT = 50000
+VITE_REFERRED_USER_REWARD_AMOUNT = 10000
 
 
 
 ```
 
-### 4. Backend Setup
+### 4. Install Root Dependencies
+
+```bash
+# Install Husky, commitlint, and lint-staged
+npm install
+```
+
+### 5. Backend Setup
 
 ```bash
 cd backend
@@ -116,7 +123,7 @@ npx prisma migrate dev
 npm run dev
 ```
 
-### 5. Frontend Setup
+### 6. Frontend Setup
 
 ```bash
 cd frontend

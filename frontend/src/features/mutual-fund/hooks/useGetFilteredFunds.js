@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+
 import { fetchFilteredFunds } from "../api/external";
 
 export function useGetFilteredFunds(filters) {

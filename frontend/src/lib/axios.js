@@ -1,10 +1,11 @@
+import axios from "axios";
+
 import {
   VITE_BACKEND_BASE_URL,
   VITE_MF_API_BASE_URL,
   VITE_MF_CHART_API_BASE_URL,
   VITE_STOCK_SEARCH_API_BASE_URL,
 } from "@/config/env";
-import axios from "axios";
 
 const api = axios.create({
   baseURL: VITE_BACKEND_BASE_URL,

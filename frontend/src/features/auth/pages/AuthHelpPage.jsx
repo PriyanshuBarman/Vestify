@@ -1,4 +1,9 @@
-import CopyButton from "@/components/CopyButton";
+import { useEffect } from "react";
+import { InfoIcon } from "@phosphor-icons/react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+
+import { trackPageView } from "@/lib/analytics";
 import {
   Accordion,
   AccordionContent,
@@ -14,11 +19,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { trackPageView } from "@/lib/analytics";
-import { InfoIcon } from "@phosphor-icons/react";
-import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import CopyButton from "@/components/CopyButton";
+
 import {
   ALTERNATIVE_MOBILE_STEPS,
   DESKTOP_STEPS,
@@ -38,7 +40,7 @@ function AuthHelpPage() {
       window.location.pathname + window.location.search,
       "Auth Help",
     );
-  }, []);
+  }, [queryClient]);
 
   return (
     <div className="mx-auto min-h-dvh w-full max-w-5xl px-4 py-8 sm:py-12">
@@ -209,9 +211,9 @@ function DesktopGuide() {
         <InfoIcon className="text-accent-foreground mt-0.5 h-5 w-5 shrink-0" />
         <p className="text-muted-foreground text-xs leading-relaxed">
           Browsers like Safari or Brave might call this{" "}
-          <strong>"Prevent Cross-Site Tracking"</strong> or{" "}
-          <strong>"Shields"</strong>. Ensure these are disabled for Vestify to
-          allow secure session cookies.
+          <strong>&quot;Prevent Cross-Site Tracking&quot;</strong> or{" "}
+          <strong>&quot;Shields&quot;</strong>. Ensure these are disabled for
+          Vestify to allow secure session cookies.
         </p>
       </div>
     </div>
@@ -236,7 +238,7 @@ function TechnicalReasonDialog() {
             Our frontend and backend systems are{" "}
             <b>hosted on different sub-domains</b>. This is why modern browsers
             block the cookies sent from our backend, treating them as
-            "third-party cookies."
+            &quot;third-party cookies.&quot;
           </p>
           <p>
             Without these cookies, we <b>cannot keep you logged in securely</b>.

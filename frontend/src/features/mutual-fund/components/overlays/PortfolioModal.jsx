@@ -1,3 +1,6 @@
+import { ChevronRightIcon, LogsIcon, MoveUpRightIcon } from "lucide-react";
+import { Link } from "react-router";
+
 import {
   ResponsiveModal,
   ResponsiveModalClose,
@@ -7,15 +10,14 @@ import {
   ResponsiveModalTitle,
 } from "@/components/ui/responsive-modal";
 import { formatToINR } from "@/utils/formatters";
-import { ChevronRightIcon, LogsIcon, MoveUpRightIcon } from "lucide-react";
-import { Link } from "react-router";
-import PurchaseBtns from "../PurchaseBtns";
+
 import { useGetFundOrders } from "../../hooks/useGetFundOrders";
+import PurchaseBtns from "../PurchaseBtns";
 
 function PortfolioModal({ fund, isOpen, onOpenChange }) {
-  if (!fund) return null;
-
   useGetFundOrders(fund.schemeCode); // prefetch
+
+  if (!fund) return null;
 
   return (
     <ResponsiveModal open={isOpen} onOpenChange={onOpenChange}>

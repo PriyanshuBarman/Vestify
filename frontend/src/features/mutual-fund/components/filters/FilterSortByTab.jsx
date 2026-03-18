@@ -1,8 +1,12 @@
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Label } from "@/components/ui/label";
-import { useSelector, useDispatch } from "react-redux";
-import { selectFilters, setFilters } from "@/store/slices/mutualFundSlice";
-import { setActiveColumn } from "@/store/slices/mutualFundSlice";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  selectFilters,
+  setActiveColumn,
+  setFilters,
+} from "@/store/slices/mutualFundSlice";
 
 const SORT_OPTIONS = [
   { label: "Popularity", value: "popularity" },

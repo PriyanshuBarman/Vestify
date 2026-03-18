@@ -1,5 +1,5 @@
-import { HistoryIcon } from "lucide-react";
 import { memo } from "react";
+import { HistoryIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 
 function SearchHistoryList({ handleClick, activeIdx, searchType }) {

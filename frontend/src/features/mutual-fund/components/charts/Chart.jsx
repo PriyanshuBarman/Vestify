@@ -1,13 +1,15 @@
-import { CardContent } from "@/components/ui/card";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { useEffect, useState } from "react";
 import { Line, LineChart, XAxis, YAxis } from "recharts";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { CardContent } from "@/components/ui/card";
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
+
 import { useGetChart } from "../../hooks/useGetChart";
 import { getSelectedRangeData, isValidRange } from "../../utils/chartUtils";
 import ChartLegend from "./ChartLegend";
 import CustomTooltipContent from "./CustomTooltipContent";
 import TimeRangeBtns from "./TimeRangeBtns";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 const returnMapping = {
   "1M": "return_1m",

@@ -1,4 +1,5 @@
 import { formatDate } from "date-fns";
+
 import OrderStatusIcon from "./OrderStatusIcon";
 
 function OrderStatusTimeline({ order }) {

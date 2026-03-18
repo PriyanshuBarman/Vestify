@@ -1,6 +1,8 @@
+import { motion } from "motion/react";
+
 import { containerVariants, itemVariants } from "@/constants/animations";
 import { features } from "@/constants/landing/features";
-import { motion } from "motion/react";
+
 import SectionHeading from "./SectionHeading";
 
 function Features() {

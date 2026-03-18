@@ -1,10 +1,11 @@
-import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   ChartPieSliceIcon,
   UsersThreeIcon,
   WalletIcon,
 } from "@phosphor-icons/react";
 import { NavLink, useLocation } from "react-router";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const TABS = [
   {

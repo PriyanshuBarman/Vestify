@@ -1,7 +1,8 @@
+import { motion } from "motion/react";
+
 import { amcs } from "@/constants/amc";
 import { heroItemVariants } from "@/constants/animations";
 import FundLogo from "@/features/mutual-fund/components/FundLogo";
-import { motion } from "motion/react";
 
 function Mockup() {
   return (
