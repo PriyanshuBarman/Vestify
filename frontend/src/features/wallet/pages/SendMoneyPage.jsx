@@ -60,10 +60,11 @@ function SendMoneyPage() {
         <Label className="flex w-full justify-center text-5xl">
           <span>₹</span>
           <input
+            autoFocus
             autoComplete="off"
+            maxLength={7} // 99.99Lakh
             type="text"
             inputMode="numeric"
-            autoFocus
             value={amount}
             placeholder="0"
             onChange={(e) => setAmount(sanitizeAmount(e.target.value))}

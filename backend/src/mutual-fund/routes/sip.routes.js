@@ -11,16 +11,6 @@ import { validatePinLimiter } from "#shared/middlewares/rate-limiter.middleware.
 
 export const sipRoutes = Router();
 
-// Step-up routes
-sipRoutes.patch(
-  "/step-up",
-  authenticate,
-  validateStepUp,
-  sipController.addEditStepUp,
-);
-sipRoutes.delete("/step-up/:sipId", authenticate, sipController.removeStepUp);
-
-// Regular SIP routes
 sipRoutes.post(
   "/",
   authenticate,
@@ -40,3 +30,12 @@ sipRoutes.patch("/:sipId/skip", authenticate, sipController.skipSip);
 
 sipRoutes.get("/", authenticate, sipController.getAllSips);
 sipRoutes.get("/:sipId", authenticate, sipController.getSipDetail);
+
+// Step-up routes
+sipRoutes.patch(
+  "/step-up",
+  authenticate,
+  validateStepUp,
+  sipController.addEditStepUp,
+);
+sipRoutes.delete("/step-up/:sipId", authenticate, sipController.removeStepUp);

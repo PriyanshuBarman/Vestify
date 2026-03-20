@@ -22,6 +22,9 @@ export const validateSip = (req, res, next) => {
   if (!amount || amount <= 0 || isNaN(amount)) {
     throw new ApiError(400, "Invalid amount");
   }
+  if (amount > 10000000) {
+    throw new ApiError(400, "Amount should be less than 1Cr");
+  }
 
   next();
 };

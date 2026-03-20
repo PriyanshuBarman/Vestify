@@ -13,6 +13,9 @@ export const sendMoney = asyncHandler(async (req, res) => {
   if (amount <= 0) {
     throw new ApiError(400, "amount shouldn't be in negative");
   }
+  if (amount > 10000000) {
+    throw new ApiError(400, "Max 1Cr can be sent at once");
+  }
   if (!receiverId) {
     throw new ApiError(400, "receiverId is required");
   }

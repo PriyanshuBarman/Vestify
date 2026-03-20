@@ -29,6 +29,11 @@ function DesktopPaymentCard({ fund }) {
 
   const { mutate: makePayment, isPending, isError, error } = activeMutation;
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if (value.length > 9) return;
+    setAmount(sanitizeAmount(value));
+  };
   const handleInvest = (pin) => {
     makePayment({ amount, sipDate, fund, pin });
   };
@@ -67,14 +72,17 @@ function DesktopPaymentCard({ fund }) {
                   type="number"
                   inputMode="numeric"
                   value={amount}
-                  onChange={(e) => setAmount(sanitizeAmount(e.target.value))}
+                  onChange={handleChange}
                   placeholder="Amount"
                   required
                   className="peer invest-input"
                   min={fund?.lump_min}
+                  max={10000000}
                 />
                 <p className="invest-input-error mt-2">
-                  Min Lumpsum is ₹{fund?.lump_min}
+                  {amount > 10000000
+                    ? "Max amount is ₹1 Cr"
+                    : `Min Lumpsum is ₹${fund?.lump_min}`}
                 </p>
               </div>
             </div>
@@ -87,7 +95,7 @@ function DesktopPaymentCard({ fund }) {
           <Button
             size="lg"
             onClick={() => setIsPinDialogOpen(true)}
-            disabled={isPending || amount < fund.lump_min}
+            disabled={isPending || amount < fund.lump_min || amount > 10000000}
             className="w-full"
           >
             {isPending && <Spinner />} Invest
@@ -116,11 +124,12 @@ function DesktopPaymentCard({ fund }) {
                 <Input
                   type="number"
                   placeholder="SIP Amount"
+                  onChange={handleChange}
                   value={amount}
-                  onChange={(e) => setAmount(sanitizeAmount(e.target.value))}
                   required
                   className="peer invest-input"
                   min={fund?.sip_min}
+                  max={10000000}
                 />
                 <p className="invest-input-error mt-2">
                   Min SIP amount is ₹{fund?.sip_min}
@@ -141,7 +150,12 @@ function DesktopPaymentCard({ fund }) {
           <Button
             onClick={() => setIsPinDialogOpen(true)}
             size="lg"
-            disabled={isPending || amount < fund.sip_min || !sipDate}
+            disabled={
+              isPending ||
+              amount < fund.sip_min ||
+              amount > 10000000 ||
+              !sipDate
+            }
             className="w-full"
           >
             {isPending && <Spinner />} Start Sip

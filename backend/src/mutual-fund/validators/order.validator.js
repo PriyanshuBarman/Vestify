@@ -22,6 +22,9 @@ export const validateInvestmentOrder = (req, res, next) => {
   if (!amount || amount <= 0 || isNaN(amount)) {
     throw new ApiError(400, "Invalid amount");
   }
+  if (amount > 10000000) {
+    throw new ApiError(400, "Amount should be less than 1Cr");
+  }
 
   next();
 };
@@ -34,7 +37,7 @@ export const validateRedemptionOrder = (req, res, next) => {
   }
 
   if (!amount) {
-    throw new ApiError(400, "amount required");
+    throw new ApiError(400, "amount is required");
   }
   if (isNaN(amount) || amount <= 0) {
     throw new ApiError(400, "invalid amount");
