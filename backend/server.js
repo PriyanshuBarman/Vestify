@@ -5,7 +5,7 @@ import requestIp from "request-ip";
 import cookieParser from "cookie-parser";
 import config from "./config/env.config.js";
 import userRoutes from "./src/user/routes/index.routes.js";
-import { authRoutes } from "./src/auth/routes/auth.routes.js";
+import authRoutes from "./src/auth/routes/index.routes.js";
 import { eventRoutes } from "./src/shared/events/events.route.js";
 import { walletRoutes } from "./src/wallet/routes/wallet.routes.js";
 import { communityRoutes } from "./src/community/routes/community.routes.js";

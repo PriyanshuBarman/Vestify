@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { deleteSession } from "@/api/account";
+import { deleteSession } from "@/api/session";
 
 export function useDeleteSession() {
   const queryClient = useQueryClient();

@@ -1,12 +1,5 @@
 import { api } from "@/lib/axios";
 
-// ================ QUERIES ================
-
-export const fetchSessions = async () => {
-  const { data } = await api.get(`/sessions`);
-  return data.activeSessions;
-};
-
 // ================ MUTATIONS ================
 
 export const changePassword = async ({ currentPassword, newPassword }) => {
@@ -45,15 +38,5 @@ export const changePin = async ({ currentPin, newPin }) => {
 
 export const deleteAccount = async () => {
   const { data } = await api.delete(`/accounts`);
-  return data;
-};
-
-export const deleteSession = async ({ sessionId }) => {
-  const { data } = await api.delete(`/sessions/${sessionId}`);
-  return data;
-};
-
-export const deleteAllSessions = async () => {
-  const { data } = await api.delete(`/sessions`);
   return data;
 };
