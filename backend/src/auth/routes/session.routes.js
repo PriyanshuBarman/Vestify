@@ -3,11 +3,8 @@ import { authenticate } from "#shared/middlewares/auth.middleware.js";
 import * as sessionController from "../controllers/session.controller.js";
 
 export const sessionRoutes = Router();
+sessionRoutes.use(authenticate);
 
-sessionRoutes.get("/", authenticate, sessionController.getActiveSessions);
-sessionRoutes.delete("/", authenticate, sessionController.revokeAllSessions);
-sessionRoutes.delete(
-  "/:sessionId",
-  authenticate,
-  sessionController.revokeSession,
-);
+sessionRoutes.get("/", sessionController.getActiveSessions);
+sessionRoutes.delete("/", sessionController.revokeAllSessions);
+sessionRoutes.delete("/:sessionId", sessionController.revokeSession);

@@ -6,12 +6,13 @@ import { validatePinLimiter } from "#shared/middlewares/rate-limiter.middleware.
 
 export const walletRoutes = Router();
 
+walletRoutes.use(authenticate);
+
 walletRoutes.post(
   "/send",
-  authenticate,
   validatePinLimiter,
   verifyPin,
   walletController.sendMoney,
 );
-walletRoutes.get("/balance", authenticate, walletController.checkBalance);
-walletRoutes.get("/transactions", authenticate, walletController.getAllTnx);
+walletRoutes.get("/balance", walletController.checkBalance);
+walletRoutes.get("/transactions", walletController.getAllTnx);

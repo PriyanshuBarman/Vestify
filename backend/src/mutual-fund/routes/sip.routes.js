@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { authenticate } from "#shared/middlewares/auth.middleware.js";
 import { verifyPin } from "#shared/middlewares/verify-pin.middleware.js";
 import * as sipController from "../controllers/sip.controller.js";
 import {
@@ -13,29 +12,18 @@ export const sipRoutes = Router();
 
 sipRoutes.post(
   "/",
-  authenticate,
   validateSip,
   validatePinLimiter,
   verifyPin,
   sipController.createSip,
 );
-sipRoutes.patch(
-  "/:sipId",
-  authenticate,
-  validateSipEdit,
-  sipController.editSip,
-);
-sipRoutes.delete("/:sipId", authenticate, sipController.cancelSip);
-sipRoutes.patch("/:sipId/skip", authenticate, sipController.skipSip);
+sipRoutes.patch("/:sipId", validateSipEdit, sipController.editSip);
+sipRoutes.delete("/:sipId", sipController.cancelSip);
+sipRoutes.patch("/:sipId/skip", sipController.skipSip);
 
-sipRoutes.get("/", authenticate, sipController.getAllSips);
-sipRoutes.get("/:sipId", authenticate, sipController.getSipDetail);
+sipRoutes.get("/", sipController.getAllSips);
+sipRoutes.get("/:sipId", sipController.getSipDetail);
 
 // Step-up routes
-sipRoutes.patch(
-  "/step-up",
-  authenticate,
-  validateStepUp,
-  sipController.addEditStepUp,
-);
-sipRoutes.delete("/step-up/:sipId", authenticate, sipController.removeStepUp);
+sipRoutes.patch("/step-up", validateStepUp, sipController.addEditStepUp);
+sipRoutes.delete("/step-up/:sipId", sipController.removeStepUp);
