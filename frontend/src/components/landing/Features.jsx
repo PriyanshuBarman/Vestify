@@ -7,7 +7,7 @@ import SectionHeading from "./SectionHeading";
 
 function Features() {
   return (
-    <section className="bg-secondary/30 w-full py-16 max-sm:mask-t-from-95% sm:py-24">
+    <section className="bg-secondary/30 dark:bg-background w-full py-16 max-sm:mask-t-from-95% sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SectionHeading
           subheading="Features"

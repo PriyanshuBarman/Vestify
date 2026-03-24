@@ -18,6 +18,8 @@ function NoWatchlist({ isOtherUserProfile }) {
           <img
             src="/empty-folder.svg"
             alt="No Watchlist"
+            loading="lazy"
+            draggable="false"
             className="size-60 sm:size-90"
           />
         </EmptyMedia>

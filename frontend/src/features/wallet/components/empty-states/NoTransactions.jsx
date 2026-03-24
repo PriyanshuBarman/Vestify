@@ -22,6 +22,8 @@ function NoTransactions() {
             <img
               src="/empty-folder2.svg"
               alt="No transactions found"
+              loading="lazy"
+              draggable="false"
               className="size-80 sm:size-100"
             />
           </EmptyMedia>

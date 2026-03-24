@@ -28,7 +28,13 @@ function NoActiveSips({ isOtherUserProfile }) {
       <Empty>
         <EmptyHeader className="max-w-none">
           <EmptyMedia>
-            <img src="/sip.svg" alt="No Active SIPs" className="h-50" />
+            <img
+              src="/sip.svg"
+              alt="No Active SIPs"
+              loading="lazy"
+              draggable="false"
+              className="h-50"
+            />
           </EmptyMedia>
           <EmptyTitle>No active SIPs</EmptyTitle>
           <EmptyDescription>

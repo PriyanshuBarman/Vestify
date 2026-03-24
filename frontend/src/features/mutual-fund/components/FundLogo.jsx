@@ -10,6 +10,8 @@ function FundLogo({ fundHouseDomain, className, noFormat = false }) {
       <AvatarImage
         src={`https://img.logo.dev/${domain}?token=pk_Rlq_iuMcQHGZ2xOrcVGX7g&retina=true`}
         alt="fund logo"
+        loading="lazy"
+        draggable="false"
         className="object-contain"
       />
       <AvatarFallback className={cn("rounded-md sm:size-10", className)} />

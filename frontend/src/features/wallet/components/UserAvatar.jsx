@@ -8,7 +8,12 @@ function UserAvatar({ user, onClick, className }) {
       onClick={onClick}
       className={cn("size-9 cursor-pointer", className)}
     >
-      <AvatarImage src={user?.avatar} />
+      <AvatarImage
+        src={user?.avatar}
+        loading="lazy"
+        draggable="false"
+        alt={`${user?.name}'s avatar`}
+      />
       <AvatarFallback className="font-medium">
         {user?.name?.charAt(0)?.toUpperCase() || (
           <IncognitoIcon className="size-5" />

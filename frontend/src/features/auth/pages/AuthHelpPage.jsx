@@ -161,6 +161,8 @@ function GuideStep({ step, SITE_URL }) {
             <img
               src={step.image}
               alt={step.title}
+              loading="lazy"
+              draggable="false"
               className="h-full w-full object-cover"
             />
           </div>

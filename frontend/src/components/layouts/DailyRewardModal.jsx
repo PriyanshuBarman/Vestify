@@ -42,7 +42,13 @@ function DailyRewardModal() {
       <ResponsiveModalContent>
         <ResponsiveModalHeader className="items-center gap-2 tabular-nums">
           <div className="mx-auto">
-            <img src="/piggy-bank.svg" className="size-50" />
+            <img
+              src="/piggy-bank.svg"
+              alt="Daily Reward"
+              loading="lazy"
+              draggable="false"
+              className="size-50"
+            />
           </div>
           <ResponsiveModalTitle className="text-center text-lg">
             {dailyRewardAmount} Added!

@@ -6,6 +6,5 @@ export function useGetSips(username) {
   return useQuery({
     queryKey: ["sips", username ? username : "self"],
     queryFn: () => fetchSips(username),
-    staleTime: 0,
   });
 }

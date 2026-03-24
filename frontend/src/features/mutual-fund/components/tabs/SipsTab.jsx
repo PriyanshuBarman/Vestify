@@ -66,7 +66,13 @@ function SipsTab({ username }) {
       </section>
       {!isOtherUserProfile && (
         <div className="hidden h-full w-1/2 lg:block">
-          <img src="/sip.svg" alt="sip" className="h-50 sm:h-70" />
+          <img
+            src="/sip.svg"
+            alt="sip"
+            loading="lazy"
+            draggable="false"
+            className="h-50 sm:h-70"
+          />
         </div>
       )}
     </div>

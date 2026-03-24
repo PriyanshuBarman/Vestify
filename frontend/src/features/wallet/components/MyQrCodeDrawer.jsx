@@ -66,7 +66,11 @@ function MyQrCodeDrawer({ children }) {
         </DrawerHeader>
 
         <div className="flex flex-col items-center justify-center">
-          <img src={qrCodeUrl} alt="" className="size-72 rounded-4xl" />
+          <img
+            src={qrCodeUrl}
+            alt="Your QR Code"
+            className="size-72 rounded-4xl"
+          />
         </div>
 
         <DrawerFooter className="mt-4 flex-row justify-center gap-6">

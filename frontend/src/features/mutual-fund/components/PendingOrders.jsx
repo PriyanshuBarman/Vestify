@@ -25,7 +25,7 @@ function PendingOrders() {
     >
       <AccordionItem value="item-1" className="px-4">
         <AccordionTrigger className="pt-0 text-base sm:text-lg">
-          Orders ({pendingOrders?.length})
+          Pending Orders ({pendingOrders?.length})
         </AccordionTrigger>
 
         <AccordionContent>

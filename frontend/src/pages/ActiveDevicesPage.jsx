@@ -102,6 +102,8 @@ function ActiveDevicesPage() {
           <img
             src="/devices.svg"
             alt="No other devices"
+            loading="lazy"
+            draggable="false"
             className="mx-auto w-2xs sm:w-xs"
           />
         ) : (

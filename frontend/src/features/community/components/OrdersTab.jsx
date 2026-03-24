@@ -14,7 +14,7 @@ function OrdersTab({ username }) {
   const { data: orders, isPending } = useGetOrders(username);
 
   if (isPending) return <LoadingState />;
-  if (!orders?.length) return <NoOrders />;
+  if (!orders?.length) return <NoOrders isOtherUserProfile={!!username} />;
 
   return (
     <ScrollArea>

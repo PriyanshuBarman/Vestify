@@ -17,6 +17,7 @@ function CollectionsSection() {
                   src={cl.img}
                   alt={`${cl.label} logo`}
                   loading="lazy"
+                  draggable="false"
                   className="size-[75%] dark:mix-blend-hard-light"
                 />
               </div>

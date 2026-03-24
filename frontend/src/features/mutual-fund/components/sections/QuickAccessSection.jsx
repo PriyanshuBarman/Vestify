@@ -47,6 +47,7 @@ function QuickAccessSection() {
                     alt={label + " Logo"}
                     className="min-h-6 min-w-6 sm:size-7 dark:brightness-0 dark:invert"
                     loading="lazy"
+                    draggable="false"
                   />
                 </CardContent>
                 <CardFooter className="px-0 text-[0.8rem] font-normal sm:text-base sm:font-medium">

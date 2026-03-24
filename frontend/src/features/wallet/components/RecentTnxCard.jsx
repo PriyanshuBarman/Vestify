@@ -55,7 +55,9 @@ function RecentTnxCard() {
           <>
             <img
               src="notebook-glass.svg"
-              alt=""
+              alt="No Recent Transactions"
+              loading="lazy"
+              draggable="false"
               className="mx-auto size-40 sm:size-60"
             />
             <p className="mt-2 text-center text-sm font-medium sm:text-base">

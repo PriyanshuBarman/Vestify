@@ -18,7 +18,13 @@ function ErrorPage() {
     <Empty className="flex h-dvh items-center justify-center">
       <EmptyHeader>
         <EmptyMedia>
-          <img src="/server-error.svg" alt="" className="size-70 sm:size-96" />
+          <img
+            src="/server-error.svg"
+            alt="Server error"
+            loading="lazy"
+            draggable="false"
+            className="size-70 sm:size-96"
+          />
         </EmptyMedia>
         <EmptyTitle className="sm:text-2xl">
           Oops! Something went wrong

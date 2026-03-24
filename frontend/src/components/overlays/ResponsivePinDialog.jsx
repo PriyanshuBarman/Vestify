@@ -196,13 +196,7 @@ function ResponsivePinDialog({
             disabled={!pin.every((v) => v !== "") || isPending}
             className="mx-auto my-4 w-[90%] sm:mt-12 sm:mb-0 sm:w-full"
           >
-            {isPending ? (
-              <Spinner />
-            ) : (
-              <>
-                Pay <SendIcon />
-              </>
-            )}
+            Pay <SendIcon />
           </Button>
           {isMobile && <PinKeypad handleVirtualInput={handleVirtualInput} />}
         </DialogFooter>

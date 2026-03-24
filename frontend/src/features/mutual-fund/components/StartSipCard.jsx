@@ -40,7 +40,9 @@ function StartSipCard() {
 
       <img
         src="sip.svg"
-        alt="start sip"
+        alt="Start SIP"
+        loading="lazy"
+        draggable="false"
         className="absolute right-0 size-46 sm:size-58 dark:mix-blend-hard-light"
       />
     </Card>

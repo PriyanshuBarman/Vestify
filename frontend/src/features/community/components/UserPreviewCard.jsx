@@ -31,45 +31,52 @@ function UserPreviewCard({ user }) {
           />
 
           <div className="flex-1">
-            <p className="text-md font-medium sm:text-base">{user.name}</p>
+            <p className="text-md font-medium capitalize sm:text-base">
+              {user.name}
+            </p>
             <p className="text-muted-foreground text-sm sm:mt-0.5">
               @{user.username}
             </p>
           </div>
           {!!user.portfolio.returnPercent && (
-            <div className="text-md flex items-center gap-2 sm:text-base">
+            <div className="text-md mr-1 flex items-center gap-2 sm:text-base">
               {user.portfolio.returnPercent >= 0 ? (
                 <TrendingUpIcon className="text-positive size-4 sm:size-5" />
               ) : (
                 <TrendingDownIcon className="text-negative size-4 sm:size-5" />
               )}
-              <span className="font-medium sm:text-[1.0625rem]">
+              <span className="font-medium">
                 {user.portfolio.returnPercent.toFixed(2)}%
               </span>
             </div>
           )}
         </div>
 
-        <div className="bg-muted/80 mx-2 mb-2 flex h-15 items-center justify-around rounded-3xl text-sm tabular-nums sm:h-16">
-          <div className="flex flex-col items-center sm:gap-1">
-            <span className="text-muted-foreground text-[0.725rem]">Funds</span>
-            <span className="text-md">{user.portfolio.fundCount}</span>
-          </div>
-          <div className="flex flex-col items-center sm:gap-1">
-            <span className="text-muted-foreground text-[0.725rem]">SIPs</span>
-            <span className="text-md">{user.portfolio.sipCount}</span>
-          </div>
-          <div className="flex flex-col items-center sm:gap-1">
-            <span className="text-muted-foreground text-[0.725rem]">
-              Invested
+        <div className="bg-muted/80 mx-2 mb-2 px-4 flex h-15 sm:h-18 items-center justify-around rounded-3xl sm:text-base text-xs">
+          <div className="flex flex-col items-center gap-0.5 sm:gap-1">
+            <span className="text-muted-foreground text-2xs">Funds</span>
+            <span className="text-md font-[450]">
+              {user.portfolio.fundCount}
             </span>
-            <span className="text-md">
+          </div>
+
+          <div className="flex flex-col items-center gap-0.5 sm:gap-1">
+            <span className="text-muted-foreground text-2xs">SIPs</span>
+            <span className="text-md font-[450]">
+              {user.portfolio.sipCount}
+            </span>
+          </div>
+
+          <div className="flex flex-col items-center gap-0.5 sm:gap-1">
+            <span className="text-muted-foreground text-2xs">Invested</span>
+            <span className="text-md font-[450]">
               {formatShortINR(user.portfolio.invested)}
             </span>
           </div>
+
           <div className="flex flex-col items-center gap-1">
             <span className="text-muted-foreground text-xs">Current</span>
-            <span className="text-md">
+            <span className="text-md font-[450]">
               {formatShortINR(user.portfolio.current)}
             </span>
           </div>

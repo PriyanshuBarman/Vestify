@@ -53,14 +53,16 @@ function Page() {
     <div className="max-sm:px-4 max-sm:pb-16 sm:mx-auto sm:flex sm:gap-24">
       {/* Illustration */}
       {!isMobile && (
-        <div className="flex w-[50%] flex-col items-center justify-center max-sm:hidden">
+        <div className="flex w-[45%] flex-col items-center justify-center max-sm:hidden">
           <img
             src="./team-work.svg"
-            alt="community illustrator"
+            alt="Community illustration"
             className="size-120"
+            loading="lazy"
+            draggable={false}
           />
           <h2 className="text-2xl font-semibold tracking-tight">Community</h2>
-          <p className="text-muted-foreground sm:text-md mt-2 text-sm">
+          <p className="text-muted-foreground sm:text-base mt-2 text-sm">
             Discover other investor profiles
           </p>
         </div>
@@ -92,7 +94,7 @@ function Page() {
           )}
 
           {!isMobile && (
-            <div className="animate-in slide-in-from-top-2 bg-background fade-in relative mt-1 mb-6 sm:mr-4">
+            <div className="bg-background fade-in relative mt-1 mb-6 sm:mr-4">
               <SearchIcon className="text-muted-foreground absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2" />
               <Input
                 autoFocus={isMobile}

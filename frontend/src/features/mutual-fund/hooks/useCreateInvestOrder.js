@@ -29,7 +29,7 @@ export function useCreateInvestOrder() {
           title: "Order Placed",
           description: `Investment of ${formatToINR(order.amount)} in ${order.fundName}.`,
           orderDetailsRoute: `/mutual-funds/orders/${order.id}`,
-          doneRoute: "/mutual-funds#explore",
+          doneRoute: "/mutual-funds#investments",
         },
         replace: true,
       });

@@ -88,7 +88,7 @@ function FundPage() {
                 onClick={handleWatchlistClick}
                 size="icon"
                 variant="ghost"
-                className="bg-accent rounded-full p-5 sm:bg-transparent sm:p-6"
+                className={`bg-accent rounded-full p-5 sm:bg-transparent sm:p-6 ${isInWatchlist && "bg-primary/10!"}`}
               >
                 <Bookmark
                   className={`${isInWatchlist && "fill-primary text-primary stroke-primary"} size-5 sm:size-6`}
