@@ -55,7 +55,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       if (isRefreshing) {
-        // 🕒 Wait for the current refresh to finish
+        // Wait for the current refresh to finish
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
         })
@@ -66,16 +66,16 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // 🔄 Attempt token refresh
+        // Attempt token refresh
         await api.post("/auth/refresh-token");
 
-        // ✅ Retry queued requests
+        // Retry queued requests
         processQueue(null);
 
-        // ✅ Retry the original request
+        // Retry the original request
         return api(originalRequest);
       } catch (refreshError) {
-        // ❌ Refresh failed → logout
+        // Refresh failed -> logout
         const currentPath = window.location.pathname;
         if (!currentPath.startsWith("/auth") && currentPath !== "/") {
           localStorage.clear();

@@ -4,10 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import db from "#config/db.config.js";
 import config from "#config/env.config.js";
 import * as referralService from "./referral.service.js";
-import { sendEmail } from "#shared/services/email.service.js";
 import { generateUniqueUsername } from "#shared/services/username.service.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
-import { refreshTokenReuseTemplate } from "#shared/utils/email-templates.js";
 import {
   generateTokenHash,
   generateTokens,
@@ -115,19 +113,25 @@ export const loginUser = async ({ email, password, userAgent, ip }) => {
 
 export const logoutUser = async (refreshToken) => {
   const decoded = jwt.verify(refreshToken, config.REFRESH_TOKEN_SECRET);
+  const refreshTokenHash = generateTokenHash(refreshToken);
+
   await db.session.deleteMany({
     where: {
       id: decoded.sessionId,
+      refreshTokenHash,
     },
   });
 };
 
-export const refreshToken = async (token, userAgent, ip) => {
+export const refreshToken = async (token) => {
   try {
     const decoded = jwt.verify(token, config.REFRESH_TOKEN_SECRET);
-    const session = await db.session.findUnique({
+    const refreshTokenHash = generateTokenHash(token);
+
+    const session = await db.session.findFirst({
       where: {
         id: decoded.sessionId,
+        refreshTokenHash,
       },
       include: { user: true },
     });
@@ -136,36 +140,16 @@ export const refreshToken = async (token, userAgent, ip) => {
       throw new ApiError(401, "Invalid refresh token");
     }
 
-    const tokenHash = generateTokenHash(token);
-
-    // REUSE DETECTED
-    if (session.refreshTokenHash !== tokenHash) {
-      // Revoke the session
-      await db.session.deleteMany({
-        where: { id: decoded.sessionId },
-      });
-
-      // Notify owner
-      await sendEmail({
-        to: config.OWNER_EMAIL,
-        subject: "REUSE DETECTED",
-        html: refreshTokenReuseTemplate(session, decoded, userAgent, ip),
-      });
-
-      throw new ApiError(401, "Invalid refresh token");
-    }
-
-    // Generate new tokens
     const newTokens = generateTokens(session.user.id, session.id);
-    const refreshTokenHash = generateTokenHash(newTokens.refreshToken);
+    const newRefreshTokenHash = generateTokenHash(newTokens.refreshToken);
 
-    // Update TokenHash in DB
     await db.session.update({
       where: {
         id: session.id,
+        refreshTokenHash,
       },
       data: {
-        refreshTokenHash,
+        refreshTokenHash: newRefreshTokenHash,
       },
     });
 
