@@ -81,6 +81,13 @@ function InvestPage() {
           The minimum amount for {isSip ? "SIP" : "Lumpsum"} is{" "}
           {formatToINR(isSip ? fund.sip_min : fund.lump_min)}
         </p>
+        <p
+          className={`animate-in zoom-in-90 fade-in slide-in-from-bottom-0 text-xs font-medium duration-200 ${
+            amount && amount >= 100000000 ? "" : "hidden"
+          } text-red-400`}
+        >
+          Amount must be less than ₹10Cr
+        </p>
 
         {/* Add Extra Buttons */}
         <div className="flex justify-center gap-4">
@@ -117,7 +124,10 @@ function InvestPage() {
         <Button
           onClick={() => setIsPinDialogOpen(true)}
           size="lg"
-          disabled={amount < (isSip ? fund.sip_min : fund.lump_min)}
+          disabled={
+            amount < (isSip ? fund.sip_min : fund.lump_min) ||
+            amount >= 100000000
+          }
           className="my-4 w-[90%]"
         >
           {isSip ? "Start SIP" : "Invest"}

@@ -7,12 +7,15 @@ import { skipSip } from "../api/sip";
 export function useSkipSip() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: skipSip,
     onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["sips"] });
-      queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
+      queryClient.invalidateQueries({ queryKey: [userKey, "sips"] });
+      queryClient.invalidateQueries({
+        queryKey: [userKey, "sip", variables.sipId],
+      });
 
       navigate("/success", {
         state: {

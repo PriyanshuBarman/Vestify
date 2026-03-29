@@ -14,10 +14,10 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import IconWrapper from "@/components/IconWrapper";
 
-import { useDeleteSip } from "../../hooks/useDeleteSip";
+import { useCancelSip } from "../../hooks/useCancelSip";
 
 function CancelSipButton({ sipId }) {
-  const { mutate: cancelSip, isPending } = useDeleteSip();
+  const { mutate: cancelSip, isPending } = useCancelSip();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCancelSip = () => {

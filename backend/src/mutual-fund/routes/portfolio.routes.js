@@ -1,11 +1,21 @@
 import { Router } from "express";
 import * as portfolioController from "../controllers/portfolio.controller.js";
-import { validateQuery } from "../validators/portfolio-query.validator.js";
+import { validate } from "#shared/middlewares/validate.middleware.js";
+import { portfolioQuerySchema } from "../schemas/portfolio.schema.js";
+import { schemeCodeParamSchema } from "#shared/schemas/schemecode-params.schema.js";
 
 export const portfolioRoutes = Router();
 
-portfolioRoutes.get("/", validateQuery, portfolioController.getPortfolio);
+portfolioRoutes.get(
+  "/",
+  validate(portfolioQuerySchema),
+  portfolioController.getPortfolio,
+);
 
 portfolioRoutes.get("/summary", portfolioController.getPortfolioSummary);
 
-portfolioRoutes.get("/:schemeCode", portfolioController.getFundPortfolio);
+portfolioRoutes.get(
+  "/:schemeCode",
+  validate(schemeCodeParamSchema),
+  portfolioController.getFundPortfolio,
+);

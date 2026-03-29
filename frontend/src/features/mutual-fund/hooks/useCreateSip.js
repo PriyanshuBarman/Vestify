@@ -10,13 +10,14 @@ import { createSip } from "../api/sip";
 export function useCreateSip() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: createSip,
     onSuccess: (data) => {
       const { order, sip } = data;
 
-      queryClient.setQueryData(["sips"], (old) => {
+      queryClient.setQueryData([userKey, "sips"], (old) => {
         if (!old) {
           return {
             sips: [sip],
@@ -30,8 +31,8 @@ export function useCreateSip() {
         };
       });
 
-      queryClient.setQueryData(["order", order.id], order);
-      queryClient.setQueryData(["orders"], (old) =>
+      queryClient.setQueryData([userKey, "order", order.id], order);
+      queryClient.setQueryData([userKey, "orders"], (old) =>
         old ? [order, ...old] : [order],
       );
       queryClient.setQueryData(["pending-orders"], (old) =>

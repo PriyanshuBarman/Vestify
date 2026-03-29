@@ -1,4 +1,3 @@
-import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as watchlistService from "../services/watchlist.service.js";
 
@@ -21,10 +20,6 @@ export const removeFromWatchlist = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { schemeCode } = req.params;
 
-  if (!schemeCode) {
-    throw new ApiError(400, "schemeCode is required");
-  }
-
   await watchlistService.removeFromWatchlist(userId, schemeCode);
 
   res
@@ -42,10 +37,6 @@ export const getWatchlist = asyncHandler(async (req, res) => {
 export const isInWatchlist = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { schemeCode } = req.params;
-
-  if (!schemeCode) {
-    throw new ApiError(400, "schemeCode is required");
-  }
 
   const isWatchlisted = await watchlistService.isInWatchlist(
     userId,

@@ -5,25 +5,30 @@ import { removeFromWatchlist } from "../api/watchlist";
 
 export function useRemoveFromWatchlist() {
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: removeFromWatchlist,
 
     onMutate: async (variables) => {
       await queryClient.cancelQueries({
-        queryKey: ["isInWatchlist", variables.schemeCode],
+        queryKey: [userKey, "isInWatchlist", variables.schemeCode],
       });
       const previousData = queryClient.getQueryData([
+        userKey,
         "isInWatchlist",
         variables.schemeCode,
       ]);
-      queryClient.setQueryData(["isInWatchlist", variables.schemeCode], false);
+      queryClient.setQueryData(
+        [userKey, "isInWatchlist", variables.schemeCode],
+        false,
+      );
       return { previousData, variables };
     },
 
     onError: (error, variables, context) => {
       queryClient.setQueryData(
-        ["isInWatchlist", context.variables.schemeCode],
+        [userKey, "isInWatchlist", context.variables.schemeCode],
         context.previousData,
       );
       toast.error(
@@ -33,9 +38,9 @@ export function useRemoveFromWatchlist() {
 
     onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["isInWatchlist", variables.schemeCode],
+        queryKey: [userKey, "isInWatchlist", variables.schemeCode],
       });
-      queryClient.invalidateQueries({ queryKey: ["watchlist"] });
+      queryClient.invalidateQueries({ queryKey: [userKey, "watchlist"] });
     },
   });
 }

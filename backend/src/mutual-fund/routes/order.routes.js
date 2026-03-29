@@ -1,17 +1,20 @@
+import { validatePinLimiter } from "#shared/middlewares/rate-limiter.middleware.js";
+import { validate } from "#shared/middlewares/validate.middleware.js";
 import { verifyPin } from "#shared/middlewares/verify-pin.middleware.js";
 import { Router } from "express";
 import * as orderController from "../controllers/order.controller.js";
 import {
-  validateInvestmentOrder,
-  validateRedemptionOrder,
-} from "../validators/order.validator.js";
-import { validatePinLimiter } from "#shared/middlewares/rate-limiter.middleware.js";
+  investmentOrderSchema,
+  redemptionOrderSchema,
+  orderIdParamSchema,
+} from "../schemas/order.schema.js";
+import { schemeCodeParamSchema } from "#shared/schemas/schemecode-params.schema.js";
 
 export const orderRoutes = Router();
 
 orderRoutes.post(
   "/invest",
-  validateInvestmentOrder,
+  validate(investmentOrderSchema),
   validatePinLimiter,
   verifyPin,
   orderController.placeInvestmentOrder,
@@ -19,11 +22,19 @@ orderRoutes.post(
 
 orderRoutes.put(
   "/redeem",
-  validateRedemptionOrder,
+  validate(redemptionOrderSchema),
   orderController.placeRedemptionOrder,
 );
 
 orderRoutes.get("/", orderController.getAllOrders);
 orderRoutes.get("/pending", orderController.getPendingOrders);
-orderRoutes.get("/:orderId", orderController.getOrderDetail);
-orderRoutes.get("/fund/:schemeCode", orderController.getFundOrders);
+orderRoutes.get(
+  "/:orderId",
+  validate(orderIdParamSchema),
+  orderController.getOrderDetail,
+);
+orderRoutes.get(
+  "/fund/:schemeCode",
+  validate(schemeCodeParamSchema),
+  orderController.getFundOrders,
+);

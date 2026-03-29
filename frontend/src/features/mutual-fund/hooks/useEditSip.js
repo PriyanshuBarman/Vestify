@@ -7,6 +7,7 @@ import { editSip } from "../api/sip";
 export function useEditSip() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: editSip,
@@ -24,8 +25,10 @@ export function useEditSip() {
         replace: true,
       });
 
-      queryClient.invalidateQueries({ queryKey: ["sips"] });
-      queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
+      queryClient.invalidateQueries({ queryKey: [userKey, "sips"] });
+      queryClient.invalidateQueries({
+        queryKey: [userKey, "sip", variables.sipId],
+      });
     },
     onError: (error) => {
       toast.error(

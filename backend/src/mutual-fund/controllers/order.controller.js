@@ -1,4 +1,3 @@
-import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as orderService from "../services/order.service.js";
 
@@ -86,10 +85,6 @@ export const getOrderDetail = asyncHandler(async (req, res) => {
 export const getFundOrders = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { schemeCode } = req.params;
-
-  if (!schemeCode) {
-    throw new ApiError(400, "schemeCode is required");
-  }
 
   const orders = await orderService.getFundOrders(userId, schemeCode);
 

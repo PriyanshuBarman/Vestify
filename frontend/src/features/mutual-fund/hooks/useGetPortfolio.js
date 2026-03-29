@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchPortfolio } from "../api/portfolio";
 
 export function useGetPortfolio(username) {
+  const userKey = username || "self";
+
   return useQuery({
-    queryKey: ["mfPortfolio", username ? username : "self"],
+    queryKey: [userKey, "mfPortfolio"],
     queryFn: () => fetchPortfolio(username),
     ...(username && { staleTime: 0 }),
   });

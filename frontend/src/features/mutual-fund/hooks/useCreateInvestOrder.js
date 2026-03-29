@@ -10,12 +10,13 @@ import { createInvestOrder } from "../api/order";
 export function useCreateInvestOrder() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: createInvestOrder,
     onSuccess: (order) => {
-      queryClient.setQueryData(["order", order.id], order);
-      queryClient.setQueryData(["orders"], (old) =>
+      queryClient.setQueryData([userKey, "order", order.id], order);
+      queryClient.setQueryData([userKey, "orders"], (old) =>
         old ? [order, ...old] : [order],
       );
       queryClient.setQueryData(["pending-orders"], (old) =>

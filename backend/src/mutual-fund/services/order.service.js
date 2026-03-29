@@ -128,10 +128,6 @@ export const getAllOrders = async (userId) => {
     },
   });
 
-  if (!orders.length) {
-    throw new ApiError(404, "No orders found");
-  }
-
   return orders;
 };
 
@@ -142,10 +138,6 @@ export const getPendingOrders = async (userId) => {
       createdAt: "desc",
     },
   });
-
-  if (!orders.length) {
-    throw new ApiError(404, "No pending orders");
-  }
 
   return orders;
 };
@@ -167,10 +159,6 @@ export const getFundOrders = async (userId, schemeCode) => {
       createdAt: "desc",
     },
   });
-
-  if (!orders.length) {
-    throw new ApiError(404, "No orders found");
-  }
 
   return orders;
 };

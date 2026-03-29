@@ -1,4 +1,3 @@
-import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as portfolioService from "../services/portfolio.service.js";
 
@@ -21,10 +20,6 @@ export const getPortfolio = asyncHandler(async (req, res) => {
 export const getFundPortfolio = asyncHandler(async (req, res) => {
   const { schemeCode } = req.params;
   const { userId } = req.user;
-
-  if (!schemeCode) {
-    throw new ApiError(400, "schemeCode is required");
-  }
 
   const fund = await portfolioService.getFundPortfolio(userId, schemeCode);
 

@@ -194,10 +194,6 @@ export const getAllSips = async (userId) => {
     _sum: { amount: true },
   });
 
-  if (!allSips.length) {
-    throw new ApiError(404, "No Active SIP's Found");
-  }
-
   return {
     totalActiveSipAmount: activeSipAmount._sum.amount,
     allSips,

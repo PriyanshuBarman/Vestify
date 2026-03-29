@@ -7,13 +7,14 @@ import { redeemFund } from "../api/order";
 export function useRedeemFund() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: redeemFund,
     onSuccess: (order) => {
-      queryClient.invalidateQueries({ queryKey: ["portfolio"] });
-      queryClient.setQueryData(["order", order.id], order);
-      queryClient.setQueryData(["orders"], (old) =>
+      queryClient.invalidateQueries({ queryKey: [userKey, "portfolio"] });
+      queryClient.setQueryData([userKey, "order", order.id], order);
+      queryClient.setQueryData([userKey, "orders"], (old) =>
         old ? [order, ...old] : [order],
       );
       queryClient.setQueryData(["pending-orders"], (old) =>

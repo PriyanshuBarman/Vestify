@@ -1,4 +1,3 @@
-import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as sipService from "../services/sip.service.js";
 
@@ -51,10 +50,6 @@ export const skipSip = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { sipId } = req.params;
 
-  if (!sipId) {
-    throw new ApiError(400, `sipId is required`);
-  }
-
   await sipService.skipSip(userId, sipId);
 
   return res
@@ -64,10 +59,6 @@ export const skipSip = asyncHandler(async (req, res) => {
 
 export const cancelSip = asyncHandler(async (req, res) => {
   const { sipId } = req.params;
-
-  if (!sipId) {
-    throw new ApiError(400, `sipId is required`);
-  }
 
   await sipService.cancelSip(sipId);
 
@@ -90,10 +81,6 @@ export const getAllSips = asyncHandler(async (req, res) => {
 
 export const getSipDetail = asyncHandler(async (req, res) => {
   const { sipId } = req.params;
-
-  if (!sipId) {
-    throw new ApiError(400, "sipId is required");
-  }
 
   const data = await sipService.getSipDetail(sipId);
 
@@ -127,9 +114,6 @@ export const addEditStepUp = asyncHandler(async (req, res) => {
 
 export const removeStepUp = asyncHandler(async (req, res) => {
   const { sipId } = req.params;
-  if (!sipId) {
-    throw new ApiError(400, "sipId is required");
-  }
 
   await sipService.removeStepUp(sipId);
 

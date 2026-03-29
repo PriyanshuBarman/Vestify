@@ -27,7 +27,7 @@ function PinSetupPage() {
           <h1 className="mb-4 text-xl font-semibold sm:text-2xl">
             Set up your PIN
           </h1>
-          <p className="text-muted-foreground text-sm text-balance sm:max-w-[50ch] sm:text-base">
+          <p className="text-muted-foreground text-sm text-balance sm:max-w-[50ch] sm:text-md">
             This PIN will be required to make investments and to send virtual
             money to other users from your virtual wallet
           </p>
@@ -51,21 +51,21 @@ function PinSetupPage() {
               if (value.length <= 4) setPin(value);
             }}
           >
-            <InputOTPGroup className="gap-3">
+            <InputOTPGroup className="gap-3 sm:gap-6">
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-none first:rounded-xl"
+                className="size-13 text-base font-medium first:rounded-xl"
                 index={0}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-none"
+                className="size-13 rounded-xl text-base font-medium"
                 index={1}
               />
               <InputOTPSlot
-                className="size-13 rounded-xl text-base font-medium shadow-none"
+                className="size-13 rounded-xl text-base font-medium"
                 index={2}
               />
               <InputOTPSlot
-                className="size-13 text-base font-medium shadow-none last:rounded-xl"
+                className="size-13 text-base font-medium last:rounded-xl"
                 index={3}
               />
             </InputOTPGroup>
@@ -76,7 +76,7 @@ function PinSetupPage() {
       <Button
         disabled={pin.length < 4 || isPending}
         size="lg"
-        className="mx-auto my-4 w-[90%] font-medium sm:w-sm"
+        className="mx-auto my-4 max-sm:h-11 w-[90%] font-medium sm:w-sm"
         onClick={() => mutate({ pin })}
       >
         {isPending && <Spinner />} Confirm

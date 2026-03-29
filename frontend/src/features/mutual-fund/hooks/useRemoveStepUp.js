@@ -5,11 +5,14 @@ import { removeStepUp } from "../api/sip";
 
 export function useRemoveStepUp() {
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: removeStepUp,
-    onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: [userKey, "sip", variables.sipId],
+      });
       toast.success("Step-up removed successfully");
     },
     onError: (error) => {

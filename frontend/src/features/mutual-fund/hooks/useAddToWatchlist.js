@@ -5,26 +5,31 @@ import { addToWatchlist } from "../api/watchlist";
 
 export function useAddToWatchlist() {
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: addToWatchlist,
 
     onMutate: async (variables) => {
       await queryClient.cancelQueries({
-        queryKey: ["isInWatchlist", variables.schemeCode],
+        queryKey: [userKey, "isInWatchlist", variables.schemeCode],
       });
       const previousData = queryClient.getQueryData([
+        userKey,
         "isInWatchlist",
         variables.schemeCode,
       ]);
 
-      queryClient.setQueryData(["isInWatchlist", variables.schemeCode], true);
+      queryClient.setQueryData(
+        [userKey, "isInWatchlist", variables.schemeCode],
+        true,
+      );
       return { previousData, variables };
     },
 
     onError: (error, variables, context) => {
       queryClient.setQueryData(
-        ["isInWatchlist", context.variables.schemeCode],
+        [userKey, "isInWatchlist", context.variables.schemeCode],
         context.previousData,
       );
       toast.error(error.response?.data?.message || "Error adding to watchlist");
@@ -32,9 +37,9 @@ export function useAddToWatchlist() {
 
     onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["isInWatchlist", variables.schemeCode],
+        queryKey: [userKey, "isInWatchlist", variables.schemeCode],
       });
-      queryClient.invalidateQueries({ queryKey: ["watchlist"] });
+      queryClient.invalidateQueries({ queryKey: [userKey, "watchlist"] });
     },
   });
 }

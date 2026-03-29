@@ -8,46 +8,20 @@ router.use(authenticate);
 
 router.get("/users", communityController.getUsers);
 router.get("/search", communityController.searchUsers);
-router.get(
-  "/users/:username",
-
-  communityController.getUserProfile,
-);
-router.get(
-  "/users/:username/portfolio",
-
-  communityController.getPortfolio,
-);
+router.get("/users/:username", communityController.getUserProfile);
+router.get("/users/:username/portfolio", communityController.getPortfolio);
 router.get(
   "/users/:username/portfolio/summary",
-
   communityController.getPortfolioSummary,
 );
 router.get(
-  "/users/:username/orders",
-
-  communityController.getAllOrders,
-);
-router.get(
   "/users/:username/portfolio/:schemeCode/orders",
-
   communityController.getFundOrders,
 );
+router.get("/users/:username/orders", communityController.getAllOrders);
+router.get("/orders/:orderId", communityController.getOrderDetail);
 router.get("/users/:username/sips", communityController.getSips);
-router.get(
-  "/users/:username/sips/:sipId",
-
-  communityController.getSipDetail,
-);
-router.get(
-  "/users/:username/watchlist",
-
-  communityController.getWatchlist,
-);
-router.get(
-  "/orders/:orderId",
-
-  communityController.getOrderDetail,
-);
+router.get("/users/:username/sips/:sipId", communityController.getSipDetail);
+router.get("/users/:username/watchlist", communityController.getWatchlist);
 
 export const communityRoutes = router;

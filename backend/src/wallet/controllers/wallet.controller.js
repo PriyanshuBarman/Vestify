@@ -1,4 +1,3 @@
-import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as walletService from "../services/wallet.service.js";
 
@@ -6,19 +5,6 @@ export const sendMoney = asyncHandler(async (req, res) => {
   const { userId } = req.user;
 
   const { amount, note, receiverId } = req.body;
-
-  if (!amount) {
-    throw new ApiError(400, "amount is required");
-  }
-  if (amount <= 0) {
-    throw new ApiError(400, "amount shouldn't be in negative");
-  }
-  if (amount > 10000000) {
-    throw new ApiError(400, "Max 1Cr can be sent at once");
-  }
-  if (!receiverId) {
-    throw new ApiError(400, "receiverId is required");
-  }
 
   const balance = await walletService.sendMoney({
     userId,

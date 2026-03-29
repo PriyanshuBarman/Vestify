@@ -38,10 +38,6 @@ export const getReferrals = async (userId) => {
     },
   });
 
-  if (!referrals.length) {
-    throw new ApiError(404, "No referrals found");
-  }
-
   return referrals;
 };
 

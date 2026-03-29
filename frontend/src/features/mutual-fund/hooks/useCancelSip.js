@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import { deleteSip } from "../api/sip";
 
-export function useDeleteSip() {
+export function useCancelSip() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -12,8 +12,10 @@ export function useDeleteSip() {
     mutationFn: deleteSip,
     onSuccess: (data, variables) => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: ["sips"] });
-      queryClient.invalidateQueries({ queryKey: ["sip", variables.sipId] });
+      queryClient.invalidateQueries({ queryKey: ["self", "sips"] });
+      queryClient.invalidateQueries({
+        queryKey: ["self", "sip", variables.sipId],
+      });
 
       navigate("/mutual-funds/#sips", { replace: true });
     },

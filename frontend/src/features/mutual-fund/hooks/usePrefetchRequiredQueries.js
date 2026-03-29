@@ -11,16 +11,18 @@ export function usePrefetchRequiredQueries(username) {
   useEffect(() => {
     if (isRestoring) return;
 
+    const userKey = username || "self";
+
     queryClient.prefetchQuery({
-      queryKey: ["mfPortfolio", username ? username : "self"],
+      queryKey: [userKey, "mfPortfolio"],
       queryFn: () => fetchPortfolio(username),
     });
     queryClient.prefetchQuery({
-      queryKey: ["mfPortfolioSummary", username ? username : "self"],
+      queryKey: [userKey, "mfPortfolioSummary"],
       queryFn: () => fetchPortfolioSummary(username),
     });
     queryClient.prefetchQuery({
-      queryKey: ["orders", username ? username : "self"],
+      queryKey: [userKey, "orders"],
       queryFn: () => fetchOrders(username),
     });
 

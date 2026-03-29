@@ -71,8 +71,8 @@ function WatchlistItem({ fund, fundData }) {
         <Button
           disabled={isPending}
           onClick={handleRemoveClick}
-          variant="icon-sm"
-          className="hover:bg-accent hover:text-destructive animate-in fade-ins zoom-in hidden size-7.5 rounded-full group-hover:flex"
+          variant="icon"
+          className="hover:text-destructive animate-in fade-ins zoom-in hidden size-9 cursor-pointer hover:bg-destructive/10 rounded-full group-hover:flex"
         >
           {isPending ? <Spinner /> : <Trash2Icon />}
         </Button>

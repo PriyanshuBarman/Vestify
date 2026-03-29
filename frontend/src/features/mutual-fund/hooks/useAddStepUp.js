@@ -10,11 +10,12 @@ import { addStepUp } from "../api/sip";
 export function useAddStepUp() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: addStepUp,
     onSuccess: (data, variables) => {
-      queryClient.setQueryData(["sip", variables.sipId], (old) => {
+      queryClient.setQueryData([userKey, "sip", variables.sipId], (old) => {
         return { ...old, sip: data };
       });
 

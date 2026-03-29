@@ -51,7 +51,7 @@ function Hero() {
           <Button
             asChild
             size="lg"
-            className="bg-landing hover:bg-landing h-9 gap-2 rounded-full leading-0 tracking-tight hover:scale-105 active:scale-95 max-sm:font-normal max-sm:tracking-tight md:h-11 md:px-6! md:py-3"
+            className="bg-landing hover:bg-landing h-9 gap-2 rounded-full leading-0 tracking-tight hover:scale-102 active:scale-95 max-sm:font-normal max-sm:tracking-tight md:h-11 md:px-6! md:py-3"
           >
             <Link
               to={{
@@ -67,7 +67,7 @@ function Hero() {
             size="lg"
             variant="outline"
             onClick={handleDemoClick}
-            className="h-9 rounded-full leading-0 hover:scale-105 hover:bg-transparent active:scale-95 max-sm:font-normal md:h-11 md:py-3"
+            className="h-9 rounded-full leading-0 hover:scale-102 hover:bg-transparent active:scale-95 max-sm:font-normal md:h-11 md:py-3"
           >
             See Demo
           </Button>

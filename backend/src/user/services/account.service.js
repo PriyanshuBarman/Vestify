@@ -12,7 +12,7 @@ export const deleteAccount = async (userId) => {
 };
 
 export const setPin = async (userId, pin) => {
-  const hashPin = await bcrypt.hash(pin.toString(), 10);
+  const hashPin = await bcrypt.hash(pin, 10);
 
   await db.user.update({
     where: { id: userId },
@@ -29,12 +29,12 @@ export const changePin = async (userId, currentPin, newPin) => {
     select: { pin: true },
   });
 
-  const isPinValid = await bcrypt.compare(currentPin.toString(), user.pin);
+  const isPinValid = await bcrypt.compare(currentPin, user.pin);
   if (!isPinValid) {
     throw new ApiError(400, "Current pin is incorrect");
   }
 
-  const hashNewPin = await bcrypt.hash(newPin.toString(), 10);
+  const hashNewPin = await bcrypt.hash(newPin, 10);
 
   await db.user.update({
     where: { id: userId },
@@ -84,7 +84,7 @@ export const requestEmailChange = async (userId, password, newEmail) => {
     );
   }
 
-  const isPinValid = await bcrypt.compare(password.toString(), user.password);
+  const isPinValid = await bcrypt.compare(password, user.password);
   if (!isPinValid) {
     throw new ApiError(400, "Incorrect password");
   }
@@ -121,10 +121,10 @@ export const verifyEmailChange = async (userId, otp) => {
   });
 
   if (!record || record.expiresAt < new Date()) {
-    throw new ApiError(404, "Expired OTP");
+    throw new ApiError(400, "Expired OTP");
   }
 
-  const isOtpValid = await bcrypt.compare(otp.toString(), record.otpHash);
+  const isOtpValid = await bcrypt.compare(otp, record.otpHash);
   if (!isOtpValid) {
     throw new ApiError(400, "Invalid OTP");
   }

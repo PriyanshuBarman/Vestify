@@ -40,7 +40,7 @@ export const verifyTokenAndResetPassword = async (token, newPassword) => {
   });
 
   if (!record || record.expiresAt < new Date()) {
-    throw new ApiError(404, "Invalid or expired token");
+    throw new ApiError(400, "Invalid or expired token");
   }
 
   await db.resetPasswordToken.delete({

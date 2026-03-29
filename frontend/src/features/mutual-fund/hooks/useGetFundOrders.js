@@ -7,8 +7,10 @@ import { fetchFundOrders } from "../api/order";
  **/
 
 export function useGetFundOrders(schemeCode, username) {
+  const userKey = username || "self";
+
   return useQuery({
-    queryKey: ["fund-orders", schemeCode, username ? username : "self"],
+    queryKey: [userKey, "fund-orders", schemeCode],
     queryFn: () => fetchFundOrders(schemeCode, username),
     staleTime: 0,
     gcTime: 0,

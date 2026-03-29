@@ -62,7 +62,7 @@ function SendMoneyPage() {
           <input
             autoFocus
             autoComplete="off"
-            maxLength={7} // 99.99Lakh
+            maxLength={9}
             type="text"
             inputMode="numeric"
             value={amount}
@@ -79,9 +79,20 @@ function SendMoneyPage() {
           maxLength={100}
           className="min-h-0 w-fit max-w-3/4 resize-none overflow-hidden text-center text-sm"
         />
+        {amount >= 100000000 && (
+          <p className="text-sm text-destructive">
+            Amount must be less than ₹10Cr
+          </p>
+        )}
       </div>
       <Button
-        disabled={!amount || !receiverName || !receiverUsername || isPending}
+        disabled={
+          !amount ||
+          amount >= 100000000 ||
+          !receiverName ||
+          !receiverUsername ||
+          isPending
+        }
         className="absolute right-6 bottom-6 rounded-2xl px-7 py-7"
         onClick={() => setIsPinDialogOpen(true)}
       >

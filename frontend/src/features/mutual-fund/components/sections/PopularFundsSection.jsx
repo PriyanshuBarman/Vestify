@@ -13,7 +13,7 @@ const CardSM = lazy(() => import("../CardSM"));
 function PopularFundsSection() {
   const { data: funds } = useGetPopularFunds();
   const isMobile = useIsMobile();
-  usePrefetchPopularFunds(funds);
+  usePrefetchPopularFunds(funds.slice(0, 2));
 
   return (
     <section className="swiper-no-swiping">

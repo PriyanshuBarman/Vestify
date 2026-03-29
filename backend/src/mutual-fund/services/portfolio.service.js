@@ -1,5 +1,4 @@
 import db from "#config/db.config.js";
-import { ApiError } from "#shared/utils/api-error.utils.js";
 import { normalizePortfolio } from "../utils/normalize-portfolio.utils.js";
 
 export const getPortfolio = async (data) => {
@@ -10,10 +9,6 @@ export const getPortfolio = async (data) => {
     include: { sips: true },
     orderBy: { [sort_by]: order_by },
   });
-
-  if (!portfolio.length) {
-    throw new ApiError(404, "No portfolio found.");
-  }
 
   return normalizePortfolio(portfolio);
 };
@@ -27,8 +22,6 @@ export const getFundPortfolio = async (userId, schemeCode) => {
     },
     include: { sips: true },
   });
-
-  if (!fund) throw new ApiError(404, "Fund not found in portfolio.");
 
   return normalizePortfolio(fund);
 };

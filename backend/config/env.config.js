@@ -1,39 +1,40 @@
-const config = {
-  // Authentication
-  REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
-  ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
-  REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY,
-  ACCESS_TOKEN_EXPIRY: process.env.ACCESS_TOKEN_EXPIRY,
-  // Google Auth
-  CLIENT_ID: process.env.CLIENT_ID,
-  CLIENT_SECRET: process.env.CLIENT_SECRET,
+import { z } from "zod";
 
+const envSchema = z.object({
   // App
-  NODE_ENV: process.env.NODE_ENV,
-  FRONTEND_URL: process.env.FRONTEND_URL,
-  DAILY_REWARD_AMOUNT: process.env.DAILY_REWARD_AMOUNT,
-  REFERRER_REWARD_AMOUNT: process.env.REFERRER_REWARD_AMOUNT,
-  REFERRED_USER_REWARD_AMOUNT: process.env.REFERRED_USER_REWARD_AMOUNT,
-
+  NODE_ENV: z.enum(["production", "development"]),
+  DATABASE_URL: z.url(),
+  FRONTEND_URL: z.url(),
+  DAILY_REWARD_AMOUNT: z.coerce.number(),
+  REFERRER_REWARD_AMOUNT: z.coerce.number(),
+  REFERRED_USER_REWARD_AMOUNT: z.coerce.number(),
+  // Auth
+  REFRESH_TOKEN_SECRET: z.string(),
+  ACCESS_TOKEN_SECRET: z.string(),
+  REFRESH_TOKEN_EXPIRY: z.string(),
+  ACCESS_TOKEN_EXPIRY: z.string(),
+  // Google Auth
+  CLIENT_ID: z.string(),
+  CLIENT_SECRET: z.string(),
   // External APIs
-  EXTERNAL_API_BASE_URL: process.env.EXTERNAL_API_BASE_URL,
-  MF_HELPER_API_BASE_URL: process.env.MF_HELPER_API_BASE_URL,
-  MF_API_BASE_URL: process.env.MF_API_BASE_URL,
-
+  EXTERNAL_API_BASE_URL: z.string(),
+  MF_HELPER_API_BASE_URL: z.string(),
+  MF_API_BASE_URL: z.string(),
   // Email
-  RESEND_API_KEY: process.env.RESEND_API_KEY,
-  OWNER_EMAIL: process.env.OWNER_EMAIL,
-
+  RESEND_API_KEY: z.string(),
+  OWNER_EMAIL: z.email(),
   // Cloudinary
-  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
-  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
-  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
-};
-
-Object.entries(config).forEach(([key, value]) => {
-  if (!value && config.NODE_ENV !== "cron") {
-    throw new Error(`${key} is not defined in environment variables!`);
-  }
+  CLOUDINARY_CLOUD_NAME: z.string(),
+  CLOUDINARY_API_KEY: z.string(),
+  CLOUDINARY_API_SECRET: z.string(),
 });
+
+const { data: config, error, success } = envSchema.safeParse(process.env);
+
+if (!success) {
+  console.error("Missing/invalid environment variables:\n");
+  console.error(z.flattenError(error).fieldErrors);
+  process.exit(1);
+}
 
 export default config;

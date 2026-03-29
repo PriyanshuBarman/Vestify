@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
@@ -7,9 +8,19 @@ import { useGetSips } from "../hooks/useGetSips";
 
 function StartSipCard() {
   const navigate = useNavigate();
-  const { data: sips } = useGetSips();
+  const { data: sips, isPending } = useGetSips();
 
-  if (sips) return null;
+  const hasActiveSipsFlag = localStorage.getItem("hasActiveSips") === "true";
+
+  useEffect(() => {
+    if (isPending) return;
+
+    const hasSips = sips?.sips?.length > 0;
+    if (hasActiveSipsFlag === hasSips) return;
+    localStorage.setItem("hasActiveSips", hasSips ? "true" : "false");
+  }, [sips, isPending, hasActiveSipsFlag]);
+
+  if (hasActiveSipsFlag) return null;
 
   return (
     <Card className="text-foreground relative mx-auto w-[90%] min-w-xs flex-row items-center overflow-hidden rounded-3xl p-4 sm:w-full sm:px-6 sm:py-8">

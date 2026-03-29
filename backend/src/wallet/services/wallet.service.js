@@ -70,10 +70,6 @@ export const getAllTnx = async (userId) => {
     orderBy: { createdAt: "desc" },
   });
 
-  if (!tnx.length) {
-    throw new ApiError(404, "No transactions found");
-  }
-
   // Group transactions by month (YYYY-MM) and calculate summary
   const grouped = tnx.reduce((acc, transaction) => {
     const monthKey = formatDate(transaction.createdAt, "MMMM yy");
