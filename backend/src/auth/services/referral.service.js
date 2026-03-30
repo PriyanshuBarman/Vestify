@@ -1,5 +1,5 @@
 import db from "#config/db.config.js";
-import config from "#config/env.config.js";
+import envConfig from "#config/env.config.js";
 import { sendUserEvent } from "#shared/events/event-manager.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 
@@ -40,8 +40,8 @@ export const validateReferral = async (ip, referralCode) => {
 };
 
 export const applyReferralBonus = async (referrerId, userId) => {
-  const REFERRER_REWARD = Number(config.REFERRER_REWARD_AMOUNT);
-  const REFERRED_USER_REWARD = Number(config.REFERRED_USER_REWARD_AMOUNT);
+  const REFERRER_REWARD = Number(envConfig.REFERRER_REWARD_AMOUNT);
+  const REFERRED_USER_REWARD = Number(envConfig.REFERRED_USER_REWARD_AMOUNT);
 
   const { referrer, user } = await db.$transaction(async (tx) => {
     // Credit referrer

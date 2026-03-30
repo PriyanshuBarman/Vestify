@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "#config/env.config.js";
+import envConfig from "#config/env.config.js";
 
 export const navCache = new Map();
 
@@ -16,7 +16,7 @@ export const fetchLatestNAVData = async (schemeCode) => {
 
   try {
     const { data } = await axios.get(
-      `${config.MF_API_BASE_URL}/${schemeCode}/latest`,
+      `${envConfig.MF_API_BASE_URL}/${schemeCode}/latest`,
     );
 
     const latestEntry = data.data[0];

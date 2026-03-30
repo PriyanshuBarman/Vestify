@@ -1,4 +1,4 @@
-import config from "#config/env.config.js";
+import envConfig from "#config/env.config.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as userService from "../services/user.service.js";
@@ -21,7 +21,7 @@ export const getReferrals = asyncHandler(async (req, res) => {
 
 export const claimDailyReward = asyncHandler(async (req, res) => {
   const { userId } = req.user;
-  const rewardAmount = Number(config.DAILY_REWARD_AMOUNT);
+  const rewardAmount = Number(envConfig.DAILY_REWARD_AMOUNT);
 
   const updatedBalance = await userService.claimDailyReward(
     userId,

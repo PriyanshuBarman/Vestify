@@ -1,6 +1,6 @@
 import axios from "axios";
 import { format } from "date-fns";
-import config from "#config/env.config.js";
+import envConfig from "#config/env.config.js";
 
 export const navCache = new Map();
 
@@ -19,7 +19,9 @@ export const fetchNavInfoByDate = async (schemeCode, date) => {
       return navCache.get(schemeCode);
     }
 
-    const { data } = await axios.get(`${config.MF_API_BASE_URL}/${schemeCode}`);
+    const { data } = await axios.get(
+      `${envConfig.MF_API_BASE_URL}/${schemeCode}`,
+    );
     const chartData = data.data;
 
     const matchedNavInfo = chartData

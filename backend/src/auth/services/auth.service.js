@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import db from "#config/db.config.js";
-import config from "#config/env.config.js";
+import envConfig from "#config/env.config.js";
 import * as referralService from "./referral.service.js";
 import { generateUniqueUsername } from "#shared/services/username.service.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
@@ -112,7 +112,7 @@ export const loginUser = async ({ email, password, userAgent, ip }) => {
 };
 
 export const logoutUser = async (refreshToken) => {
-  const decoded = jwt.verify(refreshToken, config.REFRESH_TOKEN_SECRET);
+  const decoded = jwt.verify(refreshToken, envConfig.REFRESH_TOKEN_SECRET);
   const refreshTokenHash = generateTokenHash(refreshToken);
 
   await db.session.deleteMany({
@@ -125,7 +125,7 @@ export const logoutUser = async (refreshToken) => {
 
 export const refreshToken = async (token) => {
   try {
-    const decoded = jwt.verify(token, config.REFRESH_TOKEN_SECRET);
+    const decoded = jwt.verify(token, envConfig.REFRESH_TOKEN_SECRET);
     const refreshTokenHash = generateTokenHash(token);
 
     const session = await db.session.findFirst({

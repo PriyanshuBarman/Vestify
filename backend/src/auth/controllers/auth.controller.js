@@ -1,4 +1,4 @@
-import config from "#config/env.config.js";
+import envConfig from "#config/env.config.js";
 import * as authService from "../services/auth.service.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
@@ -59,8 +59,8 @@ export const logout = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    secure: config.NODE_ENV === "production",
-    sameSite: config.NODE_ENV === "production" ? "none" : "strict",
+    secure: envConfig.NODE_ENV === "production",
+    sameSite: envConfig.NODE_ENV === "production" ? "none" : "strict",
   };
 
   return res

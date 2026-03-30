@@ -1,5 +1,5 @@
 import { OAuth2Client } from "google-auth-library";
-import config from "#config/env.config.js";
+import envConfig from "#config/env.config.js";
 import * as gAuthService from "../services/google-auth.service.js";
 import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import {
@@ -8,8 +8,8 @@ import {
 } from "../constants/auth.constants.js";
 
 const client = new OAuth2Client(
-  config.CLIENT_ID,
-  config.CLIENT_SECRET,
+  envConfig.CLIENT_ID,
+  envConfig.CLIENT_SECRET,
   "postmessage",
 );
 
@@ -22,7 +22,7 @@ export const googleAuth = asyncHandler(async (req, res) => {
 
   const ticket = await client.verifyIdToken({
     idToken: tokens.id_token,
-    audience: config.CLIENT_ID,
+    audience: envConfig.CLIENT_ID,
   });
 
   const { email, name, picture } = ticket.getPayload();
