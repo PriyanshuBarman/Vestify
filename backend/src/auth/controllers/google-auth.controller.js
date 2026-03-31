@@ -1,7 +1,6 @@
 import { OAuth2Client } from "google-auth-library";
 import envConfig from "#config/env.config.js";
 import * as gAuthService from "../services/google-auth.service.js";
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import {
   ACCESS_COOKIE_OPTIONS,
   REFRESH_COOKIE_OPTIONS,
@@ -13,7 +12,7 @@ const client = new OAuth2Client(
   "postmessage",
 );
 
-export const googleAuth = asyncHandler(async (req, res) => {
+export const googleAuth = async (req, res) => {
   const { code, referralCode } = req.body;
   const ip = req.clientIp;
   const userAgent = req.headers["user-agent"];
@@ -46,4 +45,4 @@ export const googleAuth = asyncHandler(async (req, res) => {
       message: isNewUser ? "User Registered Successfully" : "Login Successful",
       user,
     });
-});
+};

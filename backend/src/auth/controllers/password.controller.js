@@ -1,8 +1,7 @@
 import { ApiError } from "#shared/utils/api-error.utils.js";
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as passwordService from "../services/password.service.js";
 
-export const forgotPassword = asyncHandler(async (req, res) => {
+export const forgotPassword = async (req, res) => {
   const { email } = req.body;
 
   if (!email) throw new ApiError(400, "email is required");
@@ -11,9 +10,9 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Reset link sent successfully", link });
-});
+};
 
-export const resetPassword = asyncHandler(async (req, res) => {
+export const resetPassword = async (req, res) => {
   const { token } = req.params;
   const { newPassword } = req.body;
 
@@ -25,4 +24,4 @@ export const resetPassword = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Password reset successfully" });
-});
+};

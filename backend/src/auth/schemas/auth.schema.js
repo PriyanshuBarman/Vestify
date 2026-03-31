@@ -29,3 +29,9 @@ export const loginSchema = z.object({
       .max(20, "password must be at most 20 characters"),
   }),
 });
+
+export const sessionIdParamSchema = z.object({
+  params: z.object({
+    sessionId: z.uuid(),
+  }),
+});

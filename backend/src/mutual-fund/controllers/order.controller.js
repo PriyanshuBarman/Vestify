@@ -1,7 +1,6 @@
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as orderService from "../services/order.service.js";
 
-export const placeInvestmentOrder = asyncHandler(async (req, res) => {
+export const placeInvestmentOrder = async (req, res) => {
   const { userId } = req.user;
   const {
     amount,
@@ -29,9 +28,9 @@ export const placeInvestmentOrder = asyncHandler(async (req, res) => {
     message: "Investment Order Placed",
     order,
   });
-});
+};
 
-export const placeRedemptionOrder = asyncHandler(async (req, res) => {
+export const placeRedemptionOrder = async (req, res) => {
   const { userId } = req.user;
   const { amount, folio, isInstant = false } = req.body;
 
@@ -47,9 +46,9 @@ export const placeRedemptionOrder = asyncHandler(async (req, res) => {
     message: "Redemption Order Placed",
     order,
   });
-});
+};
 
-export const getAllOrders = asyncHandler(async (req, res) => {
+export const getAllOrders = async (req, res) => {
   const { userId } = req.user;
 
   const orders = await orderService.getAllOrders(userId);
@@ -58,9 +57,9 @@ export const getAllOrders = asyncHandler(async (req, res) => {
     success: true,
     orders,
   });
-});
+};
 
-export const getPendingOrders = asyncHandler(async (req, res) => {
+export const getPendingOrders = async (req, res) => {
   const { userId } = req.user;
 
   const orders = await orderService.getPendingOrders(userId);
@@ -69,9 +68,9 @@ export const getPendingOrders = asyncHandler(async (req, res) => {
     success: true,
     orders,
   });
-});
+};
 
-export const getOrderDetail = asyncHandler(async (req, res) => {
+export const getOrderDetail = async (req, res) => {
   const { orderId } = req.params;
 
   const order = await orderService.getOrderDetail(orderId);
@@ -80,9 +79,9 @@ export const getOrderDetail = asyncHandler(async (req, res) => {
     success: true,
     order,
   });
-});
+};
 
-export const getFundOrders = asyncHandler(async (req, res) => {
+export const getFundOrders = async (req, res) => {
   const { userId } = req.user;
   const { schemeCode } = req.params;
 
@@ -92,4 +91,4 @@ export const getFundOrders = asyncHandler(async (req, res) => {
     success: true,
     orders,
   });
-});
+};

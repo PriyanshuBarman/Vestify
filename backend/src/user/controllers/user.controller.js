@@ -1,25 +1,24 @@
 import envConfig from "#config/env.config.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as userService from "../services/user.service.js";
 
-export const getUser = asyncHandler(async (req, res) => {
+export const getUser = async (req, res) => {
   const { userId } = req.user;
 
   const user = await userService.getUser(userId);
 
   return res.status(200).json({ success: true, user });
-});
+};
 
-export const getReferrals = asyncHandler(async (req, res) => {
+export const getReferrals = async (req, res) => {
   const { userId } = req.user;
 
   const referrals = await userService.getReferrals(userId);
 
   return res.status(200).json({ success: true, referrals });
-});
+};
 
-export const claimDailyReward = asyncHandler(async (req, res) => {
+export const claimDailyReward = async (req, res) => {
   const { userId } = req.user;
   const rewardAmount = Number(envConfig.DAILY_REWARD_AMOUNT);
 
@@ -33,18 +32,18 @@ export const claimDailyReward = asyncHandler(async (req, res) => {
     message: `₹${rewardAmount} reward has been added`,
     updatedBalance,
   });
-});
+};
 
-export const updateProfile = asyncHandler(async (req, res) => {
+export const updateProfile = async (req, res) => {
   const { userId } = req.user;
   const { name, username } = req.body;
 
   const profile = await userService.updateProfile(userId, name, username);
 
   return res.status(200).json({ success: true, profile });
-});
+};
 
-export const uploadAvatar = asyncHandler(async (req, res) => {
+export const uploadAvatar = async (req, res) => {
   const { userId } = req.user;
   const { file } = req;
 
@@ -57,9 +56,9 @@ export const uploadAvatar = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Avatar uploaded successfully", avatar });
-});
+};
 
-export const deleteAvatar = asyncHandler(async (req, res) => {
+export const deleteAvatar = async (req, res) => {
   const { userId } = req.user;
 
   const avatar = await userService.deleteAvatar(userId);
@@ -67,4 +66,4 @@ export const deleteAvatar = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Avatar deleted successfully", avatar });
-});
+};

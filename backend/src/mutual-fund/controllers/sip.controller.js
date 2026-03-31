@@ -1,7 +1,6 @@
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as sipService from "../services/sip.service.js";
 
-export const createSip = asyncHandler(async (req, res) => {
+export const createSip = async (req, res) => {
   const { userId } = req.user;
   const {
     amount,
@@ -29,9 +28,9 @@ export const createSip = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "SIP created successfully", order, sip });
-});
+};
 
-export const editSip = asyncHandler(async (req, res) => {
+export const editSip = async (req, res) => {
   const { userId } = req.user;
   const { sipId } = req.params;
   const { amount, sipDate } = req.body;
@@ -44,9 +43,9 @@ export const editSip = asyncHandler(async (req, res) => {
   });
 
   return res.status(200).json({ success: true, message, notice });
-});
+};
 
-export const skipSip = asyncHandler(async (req, res) => {
+export const skipSip = async (req, res) => {
   const { userId } = req.user;
   const { sipId } = req.params;
 
@@ -55,9 +54,9 @@ export const skipSip = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "SIP Skipped Successfully" });
-});
+};
 
-export const cancelSip = asyncHandler(async (req, res) => {
+export const cancelSip = async (req, res) => {
   const { sipId } = req.params;
 
   await sipService.cancelSip(sipId);
@@ -65,9 +64,9 @@ export const cancelSip = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "SIP Cancelled Successfully" });
-});
+};
 
-export const getAllSips = asyncHandler(async (req, res) => {
+export const getAllSips = async (req, res) => {
   const { userId } = req.user;
 
   const data = await sipService.getAllSips(userId);
@@ -77,9 +76,9 @@ export const getAllSips = asyncHandler(async (req, res) => {
     sips: data.allSips,
     totalActiveSipAmount: data.totalActiveSipAmount,
   });
-});
+};
 
-export const getSipDetail = asyncHandler(async (req, res) => {
+export const getSipDetail = async (req, res) => {
   const { sipId } = req.params;
 
   const data = await sipService.getSipDetail(sipId);
@@ -89,13 +88,13 @@ export const getSipDetail = asyncHandler(async (req, res) => {
     sip: data.sipDetail,
     installments: data.installments,
   });
-});
+};
 
 // ---------------------------------------------------
 // Step-up SIP controllers
 // ---------------------------------------------------
 
-export const addEditStepUp = asyncHandler(async (req, res) => {
+export const addEditStepUp = async (req, res) => {
   const { sipId, amount, percentage, intervalInMonths } = req.body;
 
   const sip = await sipService.addEditStepUp({
@@ -110,9 +109,9 @@ export const addEditStepUp = asyncHandler(async (req, res) => {
     message: "Step-Up added/edited successfully",
     sip,
   });
-});
+};
 
-export const removeStepUp = asyncHandler(async (req, res) => {
+export const removeStepUp = async (req, res) => {
   const { sipId } = req.params;
 
   await sipService.removeStepUp(sipId);
@@ -120,4 +119,4 @@ export const removeStepUp = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Step-Up removed successfully" });
-});
+};

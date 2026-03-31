@@ -1,7 +1,6 @@
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as accountService from "../services/account.service.js";
 
-export const deleteAccount = asyncHandler(async (req, res) => {
+export const deleteAccount = async (req, res) => {
   const { userId } = req.user;
 
   await accountService.deleteAccount(userId);
@@ -9,9 +8,9 @@ export const deleteAccount = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Account Deleted Successfully" });
-});
+};
 
-export const setPin = asyncHandler(async (req, res) => {
+export const setPin = async (req, res) => {
   const { userId } = req.user;
   const { pin } = req.body;
 
@@ -20,9 +19,9 @@ export const setPin = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Pin Setup Successful" });
-});
+};
 
-export const changePin = asyncHandler(async (req, res) => {
+export const changePin = async (req, res) => {
   const { userId } = req.user;
   const { currentPin, newPin } = req.body;
 
@@ -31,9 +30,9 @@ export const changePin = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Pin Reset Successful" });
-});
+};
 
-export const changePassword = asyncHandler(async (req, res) => {
+export const changePassword = async (req, res) => {
   const { userId } = req.user;
   const { currentPassword, newPassword } = req.body;
 
@@ -42,9 +41,9 @@ export const changePassword = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Password changed successfully" });
-});
+};
 
-export const requestEmailChange = asyncHandler(async (req, res) => {
+export const requestEmailChange = async (req, res) => {
   const { userId } = req.user;
   const { password, newEmail } = req.body;
 
@@ -53,9 +52,9 @@ export const requestEmailChange = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "OTP sent to your new email" });
-});
+};
 
-export const verifyEmailChange = asyncHandler(async (req, res) => {
+export const verifyEmailChange = async (req, res) => {
   const { userId } = req.user;
   const { otp } = req.params;
 
@@ -64,4 +63,4 @@ export const verifyEmailChange = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Email Changed Successfully" });
-});
+};

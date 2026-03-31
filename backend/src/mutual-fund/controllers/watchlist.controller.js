@@ -1,7 +1,6 @@
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import * as watchlistService from "../services/watchlist.service.js";
 
-export const addToWatchlist = asyncHandler(async (req, res) => {
+export const addToWatchlist = async (req, res) => {
   const { userId } = req.user;
   const { schemeCode, fundName, fundShortName, fundHouseDomain } = req.body;
 
@@ -14,9 +13,9 @@ export const addToWatchlist = asyncHandler(async (req, res) => {
   });
 
   res.status(201).json({ success: true, message: "added to watchlist" });
-});
+};
 
-export const removeFromWatchlist = asyncHandler(async (req, res) => {
+export const removeFromWatchlist = async (req, res) => {
   const { userId } = req.user;
   const { schemeCode } = req.params;
 
@@ -25,16 +24,16 @@ export const removeFromWatchlist = asyncHandler(async (req, res) => {
   res
     .status(200)
     .json({ success: true, message: "Successfully removed from watchlist" });
-});
+};
 
-export const getWatchlist = asyncHandler(async (req, res) => {
+export const getWatchlist = async (req, res) => {
   const { userId } = req.user;
   const watchlist = await watchlistService.getWatchlist(userId);
 
   res.status(200).json({ success: true, watchlist });
-});
+};
 
-export const isInWatchlist = asyncHandler(async (req, res) => {
+export const isInWatchlist = async (req, res) => {
   const { userId } = req.user;
   const { schemeCode } = req.params;
 
@@ -44,4 +43,4 @@ export const isInWatchlist = asyncHandler(async (req, res) => {
   );
 
   res.status(200).json({ success: true, isWatchlisted });
-});
+};

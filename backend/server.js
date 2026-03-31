@@ -37,7 +37,7 @@ app.use("/healthz", (req, res) => {
   res.status(200).json({ message: "ok" });
 });
 
-app.all("*", notFoundHandler);
+app.all("/{*splat}", notFoundHandler);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;

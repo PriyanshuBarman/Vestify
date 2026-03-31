@@ -1,8 +1,7 @@
 import cloudinary from "#config/cloudinary.config.js";
 import db from "#config/db.config.js";
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 
-export const getScreenshots = asyncHandler(async (req, res) => {
+export const getScreenshots = async (req, res) => {
   const [lightResponse, darkResponse] = await Promise.all([
     cloudinary.api.resources_by_asset_folder("Vestify/screenshots/light", {
       type: "upload",
@@ -26,9 +25,9 @@ export const getScreenshots = asyncHandler(async (req, res) => {
   const dark = sortedDark.map((img) => img.secure_url);
 
   res.json({ light, dark });
-});
+};
 
-export const getUserCount = asyncHandler(async (req, res) => {
+export const getUserCount = async (req, res) => {
   const count = await db.user.count({
     where: {
       id: { not: "system" },
@@ -36,4 +35,4 @@ export const getUserCount = asyncHandler(async (req, res) => {
   });
 
   return res.status(200).json({ success: true, count });
-});
+};

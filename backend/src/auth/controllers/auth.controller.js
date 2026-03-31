@@ -1,13 +1,13 @@
 import envConfig from "#config/env.config.js";
 import * as authService from "../services/auth.service.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
-import { asyncHandler } from "#shared/utils/async-handler.utils.js";
 import {
   ACCESS_COOKIE_OPTIONS,
   REFRESH_COOKIE_OPTIONS,
 } from "../constants/auth.constants.js";
 
-export const signup = asyncHandler(async (req, res) => {
+export const signup = async (req, res) => {
+  console.log("working");
   const { name, email, password, referralCode } = req.body;
   const userAgent = req.headers["user-agent"];
   const ip = req.clientIp;
@@ -26,9 +26,9 @@ export const signup = asyncHandler(async (req, res) => {
     .cookie("refreshToken", refreshToken, REFRESH_COOKIE_OPTIONS)
     .status(201)
     .json({ success: true, message: "User Registration Successful", user });
-});
+};
 
-export const login = asyncHandler(async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
   const userAgent = req.headers["user-agent"];
   const ip = req.clientIp;
@@ -50,9 +50,9 @@ export const login = asyncHandler(async (req, res) => {
       user,
       refreshToken,
     });
-});
+};
 
-export const logout = asyncHandler(async (req, res) => {
+export const logout = async (req, res) => {
   const { refreshToken } = req.cookies;
 
   await authService.logoutUser(refreshToken);
@@ -68,9 +68,9 @@ export const logout = asyncHandler(async (req, res) => {
     .clearCookie("refreshToken", options)
     .status(200)
     .json({ success: true, message: "User Logged Out Successfully" });
-});
+};
 
-export const refreshToken = asyncHandler(async (req, res) => {
+export const refreshToken = async (req, res) => {
   const { refreshToken } = req.cookies;
   const userAgent = req.headers["user-agent"];
   const ip = req.clientIp;
@@ -84,4 +84,4 @@ export const refreshToken = asyncHandler(async (req, res) => {
     .cookie("refreshToken", newTokens.refreshToken, REFRESH_COOKIE_OPTIONS)
     .status(200)
     .json({ success: true, message: "Tokens refreshed successfully" });
-});
+};
