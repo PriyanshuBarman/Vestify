@@ -20,30 +20,29 @@ export const editSipSchema = z.object({
   }),
   body: z
     .object({
-      amount: z.coerce.number().positive().optional(),
-      sipDate: z.coerce.number().int().optional(),
+      amount: z.coerce.number().positive().nullable().optional(),
+      sipDate: z.coerce.number().int().nullable().optional(),
     })
-    .refine((data) => data.amount !== undefined || data.sipDate !== undefined, {
+    .refine((data) => data.amount != null || data.sipDate != null, {
       message: "amount or sipDate one is required",
       path: ["amount"],
     }),
 });
 
 export const stepUpSipSchema = z.object({
+  params: z.object({
+    sipId: z.uuid(),
+  }),
   body: z
     .object({
-      sipId: z.uuid(),
       intervalInMonths: z.coerce.number().int().positive(),
-      amount: z.coerce.number().positive().optional(),
-      percentage: z.coerce.number().positive().max(100).optional(),
+      amount: z.coerce.number().positive().nullable().optional(),
+      percentage: z.coerce.number().positive().max(100).nullable().optional(),
     })
-    .refine(
-      (data) => data.amount !== undefined || data.percentage !== undefined,
-      {
-        message: "amount or percentage one is required",
-        path: ["amount"],
-      },
-    ),
+    .refine((data) => data.amount != null || data.percentage != null, {
+      message: "amount or percentage one is required",
+      path: ["amount"],
+    }),
 });
 
 export const sipIdParamSchema = z.object({

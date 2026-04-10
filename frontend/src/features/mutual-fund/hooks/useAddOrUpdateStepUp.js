@@ -7,7 +7,7 @@ import { formatToINR } from "@/utils/formatters";
 
 import { addStepUp } from "../api/sip";
 
-export function useAddStepUp() {
+export function useAddOrUpdateStepUp() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const userKey = "self";
@@ -28,7 +28,7 @@ export function useAddStepUp() {
       navigate("/success", {
         state: {
           title: variables.isEdit ? "Step-up Updated" : "Step-up Activated",
-          description: `SIP amount will increace to ${formatToINR(stepUpValue)} from ${stepUpDate} onwards`,
+          description: `SIP amount will increase to ${formatToINR(stepUpValue)} from ${stepUpDate} onwards`,
           doneRoute: `/mutual-funds/sip/${variables.sipId}`,
         },
         replace: true,

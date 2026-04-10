@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 import { addToWatchlist } from "../api/watchlist";
 
-export function useAddToWatchlist() {
+export function useAddFundToWatchlist() {
   const queryClient = useQueryClient();
   const userKey = "self";
 
@@ -24,6 +24,7 @@ export function useAddToWatchlist() {
         [userKey, "isInWatchlist", variables.schemeCode],
         true,
       );
+      toast.success("Added to watchlist");
       return { previousData, variables };
     },
 

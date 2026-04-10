@@ -15,7 +15,7 @@ import { Spinner } from "@/components/ui/spinner";
 import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
 
-import { useAddStepUp } from "../hooks/useAddStepUp";
+import { useAddOrUpdateStepUp } from "../hooks/useAddOrUpdateStepUp";
 
 const intervals = {
   "3M": 3,
@@ -39,7 +39,7 @@ function StepUpSipPage() {
     return "amount";
   });
 
-  const { mutate: addStepUp, isPending } = useAddStepUp();
+  const { mutate: addStepUp, isPending } = useAddOrUpdateStepUp();
   const isStepUpAdded = !!sipDetail?.stepUpIntervalInMonths;
 
   const handleSubmit = () => {

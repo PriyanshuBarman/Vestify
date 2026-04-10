@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 import { removeFromWatchlist } from "../api/watchlist";
 
-export function useRemoveFromWatchlist() {
+export function useRemoveFundFromWatchlist() {
   const queryClient = useQueryClient();
   const userKey = "self";
 
@@ -23,6 +23,7 @@ export function useRemoveFromWatchlist() {
         [userKey, "isInWatchlist", variables.schemeCode],
         false,
       );
+      toast.success("Removed from watchlist");
       return { previousData, variables };
     },
 

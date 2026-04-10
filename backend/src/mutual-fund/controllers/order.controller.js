@@ -32,7 +32,8 @@ export const placeInvestmentOrder = async (req, res) => {
 
 export const placeRedemptionOrder = async (req, res) => {
   const { userId } = req.user;
-  const { amount, folio, isInstant = false } = req.body;
+  const { folio } = req.params;
+  const { amount, isInstant = false } = req.body;
 
   const order = await orderService.placeRedemptionOrder({
     userId,

@@ -60,8 +60,7 @@ export const addStepUp = async ({
   percentage,
   intervalInMonths,
 }) => {
-  const { data } = await api.patch("/mutual-funds/sips/step-up", {
-    sipId,
+  const { data } = await api.patch(`/mutual-funds/sips/step-up/${sipId}`, {
     amount,
     percentage,
     intervalInMonths,

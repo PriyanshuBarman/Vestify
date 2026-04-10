@@ -217,7 +217,7 @@ export const getSipDetail = async (sipId) => {
 // Step-up SIP services
 // ---------------------------------------------------
 
-export const addEditStepUp = async ({
+export const addOrUpdateStepUp = async ({
   sipId,
   amount,
   percentage,

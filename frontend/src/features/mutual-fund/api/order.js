@@ -48,8 +48,7 @@ export const createInvestOrder = async ({ amount, fund, pin }) => {
 };
 
 export const redeemFund = async ({ folio, amount, isInstant = false }) => {
-  const { data } = await api.put(`/mutual-funds/orders/redeem`, {
-    folio,
+  const { data } = await api.put(`/mutual-funds/orders/redeem/${folio}`, {
     amount: Number(amount),
     isInstant,
   });

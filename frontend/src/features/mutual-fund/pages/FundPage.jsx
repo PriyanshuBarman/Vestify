@@ -13,11 +13,11 @@ import FundPageAccordions from "../components/accordions/FundPageAccordions.jsx"
 import Chart from "../components/charts/Chart";
 import FundDescription from "../components/FundDescription";
 import FundLogo from "../components/FundLogo";
-import { useAddToWatchlist } from "../hooks/useAddToWatchlist";
+import { useAddFundToWatchlist } from "../hooks/useAddFundToWatchlist.js";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
 import { useGetIsInWatchlist } from "../hooks/useGetIsInWatchlist";
-import { useRemoveFromWatchlist } from "../hooks/useRemoveFromWatchlist";
+import { useRemoveFundFromWatchlist } from "../hooks/useRemoveFundFromWatchlist.js";
 import { formatFundCategory } from "../utils/formaters";
 
 const FundPortfolioPreview = lazy(
@@ -41,8 +41,8 @@ function FundPage() {
 
   const navigate = useNavigate();
 
-  const { mutate: addToWatchlist } = useAddToWatchlist();
-  const { mutate: removeFromWatchlist } = useRemoveFromWatchlist();
+  const { mutate: addToWatchlist } = useAddFundToWatchlist();
+  const { mutate: removeFromWatchlist } = useRemoveFundFromWatchlist();
 
   const handleWatchlistClick = () => {
     if (isInWatchlist) {

@@ -7,7 +7,7 @@ import { Spinner } from "@/components/ui/spinner";
 
 import { useGetFundsData } from "../hooks/useGetFundsData";
 import { useGetWatchlist } from "../hooks/useGetWatchlist";
-import { useRemoveFromWatchlist } from "../hooks/useRemoveFromWatchlist";
+import { useRemoveFundFromWatchlist } from "../hooks/useRemoveFundFromWatchlist";
 import FundLogo from "./FundLogo";
 import FundRating from "./FundRating";
 import SectionHeading from "./SectionHeading";
@@ -41,7 +41,7 @@ function YourWatchlist() {
 export default YourWatchlist;
 
 function WatchlistItem({ fund, fundData }) {
-  const { mutate, isPending } = useRemoveFromWatchlist();
+  const { mutate, isPending } = useRemoveFundFromWatchlist();
   const handleRemoveClick = (e) => {
     e.preventDefault();
     mutate({ schemeCode: fund.schemeCode });

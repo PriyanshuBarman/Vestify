@@ -40,9 +40,9 @@ sipRoutes.get(
 
 // Step-up SIP routes
 sipRoutes.patch(
-  "/step-up",
+  "/step-up/:sipId",
   validate(stepUpSipSchema),
-  sipController.addEditStepUp,
+  sipController.addOrUpdateStepUp,
 );
 sipRoutes.delete(
   "/step-up/:sipId",

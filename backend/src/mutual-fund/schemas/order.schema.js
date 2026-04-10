@@ -14,8 +14,10 @@ export const investmentOrderSchema = z.object({
 });
 
 export const redemptionOrderSchema = z.object({
+  params: z.object({
+    folio: z.coerce.number().int().positive(),
+  }),
   body: z.object({
-    folio: z.coerce.number().int(),
     amount: z.coerce.number().positive(),
   }),
 });

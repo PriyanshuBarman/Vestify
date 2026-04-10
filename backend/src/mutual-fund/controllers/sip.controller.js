@@ -94,10 +94,12 @@ export const getSipDetail = async (req, res) => {
 // Step-up SIP controllers
 // ---------------------------------------------------
 
-export const addEditStepUp = async (req, res) => {
-  const { sipId, amount, percentage, intervalInMonths } = req.body;
+export const addOrUpdateStepUp = async (req, res) => {
+  const { sipId } = req.params;
+  const { amount, percentage, intervalInMonths } = req.body;
 
-  const sip = await sipService.addEditStepUp({
+  console.log(sipId, typeof sipId);
+  const sip = await sipService.addOrUpdateStepUp({
     sipId,
     amount,
     percentage,

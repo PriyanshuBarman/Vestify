@@ -8,7 +8,7 @@ import LoadingState from "@/components/LoadingState";
 
 import { useGetFundsData } from "../../hooks/useGetFundsData";
 import { useGetWatchlist } from "../../hooks/useGetWatchlist";
-import { useRemoveFromWatchlist } from "../../hooks/useRemoveFromWatchlist";
+import { useRemoveFundFromWatchlist } from "../../hooks/useRemoveFundFromWatchlist";
 import FundLogo from "../FundLogo";
 import FundRating from "../FundRating";
 
@@ -80,7 +80,7 @@ function WatchlistItem({
   handleClick,
   isOtherUserProfile,
 }) {
-  const { mutate, isPending } = useRemoveFromWatchlist();
+  const { mutate, isPending } = useRemoveFundFromWatchlist();
 
   const handleRemoveClick = (e) => {
     e.preventDefault();

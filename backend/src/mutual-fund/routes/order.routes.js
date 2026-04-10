@@ -21,7 +21,7 @@ orderRoutes.post(
 );
 
 orderRoutes.put(
-  "/redeem",
+  "/redeem/:folio",
   validate(redemptionOrderSchema),
   orderController.placeRedemptionOrder,
 );
