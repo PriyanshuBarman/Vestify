@@ -37,7 +37,7 @@ function Hero() {
 
         <motion.p
           variants={heroItemVariants}
-          className="text-muted-foreground text-md mt-6 max-w-xl leading-relaxed md:mt-10 md:text-xl lg:max-w-2xl"
+          className="text-muted-foreground text-md mt-6 max-w-xl md:leading-relaxed md:mt-10 md:text-xl lg:max-w-2xl"
         >
           Invest, redeem, start SIPs, track portfolio — all in a fully virtual
           environment with a Groww app inspired UI.

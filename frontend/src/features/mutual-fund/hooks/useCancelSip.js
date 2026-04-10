@@ -7,14 +7,15 @@ import { deleteSip } from "../api/sip";
 export function useCancelSip() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const userKey = "self";
 
   return useMutation({
     mutationFn: deleteSip,
     onSuccess: (data, variables) => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: ["self", "sips"] });
+      queryClient.invalidateQueries({ queryKey: [userKey, "sips"] });
       queryClient.invalidateQueries({
-        queryKey: ["self", "sip", variables.sipId],
+        queryKey: [userKey, "sip", variables.sipId],
       });
 
       navigate("/mutual-funds/#sips", { replace: true });

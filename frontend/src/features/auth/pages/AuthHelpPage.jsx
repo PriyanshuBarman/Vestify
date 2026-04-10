@@ -43,7 +43,7 @@ function AuthHelpPage() {
   }, [queryClient]);
 
   return (
-    <div className="mx-auto min-h-dvh w-full max-w-5xl px-4 py-8 sm:py-12">
+    <div className="mx-auto min-h-dvh w-full max-w-4xl px-4 py-8 sm:py-12">
       <div className="flex flex-col items-center gap-4 border-b p-8 px-4 text-center sm:p-10">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-400/10">
           <InfoIcon className="h-8 w-8 text-orange-400" />

@@ -22,7 +22,7 @@ const labelArr = [
 ];
 
 function WatchlistTab({ username }) {
-  const isOtherUserProfile = !!username;
+  const isOtherUserProfile = Boolean(username);
   const [activeLabelIdx, setActiveLabelIdx] = useState(0);
   const { data: watchlist = [], isPending } = useGetWatchlist(username);
   const { data: fundsData = [] } = useGetFundsData(

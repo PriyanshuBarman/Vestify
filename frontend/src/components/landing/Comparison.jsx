@@ -31,7 +31,7 @@ function Comparison() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
           viewport={{ once: true }}
-          className="bg-card mt-12 overflow-hidden rounded-2xl border shadow-sm sm:rounded-3xl"
+          className="bg-card mt-12 overflow-hidden rounded-2xl border md:shadow-sm sm:rounded-3xl"
         >
           <Table>
             <TableHeader>

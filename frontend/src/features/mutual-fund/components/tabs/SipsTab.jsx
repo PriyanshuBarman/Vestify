@@ -24,7 +24,7 @@ import FundLogo from "../FundLogo";
 const NoActiveSips = lazy(() => import("../empty-states/NoActiveSips"));
 
 function SipsTab({ username }) {
-  const isOtherUserProfile = !!username;
+  const isOtherUserProfile = Boolean(username);
   const { data, isPending } = useGetSips(username);
   if (isPending) return <LoadingState />;
   if (!data?.sips?.length)

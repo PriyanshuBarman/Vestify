@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { ShareFatIcon } from "@phosphor-icons/react";
 import {
   CheckCircle2Icon,
   GiftIcon,
@@ -34,7 +35,6 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import GoBackBar from "@/components/GoBackBar";
-import ShareIcon from "@/components/icons/ShareIcon";
 import { formatToINR } from "@/utils/formatters";
 
 const shareText = `*Virtually Invest in Mutual funds* with a *Groww app UI*.
@@ -62,7 +62,7 @@ function ReferAndEarnPage() {
   };
 
   return (
-    <div className="container mx-auto max-w-4xl space-y-12 px-4 pb-12 sm:px-6 lg:px-8">
+    <div className="container mx-auto max-w-2xl space-y-12 px-4 sm:pt-12 pb-12 sm:px-6 lg:px-8">
       <GoBackBar
         showSearchIcon={false}
         className="bg-transparent px-0 backdrop-blur-[1px]"
@@ -90,7 +90,7 @@ function ReferAndEarnPage() {
       </Card>
 
       <Button className="w-full rounded-full" onClick={handleShare}>
-        <ShareIcon />
+        <ShareFatIcon weight="bold" />
         Share Link
       </Button>
 

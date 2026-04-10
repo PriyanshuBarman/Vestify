@@ -12,9 +12,11 @@ const NoOrders = lazy(
 
 function OrdersTab({ username }) {
   const { data: orders, isPending } = useGetOrders(username);
+  const isOtherUserProfile = Boolean(username);
 
   if (isPending) return <LoadingState />;
-  if (!orders?.length) return <NoOrders isOtherUserProfile={!!username} />;
+  if (!orders?.length)
+    return <NoOrders isOtherUserProfile={isOtherUserProfile} />;
 
   return (
     <ScrollArea>
@@ -25,7 +27,7 @@ function OrdersTab({ username }) {
               key={order.id}
               order={order}
               username={username}
-              isOtherUserProfile={!!username}
+              isOtherUserProfile={isOtherUserProfile}
               index={index}
               length={orders.length}
             />

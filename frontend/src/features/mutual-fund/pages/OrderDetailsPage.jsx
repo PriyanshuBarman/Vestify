@@ -25,7 +25,7 @@ function OrderDetailsPage() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
-  const isOtherUserProfile = !!username;
+  const isOtherUserProfile = Boolean(username);
   const { data: order = {} } = useGetOrderDetail(orderId, username);
 
   // If navigated with state & there is no cache, set it in the query cache

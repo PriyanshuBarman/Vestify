@@ -23,7 +23,7 @@ const sortOptions = {
 };
 
 function InvestmentsTab({ username }) {
-  const isOtherUserProfile = !!username;
+  const isOtherUserProfile = Boolean(username);
   const navigate = useNavigate();
   const [portfolio, setPortfolio] = useState([]);
   const [sortBy, setSortBy] = useState("current");

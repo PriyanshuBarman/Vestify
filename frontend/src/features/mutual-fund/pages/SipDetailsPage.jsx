@@ -27,7 +27,7 @@ import { useGetSipDetail } from "../hooks/useGetSipDetail";
 
 function SipDetailsPage() {
   const { sipId, username } = useParams();
-  const isOtherUserProfile = !!username;
+  const isOtherUserProfile = Boolean(username);
   const navigate = useNavigate();
   const { data, isPending } = useGetSipDetail(sipId, username);
 

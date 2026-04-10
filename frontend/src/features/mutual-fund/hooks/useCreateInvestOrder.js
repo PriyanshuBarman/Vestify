@@ -19,7 +19,7 @@ export function useCreateInvestOrder() {
       queryClient.setQueryData([userKey, "orders"], (old) =>
         old ? [order, ...old] : [order],
       );
-      queryClient.setQueryData(["pending-orders"], (old) =>
+      queryClient.setQueryData([userKey, "pending-orders"], (old) =>
         old ? [order, ...old] : [order],
       );
 

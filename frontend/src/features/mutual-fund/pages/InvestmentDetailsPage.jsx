@@ -23,7 +23,7 @@ function InvestmentDetailsPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const username = searchParams.get("username");
-  const isOtherUserProfile = !!username;
+  const isOtherUserProfile = Boolean(username);
 
   const fund = location.state;
   const { data: orders } = useGetFundOrders(fund.schemeCode, username);

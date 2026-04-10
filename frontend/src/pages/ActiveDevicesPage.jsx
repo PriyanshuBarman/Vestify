@@ -134,7 +134,10 @@ function ActiveDevicesPage() {
       </section>
 
       {/* Modal */}
-      <ResponsiveModal open={!!selected} onOpenChange={() => setSelected(null)}>
+      <ResponsiveModal
+        open={Boolean(selected)}
+        onOpenChange={() => setSelected(null)}
+      >
         <ResponsiveModalContent>
           <ResponsiveModalHeader>
             <ResponsiveModalTitle>
