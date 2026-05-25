@@ -10,6 +10,9 @@ async function placeSipInstallmentOrders() {
     where: {
       nextInstallmentDate: { lte: today },
     },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
 
   if (!activeSips.length) {

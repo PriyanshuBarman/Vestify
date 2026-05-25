@@ -18,7 +18,7 @@ async function processOrders() {
       processDate: { lte: today },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: "asc",
     },
   });
 
@@ -28,32 +28,18 @@ async function processOrders() {
 
   let failureCount = 0;
   let successCount = 0;
-  const BATCH_SIZE = 4;
-
-  for (let i = 0; i < orders.length; i += BATCH_SIZE) {
-    const batch = orders.slice(i, i + BATCH_SIZE);
-
-    await Promise.allSettled(
-      batch.map(async (order) => {
-        try {
-          if (
-            order.orderType === "ONE_TIME" ||
-            order.orderType === "NEW_SIP" ||
-            order.orderType === "SIP_INSTALLMENT"
-          ) {
-            await processInvestmentOrder(order);
-            successCount++;
-          }
-          if (order.orderType === "REDEEM") {
-            await processRedemptionOrder(order);
-            successCount++;
-          }
-        } catch (error) {
-          failureCount++;
-          console.error("❌", error.message);
-        }
-      }),
-    );
+  for (const order of orders) {
+    try {
+      if (order.orderType === "REDEEM") {
+        await processRedemptionOrder(order);
+      } else {
+        await processInvestmentOrder(order);
+      }
+      successCount++;
+    } catch (error) {
+      failureCount++;
+      console.error("❌", error.message);
+    }
   }
 
   printSummary(orders.length, successCount, failureCount);

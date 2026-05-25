@@ -6,6 +6,7 @@ export const fifoRedemption = async (
 ) => {
   const holdings = await tx.mfHolding.findMany({
     where: { userId, schemeCode },
+    orderBy: { createdAt: "asc" },
   });
 
   let remainingUnits = redemptionUnits;

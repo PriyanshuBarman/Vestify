@@ -32,15 +32,17 @@ export const placeSipInstallmentOrder = async (data) => {
 
   // prisma $transaction
   await db.$transaction(async (tx) => {
-    // 1. Fetch user balance
-    const user = await tx.user.findUnique({
-      where: { id: userId },
-      select: { balance: true },
+    // 1. Atomic debit: only succeeds if balance >= amount
+    const updated = await tx.user.updateMany({
+      where: {
+        id: userId,
+        balance: { gte: amount },
+      },
+      data: { balance: { decrement: amount } },
     });
-    if (!user) throw new Error("User not found");
 
     // 2. Create FAILED order for insufficient balance
-    if (amount.toNumber() > user.balance.toNumber()) {
+    if (updated.count === 0) {
       await tx.mfOrder.create({
         data: {
           sipId,
@@ -79,11 +81,13 @@ export const placeSipInstallmentOrder = async (data) => {
       return;
     }
 
-    // 3. Deduct balance
-    const { balance: updatedBalance } = await tx.user.update({
+    // 3. Fetch updated balance for transaction record
+    const user = await tx.user.findUnique({
       where: { id: userId },
-      data: { balance: { decrement: amount } },
+      select: { balance: true },
     });
+    if (!user) throw new Error("User not found");
+    const updatedBalance = user.balance;
 
     // 4. Create/Place order
     const order = await tx.mfOrder.create({
