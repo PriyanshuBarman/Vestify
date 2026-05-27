@@ -16,7 +16,7 @@ export const formatToINR = (num, maxFracDigits = 2) => {
 };
 
 export const formatShortINR = (num) => {
-  const number = Number(num);
+  const number = Number(num || 0);
   if (isNaN(number) || number === 0) return "₹0";
 
   if (number >= 10000000) {
@@ -29,7 +29,7 @@ export const formatShortINR = (num) => {
     return `${(number / 1000).toFixed(1).replace(/\.0$/, "")}k`;
   }
 
-  return number;
+  return number.toFixed(1);
 };
 
 export const sanitizeAmount = (value) => {

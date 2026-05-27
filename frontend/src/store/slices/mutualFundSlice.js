@@ -15,6 +15,7 @@ const initialState = {
 
   activeColumn: "return_3y",
   filters: defaultFilters,
+  recentlyViewedFunds: [],
 };
 
 const mutualFundSlice = createSlice({
@@ -33,14 +34,31 @@ const mutualFundSlice = createSlice({
     setActiveColumn: (state, action) => {
       state.activeColumn = action.payload;
     },
+    setRecentlyViewedFunds: (state, action) => {
+      const fund = action.payload;
+      if (!fund?.scheme_code) return;
+
+      const filtered = (state.recentlyViewedFunds || []).filter(
+        (item) => item.scheme_code !== fund.scheme_code,
+      );
+
+      state.recentlyViewedFunds = [fund, ...filtered].slice(0, 4);
+    },
   },
 });
 
-export const { setActiveTabIndex, setFilters, resetFilters, setActiveColumn } =
-  mutualFundSlice.actions;
+export const {
+  setActiveTabIndex,
+  setFilters,
+  resetFilters,
+  setActiveColumn,
+  setRecentlyViewedFunds,
+} = mutualFundSlice.actions;
 
 export const selectActiveTabIndex = (state) => state.mutualFund.activeTabIndex;
 export const selectFilters = (state) => state.mutualFund.filters;
 export const selectActiveColumn = (state) => state.mutualFund.activeColumn;
+export const selectRecentlyViewedFunds = (state) =>
+  state.mutualFund.recentlyViewedFunds;
 
 export default mutualFundSlice.reducer;

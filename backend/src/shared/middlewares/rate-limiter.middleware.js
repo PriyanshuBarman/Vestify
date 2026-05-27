@@ -1,7 +1,7 @@
 import rateLimit from "express-rate-limit";
 
 const createLimiter = ({
-  max = 7,
+  max = 10,
   windowMs = 15 * 60 * 1000, // 15 min
   skipSuccessfulRequests = false,
   skipFailedRequests = false,
@@ -22,8 +22,8 @@ const createLimiter = ({
   });
 };
 
-export const globalLimiter = createLimiter({ max: 200 });
-export const refreshTokenLimiter = createLimiter({ max: 10 });
+export const globalLimiter = createLimiter({ max: 1000 });
+export const refreshTokenLimiter = createLimiter();
 export const forgotPasswordLimiter = createLimiter();
 
 export const loginLimiter = createLimiter({
@@ -45,7 +45,7 @@ export const validatePinLimiter = createLimiter({
 export const avatarUploadLimiter = createLimiter({
   windowMs: 24 * 60 * 60 * 1000,
   skipFailedRequests: true,
-  message: "Avatar upload limit reached: max 7 uploads per day.",
+  message: "Avatar upload limit reached: max 10 uploads per day.",
 });
 export const signUpLimiter = createLimiter({
   windowMs: 24 * 60 * 60 * 1000,

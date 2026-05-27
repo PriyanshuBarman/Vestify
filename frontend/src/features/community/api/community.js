@@ -1,8 +1,12 @@
 import { api } from "@/lib/axios";
 
-export const fetchUsers = async ({ pageParam = 0, LIMIT = 20 } = {}) => {
+export const fetchUsers = async ({
+  pageParam = 0,
+  LIMIT = 20,
+  sortBy,
+} = {}) => {
   const { data } = await api.get(`/community/users`, {
-    params: { offset: pageParam, limit: LIMIT },
+    params: { offset: pageParam, limit: LIMIT, sortBy },
   });
   return data;
 };

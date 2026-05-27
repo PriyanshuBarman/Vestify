@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { ChevronsUpDown } from "lucide-react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import FundRating from "@/features/mutual-fund/components/FundRating";
+import { selectRecentlyViewedFunds } from "@/store/slices/mutualFundSlice";
 
-import { useRecentlyViewedFunds } from "../hooks/useRecentlyViewedFunds";
 import CardLG from "./CardLG";
 import FundLogo from "./FundLogo";
 
@@ -21,7 +22,8 @@ const labelArr = [
 function RecentlyViewedFunds() {
   const isMobile = useIsMobile();
   const [activeLabelIdx, setActiveLabelIdx] = useState(0);
-  const funds = useRecentlyViewedFunds(isMobile ? 5 : 4, false);
+  const recentlyViewedFunds = useSelector(selectRecentlyViewedFunds);
+  const funds = recentlyViewedFunds.slice(1, 5);
 
   // Loop ♾️
   const handleClick = () => {
@@ -56,13 +58,13 @@ function RecentlyViewedFunds() {
           {funds?.map((fund) =>
             isMobile ? (
               <Row
-                key={fund.id}
+                key={fund.scheme_code}
                 fund={fund}
                 activeLabelIdx={activeLabelIdx}
                 handleChange={handleClick}
               />
             ) : (
-              <CardLG key={fund.id} fund={fund} />
+              <CardLG key={fund.scheme_code} fund={fund} />
             ),
           )}
         </div>

@@ -6,6 +6,6 @@ export function useGetSearchResults(query, type) {
   return useQuery({
     queryKey: ["search", query, type],
     queryFn: () => fetchSearchResults(query, type),
-    enabled: query?.length > 2,
+    enabled: query?.length > 1,
   });
 }

@@ -11,21 +11,29 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import communityReducer from "./slices/communitySlice";
 import mutualFundReducer from "./slices/mutualFundSlice";
 import searchReducer from "./slices/searchSlice";
 import themeRedurcer from "./slices/themeSlice";
 
+const mutualFundPersistConfig = {
+  key: "mutualFund",
+  version: 1,
+  storage,
+  whitelist: ["recentlyViewedFunds"],
+};
+
 const rootReducer = combineReducers({
   theme: themeRedurcer,
   search: searchReducer,
-  mutualFund: mutualFundReducer,
+  mutualFund: persistReducer(mutualFundPersistConfig, mutualFundReducer),
+  community: communityReducer,
 });
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  blacklist: ["mutualFund"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

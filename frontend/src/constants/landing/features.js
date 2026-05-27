@@ -11,7 +11,7 @@ export const features = [
   {
     title: "Virtually Invest in Mutual Funds",
     description:
-      "Browse hundreds of real mutual funds and invest your virtual balance.",
+      "Browse thousands of mutual funds and invest with your virtual balance.",
     icon: TrendingUp,
     span: "col-span-12 md:col-span-8",
     isFill: true,
@@ -43,7 +43,8 @@ export const features = [
   },
   {
     title: "Community Portfolios",
-    description: "See how other virtual investors are allocating their funds.",
+    description:
+      "See how other investors are performing, their investment activity & portfolio allocation.",
     icon: Users,
     span: "col-span-12 md:col-span-4",
     isFill: false,

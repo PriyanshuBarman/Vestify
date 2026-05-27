@@ -2,13 +2,13 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { fetchUsers } from "../api/community";
 
-export function useGetUsers() {
+export function useGetUsers({ sortBy = "updatedAt" } = {}) {
   const LIMIT = 20;
 
   return useInfiniteQuery({
-    queryKey: ["community", "users"],
+    queryKey: ["community", "users", sortBy],
     queryFn: ({ pageParam = 0 }) => {
-      return fetchUsers({ pageParam, LIMIT });
+      return fetchUsers({ pageParam, LIMIT, sortBy });
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {

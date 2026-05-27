@@ -2,12 +2,18 @@ import db from "#config/db.config.js";
 import { ApiError } from "#shared/utils/api-error.utils.js";
 import { formatData } from "../utils/format.utils.js";
 
-export const getUsers = async ({ skip = 0, take = 20 }) => {
+export const getUsers = async ({ skip = 0, take = 20, sortBy }) => {
   const totalCount = await db.user.count({
     where: { id: { not: "system" } },
   });
 
-  // 1. Fetch paginated users with only required fields
+  const allowedSortFields = new Set(["createdAt", "updatedAt", "name"]);
+  const sortField = allowedSortFields.has(sortBy) ? sortBy : "createdAt";
+  const orderBy =
+    sortField === "name"
+      ? [{ profile: { name: "asc" } }, { id: "asc" }]
+      : [{ [sortField]: "desc" }, { id: "asc" }];
+
   const users = await db.user.findMany({
     where: {
       id: { not: "system" },
@@ -16,6 +22,8 @@ export const getUsers = async ({ skip = 0, take = 20 }) => {
     take,
     select: {
       id: true,
+      balance: true,
+      createdAt: true,
       profile: {
         select: {
           name: true,
@@ -44,18 +52,14 @@ export const getUsers = async ({ skip = 0, take = 20 }) => {
         },
       },
     },
-    orderBy: [{ mfPortfolio: { _count: "desc" } }, { id: "asc" }],
+    orderBy,
   });
 
   if (!users.length) {
     return { users: [], totalCount };
   }
 
-  // 3. Merge user and portfolio data
   const mergedUsers = users.map(formatData);
-
-  // 4. Sort users by total invested amount
-  mergedUsers.sort((a, b) => b.portfolio.invested - a.portfolio.invested);
 
   return {
     users: mergedUsers,

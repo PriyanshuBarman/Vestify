@@ -1,23 +1,27 @@
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemMedia,
+} from "@/components/ui/item";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function UserPreviewCardSkeleton() {
   return (
-    <div className="bg-card rounded-4xl border">
-      <div className="flex items-center gap-4 p-4 sm:gap-5 sm:p-5">
-        {/* Avatar skeleton */}
+    <Item variant="outline" className="rounded-3xl">
+      <ItemMedia>
         <Skeleton className="size-11 rounded-full sm:size-12" />
+      </ItemMedia>
 
-        <div className="flex-1 space-y-2">
-          {/* Name skeleton */}
-          <Skeleton className="h-5 w-32" />
-          {/* Username skeleton */}
-          <Skeleton className="h-3.5 w-24" />
-        </div>
-        <Skeleton className="h-5 w-20" />
-      </div>
+      <ItemContent className="gap-2">
+        <Skeleton className="h-5 w-32" />
+        <Skeleton className="h-3.5 w-24" />
+      </ItemContent>
 
-      <Skeleton className="bg-accent/80 mx-2 mb-2 h-15 rounded-3xl" />
-    </div>
+      <ItemActions>
+        <Skeleton className="h-5 w-8" />
+      </ItemActions>
+    </Item>
   );
 }
 

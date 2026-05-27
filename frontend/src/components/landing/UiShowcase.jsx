@@ -23,9 +23,8 @@ function UiShowcase() {
           viewport={{ once: true }}
           className="text-muted-foreground mt-4 mb-12 max-w-2xl text-base md:text-lg"
         >
-          Featuring{" "}
-          <span className="text-landing italic">Groww App inspired UI</span> for
-          realistic investing experience.
+          Featuring <span className="text-landing italic">Groww app </span>{" "}
+          inspired UI for realistic investing experience.
         </motion.p>
       </div>
 

@@ -1,11 +1,14 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
-import { useRecentlyViewedFunds } from "../../hooks/useRecentlyViewedFunds";
+import { selectRecentlyViewedFunds } from "@/store/slices/mutualFundSlice";
+
 import FundLogo from "../FundLogo";
 import SectionHeading from "../SectionHeading";
 
 function RecentlyViewedSection() {
-  const funds = useRecentlyViewedFunds();
+  const recentlyViewedFunds = useSelector(selectRecentlyViewedFunds);
+  const funds = recentlyViewedFunds.slice(0, 4);
 
   if (!funds.length) return null;
 

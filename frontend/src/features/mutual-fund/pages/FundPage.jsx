@@ -1,5 +1,5 @@
-import { lazy } from "react";
-import { Bookmark, LockKeyholeIcon, Search } from "lucide-react";
+import { lazy, useEffect } from "react";
+import { BookmarkIcon, LockKeyholeIcon, SearchIcon } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 
@@ -7,17 +7,18 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import GoBackBar from "@/components/GoBackBar";
+import { setRecentlyViewedFunds } from "@/store/slices/mutualFundSlice";
 import { setIsSearchOpen } from "@/store/slices/searchSlice";
 
-import FundPageAccordions from "../components/accordions/FundPageAccordions.jsx";
+import FundPageAccordions from "../components/accordions/FundPageAccordions";
 import Chart from "../components/charts/Chart";
 import FundDescription from "../components/FundDescription";
 import FundLogo from "../components/FundLogo";
-import { useAddFundToWatchlist } from "../hooks/useAddFundToWatchlist.js";
+import { useAddFundToWatchlist } from "../hooks/useAddFundToWatchlist";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
 import { useGetIsInWatchlist } from "../hooks/useGetIsInWatchlist";
-import { useRemoveFundFromWatchlist } from "../hooks/useRemoveFundFromWatchlist.js";
+import { useRemoveFundFromWatchlist } from "../hooks/useRemoveFundFromWatchlist";
 import { formatFundCategory } from "../utils/formaters";
 
 const FundPortfolioPreview = lazy(
@@ -43,6 +44,10 @@ function FundPage() {
 
   const { mutate: addToWatchlist } = useAddFundToWatchlist();
   const { mutate: removeFromWatchlist } = useRemoveFundFromWatchlist();
+
+  useEffect(() => {
+    dispatch(setRecentlyViewedFunds(fund));
+  }, [dispatch, fund]);
 
   const handleWatchlistClick = () => {
     if (isInWatchlist) {
@@ -80,7 +85,7 @@ function FundPage() {
                 variant="ghost"
                 className="bg-accent rounded-full p-5 sm:bg-transparent sm:p-6"
               >
-                <Search className="size-5 sm:size-6" />
+                <SearchIcon className="size-5 sm:size-6" />
               </Button>
 
               <Button
@@ -90,7 +95,7 @@ function FundPage() {
                 variant="ghost"
                 className={`bg-accent rounded-full p-5 sm:bg-transparent sm:p-6 ${isInWatchlist && "bg-primary/10!"}`}
               >
-                <Bookmark
+                <BookmarkIcon
                   className={`${isInWatchlist && "fill-primary text-primary stroke-primary"} size-5 sm:size-6`}
                 />
               </Button>

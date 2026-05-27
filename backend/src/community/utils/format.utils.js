@@ -17,7 +17,9 @@ export const formatData = (user) => {
     name: user.profile?.name ?? "Unknown User",
     username: user.profile?.username ?? "user",
     avatar: user.profile?.avatar ?? null,
+    balance: Number(user.balance ?? 0),
     lastActiveAt: user.sessions[0]?.updatedAt ?? user.updatedAt,
+    createdAt: user.createdAt,
     portfolio: {
       invested: totalInvested,
       current: currentValue,

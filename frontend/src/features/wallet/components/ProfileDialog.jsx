@@ -17,6 +17,12 @@ function ProfileDialog({ isOpen, onOpenChange, clickedProfile }) {
   const navigate = useNavigate();
   const { data: user } = useGetUser();
 
+  const handleAvatarClick = () => {
+    if (!clickedProfile?.username) return;
+    navigate(`/community/${clickedProfile.username}`);
+    onOpenChange(false);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -25,7 +31,19 @@ function ProfileDialog({ isOpen, onOpenChange, clickedProfile }) {
         </DialogHeader>
 
         <div className="flex flex-col items-center space-y-4">
-          <div className="relative">
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={handleAvatarClick}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleAvatarClick();
+              }
+            }}
+            className="relative rounded-full"
+            aria-label="View user's profile"
+          >
             <Avatar className="size-20">
               <AvatarImage
                 src={clickedProfile?.avatar}

@@ -35,17 +35,17 @@ function SipsTab({ username }) {
       <section className={cn("w-full", !isOtherUserProfile && "lg:w-1/2")}>
         {/* Title / Heading */}
         <div>
-          <div>
-            <span className="text-muted-foreground text-xs sm:text-sm">
-              Monthly SIP amount
+          <div className=" border dark:bg-muted/80 rounded-[1.25rem] py-3 px-4">
+            <span className="text-foreground/70 dark:text-muted-foreground font-medium  tracking-wider text-[0.65rem] sm:text-2xs">
+              MONTHLY SIP AMOUNT
             </span>
-            <h2 className="text-2xl leading-tight font-semibold tabular-nums sm:mt-2">
+            <h2 className="text-xl sm:text-2xl leading-tight font-semibold tabular-nums mt-1">
               {formatToINR(data?.totalActiveSipAmount, 2)}
             </h2>
           </div>
 
-          <div className="mt-6 flex justify-between">
-            <h2 className="text-sm font-medium sm:text-lg">
+          <div className="mt-8 flex justify-between">
+            <h2 className="text-md font-medium sm:text-lg">
               Active SIPs ({data?.sips?.length})
             </h2>
           </div>
@@ -111,10 +111,10 @@ function SipItem({ sip, index, length, username, isOtherUserProfile }) {
             />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle className="line-clamp-2 text-sm leading-tight font-[450] text-wrap">
+            <ItemTitle className="line-clamp-2 leading-tight font-[450] text-wrap">
               {sip.fundShortName}
             </ItemTitle>
-            <ItemDescription className="flex items-center gap-4 text-sm font-medium">
+            <ItemDescription className="flex items-center gap-4 text-sm font-[450]">
               {formatToINR(sip.amount, 2)}
 
               {dueWithinDays < 5 && !isOtherUserProfile && (

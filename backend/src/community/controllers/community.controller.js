@@ -5,10 +5,11 @@ import * as watchlistService from "../../mutual-fund/services/watchlist.service.
 import * as communityService from "../services/community.service.js";
 
 export const getUsers = async (req, res) => {
-  const { offset = 0, limit = 20 } = req.query;
+  const { offset = 0, limit = 20, sortBy = "updatedAt" } = req.query;
   const { users, totalCount } = await communityService.getUsers({
     skip: Number(offset),
     take: Number(limit),
+    sortBy,
   });
   return res.status(200).json({ success: true, users, totalCount });
 };

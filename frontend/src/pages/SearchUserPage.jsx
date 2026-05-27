@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
-import { SearchIcon, XIcon } from "lucide-react";
+import { HistoryIcon, SearchIcon, Trash2Icon, XIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 import { useDebounce } from "@/hooks/useDebounce";
+import { useGetUser } from "@/hooks/useGetUser";
 import { useSearchProfile } from "@/hooks/useSearchProfile";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Item,
@@ -16,6 +19,11 @@ import {
 } from "@/components/ui/item";
 import { Spinner } from "@/components/ui/spinner";
 import GoBackBar from "@/components/GoBackBar";
+import UserAvatar from "@/components/UserAvatar";
+import {
+  addUserSearchHistory,
+  clearUserSearchHistory,
+} from "@/store/slices/searchSlice";
 import { getNavigationConfig } from "@/utils/searchUserProfile";
 
 function SearchUserPage() {
@@ -26,11 +34,24 @@ function SearchUserPage() {
   const location = useLocation();
   // Get mode from location state - "send-money" or "community" (default)
   const mode = location.state?.mode || "community";
+  const userSearchHistory =
+    useSelector((state) => state.search.userSearchHistory) || [];
+  const { data: user } = useGetUser();
+  const dispatch = useDispatch();
 
   const { data: searchResult, isLoading } = useSearchProfile(debouncedQuery);
 
+  const isSelf = (userId) => {
+    return userId === user.id;
+  };
+
   const handleResultClick = (profile) => {
+    if (isSelf(profile?.userId) && mode === "send-money") {
+      return toast.info("You can't pay yourself");
+    }
+
     const navConfig = getNavigationConfig(mode, profile);
+    dispatch(addUserSearchHistory({ profile }));
     navigate(navConfig.pathname, { state: navConfig.state });
   };
 
@@ -48,7 +69,7 @@ function SearchUserPage() {
           ref={inputRef}
           type="search"
           placeholder="Search by name or username"
-          className="sm:!text-md sm:placeholder:text-md rounded-xl pl-10 text-sm sm:py-6 sm:pl-14"
+          className="sm:!text-md h-10 sm:placeholder:text-md rounded-xl pl-10 text-sm sm:py-6  sm:pl-14"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           autoFocus
@@ -65,7 +86,7 @@ function SearchUserPage() {
             {isLoading ? (
               <Spinner className="text-primary" />
             ) : (
-              <XIcon size={20} />
+              <XIcon size={16} />
             )}
           </button>
         )}
@@ -79,15 +100,10 @@ function SearchUserPage() {
                 <Item
                   onClick={() => handleResultClick(profile)}
                   key={profile.userId}
-                  className="hover:bg-accent/50 cursor-pointer transition-colors duration-100"
+                  className="hover:bg-accent/50"
                 >
                   <ItemMedia variant="image">
-                    <Avatar className="size-10">
-                      <AvatarImage src={profile.avatar} />
-                      <AvatarFallback className="uppercase">
-                        {profile?.name?.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
+                    <UserAvatar user={profile} />
                   </ItemMedia>
                   <ItemContent className="gap-0">
                     <ItemTitle className="capitalize">{profile.name}</ItemTitle>
@@ -97,13 +113,43 @@ function SearchUserPage() {
               );
             })}
           </ItemGroup>
-        ) : (
-          query && (
-            <div className="text-muted-foreground text-center">
-              <p className="text-sm">No users found</p>
+        ) : query ? (
+          <div className="text-muted-foreground text-center">
+            <p className="text-sm">No users found</p>
+          </div>
+        ) : userSearchHistory.length > 0 ? (
+          <ItemGroup>
+            <div className="flex items-center justify-end px-2 pb-2">
+              <Button
+                variant="outline"
+                size="icon-sm"
+                onClick={() => dispatch(clearUserSearchHistory())}
+              >
+                <Trash2Icon />
+              </Button>
             </div>
-          )
-        )}
+            {userSearchHistory.map((profile) => {
+              return (
+                <Item
+                  onClick={() => handleResultClick(profile)}
+                  key={profile.userId}
+                  className="hover:bg-accent/50 cursor-pointer transition-colors duration-100"
+                >
+                  <ItemMedia variant="image">
+                    <UserAvatar user={profile} />
+                  </ItemMedia>
+                  <ItemContent className="gap-0">
+                    <ItemTitle className="capitalize">{profile.name}</ItemTitle>
+                    <ItemDescription>@{profile.username}</ItemDescription>
+                  </ItemContent>
+                  <div className="ml-auto text-muted-foreground">
+                    <HistoryIcon className="size-5" />
+                  </div>
+                </Item>
+              );
+            })}
+          </ItemGroup>
+        ) : null}
       </div>
     </div>
   );

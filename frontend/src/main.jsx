@@ -5,14 +5,14 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import App from "./App.jsx";
-import ThemeProvider from "./components/ThemeProvider.jsx";
-import { initGA } from "./lib/analytics.js";
+import App from "./App";
+import ThemeProvider from "./components/ThemeProvider";
+import { initGA } from "./lib/analytics";
 
 import "./index.css";
 
-import { persister, queryClient } from "./lib/tanstackQuery.js";
-import { persistor, store } from "./store/store.js";
+import { persister, queryClient } from "./lib/tanstackQuery";
+import { persistor, store } from "./store/store";
 
 initGA();
 
