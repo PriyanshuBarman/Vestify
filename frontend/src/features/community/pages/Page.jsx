@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { useUserCount } from "@/hooks/useGetUserCount";
+import { useGetUserCount } from "@/hooks/useGetUserCount";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,7 +45,7 @@ function Page() {
     isFetchingNextPage,
     isPending: isListPending,
   } = useGetUsers({ sortBy });
-  const { data: totalUsersCount } = useUserCount();
+  const { data: totalUsersCount } = useGetUserCount();
 
   const { data: searchData, isPending: isSearchPending } =
     useSearchUser(search);
@@ -160,7 +160,7 @@ function Page() {
           <div className="space-y-4 pt-6 pb-8 sm:mr-4">
             {isPending ? (
               <>
-                {Array.from({ length: 4 }).map((_, index) => (
+                {Array.from({ length: 6 }).map((_, index) => (
                   <UserPreviewCardSkeleton key={index} />
                 ))}
               </>

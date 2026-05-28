@@ -113,7 +113,7 @@ function SearchUserPage() {
               );
             })}
           </ItemGroup>
-        ) : query ? (
+        ) : debouncedQuery ? (
           <div className="text-muted-foreground text-center">
             <p className="text-sm">No users found</p>
           </div>

@@ -18,7 +18,7 @@ import {
 import SendIcon from "@/components/icons/SendIcon";
 import UserAvatar from "@/components/UserAvatar";
 import ProfileDialog from "@/features/wallet/components/ProfileDialog";
-import { formatShortINR } from "@/utils/formatters";
+import { formatToShortINR } from "@/utils/formatters";
 
 function UserPreviewCard({ user, isExpanded, onToggle }) {
   const isMobile = useIsMobile();
@@ -80,7 +80,7 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
                     Invested :
                   </span>
                   <span className="font-[450]">
-                    {formatShortINR(user.portfolio.invested)}
+                    {formatToShortINR(user.portfolio.invested)}
                   </span>
                 </div>
 
@@ -89,7 +89,7 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
                     Current :
                   </span>
                   <span className="font-[450]">
-                    {formatShortINR(user.portfolio.current)}
+                    {formatToShortINR(user.portfolio.current)}
                   </span>
                 </div>
 
@@ -97,7 +97,7 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
                   <span className="text-muted-foreground sm:text-sm text-2xs">
                     P/L :
                   </span>
-                  <span className="font-[450]">{formatShortINR(profit)}</span>
+                  <span className="font-[450]">{formatToShortINR(profit)}</span>
                 </div>
 
                 <div className="flex flex-wrap gap-2">

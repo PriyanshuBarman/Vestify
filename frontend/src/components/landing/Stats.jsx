@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 
-import { useUserCount } from "@/hooks/useGetUserCount";
+import { useGetUserCount } from "@/hooks/useGetUserCount";
 import { amcs } from "@/constants/amc";
 import FundLogo from "@/features/mutual-fund/components/FundLogo";
 
 import { Marquee } from "../ui/marquee";
 
 function Stats() {
-  const { data: userCount = 99 } = useUserCount();
+  const { data: userCount = 100 } = useGetUserCount();
 
   const stats = [
     { value: `${userCount}+`, label: "Users" },

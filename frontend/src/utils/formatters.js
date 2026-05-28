@@ -15,21 +15,23 @@ export const formatToINR = (num, maxFracDigits = 2) => {
   return formatted;
 };
 
-export const formatShortINR = (num) => {
+export const formatToShortINR = (num) => {
   const number = Number(num || 0);
   if (isNaN(number) || number === 0) return "₹0";
 
   if (number >= 10000000) {
-    return `${(number / 10000000).toFixed(1).replace(/\.0$/, "")} Cr`;
+    return `₹${(number / 10000000).toFixed(1).replace(/\.0$/, "")} Cr`;
   }
   if (number >= 100000) {
-    return `${(number / 100000).toFixed(1).replace(/\.0$/, "")} Lakh`;
+    return `₹${(number / 100000).toFixed(1).replace(/\.0$/, "")} Lakh`;
   }
   if (number >= 1000) {
-    return `${(number / 1000).toFixed(1).replace(/\.0$/, "")}k`;
+    return `₹${(number / 1000).toFixed(1).replace(/\.0$/, "")}k`;
   }
 
-  return number.toFixed(1);
+  return number > 0
+    ? `₹${number.toFixed(1)}`
+    : `-₹${Math.abs(number.toFixed(1))}`;
 };
 
 export const sanitizeAmount = (value) => {

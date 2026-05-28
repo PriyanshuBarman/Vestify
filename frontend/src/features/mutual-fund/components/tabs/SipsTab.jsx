@@ -36,7 +36,7 @@ function SipsTab({ username }) {
         {/* Title / Heading */}
         <div>
           <div className=" border dark:bg-muted/80 rounded-[1.25rem] py-3 px-4">
-            <span className="text-foreground/70 dark:text-muted-foreground font-medium  tracking-wider text-[0.65rem] sm:text-2xs">
+            <span className="text-foreground/70 dark:text-muted-foreground font-medium  tracking-wider text-[0.625rem] sm:text-[0.65rem]">
               MONTHLY SIP AMOUNT
             </span>
             <h2 className="text-xl sm:text-2xl leading-tight font-semibold tabular-nums mt-1">
