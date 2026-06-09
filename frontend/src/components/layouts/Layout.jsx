@@ -9,6 +9,7 @@ import ErrorPage from "@/pages/ErrorPage";
 
 import ScrollToTop from "./ScrollToTop";
 
+const AnnouncementBanner = lazy(() => import("../AnnouncementBanner"));
 const DailyRewardModal = lazy(() => import("./DailyRewardModal"));
 const BottomNavbar = lazy(() => import("./BottomNavbar"));
 const Navbar = lazy(() => import("./Navbar"));
@@ -30,8 +31,9 @@ function Layout() {
 
   return (
     <ErrorBoundary fallback={<ErrorPage />}>
+      <AnnouncementBanner />
+      <Navbar />
       <div className="mx-auto max-w-[1300px]">
-        <Navbar />
         <Outlet />
       </div>
       <ScrollToTop />

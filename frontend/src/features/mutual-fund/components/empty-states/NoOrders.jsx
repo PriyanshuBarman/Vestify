@@ -34,9 +34,11 @@ function NoOrders({ isOtherUserProfile }) {
           )}
         </EmptyHeader>
         <EmptyContent>
-          <Button asChild className="rounded-full text-xs font-normal">
-            <Link to="/mutual-funds/all-funds">Explore Funds</Link>
-          </Button>
+          {!isOtherUserProfile && (
+            <Button asChild className="rounded-full text-xs font-normal">
+              <Link to="/mutual-funds/all-funds">Explore Funds</Link>
+            </Button>
+          )}
         </EmptyContent>
       </Empty>
     </div>

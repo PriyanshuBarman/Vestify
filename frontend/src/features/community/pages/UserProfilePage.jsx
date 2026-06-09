@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import LoadingState from "@/components/LoadingState";
-import { usePrefetchRequiredQueries } from "@/features/mutual-fund/hooks/usePrefetchRequiredQueries";
 
 import "swiper/css";
 
@@ -27,8 +26,6 @@ function UserProfilePage() {
   const [swiper, setSwiper] = useState(null);
 
   const { data: profile } = useUserProfile(username);
-
-  usePrefetchRequiredQueries(username);
 
   return (
     <div className="sm:mx-auto sm:max-w-6xl">

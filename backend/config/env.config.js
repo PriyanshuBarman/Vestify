@@ -4,7 +4,10 @@ const envSchema = z.object({
   // App
   NODE_ENV: z.enum(["production", "development", "cron"]),
   DATABASE_URL: z.url(),
-  FRONTEND_URL: z.url(),
+  FRONTEND_URL: z
+    .string()
+    .transform((value) => value.split(",").map((url) => url.trim()))
+    .pipe(z.array(z.url()).min(1)),
   DAILY_REWARD_AMOUNT: z.coerce.number(),
   REFERRER_REWARD_AMOUNT: z.coerce.number(),
   REFERRED_USER_REWARD_AMOUNT: z.coerce.number(),

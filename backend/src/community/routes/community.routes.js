@@ -1,27 +1,37 @@
+import { authenticate } from "#shared/middlewares/auth.middleware.js";
 import { Router } from "express";
 import * as communityController from "../controllers/community.controller.js";
-import { authenticate } from "#shared/middlewares/auth.middleware.js";
 
-const router = Router();
+export const communityRoutes = Router();
 
-router.use(authenticate);
+communityRoutes.use(authenticate);
 
-router.get("/users", communityController.getUsers);
-router.get("/search", communityController.searchUsers);
-router.get("/users/:username", communityController.getUserProfile);
-router.get("/users/:username/portfolio", communityController.getPortfolio);
-router.get(
+communityRoutes.get("/users", communityController.getUsers);
+communityRoutes.get("/search", communityController.searchUsers);
+communityRoutes.get("/users/:username", communityController.getUserProfile);
+communityRoutes.get(
+  "/users/:username/portfolio",
+  communityController.getPortfolio,
+);
+communityRoutes.get(
   "/users/:username/portfolio/summary",
   communityController.getPortfolioSummary,
 );
-router.get(
+communityRoutes.get(
   "/users/:username/portfolio/:schemeCode/orders",
   communityController.getFundOrders,
 );
-router.get("/users/:username/orders", communityController.getAllOrders);
-router.get("/orders/:orderId", communityController.getOrderDetail);
-router.get("/users/:username/sips", communityController.getSips);
-router.get("/users/:username/sips/:sipId", communityController.getSipDetail);
-router.get("/users/:username/watchlist", communityController.getWatchlist);
-
-export const communityRoutes = router;
+communityRoutes.get(
+  "/users/:username/orders",
+  communityController.getAllOrders,
+);
+communityRoutes.get("/orders/:orderId", communityController.getOrderDetail);
+communityRoutes.get("/users/:username/sips", communityController.getSips);
+communityRoutes.get(
+  "/users/:username/sips/:sipId",
+  communityController.getSipDetail,
+);
+communityRoutes.get(
+  "/users/:username/watchlist",
+  communityController.getWatchlist,
+);

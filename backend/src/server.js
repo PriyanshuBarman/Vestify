@@ -14,6 +14,7 @@ import { errorHandler } from "./shared/middlewares/error.middleware.js";
 import { notFoundHandler } from "./shared/middlewares/not-found.middleware.js";
 import { globalLimiter } from "#shared/middlewares/rate-limiter.middleware.js";
 import { landingRoutes } from "./landing/routes/landing.routes.js";
+import { announcementRoutes } from "./announcement/routes/announcement.routes.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/api/v1/mutual-funds", mutualFundRoutes);
 app.use("/api/v1/events", eventRoutes);
 app.use("/api/v1/community", communityRoutes);
 app.use("/api/v1/landing", landingRoutes);
+app.use("/api/v1", announcementRoutes);
 
 app.use("/healthz", (req, res) => {
   res.status(200).json({ message: "ok" });

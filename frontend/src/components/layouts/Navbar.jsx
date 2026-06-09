@@ -33,7 +33,10 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-background z-50 flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:pt-4 sm:pb-6">
+    <nav
+      className="bg-background z-50 max-w-[1300px]  mx-auto
+     flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:pt-4 sm:pb-6"
+    >
       <div className="flex items-center gap-2 sm:gap-4">
         <Link
           to="mutual-funds#explore"
