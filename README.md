@@ -209,7 +209,7 @@ Vestify/
 
 ## How Vestify Works
 
-To learn how Vestify works, please visit the "How Vestify Works?" section on our [About Page](https://www.vestiffy.vercel.app/about).
+To learn how Vestify works, please visit the "How Vestify Works?" section on our [About Page](https://www.vestify.priyanshux.me/about).
 
 ## Roadmap
 
@@ -227,7 +227,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- **Website**: [https://vestiffy.vercel.app](https://vestiffy.vercel.app)
+- **Website**: [https://vestify.priyanshux.me](https://vestify.priyanshux.me)
 - **Reddit Comunity**: [r/Vestify](https://reddit.com/r/Vestify)
 - **GitHub**: [Vestify](https://github.com/PriyanshuBarman/Vestify)
 

@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.vestiffy.vercel.app/sitemap.xml
+Sitemap: https://www.vestify.priyanshux.me/sitemap.xml
