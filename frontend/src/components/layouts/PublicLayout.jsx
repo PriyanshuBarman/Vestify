@@ -3,7 +3,6 @@ import { Outlet } from "react-router";
 
 import ErrorPage from "@/pages/ErrorPage";
 
-import AnnouncementBanner from "../AnnouncementBanner";
 import Footer from "../Footer";
 import NavbarPublic from "./NavbarPublic";
 import ScrollToTop from "./ScrollToTop";
@@ -11,7 +10,6 @@ import ScrollToTop from "./ScrollToTop";
 function PublicLayout() {
   return (
     <ErrorBoundary fallback={<ErrorPage />}>
-      <AnnouncementBanner />
       <NavbarPublic />
       <Outlet />
       <Footer className="mt-20 border-transparent sm:mt-34" />

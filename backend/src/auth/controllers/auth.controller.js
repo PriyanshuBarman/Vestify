@@ -7,7 +7,6 @@ import {
 } from "../constants/auth.constants.js";
 
 export const signup = async (req, res) => {
-  console.log("working");
   const { name, email, password, referralCode } = req.body;
   const userAgent = req.headers["user-agent"];
   const ip = req.clientIp;
