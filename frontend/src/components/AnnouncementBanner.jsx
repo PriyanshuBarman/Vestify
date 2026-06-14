@@ -1,5 +1,5 @@
 import { ArrowRightIcon, XIcon } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { useDismisAnnouncement } from "@/hooks/useDismisAnnouncement";
 import { useGetAnnouncements } from "@/hooks/useGetAnnouncements";
@@ -7,8 +7,14 @@ import { Button } from "@/components/ui/button";
 
 function AnnouncementBanner() {
   const { data: announcements, isPending } = useGetAnnouncements();
+  const location = useLocation();
 
-  if (isPending) return null;
+  if (
+    isPending ||
+    (location.pathname !== "mutual-funds" && location.hash !== "#explore")
+  ) {
+    return null;
+  }
 
   return (
     <div className="space-y-2">

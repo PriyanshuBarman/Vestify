@@ -24,7 +24,7 @@ function NavbarPublic() {
   const isMobile = useIsMobile();
 
   return (
-    <nav className="font-poppins sticky mx-auto top-0 z-50 flex w-full max-w-7xl items-center justify-between gap-8 mask-b-from-70% px-4 py-4 backdrop-blur-xs sm:p-4 sm:px-6 md:px-8">
+    <nav className="font-poppins fixed top-0 left-1/2 z-50 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between gap-8 mask-b-from-70% px-4 py-4 backdrop-blur-xs sm:p-4 sm:px-6 md:px-8">
       <Link to="/" className="flex items-center justify-center gap-2 sm:gap-4">
         <Logo className="size-8" />
         <span className="font-medium sm:text-2xl">Vestify</span>
