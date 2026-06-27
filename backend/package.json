@@ -3,24 +3,21 @@
   "version": "0.0.0",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write \"**/*.{js,jsx,md,mdx}\" --cache",
-    "format:check": "prettier --check \"**/*.{js,jsx,md,mdx}\" --cache",
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "apply-sip-changes": "node scripts/tasks/apply-sip-changes.js",
-    "place-sip-installment-orders": "node scripts/tasks/place-sip-installment-orders.js",
-    "process-orders": "node scripts/tasks/process-orders.js",
-    "process-step-up-sips": "node scripts/tasks/process-step-up-sips.js",
-    "update-portfolios": "node scripts/tasks/update-portfolios.js"
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx}\" --cache",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,md,mdx}\" --cache",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/src/server.js",
+    "check-types": "tsc --noEmit",
+    "apply-sip-changes": "tsx scripts/tasks/apply-sip-changes.ts",
+    "place-sip-installment-orders": "tsx scripts/tasks/place-sip-installment-orders.ts",
+    "process-orders": "tsx scripts/tasks/process-orders.ts",
+    "process-step-up-sips": "tsx scripts/tasks/process-step-up-sips.ts",
+    "update-portfolios": "tsx scripts/tasks/update-portfolios.ts"
   },
   "type": "module",
-  "imports": {
-    "#shared/*": "./src/shared/*",
-    "#config/*": "./config/*"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -28,6 +25,7 @@
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
     "@prisma/client": "^6.17.0",
+    "@types/multer": "^2.1.0",
     "axios": "^1.8.1",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.7.0",
@@ -48,13 +46,23 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.0.1",
+    "@types/request-ip": "^0.0.41",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-unicorn": "^63.0.0",
     "eslint-plugin-unused-imports": "^4.4.1",
     "globals": "^17.4.0",
-    "nodemon": "^3.1.10",
     "prettier": "3.8.1",
-    "prisma": "^6.17.0"
+    "prisma": "^6.17.0",
+    "tsc-alias": "^1.8.17",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.0"
   }
 }

@@ -1,0 +1,20 @@
+import { Router } from "express";
+import { authenticate } from "../middlewares/auth.middleware.js";
+import { addClient } from "./event-manager.js";
+import type { Request, Response } from "express";
+
+export const eventRoutes = Router();
+
+eventRoutes.get("/", authenticate, (req: Request, res: Response) => {
+  const { userId } = req.user!;
+
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders();
+
+  addClient(userId, res);
+
+  // Initial connection message
+  res.write(`data: ${JSON.stringify({ type: "CONNECTED" })}\n\n`);
+});

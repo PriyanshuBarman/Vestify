@@ -58,7 +58,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
+- Node.js (v24 or higher)
 - MySQL database (local or cloud)
 - Google OAuth credentials
 - npm or yarn
@@ -300,6 +300,7 @@ Vestify/
 │   ├── src/                   # Source code
 │   │   ├── auth/              # Authentication logic and routes
 │   │   ├── community/         # Community features (user profiles, social)
+│   │   ├── announcement/      # Announcement features
 │   │   ├── mutual-fund/       # Mutual fund related features
 │   │   ├── shared/            # Shared utilities and middleware
 │   │   ├── user/              # User management features

@@ -5,7 +5,7 @@ export const signupUser = async ({ name, email, password, referralCode }) => {
     name,
     email,
     password,
-    referralCode,
+    referralCode: referralCode === null ? undefined : referralCode,
   });
   return data?.user;
 };

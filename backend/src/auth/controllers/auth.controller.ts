@@ -1,0 +1,88 @@
+import { envConfig } from "@/config/env.config.js";
+import type { ApiRequest } from "@/shared/types/types.js";
+import { ApiError } from "@/shared/utils/api-error.utils.js";
+import type { Request, Response } from "express";
+
+import {
+  ACCESS_COOKIE_OPTIONS,
+  REFRESH_COOKIE_OPTIONS,
+} from "../constants/auth.constants.js";
+import type { LoginSchema, SignupSchema } from "../schemas/auth.schema.js";
+import * as authService from "../services/auth.service.js";
+
+export const signup = async (req: ApiRequest<SignupSchema>, res: Response) => {
+  const { name, email, password, referralCode } = req.body;
+  const userAgent = req.headers["user-agent"] ?? "unknown";
+  const ip = req.clientIp ?? "unknown";
+
+  const { accessToken, refreshToken, user } = await authService.signupUser({
+    name,
+    email,
+    password,
+    userAgent,
+    ip,
+    referralCode,
+  });
+
+  res
+    .cookie("accessToken", accessToken, ACCESS_COOKIE_OPTIONS)
+    .cookie("refreshToken", refreshToken, REFRESH_COOKIE_OPTIONS)
+    .status(201)
+    .json({ success: true, message: "User Registration Successful", user });
+};
+
+export const login = async (req: ApiRequest<LoginSchema>, res: Response) => {
+  const { email, password } = req.body;
+  const userAgent = req.headers["user-agent"] ?? "unknown";
+  const ip = req.clientIp ?? "unknown";
+
+  const { accessToken, refreshToken, user } = await authService.loginUser({
+    email,
+    password,
+    userAgent,
+    ip,
+  });
+
+  res
+    .cookie("accessToken", accessToken, ACCESS_COOKIE_OPTIONS)
+    .cookie("refreshToken", refreshToken, REFRESH_COOKIE_OPTIONS)
+    .status(200)
+    .json({
+      success: true,
+      message: "User Logged In Successfully",
+      user,
+      refreshToken,
+    });
+};
+
+export const logout = async (req: Request, res: Response) => {
+  const { refreshToken } = req.cookies;
+
+  await authService.logoutUser(refreshToken);
+
+  const options = {
+    httpOnly: true,
+    secure: envConfig.NODE_ENV === "production",
+    sameSite: envConfig.NODE_ENV === "production" ? "none" : "strict",
+  } as const;
+
+  res
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .status(200)
+    .json({ success: true, message: "User Logged Out Successfully" });
+};
+
+export const refreshToken = async (req: Request, res: Response) => {
+  const { refreshToken } = req.cookies;
+
+  if (!refreshToken) throw new ApiError(400, "Refresh token is required");
+
+  const newTokens = await authService.refreshToken(refreshToken);
+
+  res
+    .cookie("accessToken", newTokens.accessToken, ACCESS_COOKIE_OPTIONS)
+    .cookie("refreshToken", newTokens.refreshToken, REFRESH_COOKIE_OPTIONS)
+    .status(200)
+    .json({ success: true, message: "Tokens refreshed successfully" });
+};

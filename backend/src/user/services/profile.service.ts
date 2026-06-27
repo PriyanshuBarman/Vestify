@@ -1,0 +1,22 @@
+import { db } from "@/config/db.config.js";
+import { ApiError } from "@/shared/utils/api-error.utils.js";
+
+export const getProfile = async (userId: string) => {
+  const profile = await db.profile.findUnique({
+    where: { userId },
+  });
+
+  if (!profile) throw new ApiError(404, "Profile not found");
+
+  return profile;
+};
+
+export const searchProfile = async (query: string, limit: number = 8) => {
+  return await db.profile.findMany({
+    where: {
+      userId: { not: "system" },
+      OR: [{ name: { contains: query } }, { username: { contains: query } }],
+    },
+    take: limit,
+  });
+};

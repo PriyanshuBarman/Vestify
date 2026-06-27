@@ -29,7 +29,7 @@ export const createSip = async ({ amount, sipDate, fund, pin }) => {
     fundName: fund.name,
     fundShortName: fund.short_name,
     fundCategory: fund.fund_category,
-    fundType: fund.fund_type,
+    fundType: fund.fund_type.toUpperCase(),
     fundHouseDomain: fund.detail_info,
   });
 

@@ -39,7 +39,7 @@ export const createInvestOrder = async ({ amount, fund, pin }) => {
     schemeCode: fund.scheme_code,
     fundName: fund.name,
     fundShortName: fund.short_name,
-    fundType: fund.fund_type,
+    fundType: fund.fund_type.toUpperCase(),
     fundCategory: fund.fund_category,
     fundHouseDomain: fund.detail_info,
   });
