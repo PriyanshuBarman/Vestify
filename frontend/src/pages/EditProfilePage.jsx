@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 
 import { useGetUser } from "@/hooks/useGetUser";
 import { useUpdateProfile } from "@/hooks/useUpdateProfile";
@@ -9,14 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import GoBackBar from "@/components/GoBackBar";
 
-function EditFieldPage() {
-  const [value, setValue] = useState();
-  const navigate = useNavigate();
+function EditProfilePage() {
+  const [value, setValue] = useState("");
   const { data: user } = useGetUser();
   const { field } = useParams();
   const { mutate, isPending } = useUpdateProfile();
 
-  const isSameValueEntered = value === user?.profile?.[field];
+  const isSameValueEntered = !isPending && value === user?.profile?.[field];
 
   const handleSave = () => {
     if (field === "username") {
@@ -24,7 +23,6 @@ function EditFieldPage() {
     } else {
       mutate({ name: value, username: user?.profile?.username });
     }
-    navigate(-1);
   };
 
   return (
@@ -41,7 +39,7 @@ function EditFieldPage() {
           onChange={(e) => setValue(e.target.value)}
           className="h-11 w-full"
           autoFocus
-          maxlength="40"
+          maxLength="30"
         />
         {isSameValueEntered && (
           <FieldError>This is your current {field}</FieldError>
@@ -60,4 +58,4 @@ function EditFieldPage() {
   );
 }
 
-export default EditFieldPage;
+export default EditProfilePage;

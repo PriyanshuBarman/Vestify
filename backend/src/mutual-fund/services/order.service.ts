@@ -84,7 +84,7 @@ export const placeRedemptionOrder = async ({
   isInstant,
 }: RedemptionOrderSchema & { userId: string; folio: number }) => {
   const fund = await db.mfPortfolio.findUnique({
-    where: { folio: Number(folio) },
+    where: { folio },
   });
 
   if (!fund) {
@@ -113,7 +113,7 @@ export const placeRedemptionOrder = async ({
       fundName: fund.fundName,
       fundShortName: fund.fundShortName,
       fundType: fund.fundType,
-      fundHouseDomain: getDomain(fund.fundHouseDomain)!,
+      fundHouseDomain: fund.fundHouseDomain!,
       method: "REGULAR",
       orderType: "REDEEM",
       amount,

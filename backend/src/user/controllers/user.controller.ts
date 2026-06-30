@@ -2,6 +2,8 @@ import { envConfig } from "@/config/env.config.js";
 import { ApiError } from "@/shared/utils/api-error.utils.js";
 import type { Request, Response } from "express";
 import * as userService from "../services/user.service.js";
+import { type ApiRequest } from "@/shared/types/types.js";
+import { type UpdateProfileSchema } from "../schemas/user.schema.js";
 
 export const getUser = async (req: Request, res: Response) => {
   const { userId } = req.user!;
@@ -35,7 +37,10 @@ export const claimDailyReward = async (req: Request, res: Response) => {
   });
 };
 
-export const updateProfile = async (req: Request, res: Response) => {
+export const updateProfile = async (
+  req: ApiRequest<UpdateProfileSchema>,
+  res: Response,
+) => {
   const { userId } = req.user!;
   const { name, username } = req.body;
 

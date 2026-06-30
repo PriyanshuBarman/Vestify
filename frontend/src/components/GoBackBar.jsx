@@ -15,7 +15,7 @@ function GoBackBar({ title, showSearchIcon = true, className }) {
   return (
     <div
       className={cn(
-        "bg-background sticky top-0 z-10 flex items-center p-4",
+        "bg-background sticky top-0 z-10 flex  items-center p-4",
         className,
       )}
     >
@@ -23,7 +23,7 @@ function GoBackBar({ title, showSearchIcon = true, className }) {
         aria-label="Go back button"
         size="icon-sm"
         onClick={() => navigate(-1)}
-        className="bg-background text-foreground w-fit rounded-full hover:bg-transparent"
+        className="bg-background text-foreground -ml-2 rounded-full hover:bg-transparent"
       >
         <ArrowLeftIcon className="size-6" />
       </Button>

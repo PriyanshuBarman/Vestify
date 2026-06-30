@@ -93,12 +93,22 @@ export const updateProfile = async (
   name: string,
   username: string,
 ) => {
-  const profile = await db.profile.update({
-    where: { userId },
-    data: { name, username },
+  const updatedProfile = await db.$transaction(async (tx) => {
+    const existingProfile = await tx.profile.findUnique({
+      where: { username },
+    });
+
+    if (existingProfile && existingProfile.userId !== userId) {
+      throw new ApiError(400, "Username already exists");
+    }
+
+    return await tx.profile.update({
+      where: { userId },
+      data: { name, username },
+    });
   });
 
-  return profile;
+  return updatedProfile;
 };
 
 export const uploadAvatar = async (

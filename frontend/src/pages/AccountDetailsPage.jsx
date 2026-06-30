@@ -58,7 +58,7 @@ function AccountDetailsPage() {
             <Button
               size="icon"
               variant="ghost"
-              onClick={() => navigate("/edit-field/name")}
+              onClick={() => navigate("/edit-profile/name")}
             >
               <Edit2Icon />
             </Button>
@@ -78,7 +78,7 @@ function AccountDetailsPage() {
             <Button
               size="icon"
               variant="ghost"
-              onClick={() => navigate("/edit-field/username")}
+              onClick={() => navigate("/edit-profile/username")}
             >
               <Edit2Icon />
             </Button>

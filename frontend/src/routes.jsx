@@ -32,7 +32,7 @@ const ChangePinPage = lazy(() => import("./pages/ChangePinPage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
 const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
-const EditFieldPage = lazy(() => import("./pages/EditFieldPage"));
+const EditProfilePage = lazy(() => import("./pages/EditProfilePage"));
 const SuccessPage = lazy(() => import("./pages/SuccessPage"));
 const SearchUserPage = lazy(() => import("./pages/SearchUserPage"));
 
@@ -100,8 +100,8 @@ export const routes = createBrowserRouter([
         element: <AccountDetailsPage />,
       },
       {
-        path: "/edit-field/:field",
-        element: <EditFieldPage />,
+        path: "/edit-profile/:field",
+        element: <EditProfilePage />,
       },
       {
         path: "/change-email",
