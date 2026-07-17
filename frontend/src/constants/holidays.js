@@ -114,3 +114,103 @@ export const holidays = [
     description: "Christmas",
   },
 ];
+
+// For Stock Market
+export const nseHolidays = [
+  {
+    id: 1,
+    date: "2026-01-15",
+    day: "Thursday",
+    description: "Municipal Corporation Election - Maharashtra",
+  },
+  {
+    id: 2,
+    date: "2026-01-26",
+    day: "Monday",
+    description: "Republic Day",
+  },
+  {
+    id: 3,
+    date: "2026-03-03",
+    day: "Tuesday",
+    description: "Holi",
+  },
+  {
+    id: 4,
+    date: "2026-03-26",
+    day: "Thursday",
+    description: "Shri Ram Navami",
+  },
+  {
+    id: 5,
+    date: "2026-03-31",
+    day: "Tuesday",
+    description: "Shri Mahavir Jayanti",
+  },
+  {
+    id: 6,
+    date: "2026-04-03",
+    day: "Friday",
+    description: "Good Friday",
+  },
+  {
+    id: 7,
+    date: "2026-04-14",
+    day: "Tuesday",
+    description: "Dr. Baba Saheb Ambedkar Jayanti",
+  },
+  {
+    id: 8,
+    date: "2026-05-01",
+    day: "Friday",
+    description: "Maharashtra Day",
+  },
+  {
+    id: 9,
+    date: "2026-05-28",
+    day: "Thursday",
+    description: "Bakri Id",
+  },
+  {
+    id: 10,
+    date: "2026-06-26",
+    day: "Friday",
+    description: "Muharram",
+  },
+  {
+    id: 11,
+    date: "2026-09-14",
+    day: "Monday",
+    description: "Ganesh Chaturthi",
+  },
+  {
+    id: 12,
+    date: "2026-10-02",
+    day: "Friday",
+    description: "Mahatma Gandhi Jayanti",
+  },
+  {
+    id: 13,
+    date: "2026-10-20",
+    day: "Tuesday",
+    description: "Dussehra",
+  },
+  {
+    id: 14,
+    date: "2026-11-10",
+    day: "Tuesday",
+    description: "Diwali-Balipratipada",
+  },
+  {
+    id: 15,
+    date: "2026-11-24",
+    day: "Tuesday",
+    description: "Prakash Gurpurb Sri Guru Nanak Dev",
+  },
+  {
+    id: 16,
+    date: "2026-12-25",
+    day: "Friday",
+    description: "Christmas",
+  },
+];

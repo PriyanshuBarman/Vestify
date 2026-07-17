@@ -1,18 +1,43 @@
 /*
  * Formates Number to INR ex: 12555.12 -> ₹12,555
  */
-export const formatToINR = (num, maxFracDigits = 2) => {
+export const formatToINR = (num, maxFracDigits = 2, minFracDigits = 0) => {
   const number = Number(num);
   if (isNaN(number)) return;
 
   const formatted = new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
-    minimumFractionDigits: 0,
+    minimumFractionDigits: minFracDigits,
     maximumFractionDigits: maxFracDigits,
   }).format(number);
 
   return formatted;
+};
+
+const units = [
+  { value: 10000000, suffix: "Cr" },
+  { value: 100000, suffix: "lakh" },
+  { value: 1000, suffix: "k" },
+];
+export const formatToCompactINR = (
+  num,
+  maxFracDigits = 0,
+  withSymbol = false,
+) => {
+  const number = Number(num);
+  if (!Number.isFinite(number) || number === 0) return withSymbol ? "₹0" : "0";
+
+  const matchedUnit = units.find((unit) => Math.abs(number) >= unit.value);
+  const compact = matchedUnit ? number / matchedUnit.value : number;
+
+  const formatted = new Intl.NumberFormat("en-IN", {
+    ...(withSymbol ? { style: "currency", currency: "INR" } : {}),
+    minimumFractionDigits: 0,
+    maximumFractionDigits: maxFracDigits,
+  }).format(compact);
+
+  return matchedUnit ? `${formatted} ${matchedUnit.suffix}` : formatted;
 };
 
 export const formatToShortINR = (num) => {

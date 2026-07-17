@@ -14,6 +14,7 @@ import storage from "redux-persist/lib/storage";
 import communityReducer from "./slices/communitySlice";
 import mutualFundReducer from "./slices/mutualFundSlice";
 import searchReducer from "./slices/searchSlice";
+import stockReducer from "./slices/stockSlice";
 import themeRedurcer from "./slices/themeSlice";
 
 const mutualFundPersistConfig = {
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   mutualFund: persistReducer(mutualFundPersistConfig, mutualFundReducer),
   community: communityReducer,
+  stock: stockReducer,
 });
 
 const persistConfig = {

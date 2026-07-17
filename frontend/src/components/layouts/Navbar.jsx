@@ -14,7 +14,13 @@ const DesktopSearch = lazy(
   () => import("../../features/search/components/DesktopSearch"),
 );
 
-const allowedRoutes = new Set(["/mutual-funds", "/mutual-funds/", "/wallet"]);
+const allowedRoutes = new Set([
+  "/mutual-funds",
+  "/mutual-funds/",
+  "/stocks",
+  "/stocks/",
+  "/wallet",
+]);
 
 function Navbar() {
   const isMobile = useIsMobile();

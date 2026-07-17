@@ -8,6 +8,7 @@ import { authRoutes } from "./features/auth/routes";
 import { communityRoutes } from "./features/community/routes";
 import { mutualFundRoutes } from "./features/mutual-fund/routes";
 import SearchPage from "./features/search/pages/Page";
+import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
 import ProfilePage from "./pages/ProfilePage";
 
@@ -75,6 +76,7 @@ export const routes = createBrowserRouter([
       walletRoutes,
       mutualFundRoutes,
       communityRoutes,
+      stockRoutes,
       {
         path: "/search",
         element: <SearchPage />,
