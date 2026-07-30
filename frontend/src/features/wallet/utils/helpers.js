@@ -7,7 +7,7 @@ export const getTransactionTitle = (tnx, peerProfile, assetInfo) => {
   // 2. Stock Order
   if (tnx.assetCategory === "STOCK" || tnx.stockOrder) {
     const stockName =
-      tnx.stockOrder?.shortName ||
+      tnx.stockOrder?.longName ||
       tnx.stockOrder?.name ||
       assetInfo?.name ||
       "Stock";

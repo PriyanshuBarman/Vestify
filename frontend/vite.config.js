@@ -23,7 +23,7 @@ export default defineConfig({
         short_name: "Vestify",
         description:
           "Vestify is a virtual investment platform that helps beginners learn and practice investing using virtual money, with zero real money involved.",
-        start_url: "/mutual-funds#explore",
+        start_url: "/stocks#explore",
         scope: "/",
         background_color: "#ffffff",
         theme_color: "#ffffff",

@@ -19,7 +19,7 @@ export function useGetIntradayChart(symbol, isActive = false) {
     queryKey: ["stocks", "intraday-chart", symbol],
     queryFn: () => fetchIntradayChart(symbol),
     enabled: Boolean(symbol),
-    staleTime: 0,
+    staleTime: 5 * 60 * 1000,
   });
 
   useEffect(() => {

@@ -54,10 +54,10 @@ function Comparison() {
             <TableBody>
               {comparisonFeatures.map((feature, index) => (
                 <TableRow key={index}>
-                  <TableCell className="px-5 py-4 whitespace-normal sm:px-8 sm:py-5">
-                    <div className="flex items-center gap-3">
-                      <span className="sm:bg-muted text-muted-foreground flex size-6 shrink-0 items-center justify-center rounded-lg sm:size-9">
-                        <feature.icon className="size-4.5" />
+                  <TableCell className="px-5 py-4 whitespace-normal sm:px-8">
+                    <div className="flex items-center sm:gap-4 gap-3">
+                      <span className="sm:bg-muted text-muted-foreground flex size-6 shrink-0 items-center justify-center rounded-lg sm:size-10">
+                        <feature.icon className="size-4.5 sm:size-5" />
                       </span>
                       <span className="text-foreground text-sm sm:text-base">
                         {feature.label}

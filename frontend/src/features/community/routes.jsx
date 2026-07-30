@@ -10,6 +10,9 @@ const SipDetailsPage = lazy(
 const OrderDetailsPage = lazy(
   () => import("../mutual-fund/pages/OrderDetailsPage"),
 );
+const HoldingDetailsPage = lazy(
+  () => import("../stock/pages/HoldingDetailsPage"),
+);
 
 export const communityRoutes = {
   path: "community",
@@ -30,6 +33,10 @@ export const communityRoutes = {
     {
       path: "orders/:orderId",
       element: <OrderDetailsPage />,
+    },
+    {
+      path: "stocks/holding-details",
+      element: <HoldingDetailsPage />,
     },
   ],
 };

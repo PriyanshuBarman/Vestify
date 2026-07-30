@@ -30,7 +30,7 @@ function FilterIndices({
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
 
-      <SelectContent className="rounded-xl min-w-[10rem]">
+      <SelectContent className="rounded-xl [&_[data-slot=select-item]]:rounded-lg min-w-[10rem]">
         {indices.map((indexItem) => (
           <SelectItem
             key={indexItem.value}

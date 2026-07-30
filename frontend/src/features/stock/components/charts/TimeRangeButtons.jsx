@@ -19,7 +19,7 @@ function TimeRangeButtons({
     isLoading || isIntradayLoading || Boolean(intradayChartError);
 
   return (
-    <CardFooter className="mt-4 flex justify-center gap-1.5 pb-2 sm:mt-0 sm:gap-4 sm:border-t sm:pt-4">
+    <CardFooter className="mt-4 flex justify-center  pb-2 gap-1.5 sm:mt-0 sm:gap-4 sm:border-t sm:pt-4">
       {/* 1D Intraday Button */}
       <Button
         variant="outline"
@@ -29,7 +29,7 @@ function TimeRangeButtons({
         }}
         disabled={is1DDisabled}
         className={cn(
-          "text-muted-foreground sm:text-foreground h-8 w-11 rounded-full !bg-transparent tabular-nums shadow-none max-sm:border-0 sm:text-xs",
+          "text-muted-foreground sm:text-foreground  h-7 w-10 sm:h-8 sm:w-11 rounded-full !bg-transparent tabular-nums shadow-none max-sm:border-0 text-xs",
           selectedRange === "1D" &&
             "!border-foreground sm:!bg-accent !bg-primary/10 text-primary sm:text-foreground",
         )}
@@ -48,7 +48,7 @@ function TimeRangeButtons({
           }}
           disabled={isValidRange(timePeriod, fullChartData) || isLoading}
           className={cn(
-            "text-muted-foreground sm:text-foreground h-8 w-11 rounded-full !bg-transparent tabular-nums shadow-none max-sm:border-0 sm:text-xs",
+            "text-muted-foreground sm:text-foreground h-7 w-10 sm:h-8 sm:w-11 rounded-full !bg-transparent tabular-nums shadow-none max-sm:border-0 text-xs",
             timePeriod === selectedRange &&
               "!border-foreground sm:!bg-accent !bg-primary/10 text-primary sm:text-foreground",
           )}

@@ -240,7 +240,7 @@ function BuySellOrderTab({
                   >
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="rounded-xl [&_[data-slot=select-item]]:rounded-lg">
                     <SelectGroup>
                       <SelectItem value="MARKET">Market</SelectItem>
                       <SelectItem value="LIMIT">Limit</SelectItem>
@@ -274,7 +274,7 @@ function BuySellOrderTab({
                 >
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="rounded-xl [&_[data-slot=select-item]]:rounded-lg">
                   <SelectGroup>
                     <SelectItem value="MARKET">Market</SelectItem>
                     <SelectItem value="LIMIT">Limit</SelectItem>
@@ -510,7 +510,7 @@ function GttOrderTab({
                     >
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="rounded-xl [&_[data-slot=select-item]]:rounded-lg">
                       <SelectGroup>
                         <SelectItem value="MARKET">Market</SelectItem>
                         <SelectItem value="LIMIT">Limit</SelectItem>
@@ -524,7 +524,7 @@ function GttOrderTab({
                   disabled={priceType === "MARKET"}
                   value={priceType === "LIMIT" ? limitPrice : ""}
                   onChange={(e) => setLimitPrice(e.target.value)}
-                  placeholder={priceType === "MARKET" ? formatToINR(price) : ""}
+                  placeholder={priceType === "MARKET" ? "At Market" : ""}
                   className="w-1/2 text-right disabled:bg-accent shadow-none"
                 />
               </Field>

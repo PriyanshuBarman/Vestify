@@ -52,7 +52,7 @@ function OrderDetailsPage() {
 
         <Link
           to={`/stocks/${order.symbol}`}
-          className="flex  items-center gap-4"
+          className="flex  items-center gap-2"
         >
           <span className="text-md font-medium">{order.name}</span>
           <ChevronRightIcon className="size-5" />

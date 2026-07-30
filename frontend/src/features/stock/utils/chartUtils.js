@@ -92,7 +92,7 @@ export function mergeIntradayDataWithMarketDay(
 ) {
   // Create market open close date objects
   const marketStart = setSeconds(setMinutes(setHours(date, 9), 15), 0); // 9:15 AM
-  const marketEnd = setSeconds(setMinutes(setHours(date, 15), 15), 0); // 3:15 PM
+  const marketEnd = setSeconds(setMinutes(setHours(date, 15), 30), 0); // 3:30 PM
 
   // Create full day time slots with null values
   const fullDayData = [];

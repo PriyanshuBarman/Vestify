@@ -20,7 +20,7 @@ const CONFIG = {
     buttonText: "Explore Funds",
   },
   stock: {
-    title: "No Open orders",
+    title: "You have no open orders",
     descSelf: "",
     descOther: "User has no orders.",
     link: "/stocks#explore",

@@ -32,7 +32,7 @@ function Hero() {
           className="mt-6 text-4xl leading-[1.1] font-medium tracking-[-0.03em] text-balance md:mt-10 md:text-5xl md:leading-[1] lg:text-7xl"
         >
           Virtually invest in{" "}
-          <TextFlip className="text-landing">
+          <TextFlip interval={3} className="text-landing">
             <span className="tracking-tight">Indian Stocks</span>
             <span>Mutual Funds</span>
           </TextFlip>{" "}
@@ -97,11 +97,11 @@ function Badge() {
     <motion.div
       onClick={handleClick}
       variants={heroItemVariants}
-      className="bg-muted inline-flex w-fit items-center gap-2 rounded-full px-3 py-1 md:px-3.5 md:py-1.5"
+      className="bg-muted inline-flex w-fit items-center gap-2 rounded-full px-3 py-1 md:px-4 md:py-1.5"
     >
-      <SparklesIcon size={12} />
-      <span className="text-2xs tracking-wide md:text-xs">
-        A Virtual Investing App
+      <SparklesIcon className="size-3 sm:size-3.5" />
+      <span className="text-2xs tracking-wide  md:text-sm">
+        Free and open source
       </span>
     </motion.div>
   );

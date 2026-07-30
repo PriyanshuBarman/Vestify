@@ -42,7 +42,7 @@ function PopularStocksSection() {
     <section className="sm:px-0 px-4">
       <SectionHeading heading="Popular Stocks" className="px-0" />
 
-      <div className="flex sm:flex-row flex-wrap overflow-x-auto scrollbar-none gap-3 sm:p-0.25 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:p-0.25 sm:gap-4">
         {stocks?.slice(0, 3).map((stock, index) => (
           <StockCard key={index} stock={stock} />
         ))}

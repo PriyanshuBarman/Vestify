@@ -57,7 +57,7 @@ function TopMoversSection() {
   if (error) {
     return (
       <SectionError
-        heading="Top Movers today"
+        heading="Top Movers Today"
         isFetching={isFetching}
         error={error}
         refetch={refetch}
@@ -67,7 +67,7 @@ function TopMoversSection() {
 
   return (
     <section className="swiper-no-swiping sm:m-0.5 sm:px-0 px-4">
-      <SectionHeading heading="Top Movers today" className="p-0" />
+      <SectionHeading heading="Top Movers Today" className="p-0" />
 
       <div className="flex flex-wrap items-center gap-3">
         {["gainers", "losers"].map((tab) => (
@@ -86,7 +86,7 @@ function TopMoversSection() {
         <FilterIndices value={selectedIndex} onChange={setSelectedIndex} />
       </div>
 
-      <div className="flex sm:flex-nowrap mt-4 sm:mt-6 flex-wrap overflow-x-auto scrollbar-none gap-3 sm:p-0.25 sm:gap-4">
+      <div className="grid grid-cols-2 mt-4  sm:grid-cols-3 md:grid-cols-4 gap-3 sm:p-0.25 sm:gap-4">
         {movers?.slice(0, 3).map((item, index) => (
           <StockCard key={index} stock={item} />
         ))}

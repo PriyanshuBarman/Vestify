@@ -74,7 +74,7 @@ function FiftyTwoWeekHighLowSection() {
         <FilterIndices value={selectedIndex} onChange={setSelectedIndex} />
       </div>
 
-      <div className="flex flex-wrap mt-4 gap-3 sm:mt-6 sm:gap-3">
+      <div className="grid grid-cols-2 mt-4 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:p-0.25 sm:gap-4">
         {stocks?.length ? (
           <>
             {stocks.slice(0, 3).map((item, index) => (

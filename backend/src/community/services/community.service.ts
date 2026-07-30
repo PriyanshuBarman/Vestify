@@ -61,7 +61,7 @@ export const getUsers = async ({ skip, take, sortBy }: GetUsersParams) => {
           invested: true,
         },
       },
-      mfPortfolio: {
+      mfPortfolios: {
         select: {
           invested: true,
         },
@@ -120,7 +120,7 @@ export const searchUsers = async ({ query, limit }: SearchUsersSchema) => {
           invested: true,
         },
       },
-      mfPortfolio: {
+      mfPortfolios: {
         select: {
           invested: true,
         },

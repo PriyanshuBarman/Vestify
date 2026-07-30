@@ -2,6 +2,7 @@ import {
   GithubLogoIcon,
   LinkedinLogoIcon,
   RedditLogoIcon,
+  TelegramLogoIcon,
   TwitterLogoIcon,
 } from "@phosphor-icons/react";
 
@@ -44,5 +45,10 @@ export const socialLinks = [
     label: "Go to creators linkedin profile",
     href: "https://www.linkedin.com/in/priyanshubarman",
     Icon: LinkedinLogoIcon,
+  },
+  {
+    label: "Visit telegram group",
+    href: "https://t.me/vvestify",
+    Icon: TelegramLogoIcon,
   },
 ];

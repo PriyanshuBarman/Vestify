@@ -25,7 +25,7 @@ function Performance({ stock }) {
       <div className="flex justify-around mt-2">
         <Slot title="Open price" value={stock.regularMarketOpen} />
         <Slot title="Previous close" value={stock.regularMarketPreviousClose} />
-        <Slot title="Live volume" value={live.volume} />
+        <Slot title="Volume" value={live.volume} />
       </div>
     </div>
   );

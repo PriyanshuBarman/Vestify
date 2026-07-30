@@ -12,6 +12,10 @@ export const credits = [
     link: "https://groww.in",
   },
   {
+    label: "Yahoo Finance",
+    link: "https://finance.yahoo.com",
+  },
+  {
     label: "Illustrations by Storyset",
     link: "https://storyset.com",
   },

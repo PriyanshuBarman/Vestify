@@ -94,7 +94,7 @@ function TableRowFund({ fund, activeColumn, columnsConfig, onColumnClick }) {
       </TableCell>
 
       <TableCell
-        className="w-[25%] pr-4 text-right font-[450]"
+        className="w-[25%] active:bg-accent pr-4 text-right font-[450]"
         onClick={onColumnClick}
       >
         {getColumnValueSm(fund, activeColumn, columnsConfig)}

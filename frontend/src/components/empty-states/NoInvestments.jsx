@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Empty,
   EmptyContent,
-  EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
@@ -12,17 +11,15 @@ import {
 
 const CONFIG = {
   "mutual-fund": {
-    titleSelf: "You haven't invested yet.",
-    titleOther: "No investments yet",
+    titleSelf: "No investments.",
+    titleOther: "User has no investments",
     descSelf: "Start investing in a fund to see your portfolio grow here.",
-    descOther: "This user has no investments.",
     link: "/mutual-funds/all-funds",
     buttonText: "Start Investing",
   },
   stock: {
-    titleSelf: "You haven't invested in stocks yet.",
-    titleOther: "No stock holdings yet",
-    descSelf: "Start investing in stocks to build your portfolio here.",
+    titleSelf: "You have no holdings",
+    titleOther: "User has no holdings",
     descOther: "This user has no stock holdings.",
     link: "/stocks",
     buttonText: "Explore Stocks",
@@ -45,9 +42,6 @@ function NoInvestments({ type = "mutual-fund", isOtherUserProfile }) {
         <EmptyTitle>
           {isOtherUserProfile ? content.titleOther : content.titleSelf}
         </EmptyTitle>
-        <EmptyDescription>
-          {isOtherUserProfile ? content.descOther : content.descSelf}
-        </EmptyDescription>
       </EmptyHeader>
       {!isOtherUserProfile && type !== "stock" && (
         <EmptyContent>

@@ -100,7 +100,7 @@ function Chart({ symbol }) {
               <YAxis
                 domain={[
                   (dataMin) => dataMin - dataMin * (isIntraday ? 0.005 : 0.05),
-                  (dataMax) => dataMax + dataMax * 0.01,
+                  (dataMax) => dataMax + dataMax * (isIntraday ? 0.005 : 0.01),
                 ]}
                 hide
               />

@@ -60,7 +60,7 @@ function TopByVolumeSection() {
   }
 
   return (
-    <section className="sm:px-0 px-4">
+    <section>
       <div className="mb-4 flex justify-between px-4 sm:mb-4 sm:px-0">
         <div>
           <h2 className="font-medium sm:text-xl sm:font-semibold">
@@ -75,7 +75,7 @@ function TopByVolumeSection() {
       </div>
 
       {/* Card */}
-      <div className="p-2 border rounded-2xl">
+      <div className="p-2 mx-4 sm:mx-0 border rounded-2xl">
         <ItemGroup>
           {stocks?.slice(0, 4).map((item, index) => (
             <Row key={index} stock={item} />

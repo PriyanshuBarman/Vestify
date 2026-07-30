@@ -11,11 +11,11 @@ function RecentlyViewedSection() {
   if (!stocks?.length) return null;
 
   return (
-    <section className="swiper-no-swiping sm:px-0 px-4">
-      <SectionHeading heading="Recently viewed" className="px-0" />
+    <section className="swiper-no-swiping ">
+      <SectionHeading heading="Recently Viewed" />
 
       <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex gap-3 sm:p-1 ">
+        <div className="flex gap-3 px-4 sm:p-1 ">
           {stocks.map(({ symbol }) => (
             <Link
               draggable={false}

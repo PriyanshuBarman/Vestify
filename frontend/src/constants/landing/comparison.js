@@ -1,4 +1,5 @@
 import {
+  ActivityIcon,
   ArrowRightLeftIcon,
   CalendarDaysIcon,
   ChartNoAxesCombinedIcon,
@@ -12,13 +13,18 @@ import {
 
 export const comparisonFeatures = [
   {
+    icon: ActivityIcon,
+    label: "Realtime market data",
+    others: true,
+  },
+  {
     icon: ChartNoAxesCombinedIcon,
-    label: "Invest in stocks (virtually)",
+    label: "Virtually Invest in stocks",
     others: true,
   },
   {
     icon: ChartPieIcon,
-    label: "Invest in Mutual Funds (virtually)",
+    label: "Virtually nvest in Mutual Funds",
     others: true,
   },
   {

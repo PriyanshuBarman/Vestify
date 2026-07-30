@@ -73,8 +73,8 @@ function HoldingsTab({ username, isActive }) {
   };
 
   const handleHoldingClick = (order) => {
-    if (username) {
-      navigate(`/stocks/holding-details?username=${username}`, {
+    if (isOtherUserProfile) {
+      navigate(`/community/stocks/holding-details?username=${username}`, {
         state: { holding: order },
       });
       return;
@@ -110,13 +110,13 @@ function HoldingsTab({ username, isActive }) {
         </>
       )}
 
-      <HoldingModal
-        holding={selectedHolding}
-        isOpen={isModalOpen}
-        onOpenChange={setIsModalOpen}
-        isOtherUserProfile={isOtherUserProfile}
-        username={username}
-      />
+      {!isOtherUserProfile && (
+        <HoldingModal
+          holding={selectedHolding}
+          isOpen={isModalOpen}
+          onOpenChange={setIsModalOpen}
+        />
+      )}
     </div>
   );
 }

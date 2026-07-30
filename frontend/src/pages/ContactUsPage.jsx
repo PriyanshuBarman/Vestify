@@ -28,9 +28,10 @@ const socialLinks = [
     href: "https://linkedin.com/in/priyanshubarman",
   },
   {
-    name: "Telegrap Group",
+    name: "Telegram Group",
     icon: TelegramLogoIcon,
-    href: "https://linkedin.com/in/priyanshubarman",
+    href: "https://t.me/vvestify",
+    description: "Feature discussions only (no financial advise)",
   },
 ];
 
@@ -87,15 +88,23 @@ function ContactUsPage() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:bg-accent flex items-center justify-between rounded-2xl border p-4 transition-colors"
+                  className="hover:bg-accent rounded-2xl border p-4 transition-colors"
                 >
-                  <div className="flex items-center gap-3">
-                    <social.icon weight="fill" className="size-5" />
-                    <span className="font-medium">{social.name}</span>
+                  <div className="flex items-center justify-between ">
+                    <div className="flex items-center gap-3">
+                      <social.icon weight="fill" className="size-5" />
+                      <span className="font-medium">{social.name}</span>
+                    </div>
+                    <Button variant="ghost" size="icon">
+                      <ArrowUpRightIcon />
+                    </Button>
                   </div>
-                  <Button variant="ghost" size="icon">
-                    <ArrowUpRightIcon />
-                  </Button>
+
+                  {social.description && (
+                    <p className="text-xs px-4 text-muted-foreground">
+                      {social.description}
+                    </p>
+                  )}
                 </a>
               ))}
             </div>

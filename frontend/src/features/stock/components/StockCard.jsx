@@ -18,7 +18,7 @@ function StockCard({ stock = {} }) {
 
   return (
     <Link to={`/stocks/${stock.symbol}`}>
-      <Card className="h-44 w-43 sm:size-48 cursor-pointer justify-between gap-2 rounded-3xl p-4 duration-200 hover:scale-101">
+      <Card className="h-44 sm:h-48 cursor-pointer justify-between gap-2 rounded-3xl p-4 duration-200 hover:scale-101">
         <StockLogo symbol={stock.symbol} />
         <CardTitle className="line-clamp-2 text-sm leading-tight font-medium sm:text-[0.9rem] sm:font-[450]">
           {stock.longName || stock.shortName}

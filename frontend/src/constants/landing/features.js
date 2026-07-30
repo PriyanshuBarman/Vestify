@@ -1,6 +1,6 @@
 import {
+  ActivityIcon,
   CalendarDays,
-  ChartNoAxesCombinedIcon,
   PieChart,
   ScanQrCodeIcon,
   TrendingUp,
@@ -9,15 +9,15 @@ import {
 
 export const features = [
   {
-    title: "Virtually Invest In Stocks & Mutual Funds",
+    title: "Realtime Market Data",
     description:
-      "Browse thousands of mutual funds and invest with your virtual balance.",
-    icon: ChartNoAxesCombinedIcon,
+      "Get real investing experience with realtime market data, not dummy data.",
+    icon: ActivityIcon,
     span: "col-span-12 md:col-span-8",
     isFill: true,
   },
   {
-    title: "Start Virtual SIPs",
+    title: "Virtual SIPs",
     description:
       "Start virtual SIPs in Mutual Funds and understand how real SIPs work through an automated process.",
     icon: CalendarDays,

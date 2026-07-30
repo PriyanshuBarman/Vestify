@@ -277,9 +277,7 @@ function TriggerOrderPage() {
                       disabled={priceType === "MARKET"}
                       value={priceType === "LIMIT" ? limitPrice : ""}
                       onChange={(e) => setLimitPrice(e.target.value)}
-                      placeholder={
-                        priceType === "MARKET" && formatToINR(live.price)
-                      }
+                      placeholder={priceType === "MARKET" ? "At Market" : ""}
                       className="w-1/2 text-right disabled:bg-accent shadow-none"
                     />
                   </Field>

@@ -14,6 +14,7 @@ export function useGetLiveData(symbol, { fallback } = {}) {
     queryFn: () => fetchStockData(symbol),
     enabled: Boolean(symbol) && !hasFallback && !isMarketOpen,
     staleTime: 5 * 60 * 1000,
+    retry: 3,
   });
 
   const baseData = hasFallback ? fallback : queryData;

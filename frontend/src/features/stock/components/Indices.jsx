@@ -6,6 +6,7 @@ import {
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { indices } from "../constants/indices";
 import { useGetIndices } from "../hooks/useGetIndices";
@@ -57,13 +58,17 @@ function IndexItem({ symbol, name, initialData }) {
             <span className="text-2xs sm:text-xs text-primary py-0">Live</span>
           )}
         </ItemTitle>
-        <ItemDescription className="text-xs space-x-1 tabular-nums text-nowrap font-[450]">
-          <span>{price ? Number(price).toLocaleString("en-IN") : "--"}</span>
-          <span className={isPositive ? "text-positive" : "text-negative"}>
-            {isPositive ? "+" : ""}
-            {Number(change).toFixed(2)} ({Number(changePercent).toFixed(2)}%)
-          </span>
-        </ItemDescription>
+        {live.isPending ? (
+          <Skeleton className="w-2/3 h-4" />
+        ) : (
+          <ItemDescription className="text-xs space-x-1 tabular-nums text-nowrap font-[450]">
+            <span>{price ? Number(price).toLocaleString("en-IN") : "--"}</span>
+            <span className={isPositive ? "text-positive" : "text-negative"}>
+              {isPositive ? "+" : ""}
+              {Number(change).toFixed(2)} ({Number(changePercent).toFixed(2)}%)
+            </span>
+          </ItemDescription>
+        )}
       </ItemContent>
     </Item>
   );

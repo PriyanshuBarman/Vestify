@@ -20,13 +20,7 @@ import { formatToINR } from "@/utils/formatters";
 import { useGetLiveData } from "../../hooks/useGetLiveData";
 import BuySellButtons from "../BuySellButtons";
 
-function HoldingModal({
-  isOpen,
-  onOpenChange,
-  holding,
-  isOtherUserProfile,
-  username,
-}) {
+function HoldingModal({ isOpen, onOpenChange, holding }) {
   const { price: livePrice } = useGetLiveData(holding?.symbol);
 
   if (!holding) return null;
@@ -35,9 +29,7 @@ function HoldingModal({
   const invested = Number(holding.invested || 0);
   const avgPrice = quantity > 0 ? invested / quantity : 0;
   const currentMktPrice = livePrice || holding.currentPrice;
-  const detailsPath = username
-    ? `/stocks/holding-details?username=${username}`
-    : "/stocks/holding-details";
+  const detailsPath = "/stocks/holding-details";
 
   return (
     <ResponsiveModal open={isOpen} onOpenChange={onOpenChange}>
@@ -70,16 +62,14 @@ function HoldingModal({
         </Item>
 
         <div>
-          {!isOtherUserProfile && (
-            <Link
-              to={`/stocks/gtt-order/${holding.symbol}`}
-              state={{ order: holding }}
-              className="flex border-b items-center pl-4"
-            >
-              <ChartPieIcon className="text-muted-foreground size-5" />
-              <span className="text-md p-4">Set trigger order</span>
-            </Link>
-          )}
+          <Link
+            to={`/stocks/gtt-order/${holding.symbol}`}
+            state={{ order: holding }}
+            className="flex border-b items-center pl-4"
+          >
+            <ChartPieIcon className="text-muted-foreground size-5" />
+            <span className="text-md p-4">Set trigger order</span>
+          </Link>
 
           <Link
             to={detailsPath}
@@ -91,11 +81,9 @@ function HoldingModal({
           </Link>
         </div>
 
-        {!isOtherUserProfile && (
-          <ResponsiveModalFooter className="px-0">
-            <BuySellButtons symbol={holding.symbol} />
-          </ResponsiveModalFooter>
-        )}
+        <ResponsiveModalFooter className="px-0">
+          <BuySellButtons symbol={holding.symbol} />
+        </ResponsiveModalFooter>
       </ResponsiveModalContent>
     </ResponsiveModal>
   );

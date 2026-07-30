@@ -31,7 +31,6 @@ function TableSM({
           {stocks.map((stock) => (
             <TableRow
               key={stock.symbol}
-              onClick={() => navigate(`/stocks/${stock.symbol}`)}
               className="cursor-pointer hover:bg-accent/50 transition-colors"
             >
               <TableCell
@@ -41,7 +40,7 @@ function TableSM({
                 <StockLogo symbol={stock.symbol} />
                 <div className="min-w-0">
                   <h4 className="font-medium text-sm truncate max-w-[18ch]">
-                    {stock.longName || stock.shortName || stock.symbol}
+                    {stock.longName || stock.shortName}
                   </h4>
                   <span className="text-muted-foreground text-2xs uppercase font-medium">
                     {stock.symbol}
@@ -50,7 +49,7 @@ function TableSM({
               </TableCell>
 
               <TableCell
-                className="w-[35%] font-medium pr-4"
+                className="w-[35%] active:bg-accent font-medium pr-4"
                 onClick={onColumnClick}
               >
                 <DynamicCellField
@@ -108,7 +107,7 @@ function DynamicCellField({ stock, activeColumnKey }) {
     );
   if (activeColumnKey === "52w_low")
     return (
-      <div className="text-right text-xs  text-muted-foreground">
+      <div className="text-right text-xs">
         {formatToINR(stock.fiftyTwoWeekLow || live.dayLow, 2)}
       </div>
     );

@@ -11,7 +11,7 @@ const defaultVariants = {
     filter: "blur(0px)",
   },
   exit: {
-    y: "40%",
+    y: "25%",
     opacity: 0,
     filter: "blur(1px)",
     transition: { ease: "easeOut" },
