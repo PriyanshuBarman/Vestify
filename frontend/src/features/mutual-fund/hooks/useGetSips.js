@@ -6,7 +6,7 @@ export function useGetSips(username) {
   const userKey = username || "self";
 
   return useQuery({
-    queryKey: [userKey, "sips"],
+    queryKey: [userKey, "mutual-funds", "sips"],
     queryFn: () => fetchSips(username),
     ...(username && { staleTime: 0 }),
   });

@@ -83,7 +83,10 @@ function TnxDetailsPage() {
               onClick={handleAvatarClick}
             >
               <Avatar className="size-9">
-                <AvatarImage src={displayData.avatar} />
+                <AvatarImage
+                  src={displayData.avatar}
+                  className="object-cover"
+                />
                 <AvatarFallback className="text-sm uppercase">
                   {displayData.fallback || <IncognitoIcon className="size-5" />}
                 </AvatarFallback>

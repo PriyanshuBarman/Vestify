@@ -4,7 +4,7 @@ import { fetchMangerFunds } from "../api/external";
 
 export function useGetManagerFunds(managerName) {
   return useQuery({
-    queryKey: ["managerFunds", managerName],
+    queryKey: ["mutual-funds", "manager-funds", managerName],
     queryFn: () => fetchMangerFunds(managerName),
   });
 }

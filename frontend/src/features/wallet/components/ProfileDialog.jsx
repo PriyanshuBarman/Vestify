@@ -85,7 +85,7 @@ function ProfileDialog({ isOpen, onOpenChange, clickedProfile }) {
                 })
               }
             >
-              <SendIcon />
+              <SendIcon className="stroke-[2.5px]" />
               Pay
             </Button>
           </DialogClose>

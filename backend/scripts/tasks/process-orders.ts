@@ -30,7 +30,7 @@ async function processOrders() {
   let successCount = 0;
   for (const order of orders) {
     try {
-      if (order.orderType === "REDEEM") {
+      if (order.type === "REDEEM") {
         await processRedemptionOrder(order);
       } else {
         await processInvestmentOrder(order);

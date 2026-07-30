@@ -10,10 +10,10 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/components/ui/item";
+import FundLogo from "@/components/FundLogo";
 import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
 
-import FundLogo from "../components/FundLogo";
 import FundPortfolioSummary from "../components/FundPortfolioSummary";
 import SectionHeading from "../components/SectionHeading";
 import { orderTypeConfig } from "../constants/order";
@@ -89,7 +89,7 @@ function OrderItem({ order, isOtherUserProfile }) {
       <div className="flex w-full justify-between border-b py-4">
         <div className="max-w-[60%]">
           <h4 className="sm:text-md truncate text-sm sm:font-medium">
-            {orderTypeConfig[order.orderType]}
+            {orderTypeConfig[order.type]}
           </h4>
           <p className="text-muted-foreground mt-2 text-xs">
             {formatDate(order.createdAt, "dd MMM, yy")}
@@ -98,7 +98,7 @@ function OrderItem({ order, isOtherUserProfile }) {
 
         <div className="flex flex-col items-end">
           <span className="text-sm font-medium tabular-nums sm:text-base">
-            {order.orderType === "REDEEM" ? "-" : "+"}
+            {order.type === "REDEEM" ? "-" : "+"}
             {formatToINR(order.amount, 2)}
           </span>
           <div className="text-muted-foreground mt-2 flex items-center gap-2 text-xs">

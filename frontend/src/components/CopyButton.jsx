@@ -4,7 +4,7 @@ import { CheckIcon, CopyIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-function CopyButton({ text, timeout = 1500, className, ...props }) {
+function CopyButton({ label, text, timeout = 1500, className, ...props }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -22,31 +22,32 @@ function CopyButton({ text, timeout = 1500, className, ...props }) {
 
   return (
     <Button
-      size="icon-sm"
+      size={label ? "default" : "icon-sm"}
       variant="ghost"
       onClick={handleCopy}
-      className={cn("relative transition-all", className)}
+      className={cn("relative w-auto transition-all", className)}
       {...props}
     >
       {/* Copy Icon */}
-      <span
+      <div
         className={cn(
-          "absolute inset-0 flex items-center justify-center transition-all duration-200",
+          " gap-2 flex items-center justify-center transition-all duration-200",
           copied ? "scale-75 opacity-0" : "scale-100 opacity-100",
         )}
       >
+        {label}
         <CopyIcon size={16} />
-      </span>
+      </div>
 
       {/* Check Icon */}
-      <span
+      <div
         className={cn(
           "absolute inset-0 flex items-center justify-center transition-all duration-200",
           copied ? "scale-100 opacity-100" : "scale-75 opacity-0",
         )}
       >
         <CheckIcon size={16} strokeWidth={3} />
-      </span>
+      </div>
     </Button>
   );
 }

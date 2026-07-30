@@ -3,7 +3,7 @@ import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router";
 
-import { useSSEConnection } from "@/hooks/useSSEConnection";
+import { SocketProvider } from "@/components/SocketProvider";
 import { fetchBalance } from "@/api/wallet";
 import ErrorPage from "@/pages/ErrorPage";
 
@@ -18,7 +18,6 @@ const Footer = lazy(() => import("../Footer"));
 function Layout() {
   const queryClient = useQueryClient();
   const isRestoring = useIsRestoring();
-  useSSEConnection();
 
   useEffect(() => {
     if (isRestoring) return;
@@ -30,19 +29,23 @@ function Layout() {
   }, [isRestoring, queryClient]);
 
   return (
-    <ErrorBoundary fallback={<ErrorPage />}>
-      <AnnouncementBanner />
-      <Navbar />
-      <div className="mx-auto max-w-[1300px]">
-        <Outlet />
-      </div>
-      <ScrollToTop />
-      <BottomNavbar />
-      <DailyRewardModal />
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
-    </ErrorBoundary>
+    <SocketProvider>
+      <ErrorBoundary
+        fallbackRender={({ error }) => <ErrorPage error={error} />}
+      >
+        <AnnouncementBanner />
+        <Navbar />
+        <div className="mx-auto max-w-[1300px]">
+          <Outlet />
+        </div>
+        <ScrollToTop />
+        <BottomNavbar />
+        <DailyRewardModal />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      </ErrorBoundary>
+    </SocketProvider>
   );
 }
 

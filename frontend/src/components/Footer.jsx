@@ -31,8 +31,8 @@ function Footer({ className }) {
         <div className="flex flex-col justify-between gap-x-8 gap-y-4 py-6 sm:flex-row sm:gap-y-10 sm:px-6 xl:px-0">
           <div>
             <Link to="/" className="flex items-center">
-              <LogoShapeOnly className="size-18" />
-              <span className="relative right-2 text-xl font-medium">
+              <LogoShapeOnly className="size-16 sm:size-18" />
+              <span className="relative right-2 text-lg sm:text-2xl font-medium">
                 Vestify
               </span>
             </Link>
@@ -56,7 +56,7 @@ function Footer({ className }) {
 
           {/* Credits */}
           <div className="my-auto ml-4 w-full max-w-xs">
-            <span className="sm:text-md text-sm font-medium">Credits</span>
+            <span className="sm:text-base text-sm font-medium">Credits</span>
             <div className="mt-2 flex flex-col gap-2 text-xs sm:text-sm">
               {credits.map((item) => (
                 <a

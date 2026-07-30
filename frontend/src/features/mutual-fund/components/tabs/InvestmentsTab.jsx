@@ -11,7 +11,9 @@ const PortfolioModal = lazy(() => import("../overlays/PortfolioModal"));
 const PendingOrders = lazy(() => import("../PendingOrders"));
 const PortfolioSummary = lazy(() => import("../PortfolioSummary"));
 const PortfolioTable = lazy(() => import("../tables/PortfolioTable"));
-const NoInvestments = lazy(() => import("../empty-states/NoInvestments"));
+const NoInvestments = lazy(
+  () => import("@/components/empty-states/NoInvestments"),
+);
 
 const sortOptions = {
   current: "Current",

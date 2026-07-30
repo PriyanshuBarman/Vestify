@@ -17,7 +17,7 @@ function PinSetupPage() {
   const { mutate, isPending } = useSetPin();
   const { data: user } = useGetUser();
 
-  if (!user || user?.hasPin) return <Navigate to="/mutual-funds#explore" />;
+  if (!user || user?.hasPin) return <Navigate to="/stocks#explore" />;
 
   return (
     <div className="flex h-dvh flex-col sm:justify-center sm:gap-4">

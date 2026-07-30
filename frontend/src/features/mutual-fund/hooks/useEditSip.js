@@ -18,16 +18,17 @@ export function useEditSip() {
             ? "SIP Edit Requested"
             : "SIP Updated Successfully",
           description: data.message,
+          doneLink: "/mutual-funds/#sips",
           notice: data?.notice,
-          doneRoute: "/mutual-funds/#sips",
-          icon: data?.notice ? "arrow" : "check",
         },
         replace: true,
       });
 
-      queryClient.invalidateQueries({ queryKey: [userKey, "sips"] });
       queryClient.invalidateQueries({
-        queryKey: [userKey, "sip", variables.sipId],
+        queryKey: [userKey, "mutual-funds", "sips"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [userKey, "mutual-funds", "sip", variables.sipId],
       });
     },
     onError: (error) => {

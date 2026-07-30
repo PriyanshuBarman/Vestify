@@ -9,13 +9,18 @@ function SearchHistoryList({ handleClick, activeIdx, searchType }) {
     <ul>
       {searchHistory[searchType]?.map((item, idx) => (
         <li
-          key={item.scheme_code}
+          key={idx}
           onClick={() => handleClick(item)}
           className={`${activeIdx === idx && "bg-accent"} hover:bg-accent flex cursor-pointer place-items-center gap-4 rounded-xl px-4 py-4 sm:py-5`}
         >
           <HistoryIcon size={18} className="text-muted-foreground" />
-          <p className="Fund-Name max-w-[28ch] truncate text-sm sm:max-w-[30ch] sm:text-[0.95rem]">
-            {item.short_name || item.name}
+          <p className="Fund-Name max-w-[28ch] capitalize truncate text-sm sm:max-w-[30ch] sm:text-[0.95rem]">
+            {item.short_name ||
+              item.name ||
+              item.longname ||
+              item.longName ||
+              item.shortname?.toLowerCase() ||
+              item.shortName?.toLowerCase()}
           </p>
         </li>
       ))}

@@ -4,7 +4,7 @@ import { fetchFundCategoryRanking } from "../api/external";
 
 export function useGetFundCategoryRanking(schemeCode) {
   return useQuery({
-    queryKey: ["fund-category-ranking", Number(schemeCode)],
+    queryKey: ["mutual-funds", "fund-category-ranking", Number(schemeCode)],
     queryFn: () => fetchFundCategoryRanking(schemeCode),
   });
 }

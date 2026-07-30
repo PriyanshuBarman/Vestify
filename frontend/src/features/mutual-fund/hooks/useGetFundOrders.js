@@ -10,7 +10,7 @@ export function useGetFundOrders(schemeCode, username) {
   const userKey = username || "self";
 
   return useQuery({
-    queryKey: [userKey, "fund-orders", schemeCode],
+    queryKey: [userKey, "mutual-funds", "fund-orders", schemeCode],
     queryFn: () => fetchFundOrders(schemeCode, username),
     staleTime: 0,
     gcTime: 0,

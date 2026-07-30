@@ -37,7 +37,7 @@ function ScrollToTopButton({ scrollThreshold = 800, className }) {
           <Button
             size="icon"
             onClick={scrollToTop}
-            className="size-12 rounded-full bg-[#00c968] active:scale-95"
+            className="size-12 bg-foreground rounded-full  active:scale-95"
             aria-label="Scroll to top"
           >
             <ArrowUpIcon className="size-6" />

@@ -15,9 +15,12 @@ export function useAddOrUpdateStepUp() {
   return useMutation({
     mutationFn: addStepUp,
     onSuccess: (data, variables) => {
-      queryClient.setQueryData([userKey, "sip", variables.sipId], (old) => {
-        return { ...old, sip: data };
-      });
+      queryClient.setQueryData(
+        [userKey, "mutual-funds", "sip", variables.sipId],
+        (old) => {
+          return { ...old, sip: data };
+        },
+      );
 
       const stepUpDate = formatDate(data.nextStepUpDate, "MMM yy");
       const stepUpValue = data?.stepUpAmount
@@ -29,7 +32,7 @@ export function useAddOrUpdateStepUp() {
         state: {
           title: variables.isEdit ? "Step-up Updated" : "Step-up Activated",
           description: `SIP amount will increase to ${formatToINR(stepUpValue)} from ${stepUpDate} onwards`,
-          doneRoute: `/mutual-funds/sip/${variables.sipId}`,
+          doneLink: `/mutual-funds/sip/${variables.sipId}`,
         },
         replace: true,
       });

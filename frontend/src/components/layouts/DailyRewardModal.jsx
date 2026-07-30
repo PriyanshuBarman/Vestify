@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { isToday } from "date-fns";
 
-import { VITE_DAILY_REWARD_AMOUNT } from "@/config/env";
+import { VITE_DAILY_REWARD_AMOUNT } from "@/lib/config/env";
 import { useClaimDailyReward } from "@/hooks/useClaimDailyReward";
 import { Button } from "@/components/ui/button";
 import { formatToINR } from "@/utils/formatters";

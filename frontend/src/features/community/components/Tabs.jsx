@@ -1,13 +1,18 @@
 import { cn } from "@/lib/utils";
 
-function Tabs({ swiper, activeTabIndex, className }) {
+function Tabs({
+  swiper,
+  activeTabIndex,
+  tabsList = ["Investments", "SIPs", "Watchlist", "Orders"],
+  className,
+}) {
   return (
     <div
       className={cn(
         `bg-background scrollbar-none sticky top-0 z-10 mb-6 flex space-x-2 overflow-y-auto border-b px-4 pt-2 sm:justify-center ${className}`,
       )}
     >
-      {["Investments", "SIPs", "Watchlist", "Orders"].map((tab, idx) => (
+      {tabsList.map((tab, idx) => (
         <button
           key={tab}
           onClick={() => {

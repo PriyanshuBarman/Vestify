@@ -21,21 +21,25 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile             Profile?
-  sessions            Session[]
-  mfPortfolio         MfPortfolio[]
-  mfHolding           MfHolding[]
-  mfWatchlist         MfWatchlist[]
-  mfOrders            MfOrder[]
-  mfSips              MfSip[]
-  pendingMfSipChanges PendingMfSipChange[]
-  transactions        Transaction[]        @relation("UserTransactions")
-  peerTransactions    Transaction[]        @relation("PeerTransactions")
-  resetPasswordToken  ResetPasswordToken?
-  emailChangeRequest  EmailChangeRequest?
-  referrals           Referral[]           @relation("UserReferrals")
-  referredBy          Referral?            @relation("ReferredUser")
+  profile                Profile?
+  sessions               Session[]
+  mfPortfolios           MfPortfolio[]
+  mfHoldings             MfHolding[]
+  mfWatchlists           MfWatchlist[]
+  mfOrders               MfOrder[]
+  mfSips                 MfSip[]
+  stockOrders            StockOrder[]
+  pendingMfSipChanges    PendingMfSipChange[]
+  transactions           Transaction[]           @relation("UserTransactions")
+  peerTransactions       Transaction[]           @relation("PeerTransactions")
+  resetPasswordToken     ResetPasswordToken?
+  emailChangeRequest     EmailChangeRequest?
+  referrals              Referral[]              @relation("UserReferrals")
+  referredBy             Referral?               @relation("ReferredUser")
   announcementDismissals AnnouncementDismissal[]
+  stockPortfolios        StockPortfolio[]
+  stockHoldings          StockHolding[]
+  stockWatchlists        StockWatchlist[]
 
   @@map("users")
 }
@@ -142,9 +146,11 @@ model Transaction {
 
   // For Asset-based transactions
   assetCategory AssetCategory?
-  // assetId       String? // e.g. fund code, stock symbol, etc.
-  assetOrder    MfOrder?       @relation(fields: [assetOrderId], references: [id], onDelete: Cascade)
+  mfOrder       MfOrder?       @relation(fields: [assetOrderId], references: [id], onDelete: Cascade)
   assetOrderId  String?        @unique
+
+  stockOrder   StockOrder? @relation(fields: [stockOrderId], references: [id], onDelete: Cascade)
+  stockOrderId String?     @unique
 
   @@map("transactions")
 }
@@ -165,24 +171,24 @@ enum AssetCategory {
 // ----------------------------------------------
 
 model MfOrder {
-  id              String    @id @default(uuid())
+  id              String      @id @default(uuid())
   schemeCode      Int
   fundName        String
   fundShortName   String
   fundHouseDomain String
   fundType        FundType
-  orderType       OrderType
-  status          Status    @default(PENDING)
-  amount          Decimal?  @db.Decimal(18, 2)
-  units           Decimal?  @db.Decimal(36, 18)
-  method          TnxMethod @default(REGULAR)
+  type            MfOrderType
+  status          MfOrderStatus      @default(PENDING)
+  amount          Decimal?    @db.Decimal(18, 2)
+  units           Decimal?    @db.Decimal(36, 18)
+  method          TnxMethod   @default(REGULAR)
   sipId           String?
-  processDate     DateTime  @db.Date
-  navDate         DateTime  @db.Date
-  nav             Decimal?  @db.Decimal(10, 4)
+  processDate     DateTime    @db.Date
+  navDate         DateTime    @db.Date
+  nav             Decimal?    @db.Decimal(10, 4)
   failureReason   String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
@@ -199,13 +205,13 @@ enum TnxMethod {
   SWP
 }
 
-enum Status {
+enum MfOrderStatus {
   PENDING
   COMPLETED
   FAILED
 }
 
-enum OrderType {
+enum MfOrderType {
   ONE_TIME
   REDEEM
   SIP_INSTALLMENT
@@ -268,21 +274,22 @@ model MfHolding {
 }
 
 model MfSip {
-  id                   String    @id @default(uuid())
-  sipDate              Int
-  nextInstallmentDate  DateTime  @db.Date
-  fundName             String
-  fundShortName        String
-  fundCategory         String
-  fundType             FundType
-  schemeCode           Int
-  amount               Decimal   @db.Decimal(18, 2)
-  fundHouseDomain      String
-  failedCount          Int       @default(0) @db.UnsignedInt
+  id                  String   @id @default(uuid())
+  sipDate             Int
+  nextInstallmentDate DateTime @db.Date
+  fundName            String
+  fundShortName       String
+  fundCategory        String
+  fundType            FundType
+  schemeCode          Int
+  amount              Decimal  @db.Decimal(18, 2)
+  fundHouseDomain     String
+  failedCount         Int      @default(0) @db.UnsignedInt
+
   // step-up sip fields
-  nextStepUpDate       DateTime? @db.Date
-  stepUpAmount         Decimal?  @db.Decimal(18, 2)
-  stepUpPercentage     Decimal?  @db.Decimal(18, 2)
+  nextStepUpDate         DateTime? @db.Date
+  stepUpAmount           Decimal?  @db.Decimal(18, 2)
+  stepUpPercentage       Decimal?  @db.Decimal(18, 2)
   stepUpIntervalInMonths Int?      @db.UnsignedInt
 
   createdAt DateTime @default(now())
@@ -332,15 +339,144 @@ model MfWatchlist {
   @@map("mf_watchlists")
 }
 
-model Announcement {
-  id          String   @id @default(cuid())
-  message     String   @db.Text
-  linkUrl     String?
-  linkLabel   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+// ----------------------------------------------
+// STOCK 
+// ----------------------------------------------
 
-  dismissals  AnnouncementDismissal[]
+model StockOrder {
+  id          String           @id @default(uuid())
+  symbol      String
+  name        String
+  shortName   String
+  type        StockOrderType // REGULAR, SL, GTT
+  productType ProductType      @default(DELIVERY)
+  action      StockOrderAction // BUY, SELL
+  status      StockOrderStatus @default(OPEN)
+
+  amount       Decimal? @db.Decimal(18, 2)
+  quantity     Int?
+  price        Decimal? @db.Decimal(10, 4)
+  triggerPrice Decimal? @db.Decimal(10, 4)
+  limitPrice   Decimal? @db.Decimal(10, 4)
+
+  validity  StockOrderValidity @default(DAY_END)
+  expiresAt DateTime?          @db.Date
+  gttType   GttType?
+
+  executedAt DateTime?
+
+  failureReason String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  transaction Transaction?
+
+  @@index([status])
+  @@index([expiresAt])
+  @@index([userId, symbol])
+  @@map("stock_orders")
+}
+
+enum StockOrderStatus {
+  OPEN
+  SUCCESSFUL
+  UNSUCCESSFUL
+  CANCELLED
+}
+
+enum StockOrderType {
+  REGULAR
+  SL
+  GTT
+}
+
+enum GttType {
+  TARGET
+  STOP_LOSS
+}
+
+enum ProductType {
+  DELIVERY
+}
+
+enum StockOrderAction {
+  BUY
+  SELL
+}
+
+enum StockOrderValidity {
+  DAY_END
+  YEAR
+}
+
+model StockPortfolio {
+  id        String   @id @default(uuid())
+  symbol    String
+  name      String
+  shortName String
+  quantity  Int
+  invested  Decimal  @db.Decimal(18, 2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  holdings StockHolding[]
+
+  @@unique([userId, symbol])
+  @@index([userId])
+  @@map("stock_portfolios")
+}
+
+model StockHolding {
+  id        String   @id @default(uuid())
+  symbol    String
+  price     Decimal  @db.Decimal(10, 4) // purchase/redeem price
+  quantity  Int // purchase/redeem quantity
+  amount    Decimal  @db.Decimal(18, 2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  portfolio   StockPortfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolioId String
+
+  @@index([userId, symbol])
+  @@map("stock_holdings")
+}
+
+model StockWatchlist {
+  id        String   @id @default(uuid())
+  symbol    String
+  name      String
+  shortName String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([userId, symbol])
+  @@map("stock_watchlists")
+}
+
+// ----------------------------------------------
+// ANNOUNCEMENT 
+// ----------------------------------------------
+
+model Announcement {
+  id        String   @id @default(cuid())
+  message   String   @db.Text
+  linkUrl   String?
+  linkLabel String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  dismissals AnnouncementDismissal[]
 
   @@index([createdAt])
   @@map("announcements")
@@ -352,8 +488,8 @@ model AnnouncementDismissal {
   announcementId String
   dismissedAt    DateTime @default(now())
 
-  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  announcement Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
 
   @@unique([userId, announcementId])
   @@map("announcement_dismissals")

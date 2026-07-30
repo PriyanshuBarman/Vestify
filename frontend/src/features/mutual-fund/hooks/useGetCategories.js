@@ -4,7 +4,7 @@ import { fetchCategories } from "../api/external";
 
 export function useGetCategories() {
   return useQuery({
-    queryKey: ["categories"],
+    queryKey: ["mutual-funds", "categories"],
     queryFn: fetchCategories,
   });
 }

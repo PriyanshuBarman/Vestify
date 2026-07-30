@@ -12,9 +12,11 @@ export function useSkipSip() {
   return useMutation({
     mutationFn: skipSip,
     onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({ queryKey: [userKey, "sips"] });
       queryClient.invalidateQueries({
-        queryKey: [userKey, "sip", variables.sipId],
+        queryKey: [userKey, "mutual-funds", "sips"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [userKey, "mutual-funds", "sip", variables.sipId],
       });
 
       navigate("/success", {
@@ -23,7 +25,7 @@ export function useSkipSip() {
           notice:
             variables.diff <= 2 &&
             "Your next SIP installment is within the next 2 days, so it can’t beskipped. The following installment will be skipped instead.",
-          doneRoute: "/mutual-funds/#sips",
+          doneLink: "/mutual-funds/#sips",
         },
         replace: true,
       });

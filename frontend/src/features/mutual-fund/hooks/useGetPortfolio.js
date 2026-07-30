@@ -6,7 +6,7 @@ export function useGetPortfolio(username) {
   const userKey = username || "self";
 
   return useQuery({
-    queryKey: [userKey, "mfPortfolio"],
+    queryKey: [userKey, "mutual-funds", "portfolio"],
     queryFn: () => fetchPortfolio(username),
     ...(username && { staleTime: 0 }),
   });

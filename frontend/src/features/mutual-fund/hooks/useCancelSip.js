@@ -13,9 +13,11 @@ export function useCancelSip() {
     mutationFn: deleteSip,
     onSuccess: (data, variables) => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: [userKey, "sips"] });
       queryClient.invalidateQueries({
-        queryKey: [userKey, "sip", variables.sipId],
+        queryKey: [userKey, "mutual-funds", "sips"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [userKey, "mutual-funds", "sip", variables.sipId],
       });
 
       navigate("/mutual-funds/#sips", { replace: true });

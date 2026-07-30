@@ -4,7 +4,7 @@ import { fetchAmcFunds } from "../api/external";
 
 export function useGetAmcFunds(amcCode) {
   return useQuery({
-    queryKey: [amcCode],
+    queryKey: ["mutual-funds", "amc-funds", amcCode],
     queryFn: () => fetchAmcFunds(amcCode),
   });
 }

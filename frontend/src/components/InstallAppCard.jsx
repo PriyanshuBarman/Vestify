@@ -20,7 +20,7 @@ function InstallAppCard() {
   return (
     <Item
       variant="outline"
-      className="mx-4 cursor-pointer rounded-2xl"
+      className="mx-4 cursor-pointer rounded-[1.25rem]"
       onClick={handleInstallClick}
     >
       <ItemContent>

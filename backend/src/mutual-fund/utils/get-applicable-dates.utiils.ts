@@ -1,7 +1,7 @@
 import {
-  getNextBusinessDate,
-  getPrevBusinessDate,
-  isBusinessDay,
+  getNextMfBusinessDate,
+  getPrevMfBusinessDate,
+  isMfBusinessDay,
 } from "@/shared/utils/holidays.utils.js";
 import { TZDate } from "@date-fns/tz";
 
@@ -29,11 +29,11 @@ export function getApplicableDates(
   fundName: string,
 ) {
   const today = TZDate.tz("Asia/Kolkata");
-  const nextBday = getNextBusinessDate();
-  const nextBdayPlus1 = getNextBusinessDate(1);
-  const prevBday = getPrevBusinessDate();
+  const nextBday = getNextMfBusinessDate();
+  const nextBdayPlus1 = getNextMfBusinessDate(1);
+  const prevBday = getPrevMfBusinessDate();
 
-  if (!isBusinessDay(today)) {
+  if (!isMfBusinessDay(today)) {
     return { navDate: nextBday, processDate: nextBdayPlus1 };
   }
 

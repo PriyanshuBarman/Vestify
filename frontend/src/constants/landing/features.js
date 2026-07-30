@@ -1,18 +1,18 @@
 import {
-  ArrowLeftRightIcon,
   CalendarDays,
+  ChartNoAxesCombinedIcon,
   PieChart,
-  Rotate3DIcon,
+  ScanQrCodeIcon,
   TrendingUp,
   Users,
 } from "lucide-react";
 
 export const features = [
   {
-    title: "Virtually Invest in Mutual Funds",
+    title: "Virtually Invest In Stocks & Mutual Funds",
     description:
       "Browse thousands of mutual funds and invest with your virtual balance.",
-    icon: TrendingUp,
+    icon: ChartNoAxesCombinedIcon,
     span: "col-span-12 md:col-span-8",
     isFill: true,
   },
@@ -20,7 +20,6 @@ export const features = [
     title: "Start Virtual SIPs",
     description:
       "Start virtual SIPs in Mutual Funds and understand how real SIPs work through an automated process.",
-
     icon: CalendarDays,
     span: "col-span-12 md:col-span-4",
     isFill: false,
@@ -29,7 +28,7 @@ export const features = [
     title: "Step-Up SIPs",
     description:
       "Periodically increase SIP amounts by a fixed value or percentage, similar to real-world step-up SIPs.",
-    icon: Rotate3DIcon,
+    icon: TrendingUp,
     span: "col-span-12 md:col-span-4",
     isFill: false,
   },
@@ -53,7 +52,7 @@ export const features = [
     title: "Send & Receive Virtual Money",
     description:
       "Send, receive, Scan & Pay your virtual money with others instantly—just like UPI.",
-    icon: ArrowLeftRightIcon,
+    icon: ScanQrCodeIcon,
     span: "col-span-12",
     isFill: true,
   },

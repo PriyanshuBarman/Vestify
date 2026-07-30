@@ -1,6 +1,6 @@
 import ReactGA from "react-ga4";
 
-import { VITE_GA_MEASUREMENT_ID } from "@/config/env";
+import { VITE_GA_MEASUREMENT_ID } from "@/lib/config/env";
 
 const GA_MEASUREMENT_ID = VITE_GA_MEASUREMENT_ID;
 

@@ -1,4 +1,8 @@
-import { LinkedinLogoIcon, TwitterLogoIcon } from "@phosphor-icons/react";
+import {
+  LinkedinLogoIcon,
+  TelegramLogoIcon,
+  TwitterLogoIcon,
+} from "@phosphor-icons/react";
 import { RedditLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { ArrowUpRightIcon, HelpCircleIcon } from "lucide-react";
 
@@ -21,6 +25,11 @@ const socialLinks = [
   {
     name: "LinkedIn",
     icon: LinkedinLogoIcon,
+    href: "https://linkedin.com/in/priyanshubarman",
+  },
+  {
+    name: "Telegrap Group",
+    icon: TelegramLogoIcon,
     href: "https://linkedin.com/in/priyanshubarman",
   },
 ];

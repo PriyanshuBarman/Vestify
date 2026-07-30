@@ -1,8 +1,10 @@
 import { motion } from "motion/react";
 
+import FundLogo from "@/components/FundLogo";
 import { amcs } from "@/constants/amc";
 import { heroItemVariants } from "@/constants/animations";
-import FundLogo from "@/features/mutual-fund/components/FundLogo";
+
+import StockLogo from "../StockLogo";
 
 function Mockup() {
   return (
@@ -14,12 +16,12 @@ function Mockup() {
         fundHouseDomain={amcs[6].detail_info}
         className="absolute top-6 -left-8 size-9 rounded-lg shadow-xl md:size-11"
       />
-      <FundLogo
-        fundHouseDomain={amcs[3].detail_info}
+      <StockLogo
+        symbol="TMCV"
         className="absolute top-20 -right-12 size-9 rounded-lg shadow-xl md:size-11"
       />
-      <FundLogo
-        fundHouseDomain={amcs[2].detail_info}
+      <StockLogo
+        symbol="BHARTIARTL"
         className="absolute bottom-40 -left-12 size-9 rounded-lg shadow-xl md:size-11"
       />
       <FundLogo

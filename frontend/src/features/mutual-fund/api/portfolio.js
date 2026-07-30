@@ -2,7 +2,7 @@ import { api } from "@/lib/axios";
 
 export const fetchPortfolio = async (username) => {
   const url = username
-    ? `/community/users/${username}/portfolio`
+    ? `/community/users/${username}/mutual-funds/portfolio`
     : `/mutual-funds/portfolio`;
   const { data } = await api.get(url);
   return data.portfolio;
@@ -15,7 +15,7 @@ export const fetchFundPortfolio = async (schemeCode) => {
 
 export const fetchPortfolioSummary = async (username) => {
   const url = username
-    ? `/community/users/${username}/portfolio/summary` // Community profile endpoint returns summary
+    ? `/community/users/${username}/mutual-funds/portfolio/summary` // Community profile endpoint returns summary
     : `/mutual-funds/portfolio/summary`;
   const { data } = await api.get(url);
   return data.portfolioSummary;

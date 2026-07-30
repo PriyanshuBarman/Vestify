@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import FundLogo from "@/features/mutual-fund/components/FundLogo";
+import FundLogo from "@/components/FundLogo";
 
 function CompanyLogo({ searchType, item }) {
   return (

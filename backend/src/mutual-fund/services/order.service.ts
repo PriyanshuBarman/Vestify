@@ -1,5 +1,4 @@
 import { db } from "@/config/db.config.js";
-import { sendUserEvent } from "@/shared/events/event-manager.js";
 import { ApiError } from "@/shared/utils/api-error.utils.js";
 import type {
   InvestmentOrderSchema,
@@ -25,7 +24,7 @@ export const placeInvestmentOrder = async ({
     fundCategory,
   );
 
-  const { order, user } = await db.$transaction(async (tx) => {
+  const { order } = await db.$transaction(async (tx) => {
     // 1. Deduct amount from user's wallet
     const user = await tx.user.update({
       where: { id: userId },
@@ -52,7 +51,7 @@ export const placeInvestmentOrder = async ({
         processDate,
         navDate,
         method: sipId ? "SIP" : "REGULAR",
-        orderType: sipId ? "NEW_SIP" : "ONE_TIME",
+        type: sipId ? "NEW_SIP" : "ONE_TIME",
         sipId: sipId || null,
       },
     });
@@ -71,8 +70,6 @@ export const placeInvestmentOrder = async ({
 
     return { order, user };
   });
-
-  sendUserEvent(userId, { balance: user.balance });
 
   return order;
 };
@@ -115,7 +112,7 @@ export const placeRedemptionOrder = async ({
       fundType: fund.fundType,
       fundHouseDomain: fund.fundHouseDomain!,
       method: "REGULAR",
-      orderType: "REDEEM",
+      type: "REDEEM",
       amount,
       units: isFullRedemption ? fund.units.toNumber() : null, // Store total units for full-redemption
       processDate,

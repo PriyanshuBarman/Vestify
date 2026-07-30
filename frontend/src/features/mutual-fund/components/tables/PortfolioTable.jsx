@@ -3,11 +3,11 @@ import { ChevronsLeftRightIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import FundLogo from "@/components/FundLogo";
 import { formatToINR } from "@/utils/formatters";
 import { getChangeColor } from "@/utils/helper";
 
 import SortByButton from "../filters/SortByButton";
-import FundLogo from "../FundLogo";
 
 const columns = [
   {

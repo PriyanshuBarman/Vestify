@@ -1,7 +1,7 @@
 import {
-  getNextBusinessDate,
-  getPrevBusinessDate,
-  isBusinessDay,
+  getNextMfBusinessDate,
+  getPrevMfBusinessDate,
+  isMfBusinessDay,
 } from "@/shared/utils/holidays.utils.js";
 
 export function getApplicableDates(installmentDate: Date, fundName: string) {
@@ -10,11 +10,11 @@ export function getApplicableDates(installmentDate: Date, fundName: string) {
     fundNameLowercase.includes("liquid") ||
     fundNameLowercase.includes("overnight");
 
-  const nextBday = getNextBusinessDate(0, installmentDate);
-  const nextBdayPlus1 = getNextBusinessDate(1, installmentDate);
-  const prevBday = getPrevBusinessDate(0, installmentDate);
+  const nextBday = getNextMfBusinessDate();
+  const nextBdayPlus1 = getNextMfBusinessDate(1);
+  const prevBday = getPrevMfBusinessDate();
 
-  if (!isBusinessDay(installmentDate)) {
+  if (!isMfBusinessDay(installmentDate)) {
     return { navDate: nextBday, processDate: nextBdayPlus1 };
   }
 

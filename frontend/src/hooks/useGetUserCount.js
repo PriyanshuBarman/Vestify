@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchUserCount } from "@/api/landing";
+import { fetchUserCount } from "@/api/public-api";
 
 export function useGetUserCount() {
   return useQuery({

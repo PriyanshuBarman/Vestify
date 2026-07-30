@@ -1,6 +1,6 @@
 import { db } from "@/config/db.config.js";
 import { envConfig } from "@/config/env.config.js";
-import { sendUserEvent } from "@/shared/events/event-manager.js";
+import { getIO } from "@/socket/socket.js";
 import { ApiError } from "@/shared/utils/api-error.utils.js";
 
 export const validateReferral = async (
@@ -49,7 +49,7 @@ export const applyReferralBonus = async (
   const REFERRER_REWARD = Number(envConfig.REFERRER_REWARD_AMOUNT);
   const REFERRED_USER_REWARD = Number(envConfig.REFERRED_USER_REWARD_AMOUNT);
 
-  const { referrer, user } = await db.$transaction(async (tx) => {
+  const { referrer } = await db.$transaction(async (tx) => {
     // Credit referrer
     const referrer = await tx.user.update({
       where: { id: referrerId },
@@ -102,6 +102,10 @@ export const applyReferralBonus = async (
     return { referrer, user };
   });
 
-  sendUserEvent(referrer.id, { balance: referrer.balance });
-  sendUserEvent(user.id, { balance: user.balance });
+  const io = getIO();
+  if (io) {
+    io.to(`user:${referrer.id}`).emit("balance:update", {
+      balance: referrer.balance,
+    });
+  }
 };

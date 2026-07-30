@@ -39,7 +39,7 @@ function EditProfilePage() {
           onChange={(e) => setValue(e.target.value)}
           className="h-11 w-full"
           autoFocus
-          maxLength="30"
+          maxLength="20"
         />
         {isSameValueEntered && (
           <FieldError>This is your current {field}</FieldError>

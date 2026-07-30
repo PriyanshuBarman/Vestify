@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { formatDate, setDate } from "date-fns";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
@@ -17,7 +18,7 @@ export function useCreateSip() {
     onSuccess: (data) => {
       const { order, sip } = data;
 
-      queryClient.setQueryData([userKey, "sips"], (old) => {
+      queryClient.setQueryData([userKey, "mutual-funds", "sips"], (old) => {
         if (!old) {
           return {
             sips: [sip],
@@ -31,22 +32,39 @@ export function useCreateSip() {
         };
       });
 
-      queryClient.setQueryData([userKey, "order", order.id], order);
-      queryClient.setQueryData([userKey, "orders"], (old) =>
+      queryClient.setQueryData(
+        [userKey, "mutual-funds", "order", order.id],
+        order,
+      );
+      queryClient.setQueryData([userKey, "mutual-funds", "orders"], (old) =>
         old ? [order, ...old] : [order],
       );
-      queryClient.setQueryData([userKey, "pending-orders"], (old) =>
-        old ? [order, ...old] : [order],
+      queryClient.setQueryData(
+        [userKey, "mutual-funds", "pending-orders"],
+        (old) => (old ? [order, ...old] : [order]),
       );
 
       playPaymentSuccessSound();
       navigate("/success", {
         state: {
-          amount: order.amount,
           title: "SIP Order Placed",
-          description: `SIP of ${formatToINR(order.amount)} in ${order.fundName}.`,
-          orderDetailsRoute: `/mutual-funds/orders/${order.id}`,
-          doneRoute: "/mutual-funds#sips",
+          cardTitle: order.fundName,
+          orderDetailsLink: `/mutual-funds/orders/${order.id}`,
+          doneLink: "/mutual-funds#sips",
+          items: [
+            {
+              label: "Installment Amount",
+              value: formatToINR(sip.amount),
+            },
+            {
+              label: "SIP date",
+              value: `${formatDate(setDate(new Date(), sip.sipDate), "do")} of every month`,
+            },
+            {
+              label: "Next Installment",
+              value: formatDate(sip.nextInstallmentDate, "dd MM"),
+            },
+          ],
         },
         replace: true,
       });

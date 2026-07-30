@@ -11,7 +11,7 @@ export function useRemoveStepUp() {
     mutationFn: removeStepUp,
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: [userKey, "sip", variables.sipId],
+        queryKey: [userKey, "mutual-funds", "sip", variables.sipId],
       });
       toast.success("Step-up removed successfully");
     },

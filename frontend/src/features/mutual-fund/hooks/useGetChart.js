@@ -4,7 +4,7 @@ import { fetchChartData } from "../api/external";
 
 export function useGetChart(schemeCode) {
   return useQuery({
-    queryKey: ["fund-chart", Number(schemeCode)],
+    queryKey: ["mutual-funds", "fund-chart", Number(schemeCode)],
     queryFn: () => fetchChartData(schemeCode),
   });
 }

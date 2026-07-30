@@ -1,8 +1,10 @@
 import {
-  ChartPieSliceIcon,
+  ChartPieIcon,
   UsersThreeIcon,
   WalletIcon,
 } from "@phosphor-icons/react";
+import { ChartNoAxesCombinedIcon } from "lucide-react";
+import { motion } from "motion/react";
 import { NavLink, useLocation } from "react-router";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -10,27 +12,39 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 const TABS = [
   {
     id: 1,
-    name: "Mutual Funds",
-    icon: ChartPieSliceIcon,
-    link: "/mutual-funds#explore",
+    name: "Stocks",
+    icon: ChartNoAxesCombinedIcon,
+    link: "/stocks#explore",
+    basePath: "/stocks",
   },
   {
-    id: 4,
-    name: "Community",
-    icon: UsersThreeIcon,
-    link: "/community",
+    id: 2,
+    name: "Mutual Funds",
+    icon: ChartPieIcon,
+    link: "/mutual-funds#explore",
+    basePath: "/mutual-funds",
   },
   {
     id: 3,
+    name: "Community",
+    icon: UsersThreeIcon,
+    link: "/community",
+    basePath: "/community",
+  },
+  {
+    id: 4,
     name: "Wallet",
     icon: WalletIcon,
     link: "/wallet",
+    basePath: "/wallet",
   },
 ];
 
 const allowedRoutes = [
   "/mutual-funds",
   "/mutual-funds/",
+  "/stocks",
+  "/stocks/",
   "/wallet",
   "/community",
 ];
@@ -39,35 +53,47 @@ function BottomNavbar() {
   const isMobile = useIsMobile();
   const location = useLocation();
   const currentPath = location.pathname;
-  const activeIndex = TABS.findIndex((tab) => tab.link.startsWith(currentPath));
-  if (!allowedRoutes.includes(currentPath)) return;
-  if (!isMobile) return;
+
+  if (!allowedRoutes.includes(currentPath)) return null;
+  if (!isMobile) return null;
 
   return (
     <nav className="bg-background fixed inset-x-0 bottom-0 z-10 border-t">
-      <div className="grid grid-cols-3 pt-2 pb-1">
-        {TABS.map((tab) => (
-          <NavLink
-            to={tab.link}
-            key={tab.id}
-            className={({ isActive }) =>
-              `flex flex-col items-center gap-1 text-[0.65rem] font-medium tracking-tighter transition-all duration-100 ease-in-out sm:text-xs ${isActive ? "text-primary dark:text-foreground" : "dark:text-muted-foreground text-zinc-500"}`
-            }
-          >
-            <tab.icon
-              weight={tab.link.includes(currentPath) ? "fill" : "regular"}
-              className="size-6"
-            />
-            {tab.name}
-          </NavLink>
-        ))}
-      </div>
-      {/* Active Tab Indicator */}
-      <div
-        className="absolute top-0 left-0 w-1/3 transition-transform duration-200 ease-out"
-        style={{ transform: `translateX(${Math.max(activeIndex, 0) * 100}%)` }}
-      >
-        <div className="bg-primary dark:bg-foreground mx-auto h-1 w-2/3 rounded-b-2xl" />
+      <div className="flex  justify-between gap-4 px-4 pb-1">
+        {TABS.map((tab) => {
+          const isActive = tab.basePath
+            ? currentPath.startsWith(tab.basePath)
+            : tab.link.includes(currentPath);
+
+          return (
+            <NavLink
+              to={tab.link}
+              key={tab.id}
+              className={`relative flex-1 flex flex-col pt-2 items-center gap-1 text-[0.65rem] font-medium tracking-tighter transition-colors duration-150 sm:text-xs ${
+                isActive
+                  ? "text-primary dark:text-foreground"
+                  : "text-zinc-500 dark:text-muted-foreground"
+              }`}
+            >
+              {isActive && (
+                <motion.div
+                  layoutId="activeTabIndicator"
+                  className="bg-primary dark:bg-foreground  absolute top-0 left-1/2 h-1 w-full -translate-x-1/2 rounded-b-full"
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 35,
+                  }}
+                />
+              )}
+              <tab.icon
+                weight={isActive ? "fill" : "regular"}
+                className="size-6"
+              />
+              {tab.name}
+            </NavLink>
+          );
+        })}
       </div>
     </nav>
   );

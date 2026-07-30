@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "lucide-react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -19,10 +19,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import FundLogo from "@/components/FundLogo";
 import FundRating from "@/features/mutual-fund/components/FundRating";
 
 import { getColumnValueLg } from "../../utils/tableUtils";
-import FundLogo from "../FundLogo";
 
 /**
  *  Reusable Large screen table with pagination support
@@ -120,7 +120,6 @@ function TableLG({
               key={fund.scheme_code}
               fund={fund}
               visibleColumns={visibleColumns}
-              onClick={onClick}
               activeColumn={activeColumn}
               columnsConfig={columnsConfig}
             />
@@ -158,22 +157,15 @@ function TableLG({
 
 export default TableLG;
 
-function TableRowLG({
-  fund,
-  visibleColumns,
-  onClick,
-  activeColumn,
-  columnsConfig,
-}) {
+function TableRowLG({ fund, visibleColumns, activeColumn, columnsConfig }) {
+  const navigate = useNavigate();
   return (
-    <TableRow>
+    <TableRow onClick={() => navigate(`/mutual-funds/${fund.scheme_code}`)}>
       <TableCell className="flex items-center gap-8 py-4 pl-8">
         <FundLogo fundHouseDomain={fund.detail_info} />
 
         <div>
-          <Link to={`/mutual-funds/${fund.scheme_code}`}>
-            <h4 className="text-base">{fund.short_name}</h4>
-          </Link>
+          <h4 className="text-base">{fund.short_name}</h4>
 
           <p className="text-muted-foreground mt-1 flex gap-2 text-xs">
             <span>{fund.fund_type}</span>
@@ -187,7 +179,6 @@ function TableRowLG({
       {visibleColumns.map((key) => (
         <TableCell
           key={key}
-          onClick={() => onClick(key)}
           className={`text-md text-center ${
             activeColumn === key && "font-semibold"
           }`}

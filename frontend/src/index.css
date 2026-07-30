@@ -153,7 +153,6 @@
   * {
     @apply border-border outline-ring/50;
     box-sizing: border-box;
-    user-select: none;
     font-optical-sizing: auto;
   }
 

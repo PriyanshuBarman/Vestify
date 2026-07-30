@@ -12,7 +12,7 @@ import {
 import { formatToINR } from "@/utils/formatters";
 
 import { useGetFundOrders } from "../../hooks/useGetFundOrders";
-import PurchaseBtns from "../PurchaseBtns";
+import PurchaseButtons from "../PurchaseButtons";
 
 function PortfolioModal({ fund, isOpen, onOpenChange }) {
   useGetFundOrders(fund.schemeCode); // prefetch
@@ -54,7 +54,7 @@ function PortfolioModal({ fund, isOpen, onOpenChange }) {
 
         <ResponsiveModalFooter className="mt-4 px-0 sm:hidden">
           <ResponsiveModalClose asChild>
-            <PurchaseBtns schemeCode={fund.schemeCode} className="p-0" />
+            <PurchaseButtons schemeCode={fund.schemeCode} className="p-0" />
           </ResponsiveModalClose>
         </ResponsiveModalFooter>
       </ResponsiveModalContent>

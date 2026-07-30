@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
-import GoBackBtn from "@/components/GoBackBtn";
+import GoBackButton from "@/components/GoBackButton";
 import Keypad from "@/components/Keypad";
 import { formatToINR, sanitizeAmount } from "@/utils/formatters";
 
@@ -44,8 +44,8 @@ function RedemptionPage() {
           </div>
         )}
         {/* ================= Title ================= */}
-        <div className="Title mt-4 flex items-center gap-4 px-4">
-          <GoBackBtn />
+        <div className="Title mt-4 flex items-center gap-2 px-4">
+          <GoBackButton />
           <div>
             <h5 className="font-medium">Redeem {fund.short_name}</h5>
             <p className="text-xs">{formatToINR(current)} available</p>
@@ -137,7 +137,7 @@ function RedemptionPage() {
       <div className="bg-card mt-20 flex flex-col rounded-3xl border p-4 sm:mx-auto sm:max-w-xl">
         {/* ================= Title ================= */}
         <div className="Title mt-4 flex items-center gap-4 px-4">
-          <GoBackBtn />
+          <GoBackButton />
           <div>
             <h5 className="font-medium">Redeem {fund.short_name}</h5>
             <p className="text-xs">{formatToINR(current)} available</p>

@@ -4,7 +4,7 @@ import { api } from "@/lib/axios";
 
 export const fetchSips = async (username) => {
   const url = username
-    ? `/community/users/${username}/sips`
+    ? `/community/users/${username}/mutual-funds/sips`
     : `/mutual-funds/sips`;
   const { data } = await api.get(url);
   return data;
@@ -12,7 +12,7 @@ export const fetchSips = async (username) => {
 
 export const fetchSipDetail = async (sipId, username) => {
   const url = username
-    ? `/community/users/${username}/sips/${sipId}`
+    ? `/community/users/${username}/mutual-funds/sips/${sipId}`
     : `/mutual-funds/sips/${sipId}`;
   const { data } = await api.get(url);
   return data;

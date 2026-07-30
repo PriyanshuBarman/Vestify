@@ -49,7 +49,7 @@ function ScreenshotMarquee() {
         {screenshots?.light?.map((_, index) => (
           <div
             key={index}
-            className="h-98 w-fit shrink-0 overflow-hidden rounded-3xl border px-1 sm:mx-4 sm:h-116 sm:w-auto sm:rounded-3xl sm:px-2 sm:shadow-lg"
+            className="h-98 w-fit shrink-0 overflow-hidden rounded-3xl border px-1 sm:mx-4 sm:h-116 sm:w-auto sm:rounded-3xl sm:px-2 shadow-none"
           >
             <img
               src={screenshots.light[index]}

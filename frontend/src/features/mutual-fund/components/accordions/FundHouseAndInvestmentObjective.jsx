@@ -2,10 +2,10 @@ import { useState } from "react";
 import { ChevronRightIcon } from "lucide-react";
 import { Link } from "react-router";
 
+import FundLogo from "@/components/FundLogo";
 import { formatToINR } from "@/utils/formatters";
 
 import { useGetAMCs } from "../../hooks/useGetAMCs";
-import FundLogo from "../FundLogo";
 
 function FundHouseAndInvestmentObjective({ fund }) {
   const [textClamp, setTextClamp] = useState(true);

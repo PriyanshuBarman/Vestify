@@ -1,6 +1,6 @@
 import { formatDate } from "date-fns";
 
-import OrderStatusIcon from "./OrderStatusIcon";
+import OrderStatusIcon from "../../../components/OrderStatusIcon";
 
 function OrderStatusTimeline({ order }) {
   const steps = [

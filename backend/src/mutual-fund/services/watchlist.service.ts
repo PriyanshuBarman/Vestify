@@ -26,6 +26,11 @@ export const removeFromWatchlist = async (
   userId: string,
   schemeCode: number,
 ) => {
+  const watchlisted = await isInWatchlist(userId, schemeCode);
+  if (!watchlisted) {
+    throw new ApiError(404, "Mutual fund is not in watchlist");
+  }
+
   return db.mfWatchlist.delete({
     where: { userId_schemeCode: { userId, schemeCode } },
   });

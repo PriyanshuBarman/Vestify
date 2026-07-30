@@ -9,7 +9,7 @@ import { useGetChart } from "../../hooks/useGetChart";
 import { getSelectedRangeData, isValidRange } from "../../utils/chartUtils";
 import ChartLegend from "./ChartLegend";
 import CustomTooltipContent from "./CustomTooltipContent";
-import TimeRangeBtns from "./TimeRangeBtns";
+import TimeRangeButtons from "./TimeRangeButtons";
 
 const returnMapping = {
   "1M": "return_1m",
@@ -85,7 +85,7 @@ function Chart({ fund }) {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <TimeRangeBtns
+      <TimeRangeButtons
         selectedRange={selectedRange}
         setSelectedRange={setSelectedRange}
         fullChartData={fullChartData}

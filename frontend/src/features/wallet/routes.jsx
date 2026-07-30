@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 const TnxDetailsPage = lazy(() => import("./pages/TnxDetailsPage"));
-const TnxHistoryPage = lazy(() => import("./pages/TnxHistoryPage"));
+const AllTnxPage = lazy(() => import("./pages/AllTnxPage"));
 const SendMoneyPage = lazy(() => import("./pages/SendMoneyPage"));
 const Page = lazy(() => import("./pages/Page"));
 
@@ -18,7 +18,7 @@ export const walletRoutes = {
     },
     {
       path: "transactions",
-      element: <TnxHistoryPage />,
+      element: <AllTnxPage />,
     },
     {
       path: "tnx-details",

@@ -36,7 +36,7 @@ function Pwa() {
               onClick={handleInstallClick}
               variant="ghost"
               size="lg"
-              className="bg-background text-foreground mt-8 w-fit rounded-full !px-6 max-sm:font-normal sm:h-12"
+              className="bg-background sm:text-base text-foreground mt-8 w-fit rounded-full px-7! max-sm:font-normal sm:h-13"
             >
               Install WebApp
               <ArrowDownIcon className="size-5 max-sm:stroke-[1.5]" />

@@ -17,7 +17,12 @@ export const getUsers = async ({ skip, take, sortBy }: GetUsersParams) => {
     where: { id: { not: "system" } },
   });
 
-  const allowedSortFields = new Set(["createdAt", "updatedAt", "name"]);
+  const allowedSortFields = new Set([
+    "createdAt",
+    "updatedAt",
+    "balance",
+    "name",
+  ]);
   const sortField = allowedSortFields.has(sortBy) ? sortBy : "createdAt";
   const orderBy =
     sortField === "name"
@@ -51,10 +56,14 @@ export const getUsers = async ({ skip, take, sortBy }: GetUsersParams) => {
         },
         take: 1,
       },
+      stockPortfolios: {
+        select: {
+          invested: true,
+        },
+      },
       mfPortfolio: {
         select: {
           invested: true,
-          current: true,
         },
       },
       _count: {
@@ -89,6 +98,7 @@ export const searchUsers = async ({ query, limit }: SearchUsersSchema) => {
     take: limit,
     select: {
       id: true,
+      balance: true,
       profile: {
         select: {
           name: true,
@@ -105,16 +115,19 @@ export const searchUsers = async ({ query, limit }: SearchUsersSchema) => {
         },
         take: 1,
       },
+      stockPortfolios: {
+        select: {
+          invested: true,
+        },
+      },
       mfPortfolio: {
         select: {
           invested: true,
-          current: true,
         },
       },
       _count: {
         select: {
           mfSips: true,
-          mfPortfolio: true,
         },
       },
     },

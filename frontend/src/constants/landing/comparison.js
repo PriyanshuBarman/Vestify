@@ -1,9 +1,10 @@
 import {
   ArrowRightLeftIcon,
   CalendarDaysIcon,
+  ChartNoAxesCombinedIcon,
+  ChartPieIcon,
   PieChartIcon,
   QrCodeIcon,
-  Rotate3DIcon,
   TrendingUpIcon,
   UsersIcon,
   Wallet2Icon,
@@ -11,18 +12,22 @@ import {
 
 export const comparisonFeatures = [
   {
-    icon: TrendingUpIcon,
-    label: "Invest in Mutual Funds Virtually",
+    icon: ChartNoAxesCombinedIcon,
+    label: "Invest in stocks (virtually)",
     others: true,
   },
-
+  {
+    icon: ChartPieIcon,
+    label: "Invest in Mutual Funds (virtually)",
+    others: true,
+  },
   {
     icon: CalendarDaysIcon,
     label: "Virtual SIP (Auto-Invest)",
     others: false,
   },
   {
-    icon: Rotate3DIcon,
+    icon: TrendingUpIcon,
     label: "Step-Up SIP",
     others: false,
   },

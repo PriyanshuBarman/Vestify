@@ -8,8 +8,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import MfOrderItem from "../../../components/MfOrderItem";
 import { useGetPendingOrders } from "../hooks/useGetPendingOrders";
-import OrderItem from "./OrderItem";
 
 function PendingOrders() {
   const { data: pendingOrders } = useGetPendingOrders();
@@ -30,7 +30,7 @@ function PendingOrders() {
 
         <AccordionContent>
           {pendingOrders?.map((order, index) => (
-            <OrderItem
+            <MfOrderItem
               key={order.id}
               order={order}
               index={index}

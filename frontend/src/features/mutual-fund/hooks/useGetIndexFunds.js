@@ -4,7 +4,7 @@ import { fetchIndexFunds } from "../api/external";
 
 export function useGetIndexFunds() {
   return useQuery({
-    queryKey: ["indexFunds"],
+    queryKey: ["mutual-funds", "index-funds"],
     queryFn: fetchIndexFunds,
   });
 }

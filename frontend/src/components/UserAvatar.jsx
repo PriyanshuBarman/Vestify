@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 import { cn } from "@/lib/utils";
 import { useGetUser } from "@/hooks/useGetUser";
 import {
@@ -7,10 +9,15 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import IncognitoIcon from "@/components/icons/IncognitoIcon";
+import { selectOnlineUserIds } from "@/store/slices/onlineUsersSlice";
 
 function UserAvatar({ user, onClick, className }) {
   const { data: self } = useGetUser();
-  const isSelf = user.userId === self.id;
+  const onlineUserIds = useSelector(selectOnlineUserIds);
+
+  const isSelf = user?.userId === self?.id || user?.id === self?.id;
+  const targetUserId = user?.userId || user?.id;
+  const isOnline = isSelf || onlineUserIds?.includes(targetUserId);
 
   return (
     <Avatar
@@ -29,7 +36,7 @@ function UserAvatar({ user, onClick, className }) {
           <IncognitoIcon className="size-5" />
         )}
       </AvatarFallback>
-      {isSelf && <AvatarBadge />}
+      {isOnline && <AvatarBadge />}
     </Avatar>
   );
 }

@@ -1,7 +1,7 @@
 import {
   VITE_DAILY_REWARD_AMOUNT,
   VITE_REFERRER_REWARD_AMOUNT,
-} from "@/config/env";
+} from "@/lib/config/env";
 import { formatToINR } from "@/utils/formatters";
 
 const dailyRewardAmount = formatToINR(VITE_DAILY_REWARD_AMOUNT);

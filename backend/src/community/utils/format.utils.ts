@@ -13,28 +13,30 @@ type FormatUserParams = {
   sessions: {
     updatedAt: Date;
   }[];
-  mfPortfolio: {
+  mfPortfolio?: {
     invested: Decimal;
-    current: Decimal;
   }[];
-  _count: {
-    mfSips: number;
+  stockPortfolios?: {
+    invested: Decimal;
+  }[];
+  _count?: {
+    mfSips?: number;
   };
 };
 
 export const formatData = (user: FormatUserParams) => {
-  const totalInvested = user.mfPortfolio.reduce(
+  const mfPortfolioList = user.mfPortfolio || [];
+  const stockPortfolioList = user.stockPortfolios || [];
+
+  const totalMfInvested = mfPortfolioList.reduce(
     (sum, item) => sum + Number(item.invested),
     0,
   );
-  const currentValue = user.mfPortfolio.reduce(
-    (sum, item) => sum + Number(item.current),
+
+  const totalStockInvested = stockPortfolioList.reduce(
+    (sum, item) => sum + Number(item.invested),
     0,
   );
-  const returnPercent =
-    totalInvested > 0
-      ? ((currentValue - totalInvested) / totalInvested) * 100
-      : 0;
 
   return {
     userId: user.id,
@@ -44,12 +46,14 @@ export const formatData = (user: FormatUserParams) => {
     balance: Number(user.balance ?? 0),
     lastActiveAt: user.sessions[0]?.updatedAt ?? user.updatedAt,
     createdAt: user.createdAt,
-    portfolio: {
-      invested: totalInvested,
-      current: currentValue,
-      returnPercent: returnPercent,
-      sipCount: user._count.mfSips,
-      fundCount: user.mfPortfolio.length ?? 0,
+    mfPortfolio: {
+      invested: totalMfInvested,
+      fundCount: mfPortfolioList.length,
+      sipCount: user._count?.mfSips ?? 0,
+    },
+    stockPortfolio: {
+      invested: totalStockInvested,
+      stockCount: stockPortfolioList.length,
     },
   };
 };

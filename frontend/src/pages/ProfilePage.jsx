@@ -14,7 +14,7 @@ import { useGetBalance } from "@/hooks/useGetBalance";
 import { useGetUser } from "@/hooks/useGetUser";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import GoBackBtn from "@/components/GoBackBtn";
+import GoBackButton from "@/components/GoBackButton";
 import ProfileAvatar from "@/components/ProfileAvatar";
 
 const MENU_ITEMS = [
@@ -60,7 +60,7 @@ function ProfilePage({ closeSheet }) {
     <div className="flex h-dvh flex-col sm:min-w-md sm:rounded-l-2xl sm:pl-6">
       <div className="sticky top-0 z-10 p-4 sm:hidden">
         <div className="flex items-center justify-between">
-          <GoBackBtn />
+          <GoBackButton />
           <Button
             variant="ghost"
             size="icon"
