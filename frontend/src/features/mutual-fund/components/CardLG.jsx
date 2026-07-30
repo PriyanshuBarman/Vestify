@@ -1,8 +1,7 @@
 import { Link } from "react-router";
 
 import { Card, CardFooter, CardTitle } from "@/components/ui/card";
-
-import FundLogo from "./FundLogo";
+import FundLogo from "@/components/FundLogo";
 
 function CardLG({ fund }) {
   return (

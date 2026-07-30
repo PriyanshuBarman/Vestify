@@ -26,10 +26,13 @@ function Features() {
               key={index}
               variants={itemVariants}
               whileHover={{
-                y: -4,
-                transition: { type: "spring", stiffness: 300 },
+                scale: 1.01,
+                transition: {
+                  duration: 0.3,
+                },
               }}
-              className={`${feature.span} group relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 ${
+              whileTap={{ scale: 0.99 }}
+              className={`${feature.span} group  relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 ${
                 feature.isFill
                   ? "bg-card sm:bg-landing sm:text-primary-foreground border"
                   : "bg-card border"

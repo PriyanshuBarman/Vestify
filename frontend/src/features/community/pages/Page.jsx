@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FilterIcon, Loader2Icon, SearchIcon } from "lucide-react";
+import { Loader2Icon, SearchIcon } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -9,22 +9,15 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import NoUsersFound from "@/components/empty-states/NoUsersFound";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import {
   selectExpandedCardIndex,
   selectSortBy,
-  setSortBy,
   toggleExpandedCardIndex,
 } from "@/store/slices/communitySlice";
 
-import NoUsersFound from "../components/empty-states/NoUsersFound";
+import FilterPopover from "../components/FilterPopover";
 import UserPreviewCard from "../components/UserPreviewCard";
 import UserPreviewCardSkeleton from "../components/UserPreviewCardSkeleton";
 import { useGetUsers } from "../hooks/useGetUsers";
@@ -70,7 +63,7 @@ function Page() {
   }, [fetchNextPage, inView, hasNextPage, isSearching]);
 
   return (
-    <div className="max-sm:px-4 relative max-sm:pb-16 sm:mx-auto sm:flex sm:gap-24">
+    <div className="max-sm:px-4 max-w-6xl relative max-sm:pb-16 sm:mx-auto sm:flex sm:gap-24">
       {/* Illustration */}
       {!isMobile && (
         <div className="flex w-[45%] flex-col items-center justify-center max-sm:hidden">
@@ -131,32 +124,12 @@ function Page() {
                 </div>
               )}
 
-              <Select
-                value={sortBy}
-                onValueChange={(value) => dispatch(setSortBy(value))}
-              >
-                <SelectTrigger
-                  size="sm"
-                  aria-label="Sort"
-                  className="border-transparent max-sm:!bg-transparent shadow-none [&_[data-slot=select-value]]:sr-only [&_svg:last-child]:hidden"
-                >
-                  <SelectValue placeholder="Sort" />
-                  <FilterIcon className="text-foreground size-5" />
-                </SelectTrigger>
-                <SelectContent
-                  position="popper"
-                  className="rounded-xl [&_[data-slot=select-item]]:rounded-lg "
-                >
-                  <SelectItem value="updatedAt">Recently Active</SelectItem>
-                  <SelectItem value="createdAt">New Users</SelectItem>
-                  <SelectItem value="name">A-Z</SelectItem>
-                </SelectContent>
-              </Select>
+              <FilterPopover />
             </div>
           </div>
         </div>
 
-        <ScrollArea className="sm:h-[calc(100vh-150px)] sm:mask-b-from-95%">
+        <ScrollArea className="sm:h-[calc(100vh-170px)] sm:mask-b-from-95%">
           <div className="space-y-4 pt-6 pb-8 sm:mr-4">
             {isPending ? (
               <>

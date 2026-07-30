@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import Logo from "@/components/Logo";
 import { navs } from "@/constants/nav";
 
-import { ModeToggle } from "../ui/mode-togle";
+import ThemeToggle from "../ThemeToggle";
 import SidebarSheet from "./SidebarSheet";
 
 function NavbarPublic() {
@@ -24,7 +24,7 @@ function NavbarPublic() {
   const isMobile = useIsMobile();
 
   return (
-    <nav className="font-poppins fixed top-0 left-1/2 z-50 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between gap-8 mask-b-from-70% px-4 py-4 backdrop-blur-xs sm:p-4 sm:px-6 md:px-8">
+    <nav className="font-poppins fixed top-0 left-1/2 z-50 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between gap-8 mask-b-from-70% px-4 pt-3 pb-4 backdrop-blur-xs sm:p-4 sm:px-6 md:px-8">
       <Link to="/" className="flex items-center justify-center gap-2 sm:gap-4">
         <Logo className="size-8" />
         <span className="font-medium sm:text-2xl">Vestify</span>
@@ -38,6 +38,7 @@ function NavbarPublic() {
               variant="ghost"
               size="icon-sm"
               onClick={() => setOpenSidebar(true)}
+              className="p-6 rounded-full bg-background"
             >
               <div className="flex flex-col items-end gap-1.5">
                 <span className="bg-foreground h-0.5 w-7"></span>
@@ -48,7 +49,7 @@ function NavbarPublic() {
           </>
         ) : (
           <div className="flex items-center justify-center gap-4 lg:gap-6">
-            <ModeToggle />
+            <ThemeToggle enableHotKey className="rounded-full" />
             <Button
               onClick={() =>
                 navigate(
@@ -83,23 +84,25 @@ function NavLinks() {
 
   return (
     <div className="flex max-sm:hidden">
-      <button
+      <Button
+        variant="ghost"
         onClick={handleHomeClick}
-        className="hover:text-primary text-md shrink-0 rounded-full px-4 py-2 font-normal"
+        className=" text-md shrink-0 px-4 py-2 "
       >
         Home
-      </button>
+      </Button>
 
       {navs.map((nav) => (
-        <NavLink
-          key={nav.name}
-          to={nav.link}
-          className={({ isActive }) =>
-            `${isActive ? "text-primary" : ""} hover:text-primary text-md shrink-0 rounded-full px-4 py-2 font-normal`
-          }
-        >
-          {nav.name}
-        </NavLink>
+        <Button key={nav.name} asChild variant="ghost">
+          <NavLink
+            to={nav.link}
+            className={({ isActive }) =>
+              `${isActive ? "text-primary" : ""}  text-md shrink-0 rounded-full px-4 py-2 `
+            }
+          >
+            {nav.name}
+          </NavLink>
+        </Button>
       ))}
     </div>
   );

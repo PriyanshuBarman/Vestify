@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
+import FundLogo from "@/components/FundLogo";
 import { selectRecentlyViewedFunds } from "@/store/slices/mutualFundSlice";
 
-import FundLogo from "../FundLogo";
 import SectionHeading from "../SectionHeading";
 
 function RecentlyViewedSection() {

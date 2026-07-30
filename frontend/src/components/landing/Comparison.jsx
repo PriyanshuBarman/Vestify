@@ -23,7 +23,7 @@ function Comparison() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SectionHeading
           subheading="Why Vestify?"
-          heading="Everything others offer — and more."
+          heading="Everything you get in a real investing app."
         />
 
         <motion.div

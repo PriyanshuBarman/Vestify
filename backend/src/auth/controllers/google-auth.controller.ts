@@ -1,6 +1,6 @@
 import { envConfig } from "@/config/env.config.js";
 import { ApiError } from "@/shared/utils/api-error.utils.js";
-import type { Request, Response } from "express";
+import type { Response } from "express";
 
 import { OAuth2Client } from "google-auth-library";
 import {
@@ -8,6 +8,7 @@ import {
   REFRESH_COOKIE_OPTIONS,
 } from "../constants/auth.constants.js";
 import * as gAuthService from "../services/google-auth.service.js";
+import type { ApiRequest } from "@/shared/types/types.js";
 
 const client = new OAuth2Client(
   envConfig.CLIENT_ID,
@@ -15,7 +16,10 @@ const client = new OAuth2Client(
   "postmessage",
 );
 
-export const googleAuth = async (req: Request, res: Response) => {
+export const googleAuth = async (
+  req: ApiRequest<{ code: string; referralCode?: string }>,
+  res: Response,
+) => {
   const { code, referralCode } = req.body;
   const ip = req.clientIp ?? "unknown";
   const userAgent = req.headers["user-agent"] ?? "unknown";

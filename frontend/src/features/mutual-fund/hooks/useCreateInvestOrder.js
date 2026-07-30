@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { formatDate } from "date-fns";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
@@ -15,22 +16,39 @@ export function useCreateInvestOrder() {
   return useMutation({
     mutationFn: createInvestOrder,
     onSuccess: (order) => {
-      queryClient.setQueryData([userKey, "order", order.id], order);
-      queryClient.setQueryData([userKey, "orders"], (old) =>
+      queryClient.setQueryData(
+        [userKey, "mutual-funds", "order", order.id],
+        order,
+      );
+      queryClient.setQueryData([userKey, "mutual-funds", "orders"], (old) =>
         old ? [order, ...old] : [order],
       );
-      queryClient.setQueryData([userKey, "pending-orders"], (old) =>
-        old ? [order, ...old] : [order],
+      queryClient.setQueryData(
+        [userKey, "mutual-funds", "pending-orders"],
+        (old) => (old ? [order, ...old] : [order]),
       );
 
       playPaymentSuccessSound();
       navigate("/success", {
         state: {
-          amount: order.amount,
           title: "Order Placed",
-          description: `Investment of ${formatToINR(order.amount)} in ${order.fundName}.`,
-          orderDetailsRoute: `/mutual-funds/orders/${order.id}`,
-          doneRoute: "/mutual-funds#investments",
+          cardTitle: order.fundName,
+          orderDetailsLink: `/mutual-funds/orders/${order.id}`,
+          doneLink: "/mutual-funds#investments",
+          items: [
+            {
+              label: "Amount",
+              value: formatToINR(order.amount),
+            },
+            {
+              label: "Expected NAV date",
+              value: formatDate(order.navDate, "dd MMM yy"),
+            },
+            {
+              label: "Expected allotment date",
+              value: formatDate(order.processDate, "dd MMM yy"),
+            },
+          ],
         },
         replace: true,
       });

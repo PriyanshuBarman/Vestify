@@ -26,7 +26,7 @@ function CustomTooltipContent({
       });
 
   const tooltipWidth = 140;
-  const padding = 10;
+  const padding = 14;
 
   let x = coordinate.x;
 

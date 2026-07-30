@@ -6,7 +6,7 @@ export function useGetWatchlist(username) {
   const userKey = username || "self";
 
   return useQuery({
-    queryKey: [userKey, "watchlist"],
+    queryKey: [userKey, "mutual-funds", "watchlist"],
     queryFn: () => fetchWatchlist(username),
     ...(username && { staleTime: 0 }),
   });

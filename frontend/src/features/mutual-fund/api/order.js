@@ -4,7 +4,7 @@ import { api } from "@/lib/axios";
 
 export const fetchOrders = async (username) => {
   const url = username
-    ? `/community/users/${username}/orders`
+    ? `/community/users/${username}/mutual-funds/orders`
     : `/mutual-funds/orders`;
 
   const { data } = await api.get(url);
@@ -18,15 +18,18 @@ export const fetchPendingOrders = async () => {
 
 export const fetchFundOrders = async (schemeCode, username) => {
   const url = username
-    ? `/community/users/${username}/portfolio/${schemeCode}/orders`
+    ? `/community/users/${username}/mutual-funds/portfolio/${schemeCode}/orders`
     : `/mutual-funds/orders/fund/${schemeCode}`;
 
   const { data } = await api.get(url);
   return data.orders;
 };
 
-export const fetchOrderDetail = async (orderId) => {
-  const { data } = await api.get(`/mutual-funds/orders/${orderId}`);
+export const fetchOrderDetail = async (orderId, username) => {
+  const url = username
+    ? `/community/users/${username}/mutual-funds/orders/${orderId}`
+    : `/mutual-funds/orders/${orderId}`;
+  const { data } = await api.get(url);
   return data.order;
 };
 

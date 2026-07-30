@@ -14,14 +14,16 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
+import FundLogo from "@/components/FundLogo";
 import LoadingState from "@/components/LoadingState";
 import { formatToINR } from "@/utils/formatters";
 
 import { useGetPendingOrders } from "../../hooks/useGetPendingOrders";
 import { useGetSips } from "../../hooks/useGetSips";
-import FundLogo from "../FundLogo";
 
-const NoActiveSips = lazy(() => import("../empty-states/NoActiveSips"));
+const NoActiveSips = lazy(
+  () => import("@/components/empty-states/NoActiveSips"),
+);
 
 function SipsTab({ username }) {
   const isOtherUserProfile = Boolean(username);

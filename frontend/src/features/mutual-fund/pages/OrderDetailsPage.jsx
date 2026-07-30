@@ -14,7 +14,7 @@ import CopyButton from "@/components/CopyButton";
 import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
 
-import OrderStatusIcon from "../components/OrderStatusIcon";
+import OrderStatusIcon from "../../../components/OrderStatusIcon";
 import OrderStatusTimeline from "../components/OrderStatusTimeline";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
 import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
@@ -57,8 +57,7 @@ function OrderDetailsPage() {
               )}
             </h2>
             <span className="text-muted-foreground mt-2 space-x-6 text-xs">
-              {orderTypeConfig[order.orderType]} •{" "}
-              {orderStatusConfig[order.status]}
+              {orderTypeConfig[order.type]} • {orderStatusConfig[order.status]}
             </span>
           </div>
 

@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import FundLogo from "@/components/FundLogo";
 import GoBackBar from "@/components/GoBackBar";
 import { setRecentlyViewedFunds } from "@/store/slices/mutualFundSlice";
 import { setIsSearchOpen } from "@/store/slices/searchSlice";
@@ -13,7 +14,6 @@ import { setIsSearchOpen } from "@/store/slices/searchSlice";
 import FundPageAccordions from "../components/accordions/FundPageAccordions";
 import Chart from "../components/charts/Chart";
 import FundDescription from "../components/FundDescription";
-import FundLogo from "../components/FundLogo";
 import { useAddFundToWatchlist } from "../hooks/useAddFundToWatchlist";
 import { useGetFundData } from "../hooks/useGetFundData";
 import { useGetFundPortfolio } from "../hooks/useGetFundPortfolio";
@@ -27,7 +27,7 @@ const FundPortfolioPreview = lazy(
 const RecentlyViewedFunds = lazy(
   () => import("../components/RecentlyViewedFunds"),
 );
-const PurchaseBtns = lazy(() => import("../components/PurchaseBtns"));
+const PurchaseBtns = lazy(() => import("../components/PurchaseButtons"));
 const DesktopPaymentCard = lazy(
   () => import("../components/DesktopPaymentCard"),
 );

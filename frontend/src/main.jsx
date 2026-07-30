@@ -11,6 +11,7 @@ import { initGA } from "./lib/analytics";
 
 import "./index.css";
 
+import { TooltipProvider } from "./components/ui/tooltip";
 import { persister, queryClient } from "./lib/tanstackQuery";
 import { persistor, store } from "./store/store";
 
@@ -25,7 +26,9 @@ createRoot(document.getElementById("root")).render(
           persistOptions={{ persister }}
         >
           <ThemeProvider>
-            <App />
+            <TooltipProvider>
+              <App />
+            </TooltipProvider>
             <ReactQueryDevtools />
           </ThemeProvider>
         </PersistQueryClientProvider>

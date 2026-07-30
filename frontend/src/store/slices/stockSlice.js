@@ -28,7 +28,7 @@ const stockSlice = createSlice({
       state.recentlyViewedStocks = [
         { symbol, name },
         ...recentlyViewedStocks.filter((stock) => stock.symbol !== symbol),
-      ].slice(0, 8);
+      ].slice(0, 7);
     },
   },
 });

@@ -14,8 +14,7 @@ function AuthGuard({ children, mode = "protected" }) {
 
   // ----- Private Mode -----
   if (mode === "private") {
-    if (user && user?.hasPin)
-      return <Navigate to="/mutual-funds#explore" replace />;
+    if (user && user?.hasPin) return <Navigate to="/stocks#explore" replace />;
     return children;
   }
 

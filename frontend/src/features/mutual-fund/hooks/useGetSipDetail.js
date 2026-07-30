@@ -6,7 +6,7 @@ export function useGetSipDetail(sipId, username) {
   const userKey = username || "self";
 
   return useQuery({
-    queryKey: [userKey, "sip", sipId],
+    queryKey: [userKey, "mutual-funds", "sip", sipId],
     queryFn: () => fetchSipDetail(sipId, username),
     staleTime: 0,
   });

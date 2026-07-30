@@ -5,10 +5,10 @@ import {
   VITE_MF_API_BASE_URL,
   VITE_MF_CHART_API_BASE_URL,
   VITE_STOCK_SEARCH_API_BASE_URL,
-} from "@/config/env";
+} from "@/lib/config/env";
 
 const api = axios.create({
-  baseURL: VITE_BACKEND_BASE_URL,
+  baseURL: `${VITE_BACKEND_BASE_URL}/api/v1`,
   withCredentials: true,
 });
 
@@ -66,13 +66,8 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // Attempt token refresh
         await api.post("/auth/refresh-token");
-
-        // Retry queued requests
         processQueue(null);
-
-        // Retry the original request
         return api(originalRequest);
       } catch (refreshError) {
         // Refresh failed -> logout

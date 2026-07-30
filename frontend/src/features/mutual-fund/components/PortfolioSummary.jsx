@@ -1,5 +1,4 @@
 import { ChartNoAxesCombinedIcon } from "lucide-react";
-import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,11 +28,7 @@ function PortFolioSummary({ count, username }) {
           {formatToINR(data.current)}
         </CardTitle>
         <CardAction>
-          <Button
-            onClick={() => toast("Comming Soon")}
-            variant="icon"
-            className="size-9 rounded-full border"
-          >
+          <Button variant="icon" className="size-9 rounded-full border">
             <ChartNoAxesCombinedIcon />
           </Button>
         </CardAction>

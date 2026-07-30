@@ -4,7 +4,7 @@ import { api } from "@/lib/axios";
 
 export const fetchWatchlist = async (username) => {
   const url = username
-    ? `/community/users/${username}/watchlist`
+    ? `/community/users/${username}/mutual-funds/watchlist`
     : `/mutual-funds/watchlist`;
   const { data } = await api.get(url);
   return data.watchlist;

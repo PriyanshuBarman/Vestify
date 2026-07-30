@@ -15,7 +15,7 @@ import {
   columnsConfig,
   getNextColumn,
 } from "../../utils/similarFundsTableUtils";
-import FilterBtns from "../filters/FilterBtns";
+import FilterButtons from "../filters/FilterButtons";
 import SectionHeading from "../SectionHeading";
 import TableSM from "../tables/TableSM";
 
@@ -40,7 +40,7 @@ function AllFundsSection() {
     <section>
       <div className="bg-background sticky top-0 z-10">
         <SectionHeading heading="All Mutual Funds" />
-        <FilterBtns />
+        <FilterButtons />
 
         <div className="flex items-center justify-between px-4 py-2 sm:hidden">
           <span className="text-xs font-semibold tabular-nums">

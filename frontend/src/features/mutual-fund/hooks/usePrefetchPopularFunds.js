@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
 
-import { fetchChartData, fetchFund } from "../api/external";
+import { fetchFund } from "../api/external";
 
 export function usePrefetchPopularFunds(funds) {
   const queryClient = useQueryClient();
@@ -12,12 +12,8 @@ export function usePrefetchPopularFunds(funds) {
 
     for (const fund of funds) {
       queryClient.prefetchQuery({
-        queryKey: ["fund", Number(fund.scheme_code)],
+        queryKey: ["mutual-funds", "fund", Number(fund.scheme_code)],
         queryFn: () => fetchFund(fund.scheme_code),
-      });
-      queryClient.prefetchQuery({
-        queryKey: ["fund-chart", Number(fund.scheme_code)],
-        queryFn: () => fetchChartData(fund.scheme_code),
       });
     }
   }, [isRestoring, queryClient, funds]);

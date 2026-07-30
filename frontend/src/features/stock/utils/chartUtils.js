@@ -18,7 +18,7 @@ export function getSelectedRangeData(fullChartData, selectedRange) {
 }
 
 export function isValidRange(selectedRange, fullChartData) {
-  if (!fullChartData.length) return;
+  if (!fullChartData.length) return null;
   if (selectedRange === "All") return false;
 
   const startDate = getStartDate(selectedRange);

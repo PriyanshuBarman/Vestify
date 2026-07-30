@@ -43,8 +43,10 @@ function SortByButton({
         <Button
           variant={variant}
           className={cn(
-            "h-7.5 rounded-full sm:h-8",
-            variant === "outline" ? "border text-[0.65rem]" : "px-0 text-xs",
+            "h-8 rounded-full sm:h-10",
+            variant === "outline"
+              ? "border sm:text-xs text-[0.65rem]"
+              : "px-0 text-xs",
             !isDefaultSort && "bg-accent border-foreground border font-[550]",
             className,
           )}

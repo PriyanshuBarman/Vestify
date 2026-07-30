@@ -10,7 +10,7 @@ import { fetchFund } from "../api/external";
 export function useGetFundsData(schemeCodes) {
   const queries = useQueries({
     queries: schemeCodes.map((code) => ({
-      queryKey: ["fund", parseInt(code)],
+      queryKey: ["mutual-funds", "fund", parseInt(code)],
       queryFn: () => fetchFund(code),
       retry: 3,
       retryDelay: 5000,

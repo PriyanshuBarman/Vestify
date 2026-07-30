@@ -1,13 +1,12 @@
 import { db } from "@/config/db.config.js";
 import { envConfig } from "@/config/env.config.js";
-import { sendUserEvent } from "@/shared/events/event-manager.js";
 import { TZDate } from "@date-fns/tz";
+import type { MfPortfolio } from "@prisma/client";
 import axios from "axios";
 import { parse } from "date-fns";
 import { calcPortfolioAfterRedemption } from "../utils/calculate-updated-portfolio.utils.js";
 import { getDomain } from "../utils/get-domain.utils.js";
 import { fifoRedemption } from "./fifo.service.js";
-import type { MfPortfolio } from "@prisma/client";
 
 export const instantRedemption = async (fund: MfPortfolio, amount: number) => {
   const {
@@ -22,7 +21,7 @@ export const instantRedemption = async (fund: MfPortfolio, amount: number) => {
 
   const units = amount / latestNav; // Redemption units
 
-  const user = await db.$transaction(async (tx) => {
+  await db.$transaction(async (tx) => {
     const costBasis = await fifoRedemption(userId, schemeCode, units, tx);
 
     const updatedValues = calcPortfolioAfterRedemption(
@@ -45,7 +44,7 @@ export const instantRedemption = async (fund: MfPortfolio, amount: number) => {
         amount,
         units,
         method: "REGULAR",
-        orderType: "REDEEM",
+        type: "REDEEM",
         processDate: TZDate.tz("Asia/Kolkata"),
         navDate: latestNavDate,
         status: "COMPLETED",
@@ -75,8 +74,6 @@ export const instantRedemption = async (fund: MfPortfolio, amount: number) => {
 
     return user;
   });
-
-  sendUserEvent(userId, { balance: user.balance });
 };
 
 export const fetchLatestNAVData = async (schemeCode: number) => {

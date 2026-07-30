@@ -4,8 +4,9 @@ import { fetchStockData } from "../api/stock";
 
 export function useGetStockData(symbol) {
   return useQuery({
-    queryKey: ["stock", symbol],
+    queryKey: ["stocks", "quote", symbol],
     queryFn: () => fetchStockData(symbol),
-    enabled: !!symbol,
+    enabled: Boolean(symbol),
+    staleTime: 5 * 60 * 1000,
   });
 }

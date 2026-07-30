@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import GoBackBtn from "@/components/GoBackBtn";
+import GoBackButton from "@/components/GoBackButton";
 import Keypad from "@/components/Keypad";
 import { formatToINR } from "@/utils/formatters";
 
@@ -43,8 +43,8 @@ function EditSipPage() {
   return (
     <div className="flex h-svh flex-col justify-between">
       {/* ================= Title ================= */}
-      <div className="Title mt-4 flex items-center gap-4 px-4">
-        <GoBackBtn />
+      <div className="Title mt-4 flex items-center gap-2 px-4">
+        <GoBackButton />
         <div>
           <h5 className="font-medium">SIP</h5>
           <p className="text-xs">{fund.name}</p>

@@ -5,10 +5,10 @@ import { fetchFund, fetchFundCategoryRanking } from "../api/external";
 export function useGetFundData(schemeCode) {
   const queryClient = useQueryClient();
   return useQuery({
-    queryKey: ["fund", Number(schemeCode)],
+    queryKey: ["mutual-funds", "fund", Number(schemeCode)],
     queryFn: () => {
       queryClient.prefetchQuery({
-        queryKey: ["fund-category-ranking", Number(schemeCode)],
+        queryKey: ["mutual-funds", "fund-category-ranking", Number(schemeCode)],
         queryFn: () => fetchFundCategoryRanking(schemeCode),
       });
 

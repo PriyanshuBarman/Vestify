@@ -1,13 +1,13 @@
 import { Loader2 } from "lucide-react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import FundLogo from "@/components/FundLogo";
 
 import { formatFundCategory } from "../../utils/formaters";
 import { getColumnValueSm } from "../../utils/tableUtils";
-import FundLogo from "../FundLogo";
 
 /**
  *  Reusable Small screen table with pagination support
@@ -72,15 +72,17 @@ function TableSM({
 export default TableSM;
 
 function TableRowFund({ fund, activeColumn, columnsConfig, onColumnClick }) {
+  const navigate = useNavigate();
   return (
     <TableRow key={fund.scheme_code}>
-      <TableCell className="flex items-center gap-4 py-4 pl-4">
+      <TableCell
+        onClick={() => navigate(`/mutual-funds/${fund.scheme_code}`)}
+        className="flex items-center gap-4 py-4 pl-4"
+      >
         <FundLogo fundHouseDomain={fund.detail_info} />
         <div>
           <h4 className="Fund-Name text-foreground text-wrap">
-            <Link to={`/mutual-funds/${fund.scheme_code}`}>
-              {fund.short_name}
-            </Link>
+            {fund.short_name}
           </h4>
 
           <p className="text-muted-foreground mt-1 space-x-1 text-xs text-wrap">

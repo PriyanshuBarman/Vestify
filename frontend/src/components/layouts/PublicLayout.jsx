@@ -12,7 +12,7 @@ function PublicLayout() {
     <ErrorBoundary fallback={<ErrorPage />}>
       <NavbarPublic />
       <Outlet />
-      <Footer className="mt-20 border-transparent sm:mt-34" />
+      <Footer className="mt-20 sm:mt-34" />
       <ScrollToTop />
     </ErrorBoundary>
   );

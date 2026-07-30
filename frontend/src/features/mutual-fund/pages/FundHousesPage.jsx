@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 
+import FundLogo from "@/components/FundLogo";
 import GoBackBar from "@/components/GoBackBar";
 
-import FundLogo from "../components/FundLogo";
 import { useGetAMCs } from "../hooks/useGetAMCs";
 
 function FundHousesPage() {

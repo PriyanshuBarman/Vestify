@@ -17,13 +17,14 @@ import LoadingSkeleton from "./LoadingSkeleton";
 import SearchBar from "./SearchBar";
 import SearchHistoryList from "./SearchHistoryList";
 import SearchResultList from "./SearchResultList";
+import TrendingSearchList from "./TrendingSearchList";
 
 function DesktopSearch() {
   const { data: popularFunds } = useGetPopularFunds();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [displayQuery, setDisplayQuery] = useState("");
-  const [searchType, setSearchType] = useState("mutualFunds");
+  const [searchType, setSearchType] = useState("indianStocks");
   const [activeIdx, setActiveIdx] = useState(-1);
   const { searchHistory, isSearchOpen } = useSelector((state) => state.search);
   const dispatch = useDispatch();
@@ -78,7 +79,10 @@ function DesktopSearch() {
 
   const handleClick = useCallback(
     (item) => {
-      navigate(`/mutual-funds/${item.scheme_code}`);
+      if (searchType === "mutualFunds")
+        navigate(`/mutual-funds/${item.scheme_code}`);
+      else navigate(`/stocks/${item.symbol}`);
+
       dispatch(addToSearchHistory({ item, type: searchType }));
       dispatch(setIsSearchOpen(false));
     },
@@ -131,14 +135,14 @@ function DesktopSearch() {
                 />
               )}
 
-              {/* {!searchResult &&
+              {!searchResult &&
                 !searchHistory[searchType]?.length &&
                 !isLoading && (
                   <TrendingSearchList
-                    activeIdx={activeIdx}
+                    searchType={searchType}
                     handleClick={handleClick}
                   />
-                )} */}
+                )}
 
               <ScrollBar orientation="vertical" />
             </ScrollArea>

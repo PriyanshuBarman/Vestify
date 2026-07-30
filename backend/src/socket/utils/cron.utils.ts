@@ -1,16 +1,13 @@
 import { TZDate } from "@date-fns/tz";
 import { isAfter, isBefore, isWeekend, setHours, setMinutes } from "date-fns";
 import { TIMEZONE } from "./constants.js";
-import { nseHolidays } from "@/shared/constants/holidays.constant.js";
+import { isStockHolidayToday } from "@/shared/utils/holidays.utils.js";
 
-export function isMarketHolidayToday(): boolean {
-  const istNow = TZDate.tz(TIMEZONE);
-  const todayString = istNow.toISOString().split("T")[0]; // YYYY-MM-DD
-
-  return nseHolidays.some((holiday) => holiday.date === todayString);
+export function isMarketHolidayToday() {
+  return !!isStockHolidayToday();
 }
 
-export function isMarketOpen(): boolean {
+export function isMarketOpen() {
   const istNow = TZDate.tz(TIMEZONE);
   if (isWeekend(istNow)) return false;
 

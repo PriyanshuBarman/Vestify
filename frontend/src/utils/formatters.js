@@ -20,10 +20,11 @@ const units = [
   { value: 100000, suffix: "lakh" },
   { value: 1000, suffix: "k" },
 ];
+
 export const formatToCompactINR = (
   num,
   maxFracDigits = 0,
-  withSymbol = false,
+  withSymbol = true,
 ) => {
   const number = Number(num);
   if (!Number.isFinite(number) || number === 0) return withSymbol ? "₹0" : "0";

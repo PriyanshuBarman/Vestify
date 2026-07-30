@@ -4,11 +4,11 @@ import { useParams } from "react-router";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
+import FundLogo from "@/components/FundLogo";
 import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
 
 import FilterCategoryButton from "../components/filters/FilterCategoryButton";
-import FundLogo from "../components/FundLogo";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import { DEFAULT_COLUMNS, sortOptions } from "../constants/collection";

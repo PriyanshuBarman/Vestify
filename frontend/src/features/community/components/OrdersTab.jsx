@@ -3,12 +3,10 @@ import { lazy } from "react";
 import { ItemGroup } from "@/components/ui/item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import LoadingState from "@/components/LoadingState";
-import OrderItem from "@/features/mutual-fund/components/OrderItem";
+import MfOrderItem from "@/components/MfOrderItem";
 import { useGetOrders } from "@/features/mutual-fund/hooks/useGetOrders";
 
-const NoOrders = lazy(
-  () => import("@/features/mutual-fund/components/empty-states/NoOrders"),
-);
+const NoOrders = lazy(() => import("@/components/empty-states/NoOrders"));
 
 function OrdersTab({ username }) {
   const { data: orders, isPending } = useGetOrders(username);
@@ -23,7 +21,7 @@ function OrdersTab({ username }) {
       <div className="pb-20">
         <ItemGroup>
           {orders?.map((order, index) => (
-            <OrderItem
+            <MfOrderItem
               key={order.id}
               order={order}
               username={username}

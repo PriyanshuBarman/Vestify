@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { fetchPopularStocks } from "../api/stock";
 
-export function useGetpopularStocks() {
+export function useGetPopularStocks() {
   return useQuery({
-    queryKey: ["popularStocks"],
+    queryKey: ["stocks", "popular"],
     queryFn: fetchPopularStocks,
     placeholderData: [{}, {}, {}, {}],
+    retry: 3,
   });
 }

@@ -1,9 +1,9 @@
 import { Link } from "react-router";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
+import FundLogo from "@/components/FundLogo";
 
 import { useGetAMCs } from "../../hooks/useGetAMCs";
-import FundLogo from "../FundLogo";
 import SectionHeading from "../SectionHeading";
 
 function FundHousesSection() {

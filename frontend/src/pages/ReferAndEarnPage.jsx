@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import {
   VITE_REFERRED_USER_REWARD_AMOUNT,
   VITE_REFERRER_REWARD_AMOUNT,
-} from "@/config/env";
+} from "@/lib/config/env";
 import { useGetReferrals } from "@/hooks/useGetReferrals";
 import { useGetUser } from "@/hooks/useGetUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

@@ -10,7 +10,7 @@ export function useGetAMCs() {
   const placeholderData = Array.from({ length }, (_) => ({}));
 
   return useQuery({
-    queryKey: ["amcs"],
+    queryKey: ["mutual-funds", "amcs"],
     queryFn: fetchAMCs,
     placeholderData,
   });

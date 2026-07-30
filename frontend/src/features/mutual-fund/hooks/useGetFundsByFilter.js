@@ -4,7 +4,7 @@ import { fetchFundsByFilter } from "../api/external";
 
 export function useGetFundsByFilter(filters, options) {
   return useQuery({
-    queryKey: ["fundByFilter", filters],
+    queryKey: ["mutual-funds", "fund-by-filter", filters],
     queryFn: () => fetchFundsByFilter(filters),
     ...options,
   });

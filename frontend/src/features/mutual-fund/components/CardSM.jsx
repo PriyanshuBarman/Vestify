@@ -6,9 +6,8 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
+import FundLogo from "@/components/FundLogo";
 import FundRating from "@/features/mutual-fund/components/FundRating";
-
-import FundLogo from "./FundLogo";
 
 function CardSM({ fund }) {
   return (

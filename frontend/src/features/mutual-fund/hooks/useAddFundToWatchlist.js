@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 import { addToWatchlist } from "../api/watchlist";
 
-export function useAddFundToWatchlist() {
+export function useAddFundToWatchlist({ showToast = true } = {}) {
   const queryClient = useQueryClient();
   const userKey = "self";
 
@@ -12,35 +12,77 @@ export function useAddFundToWatchlist() {
 
     onMutate: async (variables) => {
       await queryClient.cancelQueries({
-        queryKey: [userKey, "isInWatchlist", variables.schemeCode],
+        queryKey: ["mutual-funds", "is-in-watchlist", variables.schemeCode],
       });
-      const previousData = queryClient.getQueryData([
-        userKey,
-        "isInWatchlist",
+      await queryClient.cancelQueries({
+        queryKey: [userKey, "mutual-funds", "watchlist"],
+      });
+
+      const previousIsInWatchlist = queryClient.getQueryData([
+        "mutual-funds",
+        "is-in-watchlist",
         variables.schemeCode,
+      ]);
+      const previousWatchlist = queryClient.getQueryData([
+        userKey,
+        "mutual-funds",
+        "watchlist",
       ]);
 
       queryClient.setQueryData(
-        [userKey, "isInWatchlist", variables.schemeCode],
+        ["mutual-funds", "is-in-watchlist", variables.schemeCode],
         true,
       );
-      toast.success("Added to watchlist");
-      return { previousData, variables };
+
+      if (previousWatchlist) {
+        queryClient.setQueryData(
+          [userKey, "mutual-funds", "watchlist"],
+          (old = []) => {
+            if (old.some((item) => item.schemeCode === variables.schemeCode))
+              return old;
+            return [
+              ...old,
+              {
+                schemeCode: variables.schemeCode,
+                fundName: variables.fundName,
+                fundShortName: variables.fundShortName,
+                fundHouseDomain: variables.fundHouseDomain,
+              },
+            ];
+          },
+        );
+      }
+
+      if (showToast) {
+        toast.success("Added to watchlist");
+      }
+
+      return { previousIsInWatchlist, previousWatchlist, variables };
     },
 
     onError: (error, variables, context) => {
-      queryClient.setQueryData(
-        [userKey, "isInWatchlist", context.variables.schemeCode],
-        context.previousData,
-      );
+      if (context) {
+        queryClient.setQueryData(
+          ["mutual-funds", "is-in-watchlist", context.variables.schemeCode],
+          context.previousIsInWatchlist,
+        );
+        if (context.previousWatchlist !== undefined) {
+          queryClient.setQueryData(
+            [userKey, "mutual-funds", "watchlist"],
+            context.previousWatchlist,
+          );
+        }
+      }
       toast.error(error.response?.data?.message || "Error adding to watchlist");
     },
 
     onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({
-        queryKey: [userKey, "isInWatchlist", variables.schemeCode],
+        queryKey: ["mutual-funds", "is-in-watchlist", variables.schemeCode],
       });
-      queryClient.invalidateQueries({ queryKey: [userKey, "watchlist"] });
+      queryClient.invalidateQueries({
+        queryKey: [userKey, "mutual-funds", "watchlist"],
+      });
     },
   });
 }

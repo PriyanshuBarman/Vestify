@@ -4,15 +4,15 @@ import { Link } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import FundLogo from "@/components/FundLogo";
 import LoadingState from "@/components/LoadingState";
 
 import { useGetFundsData } from "../../hooks/useGetFundsData";
 import { useGetWatchlist } from "../../hooks/useGetWatchlist";
 import { useRemoveFundFromWatchlist } from "../../hooks/useRemoveFundFromWatchlist";
-import FundLogo from "../FundLogo";
 import FundRating from "../FundRating";
 
-const NoWatchlist = lazy(() => import("../empty-states/NoWatchlist"));
+const NoWatchlist = lazy(() => import("@/components/empty-states/NoWatchlist"));
 
 const labelArr = [
   { key: "day_change_percent", label: "1D Returns", shortLabel: "1D" },

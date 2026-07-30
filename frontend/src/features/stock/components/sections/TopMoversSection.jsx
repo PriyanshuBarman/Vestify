@@ -1,26 +1,76 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import SectionHeading from "@/components/SectionHeading";
+import { selectActiveTabIndex } from "@/store/slices/stockSlice";
 
+import { BSE_INDICES } from "../../constants/bseIndices";
 import { useGetGainers } from "../../hooks/useGetGainers";
+import { useGetLosers } from "../../hooks/useGetLosers";
 import { useSubscribeStock } from "../../hooks/useSubscribeStock";
+import MoreStocksCard from "../MoreStocksCard";
+import FilterIndices from "../overlays/FilterIndices";
 import StockCard from "../StockCard";
+import SectionError from "./SectionError";
 
 function TopMoversSection() {
-  const [activeTab, setActiveTab] = useState("gainers");
-  const { data: gainers } = useGetGainers();
-  const symbols = gainers?.slice(0, 3).map((stock) => stock.symbol);
-  useSubscribeStock(symbols);
+  const activeTabIndex = useSelector(selectActiveTabIndex);
+  const isActive = activeTabIndex === 0;
 
-  const tabs = ["gainers", "losers"];
+  const [activeTab, setActiveTab] = useState("gainers");
+  const [selectedIndex, setSelectedIndex] = useState(BSE_INDICES[0].value); // Default "|BSE SENSEX|"
+
+  const {
+    data: gainers,
+    isFetching: isGainersFetching,
+    error: gainersError,
+    refetch: refetchGainers,
+  } = useGetGainers(selectedIndex);
+
+  const {
+    data: losers,
+    isFetching: isLosersFetching,
+    error: losersError,
+    refetch: refetchLosers,
+  } = useGetLosers(selectedIndex);
+
+  const isGainers = activeTab === "gainers";
+  const isFetching = isGainers ? isGainersFetching : isLosersFetching;
+
+  const movers = isGainers ? gainers : losers;
+  const error = isGainers ? gainersError : losersError;
+  const refetch = isGainers ? refetchGainers : refetchLosers;
+
+  const symbols = useMemo(() => {
+    return (
+      movers
+        ?.slice(0, 3)
+        .map((stock) => stock.symbol)
+        .filter(Boolean) || []
+    );
+  }, [movers]);
+
+  useSubscribeStock(symbols, { enabled: isActive });
+
+  if (error) {
+    return (
+      <SectionError
+        heading="Top Movers today"
+        isFetching={isFetching}
+        error={error}
+        refetch={refetch}
+      />
+    );
+  }
 
   return (
     <section className="swiper-no-swiping sm:m-0.5 sm:px-0 px-4">
       <SectionHeading heading="Top Movers today" className="p-0" />
 
-      <div className="space-x-2">
-        {tabs.map((tab) => (
+      <div className="flex flex-wrap items-center gap-3">
+        {["gainers", "losers"].map((tab) => (
           <Button
             key={tab}
             variant="outline"
@@ -32,18 +82,22 @@ function TopMoversSection() {
             {tab}
           </Button>
         ))}
+        <Separator orientation="vertical" className="h-6!" />
+        <FilterIndices value={selectedIndex} onChange={setSelectedIndex} />
       </div>
 
-      <div className="flex flex-wrap justify-between mt-4 gap-3 sm:mt-6 sm:gap-3">
-        {gainers?.slice(0, 4).map((item, index) => (
-          <StockCard
-            key={item.symbol || index}
-            symbol={item.symbol}
-            name={item.name}
-          />
+      <div className="flex sm:flex-nowrap mt-4 sm:mt-6 flex-wrap overflow-x-auto scrollbar-none gap-3 sm:p-0.25 sm:gap-4">
+        {movers?.slice(0, 3).map((item, index) => (
+          <StockCard key={index} stock={item} />
         ))}
+
+        <MoreStocksCard
+          stocks={movers?.slice(3, 7)}
+          moreLink="/stocks/top-movers"
+        />
       </div>
     </section>
   );
 }
+
 export default TopMoversSection;

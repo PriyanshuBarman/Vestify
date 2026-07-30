@@ -15,9 +15,13 @@ const searchSlice = createSlice({
   reducers: {
     addToSearchHistory: (state, action) => {
       const { item, type } = action.payload;
-      const filtered = (state.searchHistory[type] || []).filter(
-        (i) => i.name !== item.name,
-      );
+      const filtered = (state.searchHistory[type] || []).filter((i) => {
+        if (type === "mutualFunds") {
+          return i.name !== item.name;
+        } else {
+          return i.symbol !== item.symbol;
+        }
+      });
 
       state.searchHistory[type] = [item, ...filtered].slice(0, 6);
     },
@@ -34,7 +38,7 @@ const searchSlice = createSlice({
 
       state.userSearchHistory = [profile, ...filtered].slice(0, 6);
     },
-    clearUserSearchHistory: (state, action) => {
+    clearUserSearchHistory: (state) => {
       state.userSearchHistory = [];
     },
     setIsSearchOpen: (state, action) => {

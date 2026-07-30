@@ -5,7 +5,7 @@ import { useLocation } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import GoBackBtn from "@/components/GoBackBtn";
+import GoBackButton from "@/components/GoBackButton";
 import Keypad from "@/components/Keypad";
 import ResponsivePinDialog from "@/components/overlays/ResponsivePinDialog";
 import { formatToINR, sanitizeAmount } from "@/utils/formatters";
@@ -18,9 +18,9 @@ import { useGetFundData } from "../hooks/useGetFundData";
 function InvestPage() {
   const [amount, setAmount] = useState("");
   const [isPinDialogOpen, setIsPinDialogOpen] = useState(false);
-  const { schemeCode, orderType } = useLocation().state ?? {};
+  const { schemeCode, type } = useLocation().state ?? {};
   const { data: fund = {} } = useGetFundData(schemeCode);
-  const isSip = orderType === "sip";
+  const isSip = type === "sip";
   const [sipDate, setSipDate] = useState(
     isSip ? getDate(TZDate.tz("Asia/Kolkata")) : null,
   );
@@ -45,8 +45,8 @@ function InvestPage() {
   return (
     <div className="flex h-dvh flex-col sm:mx-auto sm:max-w-lg">
       {/* ================= Title ================= */}
-      <div className="Title mt-4 flex items-center gap-4 px-4">
-        <GoBackBtn />
+      <div className="Title mt-4 flex items-center gap-2 px-4">
+        <GoBackButton />
         <div>
           <h5 className="font-medium">{isSip ? "SIP" : "One-Time"}</h5>
           <p className="text-xs">{fund.name}</p>

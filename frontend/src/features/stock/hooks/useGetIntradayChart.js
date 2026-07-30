@@ -1,40 +1,43 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { socket } from "@/config/socket";
+import { useSocket } from "@/context/SocketContext";
 
 import { fetchIntradayChart } from "../api/stock";
-import { useGetLiveStockField } from "./useGetLiveStockField";
+import { useGetLiveData } from "./useGetLiveData";
 
 export function useGetIntradayChart(symbol, isActive = false) {
+  const socket = useSocket();
   const [liveChartData, setLiveChartData] = useState(null);
-  const live = useGetLiveStockField(symbol);
+  const live = useGetLiveData(symbol);
   const {
     data: queryData,
     isLoading,
+    error,
     refetch,
   } = useQuery({
-    queryKey: ["intraday-chart", symbol],
+    queryKey: ["stocks", "intraday-chart", symbol],
     queryFn: () => fetchIntradayChart(symbol),
+    enabled: Boolean(symbol),
     staleTime: 0,
   });
 
   useEffect(() => {
-    if (!isActive || !symbol) {
-      socket.emit("unsubscribe-intraday-chart", [symbol]);
-      socket.off("intraday-chart-update");
+    if (!socket || !isActive || !symbol) {
+      socket?.emit("chart:unsubscribe", symbol);
+      socket?.off("chart:update");
       return;
     }
 
-    socket.emit("subscribe-intraday-chart", [symbol]);
-    socket.on("intraday-chart-update", (data) => {
+    socket.emit("chart:subscribe", symbol);
+    socket.on("chart:update", (data) => {
       setLiveChartData(data.data);
     });
     return () => {
-      socket.emit("unsubscribe-intraday-chart", [symbol]);
-      socket.off("intraday-chart-update");
+      socket.emit("chart:unsubscribe", symbol);
+      socket.off("chart:update");
     };
-  }, [isActive, symbol]);
+  }, [socket, isActive, symbol]);
 
   // return live chart data if available & update last point with current/live price, otherwise return query data .
   const data = useMemo(() => {
@@ -52,6 +55,7 @@ export function useGetIntradayChart(symbol, isActive = false) {
     live,
     setRealtimeData: setLiveChartData,
     isLoading,
+    error,
     refetch,
   };
 }

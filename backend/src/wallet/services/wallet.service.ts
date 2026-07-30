@@ -1,5 +1,5 @@
 import { db } from "@/config/db.config.js";
-import { sendUserEvent } from "@/shared/events/event-manager.js";
+import { getIO } from "@/socket/socket.js";
 import { ApiError } from "@/shared/utils/api-error.utils.js";
 import { formatDate } from "date-fns";
 import type { SendMoneySchema } from "../schemas/wallet.schema.js";
@@ -59,14 +59,21 @@ export const sendMoney = async ({
     return { sender, receiver };
   });
 
-  sendUserEvent(userId, { balance: sender.balance });
-  sendUserEvent(receiverId, { balance: receiver.balance });
+  const io = getIO();
+  if (io) {
+    io.to(`user:${userId}`).emit("balance:update", { balance: sender.balance });
+    io.to(`user:${receiverId}`).emit("balance:update", {
+      balance: receiver.balance,
+    });
+  }
 };
 
 export const getAllTnx = async (userId: string) => {
   const transactions = await db.transaction.findMany({
     where: { userId },
     include: {
+      mfOrder: true,
+      stockOrder: true,
       peerUser: {
         select: {
           profile: true,

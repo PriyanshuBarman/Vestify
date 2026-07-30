@@ -56,7 +56,7 @@ export const placeSipInstallmentOrder = async (data: MfSip) => {
           processDate,
           navDate,
           method: "SIP",
-          orderType: "SIP_INSTALLMENT",
+          type: "SIP_INSTALLMENT",
           status: "FAILED",
           failureReason: "Insufficient balance",
         },
@@ -103,7 +103,7 @@ export const placeSipInstallmentOrder = async (data: MfSip) => {
         processDate,
         navDate,
         method: "SIP",
-        orderType: "SIP_INSTALLMENT",
+        type: "SIP_INSTALLMENT",
       },
     });
 

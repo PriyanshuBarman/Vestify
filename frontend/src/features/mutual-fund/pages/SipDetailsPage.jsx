@@ -18,8 +18,8 @@ import CopyButton from "@/components/CopyButton";
 import LoadingState from "@/components/LoadingState";
 import { formatToINR } from "@/utils/formatters";
 
+import OrderStatusIcon from "../../../components/OrderStatusIcon";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
-import OrderStatusIcon from "../components/OrderStatusIcon";
 import CancelSipButton from "../components/overlays/CancelSipButton";
 import SkipSipButton from "../components/overlays/SkipSipButton";
 import StepUpSipButton from "../components/StepUpSipButton";

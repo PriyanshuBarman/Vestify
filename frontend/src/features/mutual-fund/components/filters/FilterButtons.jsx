@@ -12,23 +12,12 @@ import {
   setFilters,
 } from "@/store/slices/mutualFundSlice";
 
+import { sortOptions } from "../../constants/collection";
 import { columnsConfig } from "../../utils/collectionsUtils";
 import { getActiveFilterCount } from "../../utils/filterUtils";
 import ActiveFilterButtons from "./ActiveFilterButtons";
-import OpenFilterSheetBtn from "./OpenFilterSheetBtn";
-import SortByButton from "./SortByButton";
-
-const sortOptions = {
-  popularity: "Popular",
-  return_1y: "1Y Returns",
-  return_3y: "3Y Returns",
-  return_5y: "5Y Returns",
-  fund_rating: "Rating",
-  expense_ratio: "Expense Ratio",
-  aum: "Fund Size",
-  lump_min: "Min Lumpsum",
-  sip_min: "Min SIP",
-};
+import OpenFilterSheetButton from "./OpenFilterSheetButton";
+import SortByBtn from "./SortByButton";
 
 const FUND_CATEGORIES = ["Flexi Cap Fund", "Small Cap Fund"];
 
@@ -36,22 +25,15 @@ function FilterButtons() {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
   const activeFilterCount = getActiveFilterCount(filters);
-  const orderBy = filters.order_by;
   let activeSortBy = filters.sort_by;
 
-  // callbacks for SortByBtn
+  // callbacks for SortByButton
   const handleSortChange = (columnKey) => {
     const orderBy = columnKey === "expense_ratio" ? "asc" : "desc";
     dispatch(setFilters({ ...filters, sort_by: columnKey, order_by: orderBy }));
     if (columnKey !== "popularity") dispatch(setActiveColumn(columnKey));
     activeSortBy = columnKey;
   };
-
-  const handleOrderChange = () => {
-    const newOrder = orderBy === "asc" ? "desc" : "asc";
-    dispatch(setFilters({ ...filters, order_by: newOrder }));
-  };
-  // ------------------------------------------------------------
 
   // Toggle FundCategory selection
   const isSelected = (value) => filters.fund_category.includes(value);
@@ -78,16 +60,16 @@ function FilterButtons() {
 
   return (
     <div className="swiper-no-swiping scrollbar-none flex items-center gap-2 overflow-auto overflow-x-auto px-4 py-2 sm:pb-8">
-      <OpenFilterSheetBtn />
+      <OpenFilterSheetButton />
 
       <Separator
         orientation="vertical"
         className="mx-1 data-[orientation=vertical]:h-8"
       />
-      <SortByButton
-        order={orderBy}
+      <SortByBtn
+        defaultSortBy="popularity"
+        variant="outline"
         onSortChange={handleSortChange}
-        onOrderChange={handleOrderChange}
         sortOptions={sortOptions}
         columnsConfig={columnsConfig}
         activeSortBy={activeSortBy}
@@ -114,7 +96,7 @@ function FilterButtons() {
         <Button
           key={FundCategory}
           variant="outline"
-          className={`h-7.5 rounded-full text-[0.65rem] sm:h-10 sm:text-xs ${isSelected(FundCategory) ? "!border-foreground !bg-accent" : ""}`}
+          className={`h-8 rounded-full text-[0.65rem] sm:h-10 sm:text-xs ${isSelected(FundCategory) ? "!border-foreground !bg-accent" : ""}`}
           onClick={() => handleToggle(FundCategory)}
         >
           <span>{FundCategory.replace(/\bFund\b/, "")}</span>
@@ -127,7 +109,7 @@ function FilterButtons() {
       <Button
         onClick={() => dispatch(resetFilters())}
         variant="outline"
-        className="text-primary disabled:text-foreground h-7.5 rounded-full border-none !bg-transparent text-xs shadow-none sm:h-10"
+        className="text-primary disabled:text-foreground h-8 rounded-full border-none !bg-transparent text-xs shadow-none sm:h-10"
         disabled={activeFilterCount === 0}
       >
         <span

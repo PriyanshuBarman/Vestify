@@ -1,20 +1,60 @@
-import type { Request, Response } from "express";
-import { formatDate } from "date-fns";
-import { NseIndia } from "stock-nse-india";
-import YahooFinance from "yahoo-finance2";
+import type { IndexSymbol } from "@/shared/types/stock.types.js";
+import { type ApiRequest } from "@/shared/types/types.js";
 import {
   cleanSymbol,
   ensureNseSymbol,
+  ensureNseSymbols,
 } from "@/shared/utils/normalize-stock-symbol.js";
-import type { IndexSymbol, YfSymbol } from "@/shared/types/stock.types.js";
+import { formatDate } from "date-fns";
+import type { Response } from "express";
 import { BSE } from "nse-bse-api";
-import { formatMoversResponse } from "../utils/format.utils.js";
-import { type ApiRequest } from "@/shared/types/types.js";
+import type { GainerLoserData } from "nse-bse-api/bse";
+import { NseIndia } from "stock-nse-india";
+import YahooFinance from "yahoo-finance2";
 import { type QuoteResponseObject } from "yahoo-finance2/modules/quote";
+
+type BseMoverItem = GainerLoserData & {
+  index_code?: string;
+  scripname?: string;
+  trd_vol?: number;
+};
+
+type Bse52WeekItem = {
+  Index_code?: string;
+  ScripName?: string;
+  Cur52wkHigh?: number;
+  Cur52wkLow?: number;
+};
 
 const nseIndia = new NseIndia();
 const yahooFinance = new YahooFinance();
 const bse = new BSE();
+
+export const searchStock = async (
+  req: ApiRequest<{}, { query: string }>,
+  res: Response,
+) => {
+  const { query } = req.query;
+
+  if (!query) {
+    return res.status(400).json({ error: "Query is required" });
+  }
+
+  const result = await yahooFinance.search(query);
+
+  const filteredData = result.quotes
+    .filter((item) => {
+      return item.exchange === "NSI" && item.quoteType === "EQUITY";
+    })
+    .map((item) => {
+      return {
+        ...item,
+        symbol: cleanSymbol(item.symbol as string),
+      };
+    });
+
+  res.status(200).json({ data: filteredData });
+};
 
 export const getStockData = async (
   req: ApiRequest<{}, { symbol: string }>,
@@ -24,8 +64,8 @@ export const getStockData = async (
 
   const data = await yahooFinance.quote(symbol);
   const responseData = {
-    ...(data as Record<string, unknown>),
-    symbol: cleanSymbol((data as Record<string, unknown>).symbol as string),
+    ...data,
+    symbol: cleanSymbol(data.symbol as string),
   };
 
   res.status(200).json({ data: responseData });
@@ -46,9 +86,7 @@ export const getHistoricalChartData = async (
     ),
   });
 
-  res
-    .status(200)
-    .json({ data: (data as unknown as Record<string, unknown>).quotes });
+  res.status(200).json({ data: data.quotes });
 };
 
 export const getIntradayChartData = async (
@@ -72,49 +110,174 @@ export const getIntradayChartData = async (
   res.status(200).json({ data: formatted });
 };
 
-export const getGainers = async (_req: Request, res: Response) => {
-  const data = await bse.gainers();
+export const getPopularStocks = async (_req: ApiRequest, res: Response) => {
+  const index = "|BSE SENSEX|";
 
-  const filteredData = (data as unknown as Record<string, unknown>[]).filter(
-    (item) => (item.index_code as string)?.includes("|BSE 100|"),
-  );
+  const [gainers, losers] = await Promise.all([bse.gainers(), bse.losers()]);
+  const movers = [...gainers, ...losers] as BseMoverItem[];
 
-  res.status(200).json({ data: formatMoversResponse(filteredData as never[]) });
+  const symbols = movers
+    .filter((item) => item.index_code?.includes(index))
+    .map((item) => item.scripname)
+    .filter(Boolean) as string[];
+
+  if (symbols.length === 0) {
+    return res.status(200).json({ data: [] });
+  }
+
+  const data = await yahooFinance.quote(ensureNseSymbols(symbols));
+  const responseData = data
+    .sort((a, b) => b.marketCap - a.marketCap)
+    .map((item) => ({
+      ...item,
+      symbol: cleanSymbol(item.symbol as string),
+    }));
+
+  res.status(200).json({ data: responseData });
 };
 
-export const getLosers = async (_req: Request, res: Response) => {
-  const data = await bse.losers();
+export const getGainers = async (
+  req: ApiRequest<{}, {}, { index?: string }>,
+  res: Response,
+) => {
+  const index = req.query.index ?? "|BSE SENSEX|";
+  const data = (await bse.gainers()) as BseMoverItem[];
 
-  const filteredData = (data as unknown as Record<string, unknown>[]).filter(
-    (item) => (item.index_code as string)?.includes("|BSE 100|"),
-  );
+  const symbols = data
+    .filter((item) => item.index_code?.includes(index))
+    .map((item) => item.scripname)
+    .filter(Boolean) as string[];
 
-  res.status(200).json({ data: formatMoversResponse(filteredData as never[]) });
+  if (symbols.length === 0) {
+    return res.status(200).json({ data: [] });
+  }
+
+  const quotesData = await yahooFinance.quote(ensureNseSymbols(symbols));
+  const responseData = quotesData.map((item) => ({
+    ...item,
+    symbol: cleanSymbol(item.symbol as string),
+  }));
+
+  res.status(200).json({ data: responseData });
 };
 
-export const getPopularStocks = async (_req: Request, res: Response) => {
-  const symbols: YfSymbol[] = [
-    "RELIANCE.NS",
-    "TCS.NS",
-    "HDFCBANK.NS",
-    "SBIN.NS",
-  ];
+export const getLosers = async (
+  req: ApiRequest<{}, {}, { index?: string }>,
+  res: Response,
+) => {
+  const index = req.query.index ?? "|BSE SENSEX|";
+  const data = (await bse.losers()) as BseMoverItem[];
 
-  const data = await yahooFinance.quote(symbols, {
-    fields: [
-      "symbol",
-      "longName",
-      "shortName",
-      "regularMarketPrice",
-      "regularMarketChange",
-      "regularMarketChangePercent",
-    ],
-  });
+  const symbols = data
+    .filter((item) => item.index_code?.includes(index))
+    .map((item) => item.scripname)
+    .filter(Boolean) as string[];
 
-  // Clean symbols in response
+  if (symbols.length === 0) {
+    return res.status(200).json({ data: [] });
+  }
+
+  const quotesData = await yahooFinance.quote(ensureNseSymbols(symbols));
+  const responseData = quotesData.map((item) => ({
+    ...item,
+    symbol: cleanSymbol(item.symbol as string),
+  }));
+
+  res.status(200).json({ data: responseData });
+};
+
+export const getTopByVolume = async (
+  req: ApiRequest<{}, {}, { index?: string }>,
+  res: Response,
+) => {
+  const index = req.query.index ?? "|BSE SENSEX|";
+
+  const [gainers, losers] = await Promise.all([bse.gainers(), bse.losers()]);
+  const movers = [...gainers, ...losers] as BseMoverItem[];
+
+  const symbols = movers
+    .filter((item) => item.index_code?.includes(index))
+    .sort((a, b) => (b.trd_vol || 0) - (a.trd_vol || 0))
+    .map((item) => item.scripname)
+    .filter(Boolean) as string[];
+
+  if (symbols.length === 0) {
+    return res.status(200).json({ data: [] });
+  }
+
+  const data = await yahooFinance.quote(ensureNseSymbols(symbols));
   const responseData = data.map((item) => ({
     ...item,
-    symbol: cleanSymbol(item.symbol),
+    symbol: cleanSymbol(item.symbol as string),
+  }));
+
+  res.status(200).json({ data: responseData });
+};
+
+export const get52WeekHighLowStocks = async (
+  req: ApiRequest<{}, {}, { index?: string }>,
+  res: Response,
+) => {
+  const index = (req.query.index as string) || "|BSE 100|";
+
+  const data = await bse.near52WeekHighLow();
+
+  const highSymbols = (data?.highs as Bse52WeekItem[])
+    .filter((item) => item.Index_code?.includes(index))
+    .sort((a, b) => (b.Cur52wkHigh || 0) - (a.Cur52wkHigh || 0))
+    .map((item) => item.ScripName)
+    .filter(Boolean) as string[];
+
+  const lowSymbols = (data?.lows as Bse52WeekItem[])
+    .filter((item) => item.Index_code?.includes(index))
+    .sort((a, b) => (a.Cur52wkLow || 0) - (b.Cur52wkLow || 0))
+    .map((item) => item.ScripName)
+    .filter(Boolean) as string[];
+
+  const highQuotesData = highSymbols.length
+    ? await yahooFinance.quote(ensureNseSymbols(highSymbols))
+    : [];
+
+  const lowQuotesData = lowSymbols.length
+    ? await yahooFinance.quote(ensureNseSymbols(lowSymbols))
+    : [];
+
+  const highs = highQuotesData.map((item) => ({
+    ...item,
+    symbol: cleanSymbol(item.symbol as string),
+  }));
+
+  const lows = lowQuotesData.map((item) => ({
+    ...item,
+    symbol: cleanSymbol(item.symbol as string),
+  }));
+
+  res.status(200).json({ data: { highs, lows } });
+};
+
+export const getSimilarStocks = async (
+  req: ApiRequest<{}, { symbol: string }>,
+  res: Response,
+) => {
+  const { symbol } = req.params;
+  const nseSymbol = ensureNseSymbol(symbol);
+
+  const result = await yahooFinance.recommendationsBySymbol(nseSymbol);
+  const recommendedSymbols = result.recommendedSymbols
+    ?.map((item) => item.symbol)
+    .filter(Boolean) as string[];
+
+  if (!recommendedSymbols || recommendedSymbols.length === 0) {
+    return res.status(200).json({ data: [] });
+  }
+
+  const quotesData = await yahooFinance.quote(
+    ensureNseSymbols(recommendedSymbols),
+  );
+
+  const responseData = quotesData.map((item) => ({
+    ...item,
+    symbol: cleanSymbol(item.symbol as string),
   }));
 
   res.status(200).json({ data: responseData });

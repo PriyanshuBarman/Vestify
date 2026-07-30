@@ -5,8 +5,9 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/ui/mode-togle";
 import Logo from "@/components/Logo";
+
+import ThemeToggle from "../ThemeToggle";
 
 const ProfileAvatar = lazy(() => import("../ProfileAvatar"));
 const ProfileSheet = lazy(() => import("../ProfileSheet"));
@@ -44,10 +45,7 @@ function Navbar() {
      flex items-center justify-between gap-8 px-4 pt-4 pb-2 sm:sticky sm:top-0 sm:px-6 sm:pt-4 sm:pb-6"
     >
       <div className="flex items-center gap-2 sm:gap-4">
-        <Link
-          to="mutual-funds#explore"
-          className="flex items-center gap-2 sm:gap-4"
-        >
+        <Link to="/stocks#explore" className="flex items-center gap-2 sm:gap-4">
           <Logo />
         </Link>
         <NavLinks />
@@ -69,7 +67,7 @@ function Navbar() {
           <SearchIcon className="size-5.5" />
         </Button>
 
-        {!isMobile && <ModeToggle />}
+        {!isMobile && <ThemeToggle enableHotKey className="rounded-full" />}
         <Button
           onClick={handleAvatarClick}
           variant="ghost"
@@ -88,9 +86,11 @@ function Navbar() {
 }
 
 export default Navbar;
+
 function NavLinks() {
   const links = [
-    { to: "/mutual-funds", label: "Mutual Funds" },
+    { to: "/stocks#explore", label: "Stocks" },
+    { to: "/mutual-funds#explore", label: "Mutual Funds" },
     { to: "/community", label: "Community" },
     { to: "/wallet", label: "Wallet" },
   ];

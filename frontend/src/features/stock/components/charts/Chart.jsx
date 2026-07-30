@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { TZDate } from "@date-fns/tz";
+import { format } from "date-fns";
+import { InfoIcon } from "lucide-react";
 import { Line, LineChart, XAxis, YAxis } from "recharts";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -16,7 +19,7 @@ import {
 } from "../../utils/chartUtils";
 import ChartLegend from "./ChartLegend";
 import CustomTooltipContent from "./CustomTooltipContent";
-import TimeRangeBtns from "./TimeRangeBtns";
+import TimeRangeButtons from "./TimeRangeButtons";
 
 function Chart({ symbol }) {
   const isMobile = useIsMobile();
@@ -28,7 +31,14 @@ function Chart({ symbol }) {
     live,
     data: intradayChart,
     isLoading: isIntradayLoading,
+    error: intradayChartError,
   } = useGetIntradayChart(symbol, isIntraday);
+
+  useEffect(() => {
+    if (intradayChartError && selectedRange === "1D") {
+      setSelectedRange("3Y");
+    }
+  }, [intradayChartError, selectedRange]);
 
   useEffect(() => {
     isValidRange("3Y", fullChartData)
@@ -45,6 +55,21 @@ function Chart({ symbol }) {
     live.price,
     selectedRange,
   );
+
+  const isPreviousDayChart = useMemo(() => {
+    if (selectedRange !== "1D" || !intradayChart?.length) return false;
+
+    const lastPoint = intradayChart[intradayChart.length - 1];
+    if (!lastPoint?.date) return false;
+
+    const lastDate = new Date(lastPoint.date);
+    if (isNaN(lastDate.getTime())) return false;
+
+    const todayIST = format(TZDate.tz("Asia/Kolkata"), "yyyy-MM-dd");
+    const chartIST = format(new TZDate(lastDate, "Asia/Kolkata"), "yyyy-MM-dd");
+
+    return chartIST !== todayIST;
+  }, [selectedRange, intradayChart]);
 
   return (
     <div className="relative overflow-x-hidden">
@@ -96,13 +121,20 @@ function Chart({ symbol }) {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <TimeRangeBtns
+      <TimeRangeButtons
         isLoading={isLoading}
         isIntradayLoading={isIntradayLoading}
+        intradayChartError={intradayChartError}
         selectedRange={selectedRange}
         setSelectedRange={setSelectedRange}
         fullChartData={fullChartData}
       />
+      {selectedRange === "1D" && isPreviousDayChart && (
+        <div className="mt-3 sm:mt-6 bg-accent rounded-lg py-2 px-4 w-fit mx-auto flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+          <InfoIcon className="size-3.5 shrink-0 text-muted-foreground/80" />
+          <span>Showing previous business day&apos;s chart</span>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,9 +2,12 @@ import { memo } from "react";
 import { BookmarkIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useAddFundToWatchlist } from "@/features/mutual-fund/hooks/useAddFundToWatchlist";
-import { useGetWatchlist } from "@/features/mutual-fund/hooks/useGetWatchlist";
-import { useRemoveFundFromWatchlist } from "@/features/mutual-fund/hooks/useRemoveFundFromWatchlist";
+import { useAddFundToWatchlist as useAddMfToWatchlist } from "@/features/mutual-fund/hooks/useAddFundToWatchlist";
+import { useGetWatchlist as useGetMfWatchlist } from "@/features/mutual-fund/hooks/useGetWatchlist";
+import { useRemoveFundFromWatchlist as useRemoveMfFromWatchlist } from "@/features/mutual-fund/hooks/useRemoveFundFromWatchlist";
+import { useAddToWatchlist as useAddStockToWatchlist } from "@/features/stock/hooks/useAddToWatchlist";
+import { useGetWatchlist as useGetStockWatchlist } from "@/features/stock/hooks/useGetWatchlist";
+import { useRemoveFromWatchlist as useRemoveStockFromWatchlist } from "@/features/stock/hooks/useRemoveFromWatchlist";
 
 import CompanyLogo from "./CompanyLogo";
 
@@ -14,27 +17,55 @@ function SearchResultList({
   activeIdx,
   searchType,
 }) {
-  const { data: watchlist } = useGetWatchlist();
-  const { mutate: addToWatchlist } = useAddFundToWatchlist();
-  const { mutate: removeFromWatchlist } = useRemoveFundFromWatchlist();
+  const { data: mfWatchlist } = useGetMfWatchlist();
+  const { mutate: addMfToWatchlist } = useAddMfToWatchlist({
+    showToast: false,
+  });
+  const { mutate: removeMfFromWatchlist } = useRemoveMfFromWatchlist({
+    showToast: false,
+  });
+
+  const { data: stockWatchlist } = useGetStockWatchlist();
+  const { mutate: addStockToWatchlist } = useAddStockToWatchlist({
+    showToast: false,
+  });
+  const { mutate: removeStockFromWatchlist } = useRemoveStockFromWatchlist({
+    showToast: false,
+  });
 
   if (!searchResult?.length) return null;
 
-  const isInWatchlist = (fund) => {
-    return watchlist?.some((item) => item.schemeCode === fund.scheme_code);
+  const isItemInWatchlist = (item) => {
+    if (searchType === "indianStocks") {
+      return stockWatchlist?.some((w) => w.symbol === item.symbol);
+    }
+    return mfWatchlist?.some((w) => w.schemeCode === item.scheme_code);
   };
 
-  const handleWatchlistClick = (e, fund) => {
+  const handleWatchlistClick = (e, item) => {
     e.stopPropagation();
-    if (isInWatchlist(fund)) {
-      removeFromWatchlist({ schemeCode: fund.scheme_code });
+
+    if (searchType === "indianStocks") {
+      if (isItemInWatchlist(item)) {
+        removeStockFromWatchlist({ symbol: item.symbol });
+      } else {
+        addStockToWatchlist({
+          symbol: item.symbol,
+          name: item.longname || item.shortname || item.name || item.symbol,
+          shortName: item.shortname || item.symbol,
+        });
+      }
     } else {
-      addToWatchlist({
-        schemeCode: fund.scheme_code,
-        fundName: fund.name,
-        fundShortName: fund.short_name,
-        fundHouseDomain: fund.detail_info,
-      });
+      if (isItemInWatchlist(item)) {
+        removeMfFromWatchlist({ schemeCode: item.scheme_code });
+      } else {
+        addMfToWatchlist({
+          schemeCode: item.scheme_code,
+          fundName: item.name,
+          fundShortName: item.short_name,
+          fundHouseDomain: item.detail_info,
+        });
+      }
     }
   };
 
@@ -49,23 +80,29 @@ function SearchResultList({
           <CompanyLogo searchType={searchType} item={item} />
           <div className="flex w-full items-center justify-between">
             <div>
-              <p className="Fund-Name text-foreground max-w-[23ch] truncate text-sm sm:max-w-[30ch] sm:text-sm">
-                {item.short_name || item.name}
+              <p className="text-foreground capitalize max-w-[23ch] truncate text-sm sm:max-w-[30ch] sm:text-sm">
+                {item.short_name ||
+                  item.name ||
+                  item.longname ||
+                  item.shortname?.toLowerCase()}{" "}
+                {item.prevName && (
+                  <span className="text-xs">({item.prevName})</span>
+                )}
               </p>
               <span className="Category text-muted-foreground text-xs">
-                {item.fund_category || item.subcategory}
+                {item.fund_category || item.subcategory || item.industry}
               </span>
             </div>
           </div>
 
           <Button
             onClick={(e) => handleWatchlistClick(e, item)}
-            size="icon-sm"
+            size="icon"
             variant="ghost"
-            className={`rounded-full`}
+            className="rounded-full hover:bg-input"
           >
             <BookmarkIcon
-              className={`${isInWatchlist(item) && "fill-primary text-primary stroke-primary"} size-5`}
+              className={`${isItemInWatchlist(item) ? "fill-primary text-primary stroke-primary" : ""} size-5`}
             />
           </Button>
         </li>

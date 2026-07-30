@@ -10,9 +10,10 @@ import { mutualFundRoutes } from "./features/mutual-fund/routes";
 import SearchPage from "./features/search/pages/Page";
 import { stockRoutes } from "./features/stock/routes";
 import { walletRoutes } from "./features/wallet/routes";
+import ErrorPage from "./pages/ErrorPage";
 import ProfilePage from "./pages/ProfilePage";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
+const Page = lazy(() => import("./pages/Page"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
@@ -21,9 +22,7 @@ const DeleteAccountPage = lazy(() => import("./pages/DeleteAccountPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const ReferAndEarnPage = lazy(() => import("./pages/ReferAndEarnPage"));
 const ActiveDevicesPage = lazy(() => import("./pages/ActiveDevicesPage"));
-const AllOrdersPage = lazy(
-  () => import("./features/mutual-fund/pages/AllOrdersPage"),
-);
+const AllOrdersPage = lazy(() => import("./pages/AllOrdersPage"));
 const VerifyEmailChangeOTPPage = lazy(
   () => import("./pages/VerifyEmailChangeOTPPage"),
 );
@@ -34,8 +33,8 @@ const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const ChangeEmailPage = lazy(() => import("./pages/ChangeEmailPage"));
 const AccountDetailsPage = lazy(() => import("./pages/AccountDetailsPage"));
 const EditProfilePage = lazy(() => import("./pages/EditProfilePage"));
-const SuccessPage = lazy(() => import("./pages/SuccessPage"));
 const SearchUserPage = lazy(() => import("./pages/SearchUserPage"));
+const SuccessPage = lazy(() => import("./pages/SuccessPage"));
 
 export const routes = createBrowserRouter([
   authRoutes,
@@ -45,7 +44,7 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <Page />,
       },
       {
         path: "/about",
@@ -86,12 +85,12 @@ export const routes = createBrowserRouter([
         element: <SearchUserPage />,
       },
       {
-        path: "/success",
-        element: <SuccessPage />,
-      },
-      {
         path: "/orders",
         element: <AllOrdersPage />,
+      },
+      {
+        path: "/success",
+        element: <SuccessPage />,
       },
       {
         path: "/profile",
@@ -116,6 +115,10 @@ export const routes = createBrowserRouter([
       {
         path: "/refer-and-earn",
         element: <ReferAndEarnPage />,
+      },
+      {
+        path: "/error",
+        element: <ErrorPage />,
       },
       {
         path: "*",

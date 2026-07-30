@@ -13,7 +13,7 @@ import {
   setFilters,
 } from "@/store/slices/mutualFundSlice";
 
-import FilterBtns from "../components/filters/FilterBtns";
+import FilterButtons from "../components/filters/FilterButtons";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import { DEFAULT_COLUMNS } from "../constants/collection";
@@ -70,8 +70,9 @@ function AllFundsPage() {
     <section className="sm:py-6">
       <div className="bg-background sticky top-0 z-10 w-full">
         <GoBackBar title="All Mutual Funds" />
-        <FilterBtns />
+        <FilterButtons />
 
+        {/* TableSMHeader */}
         <div className="flex w-full items-center justify-between px-4 py-2 sm:hidden">
           <span className="text-xs font-semibold tabular-nums">
             {totalCount?.toLocaleString()} funds

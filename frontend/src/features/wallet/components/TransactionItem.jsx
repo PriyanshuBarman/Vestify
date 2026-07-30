@@ -2,7 +2,6 @@ import { useState } from "react";
 import { formatDate } from "date-fns";
 import { Link } from "react-router";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Item,
   ItemContent,
@@ -11,21 +10,17 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
-import IncognitoIcon from "@/components/icons/IncognitoIcon";
 import { formatToINR } from "@/utils/formatters";
 
 import { assetConfig } from "../utils/constants";
+import { getTransactionTitle } from "../utils/helpers";
 import ProfileDialog from "./ProfileDialog";
+import TransactionAvatar from "./TransactionAvatar";
 
 function TransactionItem({ tnx, index, length, hideSeparator }) {
   const peerProfile = tnx.peerUser?.profile;
   const assetInfo = assetConfig[tnx.assetCategory];
-
-  const displayData = {
-    avatar: peerProfile?.avatar || assetInfo?.img,
-    fallback: peerProfile?.name?.charAt(0) || tnx.assetCategory?.charAt(0),
-    name: peerProfile?.name || assetInfo?.name || "Deleted account",
-  };
+  const title = getTransactionTitle(tnx, peerProfile, assetInfo);
 
   const [isOpen, setIsOpen] = useState(false);
   const [clickedProfile, setclickedProfile] = useState();
@@ -42,16 +37,16 @@ function TransactionItem({ tnx, index, length, hideSeparator }) {
       <Item asChild size="sm" className="cursor-pointer px-0">
         <Link to="/wallet/tnx-details" state={tnx}>
           <ItemMedia>
-            <Avatar onClick={handleAvatarClick} className="size-9">
-              <AvatarImage src={displayData.avatar} />
-              <AvatarFallback className="text-sm uppercase">
-                {displayData.fallback || <IncognitoIcon className="size-5" />}
-              </AvatarFallback>
-            </Avatar>
+            <TransactionAvatar
+              tnx={tnx}
+              peerProfile={peerProfile}
+              assetInfo={assetInfo}
+              onClick={handleAvatarClick}
+            />
           </ItemMedia>
 
           <ItemContent>
-            <ItemTitle className="capitalize">{displayData.name}</ItemTitle>
+            <ItemTitle className="capitalize line-clamp-1">{title}</ItemTitle>
             <ItemDescription className="text-xs">
               {formatDate(tnx.createdAt, "dd MMM, h:mm a")}
             </ItemDescription>

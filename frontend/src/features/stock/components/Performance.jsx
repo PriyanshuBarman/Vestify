@@ -1,18 +1,11 @@
-import { InfoIcon } from "lucide-react";
-
-import { useGetLiveStockField } from "../hooks/useGetLiveStockField";
+import { useGetLiveData } from "../hooks/useGetLiveData";
 import PriceRange from "./PriceRange";
 
 function Performance({ stock }) {
-  const live = useGetLiveStockField(stock.symbol);
+  const live = useGetLiveData(stock.symbol);
 
   return (
-    <section className="space-y-8">
-      <div className="flex gap-2 items-center">
-        <h3 className="md:text-xl lg:text-2xl font-medium">Performance</h3>
-        <InfoIcon className="size-4" />
-      </div>
-
+    <div className="space-y-8">
       <PriceRange
         leftTitle="Today's low"
         rightTitle="Today's high"
@@ -34,7 +27,7 @@ function Performance({ stock }) {
         <Slot title="Previous close" value={stock.regularMarketPreviousClose} />
         <Slot title="Live volume" value={live.volume} />
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -1,29 +1,15 @@
-import { lazy, Suspense, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import LoadingState from "@/components/LoadingState";
-
-import "swiper/css";
-
-import { HashNavigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import InvestmentsTab from "../../mutual-fund/components/tabs/InvestmentsTab";
+import FeatureSwitcher from "../components/FeatureSwitcher";
+import MutualFundTabs from "../components/MutualFundTabs";
 import ProfileHeader from "../components/ProfileHeader";
-import Tabs from "../components/Tabs";
+import StockTabs from "../components/StockTabs";
 import { useUserProfile } from "../hooks/useUserProfile";
-
-const SipsTab = lazy(() => import("../../mutual-fund/components/tabs/SipsTab"));
-const WatchlistTab = lazy(
-  () => import("../../mutual-fund/components/tabs/WatchlistTab"),
-);
-const OrdersTab = lazy(() => import("../components/OrdersTab"));
 
 function UserProfilePage() {
   const { username } = useParams();
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const [swiper, setSwiper] = useState(null);
+  const [activeFeature, setActiveFeature] = useState("stocks");
 
   const { data: profile } = useUserProfile(username);
 
@@ -31,89 +17,23 @@ function UserProfilePage() {
     <div className="sm:mx-auto sm:max-w-6xl">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         {/* Left Side: Profile Header */}
-        <div className="bg-background z-50 max-sm:sticky max-sm:top-0 lg:w-1/3 lg:shrink-0">
+        <div className="bg-background max-sm:sticky max-sm:top-0 lg:w-1/3 lg:shrink-0">
           <ProfileHeader profile={profile} />
         </div>
 
-        {/* Right Side: Tabs and Content */}
-        <div className="sm:h-[calc(100vh-100px)] lg:w-1/2">
-          <Tabs
-            swiper={swiper}
-            activeTabIndex={activeTabIndex}
-            className="max-sm:sticky max-sm:top-[168px]"
+        {/* Right Side: Feature Switcher and Tabs Content */}
+        <div className="sm:h-[calc(100vh-100px)] lg:border-l lg:pl-8 lg:w-2/3">
+          <FeatureSwitcher
+            activeFeature={activeFeature}
+            onSelect={setActiveFeature}
           />
-          <Swiper
-            onSwiper={(s) => setSwiper(s)}
-            modules={[HashNavigation]}
-            spaceBetween={50}
-            slidesPerView={1}
-            autoHeight={true}
-            initialSlide={0}
-            hashNavigation={{
-              watchState: true,
-              replaceState: true,
-            }}
-            onSlideChange={(swiper) => setActiveTabIndex(swiper.activeIndex)}
-            breakpoints={{
-              640: {
-                allowTouchMove: false,
-              },
-            }}
-          >
-            <SwiperSlide
-              data-hash="investments"
-              className="max-sm:min-h-[calc(100vh-250px)]"
-            >
-              {activeTabIndex === 0 && (
-                <ScrollArea className="h-[calc(100vh-250px)] sm:h-[calc(100vh-164px)]">
-                  <InvestmentsTab username={username} />
-                  <ScrollBar />
-                </ScrollArea>
-              )}
-            </SwiperSlide>
 
-            <SwiperSlide
-              data-hash="sips"
-              className="max-sm:min-h-[calc(100vh-250px)]"
-            >
-              {activeTabIndex === 1 && (
-                <Suspense fallback={<LoadingState />}>
-                  <ScrollArea className="h-[calc(100vh-250px)] sm:h-[calc(100vh-164px)]">
-                    <SipsTab username={username} />
-                    <ScrollBar />
-                  </ScrollArea>
-                </Suspense>
-              )}
-            </SwiperSlide>
-
-            <SwiperSlide
-              data-hash="watchlist"
-              className="max-sm:min-h-[calc(100vh-250px)]"
-            >
-              {activeTabIndex === 2 && (
-                <Suspense fallback={<LoadingState />}>
-                  <ScrollArea className="h-[calc(100vh-250px)] sm:h-[calc(100vh-164px)]">
-                    <WatchlistTab username={username} />
-                    <ScrollBar />
-                  </ScrollArea>
-                </Suspense>
-              )}
-            </SwiperSlide>
-
-            <SwiperSlide
-              data-hash="orders"
-              className="max-sm:min-h-[calc(100vh-250px)]"
-            >
-              {activeTabIndex === 3 && (
-                <Suspense fallback={<LoadingState />}>
-                  <ScrollArea className="h-[calc(100vh-250px)] sm:h-[calc(100vh-164px)]">
-                    <OrdersTab username={username} />
-                    <ScrollBar />
-                  </ScrollArea>
-                </Suspense>
-              )}
-            </SwiperSlide>
-          </Swiper>
+          {/* Conditional Rendering of Feature Tabs */}
+          {activeFeature === "mutual-funds" ? (
+            <MutualFundTabs username={username} />
+          ) : (
+            <StockTabs username={username} />
+          )}
         </div>
       </div>
     </div>

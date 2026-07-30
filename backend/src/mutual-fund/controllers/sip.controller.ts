@@ -36,7 +36,7 @@ export const createSip = async (
     fundType, // required for order placement
   });
 
-  return res
+  res
     .status(200)
     .json({ success: true, message: "SIP created successfully", order, sip });
 };
@@ -56,7 +56,7 @@ export const editSip = async (
     sipDate,
   });
 
-  return res
+  res
     .status(200)
     .json({ success: true, message: result.message, notice: result?.notice });
 };
@@ -70,9 +70,7 @@ export const skipSip = async (
 
   await sipService.skipSip(userId, sipId);
 
-  return res
-    .status(200)
-    .json({ success: true, message: "SIP Skipped Successfully" });
+  res.status(200).json({ success: true, message: "SIP Skipped Successfully" });
 };
 
 export const cancelSip = async (
@@ -83,7 +81,7 @@ export const cancelSip = async (
 
   await sipService.cancelSip(sipId);
 
-  return res
+  res
     .status(200)
     .json({ success: true, message: "SIP Cancelled Successfully" });
 };
@@ -93,7 +91,7 @@ export const getAllSips = async (req: Request, res: Response) => {
 
   const data = await sipService.getAllSips(userId);
 
-  return res.status(200).json({
+  res.status(200).json({
     success: true,
     sips: data.allSips,
     totalActiveSipAmount: data.totalActiveSipAmount,
@@ -108,7 +106,7 @@ export const getSipDetail = async (
 
   const data = await sipService.getSipDetail(sipId);
 
-  return res.status(200).json({
+  res.status(200).json({
     success: true,
     sip: data.sipDetail,
     installments: data.installments,
@@ -133,7 +131,7 @@ export const addOrUpdateStepUp = async (
     intervalInMonths,
   });
 
-  return res.status(200).json({
+  res.status(200).json({
     success: true,
     message: "Step-Up added/edited successfully",
     sip,
@@ -148,7 +146,7 @@ export const removeStepUp = async (
 
   await sipService.removeStepUp(sipId);
 
-  return res
+  res
     .status(200)
     .json({ success: true, message: "Step-Up removed successfully" });
 };

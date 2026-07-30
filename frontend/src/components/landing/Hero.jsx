@@ -6,6 +6,7 @@ import { useInstallPWA } from "@/hooks/useInstallPWA";
 import { Button } from "@/components/ui/button";
 import { containerVariants, heroItemVariants } from "@/constants/animations";
 
+import { TextFlip } from "../TextFlip";
 import Mockup from "./Mockup";
 
 function Hero() {
@@ -22,7 +23,7 @@ function Hero() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 pt-42 sm:px-6 md:flex-row md:px-8 md:py-24 xl:pt-24 2xl:min-h-svh"
+      className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 pt-38 sm:px-6 md:flex-row md:px-8 md:py-24 xl:pt-24 2xl:min-h-svh"
     >
       <div className="flex flex-col max-sm:items-center max-sm:text-center">
         <Badge />
@@ -31,7 +32,10 @@ function Hero() {
           className="mt-6 text-4xl leading-[1.1] font-medium tracking-[-0.03em] text-balance md:mt-10 md:text-5xl md:leading-[1] lg:text-7xl"
         >
           Virtually invest in{" "}
-          <span className="text-landing whitespace-nowrap">Mutual Funds</span>{" "}
+          <TextFlip className="text-landing">
+            <span className="tracking-tight">Indian Stocks</span>
+            <span>Mutual Funds</span>
+          </TextFlip>{" "}
           with zero financial risk.
         </motion.h1>
 
@@ -97,7 +101,7 @@ function Badge() {
     >
       <SparklesIcon size={12} />
       <span className="text-2xs tracking-wide md:text-xs">
-        A Virtual MF Investing App
+        A Virtual Investing App
       </span>
     </motion.div>
   );

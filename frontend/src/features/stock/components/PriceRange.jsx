@@ -37,13 +37,10 @@ function PriceRange({ low, high, current, leftTitle, rightTitle }) {
 
         {/* Arrow-Badge */}
         <div
-          className="absolute -bottom-1.5 sm:-bottom-4 -translate-x-1/2"
+          className="absolute -bottom-0 sm:-bottom-0 -translate-x-1/2"
           style={{ left: `${markerPosition}%` }}
         >
-          <div className="mx-auto h-0 w-0 border-r-4 border-b-6 border-l-4 border-r-transparent border-b-primary border-l-transparent" />
-          <div className="rounded-full bg-primary px-2 md:py-0.5 md:px-2.5 text-2xs text-background shadow-sm tabular-nums">
-            {formatToINR(current)}
-          </div>
+          <div className="mx-auto h-0 w-0 border-x-6 sm:border-x-8 sm:border-b-10 border-b-8  border-r-transparent border-b-foreground border-l-transparent" />
         </div>
       </div>
     </div>

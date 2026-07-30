@@ -6,11 +6,11 @@ import { useNavigate } from "react-router";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import FundLogo from "@/components/FundLogo";
 import FundRating from "@/features/mutual-fund/components/FundRating";
 import { selectRecentlyViewedFunds } from "@/store/slices/mutualFundSlice";
 
 import CardLG from "./CardLG";
-import FundLogo from "./FundLogo";
 
 const labelArr = [
   { key: "return_1y", label: "1Y Returns" },

@@ -5,22 +5,21 @@ import { useNavigate } from "react-router";
 
 import { useDebounce } from "@/hooks/useDebounce";
 import { Spinner } from "@/components/ui/spinner";
-import GoBackBtn from "@/components/GoBackBtn";
+import GoBackButton from "@/components/GoBackButton";
 import { useGetSearchResults } from "@/features/search/hooks/useGetSearchResults";
 import { useKeyboardDismiss } from "@/features/search/hooks/useKeyboardDismis";
 import { addToSearchHistory } from "@/store/slices/searchSlice";
 
 import TrendingSearchList from "../components/TrendingSearchList";
 
-// const FilterTabs = lazy(() => import("../components/FilterTabs"));
+const FilterTabs = lazy(() => import("../components/FilterTabs"));
 const SearchHistoryList = lazy(() => import("../components/SearchHistoryList"));
 const SearchResultList = lazy(() => import("../components/SearchResultList"));
 
 function SearchPage() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
-  // eslint-disable-next-line unused-imports/no-unused-vars
-  const [searchType, setSearchType] = useState("mutualFunds");
+  const [searchType, setSearchType] = useState("indianStocks");
   const debouncedQuery = useDebounce(query.trim());
 
   const searchHistory = useSelector((state) => state.search.searchHistory);
@@ -35,9 +34,15 @@ function SearchPage() {
   );
 
   const handleClick = (item) => {
-    navigate(`/mutual-funds/${item.scheme_code}`, {
-      replace: true,
-    });
+    if (searchType === "mutualFunds") {
+      navigate(`/mutual-funds/${item.scheme_code}`, {
+        replace: true,
+      });
+    } else {
+      navigate(`/stocks/${item.symbol}`, {
+        replace: true,
+      });
+    }
     setQuery("");
     dispatch(addToSearchHistory({ item, type: searchType }));
     if (inputRef.current) inputRef.current.blur();
@@ -46,8 +51,8 @@ function SearchPage() {
   return (
     <div className="bg-background h-dvh space-y-4 overflow-y-auto">
       {/* ============================ SearchBar ============================ */}
-      <div className="SearchBar bg-background flex gap-4 border-b px-4 pt-6 pb-2">
-        <GoBackBtn />
+      <div className="SearchBar bg-background flex gap-2 border-b px-2 pt-6 pb-2">
+        <GoBackButton className="[&_svg]:size-5" />
         <input
           ref={inputRef}
           type="search"
@@ -68,8 +73,8 @@ function SearchPage() {
           {isLoading ? <Spinner className="text-primary" /> : <X size={20} />}
         </button>
       </div>
-      {/* ============================// SearchBar ============================ */}
-      {/* <FilterTabs searchType={searchType} setSearchType={setSearchType} /> */}
+      {/* ============================ SearchBar ============================ */}
+      <FilterTabs searchType={searchType} setSearchType={setSearchType} />
 
       <div className="Lists space-y-4 px-2">
         <Suspense fallback={null}>
@@ -78,7 +83,8 @@ function SearchPage() {
             searchType={searchType}
             handleClick={handleClick}
           />
-          {!searchResult && !isLoading && (
+
+          {!searchResult && !isLoading && !query && (
             <SearchHistoryList
               searchHistory={searchHistory}
               searchType={searchType}
@@ -87,7 +93,10 @@ function SearchPage() {
           )}
         </Suspense>
         {!searchResult && !searchHistory[searchType]?.length && !isLoading && (
-          <TrendingSearchList handleClick={handleClick} />
+          <TrendingSearchList
+            searchType={searchType}
+            handleClick={handleClick}
+          />
         )}
       </div>
     </div>

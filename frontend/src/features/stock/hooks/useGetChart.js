@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchStockHistoricalData } from "../api/stock";
+import { fetchHistoricalChart } from "../api/stock";
 
 export function useGetChart(symbol) {
   return useQuery({
-    queryKey: ["stock-chart", symbol],
-    queryFn: () => fetchStockHistoricalData(symbol),
+    queryKey: ["stocks", "chart", symbol],
+    queryFn: () => fetchHistoricalChart(symbol),
     enabled: !!symbol,
     refetchOnWindowFocus: false,
   });

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RouterProvider } from "react-router";
 import { Toaster } from "sonner";
 
-import { VITE_GOOGLE_CLIENT_ID } from "@/config/env";
+import { VITE_GOOGLE_CLIENT_ID } from "@/lib/config/env";
 
 import { routes } from "./routes";
 import { selectTheme } from "./store/slices/themeSlice";

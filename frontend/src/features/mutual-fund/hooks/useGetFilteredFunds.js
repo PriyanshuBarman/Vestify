@@ -6,7 +6,7 @@ export function useGetFilteredFunds(filters) {
   const LIMIT = 20;
 
   return useInfiniteQuery({
-    queryKey: ["filteredFunds", filters],
+    queryKey: ["mutual-funds", "filtered-funds", filters],
     queryFn: ({ pageParam = 0 }) => {
       return fetchFilteredFunds({ pageParam, filters, LIMIT });
     },

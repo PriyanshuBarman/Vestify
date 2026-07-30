@@ -4,11 +4,11 @@ import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
+import FundLogo from "@/components/FundLogo";
 
 import { useGetFundsData } from "../hooks/useGetFundsData";
 import { useGetWatchlist } from "../hooks/useGetWatchlist";
 import { useRemoveFundFromWatchlist } from "../hooks/useRemoveFundFromWatchlist";
-import FundLogo from "./FundLogo";
 import FundRating from "./FundRating";
 import SectionHeading from "./SectionHeading";
 

@@ -15,7 +15,7 @@ function ChartLegend({ live, selectedRange = "1D", returnMetrics = {} }) {
     <CardHeader className="gap-0 pl-4">
       <div className="flex items-center gap-2">
         <NumberFlow
-          value={live.price}
+          value={live.price ?? 0.0}
           format={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }}
           prefix="₹"
           className="text-2xl font-semibold sm:text-[1.65rem]"

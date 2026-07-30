@@ -1,6 +1,7 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import LoadingState from "@/components/LoadingState";
 import { setActiveTabIndex } from "@/store/slices/stockSlice";
 
 import "swiper/css";
@@ -12,11 +13,11 @@ import { selectActiveTabIndex } from "@/store/slices/stockSlice";
 
 import Indices from "../components/Indices";
 import Tabs from "../components/Tabs";
+import ExploreTab from "../components/tabs/ExploreTab";
 import HoldingsTab from "../components/tabs/HoldingsTab";
-import PositionsTab from "../components/tabs/PositionsTab";
+import OrdersTab from "../components/tabs/OrdersTab";
 
 const WatchlistTab = lazy(() => import("../components/tabs/WatchlistTab"));
-const ExploreTab = lazy(() => import("../components/tabs/ExploreTab"));
 
 const TABS = [
   {
@@ -31,8 +32,8 @@ const TABS = [
   },
   {
     id: 2,
-    name: "positions",
-    component: PositionsTab,
+    name: "orders",
+    component: OrdersTab,
   },
   {
     id: 3,
@@ -74,7 +75,9 @@ function Page() {
             data-hash={name}
             className="min-h-[calc(100vh-200px)]"
           >
-            <Component />
+            <Suspense fallback={<LoadingState />}>
+              <Component isActive={activeTabIndex === id} />
+            </Suspense>
           </SwiperSlide>
         ))}
       </Swiper>

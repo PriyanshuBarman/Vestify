@@ -18,7 +18,7 @@ import {
 import SendIcon from "@/components/icons/SendIcon";
 import UserAvatar from "@/components/UserAvatar";
 import ProfileDialog from "@/features/wallet/components/ProfileDialog";
-import { formatToShortINR } from "@/utils/formatters";
+import { formatToINR } from "@/utils/formatters";
 
 function UserPreviewCard({ user, isExpanded, onToggle }) {
   const isMobile = useIsMobile();
@@ -33,17 +33,17 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
     e.stopPropagation();
   };
 
-  const profit =
-    (user?.portfolio?.current || 0) - (user?.portfolio?.invested || 0);
+  const stockCount = user?.stockPortfolio?.stockCount || 0;
+  const mfFundCount = user?.mfPortfolio?.fundCount || 0;
 
   return (
     <>
-      <Item onClick={onToggle} variant="outline" className="rounded-3xl">
+      <Item onClick={onToggle} variant="outline" className="rounded-3xl pb-3">
         <ItemMedia className="translate-y-0!">
           <UserAvatar user={user} className="size-11 sm:size-12" />
         </ItemMedia>
         <ItemContent>
-          <ItemTitle> {user.name}</ItemTitle>
+          <ItemTitle className="max-w-[20ch] truncate">{user.name}</ItemTitle>
           <ItemDescription>@{user.username}</ItemDescription>
         </ItemContent>
         <ItemActions>
@@ -51,6 +51,7 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
             <ChevronsUpDownIcon />
           </Button>
         </ItemActions>
+
         <AnimatePresence initial={false}>
           {isExpanded && (
             <motion.div
@@ -58,81 +59,61 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="overflow-hidden flex flex-col w-full"
+              className="w-full"
             >
-              <div className="bg-muted/80 tabular-nums mt-2 grid grid-cols-2 gap-4 sm:gap-6 rounded-2xl px-6 pt-6 pb-4 text-xs sm:grid-cols-3 sm:text-sm">
-                <div className="flex gap-2">
-                  <span className="text-muted-foreground sm:text-sm text-2xs">
-                    Funds :
-                  </span>
-                  <span className="font-[450]">{user.portfolio.fundCount}</span>
-                </div>
+              <div className=" flex bg-muted/80 px-6 pt-6 pb-4 rounded-2xl flex-col w-full">
+                <section className="tabular-nums grid grid-cols-2 gap-4 sm:gap-6 text-xs sm:text-sm">
+                  <div className="flex gap-2">
+                    <span className="text-muted-foreground sm:text-sm text-2xs">
+                      Total Stocks :
+                    </span>
+                    <span className="font-[450]">{stockCount}</span>
+                  </div>
 
-                <div className="flex gap-2">
-                  <span className="text-muted-foreground sm:text-sm text-2xs">
-                    SIPs :
-                  </span>
-                  <span className="font-[450]">{user.portfolio.sipCount}</span>
-                </div>
+                  <div className="flex gap-2">
+                    <span className="text-muted-foreground sm:text-sm text-2xs">
+                      Total Mutual Funds :
+                    </span>
+                    <span className="font-[450]">{mfFundCount}</span>
+                  </div>
 
-                <div className="flex gap-2">
-                  <span className="text-muted-foreground sm:text-sm text-2xs">
-                    Invested :
-                  </span>
-                  <span className="font-[450]">
-                    {formatToShortINR(user.portfolio.invested)}
-                  </span>
-                </div>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-muted-foreground sm:text-sm text-2xs">
+                      Balance :
+                    </span>
+                    <span className="font-[450]">
+                      {formatToINR(user.balance)}
+                    </span>
+                  </div>
 
-                <div className="flex gap-2">
-                  <span className="text-muted-foreground sm:text-sm text-2xs">
-                    Current :
-                  </span>
-                  <span className="font-[450]">
-                    {formatToShortINR(user.portfolio.current)}
-                  </span>
-                </div>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-muted-foreground sm:text-sm text-2xs">
+                      Active :
+                    </span>
+                    <span className="font-[450]">
+                      {user.lastActiveAt
+                        ? formatDistanceToNow(new Date(user?.lastActiveAt), {
+                            addSuffix: true,
+                          })
+                        : "NA"}
+                    </span>
+                  </div>
+                </section>
 
-                <div className="flex gap-2">
-                  <span className="text-muted-foreground sm:text-sm text-2xs">
-                    P/L :
-                  </span>
-                  <span className="font-[450]">{formatToShortINR(profit)}</span>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-muted-foreground sm:text-sm text-2xs">
-                    Return(%) :
-                  </span>
-                  <span className="font-[450]">
-                    {user.portfolio.returnPercent.toFixed(1)}%
-                  </span>
-                </div>
-                <div className="flex col-span-2 sm:col-span-3 flex-wrap gap-2">
-                  <span className="text-muted-foreground sm:text-sm text-2xs">
-                    Active :
-                  </span>
-                  <span className="font-[450]">
-                    {user.lastActiveAt
-                      ? formatDistanceToNow(new Date(user?.lastActiveAt), {
-                          addSuffix: true,
-                        })
-                      : "NA"}
-                  </span>
-                </div>
-
-                <div className="col-span-2 sm:col-span-3 flex gap-2 mt-3 items-center">
+                {/* Action Buttons */}
+                <div className="flex  gap-2 mt-6 items-center">
                   <Button
                     disabled={
-                      user?.userId === "system" || user?.userId === self.id
+                      user?.userId === "system" || user?.userId === self?.id
                     }
                     onClick={handleAvatarClick}
                     size={isMobile ? "sm" : "lg"}
                     variant="ghost"
-                    className="rounded-lg hover:bg-background! bg-background shadow-none  font-normal text-xs ml-auto"
+                    className="rounded-lg hover:bg-background! bg-background shadow-none text-xs ml-auto"
                     aria-label="Send money"
                   >
                     <SendIcon />
+                    Pay
                   </Button>
                   <Button
                     onClick={(e) => {
@@ -141,8 +122,7 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
                     }}
                     size={isMobile ? "sm" : "lg"}
                     variant="ghost"
-                    className="rounded-lg hover:bg-background! bg-background shadow-none  text-xs flex-1"
-                    aria-label="View full profile"
+                    className="rounded-lg hover:bg-background! bg-background shadow-none text-xs flex-1"
                   >
                     View full profile <ArrowUpRightIcon />
                   </Button>

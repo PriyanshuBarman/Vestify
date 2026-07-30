@@ -12,7 +12,7 @@ export const useSendMoney = () => {
 
   return useMutation({
     mutationFn: sendMoney,
-    onSuccess: (data, variables) => {
+    onSuccess: (_data, variables) => {
       const { amount, name } = variables;
       playPaymentSuccessSound();
       navigate("/success", {
@@ -20,7 +20,7 @@ export const useSendMoney = () => {
           amount,
           title: "Payment Successful",
           description: `${formatToINR(amount)} has been successfully sent to ${name}.`,
-          doneRoute: "/wallet",
+          doneLink: "/wallet",
         },
         replace: true,
       });

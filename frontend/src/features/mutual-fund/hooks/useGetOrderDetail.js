@@ -6,7 +6,7 @@ export function useGetOrderDetail(orderId, username) {
   const userKey = username || "self";
 
   return useQuery({
-    queryKey: [userKey, "order", orderId],
+    queryKey: [userKey, "mutual-funds", "order", orderId],
     queryFn: () => fetchOrderDetail(orderId),
     ...(username && { staleTime: 0 }),
   });
