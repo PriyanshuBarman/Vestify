@@ -1,11 +1,11 @@
 import { formatDate } from "date-fns";
-import { fields } from "./constants.js";
+import { liveStockFields } from "../../shared/constants/live-stock-fields.js";
 import { cleanSymbol } from "@/shared/utils/normalize-stock-symbol.js";
 
 export function pickQuoteFields(
   quote: Record<string, unknown>,
 ): Record<string, unknown> {
-  return fields.reduce<Record<string, unknown>>((acc, key) => {
+  return liveStockFields.reduce<Record<string, unknown>>((acc, key) => {
     const value = quote[key];
     if (value !== undefined) {
       acc[key] = key === "symbol" ? cleanSymbol(value as string) : value;

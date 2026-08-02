@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/item";
 import FundLogo from "@/components/FundLogo";
 import GoBackBar from "@/components/GoBackBar";
+import SinglePortfolioSummary from "@/components/SinglePortfolioSummary";
 import { formatToINR } from "@/utils/formatters";
 
-import FundPortfolioSummary from "../components/FundPortfolioSummary";
 import SectionHeading from "../components/SectionHeading";
 import { orderTypeConfig } from "../constants/order";
 import { useGetFundOrders } from "../hooks/useGetFundOrders";
@@ -58,7 +58,11 @@ function InvestmentDetailsPage() {
         </h3>
       )}
 
-      <FundPortfolioSummary fund={fund} className="mt-4" />
+      <SinglePortfolioSummary
+        summary={fund}
+        type="mutual-fund"
+        className="mt-4"
+      />
 
       {/* Fund Transaction history */}
       <section className="mt-8">

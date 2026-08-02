@@ -14,19 +14,22 @@ export const symbolParamSchema = z.object({
   }),
 });
 
-export const symbolsParamSchema = z.object({
-  params: z.object({
-    symbols: z.string().trim().min(1, "Symbols are required"),
-  }),
-});
-
 export const bseIndexQuerySchema = z.object({
   query: z.object({
     index: z.string().trim().optional(),
   }),
 });
 
+export const stockQuotesQuerySchema = z.object({
+  query: z.object({
+    symbols: z.string().trim().min(1, "Symbols are required"),
+  }),
+});
+
 export type AddToStockWatchlistSchema = z.infer<
   typeof addToStockWatchlistSchema.shape.body
 >;
-export type SymbolParams = { symbol: string };
+export type SymbolParamsSchema = z.infer<typeof symbolParamSchema.shape.params>;
+export type StockQuotesQuerySchema = z.infer<
+  typeof stockQuotesQuerySchema.shape.query
+>;

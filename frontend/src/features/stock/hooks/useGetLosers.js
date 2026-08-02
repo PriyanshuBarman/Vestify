@@ -8,6 +8,7 @@ export function useGetLosers(index) {
     queryFn: () => fetchLosers(index),
     placeholderData: [{}, {}, {}, {}],
     staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
     retry: 3,
   });
 }

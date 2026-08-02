@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAddFundToWatchlist as useAddMfToWatchlist } from "@/features/mutual-fund/hooks/useAddFundToWatchlist";
 import { useGetWatchlist as useGetMfWatchlist } from "@/features/mutual-fund/hooks/useGetWatchlist";
 import { useRemoveFundFromWatchlist as useRemoveMfFromWatchlist } from "@/features/mutual-fund/hooks/useRemoveFundFromWatchlist";
-import { useAddToWatchlist as useAddStockToWatchlist } from "@/features/stock/hooks/useAddToWatchlist";
+import { useAddStockToWatchlist } from "@/features/stock/hooks/useAddStockToWatchlist";
 import { useGetWatchlist as useGetStockWatchlist } from "@/features/stock/hooks/useGetWatchlist";
 import { useRemoveFromWatchlist as useRemoveStockFromWatchlist } from "@/features/stock/hooks/useRemoveFromWatchlist";
 

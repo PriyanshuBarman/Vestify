@@ -4,7 +4,7 @@ import {
   cleanSymbol,
   ensureNseSymbols,
 } from "@/shared/utils/normalize-stock-symbol.js";
-import { fields } from "@/socket/utils/constants.js";
+import { liveStockFields } from "@/shared/constants/live-stock-fields.js";
 import { getIO } from "@/socket/socket.js";
 import { isMarketOpen } from "@/socket/utils/cron.utils.js";
 import type { StockOrder } from "@prisma/client";
@@ -69,7 +69,7 @@ const processOpenOrders = async () => {
   const formattedSymbols = ensureNseSymbols(uniqueSymbols);
 
   const quoteData = await yahooFinance.quote(formattedSymbols, {
-    fields: [...fields],
+    fields: [...liveStockFields],
   });
 
   const priceMap = new Map<string, number>();

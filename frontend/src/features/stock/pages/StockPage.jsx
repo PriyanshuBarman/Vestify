@@ -12,17 +12,18 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import GoBackBar from "@/components/GoBackBar";
+import StockLogo from "@/components/StockLogo";
 import { setIsSearchOpen } from "@/store/slices/searchSlice";
 import { addToRecentlyViewedStocks } from "@/store/slices/stockSlice";
 
-import StockLogo from "../../../components/StockLogo";
 import BuySellButtons from "../components/BuySellButtons";
 import Chart from "../components/charts/Chart";
 import Fundamentals from "../components/Fundamentals";
 import Performance from "../components/Performance";
 import RecentlyViewedSection from "../components/sections/RecentlyViewedSection";
 import SimilarStocks from "../components/SimilarStocks";
-import { useAddToWatchlist } from "../hooks/useAddToWatchlist";
+import StockHoldingPreview from "../components/StockHoldingPreview";
+import { useAddStockToWatchlist } from "../hooks/useAddStockToWatchlist";
 import { useGetIsInWatchlist } from "../hooks/useGetIsInWatchlist";
 import { useGetStockData } from "../hooks/useGetStockData";
 import { useRemoveFromWatchlist } from "../hooks/useRemoveFromWatchlist";
@@ -41,7 +42,8 @@ function StockPage() {
   useSubscribeStock(symbol);
 
   const { data: isInWatchlist } = useGetIsInWatchlist(symbol);
-  const { mutate: addToWatchlist, isPending: isAdding } = useAddToWatchlist();
+  const { mutate: addToWatchlist, isPending: isAdding } =
+    useAddStockToWatchlist();
   const { mutate: removeFromWatchlist, isPending: isRemoving } =
     useRemoveFromWatchlist();
 
@@ -114,6 +116,7 @@ function StockPage() {
         </div>
 
         <Chart symbol={symbol} />
+        <StockHoldingPreview symbol={symbol} stock={stock} />
         <Fundamentals stock={stock} />
 
         <Accordion type="multiple" className="sm:mt-10 border-t border-b">

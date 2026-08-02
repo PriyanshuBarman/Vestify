@@ -14,7 +14,7 @@ function RecentlyViewedSection() {
 
   return (
     <section className="swiper-no-swiping">
-      <SectionHeading heading={"Recently viewed"} />
+      <SectionHeading heading="Recently viewed" />
       <div className="flex flex-wrap justify-between gap-x-2 gap-y-3 px-4 sm:px-0">
         {funds?.map((fund) => (
           <Link

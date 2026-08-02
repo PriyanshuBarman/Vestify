@@ -26,7 +26,7 @@ import { usePlaceBuyOrder } from "../hooks/usePlaceBuyOrder";
 import { usePlaceSellOrder } from "../hooks/usePlaceSellOrder";
 import { useSubscribeStock } from "../hooks/useSubscribeStock";
 
-function TriggerOrderPage() {
+function GTTOrderPage() {
   const location = useLocation();
   const { symbol } = useParams() ?? {};
 
@@ -330,4 +330,4 @@ function TriggerOrderPage() {
   );
 }
 
-export default TriggerOrderPage;
+export default GTTOrderPage;

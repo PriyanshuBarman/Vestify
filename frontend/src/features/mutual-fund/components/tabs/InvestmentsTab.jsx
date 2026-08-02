@@ -3,13 +3,15 @@ import { useNavigate } from "react-router";
 
 import ScrollToTop from "@/components/layouts/ScrollToTop";
 import LoadingState from "@/components/LoadingState";
+import PortfolioSummary from "@/components/PortfolioSummary";
 
 import { useGetPortfolio } from "../../hooks/useGetPortfolio";
+import { useGetPortfolioSummary } from "../../hooks/useGetPortfolioSummary";
 import { sortPortfolio } from "../../utils/investmentTabUtils";
 
 const PortfolioModal = lazy(() => import("../overlays/PortfolioModal"));
 const PendingOrders = lazy(() => import("../PendingOrders"));
-const PortfolioSummary = lazy(() => import("../PortfolioSummary"));
+
 const PortfolioTable = lazy(() => import("../tables/PortfolioTable"));
 const NoInvestments = lazy(
   () => import("@/components/empty-states/NoInvestments"),
@@ -34,6 +36,7 @@ function InvestmentsTab({ username }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, isPending } = useGetPortfolio(username);
+  const { data: summaryData = {} } = useGetPortfolioSummary(username);
 
   useEffect(() => {
     if (data) setPortfolio(data);
@@ -72,7 +75,11 @@ function InvestmentsTab({ username }) {
         <NoInvestments isOtherUserProfile={isOtherUserProfile} />
       ) : (
         <>
-          <PortfolioSummary username={username} count={portfolio.length} />
+          <PortfolioSummary
+            summary={summaryData}
+            count={portfolio.length}
+            type="mutual-fund"
+          />
           <PortfolioTable
             portfolio={portfolio}
             sortOptions={sortOptions}

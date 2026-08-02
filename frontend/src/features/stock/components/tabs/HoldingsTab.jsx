@@ -1,10 +1,11 @@
 import { lazy, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import ScrollToTop from "@/components/layouts/ScrollToTop";
 import LoadingState from "@/components/LoadingState";
+import PortfolioSummary from "@/components/PortfolioSummary";
 
+import { useGetMultipleLiveData } from "../../hooks/useGetLiveData";
 import { useGetPortfolio } from "../../hooks/useGetPortfolio";
 import { useSubscribeStock } from "../../hooks/useSubscribeStock";
 import {
@@ -13,7 +14,6 @@ import {
   sortStockPortfolio,
 } from "../../utils/stockPortfolioUtils";
 import HoldingModal from "../overlays/HoldingModal";
-import StockPortfolioSummary from "../StockPortfolioSummary";
 import PortfolioTable from "../tables/PortfolioTable";
 
 const NoInvestments = lazy(
@@ -34,32 +34,27 @@ function HoldingsTab({ username, isActive }) {
   const navigate = useNavigate();
 
   const { data: rawPortfolio = [], isPending } = useGetPortfolio(username);
-  const liveStocks = useSelector((state) => state.stock.liveStocks || {});
   const [selectedHolding, setSelectedHolding] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortBy, setSortBy] = useState("current");
   const [orderBy, setOrderBy] = useState("desc");
 
-  // Extract all portfolio symbols for real-time socket price subscription
   const portfolioSymbols = useMemo(
     () => rawPortfolio.map((item) => item.symbol).filter(Boolean),
     [rawPortfolio],
   );
 
-  // Subscribe to live market updates for all stocks in user's portfolio
   useSubscribeStock(portfolioSymbols, { enabled: isActive });
 
-  // Enrich portfolio with real-time calculated prices, PnL, 1D returns
+  const liveStocksMap = useGetMultipleLiveData(portfolioSymbols);
   const enrichedPortfolio = useMemo(() => {
-    return enrichStockPortfolio(rawPortfolio, liveStocks);
-  }, [rawPortfolio, liveStocks]);
+    return enrichStockPortfolio(rawPortfolio, liveStocksMap);
+  }, [rawPortfolio, liveStocksMap]);
 
-  // Calculate overall portfolio summary
   const summary = useMemo(() => {
     return calculateStockPortfolioSummary(enrichedPortfolio);
   }, [enrichedPortfolio]);
 
-  // Sorted portfolio list
   const sortedPortfolio = useMemo(() => {
     return sortStockPortfolio(enrichedPortfolio, sortBy, orderBy);
   }, [enrichedPortfolio, sortBy, orderBy]);
@@ -93,9 +88,10 @@ function HoldingsTab({ username, isActive }) {
         <NoInvestments type="stock" isOtherUserProfile={isOtherUserProfile} />
       ) : (
         <>
-          <StockPortfolioSummary
+          <PortfolioSummary
             count={rawPortfolio.length}
             summary={summary}
+            type="stock"
           />
 
           <PortfolioTable

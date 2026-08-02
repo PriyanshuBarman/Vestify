@@ -3,7 +3,7 @@ import {
   ArrowRightLeftIcon,
   CalendarDaysIcon,
   ChartNoAxesCombinedIcon,
-  ChartPieIcon,
+  ListOrderedIcon,
   PieChartIcon,
   QrCodeIcon,
   TrendingUpIcon,
@@ -19,13 +19,13 @@ export const comparisonFeatures = [
   },
   {
     icon: ChartNoAxesCombinedIcon,
-    label: "Virtually Invest in stocks",
+    label: "Virtually Invest in Stocks / Mutual Funds",
     others: true,
   },
   {
-    icon: ChartPieIcon,
-    label: "Virtually nvest in Mutual Funds",
-    others: true,
+    icon: ListOrderedIcon,
+    label: "Limit Order, Stop Loss Order, GTT Order",
+    others: false,
   },
   {
     icon: CalendarDaysIcon,

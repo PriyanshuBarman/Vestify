@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
+import SectionError from "@/components/SectionError";
 import SectionHeading from "@/components/SectionHeading";
 import { selectActiveTabIndex } from "@/store/slices/stockSlice";
 
@@ -8,7 +9,6 @@ import { useGetPopularStocks } from "../../hooks/useGetPopularStocks";
 import { useSubscribeStock } from "../../hooks/useSubscribeStock";
 import MoreStocksCard from "../MoreStocksCard";
 import StockCard from "../StockCard";
-import SectionError from "./SectionError";
 
 function PopularStocksSection() {
   const activeTabIndex = useSelector(selectActiveTabIndex);

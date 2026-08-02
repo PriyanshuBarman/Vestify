@@ -1,19 +1,25 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import GoBackButton from "@/components/GoBackButton";
+import {
+  selectTopByVolumeIndex,
+  setTopByVolumeIndex,
+} from "@/store/slices/stockSlice";
 
 import FilterIndices from "../components/overlays/FilterIndices";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import TableSMHeader from "../components/tables/TableSMHeader";
-import { BSE_INDICES } from "../constants/bseIndices";
 import { STOCK_COLUMNS_SM } from "../constants/table";
 import { useGetTopByVolume } from "../hooks/useGetTopByVolume";
 
 function TopByVolumePage() {
   const isMobile = useIsMobile();
-  const [selectedIndex, setSelectedIndex] = useState(BSE_INDICES[1].value);
+  const dispatch = useDispatch();
+  const selectedIndex = useSelector(selectTopByVolumeIndex);
+  const setSelectedIndex = (val) => dispatch(setTopByVolumeIndex(val));
   const [activeColumnIndex, setActiveColumnIndex] = useState(0);
 
   const { data, isLoading } = useGetTopByVolume(selectedIndex);

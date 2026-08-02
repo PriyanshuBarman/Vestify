@@ -7,6 +7,5 @@ export function useGetIsInWatchlist(symbol) {
     queryKey: ["stocks", "is-in-watchlist", symbol],
     queryFn: () => isInWatchlist(symbol),
     enabled: !!symbol,
-    staleTime: 0,
   });
 }

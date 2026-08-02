@@ -7,7 +7,7 @@ const Page = lazy(() => import("./pages/Page"));
 const HoldingDetailsPage = lazy(() => import("./pages/HoldingDetailsPage"));
 const OrderDetailsPage = lazy(() => import("./pages/OrderDetailsPage"));
 const BuySellPage = lazy(() => import("./pages/BuySellPage"));
-const TriggerOrderPage = lazy(() => import("./pages/TriggerOrderPage"));
+const GTTOrderPage = lazy(() => import("./pages/GTTOrderPage"));
 const ConfirmCancelPage = lazy(() => import("./pages/ConfirmCancelPage"));
 const StockPage = lazy(() => import("./pages/StockPage"));
 const FiftyTwoWeekHighLowPage = lazy(
@@ -58,7 +58,7 @@ export const stockRoutes = {
     },
     {
       path: "gtt-order/:symbol",
-      element: <TriggerOrderPage />,
+      element: <GTTOrderPage />,
     },
     {
       path: "confirm-cancel",

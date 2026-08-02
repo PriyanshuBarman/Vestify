@@ -11,7 +11,7 @@ export const features = [
   {
     title: "Realtime Market Data",
     description:
-      "Get real investing experience with realtime market data, not dummy data.",
+      "Get real investing experience with real-time market data, not dummy data, reflecting actual market movements",
     icon: ActivityIcon,
     span: "col-span-12 md:col-span-8",
     isFill: true,

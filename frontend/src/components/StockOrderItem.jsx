@@ -22,7 +22,7 @@ function StockOrderItem({ index, length, order, onOrderClick }) {
   const navigate = useNavigate();
 
   const isBuy = order.action === "BUY";
-  const isTriggerOrder = order.type === "GTT";
+  const isGTTOrder = order.type === "GTT";
   const isCompleted = order.status === "SUCCESSFUL";
 
   const handleClick = () => {
@@ -43,7 +43,7 @@ function StockOrderItem({ index, length, order, onOrderClick }) {
     ? avgPrice
       ? `Avg. ${formatToINR(avgPrice)}`
       : "Executed"
-    : isTriggerOrder
+    : isGTTOrder
       ? `Price reaches ${formatToINR(order.triggerPrice)}`
       : order.limitPrice
         ? `Limit at ${formatToINR(order.limitPrice)}`

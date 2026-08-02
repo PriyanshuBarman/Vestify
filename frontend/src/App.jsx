@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     if (isRestoring) return;
     if (shouldInvalidateCache()) {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries({ queryKey: "mutual-funds" });
     }
   }, [isRestoring, queryClient]);
 

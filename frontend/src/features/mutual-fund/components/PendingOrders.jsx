@@ -7,8 +7,8 @@ import {
   AccordionContent,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import MfOrderItem from "@/components/MfOrderItem";
 
-import MfOrderItem from "../../../components/MfOrderItem";
 import { useGetPendingOrders } from "../hooks/useGetPendingOrders";
 
 function PendingOrders() {

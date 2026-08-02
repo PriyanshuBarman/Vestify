@@ -64,7 +64,6 @@ function HoldingModal({ isOpen, onOpenChange, holding }) {
         <div>
           <Link
             to={`/stocks/gtt-order/${holding.symbol}`}
-            state={{ order: holding }}
             className="flex border-b items-center pl-4"
           >
             <ChartPieIcon className="text-muted-foreground size-5" />

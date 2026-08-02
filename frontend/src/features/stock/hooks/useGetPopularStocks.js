@@ -7,6 +7,7 @@ export function useGetPopularStocks() {
     queryKey: ["stocks", "popular"],
     queryFn: fetchPopularStocks,
     placeholderData: [{}, {}, {}, {}],
+    refetchOnWindowFocus: false,
     retry: 3,
   });
 }

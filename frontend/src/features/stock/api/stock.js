@@ -50,10 +50,18 @@ export const fetchSimilarStocks = async (symbol) => {
   return data?.data ?? data ?? [];
 };
 
-export const fetchIndices = async (symbols) => {
+export const fetchIndices = async () => {
+  const { data } = await api.get("/stocks/indices");
+  return data?.data;
+};
+
+export const fetchMultipleStockQuotes = async (symbols) => {
+  if (!symbols || (Array.isArray(symbols) && symbols.length === 0)) return {};
   const symbolsString = Array.isArray(symbols) ? symbols.join(",") : symbols;
-  const { data } = await api.get(`/stocks/indices/${symbolsString}`);
-  return data?.data ?? data ?? null;
+  const { data } = await api.get("/stocks/quotes", {
+    params: { symbols: symbolsString },
+  });
+  return data?.data ?? data ?? {};
 };
 
 export const fetchPortfolio = async (username) => {

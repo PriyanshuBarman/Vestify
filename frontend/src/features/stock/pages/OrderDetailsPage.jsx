@@ -4,6 +4,7 @@ import { Link, useLocation, useParams, useSearchParams } from "react-router";
 
 import CopyButton from "@/components/CopyButton";
 import GoBackBar from "@/components/GoBackBar";
+import LoadingState from "@/components/LoadingState";
 import OrderStatusIcon from "@/components/OrderStatusIcon";
 
 import OrderActionButtons from "../components/OrderActionButtons";
@@ -18,9 +19,10 @@ function OrderDetailsPage() {
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
   const isOtherUserProfile = Boolean(username);
-  const { data: order = {} } = useGetOrderDetail(orderId, username);
+  const { data: order = {}, isPending } = useGetOrderDetail(orderId, username);
   const userKey = isOtherUserProfile ? username : "self";
   const initialOrderData = location.state?.order || location.state;
+  const items = getOrderDetailsItems(order);
 
   // If navigated with state & there is no cache, set it in the query cache
   if (
@@ -33,7 +35,9 @@ function OrderDetailsPage() {
     );
   }
 
-  const items = getOrderDetailsItems(order);
+  if (isPending) {
+    return <LoadingState fullPage />;
+  }
 
   return (
     <div className="sm:mx-auto px-4 sm:px-6 h-svh md:px-8 sm:border-x pb-4 flex flex-col tabular-nums sm:max-w-2xl">

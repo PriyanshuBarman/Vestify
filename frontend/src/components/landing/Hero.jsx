@@ -101,7 +101,7 @@ function Badge() {
     >
       <SparklesIcon className="size-3 sm:size-3.5" />
       <span className="text-2xs tracking-wide  md:text-sm">
-        Free and open source
+        Free and Open Source
       </span>
     </motion.div>
   );

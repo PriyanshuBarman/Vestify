@@ -25,12 +25,19 @@ const mutualFundPersistConfig = {
   whitelist: ["recentlyViewedFunds"],
 };
 
+const stockPersistConfig = {
+  key: "stock",
+  version: 1,
+  storage,
+  blacklist: ["liveStocks"],
+};
+
 const rootReducer = combineReducers({
   theme: themeRedurcer,
   search: searchReducer,
   mutualFund: persistReducer(mutualFundPersistConfig, mutualFundReducer),
   community: communityReducer,
-  stock: stockReducer,
+  stock: persistReducer(stockPersistConfig, stockReducer),
   onlineUsers: onlineUsersReducer,
 });
 

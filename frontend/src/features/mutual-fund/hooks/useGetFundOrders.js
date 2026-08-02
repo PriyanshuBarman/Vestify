@@ -13,6 +13,5 @@ export function useGetFundOrders(schemeCode, username) {
     queryKey: [userKey, "mutual-funds", "fund-orders", schemeCode],
     queryFn: () => fetchFundOrders(schemeCode, username),
     staleTime: 0,
-    gcTime: 0,
   });
 }

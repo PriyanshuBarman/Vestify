@@ -146,7 +146,7 @@ function SignupForm() {
               size="lg"
               disabled={isPending}
               type="submit"
-              className="rounded-full bg-gradient-to-r from-[#00b35c] via-[#00b35c91] to-[#00b35c] [background-size:200%_auto] py-5.5 hover:bg-[99%_center]"
+              className="rounded-full bg-landing hover:bg-landing py-5.5 hover:bg-[99%_center]"
             >
               {isPending && <Spinner />} Signup
             </Button>

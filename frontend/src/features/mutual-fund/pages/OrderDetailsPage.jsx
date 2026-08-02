@@ -12,9 +12,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import CopyButton from "@/components/CopyButton";
 import GoBackBar from "@/components/GoBackBar";
+import LoadingState from "@/components/LoadingState";
+import OrderStatusIcon from "@/components/OrderStatusIcon";
 import { formatToINR } from "@/utils/formatters";
 
-import OrderStatusIcon from "../../../components/OrderStatusIcon";
 import OrderStatusTimeline from "../components/OrderStatusTimeline";
 import { orderStatusConfig, orderTypeConfig } from "../constants/order";
 import { useGetOrderDetail } from "../hooks/useGetOrderDetail";
@@ -26,7 +27,7 @@ function OrderDetailsPage() {
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
   const isOtherUserProfile = Boolean(username);
-  const { data: order = {} } = useGetOrderDetail(orderId, username);
+  const { data: order = {}, isPending } = useGetOrderDetail(orderId, username);
 
   // If navigated with state & there is no cache, set it in the query cache
   if (
@@ -41,6 +42,10 @@ function OrderDetailsPage() {
       [isOtherUserProfile ? username : "self", "order", orderId],
       location.state,
     );
+  }
+
+  if (isPending) {
+    return <LoadingState fullPage />;
   }
 
   return (

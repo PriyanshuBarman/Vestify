@@ -1,21 +1,23 @@
-import { Router } from "express";
 import { validate } from "@/shared/middlewares/validate.middleware.js";
+import { Router } from "express";
 import {
-  symbolParamSchema,
-  symbolsParamSchema,
   bseIndexQuerySchema,
+  stockQuotesQuerySchema,
+  symbolParamSchema,
 } from "../schemas/stock.schema.js";
+
 import {
-  getHistoricalChartData,
-  getIntradayChartData,
-  getStockData,
-  getPopularStocks,
-  getTopByVolume,
   get52WeekHighLowStocks,
-  getSimilarStocks,
-  getIndices,
   getGainers,
+  getHistoricalChartData,
+  getIndices,
+  getIntradayChartData,
   getLosers,
+  getMultipleStocksData,
+  getPopularStocks,
+  getSimilarStocks,
+  getStockData,
+  getTopByVolume,
   searchStock,
 } from "../controllers/stock.controller.js";
 
@@ -36,7 +38,7 @@ router.get(
   validate(symbolParamSchema),
   getSimilarStocks,
 );
-router.get("/indices/:symbols", validate(symbolsParamSchema), getIndices);
+router.get("/indices", getIndices);
 
 router.get(
   "/historical-chart/:symbol",
@@ -49,6 +51,7 @@ router.get(
   getIntradayChartData,
 );
 
+router.get("/quotes", validate(stockQuotesQuerySchema), getMultipleStocksData);
 router.get("/:symbol", validate(symbolParamSchema), getStockData);
 
 export const stockDataRoutes = router;

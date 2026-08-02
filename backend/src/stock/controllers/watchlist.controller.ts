@@ -2,7 +2,7 @@ import type { ApiRequest } from "@/shared/types/types.js";
 import type { Response } from "express";
 import type {
   AddToStockWatchlistSchema,
-  SymbolParams,
+  SymbolParamsSchema,
 } from "../schemas/stock.schema.js";
 import * as watchlistService from "../services/watchlist.service.js";
 
@@ -17,7 +17,7 @@ export const addToWatchlist = async (
 };
 
 export const removeFromWatchlist = async (
-  req: ApiRequest<{}, SymbolParams>,
+  req: ApiRequest<{}, SymbolParamsSchema>,
   res: Response,
 ) => {
   const { userId } = req.user!;
@@ -38,7 +38,7 @@ export const getWatchlist = async (req: ApiRequest, res: Response) => {
 };
 
 export const isInWatchlist = async (
-  req: ApiRequest<unknown, SymbolParams>,
+  req: ApiRequest<unknown, SymbolParamsSchema>,
   res: Response,
 ) => {
   const { userId } = req.user!;

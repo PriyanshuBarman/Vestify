@@ -62,7 +62,7 @@ export function useCreateSip() {
             },
             {
               label: "Next Installment",
-              value: formatDate(sip.nextInstallmentDate, "dd MM"),
+              value: formatDate(sip.nextInstallmentDate, "do MMM"),
             },
           ],
         },

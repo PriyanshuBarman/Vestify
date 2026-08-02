@@ -1,6 +1,6 @@
 import { TZDate } from "@date-fns/tz";
 import { isAfter, isBefore, isWeekend, setHours, setMinutes } from "date-fns";
-import { TIMEZONE } from "./constants.js";
+import { TIMEZONE } from "../../shared/constants/live-stock-fields.js";
 import { isStockHolidayToday } from "@/shared/utils/holidays.utils.js";
 
 export function isMarketHolidayToday() {

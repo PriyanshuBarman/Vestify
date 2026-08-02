@@ -1,6 +1,6 @@
 import {
   getNextStockBusinessDate,
-  isStockHolidayToday,
+  isStockBusinessDay,
 } from "@/shared/utils/holidays.utils.js";
 import { TZDate } from "@date-fns/tz";
 import type { StockOrderType } from "@prisma/client";
@@ -22,9 +22,10 @@ export function getOrderExpiryDate(type: StockOrderType) {
     return addYears(istNow, 1);
   }
 
-  const isHolidayDay = isStockHolidayToday();
+  const isBusinessDay = isStockBusinessDay(istNow);
   const isAfterMarket = istNow > marketCloseTime;
-  if (isAfterMarket || isHolidayDay) {
+
+  if (isAfterMarket || !isBusinessDay) {
     const date = getNextStockBusinessDate();
     return date;
   }

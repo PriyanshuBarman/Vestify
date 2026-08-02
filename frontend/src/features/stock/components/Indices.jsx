@@ -16,11 +16,11 @@ import { useSubscribeStock } from "../hooks/useSubscribeStock";
 const INDICES_SYMBOLS = indices.map((item) => item.symbol);
 
 function Indices() {
-  const { data: indicesData } = useGetIndices(INDICES_SYMBOLS);
+  const { data: indicesData } = useGetIndices();
   useSubscribeStock(INDICES_SYMBOLS);
 
   return (
-    <div className="py-4 px-4 sm:px-0 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
+    <div className="py-4 px-4 sm:px-0 flex items-center justify-between gap-3 sm:gap-4 overflow-x-auto scrollbar-none">
       {indices.map((item) => (
         <IndexItem
           key={item.symbol}
@@ -47,10 +47,7 @@ function IndexItem({ symbol, name, initialData }) {
   const isPositive = change >= 0;
 
   return (
-    <Item
-      variant="outline"
-      className="min-w-46 flex-1 sm:min-w-[11rem] p-3 rounded-xl"
-    >
+    <Item variant="outline" className="flex-1 sm:min-w-[11rem] p-3 rounded-xl">
       <ItemContent>
         <ItemTitle className="text-xs">
           <span>{name}</span>
@@ -61,7 +58,7 @@ function IndexItem({ symbol, name, initialData }) {
         {live.isPending ? (
           <Skeleton className="w-2/3 h-4" />
         ) : (
-          <ItemDescription className="text-xs space-x-1 tabular-nums text-nowrap font-[450]">
+          <ItemDescription className="text-xs space-x-1 tabular-nums text-nowrap font-[450] sm:font-medium">
             <span>{price ? Number(price).toLocaleString("en-IN") : "--"}</span>
             <span className={isPositive ? "text-positive" : "text-negative"}>
               {isPositive ? "+" : ""}

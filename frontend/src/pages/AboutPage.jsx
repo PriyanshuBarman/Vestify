@@ -1,12 +1,14 @@
 import {
   GithubLogoIcon,
   LinkedinLogoIcon,
-  TwitterLogoIcon,
+  LinkIcon,
+  XLogoIcon,
 } from "@phosphor-icons/react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import ButtonAnimatedLink from "@/components/ButtonAnimatedLink";
+import { Button } from "@/components/ui/button";
 import { aboutData } from "@/constants/about";
+import { credits } from "@/constants/credits";
 
 function AboutPage() {
   return (
@@ -14,7 +16,7 @@ function AboutPage() {
       <title>About us</title>
       <meta
         name="description"
-        content="Vestify is a virtual investment platform that simulates real mutual fund investing, providing a real, professional-grade experience with a Groww-inspired UI."
+        content="Vestify is a virtual investment platform that simulates real stock and mutual fund investing using virtual money, providing a professional-grade experience with a Groww app inspired UI."
       />
       <h1 className="sm:text-foreground-secondary w-full text-center text-2xl font-semibold sm:text-4xl">
         About Us
@@ -38,54 +40,36 @@ function AboutPage() {
       {/* Credits & Attributions Section */}
       <section className="mb-8">
         <h2 className="sm:text-foreground-secondary mb-4 text-2xl font-semibold">
-          5. Credits & Attributions
+          4. Credits & Attributions
         </h2>
         <div className="text-muted-foreground text-md mt-3 flex flex-col whitespace-pre-line sm:text-base">
-          <ButtonAnimatedLink className="text-muted-foreground w-fit">
-            <a
-              href="https://groww.in"
-              target="_blank"
-              rel="noopener noreferrer"
+          {credits.map((item) => (
+            <Button
+              key={item.label}
+              asChild
+              variant="link"
+              className="text-muted-foreground w-fit"
             >
-              Groww
-            </a>
-          </ButtonAnimatedLink>
-          <ButtonAnimatedLink className="text-muted-foreground w-fit">
-            <a href="https://www.kuvera.in/" target="_blank">
-              Kuvera
-            </a>
-          </ButtonAnimatedLink>
-          <ButtonAnimatedLink className="text-muted-foreground w-fit">
-            <a href="https://storyset.com" target="_blank">
-              Storyset
-            </a>
-          </ButtonAnimatedLink>
-          <ButtonAnimatedLink className="text-muted-foreground w-fit">
-            <a
-              href="https://logo.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Logo.dev
-            </a>
-          </ButtonAnimatedLink>
-          <ButtonAnimatedLink className="text-muted-foreground w-fit">
-            <a href="https://mfapi.in" target="_blank">
-              MfApi
-            </a>
-          </ButtonAnimatedLink>
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                {item.label}
+              </a>
+            </Button>
+          ))}
         </div>
       </section>
 
       {/* Creator */}
       <section className="mt-20">
-        <div className="flex items-center gap-4">
+        <h2 className="sm:text-foreground-secondary mb-4 text-2xl font-semibold">
+          5. Hire me
+        </h2>
+        <div className="flex items-center mt-8 gap-4">
           <a
             aria-label="Go to creators linkedin profile"
             href="https://linkedin.com/in/priyanshubarman"
             target="_blank"
           >
-            <Avatar className="size-12">
+            <Avatar className="size-20 sm:size-22">
               <AvatarImage
                 src="https://github.com/priyanshubarman.png"
                 alt="creator logo"
@@ -94,32 +78,72 @@ function AboutPage() {
             </Avatar>
           </a>
           <div>
-            <p className="mb-1 font-medium">Priyanshu Barman</p>
-            <div className="flex items-center justify-center gap-4">
-              <a
-                aria-label="Go to creators linkedin profile"
-                href="https://www.linkedin.com/in/priyanshubarman"
-                target="_blank"
+            <p className="mb-1 sm:mb-2 font-semibold text-lg sm:text-xl">
+              Priyanshu Barman
+            </p>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Button
+                asChild
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
               >
-                <LinkedinLogoIcon weight="regular" className="size-5" />
-              </a>
-              <a
-                aria-label="Go to creators twitter profile"
-                href="https://twitter.com/priyanshuwb"
-                target="_blank"
+                <a
+                  aria-label="Go to creators linkedin profile"
+                  href="https://www.linkedin.com/in/priyanshubarman"
+                  target="_blank"
+                >
+                  <LinkedinLogoIcon weight="fill" className="size-5" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
               >
-                <TwitterLogoIcon weight="regular" className="size-5" />
-              </a>
-              <a
-                aria-label="Go to creators github profile"
-                href="https://github.com/priyanshubarman/vestify"
-                target="_blank"
+                <a
+                  aria-label="Go to creators twitter profile"
+                  href="https://twitter.com/priyanshuwb"
+                  target="_blank"
+                >
+                  <XLogoIcon weight="fill" className="size-5" />
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
               >
-                <GithubLogoIcon weight="regular" className="size-5" />
-              </a>
+                <a
+                  aria-label="Go to creators github profile"
+                  href="https://github.com/priyanshubarman/vestify"
+                  target="_blank"
+                >
+                  <GithubLogoIcon weight="fill" className="size-5" />
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
+              >
+                <a
+                  aria-label="Go to creators linkedin profile"
+                  href="https://www.priyanshux.me"
+                  target="_blank"
+                >
+                  <LinkIcon weight="bold" className="size-5" />
+                </a>
+              </Button>
             </div>
           </div>
         </div>
+        <p className="mt-6 font-medium">Open for job / internship / projects</p>
       </section>
     </div>
   );

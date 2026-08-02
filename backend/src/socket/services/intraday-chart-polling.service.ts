@@ -96,7 +96,7 @@ export function startIntradayChartPollingIfNeeded(io: Server) {
   }, 5000); // Poll every 5 seconds for intraday data
 }
 
-export function stopIntradayChartPolling(): void {
+export function stopIntradayChartPolling() {
   if (!chartPollInterval) return;
 
   clearInterval(chartPollInterval);
@@ -104,7 +104,7 @@ export function stopIntradayChartPolling(): void {
   chartQueue.clear();
 }
 
-function getISTDateString(timestamp?: number | string | Date): string {
+function getISTDateString(timestamp?: number | string | Date) {
   const tzDate = timestamp
     ? new TZDate(new Date(timestamp), "Asia/Kolkata")
     : TZDate.tz("Asia/Kolkata");

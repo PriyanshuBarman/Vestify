@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 import { useSocket } from "@/components/SocketProvider";
 
@@ -10,17 +9,9 @@ import { useSocket } from "@/components/SocketProvider";
 
 export function useSubscribeStock(symbols, { enabled = true } = {}) {
   const socket = useSocket();
-  const isMarketOpen = useSelector((state) => state.stock.isMarketOpen);
 
   useEffect(() => {
-    if (
-      !socket ||
-      !enabled ||
-      !symbols ||
-      symbols?.length === 0 ||
-      !isMarketOpen
-    )
-      return;
+    if (!socket || !enabled || !symbols || symbols?.length === 0) return;
 
     const normalizedSymbols = Array.isArray(symbols) ? symbols : [symbols];
 
@@ -29,5 +20,5 @@ export function useSubscribeStock(symbols, { enabled = true } = {}) {
     return () => {
       socket.emit("stock:unsubscribe", normalizedSymbols);
     };
-  }, [socket, symbols, enabled, isMarketOpen]);
+  }, [socket, symbols, enabled]);
 }

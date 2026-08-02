@@ -2,17 +2,17 @@
 
 # Vestify
 
-Vestify is a virtual investment platform that simulates real mutual fund investing using virtual money. It's designed to help beginners learn how mutual fund investing, SIPs, step-up SIPs, and more, in a risk-free virtual environment with a Groww-inspired app UI.
+Vestify is a virtual investment platform that simulates real-world stock and mutual fund investing using virtual money. It's designed to help beginners learn how stock and mutual fund investing, SIPs, step-up SIPs etc. work in a risk-free virtual environment with a Groww app inspired UI.
 
 ## Features
 
-- **Virtual Investing** — Invest in mutual funds using virtual money and experience real investing without any financial risk.
-- **Virtual SIPs** — Start virtual SIPs in Mutual Funds and learn how real SIPs work through an automated process.
-- **Step-Up SIPs** — Periodically increase SIP amounts by a fixed value or percentage, similar to real-world step-up SIPs.
-- **Portfolio Tracking** — Track how your portfolio grows over time and experience how real investments perform in different market conditions.
-- **Community Features** — View other users' profiles, portfolios, SIPs, and watchlists. Learn from other investors' strategies.
-- **P2P Transfer(UPI simulation)** — Send, receive, and Scan & Pay your virtual money instantly—just like UPI.
-- **Groww app Inspired UI** — Experience real investing just like on the Groww app.
+- **Virtual Investing** — Invest in stocks and mutual funds using virtual money and experience real investing without any financial risk. Place Market, Limit, Stop Loss (SL), and GTT (Good Till Triggered) orders.
+- **Real-Time Live Price Updates** — Real-time live price streaming via WebSockets for Indian equity market symbols (indices, popular stocks, top movers, 52-week high/low).
+- **Virtual SIPs & Step-Up SIPs** — Start virtual SIPs in Mutual Funds and periodically increase SIP amounts by a fixed value or percentage.
+- **Portfolio Tracking** — Track how your mutual fund and stock portfolios grow over time in different market conditions.
+- **Community Features** — View other users' profiles, portfolios, SIPs, holdings, and watchlists. Learn from other investors' strategies.
+- **P2P Transfer (UPI simulation)** — Send, receive, and Scan & Pay your virtual money instantly—just like UPI.
+- **Groww App Inspired UI** — Experience real investing just like on the Groww app.
 - All with Zero Real Money Involved — Completely risk-free, safe, and fun.
 
 ## Tech Stack
@@ -22,13 +22,18 @@ Vestify is a virtual investment platform that simulates real mutual fund investi
 - React
 - Tailwind CSS
 - shadcn/ui
-- Tanstack Query
-- Redux toolkit
+- TanStack Query
+- Redux Toolkit
+- Socket.io Client
+- Zod
 
 ### Backend
 
+- TypeScript
 - Node.js
 - Express.js
+- Socket.io
+- Zod
 - MySQL with Prisma ORM
 - Cloudinary (Image Upload)
 - GitHub Actions (automation)
@@ -80,8 +85,6 @@ REFERRER_REWARD_AMOUNT= 15000
 REFERRED_USER_REWARD_AMOUNT= 5000
 OWNER_EMAIL = example@gmail.com
 
-
-
 ```
 
 ### 3. Set Up Environment Variables (Frontend)
@@ -89,17 +92,13 @@ OWNER_EMAIL = example@gmail.com
 Create a `.env` file in the root of frontend directory
 
 ```env
-
-VITE_BACKEND_BASE_URL = "http://localhost:3000/api/v1"
+VITE_BACKEND_BASE_URL = "http://localhost:3000"
 VITE_MF_CHART_API_BASE_URL = "https://api.mfapi.in/mf"
 VITE_MF_API_BASE_URL =
 
 VITE_DAILY_REWARD_AMOUNT = 10000
 VITE_REFERRER_REWARD_AMOUNT = 50000
 VITE_REFERRED_USER_REWARD_AMOUNT = 10000
-
-
-
 ```
 
 ### 4. Install Root Dependencies
@@ -144,9 +143,9 @@ The application should now be running at:
 Vestify/
 ├── backend/                    # Backend application
 │   ├── config/                # Configuration files
-│   │   ├── cloudinary.config.js    # Cloudinary setup for image uploads
-│   │   ├── db.config.js            # Database connection configuration
-│   │   └── env.config.js           # Environment variables configuration
+│   │   ├── cloudinary.config.ts   # Cloudinary setup for image uploads
+│   │   ├── db.config.ts           # Database connection configuration
+│   │   └── env.config.ts          # Environment variables configuration
 │   ├── generated/             # Prisma generated client files
 │   ├── prisma/                # Prisma ORM files
 │   │   ├── schema.prisma      # Database schema definitions
@@ -157,15 +156,17 @@ Vestify/
 │   │   ├── tasks/             # Scheduled tasks and cron jobs
 │   │   └── utils/             # Helper utilities
 │   ├── src/                   # Source code
+│   │   ├── announcement/      # Announcement features
 │   │   ├── auth/              # Authentication logic and routes
 │   │   ├── community/         # Community features (user profiles, social)
-│   │   ├── announcement/      # Announcement features
 │   │   ├── mutual-fund/       # Mutual fund related features
-│   │   ├── shared/            # Shared utilities and middleware
+│   │   ├── shared/            # Shared utilities, types, and middleware
+│   │   ├── socket/            # Real-time WebSocket setup & price subscriptions (Socket.io)
+│   │   ├── stock/             # Stock feature (orders, charts, market data)
 │   │   ├── user/              # User management features
 │   │   └── wallet/            # Wallet and P2P transfer features
 │   ├── package.json           # Backend dependencies
-│   └── server.js              # Main server entry point
+│   └── server.ts              # Main server entry point
 │
 └── frontend/                  # Frontend application
     ├── public/                # Static assets
@@ -178,14 +179,13 @@ Vestify/
     │   ├── config/            # Frontend configuration
     │   ├── constants/         # Application constants
     │   ├── features/          # Feature modules (each with its own structure)
-    │   │   └── [feature-name]/
-    │   │       ├── api/           # Feature-specific API calls
-    │   │       ├── components/    # Feature-specific components
-    │   │       ├── constants/     # Feature-specific constants
-    │   │       ├── hooks/         # Feature-specific hooks
-    │   │       ├── pages/         # Feature-specific pages
-    │   │       ├── utils/         # Feature-specific utilities
-    │   │       └── routes.jsx     # Feature-specific route definitions
+    │   │   ├── announcement/  # Announcement feature
+    │   │   ├── auth/          # Authentication feature
+    │   │   ├── community/     # Community profiles & social feed
+    │   │   ├── mutual-fund/   # Mutual fund feature
+    │   │   ├── stock/         # Stock feature (charts, live price, orders, tables)
+    │   │   ├── user/          # User management feature
+    │   │   └── wallet/        # Wallet & P2P transfers
     │   │
     │   │   Note: The community feature reuses components and hooks
     │   │   from other feature folders (e.g., displaying portfolios,
@@ -212,12 +212,6 @@ Vestify/
 
 To learn how Vestify works, please visit the "How Vestify Works?" section on our [About Page](https://www.vestify.priyanshux.me/about).
 
-## Roadmap
-
-- [ ] Add stock feature to Vestify
-- [ ] Implement real-time notifications
-- [ ] Add more investment strategies
-
 ## Contributing
 
 We welcome contributions from the community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project.
@@ -229,15 +223,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 - **Website**: [https://vestify.priyanshux.me](https://vestify.priyanshux.me)
-- **Reddit Comunity**: [r/Vestify](https://reddit.com/r/Vestify)
 - **GitHub**: [Vestify](https://github.com/PriyanshuBarman/Vestify)
+- **Reddit Community**: [r/Vestify](https://reddit.com/r/Vestify)
+- **Telegram Group (No financial advice)**: [r/Vestify](https://t.me/vvestify)
 
 ## Credits
 
-- [Groww](https://groww.in)
-- [Kuvera](https://kuvera.in)
 - [MfApi.in](https://www.mfapi.in/)
-- [Logo.dev](https://www.logo.dev/)
+- [Kuvera](https://kuvera.in)
+- [Groww](https://groww.in)
+- [Yahoo Finance] (https://finance.yahoo.com)
+- [Logo.dev](https://www.logo.dev)
+- [Storyset](https://storyset.com)
 
 ---
 

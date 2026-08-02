@@ -27,12 +27,12 @@ function ExploreTab() {
       <div className="flex w-full max-w-[820px] flex-col space-y-10 lg:space-y-14">
         <InstallAppCard />
         <StartSipCard />
-        <PopularFundsSection />
-        <CollectionsSection />
-        <FundHousesSection />
         <Suspense>
           <RecentlyViewedSection />
         </Suspense>
+        <PopularFundsSection />
+        <CollectionsSection />
+        <FundHousesSection />
         <Suspense>
           <IndexFundsSection />
         </Suspense>

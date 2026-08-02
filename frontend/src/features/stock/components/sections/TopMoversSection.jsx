@@ -1,26 +1,31 @@
 import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import SectionError from "@/components/SectionError";
 import SectionHeading from "@/components/SectionHeading";
-import { selectActiveTabIndex } from "@/store/slices/stockSlice";
+import {
+  selectActiveTabIndex,
+  selectTopMoversIndex,
+  setTopMoversIndex,
+} from "@/store/slices/stockSlice";
 
-import { BSE_INDICES } from "../../constants/bseIndices";
 import { useGetGainers } from "../../hooks/useGetGainers";
 import { useGetLosers } from "../../hooks/useGetLosers";
 import { useSubscribeStock } from "../../hooks/useSubscribeStock";
 import MoreStocksCard from "../MoreStocksCard";
 import FilterIndices from "../overlays/FilterIndices";
 import StockCard from "../StockCard";
-import SectionError from "./SectionError";
 
 function TopMoversSection() {
   const activeTabIndex = useSelector(selectActiveTabIndex);
   const isActive = activeTabIndex === 0;
 
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("gainers");
-  const [selectedIndex, setSelectedIndex] = useState(BSE_INDICES[0].value); // Default "|BSE SENSEX|"
+  const selectedIndex = useSelector(selectTopMoversIndex);
+  const setSelectedIndex = (val) => dispatch(setTopMoversIndex(val));
 
   const {
     data: gainers,

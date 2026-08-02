@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
 
 import { Card, CardContent } from "@/components/ui/card";
 import SectionHeading from "@/components/SectionHeading";
 import { formatToINR } from "@/utils/formatters";
 import { getChangeColor } from "@/utils/helper";
 
+import { useGetMultipleLiveData } from "../hooks/useGetLiveData";
 import { useGetPortfolio } from "../hooks/useGetPortfolio";
 import { useSubscribeStock } from "../hooks/useSubscribeStock";
 import {
@@ -15,7 +15,6 @@ import {
 
 function YourInvestments() {
   const { data: rawPortfolio = [] } = useGetPortfolio();
-  const liveStocks = useSelector((state) => state.stock.liveStocks || {});
 
   const portfolioSymbols = useMemo(
     () => rawPortfolio.map((item) => item.symbol).filter(Boolean),
@@ -24,10 +23,12 @@ function YourInvestments() {
 
   useSubscribeStock(portfolioSymbols);
 
+  const liveStocksMap = useGetMultipleLiveData(portfolioSymbols);
+
   const summary = useMemo(() => {
-    const enriched = enrichStockPortfolio(rawPortfolio, liveStocks);
+    const enriched = enrichStockPortfolio(rawPortfolio, liveStocksMap);
     return calculateStockPortfolioSummary(enriched);
-  }, [rawPortfolio, liveStocks]);
+  }, [rawPortfolio, liveStocksMap]);
 
   if (!rawPortfolio?.length) return null;
 

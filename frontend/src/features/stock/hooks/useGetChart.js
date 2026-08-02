@@ -7,6 +7,7 @@ export function useGetChart(symbol) {
     queryKey: ["stocks", "chart", symbol],
     queryFn: () => fetchHistoricalChart(symbol),
     enabled: Boolean(symbol),
+    refetchOnWindowFocus: false,
     retry: 3,
   });
 }

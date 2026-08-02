@@ -9,8 +9,8 @@ function OrderActionButtons({ order, className }) {
   if (!order || order.status !== "OPEN") return null;
 
   const handleCancel = () => {
-    const isTriggerOrder = order.type === "GTT";
-    const orderTypeLabel = isTriggerOrder
+    const isGTTOrder = order.type === "GTT";
+    const orderTypeLabel = isGTTOrder
       ? "Trigger"
       : `${order.action?.toLowerCase() || ""}`;
     const title = `You are cancelling your ${orderTypeLabel} order for ${order.name} for ${order.quantity} qty`;

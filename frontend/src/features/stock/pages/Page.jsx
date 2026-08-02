@@ -73,7 +73,7 @@ function Page() {
           <SwiperSlide
             key={id}
             data-hash={name}
-            className="min-h-[calc(100vh-200px)]"
+            className="min-h-[calc(100vh-200px)] pb-10 "
           >
             <Suspense fallback={<LoadingState />}>
               <Component isActive={activeTabIndex === id} />

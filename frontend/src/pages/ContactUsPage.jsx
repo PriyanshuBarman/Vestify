@@ -31,7 +31,7 @@ const socialLinks = [
     name: "Telegram Group",
     icon: TelegramLogoIcon,
     href: "https://t.me/vvestify",
-    description: "Feature discussions only (no financial advise)",
+    description: "Feature discussions only (no financial advice)",
   },
 ];
 

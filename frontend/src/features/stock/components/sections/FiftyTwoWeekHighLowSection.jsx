@@ -1,25 +1,30 @@
 import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import SectionError from "@/components/SectionError";
 import SectionHeading from "@/components/SectionHeading";
-import { selectActiveTabIndex } from "@/store/slices/stockSlice";
+import {
+  selectActiveTabIndex,
+  selectFiftyTwoWeekHighLowIndex,
+  setFiftyTwoWeekHighLowIndex,
+} from "@/store/slices/stockSlice";
 
-import { BSE_INDICES } from "../../constants/bseIndices";
 import { useGet52WeekHighLow } from "../../hooks/useGet52WeekHighLow";
 import { useSubscribeStock } from "../../hooks/useSubscribeStock";
 import MoreStocksCard from "../MoreStocksCard";
 import FilterIndices from "../overlays/FilterIndices";
 import StockCard from "../StockCard";
-import SectionError from "./SectionError";
 
 function FiftyTwoWeekHighLowSection() {
   const activeTabIndex = useSelector(selectActiveTabIndex);
   const isActive = activeTabIndex === 0;
 
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("highs");
-  const [selectedIndex, setSelectedIndex] = useState(BSE_INDICES[1].value); // Default "|BSE 100|"
+  const selectedIndex = useSelector(selectFiftyTwoWeekHighLowIndex);
+  const setSelectedIndex = (val) => dispatch(setFiftyTwoWeekHighLowIndex(val));
 
   const { data, isFetching, error, refetch } =
     useGet52WeekHighLow(selectedIndex);

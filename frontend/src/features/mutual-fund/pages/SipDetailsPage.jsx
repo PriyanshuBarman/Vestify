@@ -16,9 +16,9 @@ import {
 import { Button } from "@/components/ui/button";
 import CopyButton from "@/components/CopyButton";
 import LoadingState from "@/components/LoadingState";
+import OrderStatusIcon from "@/components/OrderStatusIcon";
 import { formatToINR } from "@/utils/formatters";
 
-import OrderStatusIcon from "../../../components/OrderStatusIcon";
 import DesktopEditSipCard from "../components/DesktopEditSipCard";
 import CancelSipButton from "../components/overlays/CancelSipButton";
 import SkipSipButton from "../components/overlays/SkipSipButton";

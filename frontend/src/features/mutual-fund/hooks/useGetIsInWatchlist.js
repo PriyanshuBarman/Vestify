@@ -6,6 +6,5 @@ export function useGetIsInWatchlist(schemeCode) {
   return useQuery({
     queryKey: ["mutual-funds", "is-in-watchlist", schemeCode],
     queryFn: () => isInWatchlist(schemeCode),
-    staleTime: 0,
   });
 }

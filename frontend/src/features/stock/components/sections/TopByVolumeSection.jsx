@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { ChevronRightIcon } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 
 import { cn } from "@/lib/utils";
@@ -13,22 +13,27 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/components/ui/item";
+import SectionError from "@/components/SectionError";
 import StockLogo from "@/components/StockLogo";
-import { selectActiveTabIndex } from "@/store/slices/stockSlice";
+import {
+  selectActiveTabIndex,
+  selectTopByVolumeIndex,
+  setTopByVolumeIndex,
+} from "@/store/slices/stockSlice";
 import { formatToINR } from "@/utils/formatters";
 
-import { BSE_INDICES } from "../../constants/bseIndices";
 import { useGetLiveData } from "../../hooks/useGetLiveData";
 import { useGetTopByVolume } from "../../hooks/useGetTopByVolume";
 import { useSubscribeStock } from "../../hooks/useSubscribeStock";
 import FilterIndices from "../overlays/FilterIndices";
-import SectionError from "./SectionError";
 
 function TopByVolumeSection() {
   const activeTabIndex = useSelector(selectActiveTabIndex);
   const isActive = activeTabIndex === 0;
 
-  const [selectedIndex, setSelectedIndex] = useState(BSE_INDICES[1].value); // Default "|BSE 100|"
+  const dispatch = useDispatch();
+  const selectedIndex = useSelector(selectTopByVolumeIndex);
+  const setSelectedIndex = (val) => dispatch(setTopByVolumeIndex(val));
 
   const {
     data: stocks,

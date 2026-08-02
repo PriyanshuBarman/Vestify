@@ -29,6 +29,7 @@ import OrderModal from "../overlays/OrderModal";
 const NoOrders = lazy(() => import("@/components/empty-states/NoOrders"));
 
 function OrdersTab({ username, isActive }) {
+  const isOtherUserProfile = Boolean(username);
   const navigate = useNavigate();
 
   const { data: pendingOrders = [], isLoading: isLoadingPending } =
@@ -163,11 +164,13 @@ function OrdersTab({ username, isActive }) {
         )}
       </Accordion>
 
-      <div className="w-full flex mt-4 justify-center">
-        <Button asChild variant="ghost" className="text-primary ">
-          <Link to="/orders">All orders</Link>
-        </Button>
-      </div>
+      {!isOtherUserProfile && (
+        <div className="w-full flex mt-4 justify-center">
+          <Button asChild variant="ghost" className="text-primary ">
+            <Link to="/orders">All orders</Link>
+          </Button>
+        </div>
+      )}
 
       <OrderModal
         order={selectedOrder}
@@ -184,13 +187,13 @@ function OrderItem({ index, length, order, onOrderClick }) {
   const { price: livePrice } = useGetLiveData(order.symbol);
 
   const isBuy = order.action === "BUY";
-  const isTriggerOrder = order.type === "GTT";
+  const isGTTOrder = order.type === "GTT";
 
-  const leftDescription = isTriggerOrder
+  const leftDescription = isGTTOrder
     ? `Price reaches ${formatToINR(order.triggerPrice)}`
     : `Mkt ${formatToINR(livePrice)}`;
 
-  const rightDescription = isTriggerOrder
+  const rightDescription = isGTTOrder
     ? `Mkt ${formatToINR(livePrice)}`
     : order.limitPrice
       ? `Limit at ${formatToINR(order.limitPrice)}`

@@ -1,4 +1,7 @@
-import type { IndexSymbol } from "@/shared/types/stock.types.js";
+import type {
+  Bse52WeekItem,
+  BseMoverItem,
+} from "@/shared/types/stock.types.js";
 import { type ApiRequest } from "@/shared/types/types.js";
 import {
   cleanSymbol,
@@ -8,23 +11,10 @@ import {
 import { formatDate } from "date-fns";
 import type { Response } from "express";
 import { BSE } from "nse-bse-api";
-import type { GainerLoserData } from "nse-bse-api/bse";
 import { NseIndia } from "stock-nse-india";
 import YahooFinance from "yahoo-finance2";
 import { type QuoteResponseObject } from "yahoo-finance2/modules/quote";
-
-type BseMoverItem = GainerLoserData & {
-  index_code?: string;
-  scripname?: string;
-  trd_vol?: number;
-};
-
-type Bse52WeekItem = {
-  Index_code?: string;
-  ScripName?: string;
-  Cur52wkHigh?: number;
-  Cur52wkLow?: number;
-};
+import type { StockQuotesQuerySchema } from "../schemas/stock.schema.js";
 
 const nseIndia = new NseIndia();
 const yahooFinance = new YahooFinance();
@@ -283,32 +273,62 @@ export const getSimilarStocks = async (
   res.status(200).json({ data: responseData });
 };
 
-export const getIndices = async (
-  req: ApiRequest<{}, { symbols: string }>,
-  res: Response,
-) => {
-  const { symbols } = req.params;
-  const symbolsArray = symbols.split(",");
+const DEFAULT_INDICES = ["^NSEI", "^BSESN", "^NSEBANK", "^CNX100"];
 
-  const data = await yahooFinance.quote(symbolsArray, {
-    fields: [
-      "symbol",
-      "longName",
-      "shortName",
-      "regularMarketPrice",
-      "regularMarketChange",
-      "regularMarketChangePercent",
-    ],
-  });
+export const getIndices = async (_req: ApiRequest, res: Response) => {
+  const data = await yahooFinance.quote(DEFAULT_INDICES);
 
-  // Convert array to key value object
-  const result = data.reduce<Record<IndexSymbol, QuoteResponseObject>>(
+  const quoteArray = Array.isArray(data) ? data : [data];
+
+  const result = quoteArray.reduce<Record<string, QuoteResponseObject>>(
     (acc, val) => {
-      acc[val.symbol as IndexSymbol] = val;
+      if (!val || !val.symbol) return acc;
+      acc[val.symbol] = val;
       return acc;
     },
-    {} as Record<IndexSymbol, QuoteResponseObject>,
+    {},
   );
 
   res.status(200).json({ data: result });
+};
+
+export const getMultipleStocksData = async (
+  req: ApiRequest<{}, {}, StockQuotesQuerySchema>,
+  res: Response,
+) => {
+  try {
+    const symbolsParam = req.query.symbols as string;
+
+    if (!symbolsParam) {
+      return res.status(200).json({ data: {} });
+    }
+
+    const symbolsArray = symbolsParam
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    const nseSymbols = ensureNseSymbols(symbolsArray);
+
+    const data = await yahooFinance.quote(nseSymbols);
+
+    const quoteArray = Array.isArray(data) ? data : [data];
+
+    const result = quoteArray.reduce<Record<string, any>>((acc, val) => {
+      if (!val || !val.symbol) return acc;
+      const cleaned = cleanSymbol(val.symbol as string);
+      const item = {
+        ...val,
+        symbol: cleaned,
+      };
+      acc[cleaned] = item;
+      acc[val.symbol as string] = item;
+      return acc;
+    }, {});
+
+    res.status(200).json({ data: result });
+  } catch (error) {
+    console.error("Error fetching multiple stock quotes:", error);
+    res.status(200).json({ data: {} });
+  }
 };

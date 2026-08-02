@@ -22,12 +22,12 @@ function ExploreTab() {
       <div className=" w-full max-w-[820px] flex flex-col gap-10 sm:gap-14">
         <MarketHolidayBanner />
         <InstallAppCard />
-        <RecentlyViewedSection />
+        <RecentlyViewedSection showLivePrice />
         <PopularStocksSection />
         <TopMoversSection />
         <TopByVolumeSection />
         <FiftyTwoWeekHighLowSection />
-        <CopyrightFooter className="mt-6 mb-20 sm:hidden" />
+        <CopyrightFooter className="mt-6 mb-10 sm:hidden" />
       </div>
 
       {showInvestmentCard && (

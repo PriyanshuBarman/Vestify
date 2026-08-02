@@ -9,6 +9,5 @@ export function useGetAllOrders(username) {
     queryKey: [userKey, "mutual-funds", "orders"],
     queryFn: () => fetchOrders(username),
     staleTime: 0,
-    gcTime: 0,
   });
 }

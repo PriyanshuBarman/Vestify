@@ -8,5 +8,6 @@ export function useGetStockData(symbol) {
     queryFn: () => fetchStockData(symbol),
     enabled: Boolean(symbol),
     staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
   });
 }

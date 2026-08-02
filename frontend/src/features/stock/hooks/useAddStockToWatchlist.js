@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 import { addToWatchlist } from "../api/watchlist";
 
-export function useAddToWatchlist({ showToast = true } = {}) {
+export function useAddStockToWatchlist({ showToast = true } = {}) {
   const queryClient = useQueryClient();
   const userKey = "self";
 

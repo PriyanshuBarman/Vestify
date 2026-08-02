@@ -1,23 +1,29 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import GoBackButton from "@/components/GoBackButton";
+import {
+  selectTopMoversIndex,
+  setTopMoversIndex,
+} from "@/store/slices/stockSlice";
 
 import FilterIndices from "../components/overlays/FilterIndices";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import TableSMHeader from "../components/tables/TableSMHeader";
-import { BSE_INDICES } from "../constants/bseIndices";
 import { STOCK_COLUMNS_SM } from "../constants/table";
 import { useGetGainers } from "../hooks/useGetGainers";
 import { useGetLosers } from "../hooks/useGetLosers";
 
 function TopMoversPage() {
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("gainers");
-  const [selectedIndex, setSelectedIndex] = useState(BSE_INDICES[0].value);
+  const selectedIndex = useSelector(selectTopMoversIndex);
+  const setSelectedIndex = (val) => dispatch(setTopMoversIndex(val));
   const [activeColumnIndex, setActiveColumnIndex] = useState(0);
 
   const { data: gainers = [], isLoading: isGainersLoading } =

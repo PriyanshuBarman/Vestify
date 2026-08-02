@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Empty,
   EmptyContent,
-  EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
@@ -13,16 +12,14 @@ import GoBackBar from "@/components/GoBackBar";
 
 const CONFIG = {
   "mutual-fund": {
-    title: "No orders found",
-    descSelf: "Start exploring funds to find the one that suits you best.",
-    descOther: "User has no orders.",
+    titleSelf: "No orders found",
+    titleOther: "User has no orders",
     link: "/mutual-funds/all-funds",
     buttonText: "Explore Funds",
   },
   stock: {
-    title: "You have no open orders",
-    descSelf: "",
-    descOther: "User has no orders.",
+    titleSelf: "You have no open orders",
+    titleOther: "User has no orders",
     link: "/stocks#explore",
     buttonText: "Explore Stocks",
   },
@@ -45,15 +42,14 @@ function NoOrders({
         <EmptyHeader>
           <EmptyMedia>
             <img
-              src="/no-data-rafiki.svg"
+              src="/empty-folder.svg"
               alt="No orders found"
-              className="size-50 sm:size-70"
+              className="size-60 sm:size-90"
             />
           </EmptyMedia>
-          <EmptyTitle>{content.title}</EmptyTitle>
-          <EmptyDescription>
-            {isOtherUserProfile ? content.descOther : content.descSelf}
-          </EmptyDescription>
+          <EmptyTitle>
+            {isOtherUserProfile ? content.titleOther : content.titleSelf}
+          </EmptyTitle>
         </EmptyHeader>
         {!isOtherUserProfile && type !== "stock" && (
           <EmptyContent>
@@ -62,7 +58,7 @@ function NoOrders({
             </Button>
           </EmptyContent>
         )}
-        {showAllOrdersButton && (
+        {!isOtherUserProfile && showAllOrdersButton && (
           <Button asChild variant="ghost" className="text-primary ">
             <Link to="/orders">All orders</Link>
           </Button>

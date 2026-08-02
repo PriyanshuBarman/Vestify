@@ -1,30 +1,37 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import GoBackButton from "@/components/GoBackButton";
+import {
+  selectFiftyTwoWeekHighLowIndex,
+  setFiftyTwoWeekHighLowIndex,
+} from "@/store/slices/stockSlice";
 
 import FilterIndices from "../components/overlays/FilterIndices";
 import TableLG from "../components/tables/TableLG";
 import TableSM from "../components/tables/TableSM";
 import TableSMHeader from "../components/tables/TableSMHeader";
-import { BSE_INDICES } from "../constants/bseIndices";
 import { STOCK_COLUMNS_SM } from "../constants/table";
 import { useGet52WeekHighLow } from "../hooks/useGet52WeekHighLow";
 
 function FiftyTwoWeekHighLowPage() {
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("highs");
-  const [selectedIndex, setSelectedIndex] = useState(BSE_INDICES[1].value);
+  const selectedIndex = useSelector(selectFiftyTwoWeekHighLowIndex);
+  const setSelectedIndex = (val) => dispatch(setFiftyTwoWeekHighLowIndex(val));
   const [activeColumnIndex, setActiveColumnIndex] = useState(0);
 
   const { data, isLoading } = useGet52WeekHighLow(selectedIndex);
 
   const isHighs = activeTab === "highs";
+  // show max 30 stocks
   const stocks = isHighs
     ? data?.highs?.slice(0, 30) || []
-    : data?.lows?.slice(0, 39) || []; // show max 30 stocks
+    : data?.lows?.slice(0, 39) || [];
 
   const activeColumn = STOCK_COLUMNS_SM[activeColumnIndex];
 

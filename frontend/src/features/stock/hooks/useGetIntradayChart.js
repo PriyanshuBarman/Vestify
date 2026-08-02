@@ -20,6 +20,8 @@ export function useGetIntradayChart(symbol, isActive = false) {
     queryFn: () => fetchIntradayChart(symbol),
     enabled: Boolean(symbol),
     staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    retry: 3,
   });
 
   useEffect(() => {

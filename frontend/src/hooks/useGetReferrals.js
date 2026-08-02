@@ -7,6 +7,5 @@ export function useGetReferrals() {
     queryKey: ["referrals"],
     queryFn: fetchReferrals,
     staleTime: 0,
-    gcTime: 0,
   });
 }

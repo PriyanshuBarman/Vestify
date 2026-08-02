@@ -69,6 +69,8 @@ export const getUsers = async ({ skip, take, sortBy }: GetUsersParams) => {
       _count: {
         select: {
           mfSips: true,
+          mfPortfolios: true,
+          stockPortfolios: true,
         },
       },
     },
@@ -98,6 +100,8 @@ export const searchUsers = async ({ query, limit }: SearchUsersSchema) => {
     take: limit,
     select: {
       id: true,
+      createdAt: true,
+      updatedAt: true,
       balance: true,
       profile: {
         select: {
@@ -128,6 +132,8 @@ export const searchUsers = async ({ query, limit }: SearchUsersSchema) => {
       _count: {
         select: {
           mfSips: true,
+          mfPortfolios: true,
+          stockPortfolios: true,
         },
       },
     },

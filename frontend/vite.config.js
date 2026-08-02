@@ -54,13 +54,25 @@ export default defineConfig({
         ],
         shortcuts: [
           {
-            name: "Screener",
-            short_name: "Screener",
-            description: "Discover and invest in mutual funds",
-            url: "/mutual-funds/all-funds",
+            name: "Stocks",
+            short_name: "Stocks",
+            description: "Explore and invest in stocks",
+            url: "/stocks#explore",
             icons: [
               {
-                src: "/shortcut-screener.png",
+                src: "/shortcuts/stocks.png",
+                sizes: "96x96",
+              },
+            ],
+          },
+          {
+            name: "Mutual Funds",
+            short_name: "Mutual Funds",
+            description: "Explore and invest in mutual funds",
+            url: "/mutual-funds#explore",
+            icons: [
+              {
+                src: "/shortcuts/mutual-funds.png",
                 sizes: "96x96",
               },
             ],
@@ -72,7 +84,7 @@ export default defineConfig({
             url: "/wallet",
             icons: [
               {
-                src: "/shortcut-wallet.png",
+                src: "/shortcuts/wallet.png",
                 sizes: "96x96",
               },
             ],
@@ -92,50 +104,44 @@ export default defineConfig({
         ],
         screenshots: [
           {
-            src: "/screenshot-1.jpg",
+            src: "/screenshots/1.jpg",
             sizes: "1080x1920",
             type: "image/jpg",
             form_factor: "narrow",
           },
           {
-            src: "/screenshot-2.jpg",
+            src: "/screenshots/2.jpg",
             sizes: "1080x1920",
             type: "image/jpg",
             form_factor: "narrow",
           },
           {
-            src: "/screenshot-3.jpg",
+            src: "/screenshots/3.jpg",
             sizes: "1080x1920",
             type: "image/jpg",
             form_factor: "narrow",
           },
           {
-            src: "/screenshot-4.jpg",
+            src: "/screenshots/4.jpg",
             sizes: "1080x1920",
             type: "image/jpg",
             form_factor: "narrow",
           },
           {
-            src: "/screenshot-5.jpg",
+            src: "/screenshots/5.jpg",
             sizes: "1080x1920",
             type: "image/jpg",
             form_factor: "narrow",
           },
           {
-            src: "/screenshot-6.jpg",
+            src: "/screenshots/6.jpg",
             sizes: "1080x1920",
             type: "image/jpg",
             form_factor: "narrow",
-          },
-          {
-            src: "/screenshot-wide.png",
-            sizes: "1919x975",
-            type: "image/png",
-            form_factor: "wide",
           },
           {
             src: "/og-image.png",
-            sizes: "1600x900",
+            sizes: "1897x975",
             type: "image/png",
             form_factor: "wide",
           },

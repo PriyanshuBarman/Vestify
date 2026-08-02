@@ -19,10 +19,6 @@ export function initSocket(httpServer: HTTPServer): Server {
   io.use(authenticateSocket);
 
   io.on("connection", (socket) => {
-    const userId = socket.data.userId;
-    if (userId) {
-      socket.join(`user:${userId}`);
-    }
     const isOpen = isMarketOpen();
     socket.emit("market:status", isOpen);
 

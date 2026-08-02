@@ -87,8 +87,10 @@ export default function ThemeToggle({
         </Button>
       </TooltipTrigger>
       <TooltipContent sideOffset={10}>
-        {theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
-        <Kbd>D</Kbd>
+        <span>
+          {theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
+        </span>
+        <Kbd className="ml-2">D</Kbd>
       </TooltipContent>
     </Tooltip>
   );

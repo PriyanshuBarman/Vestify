@@ -28,18 +28,18 @@ import { getChangeColor } from "@/utils/helper";
 
 const COLUMNS_CONFIG = {
   price: { name: "Market price", shortName: "Market price" },
-  market_cap: { name: "Market Cap", shortName: "Market cap" },
-  volume: { name: "Volume", shortName: "Volume" },
   "52w_high": { name: "52W high", shortName: "52W high" },
   "52w_low": { name: "52W low", shortName: "52W low" },
+  market_cap: { name: "Market Cap", shortName: "Market cap" },
+  volume: { name: "Volume", shortName: "Volume" },
 };
 
 const DEFAULT_COLUMNS = [
   "price",
-  "market_cap",
-  "volume",
   "52w_high",
   "52w_low",
+  "market_cap",
+  "volume",
 ];
 
 function TableLG({ stocks = [], isPending = false }) {

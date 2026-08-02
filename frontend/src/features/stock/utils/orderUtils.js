@@ -27,7 +27,7 @@ export function getOrderDetailsItems(order) {
     },
     {
       title: "Validity",
-      value: validityConfig[order?.validity] || order?.validity || "-",
+      value: validityConfig[order?.validity] || "-",
     },
     {
       title: "Expires on",
@@ -134,7 +134,10 @@ export function getOrderSuccessItems(order) {
         value: formatToINR(order.limitPrice),
       });
     }
-    items.push({ label: "Validity", value: "1 year" });
+    items.push({
+      label: "Validity",
+      value: validityConfig[order?.validity] || "-",
+    });
     return items;
   }
 
@@ -152,7 +155,10 @@ export function getOrderSuccessItems(order) {
         value: formatToINR(order.limitPrice),
       });
     }
-    items.push({ label: "Validity", value: "1 year" });
+    items.push({
+      label: "Validity",
+      value: validityConfig[order?.validity] || "-",
+    });
     return items;
   }
 

@@ -1,6 +1,6 @@
 import type { ApiRequest } from "@/shared/types/types.js";
 import type { Response } from "express";
-import type { SymbolParams } from "../schemas/stock.schema.js";
+import type { SymbolParamsSchema } from "../schemas/stock.schema.js";
 import * as portfolioService from "../services/portfolio.service.js";
 
 export const getStockPortfolio = async (req: ApiRequest, res: Response) => {
@@ -10,7 +10,7 @@ export const getStockPortfolio = async (req: ApiRequest, res: Response) => {
 };
 
 export const getSingleStockPortfolio = async (
-  req: ApiRequest<{}, SymbolParams>,
+  req: ApiRequest<{}, SymbolParamsSchema>,
   res: Response,
 ) => {
   const { userId } = req.user!;
@@ -23,7 +23,7 @@ export const getSingleStockPortfolio = async (
 };
 
 export const getSingleStockHoldings = async (
-  req: ApiRequest<{}, SymbolParams>,
+  req: ApiRequest<{}, SymbolParamsSchema>,
   res: Response,
 ) => {
   const { userId } = req.user!;

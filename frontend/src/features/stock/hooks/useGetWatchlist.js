@@ -8,5 +8,6 @@ export function useGetWatchlist(username) {
   return useQuery({
     queryKey: [userKey, "stocks", "watchlist"],
     queryFn: () => fetchkWatchlist(username),
+    ...(username && { staleTime: 0 }),
   });
 }

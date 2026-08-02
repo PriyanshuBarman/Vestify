@@ -33,7 +33,7 @@ function NoWatchlist({ type = "mutual-fund", isOtherUserProfile }) {
       <EmptyHeader>
         <EmptyMedia>
           <img
-            src="/empty-folder.svg"
+            src="/empty-folder2.svg"
             alt="No Watchlist"
             loading="lazy"
             draggable="false"

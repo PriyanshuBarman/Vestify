@@ -25,13 +25,13 @@ function OrderModal({ isOpen, onOpenChange, order }) {
 
   if (!order) return null;
 
-  const isTriggerOrder = order.type === "GTT";
+  const isGTTOrder = order.type === "GTT";
 
-  const leftDescription = isTriggerOrder
+  const leftDescription = isGTTOrder
     ? `Price reaches ${formatToINR(order.triggerPrice)}`
     : `Mkt ${formatToINR(livePrice)}`;
 
-  const rightDescription = isTriggerOrder
+  const rightDescription = isGTTOrder
     ? `Mkt ${formatToINR(livePrice)}`
     : order.limitPrice
       ? `Limit at ${formatToINR(order.limitPrice)}`

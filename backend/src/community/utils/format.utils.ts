@@ -1,10 +1,10 @@
 import type { Decimal } from "@prisma/client/runtime/library";
 
 type FormatUserParams = {
+  createdAt: Date;
+  updatedAt: Date;
+  balance: Decimal;
   id: string;
-  balance?: Decimal;
-  createdAt?: Date;
-  updatedAt?: Date;
   profile: {
     name: string;
     username: string;
@@ -13,19 +13,21 @@ type FormatUserParams = {
   sessions: {
     updatedAt: Date;
   }[];
-  mfPortfolio?: {
+  mfPortfolios: {
     invested: Decimal;
   }[];
-  stockPortfolios?: {
+  stockPortfolios: {
     invested: Decimal;
   }[];
-  _count?: {
-    mfSips?: number;
+  _count: {
+    mfPortfolios: number;
+    mfSips: number;
+    stockPortfolios: number;
   };
 };
 
 export const formatData = (user: FormatUserParams) => {
-  const mfPortfolioList = user.mfPortfolio || [];
+  const mfPortfolioList = user.mfPortfolios || [];
   const stockPortfolioList = user.stockPortfolios || [];
 
   const totalMfInvested = mfPortfolioList.reduce(
@@ -48,12 +50,12 @@ export const formatData = (user: FormatUserParams) => {
     createdAt: user.createdAt,
     mfPortfolio: {
       invested: totalMfInvested,
-      fundCount: mfPortfolioList.length,
+      fundCount: user._count?.mfPortfolios ?? 0,
       sipCount: user._count?.mfSips ?? 0,
     },
     stockPortfolio: {
       invested: totalStockInvested,
-      stockCount: stockPortfolioList.length,
+      stockCount: user._count?.stockPortfolios ?? 0,
     },
   };
 };

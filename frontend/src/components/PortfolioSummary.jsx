@@ -13,14 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { formatToINR } from "@/utils/formatters";
 import { getChangeColor } from "@/utils/helper";
 
-function StockPortfolioSummary({ count, summary = {} }) {
-  const current = summary.current || 0;
-  const invested = summary.invested || 0;
-  const pnl = summary.pnl || 0;
-  const returnPercent = summary.returnPercent || 0;
-  const dayChangeValue = summary.dayChangeValue || 0;
-  const dayChangePercent = summary.dayChangePercent || 0;
-
+function PortfolioSummary({ summary = {}, count, type = "stock" }) {
   return (
     <Card className="mx-4 rounded-3xl">
       <CardHeader>
@@ -28,7 +21,7 @@ function StockPortfolioSummary({ count, summary = {} }) {
           HOLDINGS ({count})
         </CardDescription>
         <CardTitle className="text-xl leading-tight">
-          {formatToINR(current)}
+          {formatToINR(summary.current || 0)}
         </CardTitle>
         <CardAction>
           <Button variant="icon" className="size-9 rounded-full border">
@@ -42,25 +35,38 @@ function StockPortfolioSummary({ count, summary = {} }) {
       <CardContent className="sm:text-md space-y-4 text-sm pt-4">
         <div className="flex items-center justify-between">
           <span>1D returns</span>
-          <span className={`font-medium ${getChangeColor(dayChangeValue)}`}>
-            {formatToINR(dayChangeValue, 2)} ({dayChangePercent.toFixed(2)}%)
+          <span
+            className={`font-medium ${getChangeColor(summary.dayChangeValue || 0)}`}
+          >
+            {formatToINR(summary.dayChangeValue || 0, 2)} (
+            {(summary.dayChangePercent || 0).toFixed(2)}%)
           </span>
         </div>
 
         <div className="flex items-center justify-between">
           <span>Total returns</span>
-          <span className={`font-medium ${getChangeColor(pnl)}`}>
-            {formatToINR(pnl, 2)} ({returnPercent.toFixed(2)}%)
+          <span className={`font-medium ${getChangeColor(summary.pnl || 0)}`}>
+            {formatToINR(summary.pnl || 0, 2)} (
+            {(summary.returnPercent || 0).toFixed(2)}%)
           </span>
         </div>
 
         <div className="flex items-center justify-between">
           <span>Invested</span>
-          <span className="font-medium">{formatToINR(invested)}</span>
+          <span className="font-medium">
+            {formatToINR(summary.invested || 0)}
+          </span>
         </div>
+
+        {type === "mutual-fund" && (
+          <div className="flex items-center justify-between">
+            <span>XIRR</span>
+            <span className="font-medium">-</span>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 }
 
-export default StockPortfolioSummary;
+export default PortfolioSummary;

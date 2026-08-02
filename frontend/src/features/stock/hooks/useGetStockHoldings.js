@@ -7,7 +7,8 @@ export function useGetStockHoldings(symbol, username) {
 
   return useQuery({
     queryKey: [userKey, "stocks", "holdings", symbol],
-    queryFn: () => fetchStockHoldings(symbol),
+    queryFn: () => fetchStockHoldings(symbol, username),
     enabled: Boolean(symbol),
+    staleTime: 0,
   });
 }

@@ -1,6 +1,6 @@
 import type { Server } from "socket.io";
 import YahooFinance from "yahoo-finance2";
-import { fields } from "../utils/constants.js";
+import { liveStockFields } from "@/shared/constants/live-stock-fields.js";
 import { pickQuoteFields } from "../utils/helper.js";
 import { isMarketOpen } from "../utils/cron.utils.js";
 import {
@@ -26,7 +26,7 @@ export function startStockPricePollingIfNeeded(io: Server) {
     try {
       const symbol = ensureNseSymbols(subscribedSymbols); // .NS
       const quoteData = await yahooFinance.quote(symbol, {
-        fields: [...fields],
+        fields: [...liveStockFields],
       });
       quoteData.forEach((item) => {
         const filteredItem = pickQuoteFields(item);
@@ -44,7 +44,7 @@ export function startStockPricePollingIfNeeded(io: Server) {
   }, 2000);
 }
 
-export function stopStockPricePolling(): void {
+export function stopStockPricePolling() {
   if (!pollInterval) return;
 
   clearInterval(pollInterval);

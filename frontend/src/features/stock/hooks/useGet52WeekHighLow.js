@@ -11,6 +11,7 @@ export function useGet52WeekHighLow(index) {
       lows: [{}, {}, {}, {}],
     },
     staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
     retry: 3,
   });
 }

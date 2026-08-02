@@ -4,7 +4,14 @@
 export function enrichStockPortfolio(rawPortfolio = [], liveStocksMap = {}) {
   return rawPortfolio.map((item) => {
     const symbol = item.symbol;
-    const liveData = liveStocksMap[symbol] || {};
+    const cleanSym = symbol ? symbol.replace(".NS", "").toUpperCase() : "";
+    const nseSym = cleanSym ? `${cleanSym}.NS` : "";
+
+    const liveData =
+      liveStocksMap[cleanSym] ||
+      liveStocksMap[nseSym] ||
+      liveStocksMap[symbol] ||
+      {};
 
     const quantity = Number(item.quantity || 0);
     const invested = Number(item.invested || 0);

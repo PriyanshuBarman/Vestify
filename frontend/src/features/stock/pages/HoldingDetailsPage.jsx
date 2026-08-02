@@ -11,10 +11,10 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import GoBackBar from "@/components/GoBackBar";
+import SinglePortfolioSummary from "@/components/SinglePortfolioSummary";
 import StockLogo from "@/components/StockLogo";
 import { formatToINR } from "@/utils/formatters";
 
-import StockPortfolioSummary from "../components/StockPortfolioSummary";
 import { useGetLiveData } from "../hooks/useGetLiveData";
 import { useGetStockHoldings } from "../hooks/useGetStockHoldings";
 import { enrichStockPortfolio } from "../utils/stockPortfolioUtils";
@@ -25,8 +25,12 @@ function HoldingDetailsPage() {
   const username = searchParams.get("username");
 
   const rawHolding = location.state?.holding || location.state || {};
-  const { price: livePrice } = useGetLiveData(rawHolding?.symbol);
-  const { data: holdings = [] } = useGetStockHoldings(
+  const {
+    price: livePrice,
+    change: liveChange,
+    changePercent: liveChangePercent,
+  } = useGetLiveData(rawHolding?.symbol);
+  const { data: holdings = [], isPending } = useGetStockHoldings(
     rawHolding?.symbol,
     username,
   );
@@ -35,21 +39,16 @@ function HoldingDetailsPage() {
   const enrichedList = enrichStockPortfolio(
     [rawHolding],
     rawHolding?.symbol && livePrice
-      ? { [rawHolding.symbol]: { regularMarketPrice: livePrice } }
+      ? {
+          [rawHolding.symbol]: {
+            regularMarketPrice: livePrice,
+            regularMarketChange: liveChange,
+            regularMarketChangePercent: liveChangePercent,
+          },
+        }
       : {},
   );
   const holding = enrichedList[0] || rawHolding;
-
-  const summary = {
-    invested: holding.invested || 0,
-    current:
-      holding.current ||
-      holding.quantity * (livePrice || holding.currentPrice || 0),
-    pnl: holding.pnl || 0,
-    returnPercent: holding.returnPercent || 0,
-    dayChangeValue: holding.dayChangeValue || 0,
-    dayChangePercent: holding.dayChangePercent || 0,
-  };
 
   return (
     <div className="sm:mx-auto sm:max-w-xl">
@@ -75,7 +74,7 @@ function HoldingDetailsPage() {
         </Link>
       </Item>
 
-      <StockPortfolioSummary count={1} summary={summary} className="mt-4" />
+      <SinglePortfolioSummary summary={holding} type="stock" className="mt-4" />
 
       {/* Holding Transaction history */}
       <section className="mt-8">
@@ -83,7 +82,11 @@ function HoldingDetailsPage() {
           <h3 className="text-lg font-semibold">Transaction history</h3>
         </div>
         <div className="px-4">
-          {!holdings || holdings.length === 0 ? (
+          {isPending ? (
+            <p className="text-muted-foreground py-4 text-center text-sm">
+              Loading...
+            </p>
+          ) : !holdings || holdings.length === 0 ? (
             <p className="text-muted-foreground py-4 text-center text-sm">
               No transactions found
             </p>

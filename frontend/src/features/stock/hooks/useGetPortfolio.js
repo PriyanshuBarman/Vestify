@@ -8,5 +8,6 @@ export function useGetPortfolio(username) {
   return useQuery({
     queryKey: [userKey, "stocks", "portfolio"],
     queryFn: () => fetchPortfolio(username),
+    staleTime: 0,
   });
 }

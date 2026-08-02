@@ -9,6 +9,5 @@ export function useGetPendingOrders() {
     queryKey: [userKey, "mutual-funds", "pending-orders"],
     queryFn: fetchPendingOrders,
     staleTime: 0,
-    gcTime: 0,
   });
 }

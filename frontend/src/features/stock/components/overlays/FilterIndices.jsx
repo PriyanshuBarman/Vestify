@@ -15,7 +15,6 @@ function FilterIndices({
   value,
   onChange,
   indices = BSE_INDICES,
-  placeholder = "Select Index",
   className = "",
 }) {
   return (
@@ -27,7 +26,7 @@ function FilterIndices({
           className,
         )}
       >
-        <SelectValue placeholder={placeholder} />
+        <SelectValue />
       </SelectTrigger>
 
       <SelectContent className="rounded-xl [&_[data-slot=select-item]]:rounded-lg min-w-[10rem]">
