@@ -225,7 +225,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Website**: [https://vestify.priyanshux.me](https://vestify.priyanshux.me)
 - **GitHub**: [Vestify](https://github.com/PriyanshuBarman/Vestify)
 - **Reddit Community**: [r/Vestify](https://reddit.com/r/Vestify)
-- **Telegram Group (No financial advice)**: [r/Vestify](https://t.me/vvestify)
+- **Telegram Group (No financial advice)**: [Vestify](https://t.me/vvestify)
 
 ## Credits
 

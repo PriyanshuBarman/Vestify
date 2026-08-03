@@ -1,14 +1,8 @@
-import {
-  GithubLogoIcon,
-  LinkedinLogoIcon,
-  LinkIcon,
-  XLogoIcon,
-} from "@phosphor-icons/react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { aboutData } from "@/constants/about";
 import { credits } from "@/constants/credits";
+import { SOCIALS } from "@/constants/socials";
 
 function AboutPage() {
   return (
@@ -82,64 +76,26 @@ function AboutPage() {
               Priyanshu Barman
             </p>
             <div className="flex items-center gap-1 sm:gap-2">
-              <Button
-                asChild
-                variant="ghost"
-                size="icon"
-                className="rounded-full"
-              >
-                <a
-                  aria-label="Go to creators linkedin profile"
-                  href="https://www.linkedin.com/in/priyanshubarman"
-                  target="_blank"
-                >
-                  <LinkedinLogoIcon weight="fill" className="size-5" />
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="icon"
-                className="rounded-full"
-              >
-                <a
-                  aria-label="Go to creators twitter profile"
-                  href="https://twitter.com/priyanshuwb"
-                  target="_blank"
-                >
-                  <XLogoIcon weight="fill" className="size-5" />
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                variant="ghost"
-                size="icon"
-                className="rounded-full"
-              >
-                <a
-                  aria-label="Go to creators github profile"
-                  href="https://github.com/priyanshubarman/vestify"
-                  target="_blank"
-                >
-                  <GithubLogoIcon weight="fill" className="size-5" />
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                variant="ghost"
-                size="icon"
-                className="rounded-full"
-              >
-                <a
-                  aria-label="Go to creators linkedin profile"
-                  href="https://www.priyanshux.me"
-                  target="_blank"
-                >
-                  <LinkIcon weight="bold" className="size-5" />
-                </a>
-              </Button>
+              {SOCIALS.map((social) => {
+                const Icon = social.Icon;
+                return (
+                  <Button
+                    key={social.href}
+                    asChild
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-full"
+                  >
+                    <a
+                      aria-label={social.label}
+                      href={social.href}
+                      target="_blank"
+                    >
+                      <Icon weight={social.weight} className="size-5" />
+                    </a>
+                  </Button>
+                );
+              })}
             </div>
           </div>
         </div>

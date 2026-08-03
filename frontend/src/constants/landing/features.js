@@ -1,8 +1,8 @@
 import {
   ActivityIcon,
+  ArrowLeftRightIcon,
   CalendarDays,
   PieChart,
-  ScanQrCodeIcon,
   TrendingUp,
   Users,
 } from "lucide-react";
@@ -52,7 +52,7 @@ export const features = [
     title: "Send & Receive Virtual Money",
     description:
       "Send, receive, Scan & Pay your virtual money with others instantly—just like UPI.",
-    icon: ScanQrCodeIcon,
+    icon: ArrowLeftRightIcon,
     span: "col-span-12",
     isFill: true,
   },

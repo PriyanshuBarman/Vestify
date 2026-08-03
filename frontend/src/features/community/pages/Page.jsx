@@ -63,33 +63,30 @@ function Page() {
   }, [fetchNextPage, inView, hasNextPage, isSearching]);
 
   return (
-    <div className="max-sm:px-4 max-w-6xl relative max-sm:pb-16 sm:mx-auto sm:flex sm:gap-24">
+    <div className="max-md:px-4 max-w-6xl relative max-md:pb-16 md:mx-auto md:flex md:gap-24">
       {/* Illustration */}
-      {!isMobile && (
-        <div className="flex w-[45%] flex-col items-center justify-center max-sm:hidden">
-          <img
-            src="./team-work.svg"
-            alt="Community illustration"
-            className="size-120"
-            loading="lazy"
-            draggable={false}
-          />
-          <h1 className="text-2xl font-semibold tracking-tight">
-            Community /
-            <span className="text-xl ml-2">
-              {totalUsersCount || 100}+ users
-            </span>
-          </h1>
-          <p className="text-muted-foreground sm:text-base mt-2 text-sm">
-            Discover other investor profiles
-          </p>
-        </div>
-      )}
+
+      <div className="flex  w-[45%] flex-col items-center justify-center max-md:hidden">
+        <img
+          src="./team-work.svg"
+          alt="Community illustration"
+          className="size-120"
+          loading="lazy"
+          draggable={false}
+        />
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Community /
+          <span className="text-xl ml-2">{totalUsersCount || 100}+ users</span>
+        </h1>
+        <p className="text-muted-foreground md:text-base mt-2 text-sm">
+          Discover other investor profiles
+        </p>
+      </div>
 
       <div className="flex-1">
-        <div className="sticky top-0 z-10 sm:top-20.5">
+        <div className="sticky top-0 z-10 md:top-20.5">
           <div className="bg-background flex items-center justify-between pt-6 pb-4">
-            <div className="space-y-1 sm:hidden">
+            <div className="space-y-1 md:hidden">
               <h1 className="text-xl font-semibold tracking-tight">
                 Community /
                 <span className="text-md font-medium ml-1">
@@ -100,37 +97,38 @@ function Page() {
                 Discover other investors
               </p>
             </div>
-            <div className="flex max-sm:border max-sm:rounded-full max-sm:px-1 max-sm:py-0.75 sm:w-full items-center gap-1">
-              {isMobile ? (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() =>
-                    navigate("/search-user", { state: { mode: "community" } })
-                  }
-                >
-                  <SearchIcon className="size-6" />
-                </Button>
-              ) : (
-                <div className="bg-background fade-in relative flex-1 sm:mr-4">
-                  <SearchIcon className="text-muted-foreground absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2" />
-                  <Input
-                    autoFocus={isMobile}
-                    placeholder="Search by name or username..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="pl-10 sm:rounded-xl sm:py-5"
-                  />
-                </div>
-              )}
+            <div className="flex max-md:border max-md:rounded-full max-md:px-1 max-md:py-0.75 md:w-full items-center gap-1">
+              {/* show search and filter icon button (no search input) for mobile */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() =>
+                  navigate("/search-user", { state: { mode: "community" } })
+                }
+                className="md:hidden"
+              >
+                <SearchIcon className="size-6" />
+              </Button>
+
+              {/* Show search input for desktop */}
+              <div className="bg-background max-md:hidden fade-in relative flex-1 md:mr-4">
+                <SearchIcon className="text-muted-foreground absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2" />
+                <Input
+                  autoFocus={isMobile}
+                  placeholder="Search by name or username..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pl-10 md:rounded-xl md:py-5"
+                />
+              </div>
 
               <FilterPopover />
             </div>
           </div>
         </div>
 
-        <ScrollArea className="sm:h-[calc(100vh-170px)] sm:mask-b-from-95%">
-          <div className="space-y-4 pt-6 pb-8 sm:mr-4">
+        <ScrollArea className="md:h-[calc(100vh-170px)] md:mask-b-from-95%">
+          <div className="space-y-4 pt-6 pb-8 md:mr-4">
             {isPending ? (
               <>
                 {Array.from({ length: 6 }).map((_, index) => (

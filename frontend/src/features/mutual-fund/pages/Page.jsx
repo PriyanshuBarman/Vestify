@@ -68,7 +68,7 @@ function Page() {
         <SwiperSlide
           key={id}
           data-hash={name}
-          className="min-h-[calc(100vh-200px)]"
+          className="min-h-[calc(100vh-200px)] pb-18"
         >
           <Component />
         </SwiperSlide>

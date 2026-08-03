@@ -37,7 +37,7 @@ import {
 import GoBackBar from "@/components/GoBackBar";
 import { formatToINR } from "@/utils/formatters";
 
-const shareText = `*Virtually Invest in Mutual funds* with a *Groww app UI*.
+const shareText = `*Virtually Invest in Stocks & Mutual funds* with a *Groww app UI*.
 
 Invest, start SIPs with step-up's, track portfolio, use a virtual wallet, send your virtual money to others and more.
 all virtually with a Groww app UI.

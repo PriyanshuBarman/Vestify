@@ -77,7 +77,7 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
                     <span className="font-[450]">{mfFundCount}</span>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-col gap-1">
                     <span className="text-muted-foreground sm:text-sm text-2xs">
                       Balance :
                     </span>
@@ -86,7 +86,7 @@ function UserPreviewCard({ user, isExpanded, onToggle }) {
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-col gap-1">
                     <span className="text-muted-foreground sm:text-sm text-2xs">
                       Active :
                     </span>

@@ -42,7 +42,7 @@ function ExploreTab() {
         <Suspense>
           <AllFundsSection />
         </Suspense>
-        <CopyrightFooter className="mt-6 mb-20 sm:hidden" />
+        <CopyrightFooter className="mt-6  sm:hidden" />
       </div>
       {showInvestmentCard && (
         <div className="space-y-12">

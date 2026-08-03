@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { useSelector } from "react-redux";
 
 import { cn } from "@/lib/utils";
 import { useGetUser } from "@/hooks/useGetUser";
@@ -11,11 +12,17 @@ import {
 } from "@/components/ui/avatar";
 import GoBackBar from "@/components/GoBackBar";
 import ProfileDialog from "@/features/wallet/components/ProfileDialog";
+import { selectOnlineUserIds } from "@/store/slices/onlineUsersSlice";
 
 function ProfileHeader({ profile }) {
   const [isOpen, setIsOpen] = useState(false);
   const { data: self } = useGetUser();
   const isSelf = profile?.userId === self.id;
+
+  const onlineUserIds = useSelector(selectOnlineUserIds);
+
+  const targetUserId = profile?.userId || profile?.id;
+  const isOnline = isSelf || onlineUserIds?.includes(targetUserId);
 
   const handleAvatarClick = () => {
     setIsOpen(true);
@@ -33,7 +40,7 @@ function ProfileHeader({ profile }) {
           <AvatarFallback className="text-3xl sm:text-4xl sm:font-medium">
             {profile?.name?.charAt(0)?.toUpperCase()}
           </AvatarFallback>
-          {isSelf && (
+          {isOnline && (
             <AvatarBadge
               className="right-1 bottom-1.5
              lg:right-4 bottom- size-3! lg:size-4!"

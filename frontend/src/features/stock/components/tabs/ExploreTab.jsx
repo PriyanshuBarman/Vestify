@@ -27,7 +27,7 @@ function ExploreTab() {
         <TopMoversSection />
         <TopByVolumeSection />
         <FiftyTwoWeekHighLowSection />
-        <CopyrightFooter className="mt-6 mb-10 sm:hidden" />
+        <CopyrightFooter className="mt-6 sm:hidden" />
       </div>
 
       {showInvestmentCard && (
