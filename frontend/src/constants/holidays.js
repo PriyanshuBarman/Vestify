@@ -1,4 +1,4 @@
-export const holidays = [
+export const mutualFundHolidays = [
   {
     id: 1,
     date: "2026-01-26",

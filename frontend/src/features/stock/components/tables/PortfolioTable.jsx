@@ -75,7 +75,7 @@ function PortfolioTable({
         <Button
           variant="ghost"
           onClick={handleNextColumn}
-          className="border-muted-foreground flex h-auto items-center justify-end gap-1 rounded-xl !px-0 text-right text-xs font-semibold sm:h-10 sm:!p-2 sm:text-sm"
+          className="border-muted-foreground  active:bg-accent flex h-auto items-center justify-end gap-1 pr-0! text-right text-xs font-semibold sm:h-10 sm:pr-2! sm:text-sm"
         >
           <ChevronsLeftRightIcon className="size-4 shrink-0" />
           <span className="border-muted-foreground border-b border-dashed">
@@ -105,7 +105,10 @@ function PortfolioTable({
                 </div>
               </TableCell>
 
-              <TableCell onClick={handleNextColumn} className="w-[30%] pr-4">
+              <TableCell
+                onClick={handleNextColumn}
+                className="w-[30%] active:bg-accent pr-4"
+              >
                 <span
                   className={`flex justify-end font-medium sm:text-base ${getColor(stock)}`}
                 >
@@ -114,18 +117,12 @@ function PortfolioTable({
 
                 <p className="text-muted-foreground flex justify-end text-xs sm:text-sm">
                   {activeIndex === 0 ? (
-                    <>
-                      ( <span> {activeColumn.unit2}</span>
-                      <span>{formatToINR(stock[activeColumn.data2], 2)} </span>)
-                    </>
+                    <span>({formatToINR(stock[activeColumn.data2], 2)})</span>
                   ) : (
-                    <>
-                      ({" "}
-                      <span>
-                        {Number(stock[activeColumn.data2] || 0).toFixed(2)}{" "}
-                      </span>
-                      <span> {activeColumn.unit2}</span>)
-                    </>
+                    <span>
+                      ({Number(stock[activeColumn.data2] || 0).toFixed(2)}
+                      {activeColumn.unit2})
+                    </span>
                   )}
                 </p>
               </TableCell>

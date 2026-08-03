@@ -11,7 +11,7 @@ export const faqs = [
   {
     question: "What is Vestify?",
     answer:
-      "Vestify is a virtual investment platform that simulates real world mutual fund investing using virtual money. It’s designed to help beginners learn how investing, SIPs works in a risk-free way.",
+      "Vestify is a virtual investment platform that simulates real world stocks and mutual fund investing using virtual money. It’s designed to help beginners learn how investing works in a risk-free way.",
   },
   {
     question: "Is it a real investment platform?",

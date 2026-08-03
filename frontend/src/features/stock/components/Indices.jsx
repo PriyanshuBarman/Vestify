@@ -47,7 +47,10 @@ function IndexItem({ symbol, name, initialData }) {
   const isPositive = change >= 0;
 
   return (
-    <Item variant="outline" className="flex-1 sm:min-w-[11rem] p-3 rounded-xl">
+    <Item
+      variant="outline"
+      className="flex-1 min-w-46 sm:min-w-[11rem] p-3 rounded-xl"
+    >
       <ItemContent>
         <ItemTitle className="text-xs">
           <span>{name}</span>

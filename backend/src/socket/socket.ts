@@ -1,13 +1,15 @@
+import { envConfig } from "@/config/env.config.js";
 import type { Server as HTTPServer } from "http";
 import { Server } from "socket.io";
-import { envConfig } from "@/config/env.config.js";
-import { registerStockHandler } from "./handlers/stock-handler.js";
 import { registerOnlineUsersHandler } from "./handlers/online-users-handler.js";
+import { registerStockHandler } from "./handlers/stock-handler.js";
+import { authenticateSocket } from "./middlewares/auth.middleware.js";
+import { startIntradayChartPollingIfNeeded } from "./services/intraday-chart-polling.service.js";
 import { initializeMarketScheduler } from "./services/market-scheduler.service.js";
 import { startStockPricePollingIfNeeded } from "./services/stock-price-polling.service.js";
-import { startIntradayChartPollingIfNeeded } from "./services/intraday-chart-polling.service.js";
-import { authenticateSocket } from "./middlewares/auth.middleware.js";
 import { isMarketOpen } from "./utils/cron.utils.js";
+
+import { startOrderExecutionIfNeeded } from "./services/stock-order-execution.service.js";
 
 let io: Server | null = null;
 
@@ -26,9 +28,11 @@ export function initSocket(httpServer: HTTPServer): Server {
     registerStockHandler(io!, socket);
     startStockPricePollingIfNeeded(io!);
     startIntradayChartPollingIfNeeded(io!);
+    startOrderExecutionIfNeeded();
   });
 
   initializeMarketScheduler(io);
+  startOrderExecutionIfNeeded();
 
   return io;
 }

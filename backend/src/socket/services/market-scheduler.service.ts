@@ -1,6 +1,7 @@
 import type { Server } from "socket.io";
 import cron from "node-cron";
-import { isMarketHolidayToday, isMarketOpen } from "../utils/cron.utils.js";
+import { isMarketOpen } from "../utils/cron.utils.js";
+import { isStockHolidayToday } from "@/shared/utils/holidays.utils.js";
 import {
   startStockPricePollingIfNeeded,
   stopStockPricePolling,
@@ -17,10 +18,8 @@ import {
 } from "./intraday-chart-polling.service.js";
 
 export function initializeMarketScheduler(io: Server) {
-  const todayIsHoliday = isMarketHolidayToday();
-
   // Start if server restarts during market hours
-  if (!todayIsHoliday && isMarketOpen()) {
+  if (!isStockHolidayToday() && isMarketOpen()) {
     startOrderExecutionIfNeeded();
   }
 
@@ -28,7 +27,7 @@ export function initializeMarketScheduler(io: Server) {
   cron.schedule(
     "15 9 * * 1-5",
     () => {
-      if (todayIsHoliday) return;
+      if (isStockHolidayToday()) return;
 
       io.emit("market:open");
       io.emit("market:status", true);
@@ -43,7 +42,7 @@ export function initializeMarketScheduler(io: Server) {
   cron.schedule(
     "30 15 * * 1-5",
     async () => {
-      if (todayIsHoliday) return;
+      if (isStockHolidayToday()) return;
 
       io.emit("market:close");
       io.emit("market:status", false);

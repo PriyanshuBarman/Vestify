@@ -1,35 +1,34 @@
 import { tz, TZDate } from "@date-fns/tz";
 import { format, isWeekend } from "date-fns";
 
-import { holidays } from "@/constants/holidays";
+import { mutualFundHolidays, nseHolidays } from "@/constants/holidays";
 
-/**
- * @param {string} dateStr - The date to check (YYYY-MM-DD).
- * @returns {Object|boolean} - The holiday object if found, otherwise false.
- */
-function isHoliday(dateStr) {
-  return holidays.find((h) => h.date === dateStr) || false;
+// ==========================================
+// MUTUAL FUND HOLIDAY UTILS
+// ==========================================
+
+function isMfHoliday(dateStr) {
+  return mutualFundHolidays.find((h) => h.date === dateStr) || false;
 }
 
-export function isTodayHoliday() {
+export function isMfHolidayToday() {
   const todayStr = format(new Date(), "yyyy-MM-dd", {
     in: tz("Asia/Kolkata"),
   });
-
-  return holidays.find((h) => h.date === todayStr) || false;
+  return mutualFundHolidays.find((h) => h.date === todayStr) || false;
 }
 
-export function isBusinessDay(date) {
-  return !isWeekend(date) && !isHoliday(format(date, "yyyy-MM-dd"));
+export function isMfBusinessDay(date) {
+  return !isWeekend(date) && !isMfHoliday(format(date, "yyyy-MM-dd"));
 }
 
-export function getNextBusinessDate(offset = 0, fromDate) {
+export function getNextMfBusinessDate(offset = 0, fromDate) {
   let newDate = new Date(fromDate || TZDate.tz("Asia/Kolkata"));
   let count = 0;
 
   while (count <= offset) {
     newDate.setDate(newDate.getDate() + 1);
-    if (isBusinessDay(newDate)) {
+    if (isMfBusinessDay(newDate)) {
       count++;
     }
   }
@@ -37,16 +36,69 @@ export function getNextBusinessDate(offset = 0, fromDate) {
   return newDate;
 }
 
-export function getPrevBusinessDate(offset = 0, fromDate) {
+export function getPrevMfBusinessDate(offset = 0, fromDate) {
   let date = new Date(fromDate || TZDate.tz("Asia/Kolkata"));
   let moved = 0;
 
   while (moved <= offset) {
     date.setDate(date.getDate() - 1);
-    if (!isWeekend(date) && !isHoliday(format(date, "yyyy-MM-dd"))) {
+    if (isMfBusinessDay(date)) {
       moved++;
     }
   }
 
   return date;
 }
+
+// ==========================================
+// STOCK MARKET HOLIDAY UTILS
+// ==========================================
+
+function isStockHoliday(dateStr) {
+  return nseHolidays.find((h) => h.date === dateStr) || false;
+}
+
+export function isStockHolidayToday() {
+  const todayStr = format(new Date(), "yyyy-MM-dd", {
+    in: tz("Asia/Kolkata"),
+  });
+  return nseHolidays.find((h) => h.date === todayStr) || false;
+}
+
+export function isStockBusinessDay(date) {
+  return !isWeekend(date) && !isStockHoliday(format(date, "yyyy-MM-dd"));
+}
+
+export function getNextStockBusinessDate(offset = 0, fromDate) {
+  let newDate = new Date(fromDate || TZDate.tz("Asia/Kolkata"));
+  let count = 0;
+
+  while (count <= offset) {
+    newDate.setDate(newDate.getDate() + 1);
+    if (isStockBusinessDay(newDate)) {
+      count++;
+    }
+  }
+
+  return newDate;
+}
+
+export function getPrevStockBusinessDate(offset = 0, fromDate) {
+  let date = new Date(fromDate || TZDate.tz("Asia/Kolkata"));
+  let moved = 0;
+
+  while (moved <= offset) {
+    date.setDate(date.getDate() - 1);
+    if (isStockBusinessDay(date)) {
+      moved++;
+    }
+  }
+
+  return date;
+}
+
+// Backward compatibility aliases
+export const isTodayHoliday = isStockHolidayToday;
+export const isBusinessDay = isMfBusinessDay;
+export const getNextBusinessDate = getNextMfBusinessDate;
+export const getPrevBusinessDate = getPrevMfBusinessDate;

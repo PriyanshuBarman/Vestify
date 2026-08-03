@@ -37,12 +37,12 @@ export function SocketProvider({ children }) {
       }
     });
 
-    // 1. Stock price updates
+    // Stock price updates
     socketInstance.on("stock:update", (data) => {
       store.dispatch(setLiveStocks({ symbol: data.symbol, data }));
     });
 
-    // 2. Market open/close status
+    // Market open/close status
     socketInstance.on("market:status", (isOpen) => {
       store.dispatch(setIsMarketOpen(isOpen));
     });
@@ -53,7 +53,7 @@ export function SocketProvider({ children }) {
       playMarketOpenBellSound();
     });
 
-    // 3. User balance updates
+    // User balance updates
     socketInstance.on("balance:update", (data) => {
       if (data?.balance !== undefined) {
         queryClient.setQueryData(["balance"], data.balance);
@@ -61,9 +61,14 @@ export function SocketProvider({ children }) {
       }
     });
 
-    // 4. Stock order execution updates
-    socketInstance.on("order:executed", () => {
+    // Stock order execution updates
+    socketInstance.on("order:executed", (data) => {
       const userKey = "self";
+      if (data?.orderId) {
+        queryClient.invalidateQueries({
+          queryKey: [userKey, "stocks", "order", data.orderId],
+        });
+      }
       queryClient.invalidateQueries({
         queryKey: [userKey, "stocks", "orders"],
       });
@@ -76,9 +81,11 @@ export function SocketProvider({ children }) {
       queryClient.invalidateQueries({
         queryKey: [userKey, "stocks", "portfolio"],
       });
+      queryClient.invalidateQueries({ queryKey: ["balance"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
     });
 
-    // 5. Online users list updates
+    // Online users list updates
     socketInstance.on("user:online", (userIds) => {
       dispatch(setOnlineUsers(userIds));
     });

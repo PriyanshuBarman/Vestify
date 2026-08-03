@@ -1,6 +1,6 @@
 import { TZDate } from "@date-fns/tz";
 
-import { getNextBusinessDate, isBusinessDay } from "@/utils/holidays";
+import { getNextMfBusinessDate, isMfBusinessDay } from "@/utils/holidays";
 
 export function getNavAndProcessDateForRedemption() {
   const today = TZDate.tz("Asia/Kolkata");
@@ -8,10 +8,10 @@ export function getNavAndProcessDateForRedemption() {
   const cutoffMinutes = 15 * 60; // 3:00 PM cutoff for redemptions
 
   // If today is not a business day, treat as next business day
-  if (!isBusinessDay(today)) {
+  if (!isMfBusinessDay(today)) {
     return {
-      navDate: getNextBusinessDate(), // T day is next business day
-      processDate: getNextBusinessDate(1), // T+1 business day
+      navDate: getNextMfBusinessDate(), // T day is next business day
+      processDate: getNextMfBusinessDate(1), // T+1 business day
     };
   }
 
@@ -19,12 +19,12 @@ export function getNavAndProcessDateForRedemption() {
   if (orderMinutes < cutoffMinutes) {
     return {
       navDate: today, // Same day NAV
-      processDate: getNextBusinessDate(), // Next business day
+      processDate: getNextMfBusinessDate(), // Next business day
     };
   }
   // After cutoff
   return {
-    navDate: getNextBusinessDate(), // Next business day NAV
-    processDate: getNextBusinessDate(1), // T+1 business day
+    navDate: getNextMfBusinessDate(), // Next business day NAV
+    processDate: getNextMfBusinessDate(1), // T+1 business day
   };
 }

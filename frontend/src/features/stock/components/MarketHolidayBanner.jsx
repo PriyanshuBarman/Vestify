@@ -7,10 +7,10 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/components/ui/item";
-import { isTodayHoliday } from "@/utils/holidays";
+import { isStockHolidayToday } from "@/utils/holidays";
 
 function MarketHolidayBanner() {
-  const todayHoliday = isTodayHoliday();
+  const todayHoliday = isStockHolidayToday();
 
   if (!todayHoliday) return null;
 
