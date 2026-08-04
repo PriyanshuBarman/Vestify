@@ -6,6 +6,9 @@ import {
   setMilliseconds,
   setMinutes,
   setSeconds,
+  isBefore,
+  isAfter,
+  isEqual,
 } from "date-fns";
 import { TIMEZONE } from "../../shared/constants/live-stock-fields.js";
 
@@ -25,6 +28,8 @@ export function isMarketOpen() {
     0,
   );
 
-  const nowMs = istNow.getTime();
-  return nowMs >= marketOpenTime.getTime() && nowMs < marketCloseTime.getTime();
+  return (
+    (isAfter(istNow, marketOpenTime) || isEqual(istNow, marketOpenTime)) &&
+    isBefore(istNow, marketCloseTime)
+  );
 }
