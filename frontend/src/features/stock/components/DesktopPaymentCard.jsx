@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatToINR } from "@/utils/formatters";
 
@@ -187,10 +188,11 @@ function BuySellOrderTab({
               id="desktop-qty"
               type="number"
               min="1"
+              disabled={isPending}
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               aria-invalid={isExceedingShares}
-              className="w-full text-right shadow-none"
+              className="w-full disabled:bg-muted text-right shadow-none"
             />
             {activeTab === "SELL" && (
               <span
@@ -221,9 +223,10 @@ function BuySellOrderTab({
                 id="desktop-trigger-price"
                 type="number"
                 value={triggerPrice}
+                disabled={isPending}
                 onChange={(e) => setTriggerPrice(e.target.value)}
                 aria-invalid={isInvalidSLTrigger}
-                className="w-1/2 text-right shadow-none"
+                className="w-1/2 text-right disabled:bg-muted shadow-none"
               />
             </Field>
 
@@ -251,12 +254,12 @@ function BuySellOrderTab({
               <Input
                 id="desktop-price-type"
                 type="number"
-                disabled={priceType === "MARKET"}
+                disabled={priceType === "MARKET" || isPending}
                 value={priceType === "LIMIT" ? limitPrice : ""}
                 onChange={(e) => setLimitPrice(e.target.value)}
                 placeholder={priceType === "MARKET" ? "At Market" : ""}
                 aria-invalid={isInvalidLimit}
-                className="w-1/2 text-right disabled:bg-accent shadow-none"
+                className="w-1/2 text-right disabled:bg-muted shadow-none"
               />
             </Field>
           </>
@@ -265,6 +268,7 @@ function BuySellOrderTab({
             <FieldLabel htmlFor="desktop-price-type" className="gap-0">
               Price
               <Select
+                disabled={isPending}
                 value={priceType}
                 onValueChange={(val) => setPriceType(val)}
               >
@@ -285,12 +289,12 @@ function BuySellOrderTab({
             <Input
               id="desktop-price-type"
               type="number"
-              disabled={priceType === "MARKET"}
+              disabled={priceType === "MARKET" || isPending}
               value={priceType === "LIMIT" ? limitPrice : ""}
               onChange={(e) => setLimitPrice(e.target.value)}
               placeholder={priceType === "MARKET" ? "At Market" : ""}
               aria-invalid={isInvalidLimit}
-              className="w-1/2 text-right disabled:bg-accent shadow-none"
+              className="w-1/2 text-right disabled:bg-muted shadow-none"
             />
           </Field>
         )}
@@ -309,7 +313,9 @@ function BuySellOrderTab({
 
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Available Balance: {formatToINR(balance)}</span>
-          <span>Required: {formatToINR(totalAmount)}</span>
+          <span>
+            Required: {activeTab === "BUY" ? formatToINR(totalAmount) : "---"}
+          </span>
         </div>
 
         <Button
@@ -319,6 +325,7 @@ function BuySellOrderTab({
           onClick={handleSubmit}
           className="w-full"
         >
+          {isPending && <Spinner />}
           {isPending
             ? "Placing Order..."
             : activeTab === "BUY"
@@ -423,9 +430,10 @@ function GttOrderTab({
               <Input
                 id="gtt-desktop-trigger"
                 type="number"
+                disabled={isPending}
                 value={triggerPrice}
                 onChange={(e) => setTriggerPrice(e.target.value)}
-                className="w-1/2 text-right shadow-none"
+                className="w-1/2 disabled:bg-muted text-right shadow-none"
               />
             </Field>
             <span className="text-xs mt-2 block text-muted-foreground text-right">
@@ -442,6 +450,7 @@ function GttOrderTab({
             </span>
             <div className="space-x-2">
               <Button
+                disabled={isPending}
                 size="sm"
                 variant="outline"
                 className={cn(
@@ -454,6 +463,7 @@ function GttOrderTab({
                 Buy
               </Button>
               <Button
+                disabled={isPending}
                 size="sm"
                 variant="outline"
                 className={cn(
@@ -477,10 +487,11 @@ function GttOrderTab({
                     id="gtt-desktop-qty"
                     type="number"
                     min="1"
+                    disabled={isPending}
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                     aria-invalid={isExceedingShares}
-                    className="w-full text-right shadow-none"
+                    className="w-full disabled:bg-muted text-right shadow-none"
                   />
                   {action === "SELL" && (
                     <span
@@ -501,6 +512,7 @@ function GttOrderTab({
                 <FieldLabel htmlFor="gtt-desktop-price-type" className="gap-0">
                   Price
                   <Select
+                    disabled={isPending}
                     value={priceType}
                     onValueChange={(val) => setPriceType(val)}
                   >
@@ -543,7 +555,9 @@ function GttOrderTab({
 
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Validity: 1 year</span>
-          <span>Required: {formatToINR(totalAmount)}</span>
+          <span>
+            Required: {action === "BUY" ? formatToINR(totalAmount) : "---"}
+          </span>
         </div>
 
         <Button
@@ -553,6 +567,7 @@ function GttOrderTab({
           onClick={handleSubmit}
           className="w-full"
         >
+          {isPending && <Spinner />}
           {isPending ? "Placing Order..." : "Set trigger order"}
         </Button>
       </div>

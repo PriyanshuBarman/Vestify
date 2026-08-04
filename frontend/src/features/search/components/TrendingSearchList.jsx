@@ -19,7 +19,7 @@ function TrendingSearchList({ searchType, activeIdx, handleClick }) {
   }
   return (
     <div className="mt-2 px-2">
-      <h6 className="text-sm sm:font-medium">
+      <h6 className="text-sm font-[450] sm:font-medium">
         Popular {searchType === "mutualFunds" ? "Funds" : "Stocks"}
       </h6>
 

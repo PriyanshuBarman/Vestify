@@ -49,7 +49,7 @@ function IndexItem({ symbol, name, initialData }) {
   return (
     <Item
       variant="outline"
-      className="flex-1 min-w-46 sm:min-w-[11rem] p-3 rounded-xl"
+      className="sm:flex-1 min-w-46 shrink-0  sm:min-w-[11rem] p-3 rounded-xl"
     >
       <ItemContent>
         <ItemTitle className="text-xs">

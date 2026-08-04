@@ -212,7 +212,7 @@ function OrderItem({ index, length, order, onOrderClick }) {
           <ItemDescription
             className={isBuy ? "text-positive" : "text-negative"}
           >
-            {order.action}
+            {order.type === "SL" && "SL"} {order.action}
           </ItemDescription>
           <ItemTitle>{order.name}</ItemTitle>
           <ItemDescription>{leftDescription}</ItemDescription>

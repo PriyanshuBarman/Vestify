@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 import GoBackButton from "@/components/GoBackButton";
 import { formatToINR } from "@/utils/formatters";
 
@@ -175,9 +176,10 @@ function GTTOrderPage() {
                   id="trigger-price"
                   type="number"
                   autoFocus={!isEditMode}
+                  disabled={isPending}
                   value={triggerPrice}
                   onChange={(e) => setTriggerPrice(e.target.value)}
-                  className="w-1/2 text-right shadow-none"
+                  className="w-1/2 text-right disabled:bg-muted shadow-none"
                 />
               </Field>
               <span className="text-xs mt-3 block text-muted-foreground text-right">
@@ -194,6 +196,7 @@ function GTTOrderPage() {
               </span>
               <div className="space-x-3">
                 <Button
+                  disabled={isPending}
                   size="sm"
                   variant="outline"
                   className={cn(
@@ -206,6 +209,7 @@ function GTTOrderPage() {
                   Buy
                 </Button>
                 <Button
+                  disabled={isPending}
                   size="sm"
                   variant="outline"
                   className={cn(
@@ -230,9 +234,10 @@ function GTTOrderPage() {
                       id="qty"
                       type="number"
                       value={quantity}
+                      disabled={isPending}
                       onChange={(e) => setQuantity(e.target.value)}
                       aria-invalid={isExceedingShares}
-                      className="w-full text-right shadow-none"
+                      className="w-full text-right disabled:bg-muted shadow-none"
                     />
                     {isSell && (
                       <span
@@ -254,6 +259,7 @@ function GTTOrderPage() {
                     <FieldLabel htmlFor="price-type" className="gap-0">
                       Price
                       <Select
+                        disabled={isPending}
                         value={priceType}
                         onValueChange={(val) => setPriceType(val)}
                       >
@@ -274,11 +280,11 @@ function GTTOrderPage() {
                     <Input
                       id="price-type"
                       type="number"
-                      disabled={priceType === "MARKET"}
+                      disabled={priceType === "MARKET" || isPending}
                       value={priceType === "LIMIT" ? limitPrice : ""}
                       onChange={(e) => setLimitPrice(e.target.value)}
                       placeholder={priceType === "MARKET" ? "At Market" : ""}
-                      className="w-1/2 text-right disabled:bg-accent shadow-none"
+                      className="w-1/2 text-right disabled:bg-muted shadow-none"
                     />
                   </Field>
 
@@ -304,7 +310,7 @@ function GTTOrderPage() {
 
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Validity: 1 year</span>
-          <span>Required: ₹{formatToINR(totalAmount)}</span>
+          <span>Required: {isBuy ? formatToINR(totalAmount) : "---"}</span>
         </div>
 
         <Button
@@ -323,6 +329,7 @@ function GTTOrderPage() {
           }
           onClick={handleOrderSubmit}
         >
+          {isPending && <Spinner />}
           {isEditMode ? "Update trigger order" : "Set trigger order"}
         </Button>
       </div>

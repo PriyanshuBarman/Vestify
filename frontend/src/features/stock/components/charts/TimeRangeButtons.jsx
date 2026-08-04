@@ -29,9 +29,9 @@ function TimeRangeButtons({
         }}
         disabled={is1DDisabled}
         className={cn(
-          "text-muted-foreground sm:text-foreground  h-7 w-10 sm:h-8 sm:w-11 rounded-full !bg-transparent tabular-nums shadow-none max-sm:border-0 text-xs",
+          "text-muted-foreground sm:text-foreground  h-6.5 w-10 sm:h-8 sm:w-11 rounded-full  tabular-nums shadow-none border-transparent sm:border-border  text-xs",
           selectedRange === "1D" &&
-            "!border-foreground sm:!bg-accent !bg-primary/10 text-primary sm:text-foreground",
+            "border-foreground! text-foreground border bg-accent",
         )}
       >
         1D
@@ -48,9 +48,9 @@ function TimeRangeButtons({
           }}
           disabled={isValidRange(timePeriod, fullChartData) || isLoading}
           className={cn(
-            "text-muted-foreground sm:text-foreground h-7 w-10 sm:h-8 sm:w-11 rounded-full !bg-transparent tabular-nums shadow-none max-sm:border-0 text-xs",
+            "text-muted-foreground sm:text-foreground h-6.5 w-10 sm:h-8 sm:w-11  border-transparent sm:border-border rounded-full  tabular-nums shadow-none  text-xs",
             timePeriod === selectedRange &&
-              "!border-foreground sm:!bg-accent !bg-primary/10 text-primary sm:text-foreground",
+              "border-foreground! text-foreground border bg-accent",
           )}
         >
           {timePeriod}

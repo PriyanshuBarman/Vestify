@@ -39,7 +39,7 @@ function SearchBar({
           searchBarRef.current.focus();
         }}
       >
-        {isLoading ? <Spinner /> : <XIcon size={18} />}
+        {isLoading ? <Spinner className="text-primary" /> : <XIcon size={18} />}
       </button>
 
       <p

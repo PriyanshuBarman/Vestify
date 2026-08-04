@@ -10,6 +10,7 @@ import { useGetSearchResults } from "@/features/search/hooks/useGetSearchResults
 import { useKeyboardDismiss } from "@/features/search/hooks/useKeyboardDismis";
 import { addToSearchHistory } from "@/store/slices/searchSlice";
 
+import NoResult from "../components/NoResult";
 import TrendingSearchList from "../components/TrendingSearchList";
 
 const FilterTabs = lazy(() => import("../components/FilterTabs"));
@@ -92,7 +93,12 @@ function SearchPage() {
             />
           )}
         </Suspense>
-        {!searchResult && !searchHistory[searchType]?.length && !isLoading && (
+
+        {searchResult?.length === 0 && !isLoading && query && (
+          <NoResult query={query} searchType={searchType} />
+        )}
+
+        {!searchHistory[searchType]?.length && !isLoading && !query && (
           <TrendingSearchList
             searchType={searchType}
             handleClick={handleClick}

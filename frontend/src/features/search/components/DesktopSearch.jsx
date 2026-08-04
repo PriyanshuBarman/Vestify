@@ -14,6 +14,7 @@ import {
 
 import FilterTabs from "./FilterTabs";
 import LoadingSkeleton from "./LoadingSkeleton";
+import NoResult from "./NoResult";
 import SearchBar from "./SearchBar";
 import SearchHistoryList from "./SearchHistoryList";
 import SearchResultList from "./SearchResultList";
@@ -135,14 +136,16 @@ function DesktopSearch() {
                 />
               )}
 
-              {!searchResult &&
-                !searchHistory[searchType]?.length &&
-                !isLoading && (
-                  <TrendingSearchList
-                    searchType={searchType}
-                    handleClick={handleClick}
-                  />
-                )}
+              {searchResult?.length === 0 && !isLoading && query && (
+                <NoResult query={query} searchType={searchType} />
+              )}
+
+              {!searchHistory[searchType]?.length && !isLoading && !query && (
+                <TrendingSearchList
+                  searchType={searchType}
+                  handleClick={handleClick}
+                />
+              )}
 
               <ScrollBar orientation="vertical" />
             </ScrollArea>

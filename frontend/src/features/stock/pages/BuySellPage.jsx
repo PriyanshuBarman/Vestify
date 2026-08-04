@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Spinner } from "@/components/ui/spinner";
 import GoBackButton from "@/components/GoBackButton";
 import { formatToINR } from "@/utils/formatters";
 
@@ -44,7 +45,6 @@ function BuySellPage() {
   const symbol = location.state?.symbol || editOrder?.symbol;
   const initialAction = location.state?.action || editOrder?.action || "BUY";
   const [action, setAction] = useState(initialAction);
-
   const [quantity, setQuantity] = useState(
     editOrder?.quantity?.toString() || "",
   );
@@ -161,6 +161,7 @@ function BuySellPage() {
           </div>
 
           <Button
+            disabled={isPending}
             aria-label="Settings"
             size="icon"
             variant="ghost"
@@ -179,6 +180,7 @@ function BuySellPage() {
             className="mx-2 data-[orientation=vertical]:h-4"
           />
           <Button
+            disabled={isPending}
             size="icon-sm"
             variant="outline"
             onClick={() => setIsSettingsOpen(true)}
@@ -196,12 +198,12 @@ function BuySellPage() {
               <Input
                 id="qty"
                 type="number"
-                min="1"
                 autoFocus={!isEditMode}
+                disabled={isPending}
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 aria-invalid={isExceedingShares}
-                className="w-full text-right shadow-none"
+                className="w-full disabled:bg-muted text-right shadow-none"
               />
               {isSell && (
                 <span
@@ -228,10 +230,11 @@ function BuySellPage() {
                 <Input
                   id="trigger-price"
                   type="number"
+                  disabled={isPending}
                   value={triggerPrice}
                   onChange={(e) => setTriggerPrice(e.target.value)}
                   aria-invalid={isInvalidSLTrigger}
-                  className="w-1/2 text-right shadow-none"
+                  className="w-1/2 text-right disabled:bg-muted shadow-none"
                 />
               </Field>
 
@@ -239,6 +242,7 @@ function BuySellPage() {
                 <FieldLabel htmlFor="price-type" className="gap-0">
                   Price
                   <Select
+                    disabled={isPending}
                     value={priceType}
                     onValueChange={(val) => setPriceType(val)}
                   >
@@ -260,10 +264,10 @@ function BuySellPage() {
                   id="sl-limit-price"
                   type="number"
                   placeholder={priceType === "MARKET" && "At Market"}
-                  disabled={priceType === "MARKET"}
+                  disabled={priceType === "MARKET" || isPending}
                   value={limitPrice}
                   onChange={(e) => setLimitPrice(e.target.value)}
-                  className="w-1/2 text-right disabled:bg-accent shadow-none"
+                  className="w-1/2 text-right disabled:bg-muted shadow-none"
                 />
               </Field>
             </>
@@ -272,6 +276,7 @@ function BuySellPage() {
               <FieldLabel htmlFor="price-type" className="gap-0">
                 Price
                 <Select
+                  disabled={isPending}
                   value={priceType}
                   onValueChange={(val) => setPriceType(val)}
                 >
@@ -292,12 +297,12 @@ function BuySellPage() {
               <Input
                 id="price-type"
                 type="number"
-                disabled={priceType === "MARKET"}
+                disabled={priceType === "MARKET" || isPending}
                 value={priceType === "LIMIT" ? limitPrice : ""}
                 onChange={(e) => setLimitPrice(e.target.value)}
                 placeholder={priceType === "MARKET" && "At Market"}
                 aria-invalid={isInvalidLimit}
-                className="w-1/2 text-right disabled:bg-accent shadow-none"
+                className="w-1/2 text-right disabled:bg-muted shadow-none"
               />
             </Field>
           )}
@@ -316,9 +321,9 @@ function BuySellPage() {
           price={live.price}
         />
 
-        <div className="flex items-center  justify-between text-xs text-muted-foreground">
+        <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Available Balance: {formatToINR(balance)}</span>
-          <span>Required: {formatToINR(totalAmount)}</span>
+          <span>Required: {isBuy ? formatToINR(totalAmount) : "---"}</span>
         </div>
 
         <Button
@@ -328,6 +333,7 @@ function BuySellPage() {
           onClick={handleOrderSubmit}
           className="capitalize"
         >
+          {isPending && <Spinner />}
           {isPending
             ? isEditMode
               ? `Updating ${action.toLowerCase()} order`

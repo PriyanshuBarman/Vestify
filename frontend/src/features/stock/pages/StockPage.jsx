@@ -19,10 +19,10 @@ import { addToRecentlyViewedStocks } from "@/store/slices/stockSlice";
 import BuySellButtons from "../components/BuySellButtons";
 import Chart from "../components/charts/Chart";
 import Fundamentals from "../components/Fundamentals";
+import HoldingPreview from "../components/HoldingPreview";
 import Performance from "../components/Performance";
 import RecentlyViewedSection from "../components/sections/RecentlyViewedSection";
 import SimilarStocks from "../components/SimilarStocks";
-import StockHoldingPreview from "../components/StockHoldingPreview";
 import { useAddStockToWatchlist } from "../hooks/useAddStockToWatchlist";
 import { useGetIsInWatchlist } from "../hooks/useGetIsInWatchlist";
 import { useGetStockData } from "../hooks/useGetStockData";
@@ -79,10 +79,7 @@ function StockPage() {
       <div className="h-full w-full space-y-4 text-inherit sm:space-y-6 lg:w-[67%]">
         <div className="px-4 space-y-4 max-sm:pr-6">
           <div className="flex items-center justify-between">
-            <StockLogo
-              symbol={stock.symbol}
-              className="size-9 border sm:size-13"
-            />
+            <StockLogo symbol={stock.symbol} className=" border sm:size-12" />
             <div className="icons flex items-center gap-4">
               <Button
                 onClick={handleSearchClick}
@@ -116,7 +113,7 @@ function StockPage() {
         </div>
 
         <Chart symbol={symbol} />
-        <StockHoldingPreview symbol={symbol} stock={stock} />
+        <HoldingPreview symbol={symbol} stock={stock} />
         <Fundamentals stock={stock} />
 
         <Accordion type="multiple" className="sm:mt-10 border-t border-b">
