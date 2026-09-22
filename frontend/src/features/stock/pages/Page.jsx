@@ -18,6 +18,7 @@ import HoldingsTab from "../components/tabs/HoldingsTab";
 import OrdersTab from "../components/tabs/OrdersTab";
 
 const WatchlistTab = lazy(() => import("../components/tabs/WatchlistTab"));
+const SipsTab = lazy(() => import("../components/tabs/SipsTab"));
 
 const TABS = [
   {
@@ -37,6 +38,11 @@ const TABS = [
   },
   {
     id: 3,
+    name: "sips",
+    component: SipsTab,
+  },
+  {
+    id: 4,
     name: "watchlist",
     component: WatchlistTab,
   },

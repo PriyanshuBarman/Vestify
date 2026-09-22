@@ -19,6 +19,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatToINR } from "@/utils/formatters";
 
+import { useCreateSip } from "../hooks/useCreateSip";
 import { useGetLiveData } from "../hooks/useGetLiveData";
 import { useGetSingleStockPortfolio } from "../hooks/useGetSingleStockPortfolio";
 import { usePlaceBuyOrder } from "../hooks/usePlaceBuyOrder";
@@ -26,6 +27,7 @@ import { usePlaceSellOrder } from "../hooks/usePlaceSellOrder";
 import { evaluateOrderValidation } from "../utils/orderValidationUtils";
 import OrderErrorMessage from "./OrderErrorMessage";
 import OrderTypePopover from "./overlays/OrderTypePopover";
+import SipDatePicker from "./overlays/SipDatePicker";
 import ProductTypeButtons from "./ProductTypeButtons";
 
 function DesktopPaymentCard({ stock }) {
@@ -70,6 +72,12 @@ function DesktopPaymentCard({ stock }) {
           >
             GTT
           </TabsTrigger>
+          <TabsTrigger
+            value="SIP"
+            className="data-[state=active]:text-indigo-500 data-[state=active]:bg-indigo-500/10 font-semibold"
+          >
+            SIP
+          </TabsTrigger>
         </TabsList>
 
         {/* Buy / Sell Tab Component */}
@@ -96,6 +104,9 @@ function DesktopPaymentCard({ stock }) {
           placeSell={placeSell}
           isPending={isPending}
         />
+
+        {/* SIP Tab Component */}
+        <SipOrderTab stock={stock} price={price} isPending={isPending} />
       </Tabs>
     </div>
   );
@@ -569,6 +580,112 @@ function GttOrderTab({
         >
           {isPending && <Spinner />}
           {isPending ? "Placing Order..." : "Set trigger order"}
+        </Button>
+      </div>
+    </TabsContent>
+  );
+}
+
+function SipOrderTab({ stock, price, isPending }) {
+  const [type, setType] = useState("QUANTITY");
+  const [frequency, setFrequency] = useState("MONTHLY");
+  const [value, setValue] = useState("");
+  const [sipDate, setSipDate] = useState(null);
+
+  const { mutate: submitSip, isPending: isCreatingSip } = useCreateSip();
+
+  const handleInvest = () => {
+    const payload = {
+      frequency,
+      type,
+      sipDate,
+      symbol: stock.symbol,
+      name: stock.longName || stock.shortName,
+      shortName: stock.shortName || stock.symbol,
+    };
+    if (type === "AMOUNT") {
+      payload.amount = Number(value);
+    } else {
+      payload.quantity = Number(value);
+    }
+    submitSip(payload, { onSuccess: () => setValue("") });
+  };
+
+  const isSubmitDisabled = () => {
+    if (!sipDate) return true;
+    const numValue = Number(value);
+    if (!numValue || numValue <= 0) return true;
+    if (type === "AMOUNT" && numValue < price) return true;
+    return false;
+  };
+
+  const getApproxShares = () => {
+    if (type !== "AMOUNT" || !price || !value) return 0;
+    return Math.floor(Number(value) / price);
+  };
+
+  return (
+    <TabsContent value="SIP" className="flex flex-col mt-2 flex-1">
+      <div className="flex items-center gap-2 mb-4">
+        <Tabs value={type} onValueChange={setType} className="w-full">
+          <TabsList className="w-full grid grid-cols-2">
+            <TabsTrigger value="QUANTITY">Quantity</TabsTrigger>
+            <TabsTrigger value="AMOUNT">Amount</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
+      <FieldGroup className="mt-4 space-y-4">
+        <Field orientation="horizontal">
+          <FieldLabel htmlFor="desktop-sip-val">
+            {type === "QUANTITY" ? "No. of shares" : "Investment (₹)"}
+          </FieldLabel>
+          <div className="flex flex-col items-end w-1/2 gap-1">
+            <Input
+              id="desktop-sip-val"
+              type="number"
+              min="1"
+              disabled={isPending || isCreatingSip}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              className="w-full disabled:bg-muted text-right shadow-none"
+            />
+          </div>
+        </Field>
+
+        <SipDatePicker
+          sipDate={sipDate}
+          setSipDate={setSipDate}
+          frequency={frequency}
+          setFrequency={setFrequency}
+        />
+      </FieldGroup>
+
+      {/* Footer / Submit */}
+      <div className="mt-auto pt-4 space-y-3 border-t">
+        <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <span>Current Price: {formatToINR(price)}</span>
+          <span>
+            {type === "AMOUNT" && value
+              ? `Approx ~${getApproxShares()} shares`
+              : "---"}
+          </span>
+        </div>
+
+        {type === "AMOUNT" && value && Number(value) < price && (
+          <p className="text-xs text-destructive font-medium text-center">
+            Amount must be at least {formatToINR(price)} (1 share)
+          </p>
+        )}
+
+        <Button
+          size="lg"
+          disabled={isPending || isCreatingSip || isSubmitDisabled()}
+          onClick={handleInvest}
+          className="w-full"
+        >
+          {(isPending || isCreatingSip) && <Spinner />}
+          {isCreatingSip ? "Starting SIP..." : "Start SIP"}
         </Button>
       </div>
     </TabsContent>

@@ -41,6 +41,9 @@ model User {
   stockHoldings          StockHolding[]
   stockWatchlists        StockWatchlist[]
 
+  stockSips              StockSip[]
+  pendingStockSipChanges PendingStockSipChange[]
+
   @@map("users")
 }
 
@@ -374,6 +377,9 @@ model StockOrder {
 
   transaction Transaction?
 
+  sipId    String?
+  stockSip StockSip? @relation(fields: [sipId], references: [id], onDelete: SetNull)
+
   @@index([status])
   @@index([expiresAt])
   @@index([userId, symbol])
@@ -426,6 +432,7 @@ model StockPortfolio {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   holdings StockHolding[]
+  sips     StockSip[]
 
   @@unique([userId, symbol])
   @@index([userId])
@@ -462,6 +469,73 @@ model StockWatchlist {
 
   @@unique([userId, symbol])
   @@map("stock_watchlists")
+}
+
+enum StockSipFrequency {
+  WEEKLY
+  MONTHLY
+}
+
+enum StockSipType {
+  AMOUNT
+  QUANTITY
+}
+
+model StockSip {
+  id                  String             @id @default(uuid())
+  symbol              String
+  name                String
+  shortName           String
+  
+  frequency           StockSipFrequency  @default(MONTHLY)
+  type                StockSipType       @default(QUANTITY)
+  
+  // For Monthly: 1-28. For Weekly: 1-5 (Monday = 1, Friday = 5)
+  sipDate             Int          
+  nextInstallmentDate DateTime           @db.Date
+  
+  amount              Decimal?           @db.Decimal(18, 2) // If type is AMOUNT
+  quantity            Int?               // If type is QUANTITY
+  
+  failedCount         Int                @default(0) @db.UnsignedInt
+  
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  user                User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId              String
+  portfolio           StockPortfolio?    @relation(fields: [portfolioId], references: [id], onDelete: SetNull)
+  portfolioId         String?
+
+  orders              StockOrder[]
+  pendingChanges      PendingStockSipChange[]
+
+  @@index([userId, symbol])
+  @@map("stock_sips")
+}
+
+model PendingStockSipChange {
+  id                  String             @id @default(uuid())
+  
+  type                StockSipType?
+  amount              Decimal?           @db.Decimal(18, 2)
+  quantity            Int?
+  frequency           StockSipFrequency?
+  sipDate             Int?
+  nextInstallmentDate DateTime?          @db.Date
+  
+  applyDate           DateTime           @db.Date // When these changes should be applied
+  
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  sip                 StockSip           @relation(fields: [sipId], references: [id], onDelete: Cascade)
+  sipId               String
+  user                User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId              String
+
+  @@unique([userId, sipId])
+  @@map("pending_stock_sip_changes")
 }
 
 // ----------------------------------------------

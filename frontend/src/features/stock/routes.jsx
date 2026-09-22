@@ -15,6 +15,8 @@ const FiftyTwoWeekHighLowPage = lazy(
 );
 const TopByVolumePage = lazy(() => import("./pages/TopByVolumePage"));
 const TopMoversPage = lazy(() => import("./pages/TopMoversPage"));
+const SipPage = lazy(() => import("./pages/SipPage"));
+const SipDetailsPage = lazy(() => import("./pages/SipDetailsPage"));
 
 export const stockRoutes = {
   path: "/stocks",
@@ -63,6 +65,14 @@ export const stockRoutes = {
     {
       path: "confirm-cancel",
       element: <ConfirmCancelPage />,
+    },
+    {
+      path: "sip",
+      element: <SipPage />,
+    },
+    {
+      path: "sips/:sipId",
+      element: <SipDetailsPage />,
     },
     {
       path: ":symbol",

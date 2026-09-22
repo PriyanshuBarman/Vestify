@@ -37,3 +37,16 @@ export const getStockWatchlistSchema = z.object({
     username: z.string().min(1, "Username must be at least 1 character long"),
   }),
 });
+
+export const getStockSipsSchema = z.object({
+  params: z.object({
+    username: z.string().min(1, "Username must be at least 1 character long"),
+  }),
+});
+
+export const getStockSipDetailSchema = z.object({
+  params: z.object({
+    username: z.string().min(1, "Username must be at least 1 character long"),
+    sipId: z.string().min(1, "SIP ID must be specified"),
+  }),
+});

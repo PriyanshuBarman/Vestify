@@ -11,7 +11,11 @@ import type {
   SellOrderSchema,
 } from "../schemas/order.schema.js";
 
-export const placeBuyOrder = async (userId: string, body: BuyOrderSchema) => {
+export const placeBuyOrder = async (
+  userId: string,
+  body: BuyOrderSchema,
+  sipId?: string,
+) => {
   const {
     name,
     shortName,
@@ -41,6 +45,7 @@ export const placeBuyOrder = async (userId: string, body: BuyOrderSchema) => {
       validity,
       expiresAt,
       status: "OPEN",
+      sipId,
     },
   });
 

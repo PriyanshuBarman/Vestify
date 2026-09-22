@@ -42,8 +42,10 @@ function FundPage() {
 
   const navigate = useNavigate();
 
-  const { mutate: addToWatchlist } = useAddFundToWatchlist();
-  const { mutate: removeFromWatchlist } = useRemoveFundFromWatchlist();
+  const { mutate: addToWatchlist, isPending: isAdding } =
+    useAddFundToWatchlist();
+  const { mutate: removeFromWatchlist, isPending: isRemoving } =
+    useRemoveFundFromWatchlist();
 
   useEffect(() => {
     dispatch(setRecentlyViewedFunds(fund));
@@ -89,7 +91,7 @@ function FundPage() {
               </Button>
 
               <Button
-                disabled={isPending}
+                disabled={isPending || isAdding || isRemoving}
                 onClick={handleWatchlistClick}
                 size="icon"
                 variant="ghost"

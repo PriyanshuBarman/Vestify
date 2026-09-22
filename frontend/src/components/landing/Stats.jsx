@@ -28,7 +28,7 @@ function Stats() {
             transition={{ delay: index * 0.1, duration: 0.6 }}
             className="flex flex-col border-ring/50 sm:nth-2:border-r sm:px-20 p-6 nth-2:border-b first:border-b nth-3:border-r first:border-r items-center text-center"
           >
-            <h2 className="font-inter text-2xl font-semibold tracking-wide tabular-nums sm:font-bold md:text-4xl lg:text-5xl">
+            <h2 className="font-inter text-2xl font-semibold tracking-wide tabular-nums sm:font-semibold md:text-4xl lg:text-[2.75rem]">
               {stat.value}
             </h2>
             <p className="text-muted-foreground  text-nowrap text-xs mt-2 lg:mt-4  md:text-base lg:text-lg">

@@ -29,7 +29,7 @@ function Hero() {
         <Badge />
         <motion.h1
           variants={heroItemVariants}
-          className="mt-6 text-4xl leading-[1.1] font-medium tracking-[-0.03em] text-balance md:mt-10 md:text-5xl md:leading-[1] lg:text-7xl"
+          className="mt-6 text-4xl leading-[1.2] font-medium tracking-[-0.03em] text-balance md:mt-10 md:text-5xl  lg:text-7xl"
         >
           Virtually invest in{" "}
           <TextFlip interval={3} className="text-landing">

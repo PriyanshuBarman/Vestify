@@ -10,23 +10,23 @@ function Mockup() {
   return (
     <motion.div
       variants={heroItemVariants}
-      className="relative mx-auto w-54 rounded-2xl md:top-6 md:right-12 md:w-96 lg:w-146 xl:right-0"
+      className="relative mx-auto w-54 rounded-2xl md:top-6 md:right-12 md:w-96 lg:w-142 xl:right-0"
     >
       <FundLogo
         fundHouseDomain={amcs[6].detail_info}
-        className="absolute top-6 -left-8 size-9 rounded-lg shadow-xl md:size-11"
+        className="absolute top-6 -left-8 size-9 rounded-lg shadow-xl md:size-10"
       />
       <StockLogo
         symbol="TMCV"
-        className="absolute top-20 -right-12 size-9 rounded-lg shadow-xl md:size-11"
+        className="absolute top-20 -right-12 size-9 rounded-lg shadow-xl md:size-10"
       />
       <StockLogo
         symbol="BHARTIARTL"
-        className="absolute bottom-40 -left-12 size-9 rounded-lg shadow-xl md:size-11"
+        className="absolute bottom-40 -left-12 size-9 rounded-lg shadow-xl md:size-10"
       />
       <FundLogo
         fundHouseDomain={amcs[12].detail_info}
-        className="absolute -right-10 bottom-28 size-9 rounded-lg shadow-xl md:size-11"
+        className="absolute -right-10 bottom-28 size-9 rounded-lg shadow-xl md:size-10"
       />
       <img
         width="1284"

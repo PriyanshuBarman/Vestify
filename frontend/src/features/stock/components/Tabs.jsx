@@ -5,6 +5,7 @@ const TABS = [
   { name: "Explore", hash: "#explore" },
   { name: "Holdings", hash: "#holdings" },
   { name: "Orders", hash: "#orders" },
+  { name: "SIPs", hash: "#sips" },
   { name: "Watchlist", hash: "#watchlist" },
 ];
 

@@ -19,18 +19,20 @@ const StockOrdersTab = lazy(
 const StockWatchlistTab = lazy(
   () => import("../../stock/components/tabs/WatchlistTab"),
 );
+const StockSipsTab = lazy(() => import("../../stock/components/tabs/SipsTab"));
 
 const TABS = [
   { id: 0, name: "holdings", component: StockHoldingsTab },
-  { id: 1, name: "orders", component: StockOrdersTab },
-  { id: 2, name: "watchlist", component: StockWatchlistTab },
+  { id: 1, name: "sips", component: StockSipsTab },
+  { id: 2, name: "orders", component: StockOrdersTab },
+  { id: 3, name: "watchlist", component: StockWatchlistTab },
 ];
 
 function StockTabs({ username }) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
 
-  const tabsList = ["Holdings", "Orders", "Watchlist"];
+  const tabsList = ["Holdings", "SIPs", "Orders", "Watchlist"];
 
   return (
     <div>

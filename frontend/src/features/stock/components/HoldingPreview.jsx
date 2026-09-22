@@ -37,7 +37,8 @@ function HoldingPreview({ symbol, stock }) {
         <ItemContent className="flex flex-row justify-between">
           <div>
             <ItemDescription className="text-xs sm:text-md">
-              {stockPortfolio.quantity} qty
+              {stockPortfolio.quantity}{" "}
+              {stockPortfolio.quantity > 1 ? "shares" : "share"}
             </ItemDescription>
             <ItemTitle className="text-md mt-1 tabular-nums sm:text-lg sm:font-medium">
               {formatToINR(invested)}

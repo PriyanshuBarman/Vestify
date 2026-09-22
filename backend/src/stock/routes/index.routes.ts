@@ -5,6 +5,7 @@ import { stockDataRoutes } from "./stock.routes.js";
 import { watchlistRoutes } from "./watchlist.routes.js";
 import { orderRoutes } from "./order.routes.js";
 import { portfolioRoutes } from "./portfolio.routes.js";
+import { sipRoutes } from "./sip.routes.js";
 
 export const stockRoutes = Router();
 
@@ -12,6 +13,7 @@ export const stockRoutes = Router();
 stockRoutes.use("/watchlist", authenticate, watchlistRoutes);
 stockRoutes.use("/orders", authenticate, orderRoutes);
 stockRoutes.use("/portfolio", authenticate, portfolioRoutes);
+stockRoutes.use("/sips", authenticate, sipRoutes);
 
 // Public stock data routes
 stockRoutes.use("/", stockDataRoutes);

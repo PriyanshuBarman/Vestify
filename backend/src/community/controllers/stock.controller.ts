@@ -3,6 +3,7 @@ import type { Response } from "express";
 import * as orderService from "../../stock/services/order.service.js";
 import * as portfolioService from "../../stock/services/portfolio.service.js";
 import * as watchlistService from "../../stock/services/watchlist.service.js";
+import * as sipService from "../../stock/services/sip.service.js";
 import * as communityService from "../services/community.service.js";
 
 export const getStockPortfolio = async (
@@ -88,4 +89,24 @@ export const getStockWatchlist = async (
   const userId = await communityService.getUserIdByUsername(username);
   const watchlist = await watchlistService.getWatchlist(userId);
   res.status(200).json({ success: true, watchlist });
+};
+
+export const getAllStockSips = async (
+  req: ApiRequest<{}, { username: string }>,
+  res: Response,
+) => {
+  const { username } = req.params;
+  const userId = await communityService.getUserIdByUsername(username);
+  const data = await sipService.getAllSips(userId);
+  res.status(200).json({ success: true, sips: data.sips });
+};
+
+export const getStockSipDetail = async (
+  req: ApiRequest<{}, { username: string; sipId: string }>,
+  res: Response,
+) => {
+  const { username, sipId } = req.params;
+  const userId = await communityService.getUserIdByUsername(username);
+  const data = await sipService.getSipDetail(sipId, userId);
+  res.status(200).json({ success: true, sip: data.sip });
 };

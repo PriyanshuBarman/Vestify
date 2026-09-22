@@ -15,7 +15,9 @@
     "place-sip-installment-orders": "tsx scripts/tasks/place-sip-installment-orders.ts",
     "process-orders": "tsx scripts/tasks/process-orders.ts",
     "process-step-up-sips": "tsx scripts/tasks/process-step-up-sips.ts",
-    "update-portfolios": "tsx scripts/tasks/update-portfolios.ts"
+    "update-portfolios": "tsx scripts/tasks/update-portfolios.ts",
+    "apply-stock-sip-changes": "tsx scripts/tasks/apply-stock-sip-changes.ts",
+    "place-stock-sip-installment-orders": "tsx scripts/tasks/place-stock-sip-installment-orders.ts"
   },
   "type": "module",
   "keywords": [],

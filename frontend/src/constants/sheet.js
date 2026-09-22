@@ -19,4 +19,12 @@ export const sheetMenues = [
     name: "Contact us",
     link: "/contact-us",
   },
+  {
+    name: "Login",
+    link: "/auth/login",
+  },
+  {
+    name: "Sign up",
+    link: "/auth/signup",
+  },
 ];

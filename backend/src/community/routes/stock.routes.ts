@@ -8,6 +8,8 @@ import {
   getStockOrdersSchema,
   getStockPortfolioSchema,
   getStockWatchlistSchema,
+  getStockSipsSchema,
+  getStockSipDetailSchema,
 } from "../schemas/stock.schema.js";
 
 export const stockCommunityRoutes = Router({ mergeParams: true });
@@ -51,4 +53,14 @@ stockCommunityRoutes.get(
   "/watchlist",
   validate(getStockWatchlistSchema),
   stockCommunityController.getStockWatchlist,
+);
+stockCommunityRoutes.get(
+  "/sips",
+  validate(getStockSipsSchema),
+  stockCommunityController.getAllStockSips,
+);
+stockCommunityRoutes.get(
+  "/sips/:sipId",
+  validate(getStockSipDetailSchema),
+  stockCommunityController.getStockSipDetail,
 );
