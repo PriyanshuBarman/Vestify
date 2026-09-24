@@ -1,0 +1,39 @@
+name: Stock SIP Installment Order Placement Cron
+
+on:
+  schedule:
+    - cron: "45 20 * * *" # 2:15 AM IST
+    - cron: "15 21 * * *" # 2:45 AM IST
+  workflow_dispatch: # Allow manual trigger
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  stock-sip-installment-order-cron:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: "./backend/package-lock.json"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Stock SIP Installment Order Placement
+        id: update-script
+        run: npm run place-stock-sip-installment-orders
+        env:
+          NODE_ENV: cron
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
