@@ -19,20 +19,20 @@ initGA();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <PersistQueryClientProvider
-          client={queryClient}
-          persistOptions={{ persister }}
-        >
-          <ThemeProvider>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <PersistQueryClientProvider
+            client={queryClient}
+            persistOptions={{ persister }}
+          >
             <TooltipProvider>
               <App />
             </TooltipProvider>
             <ReactQueryDevtools />
-          </ThemeProvider>
-        </PersistQueryClientProvider>
-      </PersistGate>
-    </Provider>
+          </PersistQueryClientProvider>
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
   </StrictMode>,
 );

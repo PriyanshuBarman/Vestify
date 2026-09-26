@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
 import { RouterProvider } from "react-router";
 import { Toaster } from "sonner";
 
 import { VITE_GOOGLE_CLIENT_ID } from "@/lib/config/env";
 
+import { useTheme } from "./components/ThemeProvider";
 import { routes } from "./routes";
-import { selectTheme } from "./store/slices/themeSlice";
 import { shouldInvalidateCache } from "./utils/shouldInvalidateCache";
 
 function App() {
-  const theme = useSelector(selectTheme);
+  const { theme } = useTheme();
   const isRestoring = useIsRestoring();
   const queryClient = useQueryClient();
 

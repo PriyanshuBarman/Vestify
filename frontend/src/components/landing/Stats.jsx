@@ -10,7 +10,7 @@ function Stats() {
   const { data: userCount = 100 } = useGetUserCount();
 
   const STATS = [
-    { value: `${userCount}+`, label: "Users" },
+    { value: `${userCount}+`, label: "Signups" },
     { value: "41+", label: "Fund Categories" },
     { value: "1550+", label: "Mutual Funds" },
     { value: "4500+", label: "Stocks" },

@@ -16,7 +16,6 @@ import mutualFundReducer from "./slices/mutualFundSlice";
 import onlineUsersReducer from "./slices/onlineUsersSlice";
 import searchReducer from "./slices/searchSlice";
 import stockReducer from "./slices/stockSlice";
-import themeRedurcer from "./slices/themeSlice";
 
 const mutualFundPersistConfig = {
   key: "mutualFund",
@@ -33,7 +32,6 @@ const stockPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  theme: themeRedurcer,
   search: searchReducer,
   mutualFund: persistReducer(mutualFundPersistConfig, mutualFundReducer),
   community: communityReducer,

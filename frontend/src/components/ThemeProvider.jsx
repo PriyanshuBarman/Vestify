@@ -1,16 +1,27 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { createContext, useContext, useEffect, useState } from "react";
 
-import { selectTheme } from "@/store/slices/themeSlice";
+const initialState = {
+  theme: "system",
+  setTheme: () => null,
+};
 
-function ThemeProvider({ children }) {
-  const theme = useSelector(selectTheme);
+const ThemeProviderContext = createContext(initialState);
+
+export function ThemeProvider({
+  children,
+  defaultTheme = "system",
+  storageKey = "vite-ui-theme",
+  ...props
+}) {
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem(storageKey) || defaultTheme,
+  );
 
   useEffect(() => {
-    const root = document.documentElement;
+    const root = window.document.documentElement;
+
     root.classList.remove("light", "dark");
 
-    // figure out the actual theme to apply
     let activeTheme = theme;
     if (theme === "system") {
       activeTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -30,7 +41,30 @@ function ThemeProvider({ children }) {
     }
   }, [theme]);
 
-  return children;
+  const value = {
+    theme,
+    setTheme: (newTheme) => {
+      localStorage.setItem(storageKey, newTheme);
+      setTheme(newTheme);
+    },
+  };
+
+  return (
+    <ThemeProviderContext.Provider {...props} value={value}>
+      {children}
+    </ThemeProviderContext.Provider>
+  );
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useTheme = () => {
+  const context = useContext(ThemeProviderContext);
+
+  if (context === undefined) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+
+  return context;
+};
 
 export default ThemeProvider;

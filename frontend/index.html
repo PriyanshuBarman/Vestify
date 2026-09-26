@@ -8,6 +8,29 @@
     />
     <meta name="theme-color" content="#ffffff" />
 
+    <script>
+      (function () {
+        try {
+          var theme =
+            localStorage.getItem("vite-ui-theme") ||
+            localStorage.getItem("theme");
+          var systemDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          var isDark =
+            theme === "dark" || ((theme === "system" || !theme) && systemDark);
+
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+            var metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) metaTheme.setAttribute("content", "#131313");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <title>Vestify - Virtual Investing</title>
     <meta
       name="description"

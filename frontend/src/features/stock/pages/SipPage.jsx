@@ -3,6 +3,7 @@ import { useLocation, useSearchParams } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GoBackButton from "@/components/GoBackButton";
 import Keypad from "@/components/Keypad";
@@ -201,7 +202,14 @@ function SipPage() {
           disabled={isSubmitDisabled()}
           className="my-4 w-[90%]"
         >
-          {isEditMode ? "Save Changes" : "Start SIP"}
+          {isPending && <Spinner />}
+          {isPending
+            ? isEditMode
+              ? "Saving Changes..."
+              : "Starting SIP..."
+            : isEditMode
+              ? "Save Changes"
+              : "Start SIP"}
         </Button>
       </div>
     </div>

@@ -1,9 +1,8 @@
 import { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { selectTheme, setTheme } from "@/store/slices/themeSlice";
+import { useTheme } from "@/components/ThemeProvider";
 
 import { Kbd } from "./ui/kbd";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
@@ -16,12 +15,11 @@ export default function ThemeToggle({
   enableHotKey = false,
   showThemeIcon = false,
 }) {
-  const theme = useSelector(selectTheme);
-  const dispatch = useDispatch();
+  const { theme, setTheme } = useTheme();
 
   const toggleTheme = useCallback(() => {
-    dispatch(setTheme(theme === "dark" ? "light" : "dark"));
-  }, [dispatch, theme]);
+    setTheme(theme === "dark" ? "light" : "dark");
+  }, [setTheme, theme]);
 
   useEffect(() => {
     if (!enableHotKey) return;
